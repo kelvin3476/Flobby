@@ -7,11 +7,13 @@
 <p>
     <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat-square&logo=Node.js&logoColor=white"/>
     <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/>
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/>
     <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=Vite&logoColor=yellow"/>
 </p>
 
 ## 필수 라이브러리
 
-- **Node.js**: v22.12.0
+- **Node.js**: v22.12.0,
 - **React**: ^18.3.1,
+- **TypeScript**: ^5.7.2,
 - **vite**: ^6.0.3,
