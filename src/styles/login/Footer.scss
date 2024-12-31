@@ -1,0 +1,28 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+
+  > span {
+    color: #72787F;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .signup-button {
+    cursor: pointer;
+    background-color: #fff;
+    border: 1.3px solid #C9CDD2;
+    border-radius: 6px;
+    padding: 12px 10px;
+    height: 60px;
+
+    color: #191919;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+  }
+}
+
