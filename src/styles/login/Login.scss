@@ -16,14 +16,56 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      
+      > label {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
 
-      > input {
-        padding: 12px;
-        border: 1px solid #E8EBED;
-        border-radius: 6px;
+        > input {
+          flex: 1;
+          padding: 12px;
+          border: 1px solid #E8EBED;
+          border-radius: 6px;
 
-        color: #191919;
-        font-size: 16px;
+          color: #191919;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+        }
+
+        > input:focus {
+          outline: none;
+          border: 1px solid #191919;
+        }
+
+        > button {
+          display: none;
+          position: absolute;
+          right: 10px;
+          top: 12.25px;
+          background-image: url("../../assets/svg/login_reset_button.svg");
+          width: 20px;
+          height: 20px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+        }
+
+        &:focus-within > button {
+          display: block;
+        }
+      }
+
+      > label > input.error {
+        border: 1px solid #F94E51;
+      }
+
+      .error-message {
+        text-align: start;
+        color: #F94E51;
+        font-size: 14px;
         font-style: normal;
         font-weight: 500;
       }
