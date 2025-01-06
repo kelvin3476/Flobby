@@ -44,7 +44,7 @@
           position: absolute;
           right: 10px;
           top: 11px;
-          background-image: url("../../assets/svg/login_password_hide.svg");
+          background-image: url("../../assets/svg/login/login_password_hide.svg");
           width: 24px;
           height: 24px;
           border: none;
@@ -52,7 +52,7 @@
           cursor: pointer;
 
           &.active {
-            background-image: url("../../assets/svg/login_password_show.svg");
+            background-image: url("../../assets/svg/login/login_password_show.svg");
           }
         }
 
@@ -61,7 +61,7 @@
           position: absolute;
           right: 10px;
           top: 12.25px;
-          background-image: url("../../assets/svg/login_reset_button.svg");
+          background-image: url("../../assets/svg/login/login_reset_button.svg");
           width: 20px;
           height: 20px;
           border: none;
@@ -74,7 +74,7 @@
           position: absolute;
           right: 40px;
           top: 12.25px;
-          background-image: url("../../assets/svg/login_reset_button.svg");
+          background-image: url("../../assets/svg/login/login_reset_button.svg");
           width: 20px;
           height: 20px;
           border: none;
@@ -118,13 +118,13 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url("../../assets/svg/login_checkbox_unchecked.svg");
+            background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
             width: 20px;
             height: 20px;
           }
 
           > input[type="checkbox"]:checked {
-            background-image: url("../../assets/svg/login_checkbox_checked.svg");
+            background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
           }
 
           > label {
@@ -202,7 +202,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login_kakao.svg");
+          background-image: url("../../assets/svg/login/login_kakao.svg");
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -212,7 +212,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login_naver.svg");
+          background-image: url("../../assets/svg/login/login_naver.svg");
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -222,7 +222,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login_apple.svg");
+          background-image: url("../../assets/svg/login/login_apple.svg");
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -232,7 +232,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login_google.svg");
+          background-image: url("../../assets/svg/login/login_google.svg");
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -242,7 +242,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login_facebook.svg");
+          background-image: url("../../assets/svg/login/login_facebook.svg");
           width: 48px;
           height: 48px;
           flex-shrink: 0;
