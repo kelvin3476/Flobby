@@ -40,7 +40,23 @@
           border: 1px solid #191919;
         }
 
-        > button {
+        .password {
+          position: absolute;
+          right: 10px;
+          top: 11px;
+          background-image: url("../../assets/svg/login_password_hide.svg");
+          width: 24px;
+          height: 24px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          &.active {
+            background-image: url("../../assets/svg/login_password_show.svg");
+          }
+        }
+
+        .reset {
           display: none;
           position: absolute;
           right: 10px;
@@ -53,7 +69,22 @@
           cursor: pointer;
         }
 
-        &:focus-within > button {
+        .reset-password {
+          display: none;
+          position: absolute;
+          right: 40px;
+          top: 12.25px;
+          background-image: url("../../assets/svg/login_reset_button.svg");
+          width: 20px;
+          height: 20px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+        }
+
+        &:focus-within > .password,
+        &:focus-within > .reset,
+        &:focus-within > .reset-password {
           display: block;
         }
       }
