@@ -24,6 +24,10 @@ interface LoginStore {
     /* 비밀번호 에러 상태 관리 */
     passwordError: string;
     setPasswordError: (passwordError: string) => void;
+
+    /* 비밀번호 표출 유무 상태 관리 */
+    passwordVisible: boolean;
+    setPasswordVisible: (passwordVisible: boolean) => void;
 }
 
 const useLoginStore = create<LoginStore>((set) => ({
@@ -44,6 +48,9 @@ const useLoginStore = create<LoginStore>((set) => ({
 
     passwordError: '',
     setPasswordError: (passwordError: string) => set({ passwordError }),
+
+    passwordVisible: false,
+    setPasswordVisible: (passwordVisible: boolean) => set({ passwordVisible }),
 }));
 
 export default useLoginStore;
