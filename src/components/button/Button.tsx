@@ -1,14 +1,15 @@
 import React from "react";
 
 interface ButtonProps {
+    type?: "button" | "submit" | "reset";
     className: string;
     title?: string;
     onClick: () => void;
 }
 
-const Button = ({ className, title, onClick }: ButtonProps) => {
+const Button = ({ type, className, title, onClick }: ButtonProps) => {
     return (
-        <button className={className} onClick={onClick}>{title}</button>
+        <button type={type} className={className} onClick={onClick}>{title}</button>
     )
 }
 
