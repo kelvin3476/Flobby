@@ -11,6 +11,7 @@ import '../styles/login/Login.scss';
 
 const Login = () => {
     const {
+        inputType,
         email,
         isEmailValid,
         emailError,
@@ -21,6 +22,7 @@ const Login = () => {
         handleEmailChange,
         handlePasswordBlur,
         handlePasswordChange,
+        handlePasswordVisibility,
     } = useLoginForm();
 
     return (
@@ -46,8 +48,9 @@ const Login = () => {
 
             <label>
               <Input
-                type="password"
+                type={inputType}
                 value={password}
+                onClick={handlePasswordVisibility}
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordBlur}
                 isValid={isPasswordValid}

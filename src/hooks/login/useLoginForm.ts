@@ -15,7 +15,9 @@ const useLoginForm = () => {
         isPasswordValid,
         setIsPasswordValid,
         passwordError,
-        setPasswordError
+        setPasswordError,
+        passwordVisible,
+        setPasswordVisible,
     } = useLoginStore();
 
     const handleEmailBlur = () => {
@@ -60,7 +62,18 @@ const useLoginForm = () => {
         }
     }
 
+    const handlePasswordVisibility = () => {
+        if (passwordVisible) {
+            setPasswordVisible(false);
+        } else {
+            setPasswordVisible(true);
+        }
+    }
+
+    const inputType = passwordVisible ? 'text' : 'password';
+
     return {
+        inputType,
         email,
         setEmail,
         isEmailValid,
@@ -77,6 +90,7 @@ const useLoginForm = () => {
         handleEmailChange,
         handlePasswordBlur,
         handlePasswordChange,
+        handlePasswordVisibility,
     };
 }
 
