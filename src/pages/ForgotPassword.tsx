@@ -42,7 +42,7 @@ const ForgotPassword = () => {
           <Button
             className="GetEmail-button"
             title="비밀번호 변경 이메일 받기"
-            onClick={() => console.log('이메일 받기 버튼 클릭!!')}
+            onClick={() => console.log('이메일 받기 버튼 클릭 !!')}
           />
         </div>
       </main>
