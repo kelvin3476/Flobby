@@ -16,7 +16,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      
+
       > label {
         position: relative;
         display: flex;
@@ -26,7 +26,7 @@
         > input {
           flex: 1;
           padding: 12px;
-          border: 1px solid #E8EBED;
+          border: 1px solid #e8ebed;
           border-radius: 6px;
 
           color: #191919;
@@ -44,7 +44,7 @@
           position: absolute;
           right: 10px;
           top: 11px;
-          background-image: url("../../assets/svg/login/login_password_hide.svg");
+          background-image: url('../../assets/svg/login/login_password_hide.svg');
           width: 24px;
           height: 24px;
           border: none;
@@ -52,7 +52,7 @@
           cursor: pointer;
 
           &.active {
-            background-image: url("../../assets/svg/login/login_password_show.svg");
+            background-image: url('../../assets/svg/login/login_password_show.svg');
           }
         }
 
@@ -61,7 +61,7 @@
           position: absolute;
           right: 10px;
           top: 12.25px;
-          background-image: url("../../assets/svg/login/login_reset_button.svg");
+          background-image: url('../../assets/svg/login/login_reset_button.svg');
           width: 20px;
           height: 20px;
           border: none;
@@ -74,7 +74,7 @@
           position: absolute;
           right: 40px;
           top: 12.25px;
-          background-image: url("../../assets/svg/login/login_reset_button.svg");
+          background-image: url('../../assets/svg/login/login_reset_button.svg');
           width: 20px;
           height: 20px;
           border: none;
@@ -90,12 +90,12 @@
       }
 
       > label > input.error {
-        border: 1px solid #F94E51;
+        border: 1px solid #f94e51;
       }
 
       .error-message {
         text-align: start;
-        color: #F94E51;
+        color: #f94e51;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -113,32 +113,31 @@
           align-items: center;
           gap: 8px;
 
-          > input[type="checkbox"] {
+          > input[type='checkbox'] {
             cursor: pointer;
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
+            background-image: url('../../assets/svg/login/login_checkbox_unchecked.svg');
             width: 20px;
             height: 20px;
           }
 
-          > input[type="checkbox"]:checked {
-            background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
+          > input[type='checkbox']:checked {
+            background-image: url('../../assets/svg/login/login_checkbox_checked.svg');
           }
 
           > label {
-            color: #72787F;
+            color: #72787f;
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
           }
-
         }
 
         > span {
           cursor: pointer;
-          color: #72787F;
+          color: #72787f;
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
@@ -148,7 +147,7 @@
 
     .login-button {
       cursor: pointer;
-      background: #3A00C3;
+      background: #3a00c3;
       border: none;
       border-radius: 6px;
       padding: 12px 10px;
@@ -166,7 +165,7 @@
       gap: 16px;
 
       .social-login-title {
-        color: #72787F;
+        color: #72787f;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -177,7 +176,7 @@
       .social-login-title::before,
       .social-login-title::after {
         content: '';
-        background-color: #E8EBED;
+        background-color: #e8ebed;
         display: block;
         height: 1.5px;
         position: absolute;
@@ -202,7 +201,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login/login_kakao.svg");
+          background-image: url('../../assets/svg/login/login_kakao.svg');
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -212,7 +211,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login/login_naver.svg");
+          background-image: url('../../assets/svg/login/login_naver.svg');
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -222,7 +221,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login/login_apple.svg");
+          background-image: url('../../assets/svg/login/login_apple.svg');
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -232,7 +231,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login/login_google.svg");
+          background-image: url('../../assets/svg/login/login_google.svg');
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -242,7 +241,7 @@
           cursor: pointer;
           border: none;
           background-color: #fff;
-          background-image: url("../../assets/svg/login/login_facebook.svg");
+          background-image: url('../../assets/svg/login/login_facebook.svg');
           width: 48px;
           height: 48px;
           flex-shrink: 0;
@@ -250,6 +249,4 @@
       }
     }
   }
-
 }
-
