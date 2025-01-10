@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router";
 
 import Header from "../components/login/Header.js";
 import Footer from "../components/login/Footer";
@@ -10,6 +11,8 @@ import useLoginForm from "../hooks/login/useLoginForm";
 import '../styles/login/Login.scss';
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const {
         inputType,
         email,
@@ -65,7 +68,7 @@ const Login = () => {
                 <label>로그인 상태 유지</label>
               </div>
 
-              <span onClick={() => console.log('비밀번호 찾기 클릭!!')}>비밀번호 찾기</span>
+              <span onClick={() => navigate('/password')}>비밀번호 찾기</span>
             </div>
           </div>
 
