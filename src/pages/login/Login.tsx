@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from "react-router";
 
-import Header from "../components/login/Header.js";
-import Footer from "../components/login/Footer";
-import Input from "../components/input/Input";
-import Button from "../components/button/Button";
+import Header from "../../components/login/Header.js";
+import Footer from "../../components/login/Footer";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
-import useLoginForm from "../hooks/login/useLoginForm";
+import useLoginForm from "../../hooks/login/useLoginForm";
 
-import '../styles/login/Login.scss';
+import '../../styles/login/Login.scss';
 
 const Login = () => {
     const navigate = useNavigate();

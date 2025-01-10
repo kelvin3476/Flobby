@@ -1,12 +1,12 @@
 import React from "react";
 
-import Header from "../components/login/Header";
-import Input from "../components/input/Input";
-import Button from "../components/button/Button";
+import Header from "../../components/login/Header";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 
-import useLoginForm from "../hooks/login/useLoginForm";
+import useLoginForm from "../../hooks/login/useLoginForm";
 
-import "../styles/password/FindPassword.scss";
+import "../../styles/password/FindPassword.scss";
 
 const FindPassword = () => {
     const {
