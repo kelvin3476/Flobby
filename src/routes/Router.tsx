@@ -3,13 +3,15 @@ import { BrowserRouter, Routes, Route } from "react-router";
 
 import Login from "../pages/login/Login";
 import FindPassword from "../pages/password/FindPassword";
+import ResetPassword from "../pages/password/ResetPassword";
 
 const Router: React.FC = () => {
     return (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/password" element={<FindPassword />} />
+          <Route path="/password/find" element={<FindPassword />} />
+          <Route path="/password/reset" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     );

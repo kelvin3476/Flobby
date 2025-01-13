@@ -68,7 +68,7 @@ const Login = () => {
                 <label>로그인 상태 유지</label>
               </div>
 
-              <span onClick={() => navigate('/password')}>비밀번호 찾기</span>
+              <span onClick={() => navigate('/password/find')}>비밀번호 찾기</span>
             </div>
           </div>
 
