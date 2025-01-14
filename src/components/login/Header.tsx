@@ -3,12 +3,13 @@ import React from "react";
 import "../../styles/login/Header.scss";
 
 interface HeaderProps {
+    className?: string;
     headerTitle: string;
 }
 
-const Header = ({ headerTitle }: HeaderProps) => {
+const Header = ({ className, headerTitle }: HeaderProps) => {
     return (
-        <div>{ headerTitle }</div>
+        <div className={className}>{ headerTitle }</div>
     )
 }
 
