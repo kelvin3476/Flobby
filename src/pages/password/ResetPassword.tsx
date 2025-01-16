@@ -4,20 +4,29 @@ import Header from "../../components/login/Header";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 
-import useLoginForm from "../../hooks/login/useLoginForm";
+import usePasswordForm from "../../hooks/password/usePasswordForm";
 
 import "../../styles/password/ResetPassword.scss";
 
 const ResetPassword = () => {
+
     const {
-      inputType,
-      password,
-      isPasswordValid,
-      passwordError,
-      handlePasswordBlur,
-      handlePasswordChange,
-      handlePasswordVisibility,
-    } = useLoginForm();
+        inputType,
+        password,
+        isPasswordValid,
+        passwordError,
+        handlePasswordBlur,
+        handlePasswordChange,
+        handlePasswordVisibility,
+        confirmPasswordInputType,
+        confirmPassword,
+        isConfirmPasswordValid,
+        confirmPasswordError,
+        handleConfirmPasswordBlur,
+        handleConfirmPasswordChange,
+        handleConfirmPasswordVisibility,
+        handlePasswordResetSubmit,
+    } = usePasswordForm();
 
     return (
         <div className="reset-password-container">
@@ -42,19 +51,19 @@ const ResetPassword = () => {
                     </label>
                     <label>
                         <Input
-                            type={inputType}
-                            value={password}
-                            onClick={handlePasswordVisibility}
-                            onChange={handlePasswordChange}
-                            onBlur={handlePasswordBlur}
-                            isValid={isPasswordValid}
-                            errorMessage={passwordError}
+                            type={confirmPasswordInputType}
+                            value={confirmPassword}
+                            onClick={handleConfirmPasswordVisibility}
+                            onChange={handleConfirmPasswordChange}
+                            onBlur={handleConfirmPasswordBlur}
+                            isValid={isConfirmPasswordValid}
+                            errorMessage={confirmPasswordError}
                             placeholder="비밀번호를 한 번 더 입력해 주세요."
                         />
                     </label>
                 </div>
 
-                <Button className="change-password-button" title="비밀번호 변경" onClick={() => console.log('비밀번호 변경 버튼 클릭 !!')}/>
+                <Button className="change-password-button" title="비밀번호 변경" onClick={handlePasswordResetSubmit} />
             </main>
         </div>
     );
