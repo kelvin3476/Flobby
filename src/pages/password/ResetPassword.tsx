@@ -22,7 +22,7 @@ const ResetPassword = () => {
     return (
         <div className="reset-password-container">
             <div className="reset-password-title">
-                <Header headerTitle="비밀번호 재설정"/>
+                <Header className="Header" headerTitle="비밀번호 재설정"/>
                 <span>비밀번호는 문자+숫자+특수문자 조합 8~20자리를 입력해 주세요</span>
             </div>
 
@@ -53,6 +53,7 @@ const ResetPassword = () => {
                         />
                     </label>
                 </div>
+
                 <Button className="change-password-button" title="비밀번호 변경" onClick={() => console.log('비밀번호 변경 버튼 클릭 !!')}/>
             </main>
         </div>
