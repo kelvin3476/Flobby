@@ -2,10 +2,20 @@ import React from "react";
 
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
+import Modal from "../../components/join/Modal";
+
+import useModalForm from "../../hooks/join/useModalForm";
 
 import "../../styles/join/Agreement.scss";
 
 const Agreement = () => {
+
+  const { 
+    isOpen,
+    openServiceModal,
+    openPrivacyModal,
+    openMarketingModal,
+  } = useModalForm();
 
   return (
     <div className="agreement-container">
@@ -29,7 +39,7 @@ const Agreement = () => {
               type="checkbox" 
             />
             <span>[필수] 서비스 이용약관 동의</span>
-            <button>약관보기</button>
+            <button onClick={openServiceModal}>약관보기</button>
           </label>
 
           <label>
@@ -37,7 +47,7 @@ const Agreement = () => {
               type="checkbox"
             />
             <span>[필수] 개인정보 수집 및 이용 동의</span>
-            <button>약관보기</button>
+            <button onClick={openPrivacyModal}>약관보기</button>
           </label>
 
           <label>
@@ -45,7 +55,7 @@ const Agreement = () => {
               type="checkbox" 
             />
             <span>[선택] 광고성 정보 수신 동의</span>
-            <button>약관보기</button>
+            <button onClick={openMarketingModal}>약관보기</button>
           </label>
         </div>
 
@@ -54,6 +64,8 @@ const Agreement = () => {
           title="다음"
           onClick={() => {"next"}}
           />
+
+        <Modal/>
       </main>
     </div>
   );
