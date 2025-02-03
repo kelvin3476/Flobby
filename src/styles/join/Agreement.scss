@@ -112,6 +112,10 @@ $font-color-basic: #72787F;
       color: #fff;
       @include font-basic-style;
       font-weight: 400;
+
+      &.active {
+        opacity: 100%;
+      }
     }
   }
 }
