@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router";
+
 import Button from "../button/Button";
 
 import "../../styles/login/Footer.scss";
@@ -8,6 +10,8 @@ interface FooterProps {
 }
 
 const Footer = ({ footerTitle }: FooterProps) => {
+    const navigate = useNavigate();
+
     return (
       <div>
         <div className="signup-container">
@@ -16,7 +20,7 @@ const Footer = ({ footerTitle }: FooterProps) => {
           <Button
             className="signup-button"
             title="회원 가입"
-            onClick={() => console.log('회원가입 버튼 클릭!!')}
+            onClick={() => navigate('/signup')}
           />
         </div>
 
