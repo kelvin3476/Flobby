@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "proxy": "http://220.93.95.108:13960",
   "dependencies": {
     "@types/node": "^22.10.5",
     "axios": "^1.7.9",
