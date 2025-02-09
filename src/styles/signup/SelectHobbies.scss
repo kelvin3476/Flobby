@@ -1,0 +1,239 @@
+.hobby-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 60px;
+}
+
+.hobby-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  .Header {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: -0.3px;
+  }
+
+  > span {
+    color: #72787F;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.3px;
+
+    &.max {
+      color: #F94E51;
+    }
+  }
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+
+}
+
+.hobby {
+  border: 1px solid #E8EBED;
+  border-radius: 6px;
+
+  .category {
+    width: 350px;
+    height: 476px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #E8EBED;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #9EA4AA;
+      border-radius: 100px;
+    }
+
+    .title {
+      width: 344px;
+      display: flex;
+      height: 48px;
+      box-sizing: border-box;
+      padding: 12px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      align-self: stretch;
+      border-radius: 4px 0 0 4px;
+      background: #F7F8F9;
+
+      .circle {
+        width: 28px;
+        height: 28px;
+        background-image: url("../../assets/svg/signup/signup_ellipse.svg");
+      }
+
+      .text {
+        display: flex;
+        height: 24px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        flex: 1 0 0;
+        color: #191919;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.3px;
+      }
+
+      button {
+        border: none;
+        background-color: transparent;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        transform: rotate(-180deg);
+        background-image: url("../../assets/svg/signup/signup_arrow.svg");
+      }
+    }
+
+    .hobby-ul {
+      width: 328px;
+      display: flex;
+      padding: 0 4px 0 12px;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin: 12px 0 28px 0;
+
+      li {
+        list-style: none;
+
+        input {
+          display: none;
+        }
+      }
+
+      label {
+        cursor: pointer;
+        box-sizing: border-box;
+        display: flex;
+        height: 40px;
+        padding: 8px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        border-radius: 6px;
+        color: #72787F;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.3px;
+        border: 1px solid #E8EBED;
+      }
+
+      label.checked {
+        border: 1px solid #764BF6;
+        color: #764BF6;
+        background: #F1EDFE;
+      }
+    }
+  }
+
+
+  .selected-box {
+    position: absolute;
+    width: 130px;
+    top: 0;
+    right: -4px;
+
+    ul {
+      margin: 0;
+      padding: 12px;
+
+      li {
+        list-style: none;
+        margin: 12px 0;
+        width: 98px;
+        border-radius: 6px;
+        padding: 8px 9px;
+        box-sizing: border-box;
+        font-size: 16px;
+        background: 0 #F7F8F9;
+        color: #72787F;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .text {
+          min-width: 55px;
+          text-align: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+    }
+  }
+
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .next {
+    cursor: pointer;
+    border: none;
+    width: 480px;
+    height: 60px;
+    border-radius: 6px;
+    background-color: #8b5cf6;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+  }
+}
+
+
+.skip {
+  cursor: pointer;
+  border: none;
+  width: 480px;
+  height: 60px;
+  background-color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  color: #72787F;
+}
+
+.delete {
+  cursor: pointer;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../../assets/svg/signup/signup_delete.svg");
+}
+
