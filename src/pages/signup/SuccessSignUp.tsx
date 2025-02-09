@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import Header from "../../components/login/Header";
-import "../../styles/signup/SignUp.scss";
+import "../../styles/signup/SuccessSignUp.scss";
 import Button from "../../components/button/Button";
 
-const SignUp = () => {
+const SuccessSignUp = () => {
     const navigate = useNavigate();
 
     return (
@@ -30,4 +30,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SuccessSignUp;
