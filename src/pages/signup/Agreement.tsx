@@ -60,14 +60,12 @@ const Agreement = () => {
       <main>
         <div className="input-container">
           <div className="all-wrapper">
-            <label>
-              <input 
-                type="checkbox" 
-                checked={allAgree}
-                onChange={handleAllAgree}
-              />
-              <span>약관 모두 동의</span>
-            </label>
+            <Checkbox
+              checked={allAgree}
+              onChange={handleAllAgree}
+              typename="약관 모두 동의"
+              withButton={false}
+            />
           </div>
           
           <hr />   

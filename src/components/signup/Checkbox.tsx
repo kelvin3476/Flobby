@@ -5,7 +5,8 @@ interface CheckboxProps {
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   typename: string;
-  onClick: () => void;
+  onClick?: () => void;
+  withButton?: boolean;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -13,6 +14,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   onChange,
   typename,
   onClick,
+  withButton = true,
 }) => {
   return (
     <>
@@ -23,12 +25,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
           onChange={onChange}
         />
         <span>{typename}</span>
-        <Button
-          type="button"
-          className="goto_service"
-          onClick={onClick}
-          title="약관보기"
-        />
+        {withButton && onClick && (
+          <Button
+            type="button"
+            className="goto_service"
+            onClick={onClick}
+            title="약관보기"
+          />
+        )}
       </label>
     </>
   );
