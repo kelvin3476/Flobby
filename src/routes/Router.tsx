@@ -6,7 +6,8 @@ import FindPassword from "../pages/password/FindPassword";
 import ResetPassword from "../pages/password/ResetPassword";
 import SuccessPassword from "../pages/password/SuccessPassword";
 import SignUp from "../pages/signup/SignUp";
-import OAuth2RedirectHandler from "../services/auth/oauth2/OAuth2RedirectHandler";
+import KakaoRedirectHandler from "../services/auth/oauth2/KakaoRedirectHandler";
+import NaverRedirectHandler from "../services/auth/oauth2/NaverRedirectHandler";
 
 const Router: React.FC = () => {
     return (
@@ -17,7 +18,8 @@ const Router: React.FC = () => {
           <Route path="/password/reset" element={<ResetPassword />} />
           <Route path="/password/success" element={<SuccessPassword />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/oauth/kakao" element={<OAuth2RedirectHandler />} /> {/* TODO: 최초 회원가입시: 회원 가입 페이지 > 프로필 설정 으로 넘기기 & 기존 회원 로그인시: 메인 페이지로 이동 */}
+          <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} /> {/* TODO: 최초 회원가입시: 회원 가입 페이지 > 프로필 설정 으로 넘기기 & 기존 회원 로그인시: 메인 페이지로 이동 */}
+          <Route path="/oauth/naver" element={<NaverRedirectHandler />} /> {/* TODO: 최초 회원가입시: 회원 가입 페이지 > 프로필 설정 으로 넘기기 & 기존 회원 로그인시: 메인 페이지로 이동 */}
         </Routes>
       </BrowserRouter>
     );
