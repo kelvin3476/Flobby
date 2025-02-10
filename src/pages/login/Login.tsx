@@ -9,6 +9,7 @@ import Button from "../../components/button/Button";
 import useLoginForm from "../../hooks/login/useLoginForm";
 
 import KakaoLogin from "../../services/auth/oauth2/KakaoLogin";
+import NaverLogin from "../../services/auth/oauth2/NaverLogin";
 
 import '../../styles/login/Login.scss';
 
@@ -83,7 +84,7 @@ const Login = () => {
 
             <div className="social-login-button-container">
               <Button className="kakao-login-button" onClick={KakaoLogin} />
-              <Button className="naver-login-button" onClick={() => console.log('네이버 소셜 로그인 버튼 클릭!!')} />
+              <Button className="naver-login-button" onClick={NaverLogin} />
               <Button className="apple-login-button" onClick={() => console.log('애플 소셜 로그인 버튼 클릭!!')} />
               <Button className="google-login-button" onClick={() => console.log('구글 소셜 로그인 버튼 클릭!!')} />
               <Button className="facebook-login-button" onClick={() => console.log('페이스북 소셜 로그인 버튼 클릭!!')} />
