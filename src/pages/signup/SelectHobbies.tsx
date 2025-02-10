@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
+import useHobbyStore from '../../store/signup/useHobbyStore';
 
 import Header from '../../components/login/Header';
 import '../../styles/signup/SelectHobbies.scss';
@@ -7,6 +8,9 @@ import Button from '../../components/button/Button';
 
 const SelectHobbies = () => {
   const navigate = useNavigate();
+  const { selectedHobbies, addHobby, removeHobby, hobbyCount } =
+    useHobbyStore();
+
   const sports = [
     '자전거',
     '배드민턴',
@@ -38,22 +42,12 @@ const SelectHobbies = () => {
     { category: '사교/인맥', items: network },
   ];
 
-  const [selectedHobbies, setSelectedHobbies] = useState([]);
-  const [hobbyCount, setHobbyCount] = useState(0);
-
-  const handleOnChange = el => {
-    if (selectedHobbies.length >= 3 || selectedHobbies.includes(el)) {
-      return;
-    } else {
-      setSelectedHobbies(prev => [...prev, el]);
-    }
-    setHobbyCount(prev => prev + 1);
+  const handleOnChange = (el: string) => {
+    addHobby(el);
   };
 
-  const deleteHobby = el => {
-    const updateHobbies = selectedHobbies.filter(item => item !== el);
-    setSelectedHobbies(updateHobbies);
-    setHobbyCount(prev => prev - 1);
+  const deleteHobby = (el: string) => {
+    removeHobby(el);
   };
 
   return (
