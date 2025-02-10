@@ -2,11 +2,7 @@ import React from "react";
 import useModalStore from "../../store/join/useModalStore";
 
 const useModalForm = () => {
-  const {
-    isOpen,
-    openModal,
-    closeModal,
-  } = useModalStore();
+  const { isOpen, openModal, closeModal, modalType } = useModalStore();
 
   const openServiceModal = () => {
     openModal("service");
@@ -22,6 +18,7 @@ const useModalForm = () => {
 
   return {
     isOpen,
+    modalType,
     openModal,
     closeModal,
     openServiceModal,

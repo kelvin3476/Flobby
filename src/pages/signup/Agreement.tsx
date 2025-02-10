@@ -10,18 +10,19 @@ import useModalForm from "../../hooks/join/useModalForm";
 
 import "../../styles/join/Agreement.scss";
 
+
 const Agreement = () => {
 
   const { 
-    isOpen,
+    modalType,
     openServiceModal,
     openPrivacyModal,
     openMarketingModal,
+    closeModal,
   } = useModalForm();
 
   const {
     allAgree,
-    setAllAgree,
     serviceAgree,
     setServiceAgree,
     privacyAgree,
@@ -34,6 +35,17 @@ const Agreement = () => {
     handleMarketingAgree,
     acceptAgree,
   } = useAgreeForm();
+
+  const handleModalAgree = () => {
+    if (modalType === "service") {
+      setServiceAgree(true);
+    } else if (modalType === "privacy") {
+      setPrivacyAgree(true);
+    } else if (modalType === "marketing") {
+      setMarketingAgree(true);
+    }
+    closeModal();
+  };
 
   return (
     <div className="agreement-container">
@@ -89,7 +101,7 @@ const Agreement = () => {
           title="다음" onClick={acceptAgree}
         />
 
-        <Modal/>
+        <Modal onAgree={handleModalAgree}/>
       </main>
     </div>
   );

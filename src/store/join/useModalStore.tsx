@@ -1,26 +1,17 @@
 import { create } from "zustand";
 
 interface ModalStore {
-  /* 모달 open 여부 */
   isOpen: boolean;
-
-  /* 모달 열기 */
+  modalType: "service" | "privacy" | "marketing" | null;
   openModal: (type: "service" | "privacy" | "marketing") => void;
-
-  /* 모달 닫기 */
   closeModal: () => void;
-
-  // modalType =
 }
 
 const useModalStore = create<ModalStore>((set) => ({
   isOpen: false,
-
-  openModal: (type) => set({isOpen: true}),
-
-  closeModal: () => set({isOpen: false}),
-
-  type: null,
+  modalType: null,
+  openModal: (type) => set({ isOpen: true, modalType: type }),
+  closeModal: () => set({ isOpen: false, modalType: null }),
 }));
 
 export default useModalStore;
