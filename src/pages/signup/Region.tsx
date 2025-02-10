@@ -10,15 +10,33 @@ import "../../styles/join/Region.scss";
 
 // 지역 리스트 (이후 API 데이터로 대체)
 const cityList = ["서울", "부산", "대구", "인천", "경기"];
-const districtList = [
-  "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구",
-  "해운대구", "사상구", "달서구", "수성구", "중구", "남동구", "연수구", "부평구", "수원시",
-  "용인시", "고양시"];
+const cityDistrictMap = {
+  서울: [
+    "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구"
+  ],
+  부산: [
+    "해운대구", "사상구", "달서구", "수성구", "중구"
+  ],
+  대구: [
+    "중구", "남동구", "연수구", "부평구"
+  ],
+  인천: [
+    "남동구", "연수구", "부평구", "수원시"
+  ],
+  경기: [
+    "용인시", "고양시", "이천시"
+  ]
+};
 
 const Region = () => {
   const nav = useNavigate();
   const { 
-    selectedRegions, activeCity, setActiveCity, attemptSelectRegion, removeRegion, warning 
+    selectedRegions, 
+    activeCity, 
+    setActiveCity, 
+    attemptSelectRegion, 
+    removeRegion, 
+    warning 
   } = useRegionStore();
 
   const handleSelect = (city: string, district: string) => {
@@ -53,7 +71,7 @@ const Region = () => {
           {/* 2. 구(동) 리스트 - 선택한 도시의 구만 표시 */}
           <div className="region-town">
             {activeCity &&
-              districtList.map((district) => {
+              cityDistrictMap[activeCity].map((district) => {
                 const isSelected = selectedRegions.includes(`${activeCity} ${district}`);
                 return (
                   <div
@@ -81,8 +99,14 @@ const Region = () => {
         </div>
         
         <div className="buttons">
-          <Button className="next-btn" title="다음" onClick={() => nav("/next")} />
-          <Button className="pass-btn" title="건너뛰기" onClick={() => nav("/next")} />
+          <Button 
+            className={`next-btn ${selectedRegions.length === 3 ? "active" : ""}`} 
+            title="다음" 
+            onClick={() => nav("/next")} />
+          <Button 
+            className="pass-btn" 
+            title="건너뛰기" 
+            onClick={() => nav("/next")} />
         </div>
       </main>
     </div>
