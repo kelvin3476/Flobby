@@ -39,41 +39,49 @@ const Agreement = () => {
     <div className="agreement-container">
       <div className="agreement-title">
         <Header className="Header" headerTitle="Flobby 회원가입을 시작합니다."/>
-        <span>Flobby 회원이 되면 취미 모임과 커뮤니티를 통해 <br/> 새로운 관심사를 발견하고 다양한 사람들과 교류할 수 있어요.</span>
+        <span>
+          Flobby 회원이 되면 취미 모임과 커뮤니티를 통해 <br/> 
+          새로운 관심사를 발견하고 다양한 사람들과 교류할 수 있어요.
+        </span>
       </div>
 
       <main>
         <div className="input-container">
-          <label>
-            <input 
-              type="checkbox" 
-              checked={allAgree}
-              onChange={handleAllAgree}
+          <div className="all-wrapper">
+            <label>
+              <input 
+                type="checkbox" 
+                checked={allAgree}
+                onChange={handleAllAgree}
+              />
+              <span>약관 모두 동의</span>
+            </label>
+          </div>
+          
+          <hr />   
+
+          <div className="rest-wrapper">
+            <Checkbox 
+              checked={serviceAgree}
+              onChange={handleServiceAgree}
+              typename="[필수] 서비스 이용약관 동의"
+              onClick={openServiceModal}
             />
-            <span>약관 모두 동의</span>
-          </label>
-          <hr />
 
-          <Checkbox 
-            checked={serviceAgree}
-            onChange={handleServiceAgree}
-            typename="[필수] 서비스 이용약관 동의"
-            onClick={openServiceModal}
-          />
+            <Checkbox 
+              checked={privacyAgree}
+              onChange={handlePrivacyAgree}
+              typename="[필수] 개인정보 수집 및 이용 동의"
+              onClick={openPrivacyModal}
+            />
 
-          <Checkbox 
-            checked={privacyAgree}
-            onChange={handlePrivacyAgree}
-            typename="[필수] 개인정보 수집 및 이용 동의"
-            onClick={openPrivacyModal}
-          />
-
-          <Checkbox 
-            checked={marketingAgree}
-            onChange={handleMarketingAgree}
-            typename="[선택] 광고성 정보 수신 동의"
-            onClick={openMarketingModal}
-          />
+            <Checkbox 
+              checked={marketingAgree}
+              onChange={handleMarketingAgree}
+              typename="[선택] 광고성 정보 수신 동의"
+              onClick={openMarketingModal}
+            />
+          </div>
         </div>
 
         <Button 
