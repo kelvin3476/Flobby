@@ -16,7 +16,7 @@ const KakaoRedirectHandler = () => {
         })
         .then(response => response.json())
         .then((response) => {
-            if (response.code === 2003) {
+            if (response.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('kakao_account', JSON.stringify(response.data.kakao_account));
                 navigate('/signup');

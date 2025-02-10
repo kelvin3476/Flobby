@@ -17,7 +17,7 @@ const NaverRedirectHandler = () => {
         })
         .then(response => response.json())
         .then((response) => {
-            if (response.code === 2003) {
+            if (response.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('naver_account', JSON.stringify(response.data.response));
                 navigate('/signup');
