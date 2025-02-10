@@ -13,7 +13,7 @@ interface RegionStore {
 
 const useRegionStore = create<RegionStore>((set) => ({
   selectedRegions: [],
-  activeCity: null,
+  activeCity: "서울",
   maxSelection: 3,
   warning: false,
   setActiveCity: (city) => set({ activeCity: city }),
