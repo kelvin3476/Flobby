@@ -1,7 +1,7 @@
 import React from "react";
 import useModalForm from "../../hooks/join/useModalForm";
-import ModalContents from "../../components/modal/ModalContents";
-import { ModalTitles } from "../../components/modal/ModalContents";
+import ModalContents from "./ModalContents";
+import { ModalTitles } from "./ModalContents";
 
 import "../../styles/join/Modal.scss";
 
@@ -9,7 +9,7 @@ interface ModalProps {
   onAgree: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ onAgree }) => {
+const AgreementModal: React.FC<ModalProps> = ({ onAgree }) => {
   const { isOpen, closeModal, modalType } = useModalForm();
 
   if (!isOpen || !modalType) return null;
@@ -31,4 +31,4 @@ const Modal: React.FC<ModalProps> = ({ onAgree }) => {
   );
 };
 
-export default Modal;
+export default AgreementModal;

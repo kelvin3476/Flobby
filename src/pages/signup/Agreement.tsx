@@ -2,8 +2,8 @@ import React from "react";
 
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
-import Checkbox from "../../components/signup/Checkbox";
-import Modal from "../../components/signup/Modal";
+import Checkbox from "../../components/checkbox/Checkbox";
+import AgreementModal from "../../components/join/AgreementModal";
 
 import useAgreeForm from "../../hooks/join/useAgreeForm";
 import useModalForm from "../../hooks/join/useModalForm";
@@ -99,7 +99,7 @@ const Agreement = () => {
           title="다음" onClick={acceptAgree}
         />
 
-        <Modal onAgree={handleModalAgree}/>
+        <AgreementModal onAgree={handleModalAgree}/>
       </main>
     </div>
   );
