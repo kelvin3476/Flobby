@@ -43,6 +43,12 @@ const Region = () => {
     attemptSelectRegion(region);
   };
 
+  const acceptNext = () => {
+    if (selectedRegions.length > 0) {
+      nav ('/next');
+    }
+  };
+
   return (
     <div className="region-container">
       <div className="region-title">
@@ -101,7 +107,7 @@ const Region = () => {
           <Button 
             className={`next-btn ${selectedRegions.length > 0 ? "active" : ""}`}
             title="다음" 
-            onClick={() => nav("/next")} />
+            onClick={acceptNext} />
           <Button 
             className="pass-btn" 
             title="건너뛰기" 
