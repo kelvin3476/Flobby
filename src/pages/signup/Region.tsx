@@ -99,7 +99,7 @@ const Region = () => {
         
         <div className="buttons">
           <Button 
-            className={`next-btn ${selectedRegions.length === 3 ? "active" : ""}`} 
+            className={`next-btn ${selectedRegions.length > 0 ? "active" : ""}`}
             title="다음" 
             onClick={() => nav("/next")} />
           <Button 
