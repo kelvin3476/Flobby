@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import SocialLogin from "../../../api/login/SocialLogin";
 
 const KakaoRedirectHandler = () => {
     const navigate = useNavigate();
@@ -8,17 +9,11 @@ const KakaoRedirectHandler = () => {
     const code = new URLSearchParams(window.location.search).get('code');
 
     try {
-        fetch(`/api/kakao/login?code=${code}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
+        SocialLogin.KakaoLogin(code)
         .then((response) => {
-            if (response.code === 2002) {
+            if (response.data.code === 2002) {
                 localStorage.clear();
-                localStorage.setItem('kakao_account', JSON.stringify(response.data.kakao_account));
+                localStorage.setItem('kakao_account', JSON.stringify(response.data.data.kakao_account));
                 navigate('/signup');
             } else {
                 navigate('/');
