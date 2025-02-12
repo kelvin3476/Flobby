@@ -45,7 +45,7 @@ const Region = () => {
 
   const acceptNext = () => {
     if (selectedRegions.length > 0) {
-      nav ('/next');
+      nav ('/signup/hobby');
     }
   };
 
@@ -111,7 +111,7 @@ const Region = () => {
           <Button 
             className="pass-btn" 
             title="건너뛰기" 
-            onClick={() => nav("/next")} />
+            onClick={() => nav("/signup/hobby")} />
         </div>
       </main>
     </div>
