@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 import usePasswordStore from "../../store/password/usePasswordStore";
+import Login from "../../api/login/Login";
 
 const useEmailForm = () => {
 
@@ -120,25 +121,16 @@ const useEmailForm = () => {
         if (!isValidPasswordResult || !isValidPasswordCheckResult) return;
 
         try {
-            // 2. 비밀번호 변경 api 연동 로직 (axios 또는 fetch로 api 호출)
-            // TODO: 현재는 fetch 방식으로 일단 구현 => 추후 논의 해보고 어떤 방식으로 통일 할지 결정
-            const response = await fetch('/api/password/reset', { /* TODO: api 주소는 실제 엔드포인트 맞게 추후 수정 예정 */
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    password,
-                    confirmPassword,
-                }),
-            })
-
-            if (response.status === 200) {
-                // 3. 비밀번호 변경 성공 페이지로 이동하는 로직
-                navigate('/password/success');
-            } else {
-                console.error('비밀번호 변경 api 호출 실패');
-            }
+            // 2. 비밀번호 변경 api 연동 로직
+            Login.resetPassword({ password, confirmPassword })
+            .then((response) => {
+                if (response.data.code === 1000) {
+                    // 3. 비밀번호 변경 성공 페이지로 이동하는 로직
+                    navigate('/password/success');
+                } else {
+                    console.error('비밀번호 변경 api 호출 실패');
+                }
+            });
         } catch (error) {
             console.error('비밀번호 변경 실패', error);
         }
