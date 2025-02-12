@@ -1,25 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import SocialLogin from "../../../api/login/SocialLogin";
 
 const NaverRedirectHandler = () => {
     const navigate = useNavigate();
 
-    /* TODO: 백엔드에서 code 값을 다르게 내려주면 해당 값에 따라 fetch() 내부에서 분기처리 진행 필요 */
+    /* TODO: 백엔드에서 code 값을 다르게 내려주면 해당 값에 따라 내부에서 분기처리 진행 필요 */
     const code = new URLSearchParams(window.location.search).get('code');
     const state = new URLSearchParams(window.location.search).get('state');
 
     try {
-        fetch(`/api/naver/login?code=${code}&state=${state}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
+        SocialLogin.NaverLogin(code, state)
         .then((response) => {
-            if (response.code === 2002) {
+            if (response.data.code === 2002) {
                 localStorage.clear();
-                localStorage.setItem('naver_account', JSON.stringify(response.data.response));
+                localStorage.setItem('naver_account', JSON.stringify(response.data.data.response));
                 navigate('/signup');
             } else {
                 navigate('/');
