@@ -14,7 +14,7 @@ const Footer = ({ footerTitle }: FooterProps) => {
 
     return (
       <div>
-        <div className="signup-container">
+        <div className="footer-container">
           <span>{ footerTitle }</span>
 
           <Button
