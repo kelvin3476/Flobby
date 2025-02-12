@@ -20,7 +20,7 @@ const Footer = ({ footerTitle }: FooterProps) => {
           <Button
             className="signup-button"
             title="회원 가입"
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/signup/agreement')}
           />
         </div>
 
