@@ -107,16 +107,24 @@ main {
         width: 24px;
         height: 24px;
         position: relative;
+
+      }
+
+      button.show {
         transform: rotate(-180deg);
+        background-image: url("../../assets/svg/signup/signup_arrow.svg");
+      }
+
+      button.hide {
         background-image: url("../../assets/svg/signup/signup_arrow.svg");
       }
     }
 
     .hobby-ul {
       width: 328px;
-      display: flex;
       padding: 0 4px 0 12px;
       gap: 4px;
+      display: flex;
       flex-wrap: wrap;
       margin: 12px 0 28px 0;
 
@@ -151,6 +159,10 @@ main {
         color: #764BF6;
         background: #F1EDFE;
       }
+    }
+
+    ul.hide {
+      display: none;
     }
   }
 
@@ -213,6 +225,11 @@ main {
     font-style: normal;
     font-weight: 400;
     color: #fff;
+  }
+
+  .disable {
+    opacity: 0.3;
+    cursor: default;
   }
 }
 

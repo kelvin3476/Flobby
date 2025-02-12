@@ -4,12 +4,12 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  gap: 48px;
+  gap: 60px;
 
   .signup-title {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 
     .Header {
       font-size: 36px;
@@ -21,7 +21,7 @@
 
     > span {
       color: #72787F;
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 150%;
@@ -40,6 +40,11 @@
       background: #764BF6;
       color: #fff;
       border: none;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      letter-spacing: -0.3px;
     }
 
 }
