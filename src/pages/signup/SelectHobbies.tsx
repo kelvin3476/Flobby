@@ -113,12 +113,12 @@ const SelectHobbies = () => {
           <Button
               className={isNextButtonDisabled ? 'next disable' : 'next'}
               title="다음"
-              onClick={() => !isNextButtonDisabled && navigate('/next')}
+              onClick={() => !isNextButtonDisabled && navigate('/signup/success')}
           />
           <Button
             className="skip"
             title="건너뛰기"
-            onClick={() => navigate('/next')}
+            onClick={() => navigate('/signup/success')}
           />
         </div>
       </main>
