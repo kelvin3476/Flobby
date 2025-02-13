@@ -35,7 +35,8 @@ const Region = () => {
     setActiveCity, 
     attemptSelectRegion, 
     removeRegion, 
-    warning 
+    warning,
+    getRegions,
   } = useRegionStore();
 
   const handleSelect = (city: string, district: string) => {
@@ -44,6 +45,11 @@ const Region = () => {
   };
 
   const acceptNext = () => {
+    const { getRegions } = useRegionStore.getState();
+    const selectedRegions = getRegions();
+
+    console.log("선택한 지역 목록:", selectedRegions);
+
     if (selectedRegions.length > 0) {
       nav ('/signup/hobby');
     }
