@@ -13,6 +13,7 @@ const useAgreeForm = () => {
     setPrivacyAgree,
     marketingAgree,
     setMarketingAgree,
+    getAgreements,
   } = useAgreeStore();
 
   const nav = useNavigate();
@@ -35,6 +36,8 @@ const useAgreeForm = () => {
 
   const acceptAgree = () => {
     if (serviceAgree && privacyAgree) {
+      const agreements = getAgreements();
+      console.log("약관 동의 상태:", agreements);
       nav('/next');
     }
   };

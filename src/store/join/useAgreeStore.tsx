@@ -1,25 +1,26 @@
 import { create } from "zustand";
 
 interface AgreeStore {
-  // 약관 동의 여부
-  /* 약관 모두 동의 여부 */
   allAgree: boolean;
   setAllAgree: (value: boolean) => void;
 
-  /* 서비스 이용약관 동의 여부 */
   serviceAgree: boolean;
   setServiceAgree: (value: boolean) => void;
 
-  /* 개인정보 수집 및 이용 동의 여부 */
   privacyAgree: boolean;
   setPrivacyAgree: (value: boolean) => void;
 
-  /*광고성 정보 수신 동의 여부 */
   marketingAgree: boolean;
   setMarketingAgree: (value: boolean) => void;
+
+  getAgreements: () => {
+    serviceAgree: boolean; 
+    privacyAgree: boolean;
+    marketingAgree: boolean;
+  };
 }
 
-const useAgreeStore = create<AgreeStore>((set) => ({
+const useAgreeStore = create<AgreeStore>((set, get) => ({
   allAgree: false,
   setAllAgree: (value: boolean) =>
     set(() => ({
@@ -48,6 +49,11 @@ const useAgreeStore = create<AgreeStore>((set) => ({
       marketingAgree: value,
       allAgree: state.serviceAgree && state.privacyAgree && value,
     })),
+
+    getAgreements: () => {
+      const { serviceAgree, privacyAgree, marketingAgree } = get();
+      return { serviceAgree, privacyAgree, marketingAgree };
+    },
 }));
 
 export default useAgreeStore;
