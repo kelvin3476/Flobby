@@ -22,8 +22,6 @@ const useRegionForm = () => {
   };
 
   const acceptNext = () => {
-    console.log("선택한 지역 목록:", getRegions());
-
     if (selectedRegions.length > 0) {
       nav ('/signup/hobby', { state: getRegions() });
     }

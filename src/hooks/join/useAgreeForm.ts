@@ -36,7 +36,6 @@ const useAgreeForm = () => {
 
   const acceptAgree = () => {
     if (serviceAgree && privacyAgree) {
-      console.log("약관 동의 상태:", getAgreements());
       nav('/next', { state: getAgreements() });
     }
   };
