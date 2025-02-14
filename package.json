@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prod": "./deploy.sh"
   },
   "proxy": "http://220.93.95.108:13960",
   "dependencies": {
