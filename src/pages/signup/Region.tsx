@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import useRegionStore from "../../store/join/useRegionStore";
 
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
 
-import "../../styles/join/Region.scss";
+import useRegionForm from "../../hooks/join/useRegionForm";
 
+import "../../styles/join/Region.scss";
 
 // 지역 리스트 (이후 API 데이터로 대체)
 const cityDistrictMap = {
@@ -29,25 +29,18 @@ const cityDistrictMap = {
 
 const Region = () => {
   const nav = useNavigate();
+
   const { 
     selectedRegions, 
     activeCity, 
     setActiveCity, 
     attemptSelectRegion, 
     removeRegion, 
-    warning 
-  } = useRegionStore();
-
-  const handleSelect = (city: string, district: string) => {
-    const region = `${city} ${district}`;
-    attemptSelectRegion(region);
-  };
-
-  const acceptNext = () => {
-    if (selectedRegions.length > 0) {
-      nav ('/signup/hobby');
-    }
-  };
+    warning,
+    getRegions,
+    handleSelect,
+    acceptNext,
+  } = useRegionForm();
 
   return (
     <div className="region-container">

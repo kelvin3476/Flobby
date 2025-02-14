@@ -1,53 +1,72 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface AgreeStore {
-  // 약관 동의 여부
-  /* 약관 모두 동의 여부 */
   allAgree: boolean;
   setAllAgree: (value: boolean) => void;
 
-  /* 서비스 이용약관 동의 여부 */
   serviceAgree: boolean;
   setServiceAgree: (value: boolean) => void;
 
-  /* 개인정보 수집 및 이용 동의 여부 */
   privacyAgree: boolean;
   setPrivacyAgree: (value: boolean) => void;
 
-  /*광고성 정보 수신 동의 여부 */
   marketingAgree: boolean;
   setMarketingAgree: (value: boolean) => void;
+
+  getAgreements: () => {
+    serviceAgree: boolean;
+    privacyAgree: boolean;
+    marketingAgree: boolean;
+  };
 }
 
-const useAgreeStore = create<AgreeStore>((set) => ({
-  allAgree: false,
-  setAllAgree: (value: boolean) =>
-    set(() => ({
-      allAgree: value,
-      serviceAgree: value,
-      privacyAgree: value,
-      marketingAgree: value,
-    })),
-  serviceAgree: false,
-  setServiceAgree: (value) =>
-    set((state) => ({
-      serviceAgree: value,
-      allAgree: value && state.privacyAgree && state.marketingAgree,
-    })),
-  
-  privacyAgree: false,
-  setPrivacyAgree: (value) =>
-    set((state) => ({
-      privacyAgree: value,
-      allAgree: state.serviceAgree && value && state.marketingAgree,
-    })),
-  
-  marketingAgree: false,
-  setMarketingAgree: (value) =>
-    set((state) => ({
-      marketingAgree: value,
-      allAgree: state.serviceAgree && state.privacyAgree && value,
-    })),
-}));
+const useAgreeStore = create<AgreeStore>()(
+  persist(
+    (set, get) => ({
+      allAgree: false,
+      setAllAgree: (value: boolean) => {
+        set(() => ({
+          allAgree: value,
+          serviceAgree: value,
+          privacyAgree: value,
+          marketingAgree: value,
+        }));
+      },
+      serviceAgree: false,
+      setServiceAgree: (value) => {
+        set((state) => ({
+          serviceAgree: value,
+          allAgree: value && state.privacyAgree && state.marketingAgree,
+        }));
+      },
+
+      privacyAgree: false,
+      setPrivacyAgree: (value) => {
+        set((state) => ({
+          privacyAgree: value,
+          allAgree: state.serviceAgree && value && state.marketingAgree,
+        }));
+      },
+
+      marketingAgree: false,
+      setMarketingAgree: (value) => {
+        set((state) => ({
+          marketingAgree: value,
+          allAgree: state.serviceAgree && state.privacyAgree && value,
+        }));
+      },
+
+      getAgreements: () => {
+        const { serviceAgree, privacyAgree, marketingAgree } = get();
+        return { serviceAgree, privacyAgree, marketingAgree };
+      },
+    }),
+    {
+      name: "agreement-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
 
 export default useAgreeStore;
