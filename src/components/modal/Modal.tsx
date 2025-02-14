@@ -1,6 +1,6 @@
 import React from "react";
-import useModalForm from "../../hooks/join/useModalForm";
-import "../../styles/join/Modal.scss";
+import useModalForm from "../../hooks/signup/useModalForm";
+import "../../styles/signup/Modal.scss";
 
 const Modal: React.FC = () => {
   const {

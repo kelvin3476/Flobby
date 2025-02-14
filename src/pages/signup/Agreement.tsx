@@ -3,12 +3,12 @@ import React from "react";
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
 import Checkbox from "../../components/checkbox/Checkbox";
-import AgreementModal from "../../components/join/AgreementModal";
+import AgreementModal from "../../components/signup/AgreementModal";
 
-import useAgreeForm from "../../hooks/join/useAgreeForm";
-import useModalForm from "../../hooks/join/useModalForm";
+import useAgreeForm from "../../hooks/signup/useAgreeForm";
+import useModalForm from "../../hooks/signup/useModalForm";
 
-import "../../styles/join/Agreement.scss";
+import "../../styles/signup/Agreement.scss";
 
 
 const Agreement = () => {

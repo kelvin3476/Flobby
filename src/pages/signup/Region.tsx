@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
 
-import useRegionForm from "../../hooks/join/useRegionForm";
+import useRegionForm from "../../hooks/signup/useRegionForm";
 
-import "../../styles/join/Region.scss";
+import "../../styles/signup/Region.scss";
 
 // 지역 리스트 (이후 API 데이터로 대체)
 const cityDistrictMap = {

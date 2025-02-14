@@ -1,5 +1,5 @@
 import React from "react";
-import useRegionStore from "../../store/join/useRegionStore";
+import useRegionStore from "../../store/signup/useRegionStore";
 
 import { useNavigate } from "react-router";
 

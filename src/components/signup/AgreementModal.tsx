@@ -1,9 +1,9 @@
 import React from "react";
-import useModalForm from "../../hooks/join/useModalForm";
+import useModalForm from "../../hooks/signup/useModalForm";
 import ModalContents from "./ModalContents";
 import { ModalTitles } from "./ModalContents";
 
-import "../../styles/join/Modal.scss";
+import "../../styles/signup/Modal.scss";
 
 interface ModalProps {
   onAgree: () => void;

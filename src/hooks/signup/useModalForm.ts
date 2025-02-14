@@ -1,5 +1,5 @@
 import React from "react";
-import useModalStore from "../../store/join/useModalStore";
+import useModalStore from "../../store/signup/useModalStore";
 
 const useModalForm = () => {
   const { isOpen, openModal, closeModal, modalType } = useModalStore();
