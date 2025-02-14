@@ -45,13 +45,10 @@ const Region = () => {
   };
 
   const acceptNext = () => {
-    const { getRegions } = useRegionStore.getState();
-    const selectedRegions = getRegions();
-
-    console.log("선택한 지역 목록:", selectedRegions);
+    console.log("선택한 지역 목록:", getRegions());
 
     if (selectedRegions.length > 0) {
-      nav ('/signup/hobby');
+      nav ('/signup/hobby', { state: getRegions() });
     }
   };
 
