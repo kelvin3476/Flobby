@@ -1,0 +1,192 @@
+.region-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 60px;
+
+  .region-title {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+
+    .Header {
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+      letter-spacing: -0.3px;
+    }
+
+    > span {
+      color: #72787F;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+
+      &.error {
+        color: #F94E51;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+
+    .region-selector {
+      display: grid;
+      grid-template-columns: 120px 176px 178px;
+      height: 476px;
+      border: 1px solid #E8EBED;
+      border-radius: 6px;
+      overflow: hidden; 
+
+      .region-city {
+        background-color: #F7F8F9;
+
+        .region-item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          height: 50px;
+
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+          letter-spacing: -0.3px;
+          color: #72787F;
+          text-indent: 16px;
+  
+          &.active {
+            background-color: #fff;  
+            color: #764BF6;
+          }
+        }
+      }
+
+      .region-town {
+        background-color: #fff;
+        overflow-y: scroll;
+        position: relative;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+  
+        &::-webkit-scrollbar-track {
+          background: #E8EBED;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #9EA4AA;
+          border-radius: 100px;
+        }
+
+        .region-item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          height: 50px;
+
+          color: #191919;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+          letter-spacing: -0.3px;
+          text-indent: 16px;
+  
+          &.selected {
+            color: #764BF6;
+            background-color: #F1EDFE;
+            background-image: url("../../assets/svg/join/region_checked.svg");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+          }
+        }
+      }
+
+      .region-selected {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding-top: 12px;
+        background-color: #fff;
+        
+        .selected-item {
+          padding: 8px 12px;
+          width: 146px;
+          background-color: #F7F8F9;
+          border-radius: 6px;
+          
+          > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #72787F;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+          }
+  
+          button {
+            cursor: pointer;
+            background-image: url("../../assets/svg/join/region_delete.svg");
+            border: none;
+            background-color: transparent;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .next-btn {
+        cursor: pointer;
+        border: none;
+        width: 480px;
+        height: 60px;
+        border-radius: 6px;
+        background-color: #764BF6;
+        opacity: 0.3;
+  
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        color: #fff;
+
+        &.active {
+          opacity: 1;
+        }
+      }
+  
+      .pass-btn {
+        cursor: pointer;
+        border: none;
+        width: 480px;
+        height: 60px;
+        background-color: #fff;
+  
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        color: #72787F;
+      }
+    }
+  }
+}

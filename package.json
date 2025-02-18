@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prod": "./deploy.sh"
   },
+  "proxy": "http://220.93.95.108:13960",
   "dependencies": {
     "@types/node": "^22.10.5",
     "axios": "^1.7.9",
@@ -34,6 +36,6 @@
     "prettier": "^3.4.2",
     "sass": "^1.83.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3"
+    "vite": "^6.1.0"
   }
 }
