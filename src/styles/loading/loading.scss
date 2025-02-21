@@ -1,0 +1,25 @@
+.loading-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    display: flex;
+    font-display: none;
+  }
+
+  > img {
+    width: 40px;
+    height: 40px;
+    animation: spin 3s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
