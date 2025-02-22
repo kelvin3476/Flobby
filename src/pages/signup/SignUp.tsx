@@ -5,80 +5,136 @@ import Header from '../../components/login/Header';
 import Button from '../../components/button/Button';
 
 import '../../styles/signup/SignUp.scss';
-import useSignUpStore from "../../store/signup/useSignUpStore";
+import useSignUpStore from '../../store/signup/useSignUpStore';
+import SignUpInput from '../../components/input/SignUpInput';
+import useNicknameForm from '../../hooks/signup/nickname/useNicknameForm';
+import usePhoneForm from "../../hooks/signup/phone/usePhoneForm";
+import useVerificationCodeForm from "../../hooks/verificationcode/useVerificationCodeForm";
+import useEmailForm from "../../hooks/email/useEmailForm";
+import usePasswordForm from "../../hooks/signup/password/usePasswordForm";
 
 const SignUp = () => {
-  const { signUpData,setSignUpData } = useSignUpStore();
+  const { signUpData, setSignUpData } = useSignUpStore();
+  const {
+    nickname,
+    isNicknameValid,
+    nicknameError,
+    handleNicknameBlur,
+    handleNicknameChange,
+    checkDuplicatedNickname
+  } = useNicknameForm();
+    const {
+        phone,
+        isPhoneValid,
+        handlePhoneBlur,
+        handlePhoneChange,
+    } = usePhoneForm();
+
+    const {
+        code,
+        handleCodeBlur,
+        handleCodeChange,
+    } = useVerificationCodeForm();
+
+const {
+    email,
+    isEmailValid,
+    emailError,
+    handleEmailBlur,
+    handleEmailChange,
+} =useEmailForm();
+
+    const {
+        password,
+        isPasswordValid,
+        passwordError,
+        handlePasswordBlur,
+        handlePasswordChange,
+    } =usePasswordForm();
+
   const navigate = useNavigate();
   const citizenship = [
     {
-      value: 'domestic',
+      value: 'N',
       display: '내국인',
     },
     {
-      value: 'foreign',
+      value: 'Y',
       display: '외국인',
     },
   ];
-  
+
   return (
     <div className="signup-container">
       <div className="signup-title">
         <Header className="Header" headerTitle="회원가입" />
       </div>
       <main>
-        <p>
+        <p className={'require'}>
           <span>*</span>필수 입력 사항
         </p>
         <ul className="user-form">
           <li>
-            <label
-                htmlFor="nickname" className="nickname">닉네임<span>*</span>
+            <label htmlFor="nickname" className="nickname">
+              닉네임<span>*</span>
             </label>
-            <div>
-              <input
+            <div className={'input-box'}>
+              <SignUpInput
                 type="text"
                 name="nickname"
-                onChange={setSignUpData}
+                value={nickname}
+                onChange={handleNicknameChange}
+                onBlur={handleNicknameBlur}
                 placeholder="닉네임을 입력해 주세요."
+                maxLength={12}
+                errorMessage={nicknameError}
+                isValid={isNicknameValid}
               />
               <Button
-                className="check-duplicated"
+                className={isNicknameValid ? 'check-btn active' : 'check-btn'}
                 title="중복 확인"
-                onClick={() => navigate('/')}
+                onClick={() =>
+                  isNicknameValid ? checkDuplicatedNickname(nickname) : ''
+                }
               />
-              <span className="delete"></span>
             </div>
           </li>
           <li>
             <label htmlFor="phone" className="phone">
               휴대폰 번호<span>*</span>
             </label>
-            <div>
-              <input
+            <div className={'input-box'}>
+              <SignUpInput
                 type="text"
                 name="phone"
-                onChange={setSignUpData}
-                placeholder="휴대폰 번호를 입력해 주세요."
+                value={phone}
+                onChange={handlePhoneChange}
+                onBlur={handlePhoneBlur}
+                isValid={isPhoneValid}
+                maxLength={11}
+                placeholder="숫자만 입력해 주세요."
               />
               <Button
-                className="check-duplicated"
+                className={isPhoneValid ? 'check-btn active' : 'check-btn'}
                 title="본인 인증"
                 onClick={() => navigate('/')}
               />
-              <span className="delete"></span>
             </div>
           </li>
           <li>
-            <label htmlFor="number" className="number">
+            <label htmlFor="verification-code" className="verification-code">
               인증 번호<span>*</span>
             </label>
-            <div>
-              <input
-                className="long"
+            <div className="input-box">
+              <SignUpInput
                 type="number"
-                name="number"
-                onChange={setSignUpData}
+                name="verification-code"
+                className="long"
+                value={code}
+                onChange={handleCodeChange}
+                onBlur={handleCodeBlur}
+                isValid={isPhoneValid}
+                maxLength={11}
                 placeholder="인증 번호를 입력해 주세요."
               />
             </div>
@@ -87,58 +143,74 @@ const SignUp = () => {
             <label htmlFor="email" className="email">
               이메일<span>*</span>
             </label>
-            <div>
-              <input
-                className="long"
+            <div className="input-box">
+              <SignUpInput
                 type="email"
                 name="email"
-                onChange={setSignUpData}
+                className="long"
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={handleEmailBlur}
+                isValid={isEmailValid}
+                // errorMessage={emailError}
+                maxLength={121}
                 placeholder="이메일을 입력해 주세요."
               />
-              <span className="delete"></span>
             </div>
           </li>
           <li>
             <label htmlFor="password" className="password">
               비밀번호<span>*</span>
             </label>
-            <div>
-              <input
-                className="long"
+            <div className="input-box">
+              <SignUpInput
                 type="password"
                 name="password"
-                onChange={setSignUpData}
+                className="long"
+                value={password}
+                onChange={handlePasswordChange}
+                onBlur={handlePasswordBlur}
+                isValid={isPasswordValid}
+                // errorMessage={passwordError}
+                maxLength={20}
                 placeholder="비밀번호를 입력해 주세요."
               />
               <span className="show-password"></span>
             </div>
-            <p className="desc">문자+숫자+특수문자 조합 8~20자리</p>
+            <p className="default">문자+숫자+특수문자 조합 8~20자리</p>
           </li>
           <li>
             <label htmlFor="check_password" className="check_password">
               비밀번호 확인<span>*</span>
             </label>
-            <div>
+            <div className="input-box">
               <input
                 className="long"
                 type="password"
                 name="check_password"
                 onChange={setSignUpData}
                 placeholder="비밀번호를 한 번 더 입력해 주세요."
+                maxLength={20}
               />
               <span className="show-password"></span>
             </div>
           </li>
           <li>
-            <label>
-              내국인 / 외국인<span>*</span>
+            <label>내국인 / 외국인<span>*</span>
             </label>
             <ul className="radio-ul">
               {citizenship &&
                 citizenship.map(item => (
                   <li>
-                    <input type={'radio'} id={item.value} value={item.value} />
-                    <label htmlFor={item.value}> {item.display}</label>
+                    <input
+                      type={'radio'}
+                      id={item.display}
+                      className={
+                        signUpData.foreignerYn == item.value ? 'checked' : ''
+                      }
+                      // onChange={""}
+                    />
+                    <label htmlFor={item.display}> {item.display}</label>
                   </li>
                 ))}
             </ul>

@@ -22,23 +22,12 @@ const useSignUpStore = create<SignUpStore>(set => ({
         check_password: "",
         foreignerYn: "N",
     },
-  setSignUpData: (e: React.ChangeEvent<HTMLInputElement>) => {
+   setSignUpData: (e: React.ChangeEvent<HTMLInputElement>) => {
       const {name, value} = e.target;
-      if (name === "nickname" && value.length) {
-      }
-      if (name === "phone" && value.length) {
-      }
-      if (name === "email" && value.length) {
-      }
-      if (name === "password" && value.length) {
-      }
-      if (name === "check_password" && value.length) {
-      }
-      if (name === "foreignerYn" && value.length) {
-      }
-      set((state) => ({
-          signUpData: {...state.signUpData, [name]: value}
-      }))
+          set((state) => ({
+              signUpData: {...state.signUpData, [name]: value}
+          }))
+
   },
     }));
 

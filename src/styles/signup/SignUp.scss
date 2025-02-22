@@ -24,7 +24,8 @@
 
   main {
     gap: 0;
-    p {
+
+    p.require {
       color: #72787F;
       font-size: 14px;
       font-style: normal;
@@ -48,13 +49,12 @@
 
       li {
         width: 380px;
-        text-align: left;
         margin-top: 24px;
 
         label {
           font-size: 18px;
+          text-align: left;
           display: block;
-
           margin-bottom: 10px;
           line-height: 140%;
           font-weight: 600;
@@ -99,23 +99,23 @@
             border: 1px solid #C9CDD2;
             margin-right: 12px;
 
-            &:checked {
-              background-color: #fff; // 체크 시 내부 원 색상
-              border: 6px solid #764BF6; // 라인이 아닌, 라인과 원 사이 색상
-              box-shadow: 0 0 0 1px #764BF6; // 라인
-            }
+          }
+
+          input.checked {
+            background-color: #fff; // 체크 시 내부 원 색상
+            border: 6px solid #764BF6; // 라인이 아닌, 라인과 원 사이 색상
+            box-shadow: 0 0 0 1px #764BF6; // 라인
           }
         }
 
-        div {
-          display: flex;
+        div.input-box {
           width: 380px;
-          justify-content: space-between;
           position: relative;
-          input.long {
-            width: 380px;
-          }
-          input {
+          display: flex;
+          justify-content: space-between;
+
+          input{
+            width: 276px;
             color: #191919;
             font-size: 16px;
             padding: 12px;
@@ -123,16 +123,47 @@
             border-radius: 6px;
             font-weight: 500;
             line-height: 150%;
-            width: 276px;
             height: 48px;
             outline: none;
+            display: inline-block;
+
             &:focus {
               outline: 1px solid #191919;
-              //outline: 1px solid #F94E51;
+
             }
-            &::placeholder{
+            &::placeholder {
               color: #9ea4aa;
             }
+
+          }
+
+          input.long {
+            width: 380px;
+            position: relative;
+            color: #191919;
+            font-size: 16px;
+            padding: 12px;
+            border: 1px solid #E8EBED;
+            border-radius: 6px;
+            font-weight: 500;
+            line-height: 150%;
+            height: 48px;
+            outline: none;
+            display: inline-block;
+
+            &:focus {
+              outline: 1px solid #191919;
+
+            }
+            &::placeholder {
+              color: #9ea4aa;
+            }
+          }
+
+          }
+
+          input.warning{
+            outline: 1px solid #F94E51;
           }
 
           .show-password {
@@ -145,58 +176,118 @@
             background-image: url("../../assets/svg/signup/signup_eyes.svg");
           }
 
-        }
       }
-    }
-    .desc{
-      font-size: 14px;
-      text-align: left;
-      line-height: 150%;
-      letter-spacing: -0.3px;
     }
   }
 
-    .check-duplicated {
-      width: 96px;
-      height: 48px;
-      color: #C9CDD2;
-      border: 1px solid #C9CDD2;
-      text-align: center;
-      border-radius: 6px;
-      background-color: #fff;
-      cursor: pointer;
-      //border: 1px solid #764BF6;
-      //color: #764BF6;
-    }
+  .check-btn {
+    width: 96px;
+    height: 48px;
+    color: #C9CDD2;
+    border: 1px solid #C9CDD2;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #fff;
+    margin-top: 10px;
+    font-weight: 500;
 
-    .next {
-      cursor: pointer;
-      border: none;
-      width: 480px;
-      height: 60px;
-      border-radius: 6px;
-      background-color: #8b5cf6;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      color: #fff;
-    }
+  }
 
-    .disable {
-      opacity: 0.3;
-      cursor: default;
-    }
+  .active {
+    cursor: pointer;
+    border: 1px solid #764BF6;
+    color: #764BF6;
+    font-weight: 500;
+  }
 
-  .delete {
+  .next {
+    cursor: pointer;
+    border: none;
+    width: 480px;
+    height: 60px;
+    border-radius: 6px;
+    background-color: #8b5cf6;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .disable {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .timer{
+    color: #F94E51;
+    position: absolute;
+    top: 25px;
+    right: 12px;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: -0.3px;
+    font-weight: 500;
+  }
+
+  .reset {
     cursor: pointer;
     position: absolute;
-    top:14px;
+    top: 25px;
     right: 115px;
-    display: inline-block;
     width: 20px;
     height: 20px;
     background-image: url("../../assets/svg/signup/signup_reset.svg");
     background-repeat: no-repeat;
     background-size: 100%;
+    border: none;
+    display: none;
+  }
+
+  .reset-2{
+    cursor: pointer;
+    position: absolute;
+    top: 25px;
+    right: 44px;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../assets/svg/signup/signup_reset.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: none;
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  p.default {
+    color: #72787F;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: left;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+  }
+
+  p.warning {
+    color: #F94E51;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: left;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+  }
+
+  p.valid {
+    color: #03B240;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: left;
+    margin-top: 6px;
+    letter-spacing: -0.3px;
+    font-weight: 500;
   }
 }
