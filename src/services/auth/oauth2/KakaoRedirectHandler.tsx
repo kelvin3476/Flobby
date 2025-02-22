@@ -2,10 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router";
 import SocialLogin from "../../../api/login/SocialLogin";
 // import Login from '../../../api/login/Login';
-import useLoadingForm from "../../../hooks/loading/useLoadingForm";
+import LoadingSpinnerController from "../../../components/controllers/LoadingSpinnerController";
 
 const KakaoRedirectHandler = () => {
-    const {isLoading, loadingSVG} = useLoadingForm();
 
     const navigate = useNavigate();
 
@@ -62,13 +61,7 @@ const KakaoRedirectHandler = () => {
         }
     }
 
-    return (
-        <>
-            <div className={`loading-container ${isLoading ? "active" : ""}`}>
-                <img src={loadingSVG} alt="로딩 중..." />
-            </div>
-        </>
-    );
+    return <LoadingSpinnerController />;
 }
 
 export default KakaoRedirectHandler;

@@ -2,9 +2,6 @@ import { useEffect } from "react";
 
 import useLoadingStore from "../../store/loading/useLoadingStore";
 
-import loadingSVG from "../../assets/svg/loading/loading-spinner.svg";
-import "../../styles/loading/loading.scss";
-
 const useLoadingForm = () => {
 
   const { 
@@ -20,16 +17,7 @@ const useLoadingForm = () => {
     };
   }, [setIsLoading]);
 
-  useEffect(() => {
-    const $loadingDiv = document.createElement("div");
-    document.body.appendChild($loadingDiv);
-
-    return () => {
-      document.body.removeChild($loadingDiv);
-    };
-  }, []);
-
-    return { isLoading, loadingSVG };
+    return { isLoading, setIsLoading };
   };
 
 export default useLoadingForm;
