@@ -5,7 +5,7 @@
 
   &.active {
     display: flex;
-    font-display: none;
+    flex-direction: column;
   }
 
   > img {
