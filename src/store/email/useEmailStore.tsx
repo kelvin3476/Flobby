@@ -10,8 +10,8 @@ interface EmailStore {
     setIsEmailValid: (isEmailValid: boolean) => void;
 
     /* 이메일 에러 상태 관리 */
-    emailError: string;
-    setEmailError: (emailError: string) => void;
+    emailError: [string,string];
+    setEmailError: (emailError: [string,string]) => void;
 }
 
 const useEmailStore = create<EmailStore>((set) => ({
@@ -21,8 +21,8 @@ const useEmailStore = create<EmailStore>((set) => ({
     isEmailValid: true,
     setIsEmailValid: (isEmailValid: boolean) => set({ isEmailValid }),
 
-    emailError: '',
-    setEmailError: (emailError: string) => set({ emailError }),
+    emailError: ['default',''],
+    setEmailError: (emailError: [string,string]) => set({ emailError }),
 }));
 
 export default useEmailStore;

@@ -12,25 +12,22 @@ const useEmailForm = () => {
         setEmailError,
     } = useEmailStore();
 
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        return emailRegex.test(email);
+    };
+
     const handleEmailBlur = () => {
-        if (!email) {
+        if (email.length > 0 && !isValidEmail(email)) {
             setIsEmailValid(false);
-            setEmailError('이메일을 입력해 주세요.');
+            setEmailError(['warning','올바른 이메일 형식으로 입력해 주세요.']);
         } else {
             setIsEmailValid(true);
-            setEmailError('');
+            setEmailError(['default','']);
         }
     }
-
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
-        if (e.target.value) {
-            setIsEmailValid(true);
-            setEmailError('');
-        } else {
-            setIsEmailValid(false);
-            setEmailError('이메일을 입력해 주세요.');
-        }
     }
 
     return {

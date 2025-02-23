@@ -114,7 +114,7 @@
           display: flex;
           justify-content: space-between;
 
-          input{
+          input {
             width: 276px;
             color: #191919;
             font-size: 16px;
@@ -131,6 +131,7 @@
               outline: 1px solid #191919;
 
             }
+
             &::placeholder {
               color: #9ea4aa;
             }
@@ -155,26 +156,27 @@
               outline: 1px solid #191919;
 
             }
+
             &::placeholder {
               color: #9ea4aa;
             }
           }
 
-          }
+        }
 
-          input.warning{
-            outline: 1px solid #F94E51;
-          }
+        input.warning {
+          outline: 1px solid #F94E51;
+        }
 
-          .show-password {
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-image: url("../../assets/svg/signup/signup_eyes.svg");
-          }
+        .show-password {
+          cursor: pointer;
+          width: 24px;
+          height: 24px;
+          position: absolute;
+          top: 22px;
+          right: 12px;
+          background-image: url("../../assets/svg/signup/signup_eyes.svg");
+        }
 
       }
     }
@@ -218,10 +220,10 @@
     cursor: default;
   }
 
-  .timer{
+  .timer {
     color: #F94E51;
     position: absolute;
-    top: 25px;
+    top: 23px;
     right: 12px;
     font-size: 14px;
     line-height: 21px;
@@ -243,19 +245,19 @@
     display: none;
   }
 
-  .reset-2{
-    cursor: pointer;
-    position: absolute;
-    top: 25px;
-    right: 44px;
-    width: 20px;
-    height: 20px;
-    background-image: url("../../assets/svg/signup/signup_reset.svg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border: none;
-    display: none;
-  }
+  //.reset-2{
+  //  cursor: pointer;
+  //  position: absolute;
+  //  top: 25px;
+  //  right: 44px;
+  //  width: 20px;
+  //  height: 20px;
+  //  background-image: url("../../assets/svg/signup/signup_reset.svg");
+  //  background-repeat: no-repeat;
+  //  background-size: 100%;
+  //  border: none;
+  //  display: none;
+  //}
 
   .show {
     display: block;
@@ -289,5 +291,28 @@
     margin-top: 6px;
     letter-spacing: -0.3px;
     font-weight: 500;
+  }
+
+  div.verification-code {
+    border: 1px solid red;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .reset {
+      right: 50px;
+    }
+  }
+
+
+  div.password {
+    border: 1px solid red;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .reset {
+      right: 50px;
+    }
   }
 }

@@ -8,6 +8,7 @@ interface PhoneStore {
     /* 휴대폰번호 유효성 검사 상태 관리 */
     isPhoneValid: boolean;
     setIsPhoneValid: (isPhoneValid: boolean) => void;
+
 }
 
 const usePhoneStore = create<PhoneStore>((set) => ({
@@ -15,7 +16,7 @@ const usePhoneStore = create<PhoneStore>((set) => ({
     setPhone: (phone: string) => set({ phone }),
 
     isPhoneValid: false,
-    setIsPhoneValid: (isPhoneValid: boolean) => set({ isPhoneValid })
+    setIsPhoneValid: (isPhoneValid: boolean) => set({ isPhoneValid }),
 
 }));
 

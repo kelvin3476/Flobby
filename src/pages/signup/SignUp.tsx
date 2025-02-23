@@ -14,7 +14,8 @@ import useEmailForm from "../../hooks/email/useEmailForm";
 import usePasswordForm from "../../hooks/signup/password/usePasswordForm";
 
 const SignUp = () => {
-  const { signUpData, setSignUpData } = useSignUpStore();
+  const navigate = useNavigate();
+  const { signUpData } = useSignUpStore();
   const {
     nickname,
     isNicknameValid,
@@ -28,10 +29,12 @@ const SignUp = () => {
         isPhoneValid,
         handlePhoneBlur,
         handlePhoneChange,
+        sendVerificationCode
     } = usePhoneForm();
 
     const {
         code,
+        display,
         handleCodeBlur,
         handleCodeChange,
     } = useVerificationCodeForm();
@@ -50,18 +53,14 @@ const {
         passwordError,
         handlePasswordBlur,
         handlePasswordChange,
+        showPassword,
+        setShowPassword
     } =usePasswordForm();
 
-  const navigate = useNavigate();
+
   const citizenship = [
-    {
-      value: 'N',
-      display: '내국인',
-    },
-    {
-      value: 'Y',
-      display: '외국인',
-    },
+    {value: 'N', display: '내국인',},
+    {value: 'Y', display: '외국인'},
   ];
 
   return (
@@ -93,9 +92,7 @@ const {
               <Button
                 className={isNicknameValid ? 'check-btn active' : 'check-btn'}
                 title="중복 확인"
-                onClick={() =>
-                  isNicknameValid ? checkDuplicatedNickname(nickname) : ''
-                }
+                onClick={() => isNicknameValid && checkDuplicatedNickname(nickname)}
               />
             </div>
           </li>
@@ -117,7 +114,7 @@ const {
               <Button
                 className={isPhoneValid ? 'check-btn active' : 'check-btn'}
                 title="본인 인증"
-                onClick={() => navigate('/')}
+                onClick={() =>isPhoneValid && sendVerificationCode(phone)}
               />
             </div>
           </li>
@@ -127,14 +124,15 @@ const {
             </label>
             <div className="input-box">
               <SignUpInput
-                type="number"
+                type="text"
                 name="verification-code"
                 className="long"
                 value={code}
+                timer={display}
                 onChange={handleCodeChange}
                 onBlur={handleCodeBlur}
                 isValid={isPhoneValid}
-                maxLength={11}
+                maxLength={6}
                 placeholder="인증 번호를 입력해 주세요."
               />
             </div>
@@ -152,7 +150,7 @@ const {
                 onChange={handleEmailChange}
                 onBlur={handleEmailBlur}
                 isValid={isEmailValid}
-                // errorMessage={emailError}
+                errorMessage={emailError}
                 maxLength={121}
                 placeholder="이메일을 입력해 주세요."
               />
@@ -171,11 +169,12 @@ const {
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordBlur}
                 isValid={isPasswordValid}
+                show={showPassword}
+                onClick={setShowPassword}
                 // errorMessage={passwordError}
                 maxLength={20}
                 placeholder="비밀번호를 입력해 주세요."
               />
-              <span className="show-password"></span>
             </div>
             <p className="default">문자+숫자+특수문자 조합 8~20자리</p>
           </li>
@@ -184,30 +183,32 @@ const {
               비밀번호 확인<span>*</span>
             </label>
             <div className="input-box">
-              <input
-                className="long"
-                type="password"
-                name="check_password"
-                onChange={setSignUpData}
-                placeholder="비밀번호를 한 번 더 입력해 주세요."
-                maxLength={20}
-              />
-              <span className="show-password"></span>
+                <SignUpInput
+                    type="check_password"
+                    name="check_password"
+                    className="long"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    onBlur={handlePasswordBlur}
+                    isValid={isPasswordValid}
+                    show={showPassword}
+                    onClick={setShowPassword}
+                    // errorMessage={passwordError}
+                    maxLength={20}
+                    placeholder="비밀번호를 한 번 더 입력해 주세요."
+                />
             </div>
           </li>
           <li>
             <label>내국인 / 외국인<span>*</span>
             </label>
             <ul className="radio-ul">
-              {citizenship &&
-                citizenship.map(item => (
-                  <li>
+              {citizenship.map(item => (
+                  <li key={item.value}>
                     <input
                       type={'radio'}
                       id={item.display}
-                      className={
-                        signUpData.foreignerYn == item.value ? 'checked' : ''
-                      }
+                      className={signUpData.foreignerYn == item.value ? 'checked' : ''}
                       // onChange={""}
                     />
                     <label htmlFor={item.display}> {item.display}</label>

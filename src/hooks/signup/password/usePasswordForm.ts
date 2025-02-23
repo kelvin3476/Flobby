@@ -9,6 +9,8 @@ const usePasswordForm = () => {
     setIsPasswordValid,
     passwordError,
     setPasswordError,
+    showPassword,
+    setShowPassword
   } = usePasswordStore();
 
   const isValidNickname = (nickname: string) => {
@@ -34,6 +36,7 @@ const usePasswordForm = () => {
     setPassword(e.target.value);
   };
 
+
   return {
     password,
     setPassword,
@@ -41,6 +44,8 @@ const usePasswordForm = () => {
     passwordError,
     handlePasswordBlur,
     handlePasswordChange,
+    showPassword,
+    setShowPassword
   };
 };
 
