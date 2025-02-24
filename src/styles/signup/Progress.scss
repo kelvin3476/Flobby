@@ -1,0 +1,31 @@
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+
+  > .line1, .line2 {
+    border-bottom: 1px solid #E8EBED;
+  }
+
+  > .line1 {
+    height: 90px;
+  }
+
+  > .line2 {
+    height: 56px;
+  }
+
+  .progress-bar {
+    height: 8px;
+    background-color: #764BF6;
+    border-radius: 100px;
+    transition: width 0.3s ease-in-out;
+  }
+}
+
+
