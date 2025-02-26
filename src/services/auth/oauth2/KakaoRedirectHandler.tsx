@@ -17,7 +17,7 @@ const KakaoRedirectHandler = () => {
             if (response.data.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('kakao_account', JSON.stringify(response.data.data.kakao_account));
-                navigate('/signup/region');
+                navigate('/signup/user-info');
             } else {
                 navigate('/');
                 console.error('유저 정보 요청 api 실패');
@@ -50,7 +50,7 @@ const KakaoRedirectHandler = () => {
             //         break;
             //     case 2002: /* 신규 회원 로그인 시도 코드 */
             //         localStorage.setItem('kakao_account', JSON.stringify(response.data.data.kakao_account));
-            //         navigate('/signup/region');
+            //         navigate('/signup/user-info');
             //         break;
             // }
         });
