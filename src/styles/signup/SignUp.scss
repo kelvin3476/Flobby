@@ -224,25 +224,11 @@
     color: #F94E51;
     position: absolute;
     top: 23px;
-    right: 12px;
+    right: 7px;
     font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.3px;
     font-weight: 500;
-  }
-
-  .reset {
-    cursor: pointer;
-    position: absolute;
-    top: 25px;
-    right: 115px;
-    width: 20px;
-    height: 20px;
-    background-image: url("../../assets/svg/signup/signup_reset.svg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border: none;
-    display: none;
   }
 
   //.reset-2{
@@ -259,9 +245,6 @@
   //  display: none;
   //}
 
-  .show {
-    display: block;
-  }
 
   p.default {
     color: #72787F;
@@ -293,26 +276,29 @@
     font-weight: 500;
   }
 
-  div.verification-code {
-    border: 1px solid red;
-    position: absolute;
-    top: 0;
-    right: 0;
 
-    .reset {
-      right: 50px;
-    }
+
+
+  .reset {
+    cursor: pointer;
+    position: absolute;
+    top: 23px;
+    right: 115px;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../assets/svg/signup/signup_reset.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: none;
+    display: none;
   }
-
-
-  div.password {
-    border: 1px solid red;
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    .reset {
-      right: 50px;
-    }
+  .show {
+    display: block;
+  }
+  .right12 {
+    right: 12px;
+  }
+  .right45 {
+    right: 45px;
   }
 }
