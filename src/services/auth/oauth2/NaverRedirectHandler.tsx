@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import SocialLogin from "../../../api/login/SocialLogin";
 // import Login from "../../../api/login/Login";
+import LoadingSpinnerController from "../../../components/controllers/LoadingSpinnerController";
 
 const NaverRedirectHandler = () => {
     const navigate = useNavigate();
@@ -60,9 +61,7 @@ const NaverRedirectHandler = () => {
         }
     }
 
-    return (
-        <div>로그인 중...</div>
-    );
+    return <LoadingSpinnerController />;
 }
 
 export default NaverRedirectHandler;
