@@ -36,7 +36,7 @@ const useAgreeForm = () => {
 
   const acceptAgree = () => {
     if (serviceAgree && privacyAgree) {
-      nav('/next', { state: getAgreements() });
+      nav('/signup/user-info', { state: getAgreements() });
     }
   };
 
