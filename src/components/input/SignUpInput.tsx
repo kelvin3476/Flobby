@@ -2,103 +2,101 @@
 // 리팩토링 필요
 
 import React from "react";
-import Button from "../button/Button";
+import Button from "../button/Button"; // @ts-ignore
 
+// @ts-ignore
 interface InputProps {
-    type: string;
-    name: string;
-    value: string;
-    onClick?: (value: string) => void;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onBlur: () => void;
-    isValid: boolean;
-    errorMessage?: [string,string] ;
-    placeholder: string;
-    className?: string;
-    maxLength: number;
-    timer?: string; //타이머 ex)인증번호
-    show?:string[]; //ex) show true인 className 담기
+  type: string;
+  name: string;
+  value: string;
+  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: () => void;
+  isValid: boolean;
+  errorMessage?: [string, string];
+  placeholder: string;
+  className?: string;
+  maxLength: number;
+  timer?: string; //타이머 ex)인증번호
+  show?: string[]; //ex) show true인 className 담기
 }
 
+const ResetButton: React.FC<{
+  value: string;
+  name: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+}> = ({ value, name, onChange }) => (
+  <Button
+    type="reset"
+    className={`reset ${
+      value.length &&
+      (name == 'verification-code' ||
+      name === 'password' ||
+      name === 'checkPassword'
+        ? 'show right45'
+        : name === 'email'
+          ? 'show right12'
+          : 'show')
+    }`}
+    onClick={() =>
+      onChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)
+    }
+  />
+);
+
+const handleShowPassword = (e: React.MouseEvent) => {
+  // `span`의 바로 이전 형제 요소를 찾고, 그 이전 형제 요소가 `input`이므로 두 번의 `previousElementSibling` 사용
+  const inputElement = e.currentTarget.previousElementSibling
+    ?.previousElementSibling as HTMLInputElement;
+
+  if (inputElement && inputElement.tagName === 'INPUT') {
+    inputElement.type = inputElement.type === 'password' ? 'text' : 'password';
+  }
+};
+
 const SignUpInput: React.FC<InputProps> = ({
-                                         type,
-                                         name,
-                                         value,
-                                         onChange,
-                                         onClick,
-                                         onBlur,
-                                         isValid,
-                                         errorMessage,
-                                         className,
-                                         placeholder,
-                                         maxLength,
-                                         timer,
-                                         show
+  type,
+  name,
+  value,
+  onChange,
+  onClick,
+  onBlur,
+  isValid,
+  errorMessage,
+  className,
+  placeholder,
+  maxLength,
+  timer,
+  show,
+}) => {
+  const isValidClass = value.length > 0 && !isValid ? 'warning' : '';
 
-
-                                     }) => {
-    return (
-      <div>
-        <input
-          type={type !== 'password' ? type :  show.filter((el)=> el === name).length > 0 ? "text" : type}
-          name={name}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          placeholder={placeholder}
-          className={
-            className
-              ? `${className} ${value.length > 0 && !isValid ? 'warning' : ''}`
-              : value.length > 0 && !isValid
-                ? 'warning'
-                : ''
-          }
-          maxLength={maxLength}
-        />
-        {name === 'verification-code' ? (
-          <div className="verification-code">
-            <Button
-              type="reset"
-              className={value.length ? 'reset show' : 'reset'}
-              onClick={() =>
-                onChange({
-                  target: { value: '' },
-                } as React.ChangeEvent<HTMLInputElement>)
-              }
-            />
-            <span className="timer">{timer}</span>
-          </div>
-        ) : name === 'password' || name === 'check_password' ? (
-          <div className="password">
-            <Button
-              type="reset"
-              className={value.length ? 'reset show' : 'reset'}
-              onClick={() =>
-                onChange({
-                  target: { value: '' },
-                } as React.ChangeEvent<HTMLInputElement>)
-              }
-            />
-            <span className="show-password"
-            onClick={()=> onClick(name)}></span>
-          </div>
-        ) : (
-          <>
-            <Button
-              type="reset"
-              className={value.length ? 'reset show' : 'reset'}
-              onClick={() =>
-                onChange({
-                  target: { value: '' },
-                } as React.ChangeEvent<HTMLInputElement>)
-              }
-            />
-          </>
-        )}
-
-        {errorMessage && <p className={errorMessage[0]}>{errorMessage[1]}</p>}
-      </div>
-    );
+  const inputType =
+    type !== 'password' ? type : show?.includes(name) ? 'text' : type;
+  return (
+    <div>
+      <input
+        type={inputType}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        className={`${className ? className : ''} ${isValidClass}`}
+        maxLength={maxLength}
+        style={{ position: 'relative' }}
+      />
+      <ResetButton name={name} value={value} onChange={onChange} />
+      {name === 'verification-code' ? (
+        <span className="timer">{timer}</span>
+      ) : name === 'password' || name === 'checkPassword' ? (
+        <span className="show-password" onClick={handleShowPassword}></span>
+      ) : (
+        ''
+      )}
+      {errorMessage && <p className={errorMessage[0]}>{errorMessage[1]}</p>}
+    </div>
+  );
 };
 
 export default SignUpInput;

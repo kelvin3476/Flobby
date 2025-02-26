@@ -7,7 +7,7 @@ interface SignUpStore {
      phone: string;
      email: string;
      password: string;
-     check_password: string;
+     checkPassword: string;
      foreignerYn: string;
  };
  setSignUpData : (e:React.ChangeEvent<HTMLInputElement>)=> void;
@@ -19,7 +19,7 @@ const useSignUpStore = create<SignUpStore>(set => ({
         phone: "",
         email: "",
         password: "",
-        check_password: "",
+        checkPassword: "",
         foreignerYn: "N",
     },
    setSignUpData: (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -5,12 +5,16 @@ const usePasswordForm = () => {
   const {
     password,
     setPassword,
+
+    checkPassword,
+    setCheckPassword,
+
     isPasswordValid,
     setIsPasswordValid,
+
     passwordError,
     setPasswordError,
-    showPassword,
-    setShowPassword
+    setShowPassword,
   } = usePasswordStore();
 
   const isValidNickname = (nickname: string) => {
@@ -33,19 +37,29 @@ const usePasswordForm = () => {
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    const { name, value } = e.target;
+
+    if (name === 'password') {
+      setPassword(value);
+    } else {
+      setCheckPassword(value);
+    }
   };
 
+  const toggleShowPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+
+    setShowPassword(name);
+  };
 
   return {
     password,
-    setPassword,
+    checkPassword,
     isPasswordValid,
     passwordError,
     handlePasswordBlur,
     handlePasswordChange,
-    showPassword,
-    setShowPassword
+    toggleShowPassword,
   };
 };
 

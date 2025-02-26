@@ -5,6 +5,10 @@ interface PasswordStore {
     password: string;
     setPassword: (password: string) => void;
 
+    /* 비밀번호 확인 상태 관리 */
+    checkPassword: string;
+    setCheckPassword: (checkPassword: string) => void;
+
     /* 비밀번호 유효성 검사 상태 관리 */
     isPasswordValid: boolean;
     setIsPasswordValid: (isNicknameValid: boolean) => void;
@@ -14,7 +18,7 @@ interface PasswordStore {
     setPasswordError: (passwordError: [string,string]) => void;
 
     /*비밀번호 보기*/
-    showPassword : string[],
+    showPassword : object,
     setShowPassword : (showPassword:string) => void;
 }
 
@@ -22,20 +26,25 @@ const usePasswordStore = create<PasswordStore>(set => ({
     password: '',
     setPassword: (password: string) => set({ password }),
 
+    checkPassword: '',
+    setCheckPassword: (checkPassword: string) => set({ checkPassword }),
+
     isPasswordValid: false,
     setIsPasswordValid: (isPasswordValid: boolean) => set({ isPasswordValid }),
 
     passwordError: ['default','문자+숫자 조합 2~12자리'],
     setPasswordError: (passwordError: [string,string]) => set({ passwordError }),
 
-    showPassword :[],
-    setShowPassword : (className) => set(state =>{
-        console.log(state.showPassword)
-            if(state.showPassword.includes(className)){
-                return {showPassword : state.showPassword.filter((prev) => prev !=className)}
-            }
+    showPassword :{
+        password : false,
+        checkPassword : false
+    },
+    setShowPassword : (name) => set(state =>{
             return {
-                showPassword : [...state.showPassword, className]
+                showPassword : {
+                    ...state.showPassword,
+                    name : !state.showPassword[name]
+                }
             };
         }),
 }));
