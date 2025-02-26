@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 
 import useProgressStore from "../../store/signup/useProgressStore";
-import "../../styles/signup/Progress.scss";
+import "../../styles/signup/ProgressBar.scss";
 
-const Progress: React.FC = () => {
+const ProgressBar: React.FC = () => {
   const {
     setStep, 
     progressWidth
@@ -35,4 +35,4 @@ const Progress: React.FC = () => {
 
 };
 
-export default Progress;
+export default ProgressBar;
