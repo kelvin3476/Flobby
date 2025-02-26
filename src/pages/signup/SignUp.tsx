@@ -217,7 +217,7 @@ const {
             </ul>
           </li>
         </ul>
-        <Button className="next" title="다음" onClick={() => navigate('/')} />
+        <Button className="next" title="다음" onClick={() => navigate('/signup/region')} />
       </main>
     </div>
   );
