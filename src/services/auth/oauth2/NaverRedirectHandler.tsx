@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import SocialLogin from "../../../api/login/SocialLogin";
+// import Login from "../../../api/login/Login";
 
 const NaverRedirectHandler = () => {
     const navigate = useNavigate();
@@ -15,15 +16,48 @@ const NaverRedirectHandler = () => {
             if (response.data.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('naver_account', JSON.stringify(response.data.data.response));
-                navigate('/signup/region');
+                navigate('/signup/user-info');
             } else {
                 navigate('/');
                 console.error('유저 정보 요청 api 실패');
             }
+            // localStorage.clear(); // 로컬 스토리지 초기화
+            // console.log('[response in naverLogin]', response);
+            // switch (response.data.code) {
+            //     case 2000: /* 기존 회원 로그인 성공 코드 */
+            //         const generateTokenData = response.data.data; /* TODO: memberId, email 값 받아서 token 발급 받을때 사용 필요 */
+            //         Login.login(generateTokenData)
+            //             .then((response) => {
+            //                 console.log('[response in token generate]', response);
+            //                 if (response.status === 200) {
+            //                     /*
+            //                         TODO: 토큰 발급 성공
+            //                           => HTTP only cookie 에서 refresh token 담아서 백엔드에서 프론트로 전달 예정,
+            //                              access token response 데이터의 body 값에 담아서 백엔드에서 프론트로 전달 예정
+            //                     */
+            //                     // const accessToken = response.data.data.access_token;
+            //                     // const refreshToken = response.data.cookie.headers.get('refresh_token');
+            //                     navigate('/main')
+            //                 } else {
+            //                     console.error('토큰 발급 실패');
+            //                     navigate('/');
+            //                 }
+            //             });
+            //         break;
+            //     case 2001: /* 기존 회원 다른 로그인 방법 시도시 코드 */
+            //         navigate('/account/integration');
+            //         break;
+            //     case 2002: /* 신규 회원 로그인 시도 코드 */
+            //         localStorage.setItem('kakao_account', JSON.stringify(response.data.data.kakao_account));
+            //         navigate('/signup/user-info');
+            //         break;
+            // }
         });
     } catch (error) {
         console.error('네이버 소셜 로그인 실패', error);
-        navigate('/');
+        if (error.data.code === 1002) {
+            navigate('/');
+        }
     }
 
     return (
