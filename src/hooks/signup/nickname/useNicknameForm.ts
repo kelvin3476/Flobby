@@ -1,6 +1,6 @@
 import React from 'react';
 import useNicknameStore from '../../../store/nickname/useNicknameStore';
-import { http } from '../../../utils/Http';
+import {axiosInstance} from '../../../utils/Http';
 
 const useNicknameForm = () => {
   const {
@@ -35,14 +35,19 @@ const useNicknameForm = () => {
   };
 
   const checkDuplicatedNickname = async (nickname: string) => {
-    const res = await http.post(`/check-nickname`, nickname);
-    if(res.data.code === 1000){
-      setNicknameError(['warning', '이미 사용 중인 닉네임입니다.']);
-      setIsNicknameValid(false);
-    }else{
-      setIsNicknameValid(true);
-      setNicknameError(['valid', '사용 가능한 닉네임입니다.'])
+    try {
+      const res = await axiosInstance.post(`check-nickname`, {nickname:nickname});
+      if(res.data.code !== 1000){
+        setNicknameError(['warning', '이미 사용 중인 닉네임입니다.']);
+        setIsNicknameValid(false);
+      }else{
+        setIsNicknameValid(true);
+        setNicknameError(['valid', '사용 가능한 닉네임입니다.'])
+      }
+    }catch (e) {
+      console.error(e)
     }
+
   };
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
