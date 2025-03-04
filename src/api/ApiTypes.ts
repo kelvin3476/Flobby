@@ -1,8 +1,12 @@
+/* -------------------- 로그인 api 타입 -------------------- */
+
 /* 최초 Access Token & Refresh Token 발급시 필요한 데이터 셋 */
 export interface GenerateTokenData {
   memberId: number;
   email: string;
 }
+
+/* -------------------- 소셜 로그인 api 타입 -------------------- */
 
 /* 소셜 로그인 유저 정보 데이터셋 */
 export interface SocialUserData {
@@ -10,7 +14,7 @@ export interface SocialUserData {
   ageRange: string;
 }
 
-/* 회원 가입 완료 처리에 필요한 데이터 셋 */
+/* 소셜 회원 가입 완료 처리에 필요한 데이터 셋 */
 export interface SignupData extends SocialUserData {
   socialType: string;
   term1: string;
@@ -27,14 +31,20 @@ export interface SignupData extends SocialUserData {
   foreignerYn: string;
 }
 
-/* 웹 자체회원가입*/
-export interface WebSignupData {
+/* -------------------- 자체 회원가입 api 타입 -------------------- */
+
+/* 웹 자체회원가입 유저정보 임시테이블에 저장할 데이터 셋 */
+export interface WebTempSignupData {
   email: string;
+  nickname: string;
   localPassword: string;
+}
+
+/* 웹 자체회원가입*/
+export interface WebSignupData extends WebTempSignupData {
   term1: string;
   term2: string;
   term3: string;
-  nickname: string;
   profilePhoto: string;
   region1: string;
   region2: string;
@@ -45,12 +55,10 @@ export interface WebSignupData {
   foreigner: string;
 }
 
+/* -------------------- 비밀번호 api 타입 -------------------- */
+
 /* 비밀번호 변경에 필요한 데이터 셋 */
 export interface PasswordData {
   password: string;
   confirmPassword: string;
-}
-
-export interface NicknameData {
-  nickname: string;
 }
