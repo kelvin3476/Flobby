@@ -31,7 +31,7 @@ const useNicknameForm = () => {
     }
   };
 
-  const checkDuplicatedNickname = async (nickname: string) => {
+  const checkDuplicatedNickname = (nickname: string) => {
     try {
       SignUp.checkNickname(nickname).then((res) => {
         if (res.data.code !== 1000) {
