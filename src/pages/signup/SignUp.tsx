@@ -23,16 +23,16 @@ const SignUp = () => {
     handleNicknameChange,
     checkDuplicatedNickname,
   } = useNicknameForm();
-  const {
-    phone,
-    isPhoneValid,
-    handlePhoneBlur,
-    handlePhoneChange,
-    sendVerificationCode,
-  } = usePhoneForm();
 
-  const { code, display, handleCodeBlur, handleCodeChange } =
-    useVerificationCodeForm();
+  // const {
+  //   phone,
+  //   isPhoneValid,
+  //   handlePhoneBlur,
+  //   handlePhoneChange,
+  //   sendVerificationCode,
+  // } = usePhoneForm();
+  //
+  // const { code, display, handleCodeBlur, handleCodeChange } = useVerificationCodeForm();
 
   const {
     email,
