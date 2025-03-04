@@ -17,7 +17,8 @@ const KakaoRedirectHandler = () => {
             if (response.data.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('kakao_account', JSON.stringify(response.data.data.kakao_account));
-                navigate('/signup/user-info');
+                localStorage.setItem('socialType', 'kakao');
+                navigate('/signup/agreement');
             } else {
                 navigate('/');
                 console.error('유저 정보 요청 api 실패');
