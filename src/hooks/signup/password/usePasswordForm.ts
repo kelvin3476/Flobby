@@ -18,7 +18,8 @@ const usePasswordForm = () => {
   } = usePasswordStore();
 
   const isValidNickname = (nickname: string) => {
-    const nicknameRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{2,12}$/;
+    /* 문자+숫자+특수문자 조합 8~20자리 정규식 체크 */
+    const nicknameRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{8,20}$/;
 
     return nicknameRegex.test(nickname);
   };
@@ -30,6 +31,7 @@ const usePasswordForm = () => {
       setPasswordError(['warning', '문자+숫자 조합 2~12자리를 입력해 주세요.']);
       return;
     } else {
+      if (password !== checkPassword) return; /* 비밀번호와 비밀번호 확인 값이 일치 하지 않을 경우 */
       //중복확인 버튼 활성화
       setIsPasswordValid(true);
       setPasswordError(['default', '문자+숫자 조합 2~12자리']);
