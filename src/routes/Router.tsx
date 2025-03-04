@@ -7,7 +7,7 @@ import ResetPassword from '../pages/password/ResetPassword';
 import SuccessPassword from '../pages/password/SuccessPassword';
 
 import Agreement from '../pages/signup/Agreement';
-import SignUp from '../pages/signup/SignUp';
+import Registration from '../pages/signup/Registration';
 import Region from '../pages/signup/Region';
 import SelectHobbies from '../pages/signup/SelectHobbies';
 import SuccessSignUp from '../pages/signup/SuccessSignUp';
@@ -24,7 +24,7 @@ const Router: React.FC = () => {
         <Route path="/password/reset" element={<ResetPassword />} />
         <Route path="/password/success" element={<SuccessPassword />} />
         <Route path="/signup/agreement" element={<Agreement />} />
-        <Route path="/signup/user-info" element={<SignUp />} />
+        <Route path="/signup/user-info" element={<Registration />} />
         <Route path="/signup/region" element={<Region />} />
         <Route path="/signup/hobby" element={<SelectHobbies />} />
         <Route path="/signup/success" element={<SuccessSignUp />} />
