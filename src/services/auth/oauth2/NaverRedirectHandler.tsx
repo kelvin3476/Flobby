@@ -17,7 +17,8 @@ const NaverRedirectHandler = () => {
             if (response.data.code === 2002) {
                 localStorage.clear();
                 localStorage.setItem('naver_account', JSON.stringify(response.data.data.response));
-                navigate('/signup/user-info');
+                localStorage.setItem('socialType', 'naver');
+                navigate('/signup/agreement');
             } else {
                 navigate('/');
                 console.error('유저 정보 요청 api 실패');
