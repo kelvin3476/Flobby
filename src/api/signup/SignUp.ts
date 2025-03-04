@@ -10,7 +10,7 @@ export default class SignUp {
 
     /*WEB 자체회원가입 유저정보 임시테이블 저장*/
     static async WebSignupUserInfoInsert(webTempSignupData: WebTempSignupData) {
-        return await http.post(`/profile/web-temp-insert`, webTempSignupData);
+        return await http.post(`/regist/web/temp`, webTempSignupData);
     }
 
     /*WEB 자체회원가입*/
@@ -20,7 +20,7 @@ export default class SignUp {
 
     /*닉네임 중복체크*/
     static async checkNickname(nickname: string) {
-        return await http.post(`/check-nickname`, nickname);
+        return await http.post(`/check-nickname`, { nickname: nickname });
     }
 
     /*이메일 중복체크*/
