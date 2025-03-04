@@ -93,47 +93,48 @@ const SignUp = () => {
               />
             </div>
           </li>
-          <li>
-            <label htmlFor="phone" className="phone">
-              휴대폰 번호<span>*</span>
-            </label>
-            <div className={'input-box'}>
-              <SignUpInput
-                type="text"
-                name="phone"
-                value={phone}
-                onChange={handlePhoneChange}
-                onBlur={handlePhoneBlur}
-                isValid={isPhoneValid}
-                maxLength={11}
-                placeholder="숫자만 입력해 주세요."
-              />
-              <Button
-                className={isPhoneValid ? 'check-btn active' : 'check-btn'}
-                title="본인 인증"
-                onClick={() => isPhoneValid && sendVerificationCode(phone)}
-              />
-            </div>
-          </li>
-          <li>
-            <label htmlFor="verification-code" className="verification-code">
-              인증 번호<span>*</span>
-            </label>
-            <div className="input-box">
-              <SignUpInput
-                type="text"
-                name="verification-code"
-                className="long"
-                value={code}
-                timer={display}
-                onChange={handleCodeChange}
-                onBlur={handleCodeBlur}
-                isValid={isPhoneValid}
-                maxLength={6}
-                placeholder="인증 번호를 입력해 주세요."
-              />
-            </div>
-          </li>
+          {/*TODO: 1차 MVP 개발에서 휴대폰 번호 입력 및 인증 절차 제외 */}
+          {/*<li>*/}
+          {/*  <label htmlFor="phone" className="phone">*/}
+          {/*    휴대폰 번호<span>*</span>*/}
+          {/*  </label>*/}
+          {/*  <div className={'input-box'}>*/}
+          {/*    <SignUpInput*/}
+          {/*      type="text"*/}
+          {/*      name="phone"*/}
+          {/*      value={phone}*/}
+          {/*      onChange={handlePhoneChange}*/}
+          {/*      onBlur={handlePhoneBlur}*/}
+          {/*      isValid={isPhoneValid}*/}
+          {/*      maxLength={11}*/}
+          {/*      placeholder="숫자만 입력해 주세요."*/}
+          {/*    />*/}
+          {/*    <Button*/}
+          {/*      className={isPhoneValid ? 'check-btn active' : 'check-btn'}*/}
+          {/*      title="본인 인증"*/}
+          {/*      onClick={() => isPhoneValid && sendVerificationCode(phone)}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*</li>*/}
+          {/*<li>*/}
+          {/*  <label htmlFor="verification-code" className="verification-code">*/}
+          {/*    인증 번호<span>*</span>*/}
+          {/*  </label>*/}
+          {/*  <div className="input-box">*/}
+          {/*    <SignUpInput*/}
+          {/*      type="text"*/}
+          {/*      name="verification-code"*/}
+          {/*      className="long"*/}
+          {/*      value={code}*/}
+          {/*      timer={display}*/}
+          {/*      onChange={handleCodeChange}*/}
+          {/*      onBlur={handleCodeBlur}*/}
+          {/*      isValid={isPhoneValid}*/}
+          {/*      maxLength={6}*/}
+          {/*      placeholder="인증 번호를 입력해 주세요."*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*</li>*/}
           <li>
             <label htmlFor="email" className="email">
               이메일<span>*</span>
