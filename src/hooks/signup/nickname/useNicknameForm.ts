@@ -33,7 +33,7 @@ const useNicknameForm = () => {
 
   const checkDuplicatedNickname = async (nickname: string) => {
     try {
-      SignUp.checkNickname({nickname:nickname}).then((res) => {
+      SignUp.checkNickname(nickname).then((res) => {
         if (res.data.code !== 1000) {
           setNicknameError(['warning', '이미 사용 중인 닉네임입니다.']);
           setIsNicknameValid(false);

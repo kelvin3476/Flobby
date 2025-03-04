@@ -1,10 +1,16 @@
 import { http } from "../../utils/Http";
-import {NicknameData, SignupData, WebSignupData} from "../ApiTypes";
+import { SignupData, WebTempSignupData, WebSignupData } from "../ApiTypes";
 
 export default class SignUp {
     /* TODO: 회원가입 완료 버튼 클릭시 소셜 유저 정보 + 프로필 설정 정보 백엔드로 보낸후 회원 가입 완료 처리 작업 필요 */
-    static async signup(signupData: SignupData) {
+    /*WEB 소셜회원가입*/
+    static async WebSocialSignup(signupData: SignupData) {
         return await http.post('/profile/social-insert', signupData);
+    }
+
+    /*WEB 자체회원가입 유저정보 임시테이블 저장*/
+    static async WebSignupUserInfoInsert(webTempSignupData: WebTempSignupData) {
+        return await http.post(`/profile/web-temp-insert`, webTempSignupData);
     }
 
     /*WEB 자체회원가입*/
@@ -13,7 +19,7 @@ export default class SignUp {
     }
 
     /*닉네임 중복체크*/
-    static async checkNickname(nickname: NicknameData) {
+    static async checkNickname(nickname: string) {
         return await http.post(`/check-nickname`, nickname);
     }
 
