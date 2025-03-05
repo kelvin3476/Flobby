@@ -5,20 +5,6 @@ import { useNavigate } from "react-router";
 import SignUp from "../../../api/signup/SignUp";
 import { BaseSignupData, SocialSignupData, WebSignupData } from "../../../api/ApiTypes";
 
-/* 회원가입 공통 데이터 */
-const baseSignupData: BaseSignupData = {
-    term1: JSON.parse(localStorage.getItem('agreement-storage')).state.serviceAgree ? 'Y' : 'N',
-    term2: JSON.parse(localStorage.getItem('agreement-storage')).state.privacyAgree ? 'Y' : 'N',
-    term3: JSON.parse(localStorage.getItem('agreement-storage')).state.marketingAgree ? 'Y' : 'N',
-    profilePhoto: '',
-    region1: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[0]}`,
-    region2: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[1]}`,
-    region3: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[2]}`,
-    interest1: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[0]}`,
-    interest2: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[1]}`,
-    interest3: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[2]}`,
-}
-
 const useSuccessSignupForm = () => {
     const navigate = useNavigate();
 
@@ -52,6 +38,20 @@ const useSuccessSignupForm = () => {
             case 'facebook':
                 return `${JSON.parse(localStorage.getItem('facebook_account')).email}`;
         }
+    }
+
+    /* 회원가입 공통 데이터 */
+    const baseSignupData: BaseSignupData = {
+        term1: JSON.parse(localStorage.getItem('agreement-storage')).state.serviceAgree ? 'Y' : 'N',
+        term2: JSON.parse(localStorage.getItem('agreement-storage')).state.privacyAgree ? 'Y' : 'N',
+        term3: JSON.parse(localStorage.getItem('agreement-storage')).state.marketingAgree ? 'Y' : 'N',
+        profilePhoto: '',
+        region1: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[0]}`,
+        region2: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[1]}`,
+        region3: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegions[2]}`,
+        interest1: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[0]}`,
+        interest2: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[1]}`,
+        interest3: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[2]}`,
     }
 
     const finalSocialSignUpHandler = () => {
