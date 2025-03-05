@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router';
 
 import Header from '../../components/login/Header';
 import Button from '../../components/button/Button';
+import SignUpInput from '../../components/input/SignUpInput';
 
 import '../../styles/signup/Registration.scss';
-import SignUpInput from '../../components/input/SignUpInput';
+
 import useNicknameForm from '../../hooks/signup/nickname/useNicknameForm';
 // import usePhoneForm from '../../hooks/signup/phone/usePhoneForm';
 // import useVerificationCodeForm from '../../hooks/verificationcode/useVerificationCodeForm';
@@ -65,11 +66,14 @@ const Registration = () => {
   const tempSignupHandler = (webTempSignupData: WebTempSignupData = { email: email, nickname: nickname, localPassword: password }) => {
     /* TODO: 닉네임, 이메일, 비밀번호 유효성 검증 로직 따로 분리 필요 + 추후 휴대폰 번호 유효성 검증 로직 추가 필요 */
     if (webTempSignupData.nickname === '' || webTempSignupData.email === '' && webTempSignupData.localPassword === '') return;
+    if (!isNicknameValid || !isEmailValid || !isPasswordValid) return;
+    if (nicknameError[1] !== '사용 가능한 닉네임입니다.') return;
 
     try {
       SignUp.WebSignupUserInfoInsert(webTempSignupData).then((response) => {
         if (response.data.code === 1000) {
           localStorage.setItem('signupTempInfoId', response.data.data.signupTempInfoId); /* 임시 회원가입 테이블 pk 값 */
+          localStorage.setItem('nickname', nickname); /* 닉네임 */
           localStorage.setItem('foreigner', `${foreigner}`); /* 내국인/외국인 여부 */
           navigate('/signup/region');
         } else {
@@ -91,6 +95,22 @@ const Registration = () => {
 
     if (localStorage.getItem('nickname') && localStorage.getItem('foreigner')) {
       navigate('/signup/region');
+    }
+  }
+
+  const changeNextButtonStyle = (socialType: string) => {
+    if (!socialType) {
+      if (isNicknameValid && isEmailValid && isPasswordValid && nicknameError[1] === '사용 가능한 닉네임입니다.' && (password === checkPassword)) {
+        return 'active';
+      } else {
+        return '';
+      }
+    } else {
+      if (isNicknameValid && nicknameError[1] === '사용 가능한 닉네임입니다.') {
+        return 'active';
+      } else {
+        return '';
+      }
     }
   }
 
@@ -274,7 +294,7 @@ const Registration = () => {
 
         {/* 다음 스텝 버튼 */}
         <Button
-          className={`next ${!localStorage.getItem('socialType') ? isNicknameValid && isEmailValid && isPasswordValid : isNicknameValid && nicknameError[1] === '사용 가능한 닉네임입니다.' ? 'active' : ''}`}
+          className={`next ${changeNextButtonStyle(localStorage.getItem('socialType'))}`}
           title="다음"
           onClick={() => !localStorage.getItem('socialType') ? tempSignupHandler({ email: email, nickname: nickname, localPassword: password }) : tempSocialSignupHandler(nickname, foreigner)}
         />
