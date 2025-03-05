@@ -6,6 +6,21 @@ export interface GenerateTokenData {
   email: string;
 }
 
+/* -------------------- 회원가입 공통 기본 api 타입 -------------------- */
+
+export interface BaseSignupData {
+  term1: string;
+  term2: string;
+  term3: string;
+  profilePhoto: string;
+  region1: string;
+  region2: string;
+  region3: string;
+  interest1: string;
+  interest2: string;
+  interest3: string;
+}
+
 /* -------------------- 소셜 로그인 api 타입 -------------------- */
 
 /* 소셜 로그인 유저 정보 데이터셋 */
@@ -15,19 +30,9 @@ export interface SocialUserData {
 }
 
 /* 소셜 회원 가입 완료 처리에 필요한 데이터 셋 */
-export interface SocialSignupData extends SocialUserData {
+export interface SocialSignupData extends SocialUserData, BaseSignupData {
   socialType: string;
-  term1: string;
-  term2: string;
-  term3: string;
   nickname: string;
-  profilePhoto: string;
-  region1: string;
-  region2: string;
-  region3: string;
-  interest1: string;
-  interest2: string;
-  interest3: string;
   foreignerYn: string;
 }
 
@@ -41,18 +46,8 @@ export interface WebTempSignupData {
 }
 
 /* 웹 자체회원가입*/
-export interface WebSignupData {
+export interface WebSignupData extends BaseSignupData {
   signupTempInfoId: number;
-  term1: string;
-  term2: string;
-  term3: string;
-  profilePhoto: string;
-  region1: string;
-  region2: string;
-  region3: string;
-  interest1: string;
-  interest2: string;
-  interest3: string;
   foreigner: string;
 }
 
