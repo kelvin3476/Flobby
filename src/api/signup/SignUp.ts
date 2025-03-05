@@ -1,10 +1,9 @@
 import { http } from "../../utils/Http";
-import { SignupData, WebTempSignupData, WebSignupData } from "../ApiTypes";
+import { SocialSignupData, WebTempSignupData, WebSignupData } from "../ApiTypes";
 
 export default class SignUp {
-    /* TODO: 회원가입 완료 버튼 클릭시 소셜 유저 정보 + 프로필 설정 정보 백엔드로 보낸후 회원 가입 완료 처리 작업 필요 */
     /*WEB 소셜회원가입*/
-    static async WebSocialSignup(signupData: SignupData) {
+    static async WebSocialSignup(signupData: SocialSignupData) {
         return await http.post('/profile/social-insert', signupData);
     }
 
@@ -26,6 +25,18 @@ export default class SignUp {
     /*이메일 중복체크*/
     static async checkEmail(email: string) {
         return await http.get(`/user-email/${email}/exists`);
+    }
+
+    /* TODO: 백엔드 배포 작업 완료되면 추후 프론트단 리스트 교체 작업 필요 */
+    /* 지역 리스트 불러오기 */
+    static async getRegionList() {
+        return await http.get(`/profile/region-list`);
+    }
+
+    /* TODO: 백엔드 배포 작업 완료되면 추후 프론트단 리스트 교체 작업 필요 */
+    /* 취미 리스트 불러오기 */
+    static async getHobbyList() {
+        return await http.get(`/profile/category-list`);
     }
 }
 
