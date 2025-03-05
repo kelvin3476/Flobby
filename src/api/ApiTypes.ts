@@ -15,7 +15,7 @@ export interface SocialUserData {
 }
 
 /* 소셜 회원 가입 완료 처리에 필요한 데이터 셋 */
-export interface SignupData extends SocialUserData {
+export interface SocialSignupData extends SocialUserData {
   socialType: string;
   term1: string;
   term2: string;
@@ -41,7 +41,8 @@ export interface WebTempSignupData {
 }
 
 /* 웹 자체회원가입*/
-export interface WebSignupData extends WebTempSignupData {
+export interface WebSignupData {
+  signupTempInfoId: number;
   term1: string;
   term2: string;
   term3: string;
