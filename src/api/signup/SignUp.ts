@@ -22,6 +22,7 @@ export default class SignUp {
         return await http.post(`/check-nickname`, { nickname: nickname });
     }
 
+    /* TODO: MVP 이후 추후 적용 예정 (나중에 사용부분에 대해 다시 논의 필요) */
     /*이메일 중복체크*/
     static async checkEmail(email: string) {
         return await http.get(`/user-email/${email}/exists`);
