@@ -6,10 +6,11 @@ type CustomAxiosRequestConfig = AxiosRequestConfig & InternalAxiosRequestConfig;
 /* 기본 axios 인스턴스 설정 */
 export const axiosInstance: AxiosInstance = axios.create({
   /* 프론트 배포 주소 => package.json: proxy url 로 요청 => 백엔드 배포 api 서버로 요청 */
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: window.location.hostname === 'localhost' ? import.meta.env.VITE_API_DEV_BASE_URL : import.meta.env.VITE_API_PROD_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  // withCredentials: true, /* TODO: refresh_token 을 포함한 HttpOnly 쿠키를 전달 하기 위한 설정 추후 확인 후 연동 필요 */
 });
 
 /* 요청 인터셉터 추가 */
