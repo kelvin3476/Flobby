@@ -6,22 +6,22 @@ import "../../styles/signup/ProgressBar.scss";
 
 const ProgressBar: React.FC = () => {
   const {
-    setStep, 
-    progressWidth
+    step,
+    setStep,
   } = useProgressStore();
   
   const location = useLocation();
 
-  const stepMap: Record<string, number> = {
-    "/signup/agreement": 1,
-    "/signup/정보입력": 2,
-    "/signup/region": 3,
-    "/signup/hobby": 4,
-    "/signup/success": 5,
+  const stepMap: Record<string, string> = {
+    "/signup/agreement": "agreement",
+    "/signup/user-info": "user-info",
+    "/signup/region": "region",
+    "/signup/hobby": "hobby",
+    "/signup/success": "success",
   };
 
   useEffect(() => {
-    const currentStep = stepMap[location.pathname];
+    const currentStep = stepMap[location.pathname] || "agreement";
     setStep(currentStep);
   }, [location.pathname, setStep]);
 
@@ -29,7 +29,7 @@ const ProgressBar: React.FC = () => {
     <div className="progress-container">
         <div className="line1"></div>
         <div className="line2"></div>
-        <div className="progress-bar" style={{width: `${progressWidth}px`}}></div>
+        <div className={`progress-bar ${step}`}></div>
     </div>
   );
 
