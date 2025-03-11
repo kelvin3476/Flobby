@@ -1,14 +1,19 @@
 import { http } from '../../utils/Http';
-import { GenerateTokenData, PasswordData } from "../ApiTypes";
+import { WebLoginData, GenerateTokenData, PasswordData} from "../ApiTypes";
 
 export default class Login {
-    /* TODO: Access Token & Refresh Token 발급 */
-    static async login(generateTokenData: GenerateTokenData) {
+    /* 자체 로그인 요청 */
+    static async webLogin(webLoginData: WebLoginData) {
+        return await http.post(`/flobby/login`, webLoginData);
+    }
+
+    /* JWT 토큰 발급 요청 */
+    static async generateJwtToken(generateTokenData: GenerateTokenData) {
         return await http.post(`/generate/token`, generateTokenData);
     }
 
     /* TODO: Refresh Token 으로 Access Token 재발급 */
-    static async ReLogin() {
+    static async reGenerateJwtToken() {
         return await http.post(`/token`);
     }
 
