@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import Header from '../../components/login/Header';
 import Button from '../../components/button/Button';
 import SignUpInput from '../../components/input/SignUpInput';
+import ProgressBar from '../../components/signup/ProgressBar';
 
 import '../../styles/signup/Registration.scss';
 
@@ -116,6 +117,7 @@ const Registration = () => {
 
   return (
     <div className="registration-container">
+      <ProgressBar />
       {/* 회원가입 헤더 */}
       <div className="registration-title">
         <Header className="Header" headerTitle="회원가입" />

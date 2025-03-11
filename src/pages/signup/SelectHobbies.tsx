@@ -5,6 +5,7 @@ import useHobbyStore from '../../store/signup/useHobbyStore';
 import Header from '../../components/login/Header';
 import '../../styles/signup/SelectHobbies.scss';
 import Button from '../../components/button/Button';
+import ProgressBar from '../../components/signup/ProgressBar';
 
 
 const SelectHobbies = () => {
@@ -53,6 +54,7 @@ const SelectHobbies = () => {
 
   return (
     <div className="hobby-container">
+      <ProgressBar />
       <div className="hobby-title">
         <Header className="Header" headerTitle="어떤 취미에 관심이 있으신가요?"/>
         <span className={hobbyCount === 3  ? 'max' : ''}>

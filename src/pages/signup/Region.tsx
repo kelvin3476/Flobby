@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
+import ProgressBar from "../../components/signup/ProgressBar";
 
 import useRegionForm from "../../hooks/signup/useRegionForm";
 
@@ -44,6 +45,7 @@ const Region = () => {
 
   return (
     <div className="region-container">
+      <ProgressBar />
       <div className="region-title">
         <Header className="Header" headerTitle="주로 활동하는 지역이 어디신가요?" />
         <span className={warning ? "error" : ""}>

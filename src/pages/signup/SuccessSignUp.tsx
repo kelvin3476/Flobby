@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
+import ProgressBar from "../../components/signup/ProgressBar";
 
 import "../../styles/signup/SuccessSignUp.scss";
 
@@ -12,6 +13,7 @@ const SuccessSignUp = () => {
 
     return (
       <div className="signup-container">
+        <ProgressBar />
         <div className="signup-title">
           <Header className="Header" headerTitle="회원 가입 완료" />
           <span>[{localStorage.getItem('nickname')}] 님의 회원가입이 성공적으로 완료되었습니다.</span>
