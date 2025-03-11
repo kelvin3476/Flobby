@@ -6,6 +6,12 @@ export interface GenerateTokenData {
   email: string;
 }
 
+/* 자체 로그인 시 필요한 데이터 셋 */
+export interface WebLoginData {
+  email: string;
+  password: string;
+}
+
 /* -------------------- 회원가입 공통 기본 api 타입 -------------------- */
 
 export interface BaseSignupData {
