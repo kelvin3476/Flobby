@@ -12,17 +12,8 @@ const ProgressBar: React.FC = () => {
   
   const location = useLocation();
 
-  const stepMap: Record<string, string> = {
-    "/signup/agreement": "agreement",
-    "/signup/user-info": "user-info",
-    "/signup/region": "region",
-    "/signup/hobby": "hobby",
-    "/signup/success": "success",
-  };
-
   useEffect(() => {
-    const currentStep = stepMap[location.pathname] || "agreement";
-    setStep(currentStep);
+    setStep(location.pathname);
   }, [location.pathname, setStep]);
 
   return (

@@ -28,8 +28,11 @@
   }
 }
 
-.agreement { width: 20%; }
-.user-info { width: 40%; }
-.region { width: 60%; }
-.hobby { width: 80%; }
-.success { width: 100%; }
+
+@media screen and (max-width:3440px) {
+  .progress-bar.\/signup\/agreement { width: calc(100vw * 0.2); }
+  .progress-bar.\/signup\/user-info { width: calc(100vw * 0.4); }
+  .progress-bar.\/signup\/region    { width: calc(100vw * 0.6); }
+  .progress-bar.\/signup\/hobby     { width: calc(100vw * 0.8); }
+  .progress-bar.\/signup\/success   { width: calc(100vw * 1); }
+}
