@@ -17,7 +17,7 @@ const NaverRedirectHandler = () => {
                 case 2000: /* 기존 회원 로그인 성공 코드 */
                     const generateTokenData = { memberId: response.data.data.memberId, email: response.data.data.email }
                     try {
-                        Login.login(generateTokenData)
+                        Login.generateJwtToken(generateTokenData)
                             .then((response) => {
                                 if (response.data.code === 1000) {
                                     /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
