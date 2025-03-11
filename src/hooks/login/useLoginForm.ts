@@ -84,14 +84,12 @@ const useLoginForm = () => {
             Login.webLogin(webLoginData)
                 .then((response) => {
                     localStorage.clear(); // 로컬 스토리지 초기화
-                    console.log('[response in login]', response);
                     switch (response.data.code) {
                         case 1000: /* 로그인 성공 코드 */
                             const generateTokenData = { memberId: response.data.data.memberId, email: response.data.data.email }
                             try {
                                 Login.generateJwtToken(generateTokenData)
                                     .then((response) => {
-                                        console.log('[response in token]', response);
                                         if (response.data.code === 1000) {
                                             /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
                                             const accessToken = response.data.data; // access token in-memory 저장 (브라우저 새로고침시 초기화)
