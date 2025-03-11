@@ -29,6 +29,7 @@ const Login = () => {
         handlePasswordBlur,
         handlePasswordChange,
         handlePasswordVisibility,
+        webLogin,
     } = useLoginForm();
 
     return (
@@ -76,7 +77,7 @@ const Login = () => {
           </div>
 
           {/* 로그인 버튼 */}
-          <Button className="login-button" title="로그인" onClick={() => console.log('로그인 버튼 클릭!!')}/>
+          <Button className="login-button" title="로그인" onClick={webLogin}/>
 
           {/* 소셜 로그인 */}
           <div className="social-login-container">

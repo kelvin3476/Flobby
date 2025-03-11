@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from "react-router";
+
 import useLoginStore from "../../store/login/useLoginStore";
 
+import Login from "../../api/login/Login";
+
 const useLoginForm = () => {
+    const navigate = useNavigate();
 
     const {
         email,
@@ -72,6 +77,62 @@ const useLoginForm = () => {
 
     const inputType = passwordVisible ? 'text' : 'password';
 
+    /* 자체 로그인 기능 (JWT 토큰 발급 api) */
+    const webLogin = () => {
+        const webLoginData = { email: email, password: password };
+        try {
+            Login.webLogin(webLoginData)
+                .then((response) => {
+                    localStorage.clear(); // 로컬 스토리지 초기화
+                    console.log('[response in login]', response);
+                    switch (response.data.code) {
+                        case 1000: /* 로그인 성공 코드 */
+                            const generateTokenData = { memberId: response.data.data.memberId, email: response.data.data.email }
+                            try {
+                                Login.generateJwtToken(generateTokenData)
+                                    .then((response) => {
+                                        console.log('[response in token]', response);
+                                        if (response.data.code === 1000) {
+                                            /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
+                                            const accessToken = response.data.data; // access token in-memory 저장 (브라우저 새로고침시 초기화)
+                                            navigate('/main');
+                                        } else {
+                                            console.error('토큰 발급 실패');
+                                            navigate('/');
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        if (error.data.code === 1002) {
+                                            console.error('JWT 토큰 발급 api 요청 실패', error);
+                                            navigate('/');
+                                        }
+                                    });
+                            } catch (error) {
+                                if (error.data.code === 1002) {
+                                    console.error('JWT 토큰 발급 api 요청 실패', error);
+                                    navigate('/');
+                                }
+                            }
+                            break;
+                        case 1001: /* 로그인 실패 코드 */
+                            console.error('로그인 실패', response.data.code);
+                            break;
+                    }
+                })
+                .catch((error) => {
+                    if (error.data.code === 1002) {
+                        console.error('로그인 api 요청 실패', error);
+                        navigate('/');
+                    }
+                });
+        } catch (error) {
+            if (error.data.code === 1002) {
+                console.error('로그인 api 요청 실패', error);
+                navigate('/');
+            }
+        }
+    }
+
     return {
         inputType,
         email,
@@ -91,6 +152,7 @@ const useLoginForm = () => {
         handlePasswordBlur,
         handlePasswordChange,
         handlePasswordVisibility,
+        webLogin,
     };
 }
 
