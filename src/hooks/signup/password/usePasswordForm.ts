@@ -14,6 +14,10 @@ const usePasswordForm = () => {
 
     passwordError,
     setPasswordError,
+
+    checkPasswordError,
+    setCheckPasswordError,
+
     setShowPassword,
   } = usePasswordStore();
 
@@ -28,15 +32,23 @@ const usePasswordForm = () => {
   const handlePasswordBlur = () => {
     if (!isValidNickname(password)) {
       setIsPasswordValid(false);
-      setPasswordError(['warning', '문자+숫자 조합 2~12자리를 입력해 주세요.']);
+      setPasswordError(['warning', '문자+숫자+특수문자 조합 8~20자리를 입력해 주세요.']);
       return;
     } else {
-      if (password !== checkPassword) return; /* 비밀번호와 비밀번호 확인 값이 일치 하지 않을 경우 */
       //중복확인 버튼 활성화
       setIsPasswordValid(true);
-      setPasswordError(['default', '문자+숫자 조합 2~12자리']);
+      setPasswordError(['default', '문자+숫자+특수문자 조합 8~20자리']);
     }
   };
+
+  const handleCheckPasswordBlur = () => {
+    if (password !== checkPassword) {
+      setCheckPasswordError(['warning', '비밀번호가 일치하지 않습니다.']);
+      return;
+    } else {
+      setCheckPasswordError(['default', '']);
+    }
+  }
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -59,7 +71,9 @@ const usePasswordForm = () => {
     checkPassword,
     isPasswordValid,
     passwordError,
+    checkPasswordError,
     handlePasswordBlur,
+    handleCheckPasswordBlur,
     handlePasswordChange,
     toggleShowPassword,
   };
