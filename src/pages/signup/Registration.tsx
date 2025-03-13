@@ -51,7 +51,9 @@ const Registration = () => {
     isPasswordValid,
     checkPassword,
     passwordError,
+    checkPasswordError,
     handlePasswordBlur,
+    handleCheckPasswordBlur,
     handlePasswordChange,
     toggleShowPassword,
   } = usePasswordForm();
@@ -238,12 +240,11 @@ const Registration = () => {
                   onBlur={handlePasswordBlur}
                   isValid={isPasswordValid}
                   onClick={e => toggleShowPassword(e)}
-                  // errorMessage={passwordError}
+                  errorMessage={passwordError}
                   maxLength={20}
                   placeholder="비밀번호를 입력해 주세요."
                 />
               </div>
-              <p className="default">문자+숫자+특수문자 조합 8~20자리</p>
             </li>
           )}
 
@@ -260,10 +261,10 @@ const Registration = () => {
                   className="long"
                   value={checkPassword}
                   onChange={handlePasswordChange}
-                  onBlur={handlePasswordBlur}
+                  onBlur={handleCheckPasswordBlur}
                   isValid={isPasswordValid}
                   onClick={e => toggleShowPassword(e)}
-                  // errorMessage={passwordError}
+                  errorMessage={checkPasswordError}
                   maxLength={20}
                   placeholder="비밀번호를 한 번 더 입력해 주세요."
                 />
