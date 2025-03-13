@@ -17,6 +17,10 @@ interface PasswordStore {
     passwordError: [string,string];
     setPasswordError: (passwordError: [string,string]) => void;
 
+    /* 비밀번호 확인 에러 상태 관리 */
+    checkPasswordError: [string,string];
+    setCheckPasswordError: (checkPasswordError: [string,string]) => void;
+
     /*비밀번호 보기*/
     showPassword : object,
     setShowPassword : (showPassword:string) => void;
@@ -32,8 +36,11 @@ const usePasswordStore = create<PasswordStore>(set => ({
     isPasswordValid: false,
     setIsPasswordValid: (isPasswordValid: boolean) => set({ isPasswordValid }),
 
-    passwordError: ['default','문자+숫자 조합 2~12자리'],
+    passwordError: ['default','문자+숫자+특수문자 조합 8~20자리'],
     setPasswordError: (passwordError: [string,string]) => set({ passwordError }),
+
+    checkPasswordError: ['default',''],
+    setCheckPasswordError: (checkPasswordError: [string,string]) => set({ checkPasswordError }),
 
     showPassword :{
         password : false,
