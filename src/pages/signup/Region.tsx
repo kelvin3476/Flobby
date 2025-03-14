@@ -24,6 +24,8 @@ const Region = () => {
     townRef,
   } = useRegionForm();
 
+  
+
   return (
     <div className="region-container">
       <ProgressBar />
@@ -52,7 +54,7 @@ const Region = () => {
           {/* 2. 구(동) 리스트 - 선택한 도시의 구만 표시 */}
           <div className="region-town" ref={townRef}>
             {activeCity &&
-              cityDistrictMap[activeCity].map((district) => {
+              cityDistrictMap[activeCity] && cityDistrictMap[activeCity].map((district) => {
                 const isSelected = selectedRegions.includes(`${activeCity} ${district}`);
                 return (
                   <div
