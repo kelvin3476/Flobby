@@ -49,6 +49,8 @@
 
       .region-city {
         background-color: #F7F8F9;
+        overflow-y: scroll;
+        scrollbar-width: none;
 
         .region-item {
           cursor: pointer;
