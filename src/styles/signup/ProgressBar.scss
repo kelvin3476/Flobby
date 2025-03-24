@@ -1,3 +1,7 @@
+:root {
+  --progress-width: 0%;
+}
+
 .progress-container {
   position: fixed;
   top: 0;
@@ -24,15 +28,42 @@
     height: 8px;
     background-color: #764BF6;
     border-radius: 100px;
+    width: var(--progress-width);
     transition: width 0.3s ease-in-out;
   }
 }
 
 
-@media screen and (max-width:3440px) {
-  .progress-bar.\/signup\/agreement { width: calc(100vw * 0.2); }
-  .progress-bar.\/signup\/user-info { width: calc(100vw * 0.4); }
-  .progress-bar.\/signup\/region    { width: calc(100vw * 0.6); }
-  .progress-bar.\/signup\/hobby     { width: calc(100vw * 0.8); }
-  .progress-bar.\/signup\/success   { width: calc(100vw * 1); }
+// 태블릿 (768 ~ 1023px)
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  $progress-tablet: (
+    "step-agreement": 22%,
+    "step-user-info": 42%,
+    "step-region": 62%,
+    "step-hobby": 82%,
+    "step-success": 100%
+    );
+    
+    @each $step, $width in $progress-tablet {
+      [style*="--step-name: #{$step}"] {
+        --progress-width: #{$width};
+      }
+    }
+  }
+  
+// 데스크탑 (1024px 이상)
+@media screen and (min-width: 1024px) {
+  $progress-desktop: (
+    "step-agreement": 20%,
+    "step-user-info": 40%,
+    "step-region": 60%,
+    "step-hobby": 80%,
+    "step-success": 100%
+  );
+  
+  @each $step, $width in $progress-desktop {
+    [style*="--step-name: #{$step}"] {
+      --progress-width: #{$width};
+    }
+  }
 }

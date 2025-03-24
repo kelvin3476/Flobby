@@ -6,7 +6,7 @@ interface ProgressStore {
 }
 
 const useProgressStore = create<ProgressStore>((set) => ({
-  step: "",
+  step: "step-agreement",
   setStep: (step) => set(() => ({ step })),
 }));
 
