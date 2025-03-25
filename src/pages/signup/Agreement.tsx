@@ -4,6 +4,7 @@ import Header from "../../components/login/Header";
 import Button from "../../components/button/Button";
 import Checkbox from "../../components/checkbox/Checkbox";
 import AgreementModal from "../../components/signup/AgreementModal";
+import ProgressBar from "../../components/signup/ProgressBar";
 
 import useAgreeForm from "../../hooks/signup/useAgreeForm";
 import useModalForm from "../../hooks/signup/useModalForm";
@@ -49,6 +50,7 @@ const Agreement = () => {
 
   return (
     <div className="agreement-container">
+      <ProgressBar />
       <div className="agreement-title">
         <Header className="Header" headerTitle="Flobby 회원가입을 시작합니다."/>
         <span>
