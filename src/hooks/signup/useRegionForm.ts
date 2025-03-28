@@ -43,23 +43,11 @@ const useRegionForm = () => {
 
       try {
         const response = await SignUp.getRegionList();
-
         const { code, message, data } = response.data;
 
         if (code === 1000) {
           // API 호출 성공
-          const formattedData: Record<string, string[]> = {};
-
-          data.forEach(({ regionName, parentName }) => {
-            if (parentName) {
-              if (!formattedData[parentName]) {
-                formattedData[parentName] = [];
-              }
-              formattedData[parentName].push(regionName);
-            }
-          });
-
-          setCityDistrictMap(formattedData);
+          setCityDistrictMap(data);
         } else if (code === 1001) {
           // API 호출 실패
           throw new Error(message || "데이터를 가져오지 못했습니다.");
