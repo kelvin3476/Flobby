@@ -61,7 +61,7 @@ const useRegionForm = () => {
     };
 
     fetchRegions();
-  }, [setCityDistrictMap]);
+  }, []);
 
   return {
     selectedRegions, 
