@@ -14,6 +14,9 @@ interface HobbyStore {
   removeHobby: (hobby: string) => void;
   setHideHobbyList: (index: number) => void;
 
+  warning: boolean;
+  setWarning: (value: boolean) => void;
+
   hobbyCategoryMap: HobbyCategory[];
   setHobbyCategoryMap: (data: HobbyCategory[]) => void;
 }
@@ -56,6 +59,9 @@ const useHobbyStore = create<HobbyStore>()(
             hideHobbyList: [...state.hideHobbyList, index],
           };
         }),
+        
+      warning: false,
+      setWarning: (value) => set({ warning: value }),
       
       hobbyCategoryMap: [],
       setHobbyCategoryMap: (data) => set({ hobbyCategoryMap: data }),

@@ -11,7 +11,7 @@ import SignUp from '../../api/signup/SignUp';
 import type { HobbyCategory } from '../../store/signup/useHobbyStore';
 
 const SelectHobbies = () => {
-  const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, hobbyCategoryMap, setHobbyCategoryMap } = useHobbyStore();
+  const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, warning, setWarning, hobbyCategoryMap, setHobbyCategoryMap } = useHobbyStore();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -65,8 +65,18 @@ const SelectHobbies = () => {
   }
 
   const selectHobbyToggle = (hobby : string) =>{
-    selectedHobbies.includes(hobby) ? removeHobby(hobby) : addHobby(hobby);
-  }
+    if (selectedHobbies.includes(hobby)) {
+      removeHobby(hobby);
+      setWarning(false);
+    } else {
+      if (hobbyCount >= 3) {
+        setWarning(true);
+      }else {
+        addHobby(hobby);
+        setWarning(false);
+      }
+    }
+  };
 
   const isHobbyListHidden = (index: number) => hideHobbyList.includes(index);
 
@@ -91,7 +101,7 @@ const SelectHobbies = () => {
       <ProgressBar />
       <div className="hobby-title">
         <Header className="Header" headerTitle="어떤 취미에 관심이 있으신가요?"/>
-        <span className={hobbyCount === 3  ? 'max' : ''}>
+        <span className={warning ? 'max' : ''}>
           관심 취미는 최대 3개까지 선택할 수 있어요. ({hobbyCount}/3)
         </span>
       </div>
