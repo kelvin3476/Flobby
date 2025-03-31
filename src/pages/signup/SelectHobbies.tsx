@@ -8,6 +8,7 @@ import Button from '../../components/button/Button';
 import ProgressBar from '../../components/signup/ProgressBar';
 
 import SignUp from '../../api/signup/SignUp';
+import type { HobbyCategory } from '../../store/signup/useHobbyStore';
 
 const SelectHobbies = () => {
   const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, hobbyCategoryMap, setHobbyCategoryMap } = useHobbyStore();
@@ -22,7 +23,7 @@ const SelectHobbies = () => {
 
         if (code === 1000) {
           // API 호출 성공
-          const formattedData: { mainCategory: string; subCategory: string[] }[] = [];
+          const formattedData: HobbyCategory[] = [];
 
           data.forEach((item: any) => {
             const subItems: string[] = [];
@@ -32,7 +33,7 @@ const SelectHobbies = () => {
                 if (typeof subItem === 'string') {
                   subItems.push(subItem);
                 } else if (typeof subItem === 'object' && subItem.subCategories) {
-                  subItems.push(subItem.subCategories);
+                  subItems.push(...subItem.subCategories);
                 }
               });
             }
@@ -132,7 +133,7 @@ const SelectHobbies = () => {
 
           {/*선택된 취미*/}
           {renderSelectedHobbies()}
-          
+
         </div>
         <div className="buttons">
           <Button

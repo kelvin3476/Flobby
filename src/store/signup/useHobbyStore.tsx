@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
-interface HobbyCategory {
+export interface HobbyCategory {
   mainCategory: string;
   subCategory: string[];
 }
