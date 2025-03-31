@@ -17,6 +17,9 @@ interface RegionStore {
   removeRegion: (region: string) => void;
 
   getRegions: () => string[];
+
+  cityDistrictMap: Record<string, string[]>; 
+  setCityDistrictMap: (data: Record<string, string[]>) => void; 
 }
 
 const useRegionStore = create<RegionStore>()(
@@ -56,6 +59,9 @@ const useRegionStore = create<RegionStore>()(
         })),
 
       getRegions: () => get().selectedRegions,
+
+      cityDistrictMap: {},
+      setCityDistrictMap: (data) => set({cityDistrictMap: data}),
     }),
     {
       name: "region-storage",
