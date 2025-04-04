@@ -1,0 +1,41 @@
+.region-selector {
+  position: relative;
+
+  .region-selector-btn {
+    width: 106px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .icon-region {
+      width: 24px;
+      height: 24px;
+      background-image: url('../../../assets/svg/main/region/region_black.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    > span {
+      color: #191919;
+      font-size: 14px;
+      line-height: 150%;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+      padding-left: 2px;
+    }
+
+    .icon-arrow {
+      width: 24px;
+      height: 24px;
+      background-image: url('../../../assets/svg/main/region/region_dropdown_arrow.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

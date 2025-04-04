@@ -1,0 +1,221 @@
+@mixin region-item {
+  width: 100%;
+  height: 52px;
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  color: #72787f;
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 500;
+}
+
+.change-region-container {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 520px;
+  min-height: 474px;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background-color: #ffffff;
+  box-shadow: 4px 4px 12px 0px #00000014;
+
+  // 지역 변경 header
+  .change-region-header {
+    width: 480px;
+    height: 56px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e8ebed;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      margin: 0;
+      color: #191919;
+      font-size: 24px;
+      line-height: 140%;
+      font-weight: 600;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+    }
+
+    .icon-close {
+      width: 40px;
+      height: 40px;
+      background-image: url('../../../assets/svg/main/region/region_close.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 20px 20px;
+      cursor: pointer;
+    }
+  }
+
+  // 관심 지역
+  .prefer-region-container {
+    width: 100%;
+    height: 77px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .prefer-region-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      .icon-prefer {
+        width: 24px;
+        height: 24px;
+        background-image: url('../../../assets/svg/main/region/region_prefer.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 20px 20px;
+      }
+
+      > span {
+        color: #191919;
+        font-size: 18px;
+        line-height: 140%;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+        margin-right: 8px;
+      }
+
+      > p {
+        color: #7a7a7a;
+        font-size: 14px;
+        line-height: 150%;
+        font-weight: 500;
+        letter-spacing: -0.3px;
+        margin: 0;
+      }
+    }
+
+    .prefer-region-content {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      gap: 12px;
+
+      .prefer-region-btn {
+        width: 96px;
+        height: 40px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #e8ebed;
+        cursor: pointer;
+
+        color: #72787f;
+        font-size: 16px;
+        line-height: 150%;
+        font-weight: 500;
+        letter-spacing: -0.3px;
+
+        &.active {
+          border: 1px solid #764bf6;
+          background-color: #f1edfe;
+          color: #764bf6;
+        }
+      }
+    }
+  }
+
+  // 지역 선택
+  .select-region-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .select-region-title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      .icon-region {
+        width: 24px;
+        height: 24px;
+        background-image: url('../../../assets/svg/main/region/region_black.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 14px 17px;
+      }
+
+      > span {
+        color: #191919;
+        font-size: 18px;
+        line-height: 140%;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+        margin-right: 8px;
+      }
+
+      > p {
+        color: #7a7a7a;
+        font-size: 14px;
+        line-height: 150%;
+        font-weight: 500;
+        letter-spacing: -0.3px;
+        margin: 0;
+      }
+    }
+
+    .select-region-content {
+      width: 480px;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid #e8ebed;
+      box-sizing: border-box;
+
+      .select-region-city {
+        display: flex;
+        flex-direction: column;
+
+        .select-region-city-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+
+          .select-region-city-item {
+            @include region-item;
+            background-color: #ffffff;
+
+            &.active {
+              background-color: #f7f8f9;
+              color: #191919;
+            }
+          }
+        }
+
+        .select-region-town {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          background-color: #f7f7f7;
+
+          .select-region-town-item {
+            @include region-item;
+
+            &.active {
+              background-color: #f7f8f9;
+              color: #191919;
+            }
+          }
+        }
+
+        .select-region-item.active + .select-region-town {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    }
+  }
+}
