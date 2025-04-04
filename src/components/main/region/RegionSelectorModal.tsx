@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject, useState } from 'react';
 
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
 import useSelectedRegion from '../../../store/main/useSelectedRegion';
@@ -8,13 +8,18 @@ import '../../../styles/main/region/RegionSelectorModal.scss';
 interface RegionSelectorModalProps {
   preferRegions: string[];
   onClose: () => void;
+  modalRef: RefObject<HTMLDivElement>;
+  selectedRegion: string;
+  setSelectedRegion: (region: string) => void;
 }
 const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   preferRegions,
   onClose,
+  modalRef,
+  selectedRegion,
+  setSelectedRegion,
 }) => {
   const { regionList } = useFetchRegions();
-  const { selectedRegion, setSelectedRegion } = useSelectedRegion();
   const [activeCity, setActiveCity] = useState<string>('');
 
   const handleRegionSelect = (region: string) => {
@@ -27,7 +32,11 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   };
 
   return (
-    <div className="change-region-container" onClick={e => e.stopPropagation()}>
+    <div
+      className="change-region-container"
+      onClick={e => e.stopPropagation()}
+      ref={modalRef}
+    >
       {/* header */}
       <div className="change-region-header">
         <h1>지역 변경</h1>
