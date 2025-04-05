@@ -32,6 +32,7 @@ const Router: React.FC = () => {
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
 
+        {/* test용 라우터 PR 올리기 전에 삭제하기!  */}
         <Route path="/searchbar" element={<SearchBar />} />
       </Routes>
     </BrowserRouter>
