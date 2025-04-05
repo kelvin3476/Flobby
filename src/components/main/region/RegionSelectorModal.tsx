@@ -1,7 +1,6 @@
 import React, { RefObject, useState } from 'react';
 
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
-import useSelectedRegion from '../../../store/main/useSelectedRegion';
 
 import '../../../styles/main/region/RegionSelectorModal.scss';
 
