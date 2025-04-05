@@ -2,7 +2,7 @@ import React, { RefObject, useState } from 'react';
 
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
 
-import '../../../styles/main/region/RegionSelectorModal.scss';
+import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
 interface RegionSelectorModalProps {
   preferRegions: string[];
