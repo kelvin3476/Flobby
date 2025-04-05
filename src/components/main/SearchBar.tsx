@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import useSearchBarHandlers from '../../hooks/search_bar/useSearchBarHandlers';
 
@@ -8,16 +8,20 @@ const SearchBar: React.FC = () => {
   const {
     searchKeyword,
     isTyping,
+    inputRef,
+
     handleSubmitSearchForm,
     handleChangeSearchInput,
-    handleResetSearchKeyword,
     handleFocusSearchInput,
     handleBlurSearchInput,
+    handleClickResetBtn,
+    handleMouseDownResetBtn,
   } = useSearchBarHandlers();
 
   return (
     <form className="search-bar-form" onSubmit={handleSubmitSearchForm}>
       <input
+        ref={inputRef}
         className="search-bar-input"
         type="text"
         placeholder="검색어를 입력해 주세요."
@@ -29,7 +33,8 @@ const SearchBar: React.FC = () => {
       />
       <div
         className={isTyping ? 'icon-reset' : ''}
-        onClick={handleResetSearchKeyword}
+        onClick={handleClickResetBtn}
+        onMouseDown={handleMouseDownResetBtn}
       ></div>
       <div className="icon-search" onClick={handleSubmitSearchForm}></div>
     </form>
