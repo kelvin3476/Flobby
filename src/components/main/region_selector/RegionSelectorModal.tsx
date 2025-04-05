@@ -26,10 +26,6 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
     onClose();
   };
 
-  const handleCityClick = (city: string) => {
-    setActiveCity(prev => (prev === city ? null : city));
-  };
-
   return (
     <div
       className="change-region-container"
@@ -79,21 +75,23 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
                 rows[rows.length - 1].push(city);
                 return rows;
               }, [])
-              .map((group, groupIndex) => (
-                <div key={groupIndex}>
+              .map((citiesInRow, citiesInRowIndex) => (
+                <div key={citiesInRowIndex}>
                   <div className="select-region-city-row">
-                    {group.map(city => (
+                    {citiesInRow.map(city => (
                       <div
                         key={city}
                         className={`select-region-city-item ${activeCity === city ? 'active' : ''}`}
-                        onClick={() => handleCityClick(city)}
+                        onClick={() =>
+                          setActiveCity(prev => (prev === city ? null : city))
+                        }
                       >
                         <span>{city}</span>
                       </div>
                     ))}
                   </div>
 
-                  {activeCity && group.includes(activeCity) && (
+                  {activeCity && citiesInRow.includes(activeCity) && (
                     <div className="select-region-town">
                       {regionList[activeCity].map(district => (
                         <div
