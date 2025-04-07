@@ -3,11 +3,19 @@ import PopularItem from "./PopularItem";
 
 import "../../styles/main/PopularPost.scss";
 
+// TODO: API 연동 시 해당 부분을 실제 백엔드 응답 데이터로 대체
+const mockPosts = Array(10).fill(null).map((_, idx) => ({
+  tag: "언어/ 외국어",
+  title: "안녕하세요! 배드민턴 모임에 들어가려면 운동 잘 해야 하나요? 잘 모르겠어요. 도와줘요",
+  likes: 123,
+  date: "2025.02.22"
+}))
+
+
 const PopularPost = () => {
 
-  const mockArray = Array(10).fill(null);
-  const leftList = mockArray.slice(0,5);
-  const rightList = mockArray.slice(5,10);
+  const leftList = mockPosts.slice(0,5);
+  const rightList = mockPosts.slice(5,10);
   
   return (
     <div className="popular-container">
@@ -17,13 +25,25 @@ const PopularPost = () => {
       </div>
       <section className="popular-section">
         <div className="left-section">
-          {leftList.map((_, idx) => (
-            <PopularItem key={`left-${idx}`} />
+          {leftList.map((item, idx) => (
+            <PopularItem 
+              key={`left-${idx}`}
+              tag={item.tag}
+              title={item.title}
+              likes={item.likes}
+              date={item.date}
+            />
           ))}
         </div>
         <div className="right-section">
-          {rightList.map((_, idx) => (
-            <PopularItem key={`right-${idx}`} />
+          {rightList.map((item, idx) => (
+            <PopularItem 
+              key={`right-${idx}`} 
+              tag={item.tag}
+              title={item.title}
+              likes={item.likes}
+              date={item.date}
+            />
           ))}
         </div>
       </section>
