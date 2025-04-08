@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SignUp from '../../api/signup/SignUp';
+import useRegionListStore from '../../store/main/useRegionListStore';
 
 const useFetchRegions = () => {
-  const [regionList, setRegionList] = useState<Record<string, string[]>>({});
+  const { regionList, setRegionList } = useRegionListStore();
 
   // TODO: api 수정 예정(서울 전체 포함)
   useEffect(() => {
     const fetchRegions = async () => {
+      // 상태 캐싱
+      if (Object.keys(regionList).length > 0) {
+        return;
+      }
+
       try {
         const response = await SignUp.getRegionList();
         const { code, message, data } = response.data;
