@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
-import useSelectedRegion from '../../../store/main/useSelectedRegion';
+import useSelectedRegionStore from '../../../store/main/useSelectedRegionStore';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
 
 const selectedRegions = ['송파구', '구로구', '용산구']; // test data
 
 const RegionSeletor: React.FC = () => {
-  const { selectedRegion, setSelectedRegion } = useSelectedRegion();
+  const { selectedRegion, setSelectedRegion } = useSelectedRegionStore();
 
   const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
     useState<boolean>(false);
