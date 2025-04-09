@@ -14,7 +14,6 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
-import SearchBar from '../components/main/SearchBar';
 
 const Router: React.FC = () => {
   return (
