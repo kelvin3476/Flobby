@@ -8,8 +8,8 @@ interface SelectedRegionStore {
 const selectedRegions = ['송파구', '구로구', '용산구']; // test용 초기값
 
 const useSelectedRegionStore = create<SelectedRegionStore>()(set => ({
-  // TODO: 로그인 : 초기값 유저 정보 api 호출 필요 / 비로그인 : 서울 전체(백에서 api 수정 예정)
-  selectedRegion: selectedRegions[0], // 코드값으로 저장후 넘겨드리기
+  // TODO: 로그인 : 초기값 지역 변경 api 호출 필요 / 비로그인 : 서울 전체(백에서 지역 리스트 api 수정 예정)
+  selectedRegion: selectedRegions[0], // TODO: 서버에는 지역 코드값만 넘겨드리기
   setSelectedRegion: region => set({ selectedRegion: region }),
 }));
 
