@@ -3,12 +3,13 @@ import "../../styles/main/Tag.scss";
 
 interface TagProps {
   label: string;
-  type: "hobby" | "size";
+  type: string;
+  color: string;
 }
 
-const Tag: React.FC<TagProps> = ({ label, type }) => {
+const Tag: React.FC<TagProps> = ({ label, type, color }) => {
   return (
-    <span className={`tag ${type}`}>{label}</span>
+    <span className={`tag ${type} ${color}`}>{label}</span>
   );
 };
 

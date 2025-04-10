@@ -17,7 +17,7 @@ const PopularItem = ({ tag, title, likes, date }: PopularItemProps) =>  {
       <div className="item-wrapper">
         <div className="item-top">
           <div className="item-tag">
-            <Tag label={tag} type="size"/>
+            <Tag label={tag} type="popular-posts" color="gray"/>
           </div>
         </div>
 
