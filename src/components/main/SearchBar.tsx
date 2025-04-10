@@ -20,23 +20,26 @@ const SearchBar: React.FC = () => {
 
   return (
     <form className="search-bar-form" onSubmit={handleSubmitSearchForm}>
-      <input
-        ref={inputRef}
-        className="search-bar-input"
-        type="text"
-        placeholder="검색어를 입력해 주세요."
-        value={searchKeyword}
-        onChange={handleChangeSearchInput}
-        onFocus={handleFocusSearchInput}
-        onBlur={handleBlurSearchInput}
-        maxLength={50}
-      />
-      <div
-        className={isTyping ? 'icon-reset' : ''}
-        onClick={handleClickResetBtn}
-        onMouseDown={handleMouseDownResetBtn}
-      ></div>
-      <div className="icon-search" onClick={handleSubmitSearchForm}></div>
+      <div className="input-container">
+        <input
+          ref={inputRef}
+          className="search-bar-input"
+          type="text"
+          placeholder="검색어를 입력해 주세요."
+          value={searchKeyword}
+          onChange={handleChangeSearchInput}
+          onFocus={handleFocusSearchInput}
+          onBlur={handleBlurSearchInput}
+          maxLength={50}
+        />
+
+        <div
+          className={isTyping ? 'icon-reset' : ''}
+          onClick={handleClickResetBtn}
+          onMouseDown={handleMouseDownResetBtn}
+        ></div>
+        <div className="icon-search" onClick={handleSubmitSearchForm}></div>
+      </div>
     </form>
   );
 };
