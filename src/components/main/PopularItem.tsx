@@ -1,4 +1,6 @@
 import React from "react";
+import Tag from "./Tag";
+
 import "../../styles/main/PopularItem.scss";
 
 interface PopularItemProps {
@@ -15,7 +17,7 @@ const PopularItem = ({ tag, title, likes, date }: PopularItemProps) =>  {
       <div className="item-wrapper">
         <div className="item-top">
           <div className="item-tag">
-            <span>{tag}</span>
+            <Tag label={tag} type="size"/>
           </div>
         </div>
 

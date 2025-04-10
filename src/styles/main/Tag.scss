@@ -1,0 +1,22 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.3px;
+
+  &.hobby {
+    background-color: #F1EDFE;
+    color: #764BF6;
+  }
+
+  &.size {
+    background-color: #f7f8f9;
+    color: #72787f;
+  }
+}

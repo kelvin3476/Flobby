@@ -16,23 +16,6 @@
     .item-top {
       text-align: left;
       line-height: 0;
-    
-      .item-tag {
-        > span {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          height: 28px;
-          padding: 4px 10px;
-          border-radius: 100px;
-          background-color: #f7f8f9;
-          font-size: 14px;
-          color: #72787f;
-          font-weight: 500;
-          line-height: 21px;
-          letter-spacing: -0.3px;
-        }
-      }
     }
     
     .item-content {
