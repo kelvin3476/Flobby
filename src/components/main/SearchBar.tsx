@@ -33,12 +33,14 @@ const SearchBar: React.FC = () => {
           maxLength={50}
         />
 
-        <div
-          className={isTyping ? 'icon-reset' : ''}
-          onClick={handleClickResetBtn}
-          onMouseDown={handleMouseDownResetBtn}
-        ></div>
-        <div className="icon-search" onClick={handleSubmitSearchForm}></div>
+        <div className="icon-container">
+          <div
+            className={isTyping ? 'icon-reset' : 'icon-reset-disabled'}
+            onClick={handleClickResetBtn}
+            onMouseDown={handleMouseDownResetBtn}
+          ></div>
+          <div className="icon-search" onClick={handleSubmitSearchForm}></div>
+        </div>
       </div>
     </form>
   );
