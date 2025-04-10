@@ -15,6 +15,8 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
 
+import Main from '../pages/main/Main';
+
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
@@ -30,6 +32,7 @@ const Router: React.FC = () => {
         <Route path="/signup/success" element={<SuccessSignUp />} />
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
