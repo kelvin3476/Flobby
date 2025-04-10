@@ -11,11 +11,10 @@ const mockPosts = Array(10).fill(null).map((_, idx) => ({
   date: "2025.02.22"
 }))
 
-
 const PopularPost = () => {
 
-  const leftList = mockPosts.slice(0,5);
-  const rightList = mockPosts.slice(5,10);
+  const leftList = mockPosts.filter((_, index) => index % 2 === 0);
+  const rightList = mockPosts.filter((_, index) => index % 2 === 1);
   
   return (
     <div className="popular-container">
