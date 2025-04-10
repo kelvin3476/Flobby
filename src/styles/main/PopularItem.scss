@@ -1,3 +1,5 @@
+@use "../mixins/Presets.scss" as *;
+
 .item-container {
   display: flex;
   flex-direction: column;
@@ -46,12 +48,11 @@
         height: 100%;
         font-size: 16px;
         color: #191919;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         font-weight: 500;
         line-height: 24px;
         letter-spacing: -0.3px;
+
+        @include abbreviation(1);
       }
       
       .item-meta {
