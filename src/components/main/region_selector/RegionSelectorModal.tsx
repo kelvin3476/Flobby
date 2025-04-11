@@ -29,12 +29,12 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
 
   return (
     <div
-      className="change-region-container"
+      className="region-selector-modal-container"
       onClick={e => e.stopPropagation()}
       ref={modalRef}
     >
       {/* header */}
-      <div className="change-region-header">
+      <div className="region-selector-modal-header">
         <h1>지역 변경</h1>
         <div className="icon-close" onClick={onClose} />
       </div>
