@@ -54,20 +54,22 @@ const Region = () => {
           {/* 2. 구(동) 리스트 - 선택한 도시의 구만 표시 */}
           <div className="region-town" ref={townRef}>
             {activeCity &&
-              cityDistrictMap[activeCity]?.map((district) => {
-                const regionName = district.regionName;
-                const regionId = district.regionId;
-                const isSelected = selectedRegions.includes(`${activeCity} ${regionName}`);
-                return (
-                  <div
-                    key={regionId}
-                    className={`region-item ${isSelected ? "selected" : ""}`}
-                    onClick={() => handleSelect(activeCity, regionName)}
-                  >
-                    <span>{regionName}</span>
-                  </div>
-                );
-              })}
+              cityDistrictMap[activeCity]
+                ?.filter((district) => !district.regionName.includes("전체"))
+                .map((district) => {
+                  const regionName = district.regionName;
+                  const regionId = district.regionId;
+                  const isSelected = selectedRegions.includes(`${activeCity} ${regionName}`);
+                  return (
+                    <div
+                      key={regionId}
+                      className={`region-item ${isSelected ? "selected" : ""}`}
+                      onClick={() => handleSelect(activeCity, regionName)}
+                    >
+                      <span>{regionName}</span>
+                    </div>
+                  );
+                })}
           </div>
 
           {/* 3. 선택된 지역 */}
