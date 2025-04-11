@@ -3,7 +3,6 @@ import RegionSelectorModal from './RegionSelectorModal';
 import useSelectedRegionStore from '../../../store/main/useSelectedRegionStore';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
-import useRegionListStore from '../../../store/main/useRegionListStore';
 
 const preferRegions = [
   { regionName: '송파구', regionId: 195 },
