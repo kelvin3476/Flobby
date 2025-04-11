@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
+interface RegionArray {
+  regionName: string;
+  regionId: number;
+}
+
 interface RegionStore {
   selectedRegions: string[];
 
@@ -18,8 +23,8 @@ interface RegionStore {
 
   getRegions: () => string[];
 
-  cityDistrictMap: Record<string, string[]>; 
-  setCityDistrictMap: (data: Record<string, string[]>) => void; 
+  cityDistrictMap: Record<string, RegionArray[]>; 
+  setCityDistrictMap: (data: Record<string, RegionArray[]>) => void; 
 }
 
 const useRegionStore = create<RegionStore>()(
