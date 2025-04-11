@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import useRegionListStore from './useRegionListStore';
 
 interface RegionItem {
   regionName: string;

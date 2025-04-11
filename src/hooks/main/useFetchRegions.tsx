@@ -5,7 +5,6 @@ import useRegionListStore from '../../store/main/useRegionListStore';
 const useFetchRegions = () => {
   const { regionList, setRegionList } = useRegionListStore();
 
-  // TODO: api 수정 예정(서울 전체 포함, 지역 코드도 넘어올 예정)
   useEffect(() => {
     const fetchRegions = async () => {
       if (Object.keys(regionList).length > 0) {
