@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface RegionItem {
+export interface RegionItem {
   regionName: string;
   regionId: number;
 }

@@ -1,13 +1,8 @@
 import React, { RefObject, useState } from 'react';
-
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
+import { RegionItem } from '../../../store/main/useRegionListStore';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
-
-interface RegionItem {
-  regionName: string;
-  regionId: number;
-}
 
 interface RegionSelectorModalProps {
   preferRegions: RegionItem[];
@@ -16,6 +11,7 @@ interface RegionSelectorModalProps {
   selectedRegion: RegionItem;
   setSelectedRegion: (region: RegionItem) => void;
 }
+
 const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   preferRegions,
   onClose,
