@@ -45,7 +45,7 @@ const RegionSelector: React.FC = () => {
         <div className="icon-arrow" />
       </button>
 
-      {isRegionSelectorOpen && preferRegions && (
+      {isRegionSelectorOpen && (
         <RegionSelectorModal
           preferRegions={preferRegions}
           onClose={() => setIsRegionSelectorOpen(false)}
