@@ -15,7 +15,7 @@
   font-weight: 500;
 }
 
-.change-region-container {
+.region-selector-modal-container {
   position: absolute;
   top: 50px;
   left: 0px;
@@ -28,9 +28,10 @@
   gap: 28px;
   background-color: #ffffff;
   box-shadow: 4px 4px 12px 0px #00000014;
+  z-index: 1000;
 
   // 지역 변경 header
-  .change-region-header {
+  .region-selector-modal-header {
     width: 480px;
     height: 56px;
     padding-bottom: 16px;
