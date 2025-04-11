@@ -3,10 +3,15 @@ import RegionSelectorModal from './RegionSelectorModal';
 import useSelectedRegionStore from '../../../store/main/useSelectedRegionStore';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
+import useRegionListStore from '../../../store/main/useRegionListStore';
 
-const selectedRegions = ['송파구', '구로구', '용산구']; // test data
+const preferRegions = [
+  { regionName: '송파구', regionId: 195 },
+  { regionName: '구로구', regionId: 203 },
+  { regionName: '용산구', regionId: 216 },
+]; // 관심 지역 test용 초기값
 
-const RegionSeletor: React.FC = () => {
+const RegionSelector: React.FC = () => {
   const { selectedRegion, setSelectedRegion } = useSelectedRegionStore();
 
   const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
@@ -37,13 +42,13 @@ const RegionSeletor: React.FC = () => {
         onClick={() => setIsRegionSelectorOpen(!isRegionSelectorOpen)}
       >
         <div className="icon-region" />
-        <span>{selectedRegion}</span>
+        <span>{selectedRegion.regionName}</span>
         <div className="icon-arrow" />
       </button>
 
-      {isRegionSelectorOpen && (
+      {isRegionSelectorOpen && preferRegions && (
         <RegionSelectorModal
-          preferRegions={selectedRegions}
+          preferRegions={preferRegions}
           onClose={() => setIsRegionSelectorOpen(false)}
           modalRef={modalRef}
           selectedRegion={selectedRegion}
@@ -54,4 +59,4 @@ const RegionSeletor: React.FC = () => {
   );
 };
 
-export default RegionSeletor;
+export default RegionSelector;

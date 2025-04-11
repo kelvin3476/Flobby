@@ -4,12 +4,17 @@ import useFetchRegions from '../../../hooks/main/useFetchRegions';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
+interface RegionItem {
+  regionName: string;
+  regionId: number;
+}
+
 interface RegionSelectorModalProps {
-  preferRegions: string[];
+  preferRegions: RegionItem[];
   onClose: () => void;
   modalRef: RefObject<HTMLDivElement>;
-  selectedRegion: string;
-  setSelectedRegion: (region: string) => void;
+  selectedRegion: RegionItem;
+  setSelectedRegion: (region: RegionItem) => void;
 }
 const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   preferRegions,
@@ -21,7 +26,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   const { regionList } = useFetchRegions();
   const [activeCity, setActiveCity] = useState<string>('');
 
-  const handleRegionSelect = (region: string) => {
+  const handleRegionSelect = (region: RegionItem) => {
     setSelectedRegion(region);
     onClose();
   };
@@ -49,11 +54,11 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
           {preferRegions.map(preferRegion => {
             return (
               <div
-                key={preferRegion}
-                className={`prefer-region-btn ${selectedRegion === preferRegion ? 'active' : ''}`}
+                key={preferRegion.regionId}
+                className={`prefer-region-btn ${selectedRegion.regionName === preferRegion.regionName ? 'active' : ''}`}
                 onClick={() => handleRegionSelect(preferRegion)}
               >
-                {preferRegion}
+                {preferRegion.regionName}
               </div>
             );
           })}
@@ -95,11 +100,11 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
                     <div className="select-region-town">
                       {regionList[activeCity].map(district => (
                         <div
-                          key={district}
+                          key={district.regionId}
                           className="select-region-town-item"
                           onClick={() => handleRegionSelect(district)}
                         >
-                          {district}
+                          {district.regionName}
                         </div>
                       ))}
                     </div>
