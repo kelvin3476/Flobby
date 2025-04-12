@@ -97,7 +97,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
                       {regionList[activeCity].map(district => (
                         <div
                           key={district.regionId}
-                          className="select-region-town-item"
+                          className={`select-region-town-item ${selectedRegion === district ? 'active' : ''}`}
                           onClick={() => handleRegionSelect(district)}
                         >
                           {district.regionName}
