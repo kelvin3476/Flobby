@@ -63,14 +63,78 @@ const useRegionStore = create<RegionStore>()(
           warning: false,
         })),
 
-      getRegions: () => get().selectedRegions,
+      getRegions: () => {
+        const { selectedRegions, cityDistrictMap } = get();
+        const regionIds: string[] = [];
+
+        for (const regionName of selectedRegions) {
+          const [city, ...districtParts] = regionName.split(" ");
+          const districtName = districtParts.join(" ");
+          const match = cityDistrictMap[city]?.find(
+            (r) => r.regionName === districtName
+          );
+          if (match) {
+            regionIds.push(match.regionId.toString());
+          }
+        }
+
+        return regionIds;
+      },
 
       cityDistrictMap: {},
-      setCityDistrictMap: (data) => set({cityDistrictMap: data}),
+      setCityDistrictMap: (data) => {
+        const { selectedRegions } = get();
+        const regionNames: string[] = [];
+      
+        for (const city in data) {
+          for (const id of selectedRegions) {
+            const match = data[city]?.find((r) => r.regionId.toString() === id);
+            if (match) {
+              regionNames.push(`${city} ${match.regionName}`);
+            }
+          }
+        }
+      
+        set({
+          cityDistrictMap: data,
+          selectedRegions: regionNames,
+        });
+      }
+      
     }),
     {
       name: "region-storage",
       storage: createJSONStorage(() => localStorage),
+
+      partialize: (state) => {
+        const { selectedRegions, cityDistrictMap } = state;
+        const regionIds: string[] = [];
+
+        for (const regionName of selectedRegions) {
+          const [city, ...districtParts] = regionName.split(" ");
+          const districtName = districtParts.join(" ");
+          const match = cityDistrictMap[city]?.find(
+            (r) => r.regionName === districtName
+          );
+          if (match) {
+            regionIds.push(match.regionId.toString());
+          }
+        }
+
+        return {
+          ...state,
+          selectedRegions: regionIds, 
+        };
+      },
+
+      merge: (persistedState: any, currentState) => {
+        return {
+          ...currentState,
+          ...persistedState,
+          selectedRegions: persistedState.selectedRegions,
+        };
+      }
+      
     }
   )
 );
