@@ -1,9 +1,5 @@
 import { create } from 'zustand';
-
-export interface RegionItem {
-  regionName: string;
-  regionId: number;
-}
+import { RegionItem } from '../../api/ApiTypes';
 
 export type RegionList = Record<string, RegionItem[]>;
 

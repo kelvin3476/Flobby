@@ -1,9 +1,5 @@
 import { create } from 'zustand';
-
-interface RegionItem {
-  regionName: string;
-  regionId: number;
-}
+import { RegionItem } from '../../api/ApiTypes';
 
 interface SelectedRegionStore {
   selectedRegion: RegionItem | null;
