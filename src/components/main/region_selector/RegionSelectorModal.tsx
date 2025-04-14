@@ -1,6 +1,6 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
-import { RegionItem } from '../../../store/main/useRegionListStore';
+import { RegionItem } from '../../../api/ApiTypes';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
@@ -67,8 +67,10 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
         <div className="prefer-region-container">
           <div className="prefer-region-title">
             <div className="icon-prefer" />
-            <span>관심 지역</span>
-            <p>관심 지역은 마이페이지에서 변경할 수 있어요.</p>
+            <div className="prefer-region-text-container">
+              <span>관심 지역</span>
+              <p>관심 지역은 마이페이지에서 변경할 수 있어요.</p>
+            </div>
           </div>
           <div className="prefer-region-content">
             {preferRegions.map(preferRegion => {
@@ -90,8 +92,10 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
       <div className="select-region-container">
         <div className="select-region-title">
           <div className="icon-region" />
-          <span>지역 선택</span>
-          <p>지역은 최대 1개까지 선택할 수 있어요.</p>
+          <div className="select-region-text-container">
+            <span>지역 선택</span>
+            <p>지역은 최대 1개까지 선택할 수 있어요.</p>
+          </div>
         </div>
         <div className="select-region-content">
           <div className="select-region-city">
