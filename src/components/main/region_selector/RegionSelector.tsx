@@ -52,8 +52,10 @@ const RegionSelector: React.FC = () => {
         type="button"
         onClick={() => setIsRegionSelectorOpen(!isRegionSelectorOpen)}
       >
-        <div className="icon-region" />
-        <span>{selectedRegion.regionName}</span>
+        <div className="icon-container">
+          <div className="icon-region" />
+          <span>{selectedRegion.regionName}</span>
+        </div>
         <div className="icon-arrow" />
       </button>
 

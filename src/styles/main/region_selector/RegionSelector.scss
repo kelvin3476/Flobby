@@ -13,22 +13,28 @@
     cursor: pointer;
     background-color: #f7f8f9;
 
-    .icon-region {
-      width: 24px;
-      height: 24px;
-      background-image: url('../../../assets/svg/main/region_selector/region_selector_region_black.svg');
-      background-repeat: no-repeat;
-      background-position: center;
-    }
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
 
-    > span {
-      color: #191919;
-      font-size: 14px;
-      font-style: normal;
-      line-height: 150%;
-      font-weight: 500;
-      letter-spacing: -0.3px;
-      padding-left: 2px;
+      .icon-region {
+        width: 24px;
+        height: 24px;
+        background-image: url('../../../assets/svg/main/region_selector/region_selector_region_black.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      > span {
+        color: #191919;
+        font-size: 14px;
+        font-style: normal;
+        line-height: 150%;
+        font-weight: 500;
+        letter-spacing: -0.3px;
+      }
     }
 
     .icon-arrow {
