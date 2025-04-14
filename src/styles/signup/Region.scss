@@ -159,7 +159,8 @@
       gap: 10px;
 
       .next-btn {
-        cursor: pointer;
+        cursor: not-allowed;
+        pointer-events: none;
         border: none;
         width: 480px;
         height: 60px;
@@ -174,6 +175,8 @@
 
         &.active {
           opacity: 1;
+          cursor: pointer;
+          pointer-events: auto;
         }
       }
   
