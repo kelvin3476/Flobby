@@ -1,27 +1,31 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
 
 import useRegionStore from "../../store/signup/useRegionStore";
 import SignUp from "../../api/signup/SignUp";
 
 const useRegionForm = () => {
   const { 
-    selectedRegions, 
+    selectedRegionNames, 
     activeCity, 
     setActiveCity: originalSetActiveCity, 
-    attemptSelectRegion, 
+    attemptSelectRegionName,
+    attemptSelectRegionId, 
     removeRegion, 
     warning,
     cityDistrictMap,
     setCityDistrictMap,
   } = useRegionStore();
 
-  const nav = useNavigate();
   const townRef = useRef<HTMLDivElement>(null);
 
   const handleSelect = (city: string, district: string) => {
     const region = `${city} ${district}`;
-    attemptSelectRegion(region);
+    const id = cityDistrictMap[city]?.find(r => r.regionName === district)?.regionId.toString();
+
+    if(!id) return;
+
+    attemptSelectRegionName(region);
+    attemptSelectRegionId(id);
   };
 
   const setActiveCity = (city: string) => {
@@ -57,10 +61,11 @@ const useRegionForm = () => {
   }, []);
 
   return {
-    selectedRegions, 
+    selectedRegionNames, 
     activeCity, 
     setActiveCity, 
-    attemptSelectRegion, 
+    attemptSelectRegionName,
+    attemptSelectRegionId, 
     removeRegion, 
     warning,
     handleSelect,
