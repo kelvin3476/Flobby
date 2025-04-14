@@ -12,7 +12,6 @@ const useRegionForm = () => {
     attemptSelectRegion, 
     removeRegion, 
     warning,
-    getRegions,
     cityDistrictMap,
     setCityDistrictMap,
   } = useRegionStore();
@@ -23,12 +22,6 @@ const useRegionForm = () => {
   const handleSelect = (city: string, district: string) => {
     const region = `${city} ${district}`;
     attemptSelectRegion(region);
-  };
-
-  const acceptNext = () => {
-    if (selectedRegions.length > 0) {
-      nav ('/signup/hobby', { state: getRegions() });
-    }
   };
 
   const setActiveCity = (city: string) => {
@@ -70,9 +63,7 @@ const useRegionForm = () => {
     attemptSelectRegion, 
     removeRegion, 
     warning,
-    getRegions,
     handleSelect,
-    acceptNext,
     cityDistrictMap,
     townRef,
   };

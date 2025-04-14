@@ -19,7 +19,6 @@ const Region = () => {
     removeRegion, 
     warning,
     handleSelect,
-    acceptNext,
     cityDistrictMap,
     townRef,
   } = useRegionForm();
@@ -89,7 +88,11 @@ const Region = () => {
           <Button 
             className={`next-btn ${selectedRegions.length > 0 ? "active" : ""}`}
             title="다음" 
-            onClick={acceptNext} />
+            onClick={() => {
+              if (selectedRegions.length > 0) {
+                nav("/signup/hobby");
+              }
+            }} />
           <Button 
             className="pass-btn" 
             title="건너뛰기" 

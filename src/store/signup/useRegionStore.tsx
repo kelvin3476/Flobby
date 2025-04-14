@@ -21,8 +21,6 @@ interface RegionStore {
 
   removeRegion: (region: string) => void;
 
-  getRegions: () => string[];
-
   cityDistrictMap: Record<string, RegionArray[]>; 
   setCityDistrictMap: (data: Record<string, RegionArray[]>) => void; 
 }
@@ -62,24 +60,6 @@ const useRegionStore = create<RegionStore>()(
           selectedRegions: state.selectedRegions.filter((item) => item !== region),
           warning: false,
         })),
-
-      getRegions: () => {
-        const { selectedRegions, cityDistrictMap } = get();
-        const regionIds: string[] = [];
-
-        for (const regionName of selectedRegions) {
-          const [city, ...districtParts] = regionName.split(" ");
-          const districtName = districtParts.join(" ");
-          const match = cityDistrictMap[city]?.find(
-            (r) => r.regionName === districtName
-          );
-          if (match) {
-            regionIds.push(match.regionId.toString());
-          }
-        }
-
-        return regionIds;
-      },
 
       cityDistrictMap: {},
       setCityDistrictMap: (data) => {
