@@ -1,0 +1,53 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, /*Autoplay*/ } from "swiper/modules";
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import "../../styles/main/CarouselBanner.scss";
+
+const mockImages = [
+  { id: 0, imageUrl: "/img/carousel/carousel2.jpg"},
+  { id: 1, imageUrl: "/img/carousel/carousel1.jpg"},
+  { id: 2, imageUrl: "/img/carousel/carousel2.jpg"},
+  { id: 3, imageUrl: "/img/carousel/carousel1.jpg"},
+  { id: 4, imageUrl: "/img/carousel/carousel2.jpg"},
+];
+
+const CarouselBanner = () => {
+  return (
+    <div className="carousel-container">
+      <Swiper
+        slidesPerView={1}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={{
+          prevEl: ".custom-prev",
+          nextEl: ".custom-next",
+        }}
+        // autoplay={{
+        //   delay: 3000,
+        // }}
+        modules={[Pagination, Navigation,/*Autoplay*/]}
+      >
+        {mockImages.map((item) => {
+          return (
+            <SwiperSlide key={item.id}>
+              <img src={item.imageUrl} alt={`slide-${item.id}`} />
+            </SwiperSlide>
+          );
+        })}
+        
+      </Swiper>
+      <div className="nav-wrapper">
+        <div className="custom-prev"></div>
+        <div className="custom-next"></div>
+      </div>
+    </div>
+  );
+};
+
+export default CarouselBanner;
