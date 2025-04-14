@@ -1,4 +1,4 @@
-import React, { RefObject, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import useFetchRegions from '../../../hooks/main/useFetchRegions';
 import { RegionItem } from '../../../store/main/useRegionListStore';
 
@@ -20,12 +20,35 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   setSelectedRegion,
 }) => {
   const { regionList } = useFetchRegions();
-  const [activeCity, setActiveCity] = useState<string>('');
 
-  const handleRegionSelect = (region: RegionItem) => {
+  const [activeCity, setActiveCity] = useState<string>('');
+  const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
+
+  const handleSelectRegion = (region: RegionItem) => {
     setSelectedRegion(region);
+    setActiveTown(region);
     onClose();
   };
+
+  useEffect(() => {
+    if (regionList && selectedRegion.regionId) {
+      const cityEntry = Object.entries(regionList).find(([city, towns]) =>
+        towns.some(town => town.regionId === selectedRegion.regionId),
+      );
+
+      if (cityEntry) {
+        setActiveCity(cityEntry[0]);
+
+        const selectedTown = cityEntry[1].find(
+          town => town.regionId === selectedRegion.regionId,
+        );
+
+        if (selectedTown) {
+          setActiveTown(selectedTown);
+        }
+      }
+    }
+  }, [regionList, selectedRegion]);
 
   return (
     <div
@@ -40,26 +63,28 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
       </div>
 
       {/* 관심 지역 */}
-      <div className="prefer-region-container">
-        <div className="prefer-region-title">
-          <div className="icon-prefer" />
-          <span>관심 지역</span>
-          <p>관심 지역은 마이페이지에서 변경할 수 있어요.</p>
+      {preferRegions?.length > 0 && (
+        <div className="prefer-region-container">
+          <div className="prefer-region-title">
+            <div className="icon-prefer" />
+            <span>관심 지역</span>
+            <p>관심 지역은 마이페이지에서 변경할 수 있어요.</p>
+          </div>
+          <div className="prefer-region-content">
+            {preferRegions.map(preferRegion => {
+              return (
+                <div
+                  key={preferRegion.regionId}
+                  className={`prefer-region-btn ${selectedRegion.regionName === preferRegion.regionName ? 'active' : ''}`}
+                  onClick={() => handleSelectRegion(preferRegion)}
+                >
+                  {preferRegion.regionName}
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="prefer-region-content">
-          {preferRegions.map(preferRegion => {
-            return (
-              <div
-                key={preferRegion.regionId}
-                className={`prefer-region-btn ${selectedRegion.regionName === preferRegion.regionName ? 'active' : ''}`}
-                onClick={() => handleRegionSelect(preferRegion)}
-              >
-                {preferRegion.regionName}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      )}
 
       {/* 지역 선택 */}
       <div className="select-region-container">
@@ -94,13 +119,17 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
 
                   {activeCity && citiesInRow.includes(activeCity) && (
                     <div className="select-region-town">
-                      {regionList[activeCity].map(district => (
+                      {regionList[activeCity].map(town => (
                         <div
-                          key={district.regionId}
-                          className={`select-region-town-item ${selectedRegion === district ? 'active' : ''}`}
-                          onClick={() => handleRegionSelect(district)}
+                          key={town.regionId}
+                          className={`select-region-town-item ${
+                            activeTown.regionId === town.regionId
+                              ? 'active'
+                              : ''
+                          }`}
+                          onClick={() => handleSelectRegion(town)}
                         >
-                          {district.regionName}
+                          {town.regionName}
                         </div>
                       ))}
                     </div>
