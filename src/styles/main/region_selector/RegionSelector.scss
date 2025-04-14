@@ -2,9 +2,9 @@
   position: relative;
 
   .region-selector-btn {
-    min-width: 106px;
+    min-width: fit-content;
     height: 40px;
-    padding: 10px;
+    padding: 8px 10px;
     border: none;
     border-radius: 100px;
     display: flex;
