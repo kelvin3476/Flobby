@@ -2,6 +2,7 @@ import React from 'react';
 
 import PopularPost from '../../components/main/PopularPost';
 import RegionSelector from '../../components/main/region_selector/RegionSelector';
+import CarouselBanner from '../../components/carousel/CarouselBanner';
 
 const Main = () => {
   return (
@@ -12,6 +13,7 @@ const Main = () => {
                       포지셔닝 작업 후 반응형 작업 필요 (승우)
              */}
       <RegionSelector />
+      <CarouselBanner />
       <PopularPost />
     </main>
   );
