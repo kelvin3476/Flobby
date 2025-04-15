@@ -16,21 +16,23 @@ const mockImages = [
 ];
 
 const CarouselBanner = () => {
+  const multiBanner = mockImages.length > 1;
+
   return (
     <div className="carousel-container">
       <Swiper
         slidesPerView={1}
-        loop={true}
+        loop={multiBanner}
         pagination={{
           clickable: true,
         }}
-        navigation={{
+        navigation={multiBanner ? {
           prevEl: ".custom-prev",
           nextEl: ".custom-next",
-        }}
-        autoplay={{
-          delay: 5000,
-        }}
+        }: false}
+        autoplay={multiBanner ? {
+          delay: 5000
+        }: false}
         modules={[Pagination, Navigation, Autoplay]}
       >
         {mockImages.map((item) => {
@@ -42,10 +44,12 @@ const CarouselBanner = () => {
         })}
         
       </Swiper>
-      <div className="nav-wrapper">
-        <div className="custom-prev"></div>
-        <div className="custom-next"></div>
-      </div>
+      {multiBanner && (
+        <div className="nav-wrapper">
+          <div className="custom-prev"></div>
+          <div className="custom-next"></div>
+        </div>
+      )}
     </div>
   );
 };
