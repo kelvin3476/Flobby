@@ -64,3 +64,10 @@ export interface PasswordData {
   password: string;
   confirmPassword: string;
 }
+
+/* -------------------- 지역 리스트 api 타입 -------------------- */
+
+export interface RegionItem {
+  regionName: string;
+  regionId: number;
+}
