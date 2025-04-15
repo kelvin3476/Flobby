@@ -21,7 +21,6 @@
     }
 
     .swiper-pagination {
-      // position: absolute;
       bottom: 20px;
       display: flex;
       justify-content: center;
@@ -60,11 +59,11 @@
       box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
       background-repeat: no-repeat;
       background-position: center;
+      cursor: pointer;
 
       &::after {
         display: none;
       }
-
     }
 
     .custom-prev {
@@ -76,5 +75,4 @@
       transform: rotate(-180deg);
     }
   }
-  
 }
