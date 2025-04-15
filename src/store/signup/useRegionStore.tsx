@@ -7,7 +7,8 @@ interface RegionArray {
 }
 
 interface RegionStore {
-  selectedRegions: string[];
+  selectedRegionNames: string[];
+  selectedRegionIds: string[];
 
   activeCity: string | null;
   setActiveCity: (city: string | null) => void;
@@ -17,20 +18,44 @@ interface RegionStore {
   warning: boolean;
   setWarning: (value: boolean) => void;
 
-  attemptSelectRegion: (region: string) => void;
+  attemptSelectRegionName: (regionName: string) => void;
+  attemptSelectRegionId: (regionId: string) => void;
 
-  removeRegion: (region: string) => void;
-
-  getRegions: () => string[];
+  removeRegion: (regionName: string) => void;
 
   cityDistrictMap: Record<string, RegionArray[]>; 
   setCityDistrictMap: (data: Record<string, RegionArray[]>) => void; 
 }
 
+const RegionValue = (
+  state: RegionStore,
+  key: "selectedRegionNames" | "selectedRegionIds",
+  value: string
+) => {
+  const list = state[key];
+
+  if(list.includes(value)) {
+    return {
+      [key]: list.filter((item) => item !== value),
+      warning: false,
+    };
+  }
+
+  if (list.length < state.maxSelection) {
+    return {
+      [key]: [...list, value],
+      warning: false,
+    };
+  }
+
+  return { warning: true };
+};
+
 const useRegionStore = create<RegionStore>()(
   persist(
     (set, get) => ({
-      selectedRegions: [],
+      selectedRegionNames: [],
+      selectedRegionIds: [],
 
       activeCity: "서울",
       setActiveCity: (city) => set({ activeCity: city }),
@@ -40,33 +65,44 @@ const useRegionStore = create<RegionStore>()(
       warning: false,
       setWarning: (value) => set({ warning: value }),
 
-      attemptSelectRegion: (region) =>
+      attemptSelectRegionName: (regionName) =>
+        set((state) => RegionValue(state, "selectedRegionNames", regionName)),
+
+      attemptSelectRegionId: (regionId) =>
+        set((state) => RegionValue(state, "selectedRegionIds", regionId)),
+
+      removeRegion: (regionName) =>
         set((state) => {
-          if (state.selectedRegions.includes(region)) {
-            return {
-              selectedRegions: state.selectedRegions.filter((item) => item !== region),
-              warning: false,
-            };
-          }
-          if (state.selectedRegions.length < state.maxSelection) {
-            return {
-              selectedRegions: [...state.selectedRegions, region],
-              warning: false,
-            };
-          }
-          return { warning: true };
+          const index = state.selectedRegionNames.findIndex((item) => item === regionName);
+          if(index === -1) return;
+
+          return {
+            selectedRegionNames: state.selectedRegionNames.filter((_, i) => i !== index),
+            selectedRegionIds: state.selectedRegionIds.filter((_, i) => i !== index),
+            warning: false,
+          };
         }),
 
-      removeRegion: (region) =>
-        set((state) => ({
-          selectedRegions: state.selectedRegions.filter((item) => item !== region),
-          warning: false,
-        })),
-
-      getRegions: () => get().selectedRegions,
-
       cityDistrictMap: {},
-      setCityDistrictMap: (data) => set({cityDistrictMap: data}),
+      setCityDistrictMap: (data) => {
+        const { selectedRegionNames } = get();
+        const regionNames: string[] = [];
+      
+        for (const city in data) {
+          for (const id of selectedRegionNames) {
+            const match = data[city]?.find((r) => r.regionId.toString() === id);
+            if (match) {
+              regionNames.push(`${city} ${match.regionName}`);
+            }
+          }
+        }
+      
+        set({
+          cityDistrictMap: data,
+          selectedRegionNames: regionNames,
+        });
+      }
+      
     }),
     {
       name: "region-storage",

@@ -13,18 +13,15 @@ const Region = () => {
   const nav = useNavigate();
 
   const { 
-    selectedRegions, 
+    selectedRegionNames,
     activeCity, 
     setActiveCity, 
     removeRegion, 
     warning,
     handleSelect,
-    acceptNext,
     cityDistrictMap,
     townRef,
   } = useRegionForm();
-
-  
 
   return (
     <div className="region-container">
@@ -32,7 +29,7 @@ const Region = () => {
       <div className="region-title">
         <Header className="Header" headerTitle="주로 활동하는 지역이 어디신가요?" />
         <span className={warning ? "error" : ""}>
-          관심 지역은 최대 3개까지 선택할 수 있어요. ({selectedRegions.length}/3)
+          관심 지역은 최대 3개까지 선택할 수 있어요. ({selectedRegionNames.length}/3)
         </span>
       </div>
 
@@ -59,7 +56,7 @@ const Region = () => {
                 .map((district) => {
                   const regionName = district.regionName;
                   const regionId = district.regionId;
-                  const isSelected = selectedRegions.includes(`${activeCity} ${regionName}`);
+                  const isSelected = selectedRegionNames.includes(`${activeCity} ${regionName}`);
                   return (
                     <div
                       key={regionId}
@@ -74,7 +71,7 @@ const Region = () => {
 
           {/* 3. 선택된 지역 */}
           <div className="region-selected">
-            {selectedRegions.map((region) => (
+            {selectedRegionNames.map((region) => (
               <div key={region} className="selected-item">
                 <div>
                   <span>{region}</span>
@@ -87,9 +84,13 @@ const Region = () => {
         
         <div className="buttons">
           <Button 
-            className={`next-btn ${selectedRegions.length > 0 ? "active" : ""}`}
+            className={`next-btn ${selectedRegionNames.length > 0 ? "active" : ""}`}
             title="다음" 
-            onClick={acceptNext} />
+            onClick={() => {
+              if (selectedRegionNames.length > 0) {
+                nav("/signup/hobby");
+              }
+            }} />
           <Button 
             className="pass-btn" 
             title="건너뛰기" 
