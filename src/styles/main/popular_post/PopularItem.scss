@@ -1,4 +1,4 @@
-@use "../mixins/Presets.scss" as *;
+@use "../../mixins/Presets" as *;
 
 .item-container {
   display: flex;
@@ -51,7 +51,7 @@
           .like-icon {
             width: 24px;
             height: 24px;
-            background-image: url("../../assets/svg/main/main_popularpost_thumb.svg");
+            background-image: url("../../../assets/svg/main/main_popularpost_thumb.svg");
             background-repeat: no-repeat;
             background-position: center;
           }

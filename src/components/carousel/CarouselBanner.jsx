@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import "../../styles/main/CarouselBanner.scss";
+import "../../styles/carousel/CarouselBanner.scss";
 
 const mockImages = [
   { id: 0, imageUrl: "/img/carousel/carousel2.jpg"},

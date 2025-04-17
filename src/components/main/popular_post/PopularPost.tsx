@@ -1,7 +1,7 @@
 import React from "react";
 import PopularItem from "./PopularItem";
 
-import "../../styles/main/PopularPost.scss";
+import "../../../styles/main/popular_post/PopularPost.scss";
 
 // TODO: API 연동 시 해당 부분을 실제 백엔드 응답 데이터로 대체
 const mockPosts = Array(10).fill(null).map((_, idx) => ({

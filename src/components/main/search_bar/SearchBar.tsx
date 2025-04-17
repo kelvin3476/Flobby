@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 
-import useSearchBarHandlers from '../../hooks/search_bar/useSearchBarHandlers';
+import useSearchBarHandlers from '../../../hooks/search_bar/useSearchBarHandlers';
 
-import '../../styles/main/search_bar/SearchBar.scss';
+import '../../../styles/main/search_bar/SearchBar.scss';
 
 const SearchBar: React.FC = () => {
   const {

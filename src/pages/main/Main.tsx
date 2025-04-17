@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PopularPost from '../../components/main/PopularPost';
+import PopularPost from '../../components/main/popular_post/PopularPost';
 import RegionSelector from '../../components/main/region_selector/RegionSelector';
 import CarouselBanner from '../../components/carousel/CarouselBanner';
 

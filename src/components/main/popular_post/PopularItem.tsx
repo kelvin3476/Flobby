@@ -1,7 +1,7 @@
 import React from "react";
-import Tag from "./Tag";
+import Tag from "../../tag/Tag";
 
-import "../../styles/main/PopularItem.scss";
+import "../../../styles/main/popular_post/PopularItem.scss";
 
 interface PopularItemProps {
   tag: string;
