@@ -67,7 +67,54 @@ export interface PasswordData {
 
 /* -------------------- 지역 리스트 api 타입 -------------------- */
 
+/* 지역 리스트 불러 올때 response 데이터 타입 */
 export interface RegionItem {
   regionName: string;
   regionId: number;
+}
+
+/* -------------------- 메인 페이지 api 타입 -------------------- */
+
+/* 동호회 response 데이터 타입 */
+export interface clubItem {
+  category: string;
+  scale: string;
+  clubName: string;
+  location: string;
+  currentMembers: number;
+}
+
+/* 원데이 response 데이터 타입 */
+export interface onedayItem {
+  category: string;
+  title: string;
+  location: string;
+  currentMembers: number;
+  maxMembers: number;
+  scheduledDate: string;
+  nickname: string;
+}
+
+/* 실시간 인기 게시글 response 데이터 타입 */
+export interface boardItem {
+  id: number;
+  title: string;
+  content: string;
+  views: number;
+  likes: number;
+  created_at: string;
+}
+
+/* 메인 페이지 동호회, 원데이, 실시간 인기 게시글 데이터셋 */
+export interface MainData {
+  region: RegionItem[];
+  clubItems: clubItem[];
+  onedayItems: onedayItem[];
+  boardItems: boardItem[];
+}
+
+/* 지역 변경 response 데이터 타입 */
+export interface ChangeRegionData {
+  clubItems: clubItem[];
+  onedayItems: onedayItem[];
 }
