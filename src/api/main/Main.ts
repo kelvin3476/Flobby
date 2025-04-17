@@ -1,0 +1,13 @@
+import { http } from "../../utils/Http";
+
+export default class Main {
+    /* 메인 페이지 (동호회, 원데이, 실시간 인기 게시글 데이터) 불러오기 */
+    static async getMainData() {
+        return await http.get(`/flobby/main`);
+    }
+
+    /* 지역 변경 */
+    static async changeRegion(regionCode: string) {
+        return await http.get(`/change/region?region=${regionCode}`);
+    }
+}
