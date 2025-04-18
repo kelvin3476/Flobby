@@ -1,9 +1,9 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
-
-import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 import { useRegionList } from '../../../hooks/main/useRegionList';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
+
+import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
 interface RegionSelectorModalProps {
   preferRegions: RegionItem[];
