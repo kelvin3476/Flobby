@@ -39,8 +39,10 @@ export class RegionContextModel {
       if (code === 1000) {
         // API 호출 성공
         this.mainData = data; // 메인 데이터 저장
+
         this.preferRegionsList = data.region; // 관심 지역 저장
         this.selectedRegion = this.preferRegionsList[0]; // 선택된 지역 초기값 저장
+
         this.initialized = true;
       } else if (code === 1001) {
         // API 호출 실패
@@ -93,5 +95,10 @@ export class RegionContextModel {
     } catch (err: any) {
       console.log(err.message || '데이터 로드 실패');
     }
+  }
+
+  // 지역 변경 API를 통해 변경된 원데이 & 동호회 데이터 가져오기
+  getChangeRegionData(): ChangeRegionData {
+    return this.changeRegionData;
   }
 }
