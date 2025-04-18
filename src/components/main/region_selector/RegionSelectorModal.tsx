@@ -4,6 +4,7 @@ import { useRegionList } from '../../../hooks/main/useRegionList';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
+import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
 
 interface RegionSelectorModalProps {
   preferRegions: RegionItem[];
@@ -72,7 +73,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
         </div>
 
         {/* 관심 지역 */}
-        {preferRegions?.length > 0 && (
+        {!(preferRegions[0]?.regionId === DEFAULT_REGION.regionId) && (
           <div className="prefer-region-container">
             <div className="prefer-region-title">
               <div className="icon-prefer" />
