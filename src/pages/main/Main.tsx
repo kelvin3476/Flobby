@@ -13,7 +13,6 @@ const Main = () => {
                       메인 페이지 헤더 부분 작업 및 병합 후 포지셔닝 작업 필요 (연지)
                       포지셔닝 작업 후 반응형 작업 필요 (승우)
              */}
-      <RegionSelector />
       <CarouselBanner />
       <ClubPost />
       <PopularPost />
