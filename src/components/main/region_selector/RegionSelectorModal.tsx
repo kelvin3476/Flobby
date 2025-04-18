@@ -2,9 +2,9 @@ import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
 import { useRegionList } from '../../../hooks/main/useRegionList';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
+import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
-import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
 
 interface RegionSelectorModalProps {
   preferRegions: RegionItem[];
@@ -27,12 +27,16 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   const regionList = useRegionList();
   const regionController = RegionContextController.getInstance();
 
-  const handleSelectRegion = (region: RegionItem) => {
+  const handleSelectRegion = async (region: RegionItem) => {
     setSelectedRegion(region);
     setActiveTown(region);
     onClose();
 
-    regionController.changeRegion(region);
+    try {
+      await regionController.changeRegion(region);
+    } catch (error) {
+      console.error(`지역 변경 실패 : ${error}`);
+    }
   };
 
   useEffect(() => {
