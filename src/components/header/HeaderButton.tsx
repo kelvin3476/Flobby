@@ -5,11 +5,12 @@ import "../../styles/header/HeaderButton.scss";
 interface HeaderButtonProps {
   className?: string;
   buttonName: string;
+  onClick: () => void;
 }
 
-const HeaderButton = ({ className, buttonName }: HeaderButtonProps) => {
+const HeaderButton = ({ className, buttonName, onClick }: HeaderButtonProps) => {
   return (
-    <button className={className}>{buttonName}</button>
+    <button className={className} onClick={onClick}>{buttonName}</button>
   );
 };
 
