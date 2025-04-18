@@ -3,6 +3,7 @@ import { RegionItem } from '../../../api/ApiTypes';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 import { useRegionList } from '../../../hooks/main/useRegionList';
+import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 interface RegionSelectorModalProps {
   preferRegions: RegionItem[];
@@ -23,11 +24,14 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
 
   const regionList = useRegionList();
+  const regionController = RegionContextController.getInstance();
 
   const handleSelectRegion = (region: RegionItem) => {
     setSelectedRegion(region);
     setActiveTown(region);
     onClose();
+
+    regionController.changeRegion(region);
   };
 
   useEffect(() => {
