@@ -1,4 +1,4 @@
-import { MainData, RegionItem } from '../../../api/ApiTypes';
+import { ChangeRegionData, MainData, RegionItem } from '../../../api/ApiTypes';
 import { RegionContextModel } from '../models/RegionContextModel';
 
 export class RegionContextController {
@@ -44,5 +44,10 @@ export class RegionContextController {
   // 지역 변경 API 호출
   async changeRegion(region: RegionItem): Promise<void> {
     await this.model.changeRegion(region);
+  }
+
+  // 지역 변경 API를 통해 변경된 원데이 & 동호회 데이터 가져오기
+  getChangeRegionData(): ChangeRegionData {
+    return this.model.getChangeRegionData();
   }
 }
