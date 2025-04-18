@@ -1,39 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
 
-import '../../../styles/main/region_selector/RegionSelector.scss';
-import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
-import { RegionItem } from '../../../api/ApiTypes';
 import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
+import { useRegionSelector } from '../../../hooks/main/useRegionSelector';
+
+import '../../../styles/main/region_selector/RegionSelector.scss';
 
 const RegionSelector: React.FC = () => {
-  const regionController = RegionContextController.getInstance();
-
-  const [preferRegions, setPreferRegions] = useState([]);
-  const [selectedRegion, setSelectedRegion] = useState(DEFAULT_REGION);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
-    useState<boolean>(false);
-
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const initRegionData = async () => {
-      await regionController.initialize();
-      setPreferRegions(regionController.getPreferRegionsList());
-      setSelectedRegion(regionController.getSelectedRegion());
-      setIsLoading(false);
-    };
-    initRegionData();
-  }, []);
-
-  const handleRegionChange = (region: RegionItem) => {
-    regionController.setSelectedRegion(region);
-    setSelectedRegion(region);
-    setIsRegionSelectorOpen(false);
-  };
+  const {
+    preferRegions,
+    selectedRegion,
+    isLoading,
+    isRegionSelectorOpen,
+    setIsRegionSelectorOpen,
+    handleRegionChange,
+  } = useRegionSelector();
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
