@@ -1,0 +1,179 @@
+/* 동호회 아이템 컨테이너 */
+.club-item-container {
+  display: flex;
+  flex-direction: column;
+  width: 302px;
+  height: 448px;
+  gap: 16px;
+
+  /* 동호회 아이템 썸네일 */
+  .club-item-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    > img {
+      display: block;
+      border-radius: 12px;
+    }
+
+    .club-item-heart-icon-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      padding: 16px;
+
+      .club-item-thumbnail-heart-icon {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+
+        background-image: url("../../../assets/svg/main/club/main_club_thumbnail_heart_icon_inactive.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+
+        &.active {
+          background-image: url("../../../assets/svg/main/club/main_club_thumbnail_heart_icon_active.svg");
+        }
+      }
+    }
+  }
+
+  /* 동호회 아이템 내용 */
+  .club-item-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    height: 97px;
+
+    /* 동호회 아이템 태그 */
+    .club-item-tag-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 동호회 아이템 정보 */
+    .club-item-information-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+
+      /* 동호회 이름 */
+      .club-item-club-name {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 25px;
+        padding-left: 4px;
+
+        color: #191919;
+
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.3px;
+      }
+
+      .club-item-information-sub-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        height: 24px;
+        gap: 10px;
+
+        /* 동호회 위치 */
+        .club-item-location-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .club-item-location-icon {
+            width: 24px;
+            height: 24px;
+            background-image: url("../../../assets/svg/main/club/main_club_icon_location.svg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          .club-item-location {
+            color: #72787F;
+
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+          }
+        }
+
+        /* 동호회 정보 구분선 아이콘 */
+        .club-item-divider-icon {
+          width: 2px;
+          height: 8px;
+          background-image: url("../../../assets/svg/main/club/main_club_icon_divider.svg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        /* 동호회 현재 인원 */
+        .club-item-current-members-container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .club-item-current-members-icon {
+            width: 24px;
+            height: 24px;
+            background-image: url("../../../assets/svg/main/club/main_club_icon_member.svg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          .club-item-member-container {
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+
+            .club-item-member {
+              color: #72787F;
+
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 150%;
+              letter-spacing: -0.3px;
+            }
+
+            .club-item-member-count {
+              color: #72787F;
+
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 150%;
+              letter-spacing: -0.3px;
+
+              .clum-item-member-number {
+                color: #191919;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

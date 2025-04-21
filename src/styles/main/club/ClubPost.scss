@@ -1,0 +1,131 @@
+.club-post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 1280px;
+  height: 505px;
+
+  /* 동호회 헤더 */
+  .club-post-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > span {
+      color: #191919;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%;
+      letter-spacing: -0.3px;
+    }
+
+    .club-overall-button {
+      cursor: pointer;
+      color: #72787F;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+
+      background-color: #fff;
+      border: none;
+    }
+  }
+
+  /* 스와이퍼 컨테이너 */
+  .swiper-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 동호회 컨텐츠 */
+    .swiper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      .swiper-wrapper {
+        display: flex;
+        flex-direction: row;
+        //gap: 24px; /* swiper spaceBetween 값을 24로 설정 */
+      }
+
+      .swiper-slide {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        cursor: pointer;
+        overflow: visible;
+      }
+    }
+
+    /* 동호회 스와이퍼 버튼 */
+    .club-navigation-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 1280px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+
+      .club-custom-prev,
+      .club-custom-next {
+        position: absolute;
+        bottom: 266px; /* 버튼 기준 아래 여백 값 으로 위치 조정 */
+        transform: translateY(0);
+
+        width: 60px;
+        height: 60px;
+        padding: 18px 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        pointer-events: auto;
+
+        border-radius: 30px;
+        background-color: rgba(255, 255, 255, 0.50);
+        box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.08);
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 24px 24px;
+        cursor: pointer;
+
+        &::after {
+          display: none;
+        }
+      }
+
+
+      .club-custom-prev {
+        left: -30px;
+        background-image: url("../../../assets/svg/main/club/main_club_icon_arrows_left_active.svg");
+
+        &.disabled {
+          background-image: url("../../../assets/svg/main/club/main_club_icon_arrows_left_inactive.svg");
+          cursor: auto;
+        }
+      }
+
+      .club-custom-next {
+        right: -30px;
+        background-image: url("../../../assets/svg/main/club/main_club_icon_arrows_left_active.svg");
+        transform: rotate(-180deg);
+
+        &.disabled {
+          background-image: url("../../../assets/svg/main/club/main_club_icon_arrows_left_inactive.svg");
+          transform: rotate(-180deg);
+          cursor: auto;
+        }
+      }
+    }
+  }
+}

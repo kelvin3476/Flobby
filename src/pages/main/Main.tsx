@@ -1,8 +1,9 @@
 import React from 'react';
 
-import PopularPost from '../../components/main/popular_post/PopularPost';
 import RegionSelector from '../../components/main/region_selector/RegionSelector';
 import CarouselBanner from '../../components/carousel/CarouselBanner';
+import ClubPost from '../../components/main/club/ClubPost';
+import PopularPost from '../../components/main/popular_post/PopularPost';
 
 const Main = () => {
   return (
@@ -14,6 +15,7 @@ const Main = () => {
              */}
       <RegionSelector />
       <CarouselBanner />
+      <ClubPost />
       <PopularPost />
     </main>
   );
