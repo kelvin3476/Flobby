@@ -1,17 +1,17 @@
 import React from "react";
 
-import "../../styles/header/HeaderButton.scss";
+import "../../styles/button/TextButton.scss";
 
-interface HeaderButtonProps {
+interface TextButtonProps {
   className?: string;
   buttonName: string;
   onClick: () => void;
 }
 
-const HeaderButton = ({ className, buttonName, onClick }: HeaderButtonProps) => {
+const TextButton = ({ className, buttonName, onClick }: TextButtonProps) => {
   return (
     <button className={className} onClick={onClick}>{buttonName}</button>
   );
 };
 
-export default HeaderButton;
+export default TextButton;

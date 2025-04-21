@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import Logo from "../logo/Logo";
 import RegionSelector from "../main/region_selector/RegionSelector";
-import HeaderButton from "./HeaderButton";
+import TextButton from "../button/TextButton";
 import SearchBar from "../main/search_bar/SearchBar";
 import Button from "../button/Button";
 
@@ -20,9 +20,9 @@ const MainHeader = () => {
           <RegionSelector /> 
         </div>
         <div className="goto-btn-wrapper">
-          <HeaderButton className="club-btn" buttonName="동호회" onClick={() => nav("/club")}/>
-          <HeaderButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday")}/>
-          <HeaderButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community")}/>
+          <TextButton className="club-btn" buttonName="동호회" onClick={() => nav("/club")}/>
+          <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday")}/>
+          <TextButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community")}/>
         </div>
         <div className="right-wrapper">
           <SearchBar />
