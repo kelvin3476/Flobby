@@ -1,9 +1,9 @@
 import React from 'react';
 
-import RegionSelector from '../../components/main/region_selector/RegionSelector';
 import CarouselBanner from '../../components/carousel/CarouselBanner';
 import ClubPost from '../../components/main/club/ClubPost';
 import PopularPost from '../../components/main/popular_post/PopularPost';
+import MainHeader from '../../components/header/MainHeader';
 
 const Main = () => {
   return (
@@ -13,6 +13,7 @@ const Main = () => {
                       메인 페이지 헤더 부분 작업 및 병합 후 포지셔닝 작업 필요 (연지)
                       포지셔닝 작업 후 반응형 작업 필요 (승우)
              */}
+      <MainHeader />
       <CarouselBanner />
       <ClubPost />
       <PopularPost />
