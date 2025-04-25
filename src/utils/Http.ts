@@ -10,7 +10,7 @@ export const axiosInstance: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  // withCredentials: true, /* TODO: refresh_token 을 포함한 HttpOnly 쿠키를 전달 하기 위한 설정 추후 확인 후 연동 필요 */
+  withCredentials: true, /* refresh_token 을 포함한 HttpOnly 쿠키를 전달 하기 위한 설정 (백에서도 똑같이 설정 되어 있어야함) */
 });
 
 /* 요청 인터셉터 추가 */
