@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import SignUp from "../../../api/signup/SignUp";
 import { BaseSignupData, SocialSignupData, WebSignupData } from "../../../api/ApiTypes";

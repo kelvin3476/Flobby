@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../../api/login/SocialLogin";
 import Login from "../../../api/login/Login";
 import LoadingSpinnerController from "../../../components/controllers/LoadingSpinnerController";

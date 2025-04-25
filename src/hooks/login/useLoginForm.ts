@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import useLoginStore from "../../store/login/useLoginStore";
 
@@ -93,7 +93,7 @@ const useLoginForm = () => {
                                         if (response.data.code === 1000) {
                                             /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
                                             const accessToken = response.data.data; // access token in-memory 저장 (브라우저 새로고침시 초기화)
-                                            navigate('/main');
+                                            navigate('/main', { state: { accessToken: accessToken } }); // 메인 페이지로 이동
                                         } else {
                                             console.error('토큰 발급 실패');
                                             navigate('/');

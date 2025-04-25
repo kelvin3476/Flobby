@@ -1,7 +1,7 @@
 import React from "react";
 import useAgreeStore from "../../store/signup/useAgreeStore";
 
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const useAgreeForm = () => {
   const {

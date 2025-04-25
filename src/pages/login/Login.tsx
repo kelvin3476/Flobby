@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/login/Header.js";
 import Footer from "../../components/login/Footer";

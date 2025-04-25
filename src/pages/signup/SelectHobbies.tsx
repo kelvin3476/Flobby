@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import useHobbyStore from '../../store/signup/useHobbyStore';
 
 import Header from '../../components/login/Header';
