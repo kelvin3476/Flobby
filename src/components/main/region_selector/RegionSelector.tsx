@@ -1,21 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
 import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
-import { useRegionSelector } from '../../../hooks/main/useRegionSelector';
+import { RegionItem } from '../../../api/ApiTypes';
+import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
 
 const RegionSelector: React.FC = () => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const {
-    preferRegions,
-    selectedRegion,
-    isLoading,
-    isRegionSelectorOpen,
-    setIsRegionSelectorOpen,
-    handleRegionChange,
-  } = useRegionSelector();
+  const regionController = RegionContextController.getInstance();
+
+  const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
+  const [selectedRegion, setSelectedRegion] =
+    useState<RegionItem>(DEFAULT_REGION);
+  const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
+    useState<boolean>(false);
+
+  const handleRegionChange = (region: RegionItem) => {
+    regionController.setSelectedRegion(region);
+    setSelectedRegion(region);
+    setIsRegionSelectorOpen(false);
+  };
+
+  useEffect(() => {
+    const initRegionData = async () => {
+      await regionController.initialize();
+      setPreferRegions(regionController.getPreferRegionsList());
+      setSelectedRegion(regionController.getSelectedRegion());
+    };
+    initRegionData();
+  }, [regionController]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -41,16 +56,14 @@ const RegionSelector: React.FC = () => {
       >
         <div className="icon-container">
           <div className="icon-region" />
-          <span>
-            {isLoading ? DEFAULT_REGION.regionName : selectedRegion.regionName}
-          </span>
+          <span>{selectedRegion?.regionName}</span>
         </div>
         <div className="icon-arrow" />
       </button>
 
       {isRegionSelectorOpen && (
         <RegionSelectorModal
-          preferRegions={preferRegions}
+          preferRegions={preferRegions || null}
           onClose={() => setIsRegionSelectorOpen(false)}
           modalRef={modalRef}
           selectedRegion={selectedRegion}
