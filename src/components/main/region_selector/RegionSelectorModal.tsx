@@ -2,7 +2,6 @@ import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
 import { useRegionList } from '../../../hooks/main/useRegionList';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
-import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
 
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
@@ -32,11 +31,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
     setActiveTown(region);
     onClose();
 
-    try {
-      await regionController.changeRegion(region);
-    } catch (error) {
-      console.error(`지역 변경 실패 : ${error}`);
-    }
+    await regionController.getMainData();
   };
 
   useEffect(() => {
@@ -77,7 +72,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
         </div>
 
         {/* 관심 지역 */}
-        {!(preferRegions[0]?.regionId === DEFAULT_REGION.regionId) && (
+        {preferRegions?.length > 0 && (
           <div className="prefer-region-container">
             <div className="prefer-region-title">
               <div className="icon-prefer" />
@@ -90,11 +85,11 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
               {preferRegions.map(preferRegion => {
                 return (
                   <div
-                    key={preferRegion.regionId}
+                    key={preferRegion?.regionId}
                     className={`prefer-region-btn ${selectedRegion.regionName === preferRegion.regionName ? 'active' : ''}`}
                     onClick={() => handleSelectRegion(preferRegion)}
                   >
-                    {preferRegion.regionName}
+                    {preferRegion?.regionName}
                   </div>
                 );
               })}
