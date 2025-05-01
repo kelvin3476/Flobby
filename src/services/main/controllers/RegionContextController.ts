@@ -1,4 +1,5 @@
-import { ChangeRegionData, MainData, RegionItem } from '../../../api/ApiTypes';
+import { MainData, RegionItem } from '../../../api/ApiTypes';
+import { setCookie } from '../../../utils/Cookie';
 import { RegionContextModel } from '../models/RegionContextModel';
 
 export class RegionContextController {
@@ -21,9 +22,9 @@ export class RegionContextController {
     await this.model.init();
   }
 
-  // 메인데이터 가져오기
-  getMainData(): MainData {
-    return this.model.getMainData();
+  // 메인 데이터 가져오기
+  async getMainData(): Promise<MainData | null> {
+    return await this.model.getMainData();
   }
 
   // 관심지역 데이터 가져오기
@@ -37,17 +38,9 @@ export class RegionContextController {
   }
 
   // 선택 지역 데이터 설정하기
-  setSelectedRegion(regionList: RegionItem): void {
-    this.model.setSelectedRegion(regionList);
-  }
-
-  // 지역 변경 API 호출
-  async changeRegion(region: RegionItem): Promise<void> {
-    await this.model.changeRegion(region);
-  }
-
-  // 지역 변경 API를 통해 변경된 원데이 & 동호회 데이터 가져오기
-  getChangeRegionData(): ChangeRegionData {
-    return this.model.getChangeRegionData();
+  setSelectedRegion(region: RegionItem): void {
+    this.model.setSelectedRegion(region);
+    // 쿠키에 저장
+    setCookie('regionId', region.regionId.toString());
   }
 }
