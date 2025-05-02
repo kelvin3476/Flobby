@@ -63,7 +63,7 @@ const RegionSelector: React.FC = () => {
 
       {isRegionSelectorOpen && (
         <RegionSelectorModal
-          preferRegions={preferRegions || null}
+          preferRegions={preferRegions}
           onClose={() => setIsRegionSelectorOpen(false)}
           modalRef={modalRef}
           selectedRegion={selectedRegion}
