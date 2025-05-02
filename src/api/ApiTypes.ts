@@ -110,7 +110,7 @@ export interface boardItem {
 
 /* 메인 페이지 동호회, 원데이, 실시간 인기 게시글 데이터셋 */
 export interface MainData {
-  region: RegionItem[] | null;
+  region: RegionItem[];
   clubItems: clubItem[];
   onedayItems: onedayItem[];
   boardItems: boardItem[];
