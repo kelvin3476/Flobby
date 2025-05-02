@@ -1,8 +1,9 @@
 import { MainData, RegionItem } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 import { getCookie } from '../../../utils/Cookie';
+import logger from '../../../utils/Logger';
 
-// 메인 데이터 기본 지역
+// 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {
   regionId: 288,
   regionName: '서울 전체',
@@ -36,15 +37,24 @@ export class RegionContextModel {
       if (code === 1000) {
         // API 호출 성공
         this.mainData = data; // 메인 데이터 저장
-        this.preferRegionsList = data.region; // 관심 지역 저장
 
+        // 관심 지역 저장
+        if (data.region) {
+          this.preferRegionsList = data.region;
+        }
+
+        // 쿠키 값 확인
         const cookie = getCookie('regionId');
 
         if (cookie) {
           this.selectedRegion = data.selectedRegion;
         } else {
-          this.selectedRegion = this.preferRegionsList[0] || DEFAULT_REGION;
+          this.selectedRegion =
+            this.preferRegionsList[0] || data.selectedRegion;
         }
+
+        logger.log('selectedRegion', this.selectedRegion);
+        logger.log('preferRegionsList', this.preferRegionsList);
 
         this.initialized = true;
       } else if (code === 1001) {
