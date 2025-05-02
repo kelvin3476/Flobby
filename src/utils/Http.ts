@@ -1,4 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import logger from './Logger';
+import useAuthStore from '../store/auth/useAuthStore';
+import Login from '../api/login/Login';
+import Logout from '../api/logout/Logout';
 
 /* 커스텀 axios request config 타입 정의 */
 type CustomAxiosRequestConfig = AxiosRequestConfig & InternalAxiosRequestConfig;
@@ -16,6 +20,11 @@ export const axiosInstance: AxiosInstance = axios.create({
 /* 요청 인터셉터 추가 */
 axiosInstance.interceptors.request.use(
     (config: CustomAxiosRequestConfig) => {
+        const accessToken = useAuthStore.getState().accessToken;
+        logger.log('[accessToken 요청 인터셉터]', accessToken);
+        if (accessToken) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+        }
         return config;
     },
     (error) => Promise.reject(error)
@@ -26,7 +35,31 @@ axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
         return response;
     },
-    (error) => Promise.reject(error)
+    async (error) => {
+        const originalRequest = error.config;
+        /* 401 unauthorized 에러 또는 accessToken 만료된 경우 처리 */
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+
+            try {
+                /* refreshToken 으로 accessToken 재발급 갱신 요청 */
+                const response = await Login.reGenerateJwtToken();
+                const newAcessToken = response.data.data;
+                logger.log('[newAcessToken]', newAcessToken);
+
+                useAuthStore.getState().setAccessToken(newAcessToken);
+
+                originalRequest.headers['Authorization'] = `Bearer ${newAcessToken}`;
+                return axiosInstance(originalRequest);
+            } catch (refreshError) {
+                /* refreshToken 이 유효하지 않은 경우 일땐 로그아웃 처리 */
+                await Logout.webLogout()
+                return Promise.reject(refreshError);
+            }
+        }
+
+        return Promise.reject(error);
+    }
 );
 
 export const http = axiosInstance;
