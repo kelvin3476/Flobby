@@ -78,12 +78,15 @@ export class RegionContextModel {
       if (code === 1000) {
         this.mainData = data;
         return this.mainData;
-      } else {
+      } else if (code === 1001) {
+        // API 호출 실패
         throw new Error(message || '메인 데이터를 가져오지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
       }
     } catch (err: any) {
-      console.log(err.message || '메인 데이터 API 호출 실패');
-      return null;
+      console.log(err.message || '데이터 로드 실패');
     }
   }
 
