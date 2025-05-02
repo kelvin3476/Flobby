@@ -2,10 +2,11 @@ import React from 'react';
 
 import logger from '../../utils/Logger';
 
+import MainHeader from '../../components/header/MainHeader';
 import CarouselBanner from '../../components/carousel/CarouselBanner';
 import ClubPost from '../../components/main/club/ClubPost';
+import OnedayPost from "../../components/main/one_day/OnedayPost";
 import PopularPost from '../../components/main/popular_post/PopularPost';
-import MainHeader from '../../components/header/MainHeader';
 
 import useMainPage from '../../hooks/main/useMainPage';
 
@@ -27,6 +28,7 @@ const Main = () => {
       <MainHeader />
       <CarouselBanner />
       <ClubPost />
+      <OnedayPost />
       <PopularPost />
     </main>
   );
