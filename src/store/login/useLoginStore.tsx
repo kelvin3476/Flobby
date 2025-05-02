@@ -28,6 +28,10 @@ interface LoginStore {
     /* 비밀번호 표출 유무 상태 관리 */
     passwordVisible: boolean;
     setPasswordVisible: (passwordVisible: boolean) => void;
+
+    /* 로그인 유지 상태 관리 */
+    maintainLogin: boolean;
+    setMaintainLogin: (maintainLogin: boolean) => void;
 }
 
 const useLoginStore = create<LoginStore>((set) => ({
@@ -51,6 +55,9 @@ const useLoginStore = create<LoginStore>((set) => ({
 
     passwordVisible: false,
     setPasswordVisible: (passwordVisible: boolean) => set({ passwordVisible }),
+
+    maintainLogin: false,
+    setMaintainLogin: (maintainLogin: boolean) => set({ maintainLogin  }),
 }));
 
 export default useLoginStore;

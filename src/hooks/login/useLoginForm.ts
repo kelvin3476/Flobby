@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 
 import useLoginStore from "../../store/login/useLoginStore";
+import useAuthStore from "../../store/auth/useAuthStore";
 
 import Login from "../../api/login/Login";
 
@@ -23,7 +24,14 @@ const useLoginForm = () => {
         setPasswordError,
         passwordVisible,
         setPasswordVisible,
+        maintainLogin,
+        setMaintainLogin,
     } = useLoginStore();
+
+    const {
+        setAccessToken,
+        setIsAuthenticated,
+    } = useAuthStore();
 
     const handleEmailBlur = () => {
         if (!email) {
@@ -78,7 +86,7 @@ const useLoginForm = () => {
     const inputType = passwordVisible ? 'text' : 'password';
 
     /* 자체 로그인 기능 (JWT 토큰 발급 api) */
-    const webLogin = () => {
+    const webLogin = (maintainLogin: boolean): void => {
         const webLoginData = { email: email, password: password };
         try {
             Login.webLogin(webLoginData)
@@ -91,9 +99,9 @@ const useLoginForm = () => {
                                 Login.generateJwtToken(generateTokenData)
                                     .then((response) => {
                                         if (response.data.code === 1000) {
-                                            /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
-                                            const accessToken = response.data.data; // access token in-memory 저장 (브라우저 새로고침시 초기화)
-                                            navigate('/main', { state: { accessToken: accessToken } }); // 메인 페이지로 이동
+                                            setAccessToken(response.data.data); // access token authStore in-memory 저장 (브라우저 새로고침시 초기화)
+                                            setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
+                                            navigate('/main'); // 메인 페이지로 이동
                                         } else {
                                             console.error('토큰 발급 실패');
                                             navigate('/');
@@ -131,6 +139,10 @@ const useLoginForm = () => {
         }
     }
 
+    const handleMaintainLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setMaintainLogin(event.target.checked);
+    }
+
     return {
         inputType,
         email,
@@ -151,6 +163,8 @@ const useLoginForm = () => {
         handlePasswordChange,
         handlePasswordVisibility,
         webLogin,
+        maintainLogin,
+        handleMaintainLogin,
     };
 }
 

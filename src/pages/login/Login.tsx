@@ -30,6 +30,8 @@ const Login = () => {
         handlePasswordChange,
         handlePasswordVisibility,
         webLogin,
+        maintainLogin,
+        handleMaintainLogin,
     } = useLoginForm();
 
     return (
@@ -68,7 +70,7 @@ const Login = () => {
 
             <div className="support-container">
               <div className="checkbox-container">
-                <input type="checkbox" id="remember" />
+                <input type="checkbox" id="remember" onChange={handleMaintainLogin} />
                 <label>로그인 상태 유지</label>
               </div>
 
@@ -77,7 +79,7 @@ const Login = () => {
           </div>
 
           {/* 로그인 버튼 */}
-          <Button className="login-button" title="로그인" onClick={webLogin}/>
+          <Button className="login-button" title="로그인" onClick={() => webLogin(maintainLogin)}/>
 
           {/* 소셜 로그인 */}
           <div className="social-login-container">
