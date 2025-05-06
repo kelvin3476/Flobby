@@ -25,7 +25,7 @@ const RegionSelector: React.FC = () => {
 
   useEffect(() => {
     const initRegionData = async () => {
-      await regionController.initialize();
+      await regionController.getMainData();
       setPreferRegions(regionController.getPreferRegionsList());
       setSelectedRegion(regionController.getSelectedRegion());
     };

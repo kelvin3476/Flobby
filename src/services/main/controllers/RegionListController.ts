@@ -1,26 +1,27 @@
-import { RegionItem } from '../../../api/ApiTypes';
 import { RegionListModel } from '../models/RegionListModel';
 
 export class RegionListController {
   private static instance: RegionListController;
-  private model: RegionListModel;
+  model: RegionListModel;
 
   private constructor() {
     this.model = new RegionListModel();
+    // @ts-ignore
+    window.$rlc = this;
   }
 
   static getInstance(): RegionListController {
-    if (!RegionListController.instance) {
+    if (
+      !RegionListController.instance ||
+      RegionListController.instance === null ||
+      RegionListController.instance === undefined
+    ) {
       RegionListController.instance = new RegionListController();
     }
     return RegionListController.instance;
   }
 
-  async initialize(): Promise<void> {
-    await this.model.init();
-  }
-
-  getRegionList(): Record<string, RegionItem[]> {
-    return this.model.getRegionList();
+  async getRegionList() {
+    return await this.model.getRegionList();
   }
 }

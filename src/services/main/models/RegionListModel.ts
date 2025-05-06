@@ -2,10 +2,15 @@ import { RegionItem } from '../../../api/ApiTypes';
 import SignUp from '../../../api/signup/SignUp';
 
 export class RegionListModel {
-  private regionList: Record<string, RegionItem[]> = {};
   private initialized = false;
+  regionList: Record<string, RegionItem[]> = {};
 
-  async init(): Promise<void> {
+  constructor() {
+    // @ts-ignore
+    window.$rlm = this;
+  }
+
+  async getRegionList(): Promise<Record<string, RegionItem[]>> {
     if (this.initialized) return;
 
     try {
@@ -16,6 +21,7 @@ export class RegionListModel {
         // API 호출 성공
         this.regionList = data;
         this.initialized = true;
+        return this.regionList;
       } else if (code === 1001) {
         // API 호출 실패
         throw new Error(message || '데이터를 가져오지 못했습니다.');
@@ -26,9 +32,5 @@ export class RegionListModel {
     } catch (err: any) {
       console.log(err.message || '데이터 로드 실패');
     }
-  }
-
-  getRegionList(): Record<string, RegionItem[]> {
-    return this.regionList;
   }
 }

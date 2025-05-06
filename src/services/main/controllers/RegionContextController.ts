@@ -11,19 +11,18 @@ export class RegionContextController {
   }
 
   static getInstance(): RegionContextController {
-    if (!RegionContextController.instance) {
+    if (
+      !RegionContextController.instance ||
+      RegionContextController.instance === null ||
+      RegionContextController.instance === undefined
+    ) {
       RegionContextController.instance = new RegionContextController();
     }
     return RegionContextController.instance;
   }
 
-  // 데이터 초기화
-  async initialize(): Promise<void> {
-    await this.model.init();
-  }
-
   // 메인 데이터 가져오기
-  async getMainData(): Promise<MainData | null> {
+  async getMainData(): Promise<MainData> {
     return await this.model.getMainData();
   }
 
