@@ -82,7 +82,7 @@ export interface clubItem {
   clubName: string;
   location: string;
   currentMembers: number;
-  imageUrl?: string; /* TODO: 백엔드에서 동호회 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */
+  imageUrl?: string /* TODO: 백엔드에서 동호회 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */;
 }
 
 /* 원데이 response 데이터 타입 */
@@ -94,8 +94,8 @@ export interface onedayItem {
   maxMembers: number;
   scheduledDate: string;
   nickname: string;
-  profilePhoto?: string; /* TODO: 백엔드에서 원데이 정보 부분 프로필 이미지 서버 url string 으로 내려주는 부분 추후 확인 필요 */
-  imageUrl?: string; /* TODO: 백엔드에서 원데이 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */
+  profilePhoto?: string /* TODO: 백엔드에서 원데이 정보 부분 프로필 이미지 서버 url string 으로 내려주는 부분 추후 확인 필요 */;
+  imageUrl?: string /* TODO: 백엔드에서 원데이 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */;
 }
 
 /* 실시간 인기 게시글 response 데이터 타입 */
@@ -114,10 +114,5 @@ export interface MainData {
   clubItems: clubItem[];
   onedayItems: onedayItem[];
   boardItems: boardItem[];
-}
-
-/* 지역 변경 response 데이터 타입 */
-export interface ChangeRegionData {
-  clubItems: clubItem[];
-  onedayItems: onedayItem[];
+  selectedRegion: RegionItem;
 }

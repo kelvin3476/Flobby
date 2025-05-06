@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, useState } from 'react';
-import useFetchRegions from '../../../hooks/main/useFetchRegions';
 import { RegionItem } from '../../../api/ApiTypes';
-
+import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
+import { RegionListController } from '../../../services/main/controllers/RegionListController';
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
 interface RegionSelectorModalProps {
@@ -19,36 +19,46 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   selectedRegion,
   setSelectedRegion,
 }) => {
-  const { regionList } = useFetchRegions();
-
   const [activeCity, setActiveCity] = useState<string>('');
   const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
 
-  const handleSelectRegion = (region: RegionItem) => {
+  const regionListController = RegionListController.getInstance();
+  const regionController = RegionContextController.getInstance();
+
+  const handleSelectRegion = async (region: RegionItem) => {
     setSelectedRegion(region);
     setActiveTown(region);
     onClose();
+
+    await regionController.getMainData();
   };
 
   useEffect(() => {
-    if (regionList && selectedRegion.regionId) {
-      const cityEntry = Object.entries(regionList).find(([city, towns]) =>
-        towns.some(town => town.regionId === selectedRegion.regionId),
-      );
+    const fetchRegionListData = async () => {
+      await regionListController.getRegionList();
 
-      if (cityEntry) {
-        setActiveCity(cityEntry[0]);
-
-        const selectedTown = cityEntry[1].find(
-          town => town.regionId === selectedRegion.regionId,
+      if (regionListController.model.regionList && selectedRegion.regionId) {
+        const cityEntry = Object.entries(
+          regionListController.model.regionList,
+        ).find(([city, towns]) =>
+          towns.some(town => town.regionId === selectedRegion.regionId),
         );
 
-        if (selectedTown) {
-          setActiveTown(selectedTown);
+        if (cityEntry) {
+          setActiveCity(cityEntry[0]);
+
+          const selectedTown = cityEntry[1].find(
+            town => town.regionId === selectedRegion.regionId,
+          );
+
+          if (selectedTown) {
+            setActiveTown(selectedTown);
+          }
         }
       }
-    }
-  }, [regionList, selectedRegion]);
+    };
+    fetchRegionListData();
+  }, [regionListController.model.regionList, selectedRegion]);
 
   return (
     <>
@@ -104,47 +114,52 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
           </div>
           <div className="select-region-content">
             <div className="select-region-city">
-              {Object.keys(regionList)
-                .reduce((rows, city, index) => {
-                  if (index % 4 === 0) rows.push([]);
-                  rows[rows.length - 1].push(city);
-                  return rows;
-                }, [])
-                .map((citiesInRow, citiesInRowIndex) => (
-                  <div key={citiesInRowIndex}>
-                    <div className="select-region-city-row">
-                      {citiesInRow.map(city => (
-                        <div
-                          key={city}
-                          className={`select-region-city-item ${activeCity === city ? 'active' : ''}`}
-                          onClick={() =>
-                            setActiveCity(prev => (prev === city ? null : city))
-                          }
-                        >
-                          <span>{city}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {activeCity && citiesInRow.includes(activeCity) && (
-                      <div className="select-region-town">
-                        {regionList[activeCity].map(town => (
+              {Object.keys(regionListController.model.regionList).length > 0 &&
+                Object.keys(regionListController.model.regionList)
+                  .reduce((rows, city, index) => {
+                    if (index % 4 === 0) rows.push([]);
+                    rows[rows.length - 1].push(city);
+                    return rows;
+                  }, [])
+                  .map((citiesInRow, citiesInRowIndex) => (
+                    <div key={citiesInRowIndex}>
+                      <div className="select-region-city-row">
+                        {citiesInRow.map(city => (
                           <div
-                            key={town.regionId}
-                            className={`select-region-town-item ${
-                              activeTown.regionId === town.regionId
-                                ? 'active'
-                                : ''
-                            }`}
-                            onClick={() => handleSelectRegion(town)}
+                            key={city}
+                            className={`select-region-city-item ${activeCity === city ? 'active' : ''}`}
+                            onClick={() =>
+                              setActiveCity(prev =>
+                                prev === city ? null : city,
+                              )
+                            }
                           >
-                            {town.regionName}
+                            <span>{city}</span>
                           </div>
                         ))}
                       </div>
-                    )}
-                  </div>
-                ))}
+
+                      {activeCity && citiesInRow.includes(activeCity) && (
+                        <div className="select-region-town">
+                          {regionListController.model.regionList[
+                            activeCity
+                          ].map(town => (
+                            <div
+                              key={town.regionId}
+                              className={`select-region-town-item ${
+                                activeTown.regionId === town.regionId
+                                  ? 'active'
+                                  : ''
+                              }`}
+                              onClick={() => handleSelectRegion(town)}
+                            >
+                              {town.regionName}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
             </div>
           </div>
         </div>
