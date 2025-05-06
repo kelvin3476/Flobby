@@ -1,36 +1,20 @@
 import React, { useState, useEffect } from "react";
-import Main from "../../../api/main/Main";
 import PopularItem from "./PopularItem";
+import { RegionContextController } from "../../../services/main/controllers/RegionContextController";
+import { boardItem } from "../../../api/ApiTypes";
 
 import "../../../styles/main/popular_post/PopularPost.scss";
 
-const PopularPost = () => {
-  const [ boardItems, setBoardItems ] = useState([]);
+const PopularPost: React.FC = () => {
+  const [ boardItems, setBoardItems ] = useState<boardItem[]>([]);
 
   useEffect(() => {
-    const fetchPosts = async() => {
+    const popularController = RegionContextController.getInstance();
 
-      try {
-        const response = await Main.getMainData();
-        const { code, message, data } = response.data;
-
-        if (code === 1000) {
-          const sortedItems  = [...data.boardItems].sort((a,b) => b.likes - a.likes);
-          // API 호출 성공
-          setBoardItems(sortedItems);
-        } else if (code === 1001) {
-          // API 호출 실패
-          throw new Error(message || "데이터를 가져오지 못했습니다.");
-        } else if (code === 1002) {
-          // API 예외 발생
-          throw new Error(message || "서버 오류가 발생했습니다.");
-        }
-      } catch (err: any) {
-        console.log(err.message || "데이터 로드 실패");
-      }
-    };
-
-    fetchPosts();
+    popularController.getMainData().then((item) => {
+      const sortedItems = [...item.boardItems].sort((a, b) => b.likes - a.likes);
+      setBoardItems(sortedItems);
+    })
   }, []);
 
   const renderedItems = boardItems.map((item, idx) => (
