@@ -1,25 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Main from "../../../api/main/Main";
 import PopularItem from "./PopularItem";
 
 import "../../../styles/main/popular_post/PopularPost.scss";
 
-// TODO: API 연동 시 해당 부분을 실제 백엔드 응답 데이터로 대체
-const mockPosts = Array(10).fill(null).map((_, idx) => ({
-  tag: "언어/ 외국어",
-  title: "안녕하세요! 배드민턴 모임에 들어가려면 운동 잘 해야 하나요? 잘 모르겠어요. 도와줘요",
-  likes: 123,
-  date: "2025.02.22"
-}))
-
 const PopularPost = () => {
+  const [ boardItems, setBoardItems ] = useState([]);
 
-  const renderedItems = mockPosts.map((item, idx) => (
+  useEffect(() => {
+    const fetchPosts = async() => {
+
+      try {
+        const response = await Main.getMainData();
+        const { code, message, data } = response.data;
+
+        if (code === 1000) {
+          const sortedItems  = [...data.boardItems].sort((a,b) => b.likes - a.likes);
+          // API 호출 성공
+          setBoardItems(sortedItems);
+        } else if (code === 1001) {
+          // API 호출 실패
+          throw new Error(message || "데이터를 가져오지 못했습니다.");
+        } else if (code === 1002) {
+          // API 예외 발생
+          throw new Error(message || "서버 오류가 발생했습니다.");
+        }
+      } catch (err: any) {
+        console.log(err.message || "데이터 로드 실패");
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const renderedItems = boardItems.map((item, idx) => (
     <PopularItem 
-      key={idx}
-      tag={item.tag}
+      key={item.id}
+      tag={"언어 / 외국어"} // TODO: 백엔드 작업 완료 후 수정
       title={item.title}
       likes={item.likes}
-      date={item.date}
+      date={item.created_at}
     />
   ))
   
