@@ -91,6 +91,7 @@ export interface onedayItem {
   category: string;
   title: string;
   location: string;
+  locationName: string;
   currentMembers: number;
   maxMembers: number;
   scheduledDate: string;

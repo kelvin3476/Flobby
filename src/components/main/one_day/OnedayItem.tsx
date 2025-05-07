@@ -7,7 +7,7 @@ import "../../../styles/main/one_day/OnedayItem.scss";
 interface OnedayItemProps {
   category: string;
   title: string;
-  location: string;
+  locationName: string;
   currentMembers: number;
   maxMembers: number;
   scheduledDate: string;
@@ -16,7 +16,7 @@ interface OnedayItemProps {
   imageUrl: string;
 }
 
-const OnedayItem = ({ category, title, location, currentMembers, maxMembers, scheduledDate, nickname, profilePhoto, imageUrl }: OnedayItemProps) => {
+const OnedayItem = ({ category, title, locationName, currentMembers, maxMembers, scheduledDate, nickname, profilePhoto, imageUrl }: OnedayItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
@@ -24,7 +24,7 @@ const OnedayItem = ({ category, title, location, currentMembers, maxMembers, sch
     <div className="one-day-item-container" onClick={() => console.log('원데이 아이템 클릭!!!')}>
       {/* 원데이 아이템 썸네일 */}
       <div className="one-day-item-thumbnail-wrapper">
-        <img src={imageUrl} alt="one-day-item-thumbnail-image" />
+        <img src={imageUrl ? imageUrl : '/img/main/one_day/thumbnail2.png'} alt="one-day-item-thumbnail-image" />
         {/* TODO: 썸네일 내부 하트 아이콘 클릭시 관심 원데이로 등록 하는 api 필요 */}
         <div className="one-day-item-heart-icon-wrapper">
           <span
@@ -54,7 +54,7 @@ const OnedayItem = ({ category, title, location, currentMembers, maxMembers, sch
             {/* 원데이 위치 */}
             <div className="one-day-item-location-container">
               <span className="one-day-item-location-icon"></span>
-              <span className="one-day-item-location">{location}</span>
+              <span className="one-day-item-location">{locationName}</span>
             </div>
 
             <span className="one-day-item-divider-icon"></span>
@@ -75,14 +75,14 @@ const OnedayItem = ({ category, title, location, currentMembers, maxMembers, sch
             {/* 원데이 캘린더 일정 */}
             <div className="one-day-item-scheduled-date-container">
               <span className="one-day-item-scheduled-date-icon"></span>
-              <span className="one-day-item-scheduled-date">{scheduledDate}</span>
+              <span className="one-day-item-scheduled-date">{new Date(scheduledDate).toISOString().slice(5, 10).replace("-", ".")}</span>
             </div>
           </div>
 
           {/* 원데이 작성자 */}
           <div className="one-day-item-writer-container">
-            <img src={profilePhoto} alt="one-day-item-writer-profile-photo" />
-            <span className="one-day-item-writer-nickname">{nickname}</span>
+            <img src={profilePhoto ? profilePhoto : '/img/main/one_day/profile1.png'} alt="one-day-item-writer-profile-photo" />
+            <span className="one-day-item-writer-nickname">{nickname ? nickname : '닉네임'}</span>
           </div>
         </div>
       </div>
