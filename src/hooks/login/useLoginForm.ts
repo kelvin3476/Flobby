@@ -26,6 +26,8 @@ const useLoginForm = () => {
     setPasswordVisible,
     maintainLogin,
     setMaintainLogin,
+    loginErrorMessage,
+    setLoginErrorMessage,
   } = useLoginStore();
 
   const { setAccessToken, setIsAuthenticated } = useAuthStore();
@@ -91,6 +93,7 @@ const useLoginForm = () => {
           localStorage.clear(); // 로컬 스토리지 초기화
           switch (response.data.code) {
             case 1000 /* 로그인 성공 코드 */:
+              setLoginErrorMessage(''); // 로그인 에러 메시지 초기화
               const generateTokenData = {
                 memberId: response.data.data.memberId,
                 email: response.data.data.email,
@@ -127,6 +130,7 @@ const useLoginForm = () => {
           }
         })
         .catch(error => {
+          setLoginErrorMessage('아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.')
           if (error.data.code === 1002) {
             console.error('로그인 api 요청 실패', error);
             navigate('/');
@@ -166,6 +170,7 @@ const useLoginForm = () => {
     webLogin,
     maintainLogin,
     handleMaintainLogin,
+    loginErrorMessage,
   };
 };
 

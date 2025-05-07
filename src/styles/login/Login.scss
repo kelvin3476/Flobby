@@ -101,33 +101,48 @@
         font-weight: 500;
       }
 
-      .support-container {
+      .support-wrapper {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
         gap: 8px;
 
-        .checkbox-container {
+        .support-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
           gap: 8px;
 
-          > input[type="checkbox"] {
+          .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+
+            > input[type="checkbox"] {
+              cursor: pointer;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
+              width: 20px;
+              height: 20px;
+            }
+
+            > input[type="checkbox"]:checked {
+              background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
+            }
+
+            > label {
+              color: #72787F;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+            }
+
+          }
+
+          > span {
             cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
-            width: 20px;
-            height: 20px;
-          }
-
-          > input[type="checkbox"]:checked {
-            background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
-          }
-
-          > label {
             color: #72787F;
             font-size: 14px;
             font-style: normal;
@@ -136,9 +151,9 @@
 
         }
 
-        > span {
-          cursor: pointer;
-          color: #72787F;
+        .login-error-message {
+          text-align: start;
+          color: #F94E51;
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
@@ -197,6 +212,7 @@
         display: flex;
         justify-content: space-between;
         gap: 16px;
+        padding: 0 38px;
 
         .kakao-login-button {
           cursor: pointer;

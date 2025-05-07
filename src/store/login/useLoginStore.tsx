@@ -32,6 +32,10 @@ interface LoginStore {
     /* 로그인 유지 상태 관리 */
     maintainLogin: boolean;
     setMaintainLogin: (maintainLogin: boolean) => void;
+
+    /* 로그인 에러 상태 관리 */
+    loginErrorMessage: string;
+    setLoginErrorMessage: (loginErrorMessage: string) => void;
 }
 
 const useLoginStore = create<LoginStore>((set) => ({
@@ -58,6 +62,9 @@ const useLoginStore = create<LoginStore>((set) => ({
 
     maintainLogin: false,
     setMaintainLogin: (maintainLogin: boolean) => set({ maintainLogin  }),
+
+    loginErrorMessage: '',
+    setLoginErrorMessage: (loginErrorMessage: string) => set({ loginErrorMessage  }),
 }));
 
 export default useLoginStore;

@@ -32,6 +32,7 @@ const Login = () => {
         webLogin,
         maintainLogin,
         handleMaintainLogin,
+        loginErrorMessage,
     } = useLoginForm();
 
     return (
@@ -68,13 +69,19 @@ const Login = () => {
               />
             </label>
 
-            <div className="support-container">
-              <div className="checkbox-container">
-                <input type="checkbox" id="remember" onChange={handleMaintainLogin} />
-                <label>로그인 상태 유지</label>
+            <div className="support-wrapper">
+              <div className="support-container">
+                <div className="checkbox-container">
+                    <input type="checkbox" id="remember" onChange={handleMaintainLogin} />
+                    <label>로그인 상태 유지</label>
+                </div>
+
+                <span onClick={() => navigate('/password/find')}>비밀번호 찾기</span>
               </div>
 
-              <span onClick={() => navigate('/password/find')}>비밀번호 찾기</span>
+              {loginErrorMessage && (
+                <span className="login-error-message">{loginErrorMessage}</span>
+              )}
             </div>
           </div>
 
