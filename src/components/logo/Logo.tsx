@@ -6,7 +6,7 @@ interface LogoProps {
 
 const Logo = ({ className }: LogoProps) => {
   return (
-    <img src="../../img/logo/flobby-logo.png" alt="Flobby 로고" className={className} />
+    <img src="../../../public/img/logo/logo.png" alt="Flobby 로고" className={className} />
   );
 };
 
