@@ -14,10 +14,9 @@ import '../../../styles/main/club/ClubPost.scss';
 
 const ClubPost: React.FC = () => {
   const [ clubData, setClubData ] = React.useState<clubItem[]>([]);
+  const regionContextController: RegionContextController = RegionContextController.getInstance();
 
   React.useEffect(() => {
-    const regionContextController: RegionContextController = RegionContextController.getInstance();
-
     regionContextController.getMainData().then((item: MainData) => {
       const clubData: clubItem[] = [...item.clubItems];
       setClubData(clubData);
