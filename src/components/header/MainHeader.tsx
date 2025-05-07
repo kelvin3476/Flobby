@@ -20,7 +20,7 @@ const MainHeader = () => {
           <RegionSelector /> 
         </div>
         <div className="goto-btn-wrapper">
-          <TextButton className="club-btn" buttonName="동호회" onClick={() => nav("/club")}/>
+          <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club")}/>
           <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday")}/>
           <TextButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community")}/>
         </div>
