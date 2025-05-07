@@ -81,6 +81,7 @@ export interface clubItem {
   scale: string;
   clubName: string;
   location: string;
+  locationName: string;
   currentMembers: number;
   imageUrl?: string /* TODO: 백엔드에서 동호회 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */;
 }
