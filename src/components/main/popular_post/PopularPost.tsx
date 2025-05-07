@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PopularItem from "./PopularItem";
+import { RegionContextController } from "../../../services/main/controllers/RegionContextController";
+import { boardItem } from "../../../api/ApiTypes";
 
 import "../../../styles/main/popular_post/PopularPost.scss";
 
-// TODO: API 연동 시 해당 부분을 실제 백엔드 응답 데이터로 대체
-const mockPosts = Array(10).fill(null).map((_, idx) => ({
-  tag: "언어/ 외국어",
-  title: "안녕하세요! 배드민턴 모임에 들어가려면 운동 잘 해야 하나요? 잘 모르겠어요. 도와줘요",
-  likes: 123,
-  date: "2025.02.22"
-}))
+const PopularPost: React.FC = () => {
+  const [ boardItems, setBoardItems ] = useState<boardItem[]>([]);
 
-const PopularPost = () => {
+  useEffect(() => {
+    const popularController = RegionContextController.getInstance();
 
-  const renderedItems = mockPosts.map((item, idx) => (
+    popularController.getMainData().then((item) => {
+      const sortedItems = [...item.boardItems].sort((a, b) => b.likes - a.likes);
+      setBoardItems(sortedItems);
+    })
+  }, []);
+
+  const renderedItems = boardItems.map((item, idx) => (
     <PopularItem 
-      key={idx}
-      tag={item.tag}
+      key={item.id}
+      tag={"언어 / 외국어"} // TODO: 백엔드 작업 완료 후 수정
       title={item.title}
       likes={item.likes}
-      date={item.date}
+      date={item.created_at}
     />
   ))
   
