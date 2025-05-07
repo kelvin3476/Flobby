@@ -7,10 +7,9 @@ import "../../../styles/main/popular_post/PopularPost.scss";
 
 const PopularPost: React.FC = () => {
   const [ boardItems, setBoardItems ] = useState<boardItem[]>([]);
+  const popularController = RegionContextController.getInstance();
 
   useEffect(() => {
-    const popularController = RegionContextController.getInstance();
-
     popularController.getMainData().then((item) => {
       const sortedItems = [...item.boardItems].sort((a, b) => b.likes - a.likes);
       setBoardItems(sortedItems);
