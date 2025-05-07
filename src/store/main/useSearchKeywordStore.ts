@@ -5,9 +5,9 @@ interface searchKeywordStore {
   setSearchKeyword: (searchKeyword: string) => void;
 }
 
-const useSearchKeyword = create<searchKeywordStore>(set => ({
+const useSearchKeywordStore = create<searchKeywordStore>(set => ({
   searchKeyword: '',
   setSearchKeyword: searchKeyword => set({ searchKeyword }),
 }));
 
-export default useSearchKeyword;
+export default useSearchKeywordStore;

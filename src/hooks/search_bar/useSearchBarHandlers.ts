@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
-import useSearchKeyword from '../../store/main/useSearchKeyword';
+import useSearchKeywordStore from '../../store/main/useSearchKeywordStore';
 
 export default function useSearchBarHandlers() {
-  const { searchKeyword, setSearchKeyword } = useSearchKeyword();
+  const { searchKeyword, setSearchKeyword } = useSearchKeywordStore();
 
   const [isTyping, setIsTyping] = useState(false);
 
