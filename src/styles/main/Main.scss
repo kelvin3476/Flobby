@@ -1,22 +1,29 @@
-> main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+.responsive-container {
+  /* TODO: 반응형 디자인 추가 예정 (승우) */
 
-  > * {
-    margin-bottom: 120px;
-  }
+  > main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
 
-  > *:first-child {
-    margin-bottom: 0;
-  }
+    > * {
+      margin-bottom: 120px;
+    }
 
-  > *:nth-child(2) {
-    margin-bottom: 140px;
-  }
+    > *:first-child {
+      margin-bottom: 0;
+    }
 
-  > *:last-child {
-    margin-bottom: 90px;
+    > *:nth-child(2) {
+      margin-bottom: 140px;
+    }
+
+    > *:last-child {
+      margin-bottom: 90px;
+    }
   }
 }
+
+/* TODO: 미디어 쿼리 사용 예정 (승우) */
+
