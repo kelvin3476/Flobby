@@ -41,5 +41,8 @@ export class RegionContextController {
     this.model.setSelectedRegion(region);
     // 쿠키에 저장
     setCookie('regionId', region.regionId.toString());
+
+    // 지역 변경 이벤트 전파
+    window.dispatchEvent(new CustomEvent('regionChanged', { detail: region }));
   }
 }
