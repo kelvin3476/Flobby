@@ -92,7 +92,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
                 return (
                   <div
                     key={preferRegion.regionId}
-                    className={`prefer-region-btn ${selectedRegion.regionName === preferRegion.regionName ? 'active' : ''}`}
+                    className={`prefer-region-btn ${selectedRegion.regionId === preferRegion.regionId ? 'active' : ''}`}
                     onClick={() => handleSelectRegion(preferRegion)}
                   >
                     {preferRegion.regionName}
