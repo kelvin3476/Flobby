@@ -7,7 +7,7 @@ import Button from '../../button/Button';
 
 import ClubItem from './ClubItem';
 
-import { clubItem, MainData } from '../../../api/ApiTypes';
+import { clubItem, MainData, RegionItem } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 import '../../../styles/main/club/ClubPost.scss';
@@ -16,11 +16,25 @@ const ClubPost: React.FC = () => {
   const [ clubData, setClubData ] = React.useState<clubItem[]>([]);
   const regionContextController: RegionContextController = RegionContextController.getInstance();
 
+  const fetchClubData = async () => {
+    const data: MainData = await regionContextController.getMainData();
+    setClubData([...data.clubItems]);
+  };
+
   React.useEffect(() => {
-    regionContextController.getMainData().then((item: MainData) => {
-      const clubData: clubItem[] = [...item.clubItems];
-      setClubData(clubData);
-    });
+    /* 최초 화면 진입 후 렌더링 시 호출 */
+    fetchClubData();
+
+    /* 지역 변경 이벤트 핸들러 */
+    const handleRegionChange = async (event: CustomEvent<RegionItem>) => {
+      await fetchClubData();
+    };
+
+    window.addEventListener('regionChanged', handleRegionChange);
+
+    return () => {
+      window.removeEventListener('regionChanged', handleRegionChange);
+    };
   }, []);
 
   const navigate = useNavigate();
@@ -63,39 +77,44 @@ const ClubPost: React.FC = () => {
         />
       </div>
       <div className="swiper-container">
-        <Swiper
-          onSwiper={changeSwiperAction} /* Swiper 인스턴스를 받아와서 처리 */
-          slidesPerView={4}
-          spaceBetween={24}
-          navigation={
-            {
-              prevEl: '.club-custom-prev',
-              nextEl: '.club-custom-next',
-            }
-          }
-          modules={[Navigation]}
-        >
-          {clubData.map((item, idx) => {
-            return (
-              <SwiperSlide key={idx}>
-                <ClubItem
-                  key={idx}
-                  category={item.category}
-                  maxMember={item.maxMember}
-                  clubName={item.clubName}
-                  locationName={item.locationName}
-                  currentMembers={item.currentMembers}
-                  imageUrl={item.imageUrl}
-                />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+        {clubData.length > 0 && (
+          <>
+            <Swiper
+              key={clubData.length}
+              onSwiper={changeSwiperAction} /* Swiper 인스턴스를 받아와서 처리 */
+              slidesPerView={4}
+              spaceBetween={24}
+              navigation={
+                {
+                  prevEl: '.club-custom-prev',
+                  nextEl: '.club-custom-next',
+                }
+              }
+              modules={[Navigation]}
+            >
+              {clubData.map((item, idx) => {
+                return (
+                  <SwiperSlide key={idx}>
+                    <ClubItem
+                      key={idx}
+                      category={item.category}
+                      maxMember={item.maxMember}
+                      clubName={item.clubName}
+                      locationName={item.locationName}
+                      currentMembers={item.currentMembers}
+                      imageUrl={item.imageUrl}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
 
-        <div className="club-navigation-wrapper">
-          <div className="club-custom-prev"></div>
-          <div className="club-custom-next"></div>
-        </div>
+            <div className="club-navigation-wrapper">
+              <div className="club-custom-prev"></div>
+              <div className="club-custom-next"></div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
