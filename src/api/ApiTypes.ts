@@ -78,7 +78,7 @@ export interface RegionItem {
 /* 동호회 response 데이터 타입 */
 export interface clubItem {
   category: string;
-  scale: string;
+  maxMember: string;
   clubName: string;
   location: string;
   locationName: string;

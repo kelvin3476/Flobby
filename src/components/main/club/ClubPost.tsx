@@ -81,7 +81,7 @@ const ClubPost: React.FC = () => {
                 <ClubItem
                   key={idx}
                   category={item.category}
-                  scale={item.scale}
+                  maxMember={item.maxMember}
                   clubName={item.clubName}
                   locationName={item.locationName}
                   currentMembers={item.currentMembers}

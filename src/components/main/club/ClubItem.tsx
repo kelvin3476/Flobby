@@ -6,14 +6,14 @@ import "../../../styles/main/club/ClubItem.scss";
 
 interface ClubItemProps {
   category: string;
-  scale: string;
+  maxMember: string;
   clubName: string;
   locationName: string;
   currentMembers: number;
   imageUrl: string;
 }
 
-const ClubItem = ({ category, scale, clubName, locationName, currentMembers, imageUrl }: ClubItemProps) => {
+const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers, imageUrl }: ClubItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
@@ -41,7 +41,6 @@ const ClubItem = ({ category, scale, clubName, locationName, currentMembers, ima
         {/* 모임 아이템 태그 */}
         <div className="club-item-tag-container">
           <Tag label={category} type="club" color="purple" />
-          <Tag label={scale} type="club" color="gray" />
         </div>
 
         {/* 모임 아이템 정보 */}
@@ -62,9 +61,8 @@ const ClubItem = ({ category, scale, clubName, locationName, currentMembers, ima
             <div className="club-item-current-members-container">
               <span className="club-item-current-members-icon"></span>
               <div className="club-item-member-container">
-                <span className="club-item-member">멤버</span>
                 <span className="club-item-member-count">
-                  <span className="clum-item-member-number">{currentMembers}</span>명
+                  <span className="clum-item-member-number">{currentMembers}</span>/{maxMember} 명
                 </span>
               </div>
             </div>
