@@ -13,7 +13,7 @@ const ClubAuto = () => {
           Y
         </label>
         <label className="no-label">
-          <input type="radio" name="autoApproval" value="false" />
+          <input type="radio" name="autoApproval" value="false" defaultChecked />
           N
         </label>
       </div>
