@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../../assets/svg/logo/logo.svg";
 
 interface LogoProps {
   className?: string;
@@ -6,7 +7,7 @@ interface LogoProps {
 
 const Logo = ({ className }: LogoProps) => {
   return (
-    <img src={"../../../img/logo/logo.png"} alt="Flobby 로고" className={className} />
+    <img src={logo} alt="Flobby 로고" className={className} />
   );
 };
 
