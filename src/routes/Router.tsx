@@ -16,7 +16,6 @@ import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
 
 import Main from '../pages/main/Main';
-import CreateClub from '../pages/main/CreateClub'; // test
 
 const Router: React.FC = () => {
   return (
@@ -34,8 +33,6 @@ const Router: React.FC = () => {
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
         <Route path="/main" element={<Main />} />
-        {/* test용 라우터 */}
-        <Route path="/create/club" element={<CreateClub />} />
       </Routes>
     </BrowserRouter>
   );
