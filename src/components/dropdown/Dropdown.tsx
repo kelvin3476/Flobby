@@ -4,16 +4,16 @@ import '../../styles/dropdown/Dropdown.scss';
 interface DropDownProps {
   options: any[];
   defaultItem?: string;
-  isAvailable: boolean;
-  isPlaceholderItem?: boolean;
+  disabled: boolean;
+  placeholder?: string;
   onSelect?: (value: string) => void;
 }
 
 const DropDown = ({
   options,
   defaultItem,
-  isAvailable,
-  isPlaceholderItem = false,
+  disabled,
+  placeholder,
   onSelect,
 }: DropDownProps) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
@@ -28,21 +28,24 @@ const DropDown = ({
       <div
         className={`drop-down-container ${isDropDownOpen ? 'active' : ''}`}
         onClick={() => {
-          if (!isAvailable) return;
+          if (disabled) return;
           setIsDropDownOpen(!isDropDownOpen);
         }}
       >
+        {}
         <div
-          className={`drop-down-label ${!isAvailable || !isPlaceholderItem ? 'disabled' : ''} `}
+          className={`drop-down-label ${disabled ? 'disabled' : ''} ${
+            !activeItem ? 'placeholder' : ''
+          }`}
         >
-          {activeItem}
+          {activeItem || placeholder}
         </div>
         <div
           className={`drop-down-icon-box ${isDropDownOpen ? 'active' : ''}`}
         ></div>
       </div>
 
-      {isAvailable && isDropDownOpen && (
+      {!disabled && isDropDownOpen && (
         <div className="drop-down-list-container">
           <div className="drop-down-list-content-box">
             {options.map((option, index) => (
