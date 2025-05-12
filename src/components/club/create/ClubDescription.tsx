@@ -6,7 +6,7 @@ import "../../../styles/club/create/ClubDescription.scss";
 const ClubDescription = () => {
   return (
     <div className="desc-container">
-      <div className="up-wrapper">
+      <label className="up-wrapper">
         <Label labelTitle="모임 소개"/>
         <input 
           type="text"
@@ -14,7 +14,7 @@ const ClubDescription = () => {
           className="club-title-input"
           maxLength={14}
         />
-      </div>
+      </label>
       <textarea 
         name="clubDescription" 
         placeholder={`게시한 글에 욕설, 음란물 및 비방적인 내용의 글이나 사진, 영상이 포함될 경우,\n사전 예고없이 삭제 또는 비공개 처리될 수 있음을 알려 드립니다.`}
