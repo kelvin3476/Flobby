@@ -1,7 +1,5 @@
 import { create } from 'zustand';
 import { DEFAULT_REGION } from '../../services/main/models/RegionContextModel';
-import { create } from 'zustand';
-import { DEFAULT_REGION } from '../../services/main/models/RegionContextModel';
 
 interface ClubCreateStore {
   clubName: string;
@@ -24,15 +22,6 @@ interface ClubCreateStore {
 
   maxMembers: number;
   setMaxMembers: (maxMember: number) => void;
-
-  mainCategory: string;
-  setMainCategory: (mainCategory: string) => void;
-
-  subCategory: string;
-  setSubCategory: (subcategory: string) => void;
-
-  location: number;
-  setLocation: (location: number) => void;
 }
 
 const useClubCreateStore = create<ClubCreateStore>(set => ({
@@ -56,14 +45,6 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
 
   maxMembers: 0,
   setMaxMembers: (maxMembers: number) => set({ maxMembers }),
-  mainCategory: '',
-  setMainCategory: (mainCategory: string) => set({ mainCategory }),
-
-  subCategory: '',
-  setSubCategory: (subCategory: string) => set({ subCategory }),
-
-  location: DEFAULT_REGION.regionId,
-  setLocation: (location: number) => set({ location }),
 }));
 
 export default useClubCreateStore;
