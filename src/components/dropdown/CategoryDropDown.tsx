@@ -1,0 +1,87 @@
+import React, { useEffect, useState } from 'react';
+import DropDown from './Dropdown';
+import SignUp from '../../api/signup/SignUp';
+import logger from '../../utils/Logger';
+// import { HobbyCategory } from '../../store/signup/useHobbyStore';
+// ㄴ 응답값은 subCategories 정의된 subCategory와 달라 쓸 수 없어서 주석처리 해둡니다.
+// 추후 응답데이터 인터페이스 통일하는 리팩토링 필요할 것 같습니다.
+import '../../styles/dropdown/CommonDropDown.scss';
+
+interface HobbyCategory {
+  mainCategory: string;
+  subCategories: string[];
+}
+
+const CategoryDropDown = () => {
+  const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
+  const [selectedMainCategory, setSelectedMainCategory] = useState<
+    string | null
+  >(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const fetchHobbyList = async () => {
+      try {
+        const response = await SignUp.getHobbyList();
+        const { code, message, data } = response.data;
+
+        if (code === 1000) {
+          // API 호출 성공
+          logger.log('getHobbyListData', data);
+          setCategoryList(data);
+        } else if (code === 1001) {
+          // API 호출 실패
+          throw new Error(
+            message || '카테고리 리스트 데이터를 가져오지 못했습니다.',
+          );
+        } else if (code === 1002) {
+          // API 예외 발생
+          throw new Error(message || '서버 오류가 발생했습니다.');
+        }
+      } catch (err: any) {
+        console.log(err.message || '데이터 로드 실패');
+      }
+    };
+    fetchHobbyList();
+  }, []);
+
+  const mainCategories = categoryList.map(item => item.mainCategory);
+
+  const subCategories =
+    categoryList.find(item => item.mainCategory === selectedMainCategory)
+      ?.subCategories ?? [];
+
+  return (
+    <div className="dropdown_group_container">
+      <div className="dropdown_label_box">
+        <span className="dropdown_label">카테고리 선택</span>
+        <span className="dropdown_required">*</span>
+      </div>
+      <div className="dropdown_box">
+        <DropDown
+          options={mainCategories}
+          defaultItem={'상위 카테고리'}
+          isAvailable={true}
+          isPlaceholderItem={!!selectedMainCategory}
+          onSelect={(value: string) => {
+            setSelectedMainCategory(value);
+            setSelectedSubCategory(null);
+          }}
+        />
+        <DropDown
+          options={subCategories}
+          defaultItem={'하위 카테고리'}
+          isAvailable={!!selectedMainCategory}
+          isPlaceholderItem={!!selectedSubCategory}
+          onSelect={(value: string) => {
+            setSelectedSubCategory(value);
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default CategoryDropDown;
