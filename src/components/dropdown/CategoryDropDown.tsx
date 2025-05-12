@@ -49,12 +49,12 @@ const CategoryDropDown = () => {
       ?.subCategories ?? [];
 
   return (
-    <div className="dropdown_group_container">
-      <div className="dropdown_label_box">
-        <span className="dropdown_label">카테고리 선택</span>
-        <span className="dropdown_required">*</span>
+    <div className="dropdown-group-container">
+      <div className="dropdown-label-box">
+        <span className="dropdown-label">카테고리 선택</span>
+        <span className="dropdown-required">*</span>
       </div>
-      <div className="dropdown_box">
+      <div className="dropdown-box">
         <DropDown
           options={mainCategories}
           placeholder="상위 카테고리"

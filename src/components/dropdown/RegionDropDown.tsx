@@ -90,12 +90,12 @@ const RegionDropDown = () => {
   };
 
   return (
-    <div className="dropdown_group_container">
-      <div className="dropdown_label_box">
-        <span className="dropdown_label">지역 선택</span>
-        <span className="dropdown_required">*</span>
+    <div className="dropdown-group-container">
+      <div className="dropdown-label-box">
+        <span className="dropdown-label">지역 선택</span>
+        <span className="dropdown-required">*</span>
       </div>
-      <div className="dropdown_box">
+      <div className="dropdown-box">
         <DropDown
           options={Object.keys(regionListController.model.regionList)}
           defaultItem={selectedMainRegion}

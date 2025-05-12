@@ -1,11 +1,11 @@
-.dropdown_group_container {
+.dropdown-group-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
 
-  .dropdown_label_box {
+  .dropdown-label-box {
     display: flex;
     height: 26px;
     padding: 0px 4px;
@@ -13,7 +13,7 @@
     gap: 2px;
     align-self: stretch;
 
-    .dropdown_label {
+    .dropdown-label {
       color: #26282b;
       font-size: 18px;
       font-style: normal;
@@ -22,7 +22,7 @@
       letter-spacing: -0.3px;
     }
 
-    .dropdown_required {
+    .dropdown-required {
       color: #f94e51;
       font-size: 12px;
       font-style: normal;
@@ -32,7 +32,7 @@
     }
   }
 
-  .dropdown_box {
+  .dropdown-box {
     display: flex;
     align-items: flex-start;
     gap: 14px;
