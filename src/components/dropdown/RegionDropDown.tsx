@@ -10,7 +10,6 @@ const RegionDropDown = () => {
   const regionListController = RegionListController.getInstance();
   const regionContextController = RegionContextController.getInstance();
 
-  const [mainList, setMainList] = useState<string[]>([]);
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
   );
@@ -19,10 +18,11 @@ const RegionDropDown = () => {
   useEffect(() => {
     const fetchRegionListData = async () => {
       await regionListController.getRegionList();
-      const regionList = regionListController.model.regionList;
-      setMainList(Object.keys(regionList));
 
-      const initialGroup = getInitialGroup(regionList);
+      const initialGroup = getInitialGroup(
+        regionListController.model.regionList,
+      );
+
       if (initialGroup) {
         setSelectedMainRegion(initialGroup);
       }
@@ -69,7 +69,7 @@ const RegionDropDown = () => {
       </div>
       <div className="dropdown_box">
         <DropDown
-          options={mainList}
+          options={Object.keys(regionListController.model.regionList)}
           defaultItem={selectedMainRegion}
           disabled={false}
           onSelect={handleMainSelect}
