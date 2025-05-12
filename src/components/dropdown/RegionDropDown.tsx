@@ -13,6 +13,10 @@ const RegionDropDown = () => {
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
   );
+  const [selectedSubRegion, setSelectedSubRegion] = useState<string | null>(
+    null,
+  );
+
   const { setLocation } = useClubCreateStore();
 
   useEffect(() => {
@@ -25,6 +29,22 @@ const RegionDropDown = () => {
 
       if (initialGroup) {
         setSelectedMainRegion(initialGroup);
+        const subRegions = regionListController.model.regionList[initialGroup];
+
+        // 기획 디폴트값 or 새로 선택된 상위 지역 기반으로 첫번째 데이터 렌더링 되도록 수정
+        if (subRegions && subRegions.length > 0) {
+          const defaultSubRegion =
+            regionContextController.model.selectedRegion &&
+            subRegions.some(
+              region =>
+                region.regionName ===
+                regionContextController.model.selectedRegion.regionName,
+            )
+              ? regionContextController.model.selectedRegion.regionName
+              : subRegions[0].regionName;
+
+          setSelectedSubRegion(defaultSubRegion);
+        }
       }
     };
 
@@ -49,6 +69,14 @@ const RegionDropDown = () => {
 
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
+
+    const subRegions = regionListController.model.regionList[regionName];
+    if (subRegions && subRegions.length > 0) {
+      const firstSub = subRegions[0];
+      setSelectedSubRegion(firstSub.regionName);
+    } else {
+      setSelectedSubRegion(null);
+    }
   };
 
   const subList =
@@ -76,9 +104,10 @@ const RegionDropDown = () => {
         />
         <DropDown
           options={subList.map(item => item.regionName)}
-          defaultItem={regionContextController.model.selectedRegion?.regionName}
+          defaultItem={selectedSubRegion}
           disabled={!selectedMainRegion}
           onSelect={(regionName: string) => {
+            setSelectedSubRegion(regionName);
             const matchedRegion = subList.find(
               item => item.regionName === regionName,
             );
