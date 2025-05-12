@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
 import SignUp from '../../api/signup/SignUp';
 import logger from '../../utils/Logger';
-// import { HobbyCategory } from '../../store/signup/useHobbyStore';
-// ㄴ 응답값은 subCategories 정의된 subCategory와 달라 쓸 수 없어서 주석처리 해둡니다.
-// 추후 응답데이터 인터페이스 통일하는 리팩토링 필요할 것 같습니다.
 import '../../styles/dropdown/CommonDropDown.scss';
 import useClubCreateStore from '../../store/club/useClubCreateStore';
 
