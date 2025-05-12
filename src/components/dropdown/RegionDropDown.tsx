@@ -5,7 +5,6 @@ import { RegionContextController } from '../../services/main/controllers/RegionC
 import { RegionItem } from '../../api/ApiTypes';
 import useClubCreateStore from '../../store/club/useClubCreateStore';
 import '../../styles/dropdown/CommonDropDown.scss';
-import logger from '../../utils/Logger';
 
 const RegionDropDown = () => {
   const regionListController = RegionListController.getInstance();
@@ -72,13 +71,13 @@ const RegionDropDown = () => {
         <DropDown
           options={mainList}
           defaultItem={selectedMainRegion}
-          isAvailable={true}
+          disabled={false}
           onSelect={handleMainSelect}
         />
         <DropDown
           options={subList.map(item => item.regionName)}
           defaultItem={regionContextController.model.selectedRegion?.regionName}
-          isAvailable={!!selectedMainRegion}
+          disabled={!selectedMainRegion}
           onSelect={(regionName: string) => {
             const matchedRegion = subList.find(
               item => item.regionName === regionName,
