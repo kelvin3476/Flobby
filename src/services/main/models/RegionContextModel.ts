@@ -11,7 +11,7 @@ export const DEFAULT_REGION: RegionItem = {
 
 export class RegionContextModel {
   // 메인데이터
-  private mainData: MainData = {
+  mainData: MainData = {
     region: null,
     clubItems: [],
     onedayItems: [],
@@ -20,10 +20,10 @@ export class RegionContextModel {
   };
 
   // 관심 지역 & 선택 지역
-  private preferRegionsList: RegionItem[] = [];
-  private selectedRegion: RegionItem = DEFAULT_REGION;
+  preferRegionsList: RegionItem[] = [];
+  selectedRegion: RegionItem = DEFAULT_REGION;
 
-  private handleSelectedRegion = data => {
+  handleSelectedRegion = data => {
     // 관심 지역 저장
     if (data.region) {
       this.preferRegionsList = data.region;
