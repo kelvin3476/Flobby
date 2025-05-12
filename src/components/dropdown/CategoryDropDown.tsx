@@ -6,6 +6,7 @@ import logger from '../../utils/Logger';
 // ㄴ 응답값은 subCategories 정의된 subCategory와 달라 쓸 수 없어서 주석처리 해둡니다.
 // 추후 응답데이터 인터페이스 통일하는 리팩토링 필요할 것 같습니다.
 import '../../styles/dropdown/CommonDropDown.scss';
+import useClubCreateStore from '../../store/club/useClubCreateStore';
 
 interface HobbyCategory {
   mainCategory: string;
@@ -14,12 +15,9 @@ interface HobbyCategory {
 
 const CategoryDropDown = () => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
-  const [selectedMainCategory, setSelectedMainCategory] = useState<
-    string | null
-  >(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(
-    null,
-  );
+
+  const { mainCategory, setMainCategory } = useClubCreateStore();
+  const { setSubCategory } = useClubCreateStore();
 
   useEffect(() => {
     const fetchHobbyList = async () => {
@@ -50,7 +48,7 @@ const CategoryDropDown = () => {
   const mainCategories = categoryList.map(item => item.mainCategory);
 
   const subCategories =
-    categoryList.find(item => item.mainCategory === selectedMainCategory)
+    categoryList.find(item => item.mainCategory === mainCategory)
       ?.subCategories ?? [];
 
   return (
@@ -62,21 +60,19 @@ const CategoryDropDown = () => {
       <div className="dropdown_box">
         <DropDown
           options={mainCategories}
-          defaultItem={'상위 카테고리'}
-          isAvailable={true}
-          isPlaceholderItem={!!selectedMainCategory}
+          placeholder="상위 카테고리"
+          disabled={false}
           onSelect={(value: string) => {
-            setSelectedMainCategory(value);
-            setSelectedSubCategory(null);
+            setMainCategory(value);
+            setSubCategory(null);
           }}
         />
         <DropDown
           options={subCategories}
-          defaultItem={'하위 카테고리'}
-          isAvailable={!!selectedMainCategory}
-          isPlaceholderItem={!!selectedSubCategory}
+          placeholder="하위 카테고리"
+          disabled={mainCategory === ''}
           onSelect={(value: string) => {
-            setSelectedSubCategory(value);
+            setSubCategory(value);
           }}
         />
       </div>

@@ -3,7 +3,9 @@ import DropDown from './Dropdown';
 import { RegionListController } from '../../services/main/controllers/RegionListController';
 import { RegionContextController } from '../../services/main/controllers/RegionContextController';
 import { RegionItem } from '../../api/ApiTypes';
+import useClubCreateStore from '../../store/club/useClubCreateStore';
 import '../../styles/dropdown/CommonDropDown.scss';
+import logger from '../../utils/Logger';
 
 const RegionDropDown = () => {
   const regionListController = RegionListController.getInstance();
@@ -13,6 +15,7 @@ const RegionDropDown = () => {
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
   );
+  const { setLocation } = useClubCreateStore();
 
   useEffect(() => {
     const fetchRegionListData = async () => {
@@ -55,6 +58,10 @@ const RegionDropDown = () => {
       ? regionListController.model.regionList[selectedMainRegion]
       : [];
 
+  const handleLocation = (regionId: number) => {
+    setLocation(regionId);
+  };
+
   return (
     <div className="dropdown_group_container">
       <div className="dropdown_label_box">
@@ -66,13 +73,20 @@ const RegionDropDown = () => {
           options={mainList}
           defaultItem={selectedMainRegion}
           isAvailable={true}
-          isPlaceholderItem={false}
           onSelect={handleMainSelect}
         />
         <DropDown
           options={subList.map(item => item.regionName)}
           defaultItem={regionContextController.model.selectedRegion?.regionName}
           isAvailable={!!selectedMainRegion}
+          onSelect={(regionName: string) => {
+            const matchedRegion = subList.find(
+              item => item.regionName === regionName,
+            );
+            if (matchedRegion) {
+              handleLocation(matchedRegion.regionId);
+            }
+          }}
         />
       </div>
     </div>
