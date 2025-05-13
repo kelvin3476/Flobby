@@ -18,7 +18,7 @@
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
-      line-height: 140%; /* 25.2px */
+      line-height: 140%;
       letter-spacing: -0.3px;
     }
 
@@ -55,17 +55,24 @@
         height: 330px;
         aspect-ratio: 1/1;
         border-radius: 6px;
+        object-fit: cover;
       }
 
       .overlay {
         width: 330px;
         height: 330px;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.5);
         border-radius: 6px;
         position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
 
         .image-change-btn {
           width: 96px;
@@ -90,6 +97,10 @@
             font-weight: 500;
             line-height: 150%;
             letter-spacing: -0.3px;
+          }
+
+          &:focus {
+            outline: none;
           }
         }
       }
