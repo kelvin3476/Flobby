@@ -19,6 +19,9 @@ interface ClubCreateStore {
 
   location: number;
   setLocation: (location: number) => void;
+
+  maxMembers: number;
+  setMaxMembers: (maxMember: number) => void;
 }
 
 const useClubCreateStore = create<ClubCreateStore>(set => ({
@@ -39,6 +42,9 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
 
   location: DEFAULT_REGION.regionId,
   setLocation: (location: number) => set({ location }),
+
+  maxMembers: 0,
+  setMaxMembers: (maxMembers: number) => set({ maxMembers }),
 }));
 
 export default useClubCreateStore;
