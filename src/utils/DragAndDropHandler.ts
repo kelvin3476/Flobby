@@ -1,6 +1,6 @@
 import logger from './Logger';
 
-type FileDropHandlerEvents = 'file-over' | 'file-drop-cancel' | 'file-drop';
+type FileDropHandlerEvents = 'file-drop'; // 일단, 필요한 타입만 정의, 'file-over', 'file-drop-cancel'과 같은 이벤트 필요시 추가 가능
 
 export type FileDropHandlerFunction = (files?: File[]) => void;
 
@@ -33,7 +33,6 @@ export default class DragAndDropHandler {
   }
 
   remove(): void {
-    // 기본동작 방지
     ['dragover', 'drop'].forEach(eventName => {
       this.element.removeEventListener(
         eventName,
@@ -42,12 +41,12 @@ export default class DragAndDropHandler {
       );
     });
 
-    // 파일 드롭 이벤트 등록
     this.element.removeEventListener('drop', this.handleFileDropEvent, false);
   }
 
   private init(): void {
     // 기본동작 방지
+    // 'dragenter' & 'dragleave'는 필요시 추가, 현재는 필요x
     ['dragover', 'drop'].forEach(eventName => {
       this.element.addEventListener(
         eventName,
@@ -66,10 +65,9 @@ export default class DragAndDropHandler {
 
   private handleFileDrop(event: DragEvent) {
     if (!event.dataTransfer) {
-      // dataTransfer = 드래그되고 있는 데이터인가
+      // dataTransfer = 드래그되고 있는 데이터 여부
       return;
     }
-
     logger.log('handleFileDrop', event);
     this.handleDrop(event.dataTransfer);
   }
