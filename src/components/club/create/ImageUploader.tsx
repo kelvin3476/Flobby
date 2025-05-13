@@ -60,15 +60,13 @@ const ImageUploader = () => {
         {imageUrl ? (
           <div className="image-preview">
             <img src={imageUrl} alt="썸네일 미리보기" />
-            <div className="overlay">
-              <button
-                className="image-change-btn"
-                type="button"
-                onClick={handleClick}
-              >
-                <span>이미지 변경</span>
-              </button>
-            </div>
+            <button
+              className="image-change-btn"
+              type="button"
+              onClick={handleClick}
+            >
+              <span>이미지 변경</span>
+            </button>
           </div>
         ) : (
           <div className="image-uploader-info-box">
