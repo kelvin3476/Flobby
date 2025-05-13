@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
-import '../../../styles/club/create/ImageUploader.scss';
 import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
+import '../../../styles/club/create/ImageUploader.scss';
 
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);

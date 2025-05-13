@@ -120,10 +120,12 @@
         justify-content: center;
         align-items: center;
         gap: 10px;
+        background: #fff;
 
         background-image: url('../../../assets/svg/club/create/add_photo.svg');
         background-repeat: no-repeat;
         background-position: center;
+        background-size: 72px 72px;
       }
 
       .image-uploader-info {
@@ -170,8 +172,8 @@
           align-items: center;
 
           border-radius: 6px;
-          border: 1px solid var(--main, #764bf6);
-          background: var(--white, #fff);
+          border: 1px solid #764bf6;
+          background: #fff;
 
           > span {
             width: 96px;
