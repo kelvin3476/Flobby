@@ -4,7 +4,7 @@ import { RegionContextModel } from '../models/RegionContextModel';
 
 export class RegionContextController {
   private static instance: RegionContextController;
-  private model: RegionContextModel;
+  model: RegionContextModel;
 
   private constructor() {
     this.model = new RegionContextModel();
