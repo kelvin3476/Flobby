@@ -48,12 +48,50 @@
     .image-preview {
       width: 330px;
       height: 330px;
+      position: relative;
 
       img {
         width: 330px;
         height: 330px;
         aspect-ratio: 1/1;
         border-radius: 6px;
+      }
+
+      .overlay {
+        width: 330px;
+        height: 330px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 6px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .image-change-btn {
+          width: 96px;
+          height: 40px;
+          flex-shrink: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          border-radius: 6px;
+          border: 1px solid var(--main, #764bf6);
+          background: var(--white, #fff);
+
+          > span {
+            width: 96px;
+            height: 20px;
+
+            color: #764bf6;
+            text-align: center;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+          }
+        }
       }
     }
 
@@ -137,11 +175,11 @@
             letter-spacing: -0.3px;
           }
         }
-
-        .image-uploader-file-input {
-          display: none;
-        }
       }
+    }
+
+    .image-uploader-file-input {
+      display: none;
     }
   }
 }
