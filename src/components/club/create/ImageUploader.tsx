@@ -9,7 +9,7 @@ const ImageUploader = () => {
   const dragAreaRef = useRef<HTMLDivElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const { file, setFile } = useClubCreateStore();
+  const { setFile } = useClubCreateStore();
 
   useEffect(() => {
     if (!dragAreaRef.current) return;
@@ -21,6 +21,7 @@ const ImageUploader = () => {
 
       const file = files[0];
       if (file.size > 500 * 1024) return;
+
       const url = URL.createObjectURL(file);
       setImageUrl(url);
       setFile(file);
@@ -38,8 +39,11 @@ const ImageUploader = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (!file) return;
+
     if (file.size > 500 * 1024) return;
+
     const url = URL.createObjectURL(file);
     setImageUrl(url);
     setFile(file);
