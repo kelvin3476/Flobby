@@ -9,8 +9,8 @@ import { HobbyCategory } from '../../api/ApiTypes';
 const CategoryDropDown = () => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
-  const { mainCategory, setMainCategory } = useClubCreateStore();
-  const { setSubCategory } = useClubCreateStore();
+  const { mainCategory, setMainCategory, setSubCategory } =
+    useClubCreateStore();
 
   useEffect(() => {
     const fetchHobbyList = async () => {
