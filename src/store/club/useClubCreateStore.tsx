@@ -22,6 +22,9 @@ interface ClubCreateStore {
 
   maxMembers: number;
   setMaxMembers: (maxMember: number) => void;
+
+  file: File | null;
+  setFile: (file: File | null) => void;
 }
 
 const useClubCreateStore = create<ClubCreateStore>(set => ({
@@ -45,6 +48,9 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
 
   maxMembers: 0,
   setMaxMembers: (maxMembers: number) => set({ maxMembers }),
+
+  file: null,
+  setFile: (file: File | null) => set({ file }),
 }));
 
 export default useClubCreateStore;

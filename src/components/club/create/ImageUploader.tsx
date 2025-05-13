@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import '../../../styles/club/create/ImageUploader.scss';
+import useClubCreateStore from '../../../store/club/useClubCreateStore';
+import logger from '../../../utils/Logger';
 
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragAreaRef = useRef<HTMLDivElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const { file, setFile } = useClubCreateStore();
 
   useEffect(() => {
     if (!dragAreaRef.current) return;
@@ -19,6 +23,8 @@ const ImageUploader = () => {
       if (file.size > 500 * 1024) return;
       const url = URL.createObjectURL(file);
       setImageUrl(url);
+      setFile(file);
+      logger.log('imageFile', file);
     });
 
     return () => {
@@ -36,6 +42,8 @@ const ImageUploader = () => {
     if (file.size > 500 * 1024) return;
     const url = URL.createObjectURL(file);
     setImageUrl(url);
+    setFile(file);
+    logger.log('imageFile', file);
   };
 
   return (
