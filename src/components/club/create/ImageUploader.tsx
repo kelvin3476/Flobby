@@ -1,9 +1,30 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import '../../../styles/club/create/ImageUploader.scss';
 
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dragAreaRef = useRef<HTMLDivElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!dragAreaRef.current) return;
+
+    const dropHandler = new DragAndDropHandler(dragAreaRef.current);
+
+    dropHandler.on('file-drop', files => {
+      if (!files || files.length === 0) return;
+
+      const file = files[0];
+      if (file.size > 500 * 1024) return;
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    });
+
+    return () => {
+      dropHandler.remove();
+    };
+  }, []);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -23,7 +44,7 @@ const ImageUploader = () => {
         <span className="image-uploader-label">대표 이미지 첨부</span>
         <span className="image-uploader-required">*</span>
       </div>
-      <div className="image-uploader-box">
+      <div className="image-uploader-box" ref={dragAreaRef}>
         {imageUrl ? (
           <div className="image-preview">
             <img src={imageUrl} alt="썸네일 미리보기" />
