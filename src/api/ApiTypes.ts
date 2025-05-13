@@ -73,6 +73,14 @@ export interface RegionItem {
   regionId: number;
 }
 
+/* -------------------- 취미 카테고리 리스트 api 타입 -------------------- */
+
+/* 취미 카테고리 리스트 불러 올때 response 데이터 타입 */
+export interface HobbyCategory {
+  mainCategory: string;
+  subCategories: string[];
+}
+
 /* -------------------- 메인 페이지 api 타입 -------------------- */
 
 /* 동호회 response 데이터 타입 */
