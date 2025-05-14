@@ -4,32 +4,84 @@ import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
 import '../../../styles/club/create/ImageUploader.scss';
 
+const MAX_FILE_SIZE = 500 * 1024;
+
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragAreaRef = useRef<HTMLDivElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-
   const { setFile } = useClubCreateStore();
 
+  // 파일 처리 함수
+  const handleFile = (file: File) => {
+    if (file.size > MAX_FILE_SIZE) {
+      // TODO: 에러 문구 나오면 수정
+      alert('500KB 이하의 jpg, png 이미지만 업로드할 수 있습니다.');
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    setImageUrl(url);
+    setFile(file);
+    logger.log('imageFile', file);
+  };
+
   useEffect(() => {
-    if (!dragAreaRef.current) return;
+    const target = dragAreaRef.current;
 
-    const dropHandler = new DragAndDropHandler(dragAreaRef.current);
+    const preventDefaults = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
 
-    dropHandler.on('file-drop', files => {
-      if (!files || files.length === 0) return;
+    // 전역 기본 이벤트 방지
+    ['dragenter', 'dragover', 'drop'].forEach(event =>
+      window.addEventListener(event, preventDefaults),
+    );
 
-      const file = files[0];
-      if (file.size > 500 * 1024) return;
+    // const handlePaste = (e: ClipboardEvent) => {
+    //   const items = e.clipboardData?.items;
+    //   if (!items) return;
 
-      const url = URL.createObjectURL(file);
-      setImageUrl(url);
-      setFile(file);
-      logger.log('imageFile', file);
-    });
+    //   for (let i = 0; i < items.length; i++) {
+    //     const item = items[i];
+    //     if (item.type.startsWith('image/')) {
+    //       const file = item.getAsFile();
+    //       if (file) {
+    //         handleFile(file);
+    //         break;
+    //       }
+    //     }
+    //   }
+    // };
+
+    // 붙여넣기 이벤트
+    // if (target) {
+    //   target.addEventListener('paste', handlePaste);
+    // }
+
+    // 드래그앤드롭 핸들러
+    let dropHandler: DragAndDropHandler | null = null;
+
+    if (target) {
+      dropHandler = new DragAndDropHandler(target, false);
+
+      dropHandler.on('file-drop', (files, text) => {
+        if (files?.length > 0) handleFile(files[0]);
+      });
+
+      dropHandler.on('file-drop-cancel', () => logger.log('file-drop-cancel'));
+      dropHandler.on('file-over', () => logger.log('file-over'));
+    }
 
     return () => {
-      dropHandler.remove();
+      ['dragenter', 'dragover', 'drop'].forEach(event =>
+        window.removeEventListener(event, preventDefaults),
+      );
+      // if (target) {
+      //   target.removeEventListener('paste', handlePaste);
+      // }
+      dropHandler?.destroy();
     };
   }, []);
 
@@ -39,15 +91,7 @@ const ImageUploader = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-
-    if (!file) return;
-
-    if (file.size > 500 * 1024) return;
-
-    const url = URL.createObjectURL(file);
-    setImageUrl(url);
-    setFile(file);
-    logger.log('imageFile', file);
+    if (file) handleFile(file);
   };
 
   return (
@@ -56,7 +100,7 @@ const ImageUploader = () => {
         <span className="image-uploader-label">대표 이미지 첨부</span>
         <span className="image-uploader-required">*</span>
       </div>
-      <div className="image-uploader-box" ref={dragAreaRef}>
+      <div className="image-uploader-box" ref={dragAreaRef} tabIndex={0}>
         {imageUrl ? (
           <div className="image-preview">
             <img src={imageUrl} alt="썸네일 미리보기" />

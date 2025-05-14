@@ -1,22 +1,27 @@
 import logger from './Logger';
 
-type FileDropHandlerEvents = 'file-drop'; // 일단, 필요한 타입만 정의, 'file-over', 'file-drop-cancel'과 같은 이벤트 필요시 추가 가능
+type FileDropHandlerEvents = 'file-over' | 'file-drop-cancel' | 'file-drop';
 
-export type FileDropHandlerFunction = (files?: File[]) => void;
+export type FileDropHandlerFunction = (files?: File[], text?: string) => void;
 
 export default class DragAndDropHandler {
+  isFileDropOver = false;
+
   private element: HTMLElement;
   private eventListeners: Map<
     FileDropHandlerEvents,
     Array<FileDropHandlerFunction>
   >;
-
-  private preventDefaultsEvent = this.preventDefaults.bind(this); // 기본 동작 방지(브라우저 파일 열기 동작)
+  private usePaste: boolean;
+  private preventDefaultsEvent = this.preventDefaults.bind(this);
+  private handleFileEnterEvent = this.handleFileEnter.bind(this);
+  private handleFileDropCancelEvent = this.handleFileDropCancel.bind(this);
   private handleFileDropEvent = this.handleFileDrop.bind(this);
+  private handlePasteEvent = this.handlePaste.bind(this);
 
-  constructor(element: HTMLElement) {
+  constructor(element: HTMLElement, usePaste: boolean) {
     this.element = element;
-
+    this.usePaste = usePaste;
     this.eventListeners = new Map<
       FileDropHandlerEvents,
       Array<FileDropHandlerFunction>
@@ -25,15 +30,18 @@ export default class DragAndDropHandler {
     this.init();
   }
 
-  on(event: FileDropHandlerEvents, callback: FileDropHandlerFunction): void {
+  public on(
+    event: FileDropHandlerEvents,
+    callback: FileDropHandlerFunction,
+  ): void {
     if (!this.eventListeners.has(event)) {
       this.eventListeners.set(event, []);
     }
     this.eventListeners.get(event)?.push(callback);
   }
 
-  remove(): void {
-    ['dragover', 'drop'].forEach(eventName => {
+  destroy(): void {
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       this.element.removeEventListener(
         eventName,
         this.preventDefaultsEvent,
@@ -41,13 +49,23 @@ export default class DragAndDropHandler {
       );
     });
 
+    this.element.removeEventListener(
+      'dragenter',
+      this.handleFileEnterEvent,
+      false,
+    );
+    this.element.removeEventListener(
+      'dragleave',
+      this.handleFileDropCancelEvent,
+      false,
+    );
     this.element.removeEventListener('drop', this.handleFileDropEvent, false);
+    if (this.usePaste)
+      document.body.removeEventListener('paste', this.handlePasteEvent, false);
   }
 
   private init(): void {
-    // 기본동작 방지
-    // 'dragenter' & 'dragleave'는 필요시 추가, 현재는 필요x
-    ['dragover', 'drop'].forEach(eventName => {
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
       this.element.addEventListener(
         eventName,
         this.preventDefaultsEvent,
@@ -55,7 +73,16 @@ export default class DragAndDropHandler {
       );
     });
 
-    // 파일 드롭 이벤트 등록
+    this.element.addEventListener(
+      'dragenter',
+      this.handleFileEnterEvent,
+      false,
+    );
+    this.element.addEventListener(
+      'dragleave',
+      this.handleFileDropCancelEvent,
+      false,
+    );
     this.element.addEventListener('drop', this.handleFileDropEvent, false);
   }
 
@@ -63,24 +90,87 @@ export default class DragAndDropHandler {
     event.preventDefault();
   }
 
-  private handleFileDrop(event: DragEvent) {
+  private handleFileEnter(event: DragEvent) {
+    // const files = event.dataTransfer?.files
+    // if(files && files.length > 0) {
+    //
+    // }
+    this.isFileDropOver = true;
+    this.emit('file-over');
+  }
+
+  private handleFileDropCancel(event: DragEvent) {
+    // const files = event.dataTransfer?.files
+    // if (files && files.length > 0) {
+    //
+    // }
+
+    const isLeavingChild =
+      event.relatedTarget && this.element.contains(event.relatedTarget as Node);
+
+    if (!isLeavingChild) {
+      this.isFileDropOver = false;
+      this.emit('file-drop-cancel');
+    }
+  }
+
+  private async handleFileDrop(event: DragEvent) {
     if (!event.dataTransfer) {
       // dataTransfer = 드래그되고 있는 데이터 여부
       return;
     }
+
     logger.log('handleFileDrop', event);
     this.handleDrop(event.dataTransfer);
   }
 
-  private handleDrop(data: DataTransfer) {
+  private async handleDrop(data: DataTransfer) {
     const files = Array.from(data.files);
 
-    if (files.length > 0) {
-      this.emit('file-drop', files);
+    let text: undefined | string = undefined;
+
+    let textPromise: Promise<string> | undefined = undefined;
+
+    for (let i = 0; i < (data.types.length || 0); i++) {
+      const item: DataTransferItem = data.items[i] as DataTransferItem;
+      if (item.kind === 'string' && item.type === 'text/plain') {
+        textPromise = this.getDropItemString(item);
+      }
+    }
+
+    if (textPromise) {
+      text = await textPromise;
+    }
+
+    this.isFileDropOver = false;
+    if ((files && files.length > 0) || text) {
+      this.emit('file-drop', files, text);
     }
   }
 
-  private emit(event: FileDropHandlerEvents, files?: File[]): void {
-    this.eventListeners.get(event)?.forEach(callback => callback(files));
+  private async handlePaste(event: ClipboardEvent) {
+    if (!event.clipboardData) return;
+    logger.debug('handlePaste', event.clipboardData);
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    await this.handleDrop(event.clipboardData);
+  }
+
+  private getDropItemString(item: DataTransferItem): Promise<string> {
+    return new Promise((resolve, reject) => {
+      item.getAsString(str => {
+        resolve(str);
+      });
+    });
+  }
+  private emit(
+    event: FileDropHandlerEvents,
+    files?: File[],
+    text?: string,
+  ): void {
+    logger.debug('emit', event, files, text);
+    this.eventListeners.get(event)?.forEach(callback => callback(files, text));
   }
 }
