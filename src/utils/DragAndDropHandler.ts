@@ -13,15 +13,21 @@ export default class DragAndDropHandler {
     Array<FileDropHandlerFunction>
   >;
   private usePaste: boolean;
+  private useGlobalEvents: boolean;
   private preventDefaultsEvent = this.preventDefaults.bind(this);
   private handleFileEnterEvent = this.handleFileEnter.bind(this);
   private handleFileDropCancelEvent = this.handleFileDropCancel.bind(this);
   private handleFileDropEvent = this.handleFileDrop.bind(this);
   private handlePasteEvent = this.handlePaste.bind(this);
 
-  constructor(element: HTMLElement, usePaste: boolean) {
+  constructor(
+    element: HTMLElement,
+    usePaste: boolean,
+    useGlobalEvents: boolean,
+  ) {
     this.element = element;
     this.usePaste = usePaste;
+    this.useGlobalEvents = useGlobalEvents;
     this.eventListeners = new Map<
       FileDropHandlerEvents,
       Array<FileDropHandlerFunction>
@@ -29,6 +35,11 @@ export default class DragAndDropHandler {
 
     this.init();
   }
+
+  private globalPreventDefaultsEvent = (e: Event) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   public on(
     event: FileDropHandlerEvents,
@@ -60,8 +71,15 @@ export default class DragAndDropHandler {
       false,
     );
     this.element.removeEventListener('drop', this.handleFileDropEvent, false);
+
     if (this.usePaste)
-      document.body.removeEventListener('paste', this.handlePasteEvent, false);
+      this.element.removeEventListener('paste', this.handlePasteEvent, false);
+
+    if (this.useGlobalEvents) {
+      ['dragenter', 'dragover', 'drop'].forEach(event =>
+        window.removeEventListener(event, this.globalPreventDefaultsEvent),
+      );
+    }
   }
 
   private init(): void {
@@ -84,6 +102,15 @@ export default class DragAndDropHandler {
       false,
     );
     this.element.addEventListener('drop', this.handleFileDropEvent, false);
+
+    if (this.usePaste)
+      this.element.addEventListener('paste', this.handlePasteEvent, false);
+
+    if (this.useGlobalEvents) {
+      ['dragenter', 'dragover', 'drop'].forEach(event =>
+        window.addEventListener(event, this.globalPreventDefaultsEvent),
+      );
+    }
   }
 
   private preventDefaults(event: Event) {
@@ -91,20 +118,11 @@ export default class DragAndDropHandler {
   }
 
   private handleFileEnter(event: DragEvent) {
-    // const files = event.dataTransfer?.files
-    // if(files && files.length > 0) {
-    //
-    // }
     this.isFileDropOver = true;
     this.emit('file-over');
   }
 
   private handleFileDropCancel(event: DragEvent) {
-    // const files = event.dataTransfer?.files
-    // if (files && files.length > 0) {
-    //
-    // }
-
     const isLeavingChild =
       event.relatedTarget && this.element.contains(event.relatedTarget as Node);
 
@@ -120,7 +138,7 @@ export default class DragAndDropHandler {
       return;
     }
 
-    logger.log('handleFileDrop', event);
+    // logger.log('handleFileDrop', event);
     this.handleDrop(event.dataTransfer);
   }
 
@@ -170,7 +188,7 @@ export default class DragAndDropHandler {
     files?: File[],
     text?: string,
   ): void {
-    logger.debug('emit', event, files, text);
+    // logger.debug('emit', event, files, text);
     this.eventListeners.get(event)?.forEach(callback => callback(files, text));
   }
 }

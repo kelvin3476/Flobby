@@ -29,42 +29,11 @@ const ImageUploader = () => {
   useEffect(() => {
     const target = dragAreaRef.current;
 
-    const preventDefaults = (e: Event) => {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-
-    // 전역 기본 이벤트 방지
-    ['dragenter', 'dragover', 'drop'].forEach(event =>
-      window.addEventListener(event, preventDefaults),
-    );
-
-    // const handlePaste = (e: ClipboardEvent) => {
-    //   const items = e.clipboardData?.items;
-    //   if (!items) return;
-
-    //   for (let i = 0; i < items.length; i++) {
-    //     const item = items[i];
-    //     if (item.type.startsWith('image/')) {
-    //       const file = item.getAsFile();
-    //       if (file) {
-    //         handleFile(file);
-    //         break;
-    //       }
-    //     }
-    //   }
-    // };
-
-    // 붙여넣기 이벤트
-    // if (target) {
-    //   target.addEventListener('paste', handlePaste);
-    // }
-
     // 드래그앤드롭 핸들러
     let dropHandler: DragAndDropHandler | null = null;
 
     if (target) {
-      dropHandler = new DragAndDropHandler(target, false);
+      dropHandler = new DragAndDropHandler(target, true, true);
 
       dropHandler.on('file-drop', (files, text) => {
         if (files?.length > 0) handleFile(files[0]);
@@ -75,12 +44,6 @@ const ImageUploader = () => {
     }
 
     return () => {
-      ['dragenter', 'dragover', 'drop'].forEach(event =>
-        window.removeEventListener(event, preventDefaults),
-      );
-      // if (target) {
-      //   target.removeEventListener('paste', handlePaste);
-      // }
       dropHandler?.destroy();
     };
   }, []);
