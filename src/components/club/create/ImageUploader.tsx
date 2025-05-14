@@ -27,13 +27,10 @@ const ImageUploader = () => {
   };
 
   useEffect(() => {
-    const target = dragAreaRef.current;
-
-    // 드래그앤드롭 핸들러
     let dropHandler: DragAndDropHandler | null = null;
 
-    if (target) {
-      dropHandler = new DragAndDropHandler(target, true, true);
+    if (dragAreaRef.current) {
+      dropHandler = new DragAndDropHandler(dragAreaRef.current, true, true);
 
       dropHandler.on('file-drop', (files, text) => {
         if (files?.length > 0) handleFile(files[0]);
