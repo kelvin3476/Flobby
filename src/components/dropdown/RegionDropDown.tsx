@@ -19,28 +19,25 @@ const RegionDropDown = () => {
   const { setLocation } = useClubCreateStore();
 
   useEffect(() => {
-    const fetchRegionListData = async () => {
-      await regionListController.getRegionList();
-
-      logger.log(regionListController.model.regionList);
-
-      const regionList = regionListController.model.regionList;
-
-      const selectedRegionId = Number(getCookie('regionId'));
-      if (selectedRegionId) {
-        for (const [mainRegion, subRegions] of Object.entries(regionList)) {
-          const selectedSubRegion = subRegions.find(
-            region => region.regionId === selectedRegionId,
-          );
-          if (selectedSubRegion) {
-            setSelectedSubRegion(selectedSubRegion.regionName);
-            setSelectedMainRegion(mainRegion);
+    regionListController
+      .getRegionList()
+      .then(response => {
+        const selectedRegionId = Number(getCookie('regionId'));
+        if (selectedRegionId) {
+          for (const [mainRegion, subRegions] of Object.entries(response)) {
+            const selectedSubRegion = subRegions.find(
+              region => region.regionId === selectedRegionId,
+            );
+            if (selectedSubRegion) {
+              setSelectedSubRegion(selectedSubRegion.regionName);
+              setSelectedMainRegion(mainRegion);
+            }
           }
         }
-      }
-    };
-
-    fetchRegionListData();
+      })
+      .catch(err => {
+        logger.error(err);
+      });
   }, []);
 
   const handleMainSelect = (regionName: string) => {
