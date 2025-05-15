@@ -25,6 +25,12 @@ interface ClubCreateStore {
 
   file: File | null;
   setFile: (file: File | null) => void;
+
+  isImageFileValid: boolean;
+  setIsImageFileValid: (isImageFileValid: boolean) => void;
+
+  imageFileError: string;
+  setImageFileError: (imageFileError: string) => void;
 }
 
 const useClubCreateStore = create<ClubCreateStore>(set => ({
@@ -51,6 +57,12 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
 
   file: null,
   setFile: (file: File | null) => set({ file }),
+
+  isImageFileValid: true,
+  setIsImageFileValid: (isImageFileValid: boolean) => set({ isImageFileValid }),
+
+  imageFileError: '',
+  setImageFileError: (imageFileError: string) => set({ imageFileError }),
 }));
 
 export default useClubCreateStore;
