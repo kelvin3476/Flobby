@@ -29,57 +29,66 @@
         height: 100%;
         border-radius: 6px;
 
+        .overlay {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 6px;
+          background: rgba(0, 0, 0, 0.5);
+          opacity: 0;
+
+          &:hover {
+            opacity: 1;
+            z-index: 1;
+          }
+
+          .image-change-btn {
+            width: 96px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 6px;
+            border: 1px solid #764bf6;
+            background: #fff;
+
+            &:focus {
+              outline: none;
+            }
+
+            > span {
+              width: 96px;
+              height: 20px;
+
+              color: #764bf6;
+              text-align: center;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 150%;
+              letter-spacing: -0.3px;
+            }
+          }
+        }
+
         img {
           aspect-ratio: 1/1;
           object-fit: cover;
           width: 100%;
           height: 100%;
           border-radius: 6px;
-
-          &:hover {
-            opacity: 0.5;
-          }
-        }
-
-        .image-change-btn {
-          width: 96px;
-          height: 40px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          border-radius: 6px;
-          border: 1px solid #764bf6;
-          background: rgba(255, 255, 255, 0.5);
-
-          opacity: 0;
-
-          &:focus {
-            outline: none;
-          }
-
-          > span {
-            width: 96px;
-            height: 20px;
-
-            color: #764bf6;
-            text-align: center;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 150%;
-            letter-spacing: -0.3px;
-          }
-        }
-
-        &:hover {
-          .image-change-btn {
-            opacity: 1;
-          }
         }
       }
 
