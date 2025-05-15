@@ -1,7 +1,6 @@
 import { MainData, RegionItem } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 import { getCookie } from '../../../utils/Cookie';
-import logger from '../../../utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {
@@ -37,9 +36,6 @@ export class RegionContextModel {
     } else {
       this.selectedRegion = this.preferRegionsList[0] || data.selectedRegion;
     }
-
-    logger.log('selectedRegion', this.selectedRegion);
-    logger.log('preferRegionsList', this.preferRegionsList);
   };
 
   // 데이터 초기화

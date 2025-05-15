@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
 import { RegionListController } from '../../services/main/controllers/RegionListController';
-import { RegionContextController } from '../../services/main/controllers/RegionContextController';
-import { RegionItem } from '../../api/ApiTypes';
 import useClubCreateStore from '../../store/club/useClubCreateStore';
+import logger from '../../utils/Logger';
+import { getCookie } from '../../utils/Cookie';
 import '../../styles/dropdown/CommonDropDown.scss';
 
 const RegionDropDown = () => {
   const regionListController = RegionListController.getInstance();
-  const regionContextController = RegionContextController.getInstance();
 
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
@@ -20,52 +19,26 @@ const RegionDropDown = () => {
   const { setLocation } = useClubCreateStore();
 
   useEffect(() => {
-    const fetchRegionListData = async () => {
-      await regionListController.getRegionList();
-
-      const initialGroup = getInitialGroup(
-        regionListController.model.regionList,
-      );
-
-      if (initialGroup) {
-        setSelectedMainRegion(initialGroup);
-        const subRegions = regionListController.model.regionList[initialGroup];
-
-        // 기획 디폴트값 or 새로 선택된 상위 지역 기반으로 첫번째 데이터 렌더링 되도록 수정
-        if (subRegions && subRegions.length > 0) {
-          const defaultSubRegion =
-            regionContextController.model.selectedRegion &&
-            subRegions.some(
-              region =>
-                region.regionName ===
-                regionContextController.model.selectedRegion.regionName,
-            )
-              ? regionContextController.model.selectedRegion.regionName
-              : subRegions[0].regionName;
-
-          setSelectedSubRegion(defaultSubRegion);
+    regionListController
+      .getRegionList()
+      .then(response => {
+        const selectedRegionId = Number(getCookie('regionId'));
+        if (selectedRegionId) {
+          for (const [mainRegion, subRegions] of Object.entries(response)) {
+            const selectedSubRegion = subRegions.find(
+              region => region.regionId === selectedRegionId,
+            );
+            if (selectedSubRegion) {
+              setSelectedSubRegion(selectedSubRegion.regionName);
+              setSelectedMainRegion(mainRegion);
+            }
+          }
         }
-      }
-    };
-
-    fetchRegionListData();
+      })
+      .catch(err => {
+        logger.error(err);
+      });
   }, []);
-
-  const getInitialGroup = (
-    regionList: Record<string, RegionItem[]>,
-  ): string | null => {
-    const selectedRegion = regionContextController.model.selectedRegion;
-    if (!selectedRegion) return null;
-
-    for (const [group, regions] of Object.entries(regionList)) {
-      if (
-        regions.some(region => region.regionName === selectedRegion.regionName)
-      ) {
-        return group;
-      }
-    }
-    return null;
-  };
 
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
