@@ -4,6 +4,8 @@ import { RegionListController } from '../../services/main/controllers/RegionList
 import { RegionContextController } from '../../services/main/controllers/RegionContextController';
 import { RegionItem } from '../../api/ApiTypes';
 import useClubCreateStore from '../../store/club/useClubCreateStore';
+import logger from '../../utils/Logger';
+import { getCookie } from '../../utils/Cookie';
 import '../../styles/dropdown/CommonDropDown.scss';
 
 const RegionDropDown = () => {
@@ -23,27 +25,24 @@ const RegionDropDown = () => {
     const fetchRegionListData = async () => {
       await regionListController.getRegionList();
 
-      const initialGroup = getInitialGroup(
-        regionListController.model.regionList,
-      );
+      logger.log(regionListController.model.regionList);
+
+      const regionList = regionListController.model.regionList;
+
+      const initialGroup = getInitialGroup(regionList);
 
       if (initialGroup) {
-        setSelectedMainRegion(initialGroup);
-        const subRegions = regionListController.model.regionList[initialGroup];
-
-        // 기획 디폴트값 or 새로 선택된 상위 지역 기반으로 첫번째 데이터 렌더링 되도록 수정
-        if (subRegions && subRegions.length > 0) {
-          const defaultSubRegion =
-            regionContextController.model.selectedRegion &&
-            subRegions.some(
-              region =>
-                region.regionName ===
-                regionContextController.model.selectedRegion.regionName,
-            )
-              ? regionContextController.model.selectedRegion.regionName
-              : subRegions[0].regionName;
-
-          setSelectedSubRegion(defaultSubRegion);
+        const selectedRegionId = Number(getCookie('regionId'));
+        if (selectedRegionId) {
+          for (const [mainRegion, subRegions] of Object.entries(regionList)) {
+            const selectedSubRegion = subRegions.find(
+              region => region.regionId === selectedRegionId,
+            );
+            if (selectedSubRegion) {
+              setSelectedSubRegion(selectedSubRegion.regionName);
+              setSelectedMainRegion(mainRegion);
+            }
+          }
         }
       }
     };
