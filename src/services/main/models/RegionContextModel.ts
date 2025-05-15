@@ -51,9 +51,6 @@ export class RegionContextModel {
         this.mainData = data;
         this.handleSelectedRegion(data);
 
-        // 초기값 쿠키 저장
-        setCookie('regionId', this.mainData.selectedRegion.regionId.toString());
-
         return this.mainData;
       } else if (code === 1001) {
         // API 호출 실패

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
 import { RegionListController } from '../../services/main/controllers/RegionListController';
-import { RegionContextController } from '../../services/main/controllers/RegionContextController';
-import { RegionItem } from '../../api/ApiTypes';
 import useClubCreateStore from '../../store/club/useClubCreateStore';
 import logger from '../../utils/Logger';
 import { getCookie } from '../../utils/Cookie';
@@ -10,7 +8,6 @@ import '../../styles/dropdown/CommonDropDown.scss';
 
 const RegionDropDown = () => {
   const regionListController = RegionListController.getInstance();
-  const regionContextController = RegionContextController.getInstance();
 
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
@@ -29,19 +26,15 @@ const RegionDropDown = () => {
 
       const regionList = regionListController.model.regionList;
 
-      const initialGroup = getInitialGroup(regionList);
-
-      if (initialGroup) {
-        const selectedRegionId = Number(getCookie('regionId'));
-        if (selectedRegionId) {
-          for (const [mainRegion, subRegions] of Object.entries(regionList)) {
-            const selectedSubRegion = subRegions.find(
-              region => region.regionId === selectedRegionId,
-            );
-            if (selectedSubRegion) {
-              setSelectedSubRegion(selectedSubRegion.regionName);
-              setSelectedMainRegion(mainRegion);
-            }
+      const selectedRegionId = Number(getCookie('regionId'));
+      if (selectedRegionId) {
+        for (const [mainRegion, subRegions] of Object.entries(regionList)) {
+          const selectedSubRegion = subRegions.find(
+            region => region.regionId === selectedRegionId,
+          );
+          if (selectedSubRegion) {
+            setSelectedSubRegion(selectedSubRegion.regionName);
+            setSelectedMainRegion(mainRegion);
           }
         }
       }
@@ -49,22 +42,6 @@ const RegionDropDown = () => {
 
     fetchRegionListData();
   }, []);
-
-  const getInitialGroup = (
-    regionList: Record<string, RegionItem[]>,
-  ): string | null => {
-    const selectedRegion = regionContextController.model.selectedRegion;
-    if (!selectedRegion) return null;
-
-    for (const [group, regions] of Object.entries(regionList)) {
-      if (
-        regions.some(region => region.regionName === selectedRegion.regionName)
-      ) {
-        return group;
-      }
-    }
-    return null;
-  };
 
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
