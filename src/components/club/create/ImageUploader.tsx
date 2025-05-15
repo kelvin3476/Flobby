@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
-import '../../../styles/club/create/ImageUploader.scss';
 import DragAndDropController from '../../../services/DragAndDrop/DragAndDropController';
+import FilePickerInput from '../../../utils/FilePickerInput';
+import '../../../styles/club/create/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 500 * 1024;
 
 const ImageUploader = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragAreaRef = useRef<HTMLDivElement>(null);
+  const [filePicker, setFilePicker] = useState<FilePickerInput<File> | null>(
+    null,
+  );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { setFile } = useClubCreateStore();
 
@@ -29,9 +32,10 @@ const ImageUploader = () => {
       return url;
     });
     setFile(file);
-    logger.log('imageFile', file);
+    logger.log('ImageUploader', 'imageFile', file);
   };
 
+  // 드래그 앤 드롭
   useEffect(() => {
     if (!dragAreaRef.current) return;
 
@@ -45,6 +49,16 @@ const ImageUploader = () => {
 
     dropHandler.on('file-drop', (files, text) => {
       if (files?.length > 0) handleFile(files[0]);
+
+      // FilePicker 이미지 파일 업로드 처리 추가
+      if (files.length > 0 && filePicker) {
+        if (files.length > 0 && filePicker) {
+          filePicker
+            .getFiles(undefined, [...files])
+            .then(result => logger.log('업로드 성공', result))
+            .catch(error => logger.error('업로드 실패', error));
+        }
+      }
     });
 
     dropHandler.on('file-drop-cancel', () => logger.log('file-drop-cancel'));
@@ -57,10 +71,29 @@ const ImageUploader = () => {
     };
   }, []);
 
+  // 파일 인풋
+  useEffect(() => {
+    if (!fileInputRef.current) return;
+
+    const picker = new FilePickerInput<File>(
+      fileInputRef.current,
+      async files => {
+        if (files.length > 0) {
+          handleFile(files[0]);
+        }
+        return files;
+      },
+    );
+
+    setFilePicker(picker);
+  }, []);
+
+  // 클릭 이벤트 핸들러
   const handleClick = () => {
-    fileInputRef.current?.click();
+    filePicker?.getFiles();
   };
 
+  // 파일 변경 이벤트 핸들러
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) handleFile(file);
