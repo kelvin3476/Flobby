@@ -3,6 +3,7 @@ import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
 import '../../../styles/club/create/ImageUploader.scss';
+import DragAndDropController from '../../../services/DragAndDrop/DragAndDropController';
 
 const MAX_FILE_SIZE = 500 * 1024;
 
@@ -21,27 +22,38 @@ const ImageUploader = () => {
     }
 
     const url = URL.createObjectURL(file);
-    setImageUrl(url);
+    setImageUrl(prevUrl => {
+      if (prevUrl) {
+        URL.revokeObjectURL(prevUrl);
+      }
+      return url;
+    });
     setFile(file);
     logger.log('imageFile', file);
   };
 
   useEffect(() => {
-    let dropHandler: DragAndDropHandler | null = null;
+    if (!dragAreaRef.current) return;
 
-    if (dragAreaRef.current) {
-      dropHandler = new DragAndDropHandler(dragAreaRef.current, true, true);
+    const dropHandler = DragAndDropController.init(
+      dragAreaRef.current,
+      true,
+      true,
+    );
 
-      dropHandler.on('file-drop', (files, text) => {
-        if (files?.length > 0) handleFile(files[0]);
-      });
+    if (!dropHandler) return;
 
-      dropHandler.on('file-drop-cancel', () => logger.log('file-drop-cancel'));
-      dropHandler.on('file-over', () => logger.log('file-over'));
-    }
+    dropHandler.on('file-drop', (files, text) => {
+      if (files?.length > 0) handleFile(files[0]);
+    });
+
+    dropHandler.on('file-drop-cancel', () => logger.log('file-drop-cancel'));
+    dropHandler.on('file-over', () => logger.log('file-over'));
 
     return () => {
-      dropHandler?.destroy();
+      if (dragAreaRef.current) {
+        DragAndDropController.destroy(dragAreaRef.current);
+      }
     };
   }, []);
 
