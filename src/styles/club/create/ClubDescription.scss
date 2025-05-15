@@ -27,28 +27,72 @@
     > input:focus {
       outline: none;
     }
+
+    .err-message {
+      text-align: start;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      color: #F94E51;
+      line-height: 21px;
+      letter-spacing: -0.3px;
+    }
   }
 
-
-  .club-description-textarea {
+  .desc-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
     width: 920px;
-    height: 302px;
-    padding: 12px;
-    gap: 10px;
+    height: 346px;
 
-    border-radius: 6px;
-    border: 1px solid #E8EBED;
-    resize: none;
+    .area-wrapper {
+      position: relative;
+      width: 100%;
+      height: 346px;
 
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    color: #9EA4AA;
-    line-height: 24px;
-    letter-spacing: -0.3px;
-  }
-  > textarea:focus {
-    outline: none;
+      .club-description-textarea {
+        width: 100%;
+        height: 346px;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #E8EBED;
+        resize: none;
+    
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        color: #9EA4AA;
+        line-height: 24px;
+        letter-spacing: -0.3px;
+      }
+      > textarea:focus {
+        outline: none;
+      }
+  
+      .text-count {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        color: #9EA4AA;
+        line-height: 24px;
+        letter-spacing: -0.3px;
+      }
+    }
+
+    .err-message {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      color: #F94E51;
+      line-height: 21px;
+      letter-spacing: -0.3px;
+    }
   }
 }
