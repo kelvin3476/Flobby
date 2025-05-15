@@ -22,6 +22,18 @@ interface ClubCreateStore {
 
   maxMembers: number;
   setMaxMembers: (maxMember: number) => void;
+
+  // 업로드한 이미지 파일
+  file: File | null;
+  setFile: (file: File | null) => void;
+
+  // 이미지 파일 유효성 검사값
+  isImageFileValid: boolean;
+  setIsImageFileValid: (isImageFileValid: boolean) => void;
+
+  // 이미지 파일 에러 메세지
+  imageFileError: string;
+  setImageFileError: (imageFileError: string) => void;
 }
 
 const useClubCreateStore = create<ClubCreateStore>(set => ({
@@ -45,6 +57,15 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
 
   maxMembers: 0,
   setMaxMembers: (maxMembers: number) => set({ maxMembers }),
+
+  file: null,
+  setFile: (file: File | null) => set({ file }),
+
+  isImageFileValid: true,
+  setIsImageFileValid: (isImageFileValid: boolean) => set({ isImageFileValid }),
+
+  imageFileError: '',
+  setImageFileError: (imageFileError: string) => set({ imageFileError }),
 }));
 
 export default useClubCreateStore;
