@@ -5,6 +5,8 @@ type FileDropHandlerEvents = 'file-over' | 'file-drop-cancel' | 'file-drop';
 export type FileDropHandlerFunction = (files?: File[], text?: string) => void;
 
 export default class DragAndDropHandler {
+  private static instance: DragAndDropHandler;
+
   isFileDropOver = false;
 
   private element: HTMLElement;
@@ -138,7 +140,6 @@ export default class DragAndDropHandler {
       return;
     }
 
-    // logger.log('handleFileDrop', event);
     this.handleDrop(event.dataTransfer);
   }
 
@@ -188,7 +189,6 @@ export default class DragAndDropHandler {
     files?: File[],
     text?: string,
   ): void {
-    // logger.debug('emit', event, files, text);
     this.eventListeners.get(event)?.forEach(callback => callback(files, text));
   }
 }

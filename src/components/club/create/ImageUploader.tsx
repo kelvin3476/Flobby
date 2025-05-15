@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
-import DragAndDropController from '../../../services/DragAndDrop/DragAndDropController';
 import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
+import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import '../../../styles/club/create/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -51,38 +51,43 @@ const ImageUploader = () => {
 
   // 드래그 앤 드롭
   useEffect(() => {
+    let init = true;
+
     if (!dragAreaRef.current) return;
 
-    const dropHandler = DragAndDropController.init(
-      dragAreaRef.current,
-      true,
-      true,
-    );
+    if (init) {
+      const dragAndDrop = new DragAndDropHandler(
+        dragAreaRef.current,
+        true,
+        true,
+      );
+      init = false;
 
-    if (!dropHandler) return;
+      if (!dragAndDrop) return;
 
-    dropHandler.on('file-drop', (files, text) => {
-      if (files?.length > 0) handleFile(files[0]);
+      dragAndDrop.on('file-drop', files => {
+        if (files?.length > 0) handleFile(files[0]);
 
-      // FilePicker 이미지 파일 업로드 처리 추가
-      if (files.length > 0 && filePicker) {
+        // FilePicker 이미지 파일 업로드 처리 추가
         if (files.length > 0 && filePicker) {
-          filePicker
-            .getFiles(undefined, [...files])
-            .then(result => logger.log('업로드 성공', result))
-            .catch(error => logger.error('업로드 실패', error));
+          if (files.length > 0 && filePicker) {
+            filePicker
+              .getFiles(undefined, [...files])
+              .then(result => logger.log('업로드 성공', result))
+              .catch(error => logger.error('업로드 실패', error));
+          }
         }
-      }
-    });
+      });
 
-    dropHandler.on('file-drop-cancel', () => logger.log('file-drop-cancel'));
-    dropHandler.on('file-over', () => logger.log('file-over'));
+      dragAndDrop.on('file-drop-cancel', e => {
+        logger.log('file-drop-cancel');
+      });
+      dragAndDrop.on('file-over', () => logger.log('file-over'));
 
-    return () => {
-      if (dragAreaRef.current) {
-        DragAndDropController.destroy(dragAreaRef.current);
-      }
-    };
+      return () => {
+        dragAndDrop.destroy();
+      };
+    }
   }, []);
 
   // 파일 인풋
