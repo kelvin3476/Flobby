@@ -3,6 +3,7 @@ import useClubCreateStore from '../../../store/club/useClubCreateStore';
 import logger from '../../../utils/Logger';
 import DragAndDropController from '../../../services/DragAndDrop/DragAndDropController';
 import FilePickerInput from '../../../utils/FilePickerInput';
+import Label from './Label';
 import '../../../styles/club/create/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -114,10 +115,7 @@ const ImageUploader = () => {
 
   return (
     <div className="image-uploader-container">
-      <div className="image-uploader-label-box">
-        <span className="image-uploader-label">대표 이미지 첨부</span>
-        <span className="image-uploader-required">*</span>
-      </div>
+      <Label className="image-uploader" labelTitle="대표 이미지 첨부"></Label>
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
