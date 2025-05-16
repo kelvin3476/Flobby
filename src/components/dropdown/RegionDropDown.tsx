@@ -65,7 +65,7 @@ const RegionDropDown = () => {
   return (
     <div className="dropdown-group-container">
       <div className="dropdown-label-box">
-        <span className="dropdown-label">지역 선택</span>
+        <span className="dropdown-label">지역</span>
         <span className="dropdown-required">*</span>
       </div>
       <div className="dropdown-box">
