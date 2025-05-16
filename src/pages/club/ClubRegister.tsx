@@ -16,6 +16,40 @@ import RequiredText from "../../components/club/text/RequiredText";
 import "../../styles/club/register/ClubRegister.scss";
 
 const ClubRegister = () => {
+  const {
+    file,
+    setIsImageFileValid,
+    setImageFileError,
+    mainCategory,
+    subCategory,
+    setIsCategoryValid,
+    setCategoryError,
+  } = useClubRegisterStore();
+
+  const handleValidChange = () => {
+    let isError = false;
+
+    if (!file) {
+      setIsImageFileValid(false);
+      setImageFileError("이미지를 등록해 주세요.");
+      isError = true;
+    } else {
+      setIsImageFileValid(true);
+      setImageFileError("");
+    }
+
+    if (!mainCategory || !subCategory) {
+      setIsCategoryValid(false);
+      setCategoryError("카테고리를 선택해 주세요.");
+      isError = true;
+    } else {
+      setIsCategoryValid(true);
+      setCategoryError("");
+    }
+
+    if(isError) return;
+  };
+  
   return (
     <div className="register-container">
       <MainHeader />
@@ -37,7 +71,7 @@ const ClubRegister = () => {
           <ClubAuto />
           <div className="buttons">
             <Button className="cancel-btn" title="취소" onClick={() => console.log("취소염")} />
-            <Button className="allow-btn" title="등록" onClick={() => console.log("오키염")} />
+            <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
       </main>
