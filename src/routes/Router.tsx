@@ -19,7 +19,6 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
 
-
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
