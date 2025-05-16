@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { DEFAULT_REGION } from '../../services/main/models/RegionContextModel';
 
-interface ClubCreateStore {
+interface ClubRegisterStore {
   clubName: string;
   setClubName: (clubName: string) => void;
 
@@ -51,7 +51,7 @@ interface ClubCreateStore {
   setImageFileError: (imageFileError: string) => void;
 }
 
-const useClubCreateStore = create<ClubCreateStore>(set => ({
+const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   clubName: '',
   setClubName: (clubName: string) => set({ clubName }),
 
@@ -98,4 +98,4 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
   setImageFileError: (imageFileError: string) => set({ imageFileError }),
 }));
 
-export default useClubCreateStore;
+export default useClubRegisterStore;
