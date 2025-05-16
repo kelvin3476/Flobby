@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../../../styles/club/create/MaxMember.scss';
-import useClubCreateStore from '../../../store/club/useClubCreateStore';
+import '../../../styles/club/register/MaxMember.scss';
+import useClubCreateStore from '../../../store/club/useClubRegisterStore';
 
 const MaxMember = () => {
   const { setMaxMembers } = useClubCreateStore();

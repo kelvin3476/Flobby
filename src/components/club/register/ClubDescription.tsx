@@ -1,8 +1,8 @@
 import React from "react";
 import Label from "./Label";
-import useClubCreateStore from "../../../store/club/useClubCreateStore";
+import useClubCreateStore from "../../../store/club/useClubRegisterStore";
 
-import "../../../styles/club/create/ClubDescription.scss";
+import "../../../styles/club/register/ClubDescription.scss";
 
 const ClubDescription = () => {
   
