@@ -47,7 +47,7 @@ const CategoryDropDown = () => {
   return (
     <div className="dropdown-group-container">
       <div className="dropdown-label-box">
-        <span className="dropdown-label">카테고리 선택</span>
+        <span className="dropdown-label">카테고리</span>
         <span className="dropdown-required">*</span>
       </div>
       <div className="dropdown-box">
