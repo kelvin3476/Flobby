@@ -1,0 +1,23 @@
+.required-container {
+  display: flex;
+  width: 88px;
+  gap: 2px;
+
+  > span {
+    font-size: 12px;
+    color: #F94E51;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+  }
+
+  > div {
+    font-size: 14px;
+    color: #72787F;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: -0.3px;
+  }
+}
