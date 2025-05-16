@@ -35,8 +35,20 @@ interface ClubRegisterStore {
   location: number;
   setLocation: (location: number) => void;
 
+  isCategoryValid: boolean,
+  setIsCategoryValid: (isCategoryValid: boolean) => void;
+
+  categoryError: string,
+  setCategoryError: (categoryError: string) => void;
+
   maxMembers: number;
   setMaxMembers: (maxMember: number) => void;
+
+  isMaxValid: boolean;
+  setIsMaxValid: (isMaxValid: boolean) => void;
+
+  maxError: string;
+  setMaxError: (maxError: string) => void;
 
   // 업로드한 이미지 파일
   file: File | null;
@@ -85,8 +97,20 @@ const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   location: DEFAULT_REGION.regionId,
   setLocation: (location: number) => set({ location }),
 
+  isCategoryValid: true,
+  setIsCategoryValid: (isCategoryValid: boolean) => set({ isCategoryValid }),
+
+  categoryError: "",
+  setCategoryError: (categoryError: string) => set({ categoryError }),
+
   maxMembers: 0,
   setMaxMembers: (maxMembers: number) => set({ maxMembers }),
+
+  isMaxValid: true,
+  setIsMaxValid: (isMaxValid: boolean) => set({ isMaxValid }),
+
+  maxError: "",
+  setMaxError: (maxError: string) => set({ maxError }),
 
   file: null,
   setFile: (file: File | null) => set({ file }),

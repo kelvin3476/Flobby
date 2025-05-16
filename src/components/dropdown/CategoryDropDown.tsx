@@ -9,7 +9,7 @@ import { HobbyCategory } from '../../api/ApiTypes';
 const CategoryDropDown = () => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
-  const { mainCategory, setMainCategory, setSubCategory } =
+  const { mainCategory, setMainCategory, setSubCategory, isCategoryValid, setIsCategoryValid, categoryError, setCategoryError } =
     useClubRegisterStore();
 
   useEffect(() => {
@@ -58,6 +58,8 @@ const CategoryDropDown = () => {
           onSelect={(value: string) => {
             setMainCategory(value);
             setSubCategory(null);
+            setIsCategoryValid(true);
+            setCategoryError("");
           }}
         />
         <DropDown
@@ -66,9 +68,14 @@ const CategoryDropDown = () => {
           disabled={mainCategory === ''}
           onSelect={(value: string) => {
             setSubCategory(value);
+            setIsCategoryValid(true);
+            setCategoryError("");
           }}
         />
       </div>
+      {!isCategoryValid && (
+        <div className="err-message">{categoryError}</div>
+      )}
     </div>
   );
 };
