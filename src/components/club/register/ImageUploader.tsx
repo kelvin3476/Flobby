@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClubCreateStore from '../../../store/club/useClubRegisterStore';
+import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
 import logger from '../../../utils/Logger';
 import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
@@ -21,7 +21,7 @@ const ImageUploader = () => {
     setIsImageFileValid,
     imageFileError,
     setImageFileError,
-  } = useClubCreateStore();
+  } = useClubRegisterStore();
 
   // 파일 처리 함수
   const handleFile = (file: File) => {

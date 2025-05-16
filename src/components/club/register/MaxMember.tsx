@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../../../styles/club/register/MaxMember.scss';
-import useClubCreateStore from '../../../store/club/useClubRegisterStore';
+import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
 
 const MaxMember = () => {
-  const { setMaxMembers } = useClubCreateStore();
+  const { setMaxMembers } = useClubRegisterStore();
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

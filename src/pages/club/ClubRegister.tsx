@@ -1,4 +1,5 @@
 import React from "react";
+import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
 import MainHeader from "../../components/header/MainHeader";
 import ImageUploader from "../../components/club/register/ImageUploader";

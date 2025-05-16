@@ -1,6 +1,6 @@
 import React from "react";
 import Label from "./Label";
-import useClubCreateStore from "../../../store/club/useClubRegisterStore";
+import useClubRegisterStore from "../../../store/club/useClubRegisterStore";
 
 import "../../../styles/club/register/ClubDescription.scss";
 
@@ -21,7 +21,7 @@ const ClubDescription = () => {
     setTitleError,
     descError,
     setDescError,
-  } = useClubCreateStore();
+  } = useClubRegisterStore();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setClubName(e.target.value);

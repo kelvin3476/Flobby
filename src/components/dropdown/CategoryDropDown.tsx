@@ -3,14 +3,14 @@ import DropDown from './Dropdown';
 import SignUp from '../../api/signup/SignUp';
 import logger from '../../utils/Logger';
 import '../../styles/dropdown/CommonDropDown.scss';
-import useClubCreateStore from '../../store/club/useClubRegisterStore';
+import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
 
 const CategoryDropDown = () => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
   const { mainCategory, setMainCategory, setSubCategory } =
-    useClubCreateStore();
+    useClubRegisterStore();
 
   useEffect(() => {
     const fetchHobbyList = async () => {
