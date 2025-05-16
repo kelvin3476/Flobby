@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClubCreateStore from '../../../store/club/useClubCreateStore';
+import useClubCreateStore from '../../../store/club/useClubRegisterStore';
 import logger from '../../../utils/Logger';
 import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
-import '../../../styles/club/create/ImageUploader.scss';
+import '../../../styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 

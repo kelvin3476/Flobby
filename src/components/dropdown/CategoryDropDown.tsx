@@ -3,7 +3,7 @@ import DropDown from './Dropdown';
 import SignUp from '../../api/signup/SignUp';
 import logger from '../../utils/Logger';
 import '../../styles/dropdown/CommonDropDown.scss';
-import useClubCreateStore from '../../store/club/useClubCreateStore';
+import useClubCreateStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
 
 const CategoryDropDown = () => {
