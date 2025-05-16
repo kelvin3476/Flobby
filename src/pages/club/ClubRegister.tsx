@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
 import MainHeader from "../../components/header/MainHeader";
@@ -25,6 +26,8 @@ const ClubRegister = () => {
     setIsCategoryValid,
     setCategoryError,
   } = useClubRegisterStore();
+
+  const nav = useNavigate();
 
   const handleValidChange = () => {
     let isError = false;
@@ -70,7 +73,7 @@ const ClubRegister = () => {
           <ClubDescription />
           <ClubAuto />
           <div className="buttons">
-            <Button className="cancel-btn" title="취소" onClick={() => console.log("취소염")} />
+            <Button className="cancel-btn" title="취소" onClick={() => nav('/club/main')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
