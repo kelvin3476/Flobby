@@ -126,3 +126,22 @@ export interface MainData {
   boardItems: boardItem[];
   selectedRegion: RegionItem;
 }
+
+/* -------------------- 모임 게시글 api 타입 -------------------- */
+
+/* 모임 게시글 생성시 필요한 json 데이터셋 */
+export interface CreateClubJsonData {
+  clubName: string;
+  description: string;
+  mainCategory: string;
+  subCategory: string;
+  location: number;
+  maxMembers: number;
+  autoApprovalFlag: boolean;
+}
+
+/* 모임 게시글 생성시 필요한 전체 데이터셋 */
+export interface CreateClubData extends CreateClubJsonData {
+  file: File;
+  data: CreateClubJsonData;
+}
