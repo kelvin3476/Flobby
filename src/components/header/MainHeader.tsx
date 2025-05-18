@@ -27,7 +27,7 @@ const MainHeader = () => {
         <div className="right-wrapper">
           <SearchBar />
           <div className="btns-wrapper">
-            <Button type="button" className="login-btn" title="로그인" onClick={() => nav("/")}/>
+            <Button type="button" className="login-btn" title="로그인" onClick={() => nav("/login")}/>
             <Button type="button" className="signup-btn" title="회원가입" onClick={() => nav("/signup/agreement")}/>
           </div>
         </div>
