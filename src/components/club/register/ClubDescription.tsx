@@ -29,7 +29,7 @@ const ClubDescription = () => {
     if(e.target.value.trim() === "") {
       setIsTitleValid(false);
       setTitleError("모임 제목을 입력해 주세요.");
-    } else if (e.target.value.length >= 14) {
+    } else if (e.target.value.length > 14) {
       setIsTitleValid(false);
       setTitleError("제목은 최대 14자까지 작성할 수 있어요.");
     } else {
@@ -45,7 +45,7 @@ const ClubDescription = () => {
     if(e.target.value.trim() === "") {
       setIsDescValid(false);
       setDescError("소개글을 입력해 주세요.");
-    } else if (e.target.value.length >= 1000) {
+    } else if (e.target.value.length > 1000) {
       setIsDescValid(false);
       setDescError("소개글은 최대 1,000자까지 작성할 수 있어요.");
     } else {
