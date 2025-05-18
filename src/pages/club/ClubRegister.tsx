@@ -30,6 +30,12 @@ const ClubRegister = () => {
     subCategory,
     setIsCategoryValid,
     setCategoryError,
+    setIsTitleValid,
+    setIsDescValid,
+    setIsMaxValid,
+    setTitleError,
+    setDescError,
+    setMaxError,
   } = useClubRegisterStore();
 
   const nav = useNavigate();
@@ -37,6 +43,7 @@ const ClubRegister = () => {
   const handleValidChange = () => {
     let isError = false;
 
+    // 이미지 유효성 검사
     if (!file) {
       setIsImageFileValid(false);
       setImageFileError("이미지를 등록해 주세요.");
@@ -46,6 +53,7 @@ const ClubRegister = () => {
       setImageFileError("");
     }
 
+    // 카테고리 유효성 검사
     if (!mainCategory || !subCategory) {
       setIsCategoryValid(false);
       setCategoryError("카테고리를 선택해 주세요.");
@@ -53,6 +61,36 @@ const ClubRegister = () => {
     } else {
       setIsCategoryValid(true);
       setCategoryError("");
+    }
+
+    // 모임제목 유효성 검사
+    if (clubName.trim() === "") {
+      setIsTitleValid(false);
+      setTitleError("모임 제목을 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsTitleValid(true);
+      setTitleError("");
+    }
+
+    // 모임내용 유효성 검사
+    if (description.trim() === "") {
+      setIsDescValid(false);
+      setDescError("소개글을 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsDescValid(true);
+      setDescError("");
+    }
+
+    // 모임규모 유효성 검사
+    if (!maxMembers) {
+      setIsMaxValid(false);
+      setMaxError("인원 수를 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsMaxValid(true);
+      setMaxError("");
     }
 
     if(isError) return;
