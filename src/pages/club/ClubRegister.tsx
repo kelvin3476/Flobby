@@ -18,6 +18,11 @@ import "../../styles/club/register/ClubRegister.scss";
 
 const ClubRegister = () => {
   const {
+    clubName,
+    description,
+    autoApprovalFlag,
+    location,
+    maxMembers,
     file,
     setIsImageFileValid,
     setImageFileError,
@@ -73,7 +78,7 @@ const ClubRegister = () => {
           <ClubDescription />
           <ClubAuto />
           <div className="buttons">
-            <Button className="cancel-btn" title="취소" onClick={() => nav('/club/main')} />
+            <Button className="cancel-btn" title="취소" onClick={() => nav('/')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
