@@ -30,8 +30,6 @@ const MaxMember = () => {
 
     setInputValue(String(memberCount));
     setMaxMembers(memberCount);
-    setIsMaxValid(true);
-    setMaxError("");
   };
 
   return (
