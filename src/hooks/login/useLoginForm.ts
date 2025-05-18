@@ -105,22 +105,22 @@ const useLoginForm = () => {
                       setAccessToken(response.data.data); // access token authStore in-memory 저장 (브라우저 새로고침시 초기화)
                       // localStorage.setItem('accessToken', response.data.data);
                       setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
-                      navigate('/main'); // 메인 페이지로 이동
+                      navigate('/'); // 메인 페이지로 이동
                     } else {
                       console.error('토큰 발급 실패');
-                      navigate('/');
+                      navigate('/login');
                     }
                   })
                   .catch(error => {
                     if (error.data.code === 1002) {
                       console.error('JWT 토큰 발급 api 요청 실패', error);
-                      navigate('/');
+                      navigate('/login');
                     }
                   });
               } catch (error) {
                 if (error.data.code === 1002) {
                   console.error('JWT 토큰 발급 api 요청 실패', error);
-                  navigate('/');
+                  navigate('/login');
                 }
               }
               break;
@@ -133,13 +133,13 @@ const useLoginForm = () => {
           setLoginErrorMessage('아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.')
           if (error.data.code === 1002) {
             console.error('로그인 api 요청 실패', error);
-            navigate('/');
+            navigate('/login');
           }
         });
     } catch (error) {
       if (error.data.code === 1002) {
         console.error('로그인 api 요청 실패', error);
-        navigate('/');
+        navigate('/login');
       }
     }
   };
