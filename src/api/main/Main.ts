@@ -5,4 +5,13 @@ export default class Main {
   static async getMainData() {
     return await http.get(`/flobby/main`);
   }
+
+  /* 모임 게시글 생성 */
+  static async createClub(createClubData: FormData) {
+    return await http.post(`/club/register`, createClubData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
 }
