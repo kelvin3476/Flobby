@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
@@ -13,6 +13,7 @@ import ClubAuto from "../../components/club/register/ClubAuto";
 import Button from "../../components/button/Button";
 import Title from "../../components/club/text/Title";
 import RequiredText from "../../components/club/text/RequiredText";
+import ClubModal from "../../components/modal/ClubModal";
 
 import "../../styles/club/register/ClubRegister.scss";
 
@@ -37,6 +38,8 @@ const ClubRegister = () => {
     setDescError,
     setMaxError,
   } = useClubRegisterStore();
+
+  const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
 
   const nav = useNavigate();
 
@@ -94,6 +97,8 @@ const ClubRegister = () => {
     }
 
     if(isError) return;
+
+    setModalStep(1);
   };
   
   return (
@@ -124,6 +129,23 @@ const ClubRegister = () => {
       <footer>
         {/* 추후 footer 추가 */}
       </footer>
+
+      {modalStep && (
+        <ClubModal 
+          message={modalStep === 1 ? "등록 하시겠습니까?" : "정상적으로 처리되었습니다."}
+          showIcon={modalStep === 1}
+          showCancelButton={modalStep === 1}
+          onConfirm={() => {
+            if (modalStep === 1) {
+              setModalStep(2);
+            } else {
+              setModalStep(null);
+              nav('/')
+            }
+          }}
+          onCancel={() => setModalStep(null)}
+        />
+      )}
     </div>
   );
 };
