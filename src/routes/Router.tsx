@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import TestPage from '../pages/TestPage';
+
+import Main from '../pages/main/Main';
+
 import Login from '../pages/login/Login';
 import FindPassword from '../pages/password/FindPassword';
 import ResetPassword from '../pages/password/ResetPassword';
@@ -15,13 +19,14 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
 
-import Main from '../pages/main/Main';
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/test" element={<TestPage />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/password/find" element={<FindPassword />} />
         <Route path="/password/reset" element={<ResetPassword />} />
         <Route path="/password/success" element={<SuccessPassword />} />
@@ -32,7 +37,6 @@ const Router: React.FC = () => {
         <Route path="/signup/success" element={<SuccessSignUp />} />
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
-        <Route path="/main" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
