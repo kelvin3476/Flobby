@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TestPage from '../pages/TestPage';
 
 import Main from '../pages/main/Main';
+import ClubRegister from '../pages/club/ClubRegister';
 
 import Login from '../pages/login/Login';
 import FindPassword from '../pages/password/FindPassword';
@@ -18,7 +19,6 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
-
 
 const Router: React.FC = () => {
   return (
@@ -37,6 +37,8 @@ const Router: React.FC = () => {
         <Route path="/signup/success" element={<SuccessSignUp />} />
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
+        <Route path="/club/register" element={<ClubRegister />} />
+
       </Routes>
     </BrowserRouter>
   );

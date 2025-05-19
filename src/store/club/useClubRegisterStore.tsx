@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { DEFAULT_REGION } from '../../services/main/models/RegionContextModel';
 
-interface ClubCreateStore {
+interface ClubRegisterStore {
   clubName: string;
   setClubName: (clubName: string) => void;
 
@@ -35,8 +35,20 @@ interface ClubCreateStore {
   location: number;
   setLocation: (location: number) => void;
 
+  isCategoryValid: boolean,
+  setIsCategoryValid: (isCategoryValid: boolean) => void;
+
+  categoryError: string,
+  setCategoryError: (categoryError: string) => void;
+
   maxMembers: number;
   setMaxMembers: (maxMember: number) => void;
+
+  isMaxValid: boolean;
+  setIsMaxValid: (isMaxValid: boolean) => void;
+
+  maxError: string;
+  setMaxError: (maxError: string) => void;
 
   // 업로드한 이미지 파일
   file: File | null;
@@ -51,7 +63,7 @@ interface ClubCreateStore {
   setImageFileError: (imageFileError: string) => void;
 }
 
-const useClubCreateStore = create<ClubCreateStore>(set => ({
+const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   clubName: '',
   setClubName: (clubName: string) => set({ clubName }),
 
@@ -85,8 +97,20 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
   location: DEFAULT_REGION.regionId,
   setLocation: (location: number) => set({ location }),
 
+  isCategoryValid: true,
+  setIsCategoryValid: (isCategoryValid: boolean) => set({ isCategoryValid }),
+
+  categoryError: "",
+  setCategoryError: (categoryError: string) => set({ categoryError }),
+
   maxMembers: 0,
   setMaxMembers: (maxMembers: number) => set({ maxMembers }),
+
+  isMaxValid: true,
+  setIsMaxValid: (isMaxValid: boolean) => set({ isMaxValid }),
+
+  maxError: "",
+  setMaxError: (maxError: string) => set({ maxError }),
 
   file: null,
   setFile: (file: File | null) => set({ file }),
@@ -98,4 +122,4 @@ const useClubCreateStore = create<ClubCreateStore>(set => ({
   setImageFileError: (imageFileError: string) => set({ imageFileError }),
 }));
 
-export default useClubCreateStore;
+export default useClubRegisterStore;

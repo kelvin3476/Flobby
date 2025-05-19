@@ -1,15 +1,15 @@
 import React from "react";
 import Label from "./Label";
-import useClubCreateStore from "../../../store/club/useClubCreateStore";
+import useClubRegisterStore from "../../../store/club/useClubRegisterStore";
 
-import "../../../styles/club/create/ClubAuto.scss";
+import "../../../styles/club/register/ClubAuto.scss";
 
 const ClubAuto: React.FC = () => {
   
   const {
     autoApprovalFlag,
     setAutoApprovalFlag,
-  } = useClubCreateStore();
+  } = useClubRegisterStore();
 
   return (
     <div className="auto-container">

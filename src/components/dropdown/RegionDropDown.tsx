@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
 import { RegionListController } from '../../services/main/controllers/RegionListController';
-import useClubCreateStore from '../../store/club/useClubCreateStore';
+import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import logger from '../../utils/Logger';
 import { getCookie } from '../../utils/Cookie';
 import '../../styles/dropdown/CommonDropDown.scss';
@@ -16,7 +16,7 @@ const RegionDropDown = () => {
     null,
   );
 
-  const { setLocation } = useClubCreateStore();
+  const { setLocation } = useClubRegisterStore();
 
   useEffect(() => {
     regionListController
@@ -65,7 +65,7 @@ const RegionDropDown = () => {
   return (
     <div className="dropdown-group-container">
       <div className="dropdown-label-box">
-        <span className="dropdown-label">지역 선택</span>
+        <span className="dropdown-label">지역</span>
         <span className="dropdown-required">*</span>
       </div>
       <div className="dropdown-box">

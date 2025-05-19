@@ -3,14 +3,14 @@ import DropDown from './Dropdown';
 import SignUp from '../../api/signup/SignUp';
 import logger from '../../utils/Logger';
 import '../../styles/dropdown/CommonDropDown.scss';
-import useClubCreateStore from '../../store/club/useClubCreateStore';
+import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
 
 const CategoryDropDown = () => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
-  const { mainCategory, setMainCategory, setSubCategory } =
-    useClubCreateStore();
+  const { mainCategory, setMainCategory, setSubCategory, isCategoryValid, setIsCategoryValid, categoryError, setCategoryError } =
+    useClubRegisterStore();
 
   useEffect(() => {
     const fetchHobbyList = async () => {
@@ -47,7 +47,7 @@ const CategoryDropDown = () => {
   return (
     <div className="dropdown-group-container">
       <div className="dropdown-label-box">
-        <span className="dropdown-label">카테고리 선택</span>
+        <span className="dropdown-label">카테고리</span>
         <span className="dropdown-required">*</span>
       </div>
       <div className="dropdown-box">
@@ -58,6 +58,8 @@ const CategoryDropDown = () => {
           onSelect={(value: string) => {
             setMainCategory(value);
             setSubCategory(null);
+            setIsCategoryValid(true);
+            setCategoryError("");
           }}
         />
         <DropDown
@@ -66,9 +68,14 @@ const CategoryDropDown = () => {
           disabled={mainCategory === ''}
           onSelect={(value: string) => {
             setSubCategory(value);
+            setIsCategoryValid(true);
+            setCategoryError("");
           }}
         />
       </div>
+      {!isCategoryValid && (
+        <div className="err-message">{categoryError}</div>
+      )}
     </div>
   );
 };

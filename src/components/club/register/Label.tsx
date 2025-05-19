@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../../styles/club/create/Label.scss";
+import "../../../styles/club/register/Label.scss";
 
 interface LabelProps {
   className?: string;
