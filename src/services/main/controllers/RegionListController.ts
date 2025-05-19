@@ -1,4 +1,5 @@
 import { RegionListModel } from '../models/RegionListModel';
+import { RegionItem } from '../../../api/ApiTypes';
 
 export class RegionListController {
   private static instance: RegionListController;
@@ -21,7 +22,7 @@ export class RegionListController {
     return RegionListController.instance;
   }
 
-  async getRegionList() {
+  async getRegionList(): Promise<Record<string, RegionItem[]>> {
     return await this.model.getRegionList();
   }
 }
