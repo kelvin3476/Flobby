@@ -1,0 +1,28 @@
+.clicked-modal-container {
+  width: 116px;
+  padding: 12px;
+
+  border-radius: 6px;
+  border: 1px solid #E8EBED;
+  background: #fff;
+  box-shadow: 6px 6px 8px 0px rgba(0, 0, 0, 0.03);
+
+  .clicked-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+
+    > span {
+      cursor: pointer;
+      font-family: Pretendard;
+      color: #9EA4AA;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.3px;
+    }
+  }
+}
