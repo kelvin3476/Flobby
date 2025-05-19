@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
 import MainHeader from "../../components/header/MainHeader";
 import ImageUploader from "../../components/club/register/ImageUploader";
@@ -14,6 +13,12 @@ import Button from "../../components/button/Button";
 import Title from "../../components/club/text/Title";
 import RequiredText from "../../components/club/text/RequiredText";
 import ClubModal from "../../components/modal/ClubModal";
+
+import useClubRegisterStore from "../../store/club/useClubRegisterStore";
+
+import Main from "../../api/main/Main";
+
+import logger from "../../utils/Logger";
 
 import "../../styles/club/register/ClubRegister.scss";
 
@@ -100,6 +105,31 @@ const ClubRegister = () => {
 
     setModalStep(1);
   };
+
+  const handleSubmitClubRegistrationForm = () => {
+    if (file) {
+      const formData = new FormData();
+      logger.log("file", file);
+
+      const jsonData = {
+        clubName: clubName,
+        description: description,
+        mainCategory: mainCategory,
+        subCategory: subCategory,
+        location: location,
+        maxMembers: maxMembers,
+        autoApprovalFlag: autoApprovalFlag,
+      }
+
+      formData.append('data', new Blob([JSON.stringify(jsonData)], { type: 'application/json' }));
+
+      try {
+        Main.createClub(formData);
+      } catch (error) {
+        console.error('모임 등록 요청 실패', error);
+      }
+    }
+  }
   
   return (
     <div className="register-container">
@@ -140,6 +170,7 @@ const ClubRegister = () => {
               setModalStep(2);
             } else {
               setModalStep(null);
+              handleSubmitClubRegistrationForm();
               nav('/')
             }
           }}
