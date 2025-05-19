@@ -20,7 +20,7 @@ const Main = () => {
   return (
     <div className="responsive-container">
       <main>
-        <MainHeader />
+        <MainHeader accessToken={accessToken} />
         <CarouselBanner />
         <ClubPost />
         <OnedayPost />
