@@ -6,7 +6,7 @@ import RegionSelector from "../main/region_selector/RegionSelector";
 import TextButton from "../button/TextButton";
 import SearchBar from "../main/search_bar/SearchBar";
 import Button from "../button/Button";
-import ClickedModal from "../modal/ClickedModal";
+import DropDownModal from "../modal/DropDownModal";
 
 import "../../styles/header/MainHeader.scss";
 
@@ -26,8 +26,8 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
             </div>
             <div className="right-wrapper">
               <SearchBar />
-              <div className={`btns-wrapper ${!hasAccessToken ? "icons" : ""}`}>
-                {hasAccessToken ? (
+              <div className={`btns-wrapper ${hasAccessToken ? "icons" : ""}`}>
+                {!hasAccessToken ? (
                   <>
                     <Button type="button" className="login-btn" title="로그인" onClick={() => nav("/login")}/>
                     <Button type="button" className="signup-btn" title="회원가입" onClick={() => nav("/signup/agreement")}/>
@@ -49,7 +49,7 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
               </div>
             </div>
           </div>
-          {isClicked && <ClickedModal className="profile-modal" firstTitle="마이페이지" secondTitle="로그아웃" />}
+          {isClicked && <DropDownModal className="profile-modal" firstTitle="마이페이지" secondTitle="로그아웃" />}
           <div className="down-wrapper">
             <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club")}/>
             <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday")}/>

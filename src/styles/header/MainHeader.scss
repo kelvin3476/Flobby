@@ -2,8 +2,6 @@
   width: 1920px;
   padding: 16px 0px;
   background: #fff;
-  min-width: 1440px;
-  max-width: 1920px;
 
   .header-wrapper {
     padding: 0px 320px;
@@ -33,7 +31,7 @@
             align-items: center;
             gap: 8px;
     
-            button {
+            > button {
               display: flex;
               align-items: center;
               justify-content: center;
@@ -60,8 +58,6 @@
 
             &.icons {
               display: flex;
-              align-items: center;
-              justify-content: center;
               gap: 16px;
 
               > button {
@@ -97,7 +93,6 @@
                   height: 32px;
                   background-color: rgba(82, 82, 82, 0.3);
                   border-radius: 50%;
-                  z-index: 1;
                 }
 
                 .profile-btn {
@@ -126,7 +121,7 @@
         height: 36px;
         gap: 32px;
       
-        button {
+        > button {
           display: flex;
           align-items: center;
           height: 40px;
