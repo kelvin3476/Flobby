@@ -31,9 +31,9 @@
             align-items: center;
             gap: 8px;
     
-            > button {
+            .login-btn,
+            .signup-btn {
               display: flex;
-              align-items: center;
               justify-content: center;
               width: 72px;
               padding: 8px 12px;
@@ -44,6 +44,8 @@
               line-height: 21px;
               letter-spacing: -0.3px;
               border-radius: 6px;
+              border: none;
+              cursor: pointer;
             }
     
             .login-btn {
@@ -64,6 +66,8 @@
                 cursor: pointer;
                 background-repeat: no-repeat;
                 background-position: center;
+                background-color: transparent;
+                border: none;
                 width: 36px;
                 height: 36px;
               }
@@ -121,7 +125,7 @@
         height: 36px;
         gap: 32px;
       
-        > button {
+        button {
           display: flex;
           align-items: center;
           height: 40px;
