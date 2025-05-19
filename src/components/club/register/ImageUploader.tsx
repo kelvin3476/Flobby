@@ -25,13 +25,10 @@ const ImageUploader = () => {
 
   // 파일 처리 함수
   const handleFile = (file: File) => {
-    if (
-      file.size > MAX_FILE_SIZE ||
-      (file.type !== 'image/jpeg' && file.type !== 'image/png')
-    ) {
+    if (file.size > MAX_FILE_SIZE) {
       // TODO: 에러 문구 나오면 수정
       setIsImageFileValid(false);
-      setImageFileError('5MB 이하의 jpg, png 이미지만 업로드할 수 있습니다.');
+      setImageFileError('5MB 이하의 이미지만 업로드할 수 있습니다.');
       return;
     }
 
@@ -143,9 +140,7 @@ const ImageUploader = () => {
               <div className="image-uploader-info">
                 <div className="image-uploader-info-text-box">
                   <span>이미지를 드래그하여 업로드하세요.</span>
-                  <span>
-                    5MB 이하의 jpg, png 이미지만 업로드할 수 있습니다.
-                  </span>
+                  <span>5MB 이하의 이미지만 업로드할 수 있습니다.</span>
                 </div>
                 <button
                   className="image-uploader-btn"
@@ -161,7 +156,7 @@ const ImageUploader = () => {
           <input
             type="file"
             ref={fileInputRef}
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/jpg, image/heic, image/heif"
             className="image-uploader-file-input"
             onChange={handleFileChange}
           />
