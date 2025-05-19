@@ -4,7 +4,8 @@ import logger from '../../../utils/Logger';
 import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
-import '../../../styles/club/register/ImageUploader.scss';
+import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
+import '../../../styles/club/create/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -23,22 +24,61 @@ const ImageUploader = () => {
     setImageFileError,
   } = useClubRegisterStore();
 
+  // 리사이즈 함수
+  function resizeImage(file: File, maxWidth = 1024): Promise<string> {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(maxWidth / img.width, 1);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d')!;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          blob => {
+            resolve;
+          },
+          'image/jpeg',
+          0.8,
+        );
+      };
+      const url = URL.createObjectURL(file);
+      img.src = url;
+      resolve(url);
+    });
+  }
+
   // 파일 처리 함수
   const handleFile = (file: File) => {
     if (file.size > MAX_FILE_SIZE) {
-      // TODO: 에러 문구 나오면 수정
       setIsImageFileValid(false);
-      setImageFileError('5MB 이하의 이미지만 업로드할 수 있습니다.');
+      setImageFileError('5MB 이하의 이미지 파일만 등록할 수 있습니다.');
       return;
     }
 
-    const url = URL.createObjectURL(file);
-    setImageUrl(prevUrl => {
-      if (prevUrl) {
-        URL.revokeObjectURL(prevUrl);
-      }
-      return url;
-    });
+    if (file.type === 'image/heic' || file.type === 'image/heif') {
+      ImageExtensionConverter(file).then(result => {
+        const convertedImageUrl = URL.createObjectURL(result);
+        setImageUrl(prevUrl => {
+          if (prevUrl) {
+            URL.revokeObjectURL(prevUrl);
+          }
+          return convertedImageUrl;
+        });
+        logger.log(convertedImageUrl);
+      });
+      const result = resizeImage(file);
+      logger.log(result);
+    } else {
+      const url = URL.createObjectURL(file);
+      setImageUrl(prevUrl => {
+        if (prevUrl) {
+          URL.revokeObjectURL(prevUrl);
+        }
+        return url;
+      });
+    }
 
     setFile(file);
     setIsImageFileValid(true);
@@ -140,7 +180,7 @@ const ImageUploader = () => {
               <div className="image-uploader-info">
                 <div className="image-uploader-info-text-box">
                   <span>이미지를 드래그하여 업로드하세요.</span>
-                  <span>5MB 이하의 이미지만 업로드할 수 있습니다.</span>
+                  <span>5MB 이하의 이미지 파일만 등록할 수 있습니다.</span>
                 </div>
                 <button
                   className="image-uploader-btn"
