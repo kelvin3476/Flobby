@@ -158,6 +158,10 @@ const SelectHobbies = () => {
           />
         </div>
       </main>
+      <footer>
+        <div className="hobby-line1"></div>
+        <div className="hobby-line2"></div>
+      </footer>
     </div>
   );
 };
