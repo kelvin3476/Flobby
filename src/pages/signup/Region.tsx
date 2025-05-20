@@ -97,6 +97,10 @@ const Region = () => {
             onClick={() => nav("/signup/hobby")} />
         </div>
       </main>
+      <footer>
+        <div className="region-line1"></div>
+        <div className="region-line2"></div>
+      </footer>
     </div>
   );
 };
