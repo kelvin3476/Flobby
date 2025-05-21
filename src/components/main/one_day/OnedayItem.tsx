@@ -12,6 +12,7 @@ interface OnedayItemProps {
   maxMembers: number;
   scheduledDate: string;
   nickname: string;
+  hostId: number;
   profilePhoto: string;
   imageUrl: string;
 }

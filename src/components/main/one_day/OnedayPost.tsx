@@ -104,6 +104,7 @@ const OnedayPost = () => {
                       maxMembers={item.maxMembers}
                       scheduledDate={item.scheduledDate}
                       nickname={item.nickname}
+                      hostId={item.hostId}
                       profilePhoto={item.profilePhoto}
                       imageUrl={item.imageUrl}
                     />
