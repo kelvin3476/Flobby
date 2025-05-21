@@ -24,31 +24,6 @@ const ImageUploader = () => {
     setImageFileError,
   } = useClubRegisterStore();
 
-  // 리사이즈 함수
-  function resizeImage(file: File, maxWidth = 1024): Promise<string> {
-    return new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => {
-        const scale = Math.min(maxWidth / img.width, 1);
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        const ctx = canvas.getContext('2d')!;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(
-          blob => {
-            resolve;
-          },
-          'image/jpeg',
-          0.8,
-        );
-      };
-      const url = URL.createObjectURL(file);
-      img.src = url;
-      resolve(url);
-    });
-  }
-
   // 파일 처리 함수
   const handleFile = (file: File) => {
     if (file.size > MAX_FILE_SIZE) {
@@ -68,8 +43,6 @@ const ImageUploader = () => {
         });
         logger.log(convertedImageUrl);
       });
-      const result = resizeImage(file);
-      logger.log(result);
     } else {
       const url = URL.createObjectURL(file);
       setImageUrl(prevUrl => {
