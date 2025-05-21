@@ -86,7 +86,7 @@ export interface HobbyCategory {
 /* 동호회 response 데이터 타입 */
 export interface clubItem {
   clubId: number;
-  photo?: string /* TODO: 백엔드에서 동호회 카드 이미지 썸네일 서버 url string 으로 내려주는 부분 추후 확인 필요 */;
+  photo?: string;
   hostId: number;
   hostNickname: string;
   category: string;
