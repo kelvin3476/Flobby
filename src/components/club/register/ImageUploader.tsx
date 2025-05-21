@@ -41,7 +41,6 @@ const ImageUploader = () => {
           }
           return convertedImageUrl;
         });
-        logger.log(convertedImageUrl);
       });
     } else {
       const url = URL.createObjectURL(file);
