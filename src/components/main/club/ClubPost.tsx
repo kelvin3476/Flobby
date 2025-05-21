@@ -97,12 +97,15 @@ const ClubPost: React.FC = () => {
                   <SwiperSlide key={idx}>
                     <ClubItem
                       key={idx}
+                      clubId={item.clubId}
+                      photo={item.photo}
+                      hostId={item.hostId}
+                      hostNickname={item.hostNickname}
                       category={item.category}
                       maxMember={item.maxMember}
                       clubName={item.clubName}
                       locationName={item.locationName}
                       currentMembers={item.currentMembers}
-                      imageUrl={item.imageUrl}
                     />
                   </SwiperSlide>
                 );

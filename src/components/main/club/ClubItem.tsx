@@ -5,15 +5,18 @@ import Tag from '../../tag/Tag';
 import "../../../styles/main/club/ClubItem.scss";
 
 interface ClubItemProps {
+  clubId: number;
+  photo: string;
+  hostId: number;
+  hostNickname: string;
   category: string;
   maxMember: string;
   clubName: string;
   locationName: string;
   currentMembers: number;
-  imageUrl: string;
 }
 
-const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers, imageUrl }: ClubItemProps) => {
+const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers, photo }: ClubItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
@@ -21,8 +24,7 @@ const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers,
     <div className="club-item-container" onClick={() => console.log('관심 모임 아이템 클릭!!!')}>
       {/* 모임 아이템 썸네일 */}
       <div className="club-item-thumbnail-wrapper">
-        {/* TODO: imageUrl 있을땐 해당 모임 아이템의 imageUrl 이 나올 예정 아닐 경우 기본 썸네일 이미지 표출 (추후 이미지 완료 된 경우 다시 처리 필요) */}
-        <img src={imageUrl ? imageUrl : '/img/main/club/thumbnail1.png'} alt="club-item-thumbnail-image" />
+        <img src={photo ? photo : '/img/main/club/thumbnail1.png'} alt="club-item-thumbnail-image" />
         {/* TODO: 썸네일 내부 하트 아이콘 클릭시 관심 모임 으로 등록 하는 api 필요 */}
         <div className="club-item-heart-icon-wrapper">
           <span
