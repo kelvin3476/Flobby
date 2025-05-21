@@ -14,4 +14,9 @@ export default class Main {
       },
     });
   }
+
+  /* 모임 상세 조회 */
+  static async getClubDetail(clubId: number) {
+    return await http.get(`/club/${clubId}`);
+  }
 }
