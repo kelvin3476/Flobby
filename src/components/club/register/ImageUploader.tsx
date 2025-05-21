@@ -5,7 +5,7 @@ import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
-import '../../../styles/club/create/ImageUploader.scss';
+import '../../../styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
