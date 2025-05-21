@@ -23,6 +23,10 @@ const SuccessSignUp = () => {
           title="로그인 화면으로"
           onClick={localStorage.getItem('socialType') ? finalSocialSignUpHandler : finalSignUpHandler}
         />
+        <footer>
+          <div className="success-line1"></div>
+          <div className="success-line2"></div>
+        </footer> 
       </div>
     );
 };

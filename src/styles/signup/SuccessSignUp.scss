@@ -5,6 +5,7 @@
   width: 100%;
   height: 100%;
   gap: 60px;
+  padding-top: 236px;
 
   .signup-title {
     display: flex;
@@ -47,4 +48,22 @@
       letter-spacing: -0.3px;
     }
 
+    > footer {
+      width: 100vw;
+      height: 336px;
+      padding-top: 200px;
+  
+      > .success-line1,
+      .success-line2 {
+        border-top: 1px solid #E8EBED;
+      }
+  
+      .success-line1 {
+        height: 56px;
+      }
+  
+      .success-line2 {
+        height: 90px;
+      }
+    }
 }

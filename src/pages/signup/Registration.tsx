@@ -302,6 +302,10 @@ const Registration = () => {
           onClick={() => !localStorage.getItem('socialType') ? tempSignupHandler({ email: email, nickname: nickname, localPassword: password }) : tempSocialSignupHandler(nickname, foreigner)}
         />
       </main>
+      <footer>
+        <div className="info-line1"></div>
+        <div className="info-line2"></div>
+      </footer>
     </div>
   );
 };

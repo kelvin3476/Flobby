@@ -6,6 +6,7 @@
   height: 100%;
   gap: 50px;
   letter-spacing: -0.3px;
+  padding-top: 236px;
 
   .registration-title {
     display: flex;
@@ -305,5 +306,24 @@
   }
   .right45 {
     right: 45px;
+  }
+
+  > footer {
+    width: 100vw;
+    height: 336px;
+    padding-top: 200px;
+
+    > .info-line1,
+    .info-line2 {
+      border-top: 1px solid #E8EBED;
+    }
+
+    .info-line1 {
+      height: 56px;
+    }
+
+    .info-line2 {
+      height: 90px;
+    }
   }
 }
