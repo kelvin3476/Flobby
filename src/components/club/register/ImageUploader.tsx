@@ -17,7 +17,7 @@ const ImageUploader = () => {
     null,
   );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     setFile,
     isImageFileValid,
@@ -35,7 +35,7 @@ const ImageUploader = () => {
     }
 
     if (file.type === 'image/heic' || file.type === 'image/heif') {
-      setIsPending(true);
+      setIsLoading(true);
       ImageExtensionConverter(file).then(result => {
         const convertedImageUrl = URL.createObjectURL(result);
         setImageUrl(prevUrl => {
@@ -44,7 +44,7 @@ const ImageUploader = () => {
           }
           return convertedImageUrl;
         });
-        setIsPending(false);
+        setIsLoading(false);
       });
     } else {
       const url = URL.createObjectURL(file);
@@ -137,7 +137,7 @@ const ImageUploader = () => {
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
-          {isPending ? (
+          {isLoading ? (
             <LoadingSpinnerController />
           ) : imageUrl ? (
             <div className="image-preview">
