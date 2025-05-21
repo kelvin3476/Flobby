@@ -5,6 +5,7 @@ import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
+import LoadingSpinnerController from '../../controllers/LoadingSpinnerController';
 import '../../../styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -16,6 +17,7 @@ const ImageUploader = () => {
     null,
   );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState<boolean>(false);
   const {
     setFile,
     isImageFileValid,
@@ -33,6 +35,7 @@ const ImageUploader = () => {
     }
 
     if (file.type === 'image/heic' || file.type === 'image/heif') {
+      setIsPending(true);
       ImageExtensionConverter(file).then(result => {
         const convertedImageUrl = URL.createObjectURL(result);
         setImageUrl(prevUrl => {
@@ -41,6 +44,7 @@ const ImageUploader = () => {
           }
           return convertedImageUrl;
         });
+        setIsPending(false);
       });
     } else {
       const url = URL.createObjectURL(file);
@@ -133,7 +137,9 @@ const ImageUploader = () => {
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
-          {imageUrl ? (
+          {isPending ? (
+            <LoadingSpinnerController />
+          ) : imageUrl ? (
             <div className="image-preview">
               <img src={imageUrl} alt="썸네일 미리보기" />
               <div className="overlay">
