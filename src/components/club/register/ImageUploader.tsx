@@ -27,39 +27,38 @@ const ImageUploader = () => {
   } = useClubRegisterStore();
 
   // 파일 처리 함수
-  const handleFile = (file: File) => {
-    if (file.size > MAX_FILE_SIZE) {
-      setIsImageFileValid(false);
-      setImageFileError('5MB 이하의 이미지 파일만 등록할 수 있습니다.');
-      return;
-    }
+  const handleFile = async (file: File) => {
+    setIsLoading(true);
+    try {
+      if (file.size > MAX_FILE_SIZE) {
+        setIsImageFileValid(false);
+        setImageFileError('5MB 이하의 이미지 파일만 등록할 수 있습니다.');
+        return;
+      }
 
-    if (file.type === 'image/heic' || file.type === 'image/heif') {
-      setIsLoading(true);
-      ImageExtensionConverter(file).then(result => {
-        const convertedImageUrl = URL.createObjectURL(result);
-        setImageUrl(prevUrl => {
-          if (prevUrl) {
-            URL.revokeObjectURL(prevUrl);
-          }
-          return convertedImageUrl;
-        });
-        setIsLoading(false);
-      });
-    } else {
-      const url = URL.createObjectURL(file);
+      let url: string;
+
+      if (file.type === 'image/heic' || file.type === 'image/heif') {
+        const result = await ImageExtensionConverter(file);
+        url = URL.createObjectURL(result);
+      } else {
+        url = URL.createObjectURL(file);
+      }
+
       setImageUrl(prevUrl => {
         if (prevUrl) {
           URL.revokeObjectURL(prevUrl);
         }
         return url;
       });
-    }
 
-    setFile(file);
-    setIsImageFileValid(true);
-    setImageFileError('');
-    logger.log('ImageUploader', 'imageFile', file);
+      setFile(file);
+      setIsImageFileValid(true);
+      setImageFileError('');
+      logger.log('ImageUploader', 'imageFile', file);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // 드래그 앤 드롭
