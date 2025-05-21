@@ -4,6 +4,8 @@ import logger from '../../../utils/Logger';
 import FilePickerInput from '../../../utils/FilePickerInput';
 import Label from './Label';
 import DragAndDropHandler from '../../../utils/DragAndDropHandler';
+import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
+import LoadingSpinnerController from '../../controllers/LoadingSpinnerController';
 import '../../../styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -15,6 +17,7 @@ const ImageUploader = () => {
     null,
   );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     setFile,
     isImageFileValid,
@@ -25,23 +28,33 @@ const ImageUploader = () => {
 
   // 파일 처리 함수
   const handleFile = (file: File) => {
-    if (
-      file.size > MAX_FILE_SIZE ||
-      (file.type !== 'image/jpeg' && file.type !== 'image/png')
-    ) {
-      // TODO: 에러 문구 나오면 수정
+    if (file.size > MAX_FILE_SIZE) {
       setIsImageFileValid(false);
-      setImageFileError('5MB 이하의 jpg, png 이미지만 업로드할 수 있습니다.');
+      setImageFileError('5MB 이하의 이미지 파일만 등록할 수 있습니다.');
       return;
     }
 
-    const url = URL.createObjectURL(file);
-    setImageUrl(prevUrl => {
-      if (prevUrl) {
-        URL.revokeObjectURL(prevUrl);
-      }
-      return url;
-    });
+    if (file.type === 'image/heic' || file.type === 'image/heif') {
+      setIsLoading(true);
+      ImageExtensionConverter(file).then(result => {
+        const convertedImageUrl = URL.createObjectURL(result);
+        setImageUrl(prevUrl => {
+          if (prevUrl) {
+            URL.revokeObjectURL(prevUrl);
+          }
+          return convertedImageUrl;
+        });
+        setIsLoading(false);
+      });
+    } else {
+      const url = URL.createObjectURL(file);
+      setImageUrl(prevUrl => {
+        if (prevUrl) {
+          URL.revokeObjectURL(prevUrl);
+        }
+        return url;
+      });
+    }
 
     setFile(file);
     setIsImageFileValid(true);
@@ -124,7 +137,9 @@ const ImageUploader = () => {
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
-          {imageUrl ? (
+          {isLoading ? (
+            <LoadingSpinnerController />
+          ) : imageUrl ? (
             <div className="image-preview">
               <img src={imageUrl} alt="썸네일 미리보기" />
               <div className="overlay">
@@ -143,9 +158,7 @@ const ImageUploader = () => {
               <div className="image-uploader-info">
                 <div className="image-uploader-info-text-box">
                   <span>이미지를 드래그하여 업로드하세요.</span>
-                  <span>
-                    5MB 이하의 jpg, png 이미지만 업로드할 수 있습니다.
-                  </span>
+                  <span>5MB 이하의 이미지 파일만 등록할 수 있습니다.</span>
                 </div>
                 <button
                   className="image-uploader-btn"
@@ -161,7 +174,7 @@ const ImageUploader = () => {
           <input
             type="file"
             ref={fileInputRef}
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/jpg, image/heic, image/heif"
             className="image-uploader-file-input"
             onChange={handleFileChange}
           />
