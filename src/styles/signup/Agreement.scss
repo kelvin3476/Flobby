@@ -43,7 +43,6 @@ $font-color-basic: #72787F;
     }
   
     main {
-      // padding: 0 698px;
       .input-container {
         display: flex;
         flex-direction: column;
@@ -119,23 +118,23 @@ $font-color-basic: #72787F;
           }
         }
       }
-  
-      .join-next-btn {
-        cursor: pointer;
-        background-color: #764BF6;
-        opacity: 0.3;
-        border: none;
-        border-radius: 6px;
-        padding: 12px 10px;
-        height: 60px;
-        width: 100%;
-        color: #fff;
-        @include font-basic-style;
-        font-weight: 400;
-  
-        &.active {
-          opacity: 1;
-        }
+    }
+    
+    .join-next-btn {
+      cursor: pointer;
+      background-color: #764BF6;
+      opacity: 0.3;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 10px;
+      height: 60px;
+      width: 100%;
+      color: #fff;
+      @include font-basic-style;
+      font-weight: 400;
+
+      &.active {
+        opacity: 1;
       }
     }
   }

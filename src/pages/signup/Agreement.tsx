@@ -96,15 +96,12 @@ const Agreement = () => {
               />
             </div>
           </div>
-
-          <Button 
-            className={`join-next-btn ${serviceAgree && privacyAgree ? 'active' : ''}`} 
-            title="다음" onClick={acceptAgree}
-          />
-
           <AgreementModal onAgree={handleModalAgree}/>
         </main>
-
+        <Button 
+            className={`join-next-btn ${serviceAgree && privacyAgree ? 'active' : ''}`} 
+            title="다음" onClick={acceptAgree}
+        />
       </div>
       <footer>
         <div className="agreement-line1"></div>
