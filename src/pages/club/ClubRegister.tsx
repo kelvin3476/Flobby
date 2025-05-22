@@ -20,6 +20,8 @@ import Main from "../../api/main/Main";
 
 import logger from "../../utils/Logger";
 
+import useMainPage from "../../hooks/main/useMainPage";
+
 import "../../styles/club/register/ClubRegister.scss";
 
 const ClubRegister = () => {
@@ -43,6 +45,8 @@ const ClubRegister = () => {
     setDescError,
     setMaxError,
   } = useClubRegisterStore();
+
+  const { accessToken } = useMainPage();
 
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
 
@@ -133,7 +137,7 @@ const ClubRegister = () => {
   
   return (
     <div className="register-container">
-      <MainHeader />
+      <MainHeader accessToken={accessToken} />
       <div className="register-main">
         <div className="register-title">
           <Title titleName="모임 등록"/>
