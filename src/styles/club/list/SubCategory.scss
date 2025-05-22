@@ -1,0 +1,36 @@
+.sub-category-container {
+  display: flex;
+  width: 1060px;
+  min-height: 50px;
+  padding: 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #f7f8f9;
+
+  .sub-category-box {
+    display: flex;
+    align-items: center;
+    gap: 18px 10px;
+    flex-wrap: wrap;
+
+    > span {
+      color: #72787f;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+      flex-shrink: 0;
+      cursor: default;
+
+      &.active {
+        color: #191919;
+        font-weight: 600;
+      }
+    }
+  }
+}
