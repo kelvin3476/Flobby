@@ -134,7 +134,7 @@ const ClubRegister = () => {
   return (
     <div className="register-container">
       <MainHeader />
-      <main>
+      <div className="register-main">
         <div className="register-title">
           <Title titleName="모임 등록"/>
           <RequiredText />
@@ -155,7 +155,7 @@ const ClubRegister = () => {
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
-      </main>
+      </div>
       <footer>
         {/* 추후 footer 추가 */}
       </footer>
