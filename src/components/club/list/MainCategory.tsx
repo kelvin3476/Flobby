@@ -1,6 +1,6 @@
 import React from 'react';
 import { categoryData } from './Category';
-import '../../../styles/club/category/MainCategory.scss';
+import '../../../styles/club/list/MainCategory.scss';
 
 const MainCategory = () => {
   const mainCategory = [{ mainCategory: '전체' }, ...categoryData];
