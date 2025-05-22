@@ -9,7 +9,7 @@ interface TitleProps {
 
 const Title = ({ className, titleName }: TitleProps) => {
   return (
-    <div className={className}>{titleName}</div>
+    <div className={`club-title ${className}`}>{titleName}</div>
   );
 };
 
