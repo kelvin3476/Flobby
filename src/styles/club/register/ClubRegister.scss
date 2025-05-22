@@ -38,16 +38,19 @@
         align-items: flex-start;
         gap: 96px;
 
-        .up-and-right > * {
+        .register-region,
+        .register-category,
+        .register-member
+        {
           margin-bottom: 32px;
         }
       }
 
-      > *:nth-child(2) {
+      .register-club {
         margin: 40px 0 40px 0;
       }
 
-      > *:nth-child(3) {
+      .register-auto {
         margin-bottom: 12px;
       }
 
@@ -57,7 +60,9 @@
         justify-content: flex-end;
         gap: 12px;
 
-        > * {
+        .cancel-btn,
+        .allow-btn
+        {
           width: 96px;
           height: 48px;
           cursor: pointer;
