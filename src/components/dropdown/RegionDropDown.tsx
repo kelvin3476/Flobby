@@ -6,7 +6,7 @@ import logger from '../../utils/Logger';
 import { getCookie } from '../../utils/Cookie';
 import '../../styles/dropdown/CommonDropDown.scss';
 
-const RegionDropDown = () => {
+const RegionDropDown = ({ className }) => {
   const regionListController = RegionListController.getInstance();
 
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
@@ -63,7 +63,7 @@ const RegionDropDown = () => {
   };
 
   return (
-    <div className="dropdown-group-container">
+    <div className={`dropdown-group-container ${className}`}>
       <div className="dropdown-label-box">
         <span className="dropdown-label">지역</span>
         <span className="dropdown-required">*</span>

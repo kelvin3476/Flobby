@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../../styles/club/register/MaxMember.scss';
 import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
 
-const MaxMember = () => {
+const MaxMember = ({ className }) => {
   const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } = useClubRegisterStore();
   const [inputValue, setInputValue] = useState('');
 
@@ -33,7 +33,7 @@ const MaxMember = () => {
   };
 
   return (
-    <div className="max-member-container">
+    <div className={`max-member-container`}>
       <div className="max-member-label-box">
         <span className="max-member-label">모임 규모</span>
         <span className="max-member-required">*</span>

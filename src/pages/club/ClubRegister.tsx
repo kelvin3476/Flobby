@@ -147,13 +147,13 @@ const ClubRegister = () => {
           <div className="register-up">
             <ImageUploader />
             <div className="up-and-right">
-              <RegionDropDown />
-              <CategoryDropDown />
-              <MaxMember />
+              <RegionDropDown className="register-region"/>
+              <CategoryDropDown className="register-category"/>
+              <MaxMember className="register-member"/>
             </div>
           </div>
-          <ClubDescription />
-          <ClubAuto />
+          <ClubDescription className="register-club" />
+          <ClubAuto className="register-auto"/>
           <div className="buttons">
             <Button className="cancel-btn" title="취소" onClick={() => nav('/')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />

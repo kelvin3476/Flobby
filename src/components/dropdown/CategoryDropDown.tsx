@@ -6,7 +6,7 @@ import '../../styles/dropdown/CommonDropDown.scss';
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
 
-const CategoryDropDown = () => {
+const CategoryDropDown = ({ className }) => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
   const { mainCategory, setMainCategory, setSubCategory, isCategoryValid, setIsCategoryValid, categoryError, setCategoryError } =
@@ -45,7 +45,7 @@ const CategoryDropDown = () => {
       ?.subCategories ?? [];
 
   return (
-    <div className="dropdown-group-container">
+    <div className={`dropdown-group-container ${className}`}>
       <div className="dropdown-label-box">
         <span className="dropdown-label">카테고리</span>
         <span className="dropdown-required">*</span>
