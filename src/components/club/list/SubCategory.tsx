@@ -19,11 +19,11 @@ const SubCategory = () => {
   ];
 
   useEffect(() => {
-    if (mainCategory && getCookie('subCategory')) {
+    if (getCookie('subCategory')) {
       setSubCategory(decodeURIComponent(getCookie('subCategory')));
       setActiveCategory(decodeURIComponent(getCookie('subCategory')));
     }
-  }, [mainCategory]);
+  }, []);
 
   const handleClickSubCategory = (subCategory: string) => {
     // TODO: subCategory 기반 데이터 api 호출
