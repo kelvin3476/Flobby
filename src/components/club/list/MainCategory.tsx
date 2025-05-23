@@ -10,35 +10,28 @@ const MainCategory = () => {
   const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
 
   useEffect(() => {
-    let mainCategory = '전체';
+    const rawCookie = getCookie('mainCategory');
+    const decodedMainCategory = rawCookie
+      ? decodeURIComponent(rawCookie)
+      : '전체';
 
-    if (decodeURIComponent(getCookie('subCategory'))) {
-      const selectedCategory = categoryData.find(data =>
-        data.subCategories.includes(
-          decodeURIComponent(getCookie('subCategory')),
-        ),
-      );
-      if (selectedCategory) {
-        mainCategory = selectedCategory.mainCategory;
-      }
+    setMainCategory(decodedMainCategory);
+    setActiveMainCategory(decodedMainCategory);
+  }, []);
+
+  const handleClickMainCategory = (mainCategory: string) => {
+    if (mainCategory === '전체') {
+      // TODO: mainList 초기 데이터 api 호출
+      setSubCategory('');
+      setCookie('mainCategory', '', 0);
+      setCookie('subCategory', '', 0);
+    } else {
+      // TODO: mainCategory 기반 전체 데이터 api 호출
+      setCookie('mainCategory', mainCategory);
     }
 
     setMainCategory(mainCategory);
     setActiveMainCategory(mainCategory);
-  }, []);
-
-  const handleClickMainCategory = (category: string) => {
-    if (category === '전체') {
-      // TODO: mainList 초기 데이터 api 호출
-
-      setSubCategory('');
-      setCookie('subCategory', '', 0);
-    } else {
-      // TODO: mainCategory 기반 전체 데이터 api 호출 ?? 호출 시점에 대해서 기획 & 백엔드 확인 필요
-    }
-
-    setMainCategory(category);
-    setActiveMainCategory(category);
   };
 
   return (
