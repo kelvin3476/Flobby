@@ -1,4 +1,4 @@
-/* 동호회 아이템 컨테이너 */
+/* 모임 아이템 컨테이너 */
 .club-item-container {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,14 @@
   height: 448px;
   gap: 16px;
 
-  /* 동호회 아이템 썸네일 */
+  /* 모임 전체 페이지 속성 */
+  &.club-list-item {
+    width: 250px;
+    max-width: 250px;
+    align-items: flex-start;
+  }
+
+  /* 모임 아이템 썸네일 */
   .club-item-thumbnail-wrapper {
     position: relative;
     width: 100%;
@@ -34,20 +41,20 @@
         width: 36px;
         height: 36px;
 
-        background-image: url("../../../assets/svg/main/club/main_club_thumbnail_heart_icon_inactive.svg");
+        background-image: url('../../../assets/svg/main/club/main_club_thumbnail_heart_icon_inactive.svg');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
 
         &.active {
-          background-image: url("../../../assets/svg/main/club/main_club_thumbnail_heart_icon_active.svg");
+          background-image: url('../../../assets/svg/main/club/main_club_thumbnail_heart_icon_active.svg');
         }
       }
     }
   }
 
-  /* 동호회 아이템 내용 */
+  /* 모임 아이템 내용 */
   .club-item-content-container {
     display: flex;
     flex-direction: column;
@@ -55,21 +62,21 @@
     width: 100%;
     height: 97px;
 
-    /* 동호회 아이템 태그 */
+    /* 모임 아이템 태그 */
     .club-item-tag-container {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    /* 동호회 아이템 정보 */
+    /* 모임 아이템 정보 */
     .club-item-information-container {
       display: flex;
       flex-direction: column;
       gap: 8px;
       align-items: flex-start;
 
-      /* 동호회 이름 */
+      /* 모임 이름 */
       .club-item-club-name {
         display: flex;
         align-items: center;
@@ -94,7 +101,7 @@
         height: 24px;
         gap: 10px;
 
-        /* 동호회 위치 */
+        /* 모임 위치 */
         .club-item-location-container {
           display: flex;
           flex-direction: row;
@@ -103,14 +110,14 @@
           .club-item-location-icon {
             width: 24px;
             height: 24px;
-            background-image: url("../../../assets/svg/main/club/main_club_icon_location.svg");
+            background-image: url('../../../assets/svg/main/club/main_club_icon_location.svg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
           }
 
           .club-item-location {
-            color: #72787F;
+            color: #72787f;
 
             font-size: 16px;
             font-style: normal;
@@ -120,17 +127,17 @@
           }
         }
 
-        /* 동호회 정보 구분선 아이콘 */
+        /* 모임 정보 구분선 아이콘 */
         .club-item-divider-icon {
           width: 2px;
           height: 8px;
-          background-image: url("../../../assets/svg/main/club/main_club_icon_divider.svg");
+          background-image: url('../../../assets/svg/main/club/main_club_icon_divider.svg');
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
         }
 
-        /* 동호회 현재 인원 */
+        /* 모임 현재 인원 */
         .club-item-current-members-container {
           display: flex;
           flex-direction: row;
@@ -139,7 +146,7 @@
           .club-item-current-members-icon {
             width: 24px;
             height: 24px;
-            background-image: url("../../../assets/svg/main/club/main_club_icon_member.svg");
+            background-image: url('../../../assets/svg/main/club/main_club_icon_member.svg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -151,7 +158,7 @@
             gap: 2px;
 
             .club-item-member-count {
-              color: #72787F;
+              color: #72787f;
 
               font-size: 16px;
               font-style: normal;
