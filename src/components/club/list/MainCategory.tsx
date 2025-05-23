@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { categoryData } from './Category'; // test용 데이터
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
+import { CategorySlugMap } from '../../../utils/CategorySlugMap';
 import '../../../styles/club/list/MainCategory.scss';
 
 const MainCategory = () => {
@@ -46,7 +47,9 @@ const MainCategory = () => {
               className="main-category-item-box"
               onClick={() => handleClickMainCategory(data.mainCategory)}
             >
-              <div className="main-category-icon"></div>
+              <div
+                className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
+              ></div>
               <span>{data.mainCategory}</span>
             </div>
           </div>

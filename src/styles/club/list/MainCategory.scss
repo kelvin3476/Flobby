@@ -38,9 +38,16 @@
         height: 24px;
         background: #d9d9d9; // icon 정해지면 수정
 
-        // background-image: url('');
         // background-repeat: no-repeat;
         // background-position: center;
+
+        // &.sports {
+        //   background-image: url('');
+        // }
+
+        // &.language{
+        //    background-image: url('');
+        // }
       }
 
       > span {
