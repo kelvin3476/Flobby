@@ -157,7 +157,7 @@ export interface ClubListItem {
   hostId: number;
   hostNickname: string;
   category: string;
-  subCatecory: string; // 오타있음
+  subCategory: string;
   maxMember: number;
   clubName: string;
   regionId: number;
