@@ -5,13 +5,13 @@ import logger from '../../utils/Logger';
 export class ClubItemsListModel {
   clubListData: ClubListItem[] = [];
 
-  async getClubList(category?: string): Promise<ClubListItem[]> {
+  async getClubList(mainCategory?: string): Promise<ClubListItem[]> {
     try {
-      const response = await Main.getClubList(category);
+      // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
+      const response = await Main.getClubList(mainCategory);
       const { code, message, data } = response.data;
       if (code === 1000) {
         // API 호출 성공
-        logger.log(data);
         this.clubListData = data;
         return this.clubListData;
       } else if (code === 1001) {
