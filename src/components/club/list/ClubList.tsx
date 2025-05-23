@@ -1,10 +1,11 @@
 import React from 'react';
 import ClubItem from '../../main/club/ClubItem';
-import { clubItems } from './clubItems';
+import { clubItems } from './clubItems'; // test용 데이터
 import '../../../styles/club/list/ClubList.scss';
-import logger from '../../../utils/Logger';
 
 const ClubList = () => {
+  // TODO: api 연동
+
   return (
     <div className="club-list-container">
       <div className="club-list-box">
