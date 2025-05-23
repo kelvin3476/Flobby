@@ -6,13 +6,17 @@ import '../../../styles/club/list/SubCategory.scss';
 
 const SubCategory = () => {
   const { mainCategory, setSubCategory } = useClubCategoryStore();
-  const [activeCategory, setActiveCategory] = useState<string>('');
+  const [activeCategory, setActiveCategory] = useState<string>('전체');
 
+  // TODO: api 연동시 실제 데이터로 처리
   const selectedCategoryData = categoryData.find(
     data => data.mainCategory === mainCategory,
   );
 
-  const subCategoryList = selectedCategoryData?.subCategories || [];
+  const subCategoryList = [
+    '전체',
+    ...(selectedCategoryData?.subCategories || []),
+  ];
 
   useEffect(() => {
     if (mainCategory && getCookie('subCategory')) {
@@ -30,6 +34,7 @@ const SubCategory = () => {
   };
 
   return (
+    mainCategory !== '전체' &&
     subCategoryList.length > 0 && (
       <div className="sub-category-container">
         <div className="sub-category-box">

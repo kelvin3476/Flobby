@@ -7,7 +7,7 @@ import '../../../styles/club/list/MainCategory.scss';
 const MainCategory = () => {
   const mainCategoryData = [{ mainCategory: '전체' }, ...categoryData];
   const { setMainCategory, setSubCategory } = useClubCategoryStore();
-  const [activeMainCategory, setActiveMainCategory] = useState<string>('');
+  const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
 
   useEffect(() => {
     let mainCategory = '전체';
@@ -33,6 +33,8 @@ const MainCategory = () => {
 
       setSubCategory('');
       setCookie('subCategory', '', 0);
+    } else {
+      // TODO: mainCategory 기반 전체 데이터 api 호출 ?? 호출 시점에 대해서 기획 & 백엔드 확인 필요
     }
 
     setMainCategory(category);
