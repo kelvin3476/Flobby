@@ -10,21 +10,26 @@ import ProgressBar from '../../components/signup/ProgressBar';
 import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 
 const SelectHobbies = () => {
-  const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, warning, setWarning } = useHobbyStore();
+  const { 
+    selectedHobbies, 
+    addHobby, 
+    removeHobby, 
+    hobbyCount,
+    hideHobbyList,
+    setHideHobbyList, 
+    warning, 
+    setWarning } = useHobbyStore();
+
   const navigate = useNavigate();
+
   const [ hobbyCategoryList, setHobbyCategoryList ] = useState([]);
+  
+  const categoryListController = CategoryListController.getInstance();
   
   useEffect(() => {
     const fetchHobbies = async() => {
-
-      try {
-        const controller = CategoryListController.getInstance();
-        const formattedHobby = await controller.getCategoryList();
-
-        setHobbyCategoryList(formattedHobby);
-      } catch (err: any) {
-        console.error(err.message || "데이터 로드 실패");
-      }
+      await categoryListController.getCategoryList();
+      setHobbyCategoryList(categoryListController.model.categoryList);
     };
 
     fetchHobbies();
