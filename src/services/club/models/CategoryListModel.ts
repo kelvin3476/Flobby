@@ -14,28 +14,8 @@ export class CategoryListModel {
       if (code === 1000) {
         // API 호출 성공
         logger.log(data);
-        const formattedData: HobbyCategory[] = [];
 
-        data.forEach((item: any) => {
-          const subItems: string[] = [];
-
-          if (Array.isArray(item.subCategories)) {
-            item.subCategories.forEach((subItem: any) => {
-              if (typeof subItem === 'string') {
-                subItems.push(subItem);
-              } else if (typeof subItem === 'object' && subItem.subCategories) {
-                subItems.push(...subItem.subCategories);
-              }
-            });
-          }
-
-          formattedData.push({
-            mainCategory: item.mainCategory,
-            subCategories: subItems,
-          });
-        });
-
-        this.categoryList = formattedData;
+        this.categoryList = data;
         return this.categoryList;
 
       } else if (code === 1001) {
