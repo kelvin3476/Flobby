@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useHobbyStore from '../../store/signup/useHobbyStore';
 
@@ -7,51 +7,21 @@ import '../../styles/signup/SelectHobbies.scss';
 import Button from '../../components/button/Button';
 import ProgressBar from '../../components/signup/ProgressBar';
 
-import SignUp from '../../api/signup/SignUp';
-import type { HobbyCategory } from '../../store/signup/useHobbyStore';
+import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 
 const SelectHobbies = () => {
-  const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, warning, setWarning, hobbyCategoryMap, setHobbyCategoryMap } = useHobbyStore();
+  const { selectedHobbies, addHobby, removeHobby, hobbyCount,hideHobbyList,setHideHobbyList, warning, setWarning } = useHobbyStore();
   const navigate = useNavigate();
+  const [ hobbyCategoryList, setHobbyCategoryList ] = useState([]);
   
   useEffect(() => {
     const fetchHobbies = async() => {
 
       try {
-        const response = await SignUp.getHobbyList();
-        const { code, message, data } = response.data;
+        const controller = CategoryListController.getInstance();
+        const formattedHobby = await controller.getCategoryList();
 
-        if (code === 1000) {
-          // API 호출 성공
-          const formattedData: HobbyCategory[] = [];
-
-          data.forEach((item: any) => {
-            const subItems: string[] = [];
-
-            if (Array.isArray(item.subCategories)) {
-              item.subCategories.forEach((subItem: any) => {
-                if (typeof subItem === 'string') {
-                  subItems.push(subItem);
-                } else if (typeof subItem === 'object' && subItem.subCategories) {
-                  subItems.push(...subItem.subCategories);
-                }
-              });
-            }
-
-            formattedData.push({
-              mainCategory: item.mainCategory,
-              subCategory: subItems,
-            });
-          });
-
-          setHobbyCategoryMap(formattedData);
-        } else if (code === 1001) {
-          // API 호출 실패
-          throw new Error(message || '데이터를 가져오지 못했습니다.');
-        } else if (code === 1002) {
-          // API 예외 발생
-          throw new Error(message || "서버 오류가 발생했습니다.");
-        }
+        setHobbyCategoryList(formattedHobby);
       } catch (err: any) {
         console.error(err.message || "데이터 로드 실패");
       }
@@ -110,7 +80,7 @@ const SelectHobbies = () => {
         {/*취미 카테고리, 리스트*/}
         <div className="hobby">
           <div className="category">
-            {hobbyCategoryMap.map((categoryObj, index) => (
+            {hobbyCategoryList.map((categoryObj, index) => (
                 <div key={index}>
                   <div className="title">
                     <span className="circle"></span>
@@ -121,7 +91,7 @@ const SelectHobbies = () => {
                     ></button>
                   </div>
                   <ul className={`hobby-ul ${isHobbyListHidden(index)? 'hide' : ''}`}>
-                      {categoryObj.subCategory?.map((item, idx) => (
+                      {categoryObj.subCategories?.map((item, idx) => (
                           <li key={idx}>
                             <label
                                 htmlFor={item}
