@@ -136,9 +136,7 @@ const ImageUploader = () => {
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
-          {isLoading ? (
-            <LoadingSpinnerController />
-          ) : imageUrl ? (
+          {imageUrl ? (
             <div className="image-preview">
               <img src={imageUrl} alt="썸네일 미리보기" />
               <div className="overlay">
@@ -150,6 +148,12 @@ const ImageUploader = () => {
                   <span>이미지 선택</span>
                 </button>
               </div>
+              {isLoading && (
+                <div className="spinner-box">
+                  {' '}
+                  <LoadingSpinnerController />
+                </div>
+              )}
             </div>
           ) : (
             <div className="image-uploader-info-box">
