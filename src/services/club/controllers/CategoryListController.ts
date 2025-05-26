@@ -10,7 +10,10 @@ export class CategoryListController {
   }
 
   public static getInstance(): CategoryListController {
-    if (!CategoryListController.instance) {
+    if (!CategoryListController.instance ||
+      CategoryListController.instance === null ||
+      CategoryListController.instance === undefined
+    ) {
       CategoryListController.instance = new CategoryListController();
     } 
     return CategoryListController.instance;
