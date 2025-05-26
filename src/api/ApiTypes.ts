@@ -149,3 +149,18 @@ export interface CreateClubData extends CreateClubJsonData {
   file: File;
   data: CreateClubJsonData;
 }
+
+/* 모임 목록 응답 데이터 타입 */
+export interface ClubListItem {
+  clubId: number;
+  clubImage: string;
+  hostId: number;
+  hostNickname: string;
+  category: string;
+  subCategory: string;
+  maxMember: number;
+  clubName: string;
+  regionId: number;
+  location: string;
+  currentMembers: number;
+}

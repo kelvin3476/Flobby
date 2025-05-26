@@ -19,4 +19,13 @@ export default class Main {
   static async getClubDetail(clubId: number) {
     return await http.get(`/club/${clubId}`);
   }
+
+  /* 모임 목록 조회 */
+  static async getClubList(mainCategory?: string) {
+    return await http.get(`/club/list`, {
+      params: {
+        mainCategory,
+      },
+    });
+  }
 }
