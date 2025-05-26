@@ -20,6 +20,8 @@ import Main from "../../api/main/Main";
 
 import logger from "../../utils/Logger";
 
+import useMainPage from "../../hooks/main/useMainPage";
+
 import "../../styles/club/register/ClubRegister.scss";
 
 const ClubRegister = () => {
@@ -43,6 +45,8 @@ const ClubRegister = () => {
     setDescError,
     setMaxError,
   } = useClubRegisterStore();
+
+  const { accessToken } = useMainPage();
 
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
 
@@ -133,8 +137,8 @@ const ClubRegister = () => {
   
   return (
     <div className="register-container">
-      <MainHeader />
-      <main>
+      <MainHeader accessToken={accessToken} />
+      <div className="register-main">
         <div className="register-title">
           <Title titleName="모임 등록"/>
           <RequiredText />
@@ -143,19 +147,19 @@ const ClubRegister = () => {
           <div className="register-up">
             <ImageUploader />
             <div className="up-and-right">
-              <RegionDropDown />
-              <CategoryDropDown />
-              <MaxMember />
+              <RegionDropDown className="register-region"/>
+              <CategoryDropDown className="register-category"/>
+              <MaxMember className="register-member"/>
             </div>
           </div>
-          <ClubDescription />
-          <ClubAuto />
+          <ClubDescription className="register-club" />
+          <ClubAuto className="register-auto"/>
           <div className="buttons">
             <Button className="cancel-btn" title="취소" onClick={() => nav('/')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
-      </main>
+      </div>
       <footer>
         {/* 추후 footer 추가 */}
       </footer>

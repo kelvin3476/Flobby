@@ -4,7 +4,7 @@ import useClubRegisterStore from "../../../store/club/useClubRegisterStore";
 
 import "../../../styles/club/register/ClubAuto.scss";
 
-const ClubAuto: React.FC = () => {
+const ClubAuto = ({ className }) => {
   
   const {
     autoApprovalFlag,
@@ -12,7 +12,7 @@ const ClubAuto: React.FC = () => {
   } = useClubRegisterStore();
 
   return (
-    <div className="auto-container">
+    <div className={`auto-container ${className}`}>
       <Label labelTitle="자동 승인 여부"/>
       <div className="select-wrapper">
         <label className="yes-label">

@@ -4,7 +4,7 @@ import useClubRegisterStore from "../../../store/club/useClubRegisterStore";
 
 import "../../../styles/club/register/ClubDescription.scss";
 
-const ClubDescription = () => {
+const ClubDescription = ({ className }) => {
   
   const {
     clubName,
@@ -55,7 +55,7 @@ const ClubDescription = () => {
   }
 
   return (
-    <div className="desc-container">
+    <div className={`desc-container ${className}`}>
       <label className="up-wrapper">
         <Label labelTitle="모임 소개"/>
         <input 
