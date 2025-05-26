@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tag from '../../tag/Tag';
 
-import "../../../styles/main/club/ClubItem.scss";
+import '../../../styles/main/club/ClubItem.scss';
 
 interface ClubItemProps {
   clubId: number;
@@ -14,25 +14,40 @@ interface ClubItemProps {
   clubName: string;
   locationName: string;
   currentMembers: number;
+  className?: string;
 }
 
-const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers, photo }: ClubItemProps) => {
+const ClubItem = ({
+  category,
+  maxMember,
+  clubName,
+  locationName,
+  currentMembers,
+  photo,
+  className,
+}: ClubItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
     /* 모임 아이템 컨테이너 */
-    <div className="club-item-container" onClick={() => console.log('관심 모임 아이템 클릭!!!')}>
+    <div
+      className={`club-item-container ${className}`}
+      onClick={() => console.log('관심 모임 아이템 클릭!!!')}
+    >
       {/* 모임 아이템 썸네일 */}
       <div className="club-item-thumbnail-wrapper">
-        <img src={photo ? photo : '/img/main/club/thumbnail1.png'} alt="club-item-thumbnail-image" />
+        <img
+          src={photo ? photo : '/img/main/club/thumbnail1.png'}
+          alt="club-item-thumbnail-image"
+        />
         {/* TODO: 썸네일 내부 하트 아이콘 클릭시 관심 모임 으로 등록 하는 api 필요 */}
         <div className="club-item-heart-icon-wrapper">
           <span
             className={`club-item-thumbnail-heart-icon ${isHeartActive ? 'active' : ''}`}
-            onClick={(event) => {
-              event.stopPropagation()
+            onClick={event => {
+              event.stopPropagation();
               console.log('관심 모임 아이콘 toggle!!');
-              setIsHeartActive((prev) => !prev);
+              setIsHeartActive(prev => !prev);
             }}
           ></span>
         </div>
@@ -64,7 +79,10 @@ const ClubItem = ({ category, maxMember, clubName, locationName, currentMembers,
               <span className="club-item-current-members-icon"></span>
               <div className="club-item-member-container">
                 <span className="club-item-member-count">
-                  <span className="clum-item-member-number">{currentMembers}</span>/{maxMember} 명
+                  <span className="clum-item-member-number">
+                    {currentMembers}
+                  </span>
+                  /{maxMember} 명
                 </span>
               </div>
             </div>
