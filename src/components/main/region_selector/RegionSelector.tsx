@@ -27,10 +27,15 @@ const RegionSelector: React.FC = () => {
   useEffect(() => {
     const initRegionData = async () => {
       await regionController.getMainData();
-      // 관심 지역 저장
       setPreferRegions(regionController.getPreferRegionsList());
-      // 선택 지역 저장
       setSelectedRegion(regionController.getSelectedRegion());
+
+      if (!getCookie('regionId')) {
+        setCookie(
+          'regionId',
+          regionController.model.preferRegionsList[0].regionId.toString(),
+        );
+      }
     };
     initRegionData();
   }, [regionController]);
