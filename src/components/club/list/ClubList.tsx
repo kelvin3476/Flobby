@@ -32,6 +32,8 @@ const ClubList = ({ clubList }: ClubListProps) => {
                     clubName={clubItemInRow.clubName}
                     locationName={clubItemInRow.locationName}
                     currentMembers={clubItemInRow.currentMembers}
+                    subCategory={clubItemInRow.subCategory}
+                    postCategory={clubItemInRow.postCategory}
                   />
                 ))}
               </div>

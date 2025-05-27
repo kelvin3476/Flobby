@@ -15,6 +15,8 @@ interface ClubItemProps {
   locationName: string;
   currentMembers: number;
   className?: string;
+  postCategory?: string;
+  subCategory?: string;
 }
 
 const ClubItem = ({
@@ -25,6 +27,8 @@ const ClubItem = ({
   currentMembers,
   photo,
   className,
+  postCategory,
+  subCategory,
 }: ClubItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
@@ -57,7 +61,11 @@ const ClubItem = ({
       <div className="club-item-content-container">
         {/* 모임 아이템 태그 */}
         <div className="club-item-tag-container">
-          <Tag label={category} type="club" color="purple" />
+          <Tag
+            label={subCategory ? `${category} / ${subCategory}` : category}
+            type="club"
+            color="purple"
+          />
         </div>
 
         {/* 모임 아이템 정보 */}
@@ -66,9 +74,14 @@ const ClubItem = ({
           <div className="club-item-club-name">{clubName}</div>
 
           <div className="club-item-information-sub-container">
+            {/* 모임 */}
+            <div className="club-item-post-category-container">
+              <span className="club-item-post-category">{postCategory}</span>
+            </div>
+
+            <span className="club-item-divider-icon"></span>
             {/* 모임 위치 */}
             <div className="club-item-location-container">
-              <span className="club-item-location-icon"></span>
               <span className="club-item-location">{locationName}</span>
             </div>
 
