@@ -1,6 +1,7 @@
 import { MainData, RegionItem } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
-import { getCookie } from '../../../utils/Cookie';
+import { getCookie, setCookie } from '../../../utils/Cookie';
+import logger from '../../../utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {
@@ -9,6 +10,8 @@ export const DEFAULT_REGION: RegionItem = {
 };
 
 export class RegionContextModel {
+  // initialize = false;
+
   // 메인데이터
   mainData: MainData = {
     region: null,
@@ -34,8 +37,12 @@ export class RegionContextModel {
     if (cookie) {
       this.selectedRegion = data.selectedRegion;
     } else {
+      // 초기 진입시 selectedRegion은 로그인 유저일 경우 관심지역의 첫번째 값, 비로그인 유저의 경우 selectedRegion으로 넘어오는 defaultRegion(서울 전체)값으로 설정
       this.selectedRegion = this.preferRegionsList[0] || data.selectedRegion;
     }
+
+    // selectedRegion의 regionId를 쿠키에 무조건 저장
+    setCookie('regionId', this.selectedRegion.regionId.toString()); // 쿠키값 저장
   };
 
   // 데이터 초기화
