@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { categoryData, CategorySlugMap } from './Category'; // test용 데이터
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
+import { CategorySlugMap } from '../../../services/club/models/CategoryListModel';
+import { HobbyCategory } from '../../../api/ApiTypes';
 import '../../../styles/club/list/MainCategory.scss';
 
-const MainCategory = () => {
-  const mainCategoryData = [{ mainCategory: '전체' }, ...categoryData];
+interface MainCategoryProps {
+  categoryList: HobbyCategory[];
+}
+
+const MainCategory = ({ categoryList }: MainCategoryProps) => {
   const { setMainCategory, setSubCategory } = useClubCategoryStore();
   const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
 
@@ -36,24 +40,25 @@ const MainCategory = () => {
 
   return (
     <div className="main-category-container">
-      {mainCategoryData.map(data => {
-        return (
-          <div
-            className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}
-            key={data.mainCategory}
-          >
+      {categoryList &&
+        categoryList.map(data => {
+          return (
             <div
-              className="main-category-item-box"
-              onClick={() => handleClickMainCategory(data.mainCategory)}
+              className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}
+              key={data.mainCategory}
             >
               <div
-                className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
-              ></div>
-              <span>{data.mainCategory}</span>
+                className="main-category-item-box"
+                onClick={() => handleClickMainCategory(data.mainCategory)}
+              >
+                <div
+                  className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
+                ></div>
+                <span>{data.mainCategory}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

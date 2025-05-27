@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { categoryData } from './Category'; // test용 데이터
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import '../../../styles/club/list/SubCategory.scss';
 
-const SubCategory = () => {
+import '../../../styles/club/list/SubCategory.scss';
+import { HobbyCategory } from '../../../api/ApiTypes';
+
+interface SubCategoryProps {
+  categoryList: HobbyCategory[];
+}
+
+const SubCategory = ({ categoryList }: SubCategoryProps) => {
   const { mainCategory, setSubCategory } = useClubCategoryStore();
   const [activeCategory, setActiveCategory] = useState<string>('전체');
 
-  // TODO: api 연동시 실제 데이터로 처리
-  const selectedCategoryData = categoryData.find(
+  const selectedCategoryData = categoryList.find(
     data => data.mainCategory === mainCategory,
   );
 
-  const subCategoryList = [
-    '전체',
-    ...(selectedCategoryData?.subCategories || []),
-  ];
+  const subCategoryList = selectedCategoryData?.subCategories
+    ? ['전체', ...selectedCategoryData.subCategories]
+    : [];
 
   useEffect(() => {
     if (getCookie('subCategory')) {

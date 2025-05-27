@@ -5,7 +5,6 @@ import { RegionItem } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
-import { getCookie, setCookie } from '../../../utils/Cookie';
 
 const RegionSelector: React.FC = () => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -27,15 +26,10 @@ const RegionSelector: React.FC = () => {
   useEffect(() => {
     const initRegionData = async () => {
       await regionController.getMainData();
+      // 관심 지역 저장
       setPreferRegions(regionController.getPreferRegionsList());
+      // 선택 지역 저장
       setSelectedRegion(regionController.getSelectedRegion());
-
-      if (!getCookie('regionId')) {
-        setCookie(
-          'regionId',
-          regionController.model.preferRegionsList[0].regionId.toString(),
-        );
-      }
     };
     initRegionData();
   }, [regionController]);
