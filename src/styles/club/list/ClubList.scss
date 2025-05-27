@@ -18,5 +18,12 @@
       gap: 20px;
       align-self: stretch;
     }
+
+    .empty-club-list {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
