@@ -5,7 +5,6 @@ import { RegionItem } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
-import { getCookie, setCookie } from '../../../utils/Cookie';
 
 const RegionSelector: React.FC = () => {
   const modalRef = useRef<HTMLDivElement>(null);
