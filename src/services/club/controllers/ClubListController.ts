@@ -1,5 +1,5 @@
-import { ClubListItem } from '../../api/ApiTypes';
-import { ClubItemsListModel } from './ClubListModel';
+import { ClubListItem } from '../../../api/ApiTypes';
+import { ClubItemsListModel } from '../models/ClubListModel';
 
 export class ClubItemsListController {
   private static instance: ClubItemsListController;

@@ -1,6 +1,5 @@
-import { ClubListItem } from '../../api/ApiTypes';
-import Main from '../../api/main/Main';
-import logger from '../../utils/Logger';
+import { ClubListItem } from '../../../api/ApiTypes';
+import Main from '../../../api/main/Main';
 
 export class ClubItemsListModel {
   clubListData: ClubListItem[] = [];
