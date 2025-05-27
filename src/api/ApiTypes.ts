@@ -153,7 +153,7 @@ export interface CreateClubData extends CreateClubJsonData {
 /* 모임 목록 응답 데이터 타입 */
 export interface ClubListItem {
   clubId: number;
-  clubImage: string;
+  photo: string;
   hostId: number;
   hostNickname: string;
   category: string;
@@ -161,6 +161,7 @@ export interface ClubListItem {
   maxMember: number;
   clubName: string;
   regionId: number;
-  location: string;
+  locationName: string;
   currentMembers: number;
+  postCategory: string;
 }
