@@ -10,7 +10,7 @@ const ClubList = ({ clubList }: ClubListProps) => {
   return (
     <div className="club-list-container">
       <div className="club-list-box">
-        {clubList?.length > 0 ? (
+        {clubList?.length > 0 &&
           clubList
             .reduce((rows, clubItem, index) => {
               if (index % 4 === 0) rows.push([]);
@@ -35,12 +35,7 @@ const ClubList = ({ clubList }: ClubListProps) => {
                   />
                 ))}
               </div>
-            ))
-        ) : (
-          <div className="empty-club-list">
-            해당 카테고리에 해당하는 모임이 없습니다.
-          </div>
-        )}
+            ))}
       </div>
     </div>
   );
