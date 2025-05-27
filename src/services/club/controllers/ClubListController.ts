@@ -10,11 +10,7 @@ export class ClubItemsListController {
   }
 
   static getInstance(): ClubItemsListController {
-    if (
-      !ClubItemsListController.instance ||
-      ClubItemsListController.instance === null ||
-      ClubItemsListController.instance === undefined
-    ) {
+    if (!ClubItemsListController.instance) {
       ClubItemsListController.instance = new ClubItemsListController();
     }
     return ClubItemsListController.instance;
