@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { categoryData, CategorySlugMap } from './Category'; // test용 데이터
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
+import { CategoryListController } from '../../../services/club/controllers/CategoryListController';
+import { CategorySlugMap } from '../../../services/club/models/CategoryListModel';
 import '../../../styles/club/list/MainCategory.scss';
 
 const MainCategory = () => {
-  const mainCategoryData = [{ mainCategory: '전체' }, ...categoryData];
   const { setMainCategory, setSubCategory } = useClubCategoryStore();
   const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
+  const [categoryList, setCategoryList] = useState([]);
+
+  const categoryListController = CategoryListController.getInstance();
+
+  useEffect(() => {
+    const fetchCategoryListData = async () => {
+      const categoryListData = await categoryListController.getCategoryList();
+      const processedCategoryListData = [
+        { mainCategory: '전체' },
+        ...categoryListData,
+      ];
+      setCategoryList(processedCategoryListData);
+    };
+    fetchCategoryListData();
+  }, []);
 
   useEffect(() => {
     const rawCookie = getCookie('mainCategory');
@@ -36,7 +51,7 @@ const MainCategory = () => {
 
   return (
     <div className="main-category-container">
-      {mainCategoryData.map(data => {
+      {categoryList.map(data => {
         return (
           <div
             className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}

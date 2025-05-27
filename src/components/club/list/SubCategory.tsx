@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { categoryData } from './Category'; // test용 데이터
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
+import { CategoryListController } from '../../../services/club/controllers/CategoryListController';
 import '../../../styles/club/list/SubCategory.scss';
 
 const SubCategory = () => {
   const { mainCategory, setSubCategory } = useClubCategoryStore();
   const [activeCategory, setActiveCategory] = useState<string>('전체');
+  const [categoryList, setCategoryList] = useState([]);
 
-  // TODO: api 연동시 실제 데이터로 처리
-  const selectedCategoryData = categoryData.find(
+  const categoryListController = CategoryListController.getInstance();
+
+  useEffect(() => {
+    const fetchCategoryListData = async () => {
+      const categoryListData = await categoryListController.getCategoryList();
+      const processedCategoryListData = [
+        { mainCategory: '전체' },
+        ...categoryListData,
+      ];
+      setCategoryList(processedCategoryListData);
+    };
+    fetchCategoryListData();
+  }, []);
+
+  const selectedCategoryData = categoryList.find(
     data => data.mainCategory === mainCategory,
   );
 
