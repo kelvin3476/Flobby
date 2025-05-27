@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
 import { CategorySlugMap } from '../../../services/club/models/CategoryListModel';
@@ -10,32 +10,35 @@ interface MainCategoryProps {
 }
 
 const MainCategory = ({ categoryList }: MainCategoryProps) => {
-  const { setMainCategory, setSubCategory } = useClubCategoryStore();
-  const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
+  const { mainCategory, setMainCategory, setSubCategory } =
+    useClubCategoryStore();
 
   useEffect(() => {
     const rawCookie = getCookie('mainCategory');
+
+    // 쿠키에 저장된 인코딩된 한글값 디코딩하여 불러오기
+    // 값이 없으면 '전체'가 기본값
     const decodedMainCategory = rawCookie
       ? decodeURIComponent(rawCookie)
       : '전체';
 
     setMainCategory(decodedMainCategory);
-    setActiveMainCategory(decodedMainCategory);
   }, []);
 
   const handleClickMainCategory = (mainCategory: string) => {
     if (mainCategory === '전체') {
-      // TODO: mainList 초기 데이터 api 호출
-      setSubCategory('');
+      // mainCategory가 전체일 경우 쿠키 삭제
       setCookie('mainCategory', '', 0);
-      setCookie('subCategory', '', 0);
     } else {
-      // TODO: mainCategory 기반 전체 데이터 api 호출
+      // 그 외 케이스 쿠키에 저장
       setCookie('mainCategory', mainCategory);
     }
 
     setMainCategory(mainCategory);
-    setActiveMainCategory(mainCategory);
+
+    // 메인 카테고리 클릭시 subCategory값은 '전체'로 초기화 & 쿠키 삭제
+    setSubCategory('전체');
+    setCookie('subCategory', '', 0);
   };
 
   return (
@@ -44,7 +47,7 @@ const MainCategory = ({ categoryList }: MainCategoryProps) => {
         categoryList.map(data => {
           return (
             <div
-              className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}
+              className={`main-category-item-container ${mainCategory === data.mainCategory ? 'active' : ''}`}
               key={data.mainCategory}
             >
               <div
