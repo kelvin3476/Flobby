@@ -92,9 +92,11 @@ export interface clubItem {
   category: string;
   maxMember: string;
   clubName: string;
-  location: string;
+  regionId: string;
   locationName: string;
   currentMembers: number;
+  subCategory: string;
+  postCategory: string;
 }
 
 /* 원데이 response 데이터 타입 */

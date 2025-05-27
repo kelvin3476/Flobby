@@ -35,7 +35,7 @@ const ClubItem = ({
   return (
     /* 모임 아이템 컨테이너 */
     <div
-      className={`club-item-container ${className}`}
+      className={`club-item-container ${className ? className : ''}`}
       onClick={() => console.log('관심 모임 아이템 클릭!!!')}
     >
       {/* 모임 아이템 썸네일 */}
@@ -62,7 +62,7 @@ const ClubItem = ({
         {/* 모임 아이템 태그 */}
         <div className="club-item-tag-container">
           <Tag
-            label={subCategory ? `${category} / ${subCategory}` : category}
+            label={`${category} / ${subCategory}`}
             type="club"
             color="purple"
           />

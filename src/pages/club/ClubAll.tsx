@@ -7,6 +7,7 @@ import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
+import logger from '../../utils/Logger';
 
 const ClubAll = () => {
   const { mainCategory, subCategory } = useClubCategoryStore();
@@ -41,11 +42,13 @@ const ClubAll = () => {
         const clubListData = await clubItemsListController.getClubList();
         setClubList(clubListData);
       } else {
-        const clubListData =
-          await clubItemsListController.getClubList(mainCategory);
+        const clubListData = await clubItemsListController.getClubList(
+          encodeURIComponent(mainCategory),
+        );
         setClubList(clubListData);
       }
     };
+
     fetchClubItemsList();
   }, [mainCategory, subCategory]);
 
