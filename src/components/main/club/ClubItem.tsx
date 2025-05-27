@@ -92,7 +92,7 @@ const ClubItem = ({
               <span className="club-item-current-members-icon"></span>
               <div className="club-item-member-container">
                 <span className="club-item-member-count">
-                  <span className="clum-item-member-number">
+                  <span className="club-item-member-number">
                     {currentMembers}
                   </span>
                   /{maxMember} 명
