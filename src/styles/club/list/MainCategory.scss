@@ -25,6 +25,24 @@
         > span {
           color: #764bf6;
         }
+
+        > .main-category-icon {
+          $categories: (
+            entire,
+            sports,
+            music,
+            art,
+            travel,
+            leisure,
+            self-improvement
+          );
+
+          @each $category in $categories {
+            &.#{$category} {
+              background-color: #764bf6;
+            }
+          }
+        }
       }
     }
 
@@ -36,22 +54,33 @@
       .main-category-icon {
         width: 24px;
         height: 24px;
-        background: #d9d9d9; // icon 정해지면 수정
 
-        // background-repeat: no-repeat;
-        // background-position: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        mask-size: contain;
+        background-color: #191919;
 
-        // &.sports {
-        //   background-image: url('');
-        // }
+        $categories: (
+          entire,
+          sports,
+          music,
+          art,
+          travel,
+          leisure,
+          self-improvement
+        );
 
-        // &.language{
-        //    background-image: url('');
-        // }
+        @each $category in $categories {
+          &.#{$category} {
+            mask: url('../../../assets/svg/club/register/category/category-#{$category}.svg')
+              no-repeat
+              center;
+          }
+        }
       }
 
       > span {
-        color: #72787f;
+        color: #191919;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

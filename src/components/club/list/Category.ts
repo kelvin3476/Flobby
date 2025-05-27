@@ -1,8 +1,13 @@
 export const CategorySlugMap: Record<string, string> = {
+  전체: 'entire',
   스포츠: 'sports',
   언어: 'language',
+  음악: 'music',
+  예술: 'art',
+  여행: 'travel',
+  '기타 여가': 'leisure',
+  자기계발: 'self-improvement',
 };
-
 export const categoryData = [
   {
     mainCategory: '스포츠',
@@ -66,5 +71,51 @@ export const categoryData = [
       '우르두어',
       '펀자브어',
     ],
+  },
+  {
+    mainCategory: '음악',
+    subCategories: [
+      '밴드',
+      '힙합/락',
+      '댄스/무용',
+      '재즈',
+      '작사/작곡',
+      '노래/보컬',
+    ],
+  },
+  {
+    mainCategory: '예술',
+    subCategories: [
+      '드로잉',
+      '도예',
+      '뜨개질',
+      '가죽공예',
+      '목공예',
+      '금속공예',
+      '플라워',
+      '캘리그라피',
+      '캔들/디퓨저/석고',
+    ],
+  },
+  {
+    mainCategory: '여행',
+    subCategories: ['국내여행', '캠핑', '낚시', '등산'],
+  },
+  {
+    mainCategory: '기타 여가',
+    subCategories: [
+      '게임',
+      '방탈출',
+      '프라모델',
+      '자동차/바이크',
+      '반려동물',
+      '요리',
+      '봉사',
+      '전시/공연',
+    ],
+  },
+  {
+    mainCategory: '자기계발',
+    subCategories: ['IT', '마케팅', '투자', '시험/자격증', '취업/이직'],
   },
 ];
