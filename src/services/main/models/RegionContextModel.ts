@@ -9,8 +9,6 @@ export const DEFAULT_REGION: RegionItem = {
 };
 
 export class RegionContextModel {
-  // initialize = false;
-
   // 메인데이터
   mainData: MainData = {
     region: null,
