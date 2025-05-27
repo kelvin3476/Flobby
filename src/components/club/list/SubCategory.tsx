@@ -27,10 +27,14 @@ const SubCategory = () => {
 
   const handleClickSubCategory = (subCategory: string) => {
     // TODO: subCategory 기반 데이터 api 호출
+    if (subCategory === '전체') {
+      setCookie('subCategory', '', 0);
+    } else {
+      setCookie('subCategory', subCategory);
+    }
 
     setSubCategory(subCategory);
     setActiveCategory(subCategory);
-    setCookie('subCategory', subCategory);
   };
 
   return (
