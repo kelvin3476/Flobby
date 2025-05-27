@@ -1,28 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import { CategoryListController } from '../../../services/club/controllers/CategoryListController';
 import { CategorySlugMap } from '../../../services/club/models/CategoryListModel';
+import { HobbyCategory } from '../../../api/ApiTypes';
 import '../../../styles/club/list/MainCategory.scss';
 
-const MainCategory = () => {
+interface MainCategoryProps {
+  categoryList: HobbyCategory[];
+}
+
+const MainCategory = ({ categoryList }: MainCategoryProps) => {
   const { setMainCategory, setSubCategory } = useClubCategoryStore();
   const [activeMainCategory, setActiveMainCategory] = useState<string>('전체');
-  const [categoryList, setCategoryList] = useState([]);
-
-  const categoryListController = CategoryListController.getInstance();
-
-  useEffect(() => {
-    const fetchCategoryListData = async () => {
-      const categoryListData = await categoryListController.getCategoryList();
-      const processedCategoryListData = [
-        { mainCategory: '전체' },
-        ...categoryListData,
-      ];
-      setCategoryList(processedCategoryListData);
-    };
-    fetchCategoryListData();
-  }, []);
 
   useEffect(() => {
     const rawCookie = getCookie('mainCategory');
@@ -51,24 +40,25 @@ const MainCategory = () => {
 
   return (
     <div className="main-category-container">
-      {categoryList.map(data => {
-        return (
-          <div
-            className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}
-            key={data.mainCategory}
-          >
+      {categoryList &&
+        categoryList.map(data => {
+          return (
             <div
-              className="main-category-item-box"
-              onClick={() => handleClickMainCategory(data.mainCategory)}
+              className={`main-category-item-container ${activeMainCategory === data.mainCategory ? 'active' : ''}`}
+              key={data.mainCategory}
             >
               <div
-                className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
-              ></div>
-              <span>{data.mainCategory}</span>
+                className="main-category-item-box"
+                onClick={() => handleClickMainCategory(data.mainCategory)}
+              >
+                <div
+                  className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
+                ></div>
+                <span>{data.mainCategory}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

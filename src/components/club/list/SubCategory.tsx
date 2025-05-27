@@ -1,27 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import { CategoryListController } from '../../../services/club/controllers/CategoryListController';
+import { HobbyCategory } from '../../../api/ApiTypes';
 import '../../../styles/club/list/SubCategory.scss';
 
-const SubCategory = () => {
+interface SubCategoryProps {
+  categoryList: HobbyCategory[];
+}
+
+const SubCategory = ({ categoryList }: SubCategoryProps) => {
   const { mainCategory, setSubCategory } = useClubCategoryStore();
   const [activeCategory, setActiveCategory] = useState<string>('전체');
-  const [categoryList, setCategoryList] = useState([]);
-
-  const categoryListController = CategoryListController.getInstance();
-
-  useEffect(() => {
-    const fetchCategoryListData = async () => {
-      const categoryListData = await categoryListController.getCategoryList();
-      const processedCategoryListData = [
-        { mainCategory: '전체' },
-        ...categoryListData,
-      ];
-      setCategoryList(processedCategoryListData);
-    };
-    fetchCategoryListData();
-  }, []);
 
   const selectedCategoryData = categoryList.find(
     data => data.mainCategory === mainCategory,
