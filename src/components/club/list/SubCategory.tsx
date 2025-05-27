@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import { HobbyCategory } from '../../../api/ApiTypes';
+
 import '../../../styles/club/list/SubCategory.scss';
+import { HobbyCategory } from '../../../api/ApiTypes';
 
 interface SubCategoryProps {
   categoryList: HobbyCategory[];
@@ -16,10 +17,9 @@ const SubCategory = ({ categoryList }: SubCategoryProps) => {
     data => data.mainCategory === mainCategory,
   );
 
-  const subCategoryList = [
-    '전체',
-    ...(selectedCategoryData?.subCategories || []),
-  ];
+  const subCategoryList = selectedCategoryData?.subCategories
+    ? ['전체', ...selectedCategoryData.subCategories]
+    : [];
 
   useEffect(() => {
     if (getCookie('subCategory')) {
