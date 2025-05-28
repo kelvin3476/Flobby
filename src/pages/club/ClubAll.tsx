@@ -7,7 +7,6 @@ import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
-import logger from '../../utils/Logger';
 
 const ClubAll = () => {
   const { mainCategory, subCategory } = useClubCategoryStore();
