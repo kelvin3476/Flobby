@@ -1,5 +1,5 @@
-import { ClubListItem } from '../../api/ApiTypes';
-import { ClubItemsListModel } from './ClubListModel';
+import { ClubListItem } from '../../../api/ApiTypes';
+import { ClubItemsListModel } from '../models/ClubListModel';
 
 export class ClubItemsListController {
   private static instance: ClubItemsListController;
@@ -10,11 +10,7 @@ export class ClubItemsListController {
   }
 
   static getInstance(): ClubItemsListController {
-    if (
-      !ClubItemsListController.instance ||
-      ClubItemsListController.instance === null ||
-      ClubItemsListController.instance === undefined
-    ) {
+    if (!ClubItemsListController.instance) {
       ClubItemsListController.instance = new ClubItemsListController();
     }
     return ClubItemsListController.instance;

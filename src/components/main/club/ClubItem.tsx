@@ -15,6 +15,8 @@ interface ClubItemProps {
   locationName: string;
   currentMembers: number;
   className?: string;
+  postCategory?: string;
+  subCategory?: string;
 }
 
 const ClubItem = ({
@@ -25,13 +27,15 @@ const ClubItem = ({
   currentMembers,
   photo,
   className,
+  postCategory,
+  subCategory,
 }: ClubItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
     /* 모임 아이템 컨테이너 */
     <div
-      className={`club-item-container ${className}`}
+      className={`club-item-container ${className ? className : ''}`}
       onClick={() => console.log('관심 모임 아이템 클릭!!!')}
     >
       {/* 모임 아이템 썸네일 */}
@@ -57,7 +61,11 @@ const ClubItem = ({
       <div className="club-item-content-container">
         {/* 모임 아이템 태그 */}
         <div className="club-item-tag-container">
-          <Tag label={category} type="club" color="purple" />
+          <Tag
+            label={`${category} / ${subCategory}`}
+            type="club"
+            color="purple"
+          />
         </div>
 
         {/* 모임 아이템 정보 */}
@@ -66,9 +74,14 @@ const ClubItem = ({
           <div className="club-item-club-name">{clubName}</div>
 
           <div className="club-item-information-sub-container">
+            {/* 모임 */}
+            <div className="club-item-post-category-container">
+              <span className="club-item-post-category">{postCategory}</span>
+            </div>
+
+            <span className="club-item-divider-icon"></span>
             {/* 모임 위치 */}
             <div className="club-item-location-container">
-              <span className="club-item-location-icon"></span>
               <span className="club-item-location">{locationName}</span>
             </div>
 
@@ -79,7 +92,7 @@ const ClubItem = ({
               <span className="club-item-current-members-icon"></span>
               <div className="club-item-member-container">
                 <span className="club-item-member-count">
-                  <span className="clum-item-member-number">
+                  <span className="club-item-member-number">
                     {currentMembers}
                   </span>
                   /{maxMember} 명

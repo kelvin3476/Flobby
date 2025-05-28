@@ -13,8 +13,9 @@ import { RegionContextController } from '../../../services/main/controllers/Regi
 import '../../../styles/main/club/ClubPost.scss';
 
 const ClubPost: React.FC = () => {
-  const [ clubData, setClubData ] = React.useState<clubItem[]>([]);
-  const regionContextController: RegionContextController = RegionContextController.getInstance();
+  const [clubData, setClubData] = React.useState<clubItem[]>([]);
+  const regionContextController: RegionContextController =
+    RegionContextController.getInstance();
 
   const fetchClubData = async () => {
     const data: MainData = await regionContextController.getMainData();
@@ -81,15 +82,15 @@ const ClubPost: React.FC = () => {
           <>
             <Swiper
               key={clubData.length}
-              onSwiper={changeSwiperAction} /* Swiper 인스턴스를 받아와서 처리 */
+              onSwiper={
+                changeSwiperAction
+              } /* Swiper 인스턴스를 받아와서 처리 */
               slidesPerView={4}
               spaceBetween={24}
-              navigation={
-                {
-                  prevEl: '.club-custom-prev',
-                  nextEl: '.club-custom-next',
-                }
-              }
+              navigation={{
+                prevEl: '.club-custom-prev',
+                nextEl: '.club-custom-next',
+              }}
               modules={[Navigation]}
             >
               {clubData.map((item, idx) => {
@@ -106,6 +107,8 @@ const ClubPost: React.FC = () => {
                       clubName={item.clubName}
                       locationName={item.locationName}
                       currentMembers={item.currentMembers}
+                      subCategory={item.subCategory}
+                      postCategory={item.postCategory}
                     />
                   </SwiperSlide>
                 );
