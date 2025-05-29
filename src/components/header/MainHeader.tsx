@@ -21,7 +21,7 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
         <div className="main-wrapper">
           <div className="up-wrapper">
             <div className="left-wrapper">
-              <Logo />  
+              <Logo className="header-logo" onClick={() => nav('/')} />  
               <RegionSelector /> 
             </div>
             <div className="right-wrapper">
@@ -51,7 +51,7 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
           </div>
           {isClicked && <DropDownModal className="profile-modal" firstTitle="마이페이지" secondTitle="로그아웃" />}
           <div className="down-wrapper">
-            <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club/all")}/>
+            <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club/all", { state: accessToken })}/>
             <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday/all")}/>
             <TextButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community/all")}/>
           </div>

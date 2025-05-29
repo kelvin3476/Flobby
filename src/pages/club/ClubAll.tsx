@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import logger from '../../utils/Logger';
+import { useLocation } from 'react-router-dom';
 import MainHeader from '../../components/header/MainHeader';
 import MainCategory from '../../components/club/list/MainCategory';
 import Title from '../../components/club/text/Title';
@@ -11,6 +13,11 @@ import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
 import '../../styles/main/club/ClubAll.scss';
 
 const ClubAll = () => {
+  const location = useLocation();
+  const accessToken = location.state as string | null;
+
+  logger.log('[cluball: accessToken]', accessToken);
+
   const { mainCategory, subCategory } = useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
   const [clubList, setClubList] = useState<ClubListItem[]>([]);
@@ -55,7 +62,7 @@ const ClubAll = () => {
 
   return (
     <div className="club-all-wrapper">
-      <MainHeader accessToken={null} />
+      <MainHeader accessToken={accessToken} />
       <div className='club-all-content-container'>
         <MainCategory categoryList={categoryList} />  
         <div className='club-all-content'>
