@@ -1,0 +1,29 @@
+.club-all-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+
+  .club-all-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 41px;
+
+    .club-all-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+
+      .club-all-sub-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        width: 100%;
+      }
+    }
+  }
+}

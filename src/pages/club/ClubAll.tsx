@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MainHeader from '../../components/header/MainHeader';
 import MainCategory from '../../components/club/list/MainCategory';
 import Title from '../../components/club/text/Title';
 import SubCategory from '../../components/club/list/SubCategory';
@@ -7,6 +8,7 @@ import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
+import '../../styles/main/club/ClubAll.scss';
 
 const ClubAll = () => {
   const { mainCategory, subCategory } = useClubCategoryStore();
@@ -52,12 +54,19 @@ const ClubAll = () => {
   }, [mainCategory, subCategory]);
 
   return (
-    <>
-      <MainCategory categoryList={categoryList} />
-      <Title titleName={mainCategory ? mainCategory : '모임'} />
-      <SubCategory categoryList={categoryList} />
-      <ClubList clubList={clubList} />
-    </>
+    <div className="club-all-wrapper">
+      <MainHeader accessToken={null} />
+      <div className='club-all-content-container'>
+        <MainCategory categoryList={categoryList} />  
+        <div className='club-all-content'>
+          <Title titleName={mainCategory ? mainCategory : '모임'} />
+          <div className='club-all-sub-content'>  
+            <SubCategory categoryList={categoryList} />
+            <ClubList clubList={clubList} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
