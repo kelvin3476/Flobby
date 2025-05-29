@@ -7,7 +7,6 @@ import RegionDropDown from "../../components/dropdown/RegionDropDown";
 import CategoryDropDown from "../../components/dropdown/CategoryDropDown";
 import MaxMember from "../../components/club/register/MaxMember";
 import ClubDescription from "../../components/club/register/ClubDescription";
-import ClubAuto from "../../components/club/register/ClubAuto";
 
 import Button from "../../components/button/Button";
 import Title from "../../components/club/text/Title";
@@ -28,7 +27,6 @@ const ClubRegister = () => {
   const {
     clubName,
     description,
-    autoApprovalFlag,
     location,
     maxMembers,
     file,
@@ -122,7 +120,6 @@ const ClubRegister = () => {
         subCategory: subCategory,
         location: location,
         maxMembers: maxMembers,
-        autoApprovalFlag: autoApprovalFlag,
       }
 
       formData.append('data', new Blob([JSON.stringify(jsonData)], { type: 'application/json' }));
@@ -153,7 +150,6 @@ const ClubRegister = () => {
             </div>
           </div>
           <ClubDescription className="register-club" />
-          <ClubAuto className="register-auto"/>
           <div className="buttons">
             <Button className="cancel-btn" title="취소" onClick={() => nav('/')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
