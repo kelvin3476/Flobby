@@ -3,11 +3,12 @@ import logo from "../../assets/svg/logo/logo.svg";
 
 interface LogoProps {
   className?: string;
+  onClick?: () => void;
 }
 
-const Logo = ({ className }: LogoProps) => {
+const Logo = ({ className, onClick }: LogoProps) => {
   return (
-    <img src={logo} alt="Flobby 로고" className={className} />
+    <img src={logo} alt="Flobby 로고" className={className} onClick={onClick} />
   );
 };
 
