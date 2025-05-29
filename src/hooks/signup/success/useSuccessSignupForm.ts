@@ -69,7 +69,7 @@ const useSuccessSignupForm = () => {
             SignUp.WebSocialSignup(socialSignupData).then((response) => {
                 if (response.data.code === 1000) {
                     localStorage.clear();
-                    navigate('/');
+                    navigate('/login');
                 } else {
                     console.error('소셜 회원가입 실패');
                 }
@@ -91,7 +91,7 @@ const useSuccessSignupForm = () => {
             SignUp.WebSignup(webSignupData).then((response) => {
                 if (response.data.code === 1000) {
                     localStorage.clear();
-                    navigate('/');
+                    navigate('/login');
                 } else {
                     console.error('자체 회원가입 실패');
                 }
