@@ -40,7 +40,6 @@ const Router: React.FC = () => {
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
         <Route path="/club/all" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
-
       </Routes>
     </BrowserRouter>
   );
