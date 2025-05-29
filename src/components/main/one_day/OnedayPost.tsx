@@ -73,7 +73,7 @@ const OnedayPost = () => {
           type="button"
           className="one-day-overall-button"
           title="전체보기"
-          onClick={() => navigate('/main/one-day-all')}
+          onClick={() => navigate('/oneday/all')}
         />
       </div>
       <div className="swiper-container">

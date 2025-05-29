@@ -51,9 +51,9 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
           </div>
           {isClicked && <DropDownModal className="profile-modal" firstTitle="마이페이지" secondTitle="로그아웃" />}
           <div className="down-wrapper">
-            <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club")}/>
-            <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday")}/>
-            <TextButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community")}/>
+            <TextButton className="club-btn" buttonName="모임" onClick={() => nav("/club/all")}/>
+            <TextButton className="oneday-btn" buttonName="원데이" onClick={() => nav("/oneday/all")}/>
+            <TextButton className="community-btn" buttonName="정보공유" onClick={() => nav("/community/all")}/>
           </div>
         </div>
       </div>

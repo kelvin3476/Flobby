@@ -74,7 +74,7 @@ const ClubPost: React.FC = () => {
           type="button"
           className="club-overall-button"
           title="전체 보기"
-          onClick={() => navigate('/main/club-all')}
+          onClick={() => navigate('/club/all')}
         />
       </div>
       <div className="swiper-container">
