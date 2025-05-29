@@ -121,7 +121,8 @@ const ClubRegister = () => {
         location: location,
         maxMembers: maxMembers,
       }
-
+            
+      formData.append('file', file);
       formData.append('data', new Blob([JSON.stringify(jsonData)], { type: 'application/json' }));
 
       try {
