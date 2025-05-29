@@ -1,0 +1,92 @@
+.floating-btn-wrapper {
+  position: fixed;
+  bottom: 9%;
+  right: 5%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .floating-option-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 0;
+    gap: 20px;
+
+    &:hover {
+      .floating-option-label {
+        color: #764BF6;
+      }
+
+      .floating-option-btn {
+        background-color: #D5C7FC;
+        transform: scale(1.05); // 살짝 커지는 효과 추가 (선택)
+      }
+    }
+
+    .floating-option-label {
+      white-space: nowrap;
+      color: #72787F;
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+    }
+
+    .floating-option-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      padding: 20px;
+
+      cursor: pointer;
+      border: none;
+      border-radius: 40px;
+      background-color: #f1edfe;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+      transition: bottom 0.3s ease, opacity 0.3s ease;
+
+      // &:hover {
+      //   background-color: #D5C7FC;
+      //   transform: scale(1.05); // 살짝 커지는 효과 추가 (선택)
+      // }
+
+      .floating-option-btn-img {
+        width: 40px;
+        height: 40px;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  }
+
+  .floating-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    
+    cursor: pointer;
+    border: none;
+    border-radius: 40px;
+    background-color: #764bf6;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.16);
+
+    &.open {
+      background-color: #f7f8f9;
+    }
+
+    .floating-btn-img {
+      width: 40px;
+      height: 40px;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.3s ease;
+    }
+  }
+}
+  
