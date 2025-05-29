@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TestPage from '../pages/TestPage';
 
 import Main from '../pages/main/Main';
+import ClubAll from '../pages/club/ClubAll';
 import ClubRegister from '../pages/club/ClubRegister';
 
 import Login from '../pages/login/Login';
@@ -37,6 +38,7 @@ const Router: React.FC = () => {
         <Route path="/signup/success" element={<SuccessSignUp />} />
         <Route path="/oauth/kakao" element={<KakaoRedirectHandler />} />
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
+        <Route path="/club/all" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
 
       </Routes>
