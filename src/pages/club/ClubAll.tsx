@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import logger from '../../utils/Logger';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import MainHeader from '../../components/header/MainHeader';
 import MainCategory from '../../components/club/list/MainCategory';
 import Title from '../../components/club/text/Title';
 import SubCategory from '../../components/club/list/SubCategory';
 import ClubList from '../../components/club/list/ClubList';
+import FloatingButton from '../../components/button/FloatingButton';
 import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/club/controllers/CategoryListController';
 import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
+import FabDefaultIcon from "../../assets/svg/club/clublist/floating_button_default.svg";
+import FabDefaultCancelIcon from "../../assets/svg/club/clublist/floating_button_default_cancel.svg";
+import FabClubRegisterIcon from "../../assets/svg/club/clublist/floating_button_club_register.svg";
+import FabOnedayRegisterIcon from "../../assets/svg/club/clublist/floating_button_oneday_register.svg";
 import '../../styles/main/club/ClubAll.scss';
 
 const ClubAll = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const accessToken = location.state as string | null;
 
@@ -73,6 +79,14 @@ const ClubAll = () => {
           </div>
         </div>
       </div>
+      <FloatingButton
+        mainDefaultIcon={FabDefaultIcon}
+        mainActionIcon={FabDefaultCancelIcon}
+        options={[
+          { icon: FabClubRegisterIcon, label: '모임 등록', onClick: () => navigate('/club/register', { state: accessToken }) },
+          { icon: FabOnedayRegisterIcon, label: '원데이 등록', onClick: () => navigate('/oneday/register', { state: accessToken }) },
+        ]}
+      />
     </div>
   );
 };
