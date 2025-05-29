@@ -143,7 +143,6 @@ export interface CreateClubJsonData {
   subCategory: string;
   location: number;
   maxMembers: number;
-  autoApprovalFlag: boolean;
 }
 
 /* 모임 게시글 생성시 필요한 전체 데이터셋 */

@@ -23,9 +23,6 @@ interface ClubRegisterStore {
   descCount: number;
   setDescCount: (descCount: number) => void;
 
-  autoApprovalFlag: boolean;
-  setAutoApprovalFlag: (autoApprovalFlag: boolean) => void;
-
   mainCategory: string;
   setMainCategory: (mainCategory: string) => void;
 
@@ -84,9 +81,6 @@ const useClubRegisterStore = create<ClubRegisterStore>(set => ({
 
   descCount: 0,
   setDescCount: (descCount: number) => set({ descCount }),
-
-  autoApprovalFlag: false,
-  setAutoApprovalFlag: (autoApprovalFlag: boolean) => set({ autoApprovalFlag }),
 
   mainCategory: '',
   setMainCategory: (mainCategory: string) => set({ mainCategory }),
