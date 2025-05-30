@@ -3,7 +3,7 @@ import '../../styles/dropdown/Dropdown.scss';
 
 interface DropDownProps {
   options: any[];
-  defaultItem?: string;
+  defaultItem?: string | null;
   disabled: boolean;
   placeholder?: string;
   onSelect?: (value: string) => void;
