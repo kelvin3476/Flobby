@@ -1,0 +1,44 @@
+.club-detail-member-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  min-width: 920px;
+
+  .club-detail-member-title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+    .club-detail-member-admin-button-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .club-detail-member-admin-icon {
+        width: 24px;
+        height: 24px;
+
+        background: url('../../../assets/svg/club/detail/club_detail_member_Icon_member.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .club-detail-member-admin-text {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        > span {
+          color: #72787f;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%;
+          letter-spacing: -0.3px;
+        }
+      }
+    }
+  }
+}
