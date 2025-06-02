@@ -1,17 +1,6 @@
-export interface ClubMeetingDataType {
-  meetingLeaderId: number;
-  meetingId: number;
-  clubMeetingTitle: string;
-  clubMeetingDate: string;
-  clubMeetingLocation: string;
-  maxParticipants: number;
-  currentParticipants: number;
-  isApplied: boolean;
-  dday: string;
-  clubMeetingFee: string;
-}
+import { ClubMeetingListItem } from '../../../api/ApiTypes';
 
-export const ClubMeetingListData: ClubMeetingDataType[] = [
+export const ClubMeetingListData: ClubMeetingListItem[] = [
   {
     meetingLeaderId: 12,
     meetingId: 1,
