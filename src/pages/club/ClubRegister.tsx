@@ -15,11 +15,11 @@ import ClubModal from "../../components/modal/ClubModal";
 
 import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
-import Main from "../../api/main/Main";
-
 import logger from "../../utils/Logger";
 
 import useMainPage from "../../hooks/main/useMainPage";
+
+import { ClubController } from "../../services/club/controllers/ClubController";
 
 import "../../styles/club/register/ClubRegister.scss";
 
@@ -44,11 +44,12 @@ const ClubRegister = () => {
     setMaxError,
   } = useClubRegisterStore();
 
-  const { accessToken } = useMainPage();
-
+  const nav = useNavigate();
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
 
-  const nav = useNavigate();
+  const { accessToken } = useMainPage();
+
+  const clubController = ClubController.getInstance();
 
   const handleValidChange = () => {
     let isError = false;
@@ -108,7 +109,7 @@ const ClubRegister = () => {
     setModalStep(1);
   };
 
-  const handleSubmitClubRegistrationForm = () => {
+  const handleSubmitClubRegistrationForm = async () => {
     if (file) {
       const formData = new FormData();
       logger.log("file", file);
@@ -126,7 +127,7 @@ const ClubRegister = () => {
       formData.append('data', new Blob([JSON.stringify(jsonData)], { type: 'application/json' }));
 
       try {
-        Main.createClub(formData);
+        await clubController.createClub(formData);
       } catch (error) {
         console.error('모임 등록 요청 실패', error);
       }
@@ -166,13 +167,13 @@ const ClubRegister = () => {
           message={modalStep === 1 ? "등록 하시겠습니까?" : "정상적으로 처리되었습니다."}
           showIcon={modalStep === 1}
           showCancelButton={modalStep === 1}
-          onConfirm={() => {
+          onConfirm={async () => {
             if (modalStep === 1) {
               setModalStep(2);
             } else {
               setModalStep(null);
-              handleSubmitClubRegistrationForm();
-              nav('/')
+              await handleSubmitClubRegistrationForm();
+              nav('/club/all');
             }
           }}
           onCancel={() => setModalStep(null)}
