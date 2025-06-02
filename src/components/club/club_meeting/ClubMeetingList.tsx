@@ -5,7 +5,7 @@ import Button from '../../button/Button';
 import { ClubMeetingListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/club_meeting/ClubMeetingList.scss';
 
-interface ClubMeetingListProp {
+interface ClubMeetingListProps {
   clubMeetingList: ClubMeetingListItem[];
   loginMemberId: number;
   role: string;
@@ -16,7 +16,7 @@ const ClubMeetingList = ({
   loginMemberId,
   role,
   isMember,
-}: ClubMeetingListProp) => {
+}: ClubMeetingListProps) => {
   return (
     <div className="club-meeting-list-container">
       <Title className="club-detail-item-sub-title" titleName="정기 모임" />
