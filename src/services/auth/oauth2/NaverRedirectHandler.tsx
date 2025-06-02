@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import SocialLogin from "../../../api/login/SocialLogin";
 import Login from "../../../api/login/Login";
 import LoadingSpinnerController from "../../../components/controllers/LoadingSpinnerController";
+import useAuthStore from "../../../store/auth/useAuthStore";
 
 const NaverRedirectHandler = () => {
     const navigate = useNavigate();
     const code = new URLSearchParams(window.location.search).get('code');
     const state = new URLSearchParams(window.location.search).get('state');
+
+    const { setAccessToken } = useAuthStore();
 
     try {
         SocialLogin.NaverLogin(code, state)
@@ -21,16 +24,20 @@ const NaverRedirectHandler = () => {
                             .then((response) => {
                                 if (response.data.code === 1000) {
                                     /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
-                                    const accessToken = response.data.data; // access token in-memory 저장 (브라우저 새로고침시 초기화)
-                                    navigate('/main')
+                                    setAccessToken(response.data.data); // access token in-memory 저장 (브라우저 새로고침시 초기화)
+                                    navigate('/')
                                 } else {
                                     console.error('토큰 발급 실패');
-                                    navigate('/');
+                                    navigate('/login');
                                 }
-                            });
+                            })
+                            .catch((error) => {
+                                console.error('JWT 토큰 발급 api 요청 실패', error);
+                                navigate('/login');
+                            })
                     } catch (error) {
                         console.error('JWT 토큰 발급 api 요청 실패', error);
-                        navigate('/');
+                        navigate('/login');
                     }
                     break;
                 case 2001: /* 기존 회원 다른 로그인 방법 시도시 코드 */
@@ -46,7 +53,7 @@ const NaverRedirectHandler = () => {
     } catch (error) {
         console.error('네이버 소셜 로그인 실패', error);
         if (error.data.code === 1002) {
-            navigate('/');
+            navigate('/login');
         }
     }
 
