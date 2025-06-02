@@ -9,7 +9,7 @@ import ClubList from '../../components/club/list/ClubList';
 import FloatingButton from '../../components/button/FloatingButton';
 import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
-import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
+import { ClubController } from '../../services/club/controllers/ClubController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
 import FabDefaultIcon from "../../assets/svg/club/clublist/floating_button_default.svg";
 import FabDefaultCancelIcon from "../../assets/svg/club/clublist/floating_button_default_cancel.svg";
@@ -48,15 +48,15 @@ const ClubAll = () => {
   }, []);
 
   // 모임 목록 컨트롤러
-  const clubItemsListController = ClubItemsListController.getInstance();
+  const clubController = ClubController.getInstance();
 
   useEffect(() => {
     const fetchClubItemsList = async () => {
       if (!mainCategory || mainCategory === '전체') {
-        const clubListData = await clubItemsListController.getClubList();
+        const clubListData = await clubController.getClubList();
         setClubList(clubListData);
       } else {
-        const clubListData = await clubItemsListController.getClubList(
+        const clubListData = await clubController.getClubList(
           encodeURIComponent(mainCategory),
         );
         setClubList(clubListData);
