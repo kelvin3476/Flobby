@@ -79,14 +79,16 @@ const ClubAll = () => {
           </div>
         </div>
       </div>
-      <FloatingButton
-        mainDefaultIcon={FabDefaultIcon}
-        mainActionIcon={FabDefaultCancelIcon}
-        options={[
-          { icon: FabClubRegisterIcon, label: '모임 등록', onClick: () => navigate('/club/register', { state: accessToken }) },
-          { icon: FabOnedayRegisterIcon, label: '원데이 등록', onClick: () => navigate('/oneday/register', { state: accessToken }) },
-        ]}
-      />
+      {accessToken && (
+        <FloatingButton
+          mainDefaultIcon={FabDefaultIcon}
+          mainActionIcon={FabDefaultCancelIcon}
+          options={[
+            { icon: FabClubRegisterIcon, label: '모임 등록', onClick: () => navigate('/club/register', { state: accessToken }) },
+            { icon: FabOnedayRegisterIcon, label: '원데이 등록', onClick: () => navigate('/oneday/register', { state: accessToken }) },
+          ]}
+        />
+      )}
     </div>
   );
 };
