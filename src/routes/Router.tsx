@@ -6,6 +6,7 @@ import TestPage from '../pages/TestPage';
 import Main from '../pages/main/Main';
 import ClubAll from '../pages/club/ClubAll';
 import ClubRegister from '../pages/club/ClubRegister';
+import ClubDetail from "../pages/club/ClubDetail";
 
 import Login from '../pages/login/Login';
 import FindPassword from '../pages/password/FindPassword';
@@ -40,6 +41,7 @@ const Router: React.FC = () => {
         <Route path="/oauth/naver" element={<NaverRedirectHandler />} />
         <Route path="/club/all" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
+        <Route path="/club/:clubId" element={<ClubDetail />} />
       </Routes>
     </BrowserRouter>
   );
