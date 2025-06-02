@@ -46,6 +46,16 @@ const ClubDetail = () => {
 
   return (
     <div>
+      <DetailInfo 
+        role={DetailInfoData.role}
+        isMember={DetailInfoData.isMember}
+        clubName={DetailInfoData.clubName}
+        location={DetailInfoData.location}
+        currentMembers={DetailInfoData.currentMembers}
+        maxMambers={DetailInfoData.maxMembers}
+        clubImage={DetailInfoData.clubImage}
+        subCategory={DetailInfoData.subCategory}
+      />
       <ClubMeetingList
         clubMeetingList={clubMeetingList}
         loginMemberId={loginMemberId}
