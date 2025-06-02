@@ -1,41 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
-import SignUp from '../../api/signup/SignUp';
-import logger from '../../utils/Logger';
-import '../../styles/dropdown/CommonDropDown.scss';
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
+import { CategoryListController } from '../../services/club/controllers/CategoryListController';
+import '../../styles/dropdown/CommonDropDown.scss';
 
 const CategoryDropDown = ({ className }) => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
-  const { mainCategory, setMainCategory, setSubCategory, isCategoryValid, setIsCategoryValid, categoryError, setCategoryError } =
-    useClubRegisterStore();
+  const {
+    mainCategory,
+    setMainCategory,
+    subCategory,
+    setSubCategory,
+    isCategoryValid,
+    setIsCategoryValid,
+    categoryError,
+    setCategoryError,
+  } = useClubRegisterStore();
+
+  const categoryListController = CategoryListController.getInstance();
 
   useEffect(() => {
-    const fetchHobbyList = async () => {
-      try {
-        const response = await SignUp.getHobbyList();
-        const { code, message, data } = response.data;
-
-        if (code === 1000) {
-          // API 호출 성공
-          logger.log('getHobbyListData', data);
-          setCategoryList(data);
-        } else if (code === 1001) {
-          // API 호출 실패
-          throw new Error(
-            message || '카테고리 리스트 데이터를 가져오지 못했습니다.',
-          );
-        } else if (code === 1002) {
-          // API 예외 발생
-          throw new Error(message || '서버 오류가 발생했습니다.');
-        }
-      } catch (err: any) {
-        console.log(err.message || '데이터 로드 실패');
-      }
+    const fetchCategoryListData = async () => {
+      const categoryListData = await categoryListController.getCategoryList();
+      setCategoryList(categoryListData);
     };
-    fetchHobbyList();
+    fetchCategoryListData();
   }, []);
 
   const mainCategories = categoryList.map(item => item.mainCategory);
@@ -59,23 +50,23 @@ const CategoryDropDown = ({ className }) => {
             setMainCategory(value);
             setSubCategory(null);
             setIsCategoryValid(true);
-            setCategoryError("");
+            setCategoryError('');
           }}
         />
+
         <DropDown
           options={subCategories}
           placeholder="하위 카테고리"
           disabled={mainCategory === ''}
+          defaultItem={subCategories.includes(subCategory) ? subCategory : null}
           onSelect={(value: string) => {
             setSubCategory(value);
             setIsCategoryValid(true);
-            setCategoryError("");
+            setCategoryError('');
           }}
         />
       </div>
-      {!isCategoryValid && (
-        <div className="err-message">{categoryError}</div>
-      )}
+      {!isCategoryValid && <div className="err-message">{categoryError}</div>}
     </div>
   );
 };
