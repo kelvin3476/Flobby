@@ -1,0 +1,210 @@
+/* 공통 스타일 정의 */
+@mixin content-span-style {
+  color: #72787f;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.3px;
+}
+
+@mixin club-meeting-button-style {
+  width: 96px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  cursor: pointer;
+
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.3px;
+}
+
+/* 컴포넌트 스타일링 */
+.club-meeting-item-container {
+  display: flex;
+  width: 920px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  background: #f7f8f9;
+
+  /* 내용 영역 */
+  .club-meeting-item-content-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+
+    .club-meeting-item-title-box {
+      display: flex;
+      padding: 0px 4px;
+      align-items: center;
+      gap: 10px;
+
+      > span {
+        flex: 1 0 0;
+        color: #000;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: -0.3px;
+      }
+    }
+
+    .club-meeting-item-info-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      align-self: stretch;
+
+      /* 구분선 */
+      .club-meeting-item-divider-icon {
+        width: 2px;
+        height: 10px;
+        background-image: url('../../../assets/svg/club/clubItem/club_meeting_divider.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      /* 정기모임 일시 */
+      .club-meeting-date-box {
+        display: flex;
+        align-items: center;
+
+        .club-meeting-date-icon {
+          width: 24px;
+          height: 24px;
+
+          background: url('../../../assets/svg/club/clubItem/club_meeting_date.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        .club-meeting-date {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          > span {
+            @include content-span-style();
+          }
+        }
+      }
+
+      /* 정기모임 장소 */
+      .club-meeting-location-box {
+        display: flex;
+        padding-right: 4px;
+        justify-content: center;
+        align-items: center;
+
+        .club-meeting-location-icon {
+          width: 24px;
+          height: 24px;
+
+          background: url('../../../assets/svg/club/clubItem/club_meeting_location.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        .club-meeting-location {
+          @include content-span-style();
+        }
+      }
+
+      /* 정기모임 인원 */
+      .club-meeting-participant-box {
+        display: flex;
+        align-items: center;
+
+        .club-meeting-participant-icon {
+          width: 24px;
+          height: 24px;
+
+          background: url('../../../assets/svg/club/clubItem/club_meeting_participant.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        .club-meeting-participant {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          .club-meeting-participant-num {
+            display: flex;
+            align-items: center;
+
+            > span {
+              @include content-span-style();
+
+              &.club-meeting-current-participant {
+                color: #191919;
+              }
+            }
+          }
+
+          > span {
+            @include content-span-style();
+          }
+        }
+      }
+
+      /* 참가비 */
+      .club-meeting-participationFee-box {
+        display: flex;
+        padding-right: 4px;
+        justify-content: center;
+        align-items: center;
+
+        .club-meeting-participationFee-icon {
+          width: 24px;
+          height: 24px;
+
+          background: url('../../../assets/svg/club/clubItem/club_meeting_participation_fee.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        .club-meeting-participationFee {
+          @include content-span-style();
+        }
+      }
+    }
+  }
+
+  .club-meeting-button-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    .club-meeting-button-apply {
+      @include club-meeting-button-style();
+      border: 1px solid #764bf6;
+      background: #764bf6;
+      color: #e8ebed;
+    }
+
+    .club-meeting-button-cancel {
+      @include club-meeting-button-style();
+      border: 1px solid #c9cdd2;
+      background: #fff;
+      color: #454c53;
+    }
+
+    .club-meeting-button-modify {
+      @include club-meeting-button-style();
+      border: 1px solid #764bf6;
+      background: #fff;
+      color: #764bf6;
+    }
+  }
+}

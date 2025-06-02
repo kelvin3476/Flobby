@@ -186,3 +186,17 @@ export interface ClubItemDetail {
   createdAt: string;
   updatedAt: string;
 }
+
+/* 정기 모임 데이터 타입 */
+export interface ClubMeetingListItem {
+  meetingLeaderId: number;
+  meetingId: number;
+  clubMeetingTitle: string;
+  clubMeetingDate: string;
+  clubMeetingLocation: string;
+  maxParticipants: number;
+  currentParticipants: number;
+  isApplied: boolean;
+  dday: string;
+  clubMeetingFee: string;
+}
