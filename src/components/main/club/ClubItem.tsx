@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Tag from '../../tag/Tag';
 
@@ -20,6 +21,7 @@ interface ClubItemProps {
 }
 
 const ClubItem = ({
+  clubId,
   category,
   maxMember,
   clubName,
@@ -30,13 +32,14 @@ const ClubItem = ({
   postCategory,
   subCategory,
 }: ClubItemProps) => {
+  const navigate = useNavigate();
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
   return (
     /* 모임 아이템 컨테이너 */
     <div
       className={`club-item-container ${className ? className : ''}`}
-      onClick={() => console.log('관심 모임 아이템 클릭!!!')} /* TODO: 모임 아이템 클릭시 해당 모임의 상세 페이지로 이동 연동 필요 */
+      onClick={() => navigate(`/club/${clubId}`)}
     >
       {/* 모임 아이템 썸네일 */}
       <div className="club-item-thumbnail-wrapper">
