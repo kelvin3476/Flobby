@@ -44,12 +44,16 @@ const ClubMeetingList = ({
           </div>
         )}
       </div>
-      <Button
-        className="club-meeting-create-button"
-        onClick={() => {}}
-        type="button"
-        title="정기 모임 만들기"
-      />
+      {isMember ? (
+        <Button
+          className="club-meeting-create-button"
+          onClick={() => {}}
+          type="button"
+          title="정기 모임 만들기"
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
