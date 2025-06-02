@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
-import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
-import { RegionListController } from '../../../services/main/controllers/RegionListController';
+import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
+import { RegionListController } from '../../../services/region/controllers/RegionListController';
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
 interface RegionSelectorModalProps {

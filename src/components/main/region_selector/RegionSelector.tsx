@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
-import { DEFAULT_REGION } from '../../../services/main/models/RegionContextModel';
+import { DEFAULT_REGION } from '../../../services/region/models/RegionContextModel';
 import { RegionItem } from '../../../api/ApiTypes';
-import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
+import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
 

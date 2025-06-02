@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
-import { CategoryListController } from '../../services/club/controllers/CategoryListController';
+import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import '../../styles/dropdown/CommonDropDown.scss';
 
 const CategoryDropDown = ({ className }) => {

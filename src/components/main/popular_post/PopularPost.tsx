@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PopularItem from "./PopularItem";
-import { RegionContextController } from "../../../services/main/controllers/RegionContextController";
+import { RegionContextController } from "../../../services/region/controllers/RegionContextController";
 import { boardItem } from "../../../api/ApiTypes";
 
 import "../../../styles/main/popular_post/PopularPost.scss";

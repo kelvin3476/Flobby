@@ -8,7 +8,7 @@ import Button from '../../button/Button';
 import OnedayItem from './OnedayItem';
 
 import { onedayItem, MainData, RegionItem } from '../../../api/ApiTypes';
-import { RegionContextController } from "../../../services/main/controllers/RegionContextController";
+import { RegionContextController } from "../../../services/region/controllers/RegionContextController";
 
 import '../../../styles/main/one_day/OnedayPost.scss';
 

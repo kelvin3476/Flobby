@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import { CategorySlugMap } from '../../../services/club/models/CategoryListModel';
+import { CategorySlugMap } from '../../../services/category/models/CategoryListModel';
 import { HobbyCategory } from '../../../api/ApiTypes';
 import '../../../styles/club/list/MainCategory.scss';
 

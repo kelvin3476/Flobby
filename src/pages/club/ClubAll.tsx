@@ -8,7 +8,7 @@ import SubCategory from '../../components/club/list/SubCategory';
 import ClubList from '../../components/club/list/ClubList';
 import FloatingButton from '../../components/button/FloatingButton';
 import useClubCategoryStore from '../../store/club/useClubCategoryStore';
-import { CategoryListController } from '../../services/club/controllers/CategoryListController';
+import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import { ClubItemsListController } from '../../services/club/controllers/ClubListController';
 import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
 import FabDefaultIcon from "../../assets/svg/club/clublist/floating_button_default.svg";

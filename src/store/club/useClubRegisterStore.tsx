@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { DEFAULT_REGION } from '../../services/main/models/RegionContextModel';
+import { DEFAULT_REGION } from '../../services/region/models/RegionContextModel';
 
 interface ClubRegisterStore {
   clubName: string;

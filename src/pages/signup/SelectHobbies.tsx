@@ -7,7 +7,7 @@ import '../../styles/signup/SelectHobbies.scss';
 import Button from '../../components/button/Button';
 import ProgressBar from '../../components/signup/ProgressBar';
 
-import { CategoryListController } from '../../services/club/controllers/CategoryListController';
+import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 
 const SelectHobbies = () => {
   const { 

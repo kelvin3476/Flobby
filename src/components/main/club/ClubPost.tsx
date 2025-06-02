@@ -8,7 +8,7 @@ import Button from '../../button/Button';
 import ClubItem from './ClubItem';
 
 import { clubItem, MainData, RegionItem } from '../../../api/ApiTypes';
-import { RegionContextController } from '../../../services/main/controllers/RegionContextController';
+import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
 
 import '../../../styles/main/club/ClubPost.scss';
 
