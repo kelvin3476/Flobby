@@ -67,8 +67,9 @@ const DetailInfo = ({
     <div className="detail-info-container">
       <div className="detail-tab-container">  
         <span className="tab-active">홈</span>
-        <span>게시판</span>
-        <span>멤버</span>
+        {/* 추후 nav 추가 */}
+        <span onClick={() => {}}>게시판</span>
+        <span onClick={() => {}}>멤버</span>
       </div>
       <div className="detail-info-wrapper">
         <img 
@@ -123,14 +124,14 @@ const DetailInfo = ({
             <Button 
             type="button"
             className="info-content-btn-yes"
-            onClick={() => console.log('클릭')}
+            onClick={() => {}} // TODO: 가입인사 모달창 추가하기
             title="가입 신청하기"
             />
           ) : (
             <Button 
               type="button"
               className="info-content-btn-no"
-              onClick={() => console.log('클릭')}
+              onClick={() => {}}
               title="가입된 모임이에요!"
             />
           )}
