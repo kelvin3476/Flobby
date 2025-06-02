@@ -61,12 +61,17 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
             </div>
           </div>
           {isClicked && (
-            <DropDownModal
-              className="profile-modal"
-              firstTitle="마이페이지"
-              secondTitle="로그아웃"
-            />
-          )}
+            <DropDownModal 
+              className="profile-modal" 
+              items={["마이페이지", "로그아웃"]}
+              onItemClick={(item, idx) => {
+                if (item === "로그아웃") {
+                  // 로그아웃 로직
+                } else if (item === "마이페이지") {
+                  // 마이페이지 라우팅
+                }
+              }}
+            /> )}
           <div className="down-wrapper">
             <TextButton
               className="club-btn"
