@@ -1,7 +1,20 @@
-.club-title {
+@mixin club-title-style {
   font-size: 30px;
   font-style: normal;
   font-weight: 600;
   color: #191919;
   text-align: center;
+}
+
+.club-title {
+  @include club-title-style();
+}
+
+.club-detail-item-sub-title {
+  @include club-title-style();
+
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.3px;
+  text-align: start;
 }
