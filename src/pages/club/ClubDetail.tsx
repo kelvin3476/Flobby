@@ -56,6 +56,9 @@ const ClubDetail = () => {
         clubImage={DetailInfoData.clubImage}
         subCategory={DetailInfoData.subCategory}
       />
+      <DetailDescription 
+        description={DetailInfoData.description}
+      />
       <ClubMeetingList
         clubMeetingList={clubMeetingList}
         loginMemberId={loginMemberId}
