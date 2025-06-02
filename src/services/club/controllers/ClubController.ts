@@ -20,6 +20,10 @@ export class ClubController {
     return this.model.getClubList(category);
   }
 
+  createClub(createClubData: FormData): Promise<void> {
+    return this.model.createClub(createClubData);
+  }
+
   selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     return this.model.selectClubDetail(clubId);
   }

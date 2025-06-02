@@ -1,10 +1,13 @@
 import { ClubListItem, ClubItemDetail } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 
+import logger from '../../../utils/Logger';
+
 export class ClubModel {
   clubListData: ClubListItem[] = [];
   ClubItemDetailData: ClubItemDetail;
 
+  /* 모임 리스트 불러 오는 api */
   async getClubList(mainCategory?: string): Promise<ClubListItem[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
@@ -22,10 +25,31 @@ export class ClubModel {
         throw new Error(message || '서버 오류가 발생했습니다.');
       }
     } catch (err: any) {
-      console.log(err.message || '데이터 로드 실패');
+      logger.error(err.message || '모임 목록 api 요청 실패');
     }
   }
 
+  /* 모임 등록 api */
+  async createClub(createClubData: FormData): Promise<void> {
+    try {
+      const response = await Main.createClub(createClubData);
+      const { code, message } = response.data;
+      if (code === 1000) {
+        // API 호출 성공
+        logger.log('모임 게시글이 성공적으로 생성되었습니다.');
+      } else if (code === 1001) {
+        // API 호출 실패
+        throw new Error(message || '모임 게시글을 생성하지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
+      }
+    } catch (error: any) {
+      logger.error(error.message || '모임 등록 api 요청 실패');
+    }
+  }
+
+  /* 모임 아이템 선택시 상세 정보 불러 오는 api */
   async selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     try {
       const response = await Main.getClubDetail(clubId);
@@ -42,7 +66,7 @@ export class ClubModel {
         throw new Error(message || '서버 오류가 발생했습니다.');
       }
     } catch (error: any) {
-      console.error(error.message || '데이터 로드 실패');
+      logger.error(error.message || '모임 상세 api 요청 실패');
     }
   }
 }
