@@ -167,9 +167,9 @@ export interface ClubListItem {
   postCategory: string;
 }
 
-/* TODO: 모임 상세 조회 시 응답 데이터 받는 부분 확인 필요 및 명세서 수정 이후 픽스 되면 수정 필요 */
-/* 모임 상세 조회 응답 데이터 타입 */
+/* -------------------- 모임 상세 api 타입 -------------------- */
 
+/* 모임 상세 조회 응답 데이터 타입 */
 export interface ClubItemDetail {
   clubDTO: ClubDTO;
   clubMeetingList: ClubMeetingListItem[];
@@ -180,6 +180,7 @@ export interface ClubItemDetail {
   role: string | null;
 }
 
+/* 모임 상세 데이터 타입 */
 export interface ClubDTO {
   clubId: number;
   clubImage: string;
