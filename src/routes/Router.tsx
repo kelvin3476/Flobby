@@ -23,6 +23,7 @@ import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
 import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
 import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
+import ClubMember from '../pages/club/ClubMember';
 
 const Router: React.FC = () => {
   return (
@@ -44,14 +45,7 @@ const Router: React.FC = () => {
         <Route path="/club/list" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
-        <Route
-          path="/club/:clubId/clubmeeting/register"
-          element={<ClubMeetingRegister />}
-        />
-        <Route
-          path="/club/:clubId/clubmeeting/:meetingId/edit"
-          element={<ClubMeetingEdit />}
-        />
+        <Route path="/club/member/:clubId" element={<ClubMember />} />
       </Routes>
     </BrowserRouter>
   );
