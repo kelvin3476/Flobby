@@ -213,7 +213,7 @@ export interface ClubMemberListItem {
   clubMemberId: number;
   nickname: string;
   profilePhoto: string;
-  role: 'LEADER' | 'MANAGER' | 'MEMBER';
+  role: 'LEADER' | 'MANAGER' | 'MEMBER' | null;
 }
 
 /* 추천 모임 데이터 타입 */
