@@ -22,10 +22,6 @@ export default class Main {
 
   /* 모임 목록 조회 */
   static async getClubList(mainCategory?: string) {
-    return await http.get(`/club/list`, {
-      params: {
-        mainCategory,
-      },
-    });
+    return await http.get(`/club/list?mainCategory=${mainCategory}`);
   }
 }
