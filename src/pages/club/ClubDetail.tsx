@@ -4,12 +4,17 @@ import { useParams } from 'react-router-dom';
 import { ClubController } from '../../services/club/controllers/ClubController';
 
 import logger from '../../utils/Logger';
+import {
+  ClubDTO,
+  ClubMeetingListItem,
+  ClubMemberListItem,
+} from '../../api/ApiTypes';
 import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
-import { ClubDTO, ClubMeetingListItem } from '../../api/ApiTypes';
 
 import Tab from '../../components/tab/Tab';
 import DetailInfo from '../../components/club/detail/DetailInfo';
 import DetailDescription from '../../components/club/detail/DetailDescription';
+import ClubMemberList from '../../components/club/detail/ClubMemberList';
 
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -19,8 +24,11 @@ const ClubDetail = () => {
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
   const [role, setRole] = useState<string | null>(null);
-  const [currentTab, setCurrentTab] =  useState<string>("home");
+  const [currentTab, setCurrentTab] = useState<string>('home');
   const [clubInfo, setClubInfo] = useState<ClubDTO>(null);
+  const [clubMemberList, setClubMemberList] = useState<ClubMemberListItem[]>(
+    [],
+  );
 
   React.useEffect(() => {
     if (!clubId) {
@@ -41,7 +49,7 @@ const ClubDetail = () => {
         setIsMember(response.isMember);
         setLoginMemberId(response.loginMemberId);
         setRole(response.role);
-
+        setClubMemberList(response.clubMemberList);
         logger.log('모임 상세 정보:', response);
       } catch (error) {
         logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
@@ -52,22 +60,22 @@ const ClubDetail = () => {
   }, [clubId]);
 
   const tabItems = [
-    {label: "홈", key: "home"},
-    {label: "게시판", key: "board"},
-    {label: "멤버", key: "member"},
+    { label: '홈', key: 'home' },
+    { label: '게시판', key: 'board' },
+    { label: '멤버', key: 'member' },
   ];
 
   return (
     <div>
-      <Tab 
+      <Tab
         tabs={tabItems}
         currentTab={currentTab}
         onTabChange={setCurrentTab}
       />
 
-      {currentTab === "home" && clubInfo && (
+      {currentTab === 'home' && clubInfo && (
         <>
-          <DetailInfo 
+          <DetailInfo
             role={role}
             isMember={isMember}
             clubName={clubInfo.clubName}
@@ -77,9 +85,7 @@ const ClubDetail = () => {
             clubImage={clubInfo.clubImage}
             subCategory={clubInfo.subCategory}
           />
-          <DetailDescription 
-            description={clubInfo.description}
-          />
+          <DetailDescription description={clubInfo.description} />
           <ClubMeetingList
             clubMeetingList={clubMeetingList}
             loginMemberId={loginMemberId}
@@ -90,8 +96,8 @@ const ClubDetail = () => {
         </>
       )}
 
-      {currentTab === "board" && <div>게시판 탭 준비중</div>}
-      {currentTab === "member" && <div>멤버 탭 준비중</div>}      
+      {currentTab === 'board' && <div>게시판 탭 준비중</div>}
+      {currentTab === 'member' && <div>멤버 탭 준비중</div>}
     </div>
   );
 };
