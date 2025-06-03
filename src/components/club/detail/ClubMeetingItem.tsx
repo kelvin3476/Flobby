@@ -1,20 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../button/Button';
 import '../../../styles/club/detail/ClubMeetingItem.scss';
-import { useNavigate } from 'react-router-dom';
 
 interface ClubMeetingProps {
   meetingId: number;
-  loginMemberId: number; // clubDTO에 추가 될 예정
-  meetingLeaderId: number; // clubMeetingList에 추가 될 예정
+  loginMemberId: number;
+  meetingLeaderId: number;
   clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingLocation: string;
   maxParticipants: number;
   currentParticipants: number;
   isApplied: boolean;
-  isMember: boolean; // clubMeetingList에 추가 될 예정
-  role: string; // clubDTO에 추가 될 예정
+  isMember: boolean;
+  role: string;
   entryfee: string;
 }
 const ClubMeetingItem = ({
