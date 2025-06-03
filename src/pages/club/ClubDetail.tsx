@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState }, { useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { ClubController } from '../../services/club/controllers/ClubController';
 
@@ -8,6 +8,7 @@ import {
   ClubDTO,
   ClubMeetingListItem,
   ClubMemberListItem,
+  RecommendClubListItem
 } from '../../api/ApiTypes';
 import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
 
@@ -15,8 +16,11 @@ import Tab from '../../components/tab/Tab';
 import DetailInfo from '../../components/club/detail/DetailInfo';
 import DetailDescription from '../../components/club/detail/DetailDescription';
 import ClubMemberList from '../../components/club/detail/ClubMemberList';
+import RecommendClubList from '../../components/club/detail/RecommendClubList';
+
 
 const ClubDetail = () => {
+  const location = useLocation();
   const { clubId } = useParams<{ clubId: string }>();
 
   const [isMember, setIsMember] = useState<boolean>(false);
@@ -30,6 +34,9 @@ const ClubDetail = () => {
   const [clubMemberList, setClubMemberList] = useState<ClubMemberListItem[]>(
     [],
   );
+  const [recommendClubList, setRecommendClubList] = useState<
+    RecommendClubListItem[]
+  >([]);
 
   React.useEffect(() => {
     if (!clubId) {
@@ -52,6 +59,7 @@ const ClubDetail = () => {
         setRole(response.role);
         setClubMeetingList(response.clubMeetingList);
         setClubMemberList(response.clubMemberList);
+        setRecommendClubList(response.recommendClubList);
         logger.log('모임 상세 정보:', response);
       } catch (error) {
         logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
@@ -100,11 +108,16 @@ const ClubDetail = () => {
             clubId={clubId}
             clubMemberList={clubMemberList}
           />
+          <RecommendClubList
+        recommendClubList={recommendClubList}
+        isDetailPage={location.pathname === `/club/${clubId}`}
+      />
         </>
       )}
 
       {currentTab === 'board' && <div>게시판 탭 준비중</div>}
       {currentTab === 'member' && <div>멤버 탭 준비중</div>}
+      
     </div>
   );
 };
