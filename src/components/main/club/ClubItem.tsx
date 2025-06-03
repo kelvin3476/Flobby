@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Tag from '../../tag/Tag';
 
@@ -8,8 +8,8 @@ import '../../../styles/main/club/ClubItem.scss';
 interface ClubItemProps {
   clubId: number;
   photo: string;
-  hostId: number;
-  hostNickname: string;
+  hostId?: number;
+  hostNickname?: string;
   category: string;
   maxMember: string;
   clubName: string;
@@ -18,6 +18,7 @@ interface ClubItemProps {
   className?: string;
   postCategory?: string;
   subCategory?: string;
+  isDetailPage?: boolean;
 }
 
 const ClubItem = ({
@@ -31,6 +32,7 @@ const ClubItem = ({
   className,
   postCategory,
   subCategory,
+  isDetailPage,
 }: ClubItemProps) => {
   const navigate = useNavigate();
   const [isHeartActive, setIsHeartActive] = React.useState(false);
@@ -78,13 +80,20 @@ const ClubItem = ({
 
           <div className="club-item-information-sub-container">
             {/* 모임 */}
-            <div className="club-item-post-category-container">
-              <span className="club-item-post-category">{postCategory}</span>
-            </div>
+            {postCategory && (
+              <>
+                <div className="club-item-post-category-container">
+                  <span className="club-item-post-category">
+                    {postCategory}
+                  </span>
+                </div>
 
-            <span className="club-item-divider-icon"></span>
+                <span className="club-item-divider-icon"></span>
+              </>
+            )}
             {/* 모임 위치 */}
             <div className="club-item-location-container">
+              {isDetailPage && <div className="club-item-location-icon"></div>}
               <span className="club-item-location">{locationName}</span>
             </div>
 
