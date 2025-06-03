@@ -34,7 +34,7 @@ const ClubDetail = () => {
         setIsMember(response.isMember);
         setLoginMemberId(response.loginMemberId);
         setRole(response.role);
-        response.loginMemberId;
+
         logger.log('모임 상세 정보:', response);
       } catch (error) {
         logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
