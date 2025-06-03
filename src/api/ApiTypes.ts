@@ -169,37 +169,60 @@ export interface ClubListItem {
 
 /* TODO: 모임 상세 조회 시 응답 데이터 받는 부분 확인 필요 및 명세서 수정 이후 픽스 되면 수정 필요 */
 /* 모임 상세 조회 응답 데이터 타입 */
+
 export interface ClubItemDetail {
-  clubId: number;
-  photo: string;
-  hostId: number;
-  hostNickname: string;
-  category: string;
-  subCategory: string;
-  maxMember: number;
-  clubName: string;
-  regionId: number;
-  locationName: string;
-  currentMembers: number;
-  postCategory: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
+  clubDTO: ClubDTO;
   clubMeetingList: ClubMeetingListItem[];
+  clubMemberList: ClubMemberListItem[];
+  recommendClubList: RecommendClubListItem[];
+  isMember: boolean;
+  loginMemberId: number | null;
+  role: string | null;
+}
+
+export interface ClubDTO {
+  clubId: number;
+  clubImage: string;
+  clubName: string;
+  currentMembers: number;
+  description: string;
+  location: string;
+  maxMembers: number;
+  subCategory: string;
 }
 
 /* 정기 모임 데이터 타입 */
 export interface ClubMeetingListItem {
-  meetingLeaderId: number;
-  meetingId: number;
-  clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingLocation: string;
-  maxParticipants: number;
+  clubMeetingTime: string;
+  clubMeetingTitle: string;
   currentParticipants: number;
-  isApplied: boolean;
   dday: string;
   entryfee: string;
-  clubMeetingTime: string;
+  isApplied: boolean;
+  maxParticipants: number;
+  meetingId: number;
+  meetingLeaderId: number;
   status: string;
+}
+
+/* 모임 멤버 데이터 타입 */
+export interface ClubMemberListItem {
+  clubMemberId: number;
+  nickname: string;
+  profilePhoto: string;
+  role: 'LEADER' | 'MANAGER' | 'MEMBER';
+}
+
+/* 추천 모임 데이터 타입 */
+export interface RecommendClubListItem {
+  clubId: number;
+  clubImage: string;
+  clubName: string;
+  currentMembers: number;
+  location: string;
+  mainCategory: string;
+  maxMembers: number;
+  subCategory: string;
 }
