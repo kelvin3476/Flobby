@@ -21,7 +21,8 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
-import ClubMeetingModify from '../pages/club/ClubMeetingModify';
+import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
+import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
 
 const Router: React.FC = () => {
   return (
@@ -43,10 +44,15 @@ const Router: React.FC = () => {
         <Route path="/club/list" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
+        {/* 정기 모임 등록 페이지 */}
+        <Route
+          path="/club/meeting/register"
+          element={<ClubMeetingRegister />}
+        />
         {/* 정기 모임 수정 페이지 */}
         <Route
-          path="/club/meeting/modify/:meetingId"
-          element={<ClubMeetingModify />}
+          path="/club/meeting/:meetingId/edit"
+          element={<ClubMeetingEdit />}
         />
       </Routes>
     </BrowserRouter>

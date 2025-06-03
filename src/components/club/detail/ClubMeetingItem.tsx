@@ -34,7 +34,7 @@ const ClubMeetingItem = ({
   const navigate = useNavigate();
 
   const handleClickModifyButton = () => {
-    navigate(`/club/meeting/modify/${meetingId}`);
+    navigate(`/club/meeting/${meetingId}/edit`);
   };
 
   return (
