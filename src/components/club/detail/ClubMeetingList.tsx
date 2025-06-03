@@ -4,6 +4,7 @@ import ClubMeetingItem from './ClubMeetingItem';
 import Button from '../../button/Button';
 import { ClubMeetingListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/detail/ClubMeetingList.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface ClubMeetingListProps {
   clubMeetingList: ClubMeetingListItem[];
@@ -17,6 +18,8 @@ const ClubMeetingList = ({
   role,
   isMember,
 }: ClubMeetingListProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="club-meeting-list-container">
       <Title className="club-detail-item-sub-title" titleName="정기 모임" />
@@ -48,7 +51,9 @@ const ClubMeetingList = ({
       {isMember ? (
         <Button
           className="club-meeting-create-button"
-          onClick={() => {}}
+          onClick={() => {
+            navigate('/club/meeting/register');
+          }}
           type="button"
           title="정기 모임 만들기"
         />
