@@ -12,6 +12,9 @@ const ClubDetail = () => {
   const [clubMeetingList, setClubMeetingList] = useState<ClubMeetingListItem[]>(
     [],
   );
+  const [isMember, setIsMember] = useState<boolean>(false);
+  const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   React.useEffect(() => {
     if (!clubId) {
@@ -28,6 +31,10 @@ const ClubDetail = () => {
           Number(clubId),
         );
         setClubMeetingList(response.clubMeetingList);
+        setIsMember(response.isMember);
+        setLoginMemberId(response.loginMemberId);
+        setRole(response.role);
+        response.loginMemberId;
         logger.log('모임 상세 정보:', response);
       } catch (error) {
         logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
@@ -41,9 +48,9 @@ const ClubDetail = () => {
     <div>
       <ClubMeetingList
         clubMeetingList={clubMeetingList}
-        loginMemberId={12} //TODO: 데이터 연동 필요
-        role="leader" //TODO: 데이터 연동 필요
-        isMember={true} //TODO: 데이터 연동 필요
+        loginMemberId={loginMemberId}
+        role={role}
+        isMember={isMember}
       />
     </div>
   );
