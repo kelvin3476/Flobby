@@ -185,6 +185,7 @@ export interface ClubItemDetail {
   description: string;
   createdAt: string;
   updatedAt: string;
+  clubMeetingList: ClubMeetingListItem[];
 }
 
 /* 정기 모임 데이터 타입 */
@@ -198,5 +199,7 @@ export interface ClubMeetingListItem {
   currentParticipants: number;
   isApplied: boolean;
   dday: string;
-  clubMeetingFee: string;
+  entryfee: string;
+  clubMeetingTime: string;
+  status: string;
 }
