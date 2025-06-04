@@ -175,9 +175,9 @@ export interface ClubItemDetail {
   clubMeetingList: ClubMeetingListItem[];
   clubMemberList: ClubMemberListItem[];
   recommendClubList: RecommendClubListItem[];
-  isMember: boolean;
-  loginMemberId: number | null;
-  role: string | null;
+  isMember: boolean; // 모임 가입 여부
+  loginMemberId: number | null; // 로그인 했을 경우 memberId 값, 비로그인 상태면 null로 넘어옴
+  role: ClubRoleType; // 모임 권한
 }
 
 /* 모임 상세 데이터 타입 */
@@ -204,7 +204,7 @@ export interface ClubMeetingListItem {
   isApplied: boolean;
   maxParticipants: number;
   meetingId: number;
-  meetingLeaderId: number;
+  meetingLeaderId: number; // 정기 모임 생성자의 memberId
   status: string;
 }
 
@@ -213,7 +213,7 @@ export interface ClubMemberListItem {
   clubMemberId: number;
   nickname: string;
   profilePhoto: string;
-  role: 'LEADER' | 'MANAGER' | 'MEMBER' | null;
+  role: ClubRoleType;
 }
 
 /* 추천 모임 데이터 타입 */
@@ -227,3 +227,5 @@ export interface RecommendClubListItem {
   maxMembers: number;
   subCategory: string;
 }
+
+export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
