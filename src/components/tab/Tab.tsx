@@ -1,32 +1,28 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 import "../../styles/tab/Tab.scss";
 
-interface TabProps {
-  tabs: { label: string; path: string }[];
+interface TabItem {
+  label: string;
+  key: string;
 }
 
-const Tab = ({ tabs }: TabProps) => {
-  const nav = useNavigate();
-  const [activeTab, setActiveTap] = useState<string>("홈");
+interface TabProps {
+  tabs: TabItem[];
+  currentTab: string;
+  onTabChange: (key: string) => void;
+}
+
+const Tab = ({ tabs, currentTab, onTabChange }: TabProps) => {
 
   return (
     <div className="tab-container">
       <div className="tab-btns">
-        <span 
-          className={`tab-btn ${activeTab === "홈" ? "active" : ""}`}
-          onClick={() => setActiveTap("홈")}
-        >홈</span>
-
-        {tabs.map(({label, path}) => (
+        {tabs.map(({ label, key }) => (
           <span
-            key={path}
-            className={`tab-btn ${activeTab === label ? "active" : ""}`}
-            onClick={() => {
-              nav(path);
-              setActiveTap(label);
-            }}
+            key={key}
+            className={`tab-btn ${currentTab === key ? "active" : ""}`}
+            onClick={() => onTabChange(key)}
           >
             {label}
           </span>
