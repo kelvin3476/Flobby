@@ -7,6 +7,13 @@ import logger from '../../utils/Logger';
 import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
 import { ClubMeetingListItem } from '../../api/ApiTypes';
 
+import Tab from '../../components/tab/Tab';
+import DetailInfo from '../../components/club/detail/DetailInfo';
+import DetailDescription from '../../components/club/detail/DetailDescription';
+import { DetailInfoData } from '../../components/club/detail/DetailInfoData';
+
+import TestPage from '../TestPage';
+
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const [clubMeetingList, setClubMeetingList] = useState<ClubMeetingListItem[]>(
@@ -15,6 +22,7 @@ const ClubDetail = () => {
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
   const [role, setRole] = useState<string | null>(null);
+  const [currentTab, setCurrentTab] =  useState<string>("home");
 
   React.useEffect(() => {
     if (!clubId) {
@@ -44,28 +52,47 @@ const ClubDetail = () => {
     fetchClubDetail();
   }, [clubId]);
 
+  const tabItems = [
+    {label: "홈", key: "home"},
+    {label: "게시판", key: "board"},
+    {label: "멤버", key: "member"},
+  ];
+
   return (
     <div>
-      <DetailInfo 
-        role={DetailInfoData.role}
-        isMember={DetailInfoData.isMember}
-        clubName={DetailInfoData.clubName}
-        location={DetailInfoData.location}
-        currentMembers={DetailInfoData.currentMembers}
-        maxMambers={DetailInfoData.maxMembers}
-        clubImage={DetailInfoData.clubImage}
-        subCategory={DetailInfoData.subCategory}
+      <Tab 
+        tabs={tabItems}
+        currentTab={currentTab}
+        onTabChange={setCurrentTab}
       />
-      <DetailDescription 
-        description={DetailInfoData.description}
-      />
-      <ClubMeetingList
-        clubMeetingList={clubMeetingList}
-        loginMemberId={loginMemberId}
-        role={role}
-        isMember={isMember}
-        clubId={clubId}
-      />
+
+      {currentTab === "home" && (
+        <>
+          <DetailInfo 
+            role={DetailInfoData.role}
+            isMember={DetailInfoData.isMember}
+            clubName={DetailInfoData.clubName}
+            location={DetailInfoData.location}
+            currentMembers={DetailInfoData.currentMembers}
+            maxMambers={DetailInfoData.maxMembers}
+            clubImage={DetailInfoData.clubImage}
+            subCategory={DetailInfoData.subCategory}
+          />
+          <DetailDescription 
+            description={DetailInfoData.description}
+          />
+          <ClubMeetingList
+            clubMeetingList={clubMeetingList}
+            loginMemberId={loginMemberId}
+            role={role}
+            isMember={isMember}
+            clubId={clubId}
+          />
+        </>
+      )}
+
+      {currentTab === "board" && <TestPage />}
+      {currentTab === "member" && <div>멤버 탭 준비중</div>}      
     </div>
   );
 };

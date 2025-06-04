@@ -65,12 +65,6 @@ const DetailInfo = ({
 
   return (
     <div className="detail-info-container">
-      <div className="detail-tab-container">  
-        <span className="tab-active">홈</span>
-        {/* 추후 nav 추가 */}
-        <span onClick={() => {}}>게시판</span>
-        <span onClick={() => {}}>멤버</span>
-      </div>
       <div className="detail-info-wrapper">
         <img 
           src={clubImage} 
