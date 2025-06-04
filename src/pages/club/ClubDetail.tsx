@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { ClubController } from '../../services/club/controllers/ClubController';
 
@@ -19,7 +19,6 @@ import ClubMemberList from '../../components/club/detail/ClubMemberList';
 import RecommendClubList from '../../components/club/detail/RecommendClubList';
 
 const ClubDetail = () => {
-  const location = useLocation();
   const { clubId } = useParams<{ clubId: string }>();
 
   const [isMember, setIsMember] = useState<boolean>(false);
@@ -109,7 +108,7 @@ const ClubDetail = () => {
           />
           <RecommendClubList
             recommendClubList={recommendClubList}
-            isDetailPage={location.pathname === `/club/${clubId}`}
+            isDetailPage={window.location.pathname === `/club/${clubId}`}
           />
         </>
       )}
