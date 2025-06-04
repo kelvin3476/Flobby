@@ -55,7 +55,7 @@ const ClubMeetingList = ({
         <Button
           className="club-meeting-create-button"
           onClick={() => {
-            navigate('/club/meeting/register');
+            navigate(`/club/${clubId}/clubmeeting/register`);
           }}
           type="button"
           title="정기 모임 만들기"
