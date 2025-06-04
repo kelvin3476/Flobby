@@ -13,7 +13,7 @@ interface DetailInfoProps {
   clubName: string;
   location: string;
   currentMembers: number;
-  maxMambers: number;
+  maxMembers: number;
   clubImage: string;
   subCategory: string;
 }
@@ -24,7 +24,7 @@ const DetailInfo = ({
   clubName,
   location,
   currentMembers,
-  maxMambers,
+  maxMembers,
   clubImage,
   subCategory
 }: DetailInfoProps) => {
@@ -100,7 +100,7 @@ const DetailInfo = ({
                   <span className="titles-inner-member-icon"></span>
                   <div className="titles-inner-member-container">
                     <span className="titles-inner-member-count">
-                      <span className="titles-inner-member-number">{currentMembers}</span>/{maxMambers}</span>
+                      <span className="titles-inner-member-number">{currentMembers}</span>/{maxMembers}</span>
                     <span className="titles-inner-member-postfix">명</span>
                   </div>
                 </div>
