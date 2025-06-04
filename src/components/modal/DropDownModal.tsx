@@ -4,16 +4,21 @@ import "../../styles/modal/DropDownModal.scss";
 
 interface DropDownModalProps {
   className: string;
-  firstTitle?: string;
-  secondTitle?: string;
+  items: string[];
+  onItemClick?: (item: string, idx: number) => void;
 }
 
-const DropDownModal = ({ className, firstTitle, secondTitle }: DropDownModalProps) => {
+const DropDownModal = ({ className, items, onItemClick }: DropDownModalProps) => {
   return (
     <div className={`drop-modal-container ${className}`}>
       <div className="drop-modal-wrapper">
-        <span className="drop-first">{firstTitle}</span>
-        <span className="drop-second">{secondTitle}</span>
+        {items.map((item, idx) => (
+          <span
+            key={idx}
+            className="drop-item"
+            onClick={() => onItemClick?.(item, idx)}
+          >{item}</span>
+        ))}
       </div>
     </div>
   );
