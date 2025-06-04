@@ -28,7 +28,7 @@ const ClubMemberList = ({
         {role === 'LEADER' || role === 'MANAGER' ? (
           <div
             className="club-detail-member-admin-button-container"
-            onClick={() => navigate(`/club/member/${clubId}`)}
+            onClick={() => navigate(`/club/${clubId}/member`)}
           >
             <div className="club-detail-member-admin-icon"></div>
             <div className="club-detail-member-admin-text">

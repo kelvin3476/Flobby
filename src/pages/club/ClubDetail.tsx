@@ -18,14 +18,15 @@ import ClubMemberList from '../../components/club/detail/ClubMemberList';
 
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const [clubMeetingList, setClubMeetingList] = useState<ClubMeetingListItem[]>(
-    [],
-  );
+
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
   const [role, setRole] = useState<string | null>(null);
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [clubInfo, setClubInfo] = useState<ClubDTO>(null);
+  const [clubMeetingList, setClubMeetingList] = useState<ClubMeetingListItem[]>(
+    [],
+  );
   const [clubMemberList, setClubMemberList] = useState<ClubMemberListItem[]>(
     [],
   );
@@ -49,6 +50,7 @@ const ClubDetail = () => {
         setIsMember(response.isMember);
         setLoginMemberId(response.loginMemberId);
         setRole(response.role);
+        setClubMeetingList(response.clubMeetingList);
         setClubMemberList(response.clubMemberList);
         logger.log('모임 상세 정보:', response);
       } catch (error) {
