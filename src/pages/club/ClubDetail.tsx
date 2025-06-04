@@ -51,6 +51,7 @@ const ClubDetail = () => {
         loginMemberId={loginMemberId}
         role={role}
         isMember={isMember}
+        clubId={clubId}
       />
     </div>
   );

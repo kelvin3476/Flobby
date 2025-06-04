@@ -4,7 +4,7 @@ import Button from '../../button/Button';
 import '../../../styles/club/detail/ClubMeetingItem.scss';
 
 interface ClubMeetingProps {
-  meetingId: number;
+  meetingId: number; // 정기 모임 id
   loginMemberId: number;
   meetingLeaderId: number;
   clubMeetingTitle: string;
@@ -16,6 +16,7 @@ interface ClubMeetingProps {
   isMember: boolean;
   role: string;
   entryfee: string;
+  clubId: string; // 모임 id
 }
 const ClubMeetingItem = ({
   meetingId,
@@ -30,11 +31,12 @@ const ClubMeetingItem = ({
   isMember,
   role,
   entryfee,
+  clubId,
 }: ClubMeetingProps) => {
   const navigate = useNavigate();
 
   const handleClickModifyButton = () => {
-    navigate(`/club/meeting/${meetingId}/edit`);
+    navigate(`/club/${clubId}/clubmeeting/${meetingId}/edit`);
   };
 
   return (

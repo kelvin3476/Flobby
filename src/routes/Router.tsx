@@ -44,14 +44,12 @@ const Router: React.FC = () => {
         <Route path="/club/list" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
-        {/* 정기 모임 등록 페이지 */}
         <Route
           path="/club/meeting/register"
           element={<ClubMeetingRegister />}
         />
-        {/* 정기 모임 수정 페이지 */}
         <Route
-          path="/club/meeting/:meetingId/edit"
+          path="/club/:clubId/clubmeeting/:meetingId/edit"
           element={<ClubMeetingEdit />}
         />
       </Routes>

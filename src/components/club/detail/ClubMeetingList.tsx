@@ -11,12 +11,14 @@ interface ClubMeetingListProps {
   loginMemberId: number;
   role: string;
   isMember: boolean;
+  clubId: string;
 }
 const ClubMeetingList = ({
   clubMeetingList,
   loginMemberId,
   role,
   isMember,
+  clubId,
 }: ClubMeetingListProps) => {
   const navigate = useNavigate();
 
@@ -40,6 +42,7 @@ const ClubMeetingList = ({
               role={role}
               entryfee={clubMeetingItem.entryfee}
               meetingId={clubMeetingItem.meetingId}
+              clubId={clubId}
             />
           ))
         ) : (
