@@ -1,0 +1,36 @@
+.tab-container {
+  display: flex;
+  width: 920px;
+  height: 55px;
+  align-items: center;
+  border-bottom: 1px solid #E8EBED;
+
+  .tab-btns {
+    display: flex;
+    gap: 8px;
+    height: 55px;
+    
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      // height: 52px;
+
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 33.6px;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      color: #9EA4AA;
+      cursor: pointer;
+
+      &.active {
+        width: 72px;
+        border-bottom: 3px solid #191919;
+        color: #191919;
+      }
+    }
+  }
+}
