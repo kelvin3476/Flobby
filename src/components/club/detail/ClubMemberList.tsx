@@ -59,6 +59,9 @@ const ClubMemberList = ({
       </div>
 
       {/* 멤버 더보기 버튼 */}
+      {/* TODO: 기획 변경 예정 */}
+      {/* ex) 멤버 TAB으로 이동하게 되도록 업데이트 예정 */}
+      {/* ex) 버튼은 상시 노출하나 권한에 따라 얼럿으로 멤버 TAB에 대한 접근 제어 예정 */}
       <button
         type="button"
         className="club-member-more-button"
