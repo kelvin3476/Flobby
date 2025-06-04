@@ -7,7 +7,7 @@ import '../../../styles/club/detail/ClubMemberList.scss';
 
 interface ClubMemberListProps {
   role: string | null;
-  clubId: number;
+  clubId: string;
   clubMemberList: ClubMemberListItem[];
 }
 
@@ -25,7 +25,7 @@ const ClubMemberList = ({
       <div className="club-detail-member-title-box">
         <Title className="club-detail-item-sub-title" titleName="멤버 소개" />
         {/* 멤버 관리 버튼 영역(모임장, 운영진 권한) */}
-        {role === 'leader' || role === 'manager' ? (
+        {role === 'LEADER' || role === 'MANAGER' ? (
           <div
             className="club-detail-member-admin-button-container"
             onClick={() => navigate(`/club/member/${clubId}`)}

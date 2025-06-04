@@ -20,7 +20,9 @@ const ClubMemberItem = ({
         <img src={profilePhoto} alt="프로필 이미지" />
         <span>{nickname}</span>
       </div>
-      <div className={`club-detail-member-role-icon ${role ? role : ''}`}></div>
+      <div
+        className={`club-detail-member-role-icon ${role ? role.toLocaleLowerCase() : ''}`}
+      ></div>
     </div>
   );
 };
