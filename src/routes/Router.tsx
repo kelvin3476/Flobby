@@ -45,6 +45,14 @@ const Router: React.FC = () => {
         <Route path="/club/list" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
+        <Route
+          path="/club/:clubId/clubmeeting/register"
+          element={<ClubMeetingRegister />}
+        />
+        <Route
+          path="/club/:clubId/clubmeeting/:meetingId/edit"
+          element={<ClubMeetingEdit />}
+        />
         <Route path="/club/member/:clubId" element={<ClubMember />} />
       </Routes>
     </BrowserRouter>
