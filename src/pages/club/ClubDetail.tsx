@@ -95,6 +95,11 @@ const ClubDetail = () => {
             isMember={isMember}
             clubId={clubId}
           />
+          <ClubMemberList
+            role={role}
+            clubId={clubId}
+            clubMemberList={clubMemberList}
+          />
         </>
       )}
 
