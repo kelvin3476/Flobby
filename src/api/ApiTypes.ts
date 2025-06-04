@@ -167,36 +167,65 @@ export interface ClubListItem {
   postCategory: string;
 }
 
-/* TODO: 모임 상세 조회 시 응답 데이터 받는 부분 확인 필요 및 명세서 수정 이후 픽스 되면 수정 필요 */
+/* -------------------- 모임 상세 api 타입 -------------------- */
+
 /* 모임 상세 조회 응답 데이터 타입 */
 export interface ClubItemDetail {
+  clubDTO: ClubDTO;
+  clubMeetingList: ClubMeetingListItem[];
+  clubMemberList: ClubMemberListItem[];
+  recommendClubList: RecommendClubListItem[];
+  isMember: boolean; // 모임 가입 여부
+  loginMemberId: number | null; // 로그인 했을 경우 memberId 값, 비로그인 상태면 null로 넘어옴
+  role: ClubRoleType; // 모임 권한
+}
+
+/* 모임 상세 데이터 타입 */
+export interface ClubDTO {
   clubId: number;
-  photo: string;
-  hostId: number;
-  hostNickname: string;
-  category: string;
-  subCategory: string;
-  maxMember: number;
+  clubImage: string;
   clubName: string;
-  regionId: number;
-  locationName: string;
   currentMembers: number;
-  postCategory: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  location: string;
+  maxMembers: number;
+  subCategory: string;
 }
 
 /* 정기 모임 데이터 타입 */
 export interface ClubMeetingListItem {
-  meetingLeaderId: number;
-  meetingId: number;
-  clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingLocation: string;
-  maxParticipants: number;
+  clubMeetingTime: string;
+  clubMeetingTitle: string;
   currentParticipants: number;
-  isApplied: boolean;
   dday: string;
-  clubMeetingFee: string;
+  entryfee: string;
+  isApplied: boolean;
+  maxParticipants: number;
+  meetingId: number;
+  meetingLeaderId: number; // 정기 모임 생성자의 memberId
+  status: string;
 }
+
+/* 모임 멤버 데이터 타입 */
+export interface ClubMemberListItem {
+  clubMemberId: number;
+  nickname: string;
+  profilePhoto: string;
+  role: ClubRoleType;
+}
+
+/* 추천 모임 데이터 타입 */
+export interface RecommendClubListItem {
+  clubId: number;
+  clubImage: string;
+  clubName: string;
+  currentMembers: number;
+  location: string;
+  mainCategory: string;
+  maxMembers: number;
+  subCategory: string;
+}
+
+export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;

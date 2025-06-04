@@ -1,22 +1,27 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Title from '../text/Title';
 import ClubMeetingItem from './ClubMeetingItem';
 import Button from '../../button/Button';
 import { ClubMeetingListItem } from '../../../api/ApiTypes';
-import '../../../styles/club/club_meeting/ClubMeetingList.scss';
+import '../../../styles/club/detail/ClubMeetingList.scss';
 
 interface ClubMeetingListProps {
   clubMeetingList: ClubMeetingListItem[];
   loginMemberId: number;
   role: string;
   isMember: boolean;
+  clubId: string;
 }
 const ClubMeetingList = ({
   clubMeetingList,
   loginMemberId,
   role,
   isMember,
+  clubId,
 }: ClubMeetingListProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="club-meeting-list-container">
       <Title className="club-detail-item-sub-title" titleName="정기 모임" />
@@ -35,7 +40,9 @@ const ClubMeetingList = ({
               loginMemberId={loginMemberId}
               meetingLeaderId={clubMeetingItem.meetingLeaderId}
               role={role}
-              clubMeetingFee={clubMeetingItem.clubMeetingFee}
+              entryfee={clubMeetingItem.entryfee}
+              meetingId={clubMeetingItem.meetingId}
+              clubId={clubId}
             />
           ))
         ) : (
@@ -47,7 +54,9 @@ const ClubMeetingList = ({
       {isMember ? (
         <Button
           className="club-meeting-create-button"
-          onClick={() => {}}
+          onClick={() => {
+            navigate(`/club/${clubId}/clubmeeting/register`);
+          }}
           type="button"
           title="정기 모임 만들기"
         />

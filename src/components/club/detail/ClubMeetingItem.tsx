@@ -1,21 +1,25 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../button/Button';
-import '../../../styles/club/club_meeting/ClubMeetingItem.scss';
+import '../../../styles/club/detail/ClubMeetingItem.scss';
 
 interface ClubMeetingProps {
-  loginMemberId: number; // clubDTO에 추가 될 예정
-  meetingLeaderId: number; // clubMeetingList에 추가 될 예정
+  meetingId: number; // 정기 모임 id
+  loginMemberId: number;
+  meetingLeaderId: number;
   clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingLocation: string;
   maxParticipants: number;
   currentParticipants: number;
   isApplied: boolean;
-  isMember: boolean; // clubMeetingList에 추가 될 예정
-  role: string; // clubDTO에 추가 될 예정
-  clubMeetingFee: string;
+  isMember: boolean;
+  role: string;
+  entryfee: string;
+  clubId: string; // 모임 id
 }
 const ClubMeetingItem = ({
+  meetingId,
   loginMemberId,
   meetingLeaderId,
   clubMeetingTitle,
@@ -26,8 +30,15 @@ const ClubMeetingItem = ({
   isApplied,
   isMember,
   role,
-  clubMeetingFee,
+  entryfee,
+  clubId,
 }: ClubMeetingProps) => {
+  const navigate = useNavigate();
+
+  const handleClickModifyButton = () => {
+    navigate(`/club/${clubId}/clubmeeting/${meetingId}/edit`);
+  };
+
   return (
     <div className="club-meeting-item-container">
       {/* 내용 영역 */}
@@ -75,8 +86,7 @@ const ClubMeetingItem = ({
           <div className="club-meeting-participationFee-box">
             <div className="club-meeting-participationFee-icon"></div>
             <div className="club-meeting-participationFee">
-              {/* TODO: 참가비 단순 스트링값 디자인 수정 필요 */}
-              <span>{clubMeetingFee}</span>
+              <span>{entryfee}</span>
             </div>
           </div>
         </div>
@@ -95,7 +105,7 @@ const ClubMeetingItem = ({
                   type="button"
                   className="club-meeting-button-modify"
                   title="수정"
-                  onClick={() => {}}
+                  onClick={handleClickModifyButton}
                 />
                 {/* 정기 모임 참석 여부 확인 */}
                 {isApplied ? (
@@ -124,7 +134,7 @@ const ClubMeetingItem = ({
                       type="button"
                       className="club-meeting-button-modify"
                       title="수정"
-                      onClick={() => {}}
+                      onClick={handleClickModifyButton}
                     />
                     <Button
                       type="button"
