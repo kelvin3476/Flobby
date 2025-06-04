@@ -1,4 +1,4 @@
-import React, { useState }, { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { ClubController } from '../../services/club/controllers/ClubController';
@@ -8,7 +8,7 @@ import {
   ClubDTO,
   ClubMeetingListItem,
   ClubMemberListItem,
-  RecommendClubListItem
+  RecommendClubListItem,
 } from '../../api/ApiTypes';
 import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
 
@@ -17,7 +17,6 @@ import DetailInfo from '../../components/club/detail/DetailInfo';
 import DetailDescription from '../../components/club/detail/DetailDescription';
 import ClubMemberList from '../../components/club/detail/ClubMemberList';
 import RecommendClubList from '../../components/club/detail/RecommendClubList';
-
 
 const ClubDetail = () => {
   const location = useLocation();
@@ -109,15 +108,14 @@ const ClubDetail = () => {
             clubMemberList={clubMemberList}
           />
           <RecommendClubList
-        recommendClubList={recommendClubList}
-        isDetailPage={location.pathname === `/club/${clubId}`}
-      />
+            recommendClubList={recommendClubList}
+            isDetailPage={location.pathname === `/club/${clubId}`}
+          />
         </>
       )}
 
       {currentTab === 'board' && <div>게시판 탭 준비중</div>}
       {currentTab === 'member' && <div>멤버 탭 준비중</div>}
-      
     </div>
   );
 };
