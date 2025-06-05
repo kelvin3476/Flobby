@@ -23,6 +23,7 @@ const RecommendClubList = ({
         {recommendClubList.map((recommendClubItem, index) => {
           return (
             <ClubItem
+              key={index}
               clubId={recommendClubItem.clubId}
               clubName={recommendClubItem.clubName}
               photo={recommendClubItem.clubImage}
