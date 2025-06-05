@@ -21,8 +21,6 @@ const RecommendClubList = ({
       />
       <div className="recommend-club-list">
         {recommendClubList.map((recommendClubItem, index) => {
-          if (index > 3) return null;
-
           return (
             <ClubItem
               clubId={recommendClubItem.clubId}
