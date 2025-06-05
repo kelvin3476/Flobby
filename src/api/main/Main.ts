@@ -26,4 +26,9 @@ export default class Main {
       ? await http.get(`/club/list?mainCategory=${mainCategory}`)
       : await http.get(`/club/list`);
   }
+
+  /* 모임 검색 조회 */
+  static async searchClubList(searchKeyword?: string) {
+    return await http.get(`/club/search?keyword=${searchKeyword}`);
+  }
 }
