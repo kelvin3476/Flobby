@@ -7,28 +7,40 @@ import Button from '../../button/Button';
 
 import ClubItem from './ClubItem';
 
-import { clubItem, MainData, RegionItem } from '../../../api/ApiTypes';
+import logger from '../../../utils/Logger';
+
+import { clubItem, MainData } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
 
 import '../../../styles/main/club/ClubPost.scss';
 
-const ClubPost: React.FC = () => {
-  const [clubData, setClubData] = React.useState<clubItem[]>([]);
-  const regionContextController: RegionContextController =
-    RegionContextController.getInstance();
+interface ClubPostProps {
+  mainDataList: MainData;
+  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
+}
 
-  const fetchClubData = async () => {
-    const data: MainData = await regionContextController.getMainData();
-    setClubData([...data.clubItems]);
-  };
+const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: ClubPostProps) => {
+  const [clubData, setClubData] = React.useState<clubItem[]>([]);
+  const regionContextController = RegionContextController.getInstance();
 
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
-    fetchClubData();
+    setMainDataList(mainDataList);
+    /* 초기 모임 데이터 설정 */
+    setClubData([...mainDataList.clubItems]);
+  }, [mainDataList]);
 
+  React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
-    const handleRegionChange = async (event: CustomEvent<RegionItem>) => {
-      await fetchClubData();
+    const handleRegionChange = () => {
+      regionContextController.getMainData()
+        .then((mainData: MainData) => {
+          setMainDataList(mainData);
+          setClubData([...mainData.clubItems]);
+        })
+        .catch((error) => {
+          logger.error('모임 데이터 업데이트 실패:', error);
+        })
     };
 
     window.addEventListener('regionChanged', handleRegionChange);
@@ -74,7 +86,7 @@ const ClubPost: React.FC = () => {
           type="button"
           className="club-overall-button"
           title="전체 보기"
-          onClick={() => navigate('/club/all')}
+          onClick={() => navigate('/club/list')}
         />
       </div>
       <div className="swiper-container">

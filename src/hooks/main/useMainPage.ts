@@ -1,6 +1,7 @@
 import React from 'react';
 import logger from '../../utils/Logger';
 import useAuthStore from "../../store/auth/useAuthStore";
+import useMainDataStore from "../../store/main/useMainDataStore";
 import Login from "../../api/login/Login";
 
 const useMainPage = () => {
@@ -9,6 +10,11 @@ const useMainPage = () => {
         setAccessToken,
         isAuthenticated,
     } = useAuthStore();
+
+    const {
+        mainDataList,
+        setMainDataList,
+    } = useMainDataStore();
 
     /* accessToken 재발급 함수 */
     const reGenerateAccessToken = () => {
@@ -135,6 +141,8 @@ const useMainPage = () => {
 
     return {
         accessToken,
+        mainDataList,
+        setMainDataList,
     }
 }
 

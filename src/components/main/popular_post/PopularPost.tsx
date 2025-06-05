@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PopularItem from "./PopularItem";
-import { RegionContextController } from "../../../services/region/controllers/RegionContextController";
-import { boardItem } from "../../../api/ApiTypes";
+import { boardItem, MainData } from '../../../api/ApiTypes';
 
 import "../../../styles/main/popular_post/PopularPost.scss";
 
-const PopularPost: React.FC = () => {
+interface BoardPostProps {
+  mainDataList: MainData;
+  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
+}
+
+const PopularPost: React.FC<BoardPostProps> = ({ mainDataList, setMainDataList }: BoardPostProps) => {
   const navigate = useNavigate();
   const [ boardItems, setBoardItems ] = useState<boardItem[]>([]);
-  const popularController = RegionContextController.getInstance();
 
   useEffect(() => {
-    popularController.getMainData().then((item) => {
-      const sortedItems = [...item.boardItems].sort((a, b) => b.likes - a.likes);
-      setBoardItems(sortedItems);
-    })
-  }, []);
+    /* 최초 화면 진입 후 렌더링 시 호출 */
+    setMainDataList(mainDataList);
+    /* 초기 인기 게시글 데이터 설정 */
+    setBoardItems([...mainDataList.boardItems]);
+  }, [mainDataList]);
 
   const renderedItems = boardItems.map((item, idx) => (
     <PopularItem 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import MainHeader from "../../components/header/MainHeader";
 import ImageUploader from "../../components/club/register/ImageUploader";
@@ -13,11 +13,10 @@ import Title from "../../components/club/text/Title";
 import RequiredText from "../../components/club/text/RequiredText";
 import ClubModal from "../../components/modal/ClubModal";
 
+import useMainPage from "../../hooks/main/useMainPage";
 import useClubRegisterStore from "../../store/club/useClubRegisterStore";
 
 import logger from "../../utils/Logger";
-
-import useMainPage from "../../hooks/main/useMainPage";
 
 import { ClubController } from "../../services/club/controllers/ClubController";
 
@@ -44,10 +43,10 @@ const ClubRegister = () => {
     setMaxError,
   } = useClubRegisterStore();
 
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
 
-  const { accessToken } = useMainPage();
+  const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
   const clubController = ClubController.getInstance();
 
@@ -136,7 +135,7 @@ const ClubRegister = () => {
   
   return (
     <div className="register-container">
-      <MainHeader accessToken={accessToken} />
+      <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
       <div className="register-main">
         <div className="register-title">
           <Title titleName="모임 등록"/>
@@ -153,7 +152,7 @@ const ClubRegister = () => {
           </div>
           <ClubDescription className="register-club" />
           <div className="buttons">
-            <Button className="cancel-btn" title="취소" onClick={() => nav('/')} />
+            <Button className="cancel-btn" title="취소" onClick={() => navigate('/')} />
             <Button className="allow-btn" title="등록" onClick={handleValidChange} />
           </div>
         </div>
@@ -173,7 +172,7 @@ const ClubRegister = () => {
             } else {
               setModalStep(null);
               await handleSubmitClubRegistrationForm();
-              nav('/club/all');
+              navigate('/club/list');
             }
           }}
           onCancel={() => setModalStep(null)}

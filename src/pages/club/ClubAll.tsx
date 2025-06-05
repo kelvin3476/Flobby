@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import logger from '../../utils/Logger';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MainHeader from '../../components/header/MainHeader';
 import MainCategory from '../../components/club/list/MainCategory';
 import Title from '../../components/club/text/Title';
 import SubCategory from '../../components/club/list/SubCategory';
 import ClubList from '../../components/club/list/ClubList';
 import FloatingButton from '../../components/button/FloatingButton';
+import useMainPage from "../../hooks/main/useMainPage";
 import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import { ClubController } from '../../services/club/controllers/ClubController';
@@ -19,8 +20,7 @@ import '../../styles/main/club/ClubAll.scss';
 
 const ClubAll = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const accessToken = location.state as string | null;
+  const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
   logger.log('[cluball: accessToken]', accessToken);
 
@@ -32,6 +32,8 @@ const ClubAll = () => {
   const categoryListController = CategoryListController.getInstance();
 
   useEffect(() => {
+    /* 초기 메인 데이터 저장 (메인 헤더)  */
+    setMainDataList(mainDataList);
     const fetchCategoryListData = async () => {
       try {
         const categoryListData = await categoryListController.getCategoryList();
@@ -45,7 +47,7 @@ const ClubAll = () => {
       }
     };
     fetchCategoryListData();
-  }, []);
+  }, [mainDataList]);
 
   // 모임 목록 컨트롤러
   const clubController = ClubController.getInstance();
@@ -68,7 +70,7 @@ const ClubAll = () => {
 
   return (
     <div className="club-all-wrapper">
-      <MainHeader accessToken={accessToken} />
+      <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
       <div className='club-all-content-container'>
         <MainCategory categoryList={categoryList} />  
         <div className='club-all-content'>
@@ -84,8 +86,8 @@ const ClubAll = () => {
           mainDefaultIcon={FabDefaultIcon}
           mainActionIcon={FabDefaultCancelIcon}
           options={[
-            { icon: FabClubRegisterIcon, label: '모임 등록', onClick: () => navigate('/club/register', { state: accessToken }) },
-            { icon: FabOnedayRegisterIcon, label: '원데이 등록', onClick: () => navigate('/oneday/register', { state: accessToken }) },
+            { icon: FabClubRegisterIcon, label: '모임 등록', onClick: () => navigate('/club/register') },
+            { icon: FabOnedayRegisterIcon, label: '원데이 등록', onClick: () => navigate('/oneday/register')},
           ]}
         />
       )}

@@ -7,27 +7,40 @@ import Button from '../../button/Button';
 
 import OnedayItem from './OnedayItem';
 
-import { onedayItem, MainData, RegionItem } from '../../../api/ApiTypes';
+import logger from '../../../utils/Logger';
+
+import { onedayItem, MainData } from '../../../api/ApiTypes';
 import { RegionContextController } from "../../../services/region/controllers/RegionContextController";
 
 import '../../../styles/main/one_day/OnedayPost.scss';
 
-const OnedayPost = () => {
+interface OnedayPostProps {
+  mainDataList: MainData;
+  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
+}
+
+const OnedayPost: React.FC<OnedayPostProps> = ({ mainDataList, setMainDataList }: OnedayPostProps) => {
   const [ onedayData, setOnedayData ] = React.useState<onedayItem[]>([]);
   const regionContextController: RegionContextController = RegionContextController.getInstance();
 
-  const fetchOnedayData = async () => {
-    const data: MainData = await regionContextController.getMainData();
-    setOnedayData([...data.onedayItems]);
-  };
-
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
-    fetchOnedayData();
+    setMainDataList(mainDataList);
+    /* 초기 원데이 데이터 설정 */
+    setOnedayData([...mainDataList.onedayItems]);
+  }, [mainDataList]);
 
+  React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
-    const handleRegionChange = async (event: CustomEvent<RegionItem>) => {
-      await fetchOnedayData();
+    const handleRegionChange = () => {
+      regionContextController.getMainData()
+        .then((mainData: MainData) => {
+          setMainDataList(mainData);
+          setOnedayData([...mainData.onedayItems]);
+        })
+        .catch((error) => {
+          logger.error('원데이 데이터 업데이트 실패:', error);
+        });
     };
 
     window.addEventListener('regionChanged', handleRegionChange);

@@ -1,38 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
 import { DEFAULT_REGION } from '../../../services/region/models/RegionContextModel';
-import { RegionItem } from '../../../api/ApiTypes';
+import { RegionItem, MainData } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
 
 import '../../../styles/main/region_selector/RegionSelector.scss';
 
-const RegionSelector: React.FC = () => {
+interface RegionSelectorProps {
+  mainDataList: MainData;
+  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
+}
+
+const RegionSelector: React.FC<RegionSelectorProps> = ({ mainDataList, setMainDataList }: RegionSelectorProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const regionController = RegionContextController.getInstance();
+  const regionContextController = RegionContextController.getInstance();
 
   const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
-  const [selectedRegion, setSelectedRegion] =
-    useState<RegionItem>(DEFAULT_REGION);
-  const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
-    useState<boolean>(false);
+  const [selectedRegion, setSelectedRegion] = useState<RegionItem>(DEFAULT_REGION);
+  const [isRegionSelectorOpen, setIsRegionSelectorOpen] = useState<boolean>(false);
 
   const handleRegionChange = (region: RegionItem) => {
-    regionController.setSelectedRegion(region);
+    regionContextController.setSelectedRegion(region);
     setSelectedRegion(region);
     setIsRegionSelectorOpen(false);
   };
 
   useEffect(() => {
-    const initRegionData = async () => {
-      await regionController.getMainData();
-      // 관심 지역 저장
-      setPreferRegions(regionController.getPreferRegionsList());
-      // 선택 지역 저장
-      setSelectedRegion(regionController.getSelectedRegion());
-    };
-    initRegionData();
-  }, [regionController]);
+    // 초기 메인 데이터 저장 및 새로 고침 시 업데이트
+    setMainDataList(mainDataList);
+    // 관심 지역 저장
+    setPreferRegions(regionContextController.getPreferRegionsList());
+    // 선택 지역 저장
+    setSelectedRegion(regionContextController.getSelectedRegion());
+  }, [mainDataList]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '../logo/Logo';
@@ -8,12 +8,24 @@ import SearchBar from '../main/search_bar/SearchBar';
 import Button from '../button/Button';
 import DropDownModal from '../modal/DropDownModal';
 
+import { MainData } from '../../api/ApiTypes';
+
 import '../../styles/header/MainHeader.scss';
 
-const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
+interface MainHeaderProps {
+  accessToken: string | null;
+  mainDataList: MainData;
+  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
+}
+
+const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setMainDataList }: MainHeaderProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const nav = useNavigate();
   const hasAccessToken = !!accessToken;
+
+  useEffect(() => {
+    setMainDataList(mainDataList);
+  }, []);
 
   return (
     <header className="header-container">
@@ -22,7 +34,7 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
           <div className="up-wrapper">
             <div className="left-wrapper">
               <Logo className="header-logo" onClick={() => nav('/')} />
-              <RegionSelector />
+              <RegionSelector mainDataList={mainDataList} setMainDataList={setMainDataList} />
             </div>
             <div className="right-wrapper">
               <SearchBar />
@@ -76,7 +88,7 @@ const MainHeader = ({ accessToken }: { accessToken: string | null }) => {
             <TextButton
               className="club-btn"
               buttonName="모임"
-              onClick={() => nav('/club/list', { state: accessToken })}
+              onClick={() => nav('/club/list')}
             />
             <TextButton
               className="oneday-btn"
