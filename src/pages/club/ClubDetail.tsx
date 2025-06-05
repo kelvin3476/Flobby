@@ -8,6 +8,7 @@ import {
   ClubDTO,
   ClubMeetingListItem,
   ClubMemberListItem,
+  RecommendClubListItem,
 } from '../../api/ApiTypes';
 import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
 
@@ -15,6 +16,7 @@ import Tab from '../../components/tab/Tab';
 import DetailInfo from '../../components/club/detail/DetailInfo';
 import DetailDescription from '../../components/club/detail/DetailDescription';
 import ClubMemberList from '../../components/club/detail/ClubMemberList';
+import RecommendClubList from '../../components/club/detail/RecommendClubList';
 
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -30,6 +32,9 @@ const ClubDetail = () => {
   const [clubMemberList, setClubMemberList] = useState<ClubMemberListItem[]>(
     [],
   );
+  const [recommendClubList, setRecommendClubList] = useState<
+    RecommendClubListItem[]
+  >([]);
 
   React.useEffect(() => {
     if (!clubId) {
@@ -52,6 +57,7 @@ const ClubDetail = () => {
         setRole(response.role);
         setClubMeetingList(response.clubMeetingList);
         setClubMemberList(response.clubMemberList);
+        setRecommendClubList(response.recommendClubList);
         logger.log('모임 상세 정보:', response);
       } catch (error) {
         logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
@@ -99,6 +105,10 @@ const ClubDetail = () => {
             role={role}
             clubId={clubId}
             clubMemberList={clubMemberList}
+          />
+          <RecommendClubList
+            recommendClubList={recommendClubList}
+            isDetailPage={window.location.pathname === `/club/${clubId}`}
           />
         </>
       )}

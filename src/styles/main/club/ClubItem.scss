@@ -5,6 +5,7 @@
   width: 302px;
   height: 448px;
   gap: 16px;
+  cursor: pointer;
 
   /* 모임 전체 페이지 속성 */
   &.club-list-item {
@@ -126,8 +127,13 @@
           flex-direction: row;
           align-items: center;
 
-          .club-item-post-category {
-            display: none;
+          .club-item-location-icon {
+            width: 24px;
+            height: 24px;
+
+            background: url('../../../assets/svg/main/club/main_club_icon_location.svg');
+            background-position: center;
+            background-repeat: no-repeat;
           }
 
           .club-item-location {
