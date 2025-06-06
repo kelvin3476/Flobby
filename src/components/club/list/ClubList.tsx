@@ -2,11 +2,14 @@ import React from 'react';
 import ClubItem from '../../main/club/ClubItem';
 import { ClubListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/list/ClubList.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface ClubListProps {
   clubList: ClubListItem[];
 }
 const ClubList = ({ clubList }: ClubListProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className="club-list-container">
       <div className="club-list-box">
@@ -46,7 +49,7 @@ const ClubList = ({ clubList }: ClubListProps) => {
               <span>근처에 개설된 모임이 없어요.</span>
               <span>지역을 바꾸거나 다른 카테고리의 모임을 살펴보세요.</span>
             </div>
-            <button type="button">
+            <button type="button" onClick={() => navigate('/club/register')}>
               <div className="club-list-exception-icon"></div>
               <span>직접 모임을 만들어 보세요!</span>
             </button>
