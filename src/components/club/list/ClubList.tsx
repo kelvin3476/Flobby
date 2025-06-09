@@ -3,12 +3,16 @@ import ClubItem from '../../main/club/ClubItem';
 import { ClubListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/list/ClubList.scss';
 import { useNavigate } from 'react-router-dom';
+import useMainPage from '../../../hooks/main/useMainPage';
+import logger from '../../../utils/Logger';
 
 interface ClubListProps {
   clubList: ClubListItem[];
 }
 const ClubList = ({ clubList }: ClubListProps) => {
   const navigate = useNavigate();
+
+  const { accessToken } = useMainPage();
 
   return (
     <div className="club-list-container">
@@ -49,7 +53,13 @@ const ClubList = ({ clubList }: ClubListProps) => {
               <span>근처에 개설된 모임이 없어요.</span>
               <span>지역을 바꾸거나 다른 카테고리의 모임을 살펴보세요.</span>
             </div>
-            <button type="button" onClick={() => navigate('/club/register')}>
+            <button
+              type="button"
+              /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
+              onClick={() =>
+                accessToken ? navigate('/club/register') : navigate('/login')
+              }
+            >
               <div className="club-list-exception-icon"></div>
               <span>직접 모임을 만들어 보세요!</span>
             </button>
