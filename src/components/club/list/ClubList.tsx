@@ -7,11 +7,10 @@ import useMainPage from '../../../hooks/main/useMainPage';
 
 interface ClubListProps {
   clubList: ClubListItem[];
+  accessToken: string;
 }
-const ClubList = ({ clubList }: ClubListProps) => {
+const ClubList = ({ clubList, accessToken }: ClubListProps) => {
   const navigate = useNavigate();
-
-  const { accessToken } = useMainPage();
 
   return (
     <div className="club-list-container">

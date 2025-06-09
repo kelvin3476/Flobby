@@ -98,7 +98,7 @@ const ClubAll = () => {
             className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
           >
             <SubCategory categoryList={categoryList} />
-            <ClubList clubList={clubList} />
+            <ClubList clubList={clubList} accessToken={accessToken} />
           </div>
         </div>
       </div>
