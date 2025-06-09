@@ -94,9 +94,11 @@ const ClubAll = () => {
         <MainCategory categoryList={categoryList} />
         <div className="club-all-content">
           <Title titleName={mainCategory ? mainCategory : '모임'} />
-          <div className="club-all-sub-content">
+          <div
+            className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
+          >
             <SubCategory categoryList={categoryList} />
-            <ClubList clubList={clubList} />
+            <ClubList clubList={clubList} accessToken={accessToken} />
           </div>
         </div>
       </div>

@@ -4,6 +4,8 @@
   align-items: center;
   gap: 52px;
 
+  min-height: 100vh;
+
   .club-all-content-container {
     display: flex;
     flex-direction: row;
@@ -23,6 +25,10 @@
         align-items: center;
         gap: 32px;
         width: 100%;
+
+        &.empty {
+          gap: 40px;
+        }
       }
     }
   }
