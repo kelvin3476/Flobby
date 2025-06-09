@@ -4,7 +4,6 @@ import { ClubListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/list/ClubList.scss';
 import { useNavigate } from 'react-router-dom';
 import useMainPage from '../../../hooks/main/useMainPage';
-import logger from '../../../utils/Logger';
 
 interface ClubListProps {
   clubList: ClubListItem[];
