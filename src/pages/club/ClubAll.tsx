@@ -17,8 +17,6 @@ import FabDefaultCancelIcon from '../../assets/svg/club/clublist/floating_button
 import FabClubRegisterIcon from '../../assets/svg/club/clublist/floating_button_club_register.svg';
 import FabOnedayRegisterIcon from '../../assets/svg/club/clublist/floating_button_oneday_register.svg';
 import '../../styles/main/club/ClubAll.scss';
-import { getCookie } from '../../utils/Cookie';
-import { RegionContextController } from '../../services/region/controllers/RegionContextController';
 
 const ClubAll = () => {
   const navigate = useNavigate();
