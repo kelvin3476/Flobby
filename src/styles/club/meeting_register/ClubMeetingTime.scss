@@ -1,0 +1,39 @@
+.club-meeting-time-switch-box {
+  display: flex;
+  height: 48px;
+  align-items: center;
+  gap: 12px;
+
+  .time-switch-button {
+    width: 84px;
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid #e8ebed;
+    background: #fff;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #454c53;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.3px;
+
+    &.active {
+      border: 1px solid #26282b;
+      background: #26282b;
+      color: #fff;
+    }
+  }
+}
+
+.club-meeting-dropdown-box {
+  display: flex;
+  height: 48px;
+  align-items: flex-start;
+  gap: 14px;
+}
