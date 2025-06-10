@@ -30,9 +30,9 @@ export default class DatePicker {
       this.options.trigger.addEventListener('click', e => {
         e.stopPropagation();
 
-        if (!this.container.contains(e.target as Node)) {
-          this.hide();
-        }
+        // if (!this.container.contains(e.target as Node)) {
+        //   this.hide();
+        // }
 
         this.container.style.display === 'block' ? this.hide() : this.show();
       });
@@ -69,6 +69,8 @@ export default class DatePicker {
     prev.addEventListener('click', e => {
       this.currentDate.setMonth(this.currentDate.getMonth() - 1);
       this.render();
+
+      this.container.style.display === 'block' ? this.hide() : this.show();
     });
 
     const next = document.createElement('button');
@@ -76,6 +78,8 @@ export default class DatePicker {
     next.addEventListener('click', () => {
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
       this.render();
+
+      this.container.style.display === 'block' ? this.hide() : this.show();
     });
 
     const title = document.createElement('span');
