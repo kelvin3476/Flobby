@@ -1,29 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from '../../utils/DatePicker';
 
-import '../../styles/datepicker/DatePicker.scss';
+import Label from '../../components/club/register/Label';
+import DropDown from '../../components/dropdown/Dropdown';
+import ClubMeetingDate from '../../components/club/meetingRegister/ClubMeetingDate';
+import Title from '../../components/club/text/Title';
+
+import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
+import ClubMeetingTitle from '../../components/club/meetingRegister/ClubMeetingTitle';
+import ClubMeetingTime from '../../components/club/meetingRegister/ClubMeetingTime';
+import ClubMeetingLocation from '../../components/club/meetingRegister/clubMeetingLocation';
+import ClubMeetingMember from '../../components/club/meetingRegister/ClubMeetingMember';
+import ClubMeetingEntryFee from '../../components/club/meetingRegister/ClubMeetingEntryFee';
 
 const ClubMeetingRegister = () => {
-  const datepickerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (datepickerRef.current) {
-      new DatePicker(datepickerRef.current, {
-        trigger: triggerRef.current,
-        onSelect: date => {
-          console.log(date);
-          /* TODO: 선택된 날짜를 데이터 형식에 맞게 가공 후 전역에 저장 */
-        },
-      });
-    }
-  }, []);
-
   return (
-    <div>
-      {/* TODO: 날짜 선택 => 퍼블 필요 */}
-      <div ref={triggerRef}>날짜 선택</div>
-      <div className="datepicker-container" ref={datepickerRef} />
+    <div className="club-meeting-register-container">
+      <Title
+        titleName="정기 모임 등록"
+        className="club-meeting-register-title"
+      />
+
+      <div className="club-meeting-register-content-wrapper">
+        <div className="club-meeting-register-line-box">
+          <div>
+            <span>*</span>
+            <span>필수 입력 사항</span>
+          </div>
+          <div className="line"></div>
+        </div>
+        <div className="club-meeting-register-content-area">
+          <div className="club-meeting-register-content">
+            <ClubMeetingTitle />
+            <ClubMeetingDate />
+            <ClubMeetingTime />
+            <ClubMeetingLocation />
+            <ClubMeetingMember />
+            <ClubMeetingEntryFee />
+          </div>
+          <div className="club-meeting-register-button-container">
+            <button>등록</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
