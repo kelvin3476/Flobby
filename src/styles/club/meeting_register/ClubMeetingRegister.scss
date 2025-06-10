@@ -123,6 +123,48 @@
           }
         }
       }
+
+      .club-meeting-register-button-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .club-meeting-register-cancel {
+          width: 96px;
+          height: 48px;
+          flex-shrink: 0;
+          border-radius: 6px;
+          border: 1px solid #c9cdd2;
+          background: #fff;
+          cursor: pointer;
+
+          color: #454c53;
+          text-align: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 150%;
+          letter-spacing: -0.3px;
+        }
+
+        .club-meeting-register-submit {
+          width: 96px;
+          height: 48px;
+          flex-shrink: 0;
+          border-radius: 6px;
+          border: 1px solid #764bf6;
+          background: #764bf6;
+          cursor: pointer;
+
+          color: #fff;
+          text-align: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 150%;
+          letter-spacing: -0.3px;
+        }
+      }
     }
   }
 }

@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import DatePicker from '../../utils/DatePicker';
 
-import Label from '../../components/club/register/Label';
-import DropDown from '../../components/dropdown/Dropdown';
 import ClubMeetingDate from '../../components/club/meetingRegister/ClubMeetingDate';
 import Title from '../../components/club/text/Title';
 
-import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
 import ClubMeetingTitle from '../../components/club/meetingRegister/ClubMeetingTitle';
 import ClubMeetingTime from '../../components/club/meetingRegister/ClubMeetingTime';
 import ClubMeetingLocation from '../../components/club/meetingRegister/clubMeetingLocation';
 import ClubMeetingMember from '../../components/club/meetingRegister/ClubMeetingMember';
 import ClubMeetingEntryFee from '../../components/club/meetingRegister/ClubMeetingEntryFee';
+
+import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
 
 const ClubMeetingRegister = () => {
   return (
@@ -39,7 +37,12 @@ const ClubMeetingRegister = () => {
             <ClubMeetingEntryFee />
           </div>
           <div className="club-meeting-register-button-container">
-            <button>등록</button>
+            <button type="button" className="club-meeting-register-cancel">
+              취소
+            </button>
+            <button type="button" className="club-meeting-register-submit">
+              등록
+            </button>
           </div>
         </div>
       </div>
