@@ -30,6 +30,10 @@ export default class DatePicker {
       this.options.trigger.addEventListener('click', e => {
         e.stopPropagation();
 
+        if (!this.container.contains(e.target as Node)) {
+          this.hide();
+        }
+
         this.container.style.display === 'block' ? this.hide() : this.show();
       });
     }
@@ -62,7 +66,7 @@ export default class DatePicker {
     // 이전, 다음 버튼 생성
     const prev = document.createElement('button');
     prev.classList.add('datepicker-header-prev-button');
-    prev.addEventListener('click', () => {
+    prev.addEventListener('click', e => {
       this.currentDate.setMonth(this.currentDate.getMonth() - 1);
       this.render();
     });
@@ -148,7 +152,8 @@ export default class DatePicker {
           // 오늘보다 이전인 날짜는 disabled
           dayCell.classList.add('disabled');
         } else {
-          dayCell.addEventListener('click', () => {
+          dayCell.addEventListener('click', e => {
+            e.stopPropagation();
             this.selectDate(thisDate);
           });
         }
@@ -164,6 +169,7 @@ export default class DatePicker {
     return dayGrid;
   }
 
+  /* 날짜 선택 */
   private selectDate(date: Date) {
     if (date < this.today) return;
 
