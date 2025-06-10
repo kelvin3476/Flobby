@@ -27,4 +27,8 @@ export class ClubController {
   selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     return this.model.selectClubDetail(clubId);
   }
+
+  searchClubList(searchKeyword?: string): Promise<ClubListItem[]> {
+    return this.model.searchClubList(searchKeyword);
+  }
 }

@@ -14,7 +14,8 @@ export default function useSearchBarHandlers() {
     if (searchKeyword.length > 0) {
       console.log(searchKeyword, '검색어 제출!'); // test
 
-      // TODO: 검색 api 연결
+      /* 검색시 CustomEvent를 사용하여 검색어 전달 */
+      window.dispatchEvent(new CustomEvent('clubSearch', { detail: { searchKeyword: searchKeyword } }));
 
       inputRef.current?.blur();
       setIsTyping(false);
