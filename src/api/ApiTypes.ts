@@ -83,7 +83,7 @@ export interface HobbyCategory {
 
 /* -------------------- 메인 페이지 api 타입 -------------------- */
 
-/* 동호회 response 데이터 타입 */
+/* 모임 response 데이터 타입 */
 export interface clubItem {
   clubId: number;
   photo?: string;
@@ -124,7 +124,7 @@ export interface boardItem {
   created_at: string;
 }
 
-/* 메인 페이지 동호회, 원데이, 실시간 인기 게시글 데이터셋 */
+/* 메인 페이지 모임, 원데이, 실시간 인기 게시글 데이터셋 */
 export interface MainData {
   region: RegionItem[];
   clubItems: clubItem[];
@@ -149,22 +149,6 @@ export interface CreateClubJsonData {
 export interface CreateClubData extends CreateClubJsonData {
   file: File;
   data: CreateClubJsonData;
-}
-
-/* 모임 목록 응답 데이터 타입 */
-export interface ClubListItem {
-  clubId: number;
-  photo: string;
-  hostId: number;
-  hostNickname: string;
-  category: string;
-  subCategory: string;
-  maxMember: number;
-  clubName: string;
-  regionId: number;
-  locationName: string;
-  currentMembers: number;
-  postCategory: string;
 }
 
 /* -------------------- 모임 상세 api 타입 -------------------- */
