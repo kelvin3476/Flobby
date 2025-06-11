@@ -1,14 +1,14 @@
-import { ClubListItem, ClubItemDetail } from '../../../api/ApiTypes';
+import { clubItem, ClubItemDetail } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 
 import logger from '../../../utils/Logger';
 
 export class ClubModel {
-  clubListData: ClubListItem[] = [];
+  clubListData: clubItem[] = [];
   ClubItemDetailData: ClubItemDetail;
 
   /* 모임 리스트 불러 오는 api */
-  async getClubList(mainCategory?: string): Promise<ClubListItem[]> {
+  async getClubList(mainCategory?: string): Promise<clubItem[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
       const response = await Main.getClubList(mainCategory);
@@ -71,7 +71,7 @@ export class ClubModel {
   }
 
   /* 모임 검색 api */
-  async searchClubList(searchKeyword?: string): Promise<ClubListItem[]> {
+  async searchClubList(searchKeyword?: string): Promise<clubItem[]> {
     try {
       const response = await Main.searchClubList(searchKeyword);
       const { code, message, data } = response.data;

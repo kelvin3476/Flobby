@@ -11,7 +11,7 @@ import useMainPage from '../../hooks/main/useMainPage';
 import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import { ClubController } from '../../services/club/controllers/ClubController';
-import { ClubListItem, HobbyCategory } from '../../api/ApiTypes';
+import { clubItem, HobbyCategory } from '../../api/ApiTypes';
 import FabDefaultIcon from '../../assets/svg/club/clublist/floating_button_default.svg';
 import FabDefaultCancelIcon from '../../assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '../../assets/svg/club/clublist/floating_button_club_register.svg';
@@ -26,7 +26,7 @@ const ClubAll = () => {
 
   const { mainCategory, subCategory } = useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
-  const [clubList, setClubList] = useState<ClubListItem[]>([]);
+  const [clubList, setClubList] = useState<clubItem[]>([]);
 
   const [selectedRegion, setSelectedRegion] = useState<string>('');
 

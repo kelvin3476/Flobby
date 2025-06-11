@@ -1,4 +1,4 @@
-import { ClubListItem, ClubItemDetail } from '../../../api/ApiTypes';
+import { clubItem, ClubItemDetail } from '../../../api/ApiTypes';
 import { ClubModel } from '../models/ClubModel';
 
 export class ClubController {
@@ -16,7 +16,7 @@ export class ClubController {
     return ClubController.instance;
   }
 
-  getClubList(category?: string): Promise<ClubListItem[]> {
+  getClubList(category?: string): Promise<clubItem[]> {
     return this.model.getClubList(category);
   }
 
@@ -28,7 +28,7 @@ export class ClubController {
     return this.model.selectClubDetail(clubId);
   }
 
-  searchClubList(searchKeyword?: string): Promise<ClubListItem[]> {
+  searchClubList(searchKeyword?: string): Promise<clubItem[]> {
     return this.model.searchClubList(searchKeyword);
   }
 }
