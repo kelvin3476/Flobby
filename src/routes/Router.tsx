@@ -4,10 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TestPage from '../pages/TestPage';
 
 import Main from '../pages/main/Main';
-import ClubAll from '../pages/club/ClubAll';
-import ClubRegister from '../pages/club/ClubRegister';
-import ClubDetail from '../pages/club/ClubDetail';
-
 import Login from '../pages/login/Login';
 import FindPassword from '../pages/password/FindPassword';
 import ResetPassword from '../pages/password/ResetPassword';
@@ -21,9 +17,14 @@ import SuccessSignUp from '../pages/signup/SuccessSignUp';
 
 import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
+
+import ClubAll from '../pages/club/ClubAll';
+import ClubRegister from '../pages/club/ClubRegister';
+import ClubDetail from '../pages/club/ClubDetail';
 import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
 import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
 import ClubMemberManagement from '../pages/club/ClubMemberManagement';
+import ClubSearch from '../pages/club/ClubSearch';
 
 const Router: React.FC = () => {
   return (
@@ -57,6 +58,7 @@ const Router: React.FC = () => {
           path="/club/:clubId/clubmeeting/:meetingId/edit"
           element={<ClubMeetingEdit />}
         />
+        <Route path="/club/search" element={<ClubSearch />} />
       </Routes>
     </BrowserRouter>
   );

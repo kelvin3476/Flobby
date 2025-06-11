@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useSearchKeywordStore from '../../store/main/useSearchKeywordStore';
 
 export default function useSearchBarHandlers() {
+  const navigate = useNavigate();
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore();
 
   const [isTyping, setIsTyping] = useState(false);
@@ -14,12 +16,12 @@ export default function useSearchBarHandlers() {
     if (searchKeyword.length > 0) {
       console.log(searchKeyword, '검색어 제출!'); // test
 
-      /* 검색시 CustomEvent를 사용하여 검색어 전달 */
-      window.dispatchEvent(new CustomEvent('clubSearch', { detail: { searchKeyword: searchKeyword } }));
-
       setSearchKeyword(''); /* input 필드 입력값 초기화 */
       inputRef.current?.blur();
       setIsTyping(false);
+
+      /* 검색어가 있는 경우에만 검색 페이지로 이동 */
+      navigate(`/club/search?keyword=${searchKeyword}`);
     }
   };
 
