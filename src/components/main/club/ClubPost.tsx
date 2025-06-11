@@ -11,6 +11,7 @@ import logger from '../../../utils/Logger';
 
 import { clubItem, MainData } from '../../../api/ApiTypes';
 import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
+import { ClubController } from '../../../services/club/controllers/ClubController';
 
 import '../../../styles/main/club/ClubPost.scss';
 
@@ -22,6 +23,7 @@ interface ClubPostProps {
 const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: ClubPostProps) => {
   const [clubData, setClubData] = React.useState<clubItem[]>([]);
   const regionContextController = RegionContextController.getInstance();
+  const clubController = ClubController.getInstance();
 
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
@@ -47,6 +49,24 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
 
     return () => {
       window.removeEventListener('regionChanged', handleRegionChange);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const handleSearch = async (event: CustomEvent) => {
+      const searchKeyword = event.detail.searchKeyword;
+      if (searchKeyword) {
+        const clubListData = await clubController.searchClubList(searchKeyword);
+        setClubData(clubListData);
+      } else {
+        setClubData([...mainDataList.clubItems]);
+      }
+    };
+
+    window.addEventListener('clubSearch', handleSearch);
+
+    return () => {
+      window.removeEventListener('clubSearch', handleSearch);
     };
   }, []);
 
