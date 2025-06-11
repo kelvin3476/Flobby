@@ -1,12 +1,11 @@
 import React from 'react';
 import ClubItem from '../../main/club/ClubItem';
-import { ClubListItem } from '../../../api/ApiTypes';
+import { clubItem } from '../../../api/ApiTypes';
 import '../../../styles/club/list/ClubList.scss';
 import { useNavigate } from 'react-router-dom';
-import useMainPage from '../../../hooks/main/useMainPage';
 
 interface ClubListProps {
-  clubList: ClubListItem[];
+  clubList: clubItem[];
   accessToken: string | null;
 }
 const ClubList = ({ clubList, accessToken }: ClubListProps) => {
