@@ -17,6 +17,7 @@ export default function useSearchBarHandlers() {
       /* 검색시 CustomEvent를 사용하여 검색어 전달 */
       window.dispatchEvent(new CustomEvent('clubSearch', { detail: { searchKeyword: searchKeyword } }));
 
+      setSearchKeyword(''); /* input 필드 입력값 초기화 */
       inputRef.current?.blur();
       setIsTyping(false);
     }
