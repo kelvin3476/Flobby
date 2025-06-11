@@ -83,25 +83,6 @@ const ClubAll = () => {
     };
   }, []);
 
-  // 모임 검색시 모임 목록 업데이트
-  useEffect(() => {
-    const handleSearch = async (event: CustomEvent) => {
-      const searchKeyword = event.detail.searchKeyword;
-      if (searchKeyword) {
-        const clubListData = await clubController.searchClubList(searchKeyword);
-        setClubList(clubListData);
-      } else {
-        fetchClubItemsList();
-      }
-    };
-
-    window.addEventListener('clubSearch', handleSearch);
-
-    return () => {
-      window.removeEventListener('clubSearch', handleSearch);
-    };
-  }, []);
-
   return (
     <div className="club-all-wrapper">
       <MainHeader

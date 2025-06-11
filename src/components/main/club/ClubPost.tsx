@@ -52,24 +52,6 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
     };
   }, []);
 
-  React.useEffect(() => {
-    const handleSearch = async (event: CustomEvent) => {
-      const searchKeyword = event.detail.searchKeyword;
-      if (searchKeyword) {
-        const clubListData = await clubController.searchClubList(searchKeyword);
-        setClubData(clubListData);
-      } else {
-        setClubData([...mainDataList.clubItems]);
-      }
-    };
-
-    window.addEventListener('clubSearch', handleSearch);
-
-    return () => {
-      window.removeEventListener('clubSearch', handleSearch);
-    };
-  }, []);
-
   const navigate = useNavigate();
 
   const changeSwiperAction = swiper => {
