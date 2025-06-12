@@ -27,7 +27,7 @@ const ClubMeetingTitle = () => {
 
   return (
     <div className="club-meeting-content-container">
-      <Label labelTitle="정기 모임명" />
+      <Label labelTitle="정기 모임명" isRequired />
       <input
         type="text"
         placeholder="모임명을 입력해 주세요."
