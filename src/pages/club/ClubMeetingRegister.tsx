@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import ClubMeetingDate from '../../components/club/meetingRegister/ClubMeetingDate';
 import Title from '../../components/club/text/Title';
@@ -13,6 +14,8 @@ import ClubModal from '../../components/modal/ClubModal';
 import useClubMeetingRegisterStore from '../../store/club/useClubMeetingRegisterStore';
 
 import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
+import { CreateClubMeetingData } from '../../api/ApiTypes';
+import { ClubController } from '../../services/club/controllers/ClubController';
 
 const ClubMeetingRegister = () => {
   const {
@@ -21,6 +24,7 @@ const ClubMeetingRegister = () => {
     clubMeetingTime,
     clubMeetingLocation,
     maxParticipants,
+    entryFee,
     setIsClubMeetingTitleValid,
     setClubMeetingTitleError,
     setIsClubMeetingDateValid,
@@ -33,7 +37,12 @@ const ClubMeetingRegister = () => {
     setMaxParticipantsError,
   } = useClubMeetingRegisterStore();
 
+  const { clubId } = useParams<{ clubId: string }>();
+  const nav = useNavigate();
+
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
+
+  const clubController = ClubController.getInstance();
 
   const handleValidChange = () => {
     let isError = false;
@@ -93,6 +102,43 @@ const ClubMeetingRegister = () => {
     setModalStep(1);
   };
 
+  const formattedDate = (input: string): string => {
+    const date = new Date(input);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const formattedTime = (input: string): string => {
+    return input.replace('분', '').trim();
+  };
+
+  const handleSubmitClubMeetingForm = async () => {
+    if (!clubId) {
+      console.error("clubId가 없습니다.");
+      return;
+    }
+
+    const formattedDateTo = formattedDate(clubMeetingDate);
+    const formattedTimeTo = formattedTime(clubMeetingTime);
+
+    const payload: CreateClubMeetingData = {
+      clubMeetingTitle,
+      clubMeetingDate: formattedDateTo,
+      clubMeetingTime: formattedTimeTo,
+      clubMeetingLocation,
+      maxParticipants,
+      ...(entryFee && { entryFee }),
+    }
+
+    try {
+      await clubController.createClubMeeting(payload, Number(clubId));
+    } catch (error) {
+      console.error('정기 모임 등록 요청 실패:', error);
+    }
+  }
+
   return (
     <div className="club-meeting-register-container">
       <Title
@@ -137,6 +183,8 @@ const ClubMeetingRegister = () => {
               setModalStep(2);
             } else {
               setModalStep(null);
+              await handleSubmitClubMeetingForm();
+              nav('/club/list/register')
             }
           }}
           onCancel={() => setModalStep(null)}
