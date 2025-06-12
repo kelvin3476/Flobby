@@ -212,4 +212,14 @@ export interface RecommendClubListItem {
   subCategory: string;
 }
 
+/* 정기 모임 생성시 필요한 json 데이터셋 */
+export interface CreateClubMeetingData {
+  clubMeetingTitle: string;
+  clubMeetingDate: string;
+  clubMeetingTime: string;
+  clubMeetingLocation: string;
+  maxParticipants: number;
+  entryfee?: string;
+}
+
 export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
