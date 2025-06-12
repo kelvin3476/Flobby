@@ -25,7 +25,7 @@ const ClubModal = ({
         <div className="modal-wrapper">
           <div className="modal-up">
             {showIcon && (
-              <img className="modal-icon" src="../../img/modal/modal-checked.png" />
+              <img className="modal-icon" src="../../../img/modal/modal-checked.png" />
             )}
             <div className="modal-message">{message}</div>
           </div>
