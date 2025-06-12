@@ -108,7 +108,7 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
   setClubMeetingLocationError: (clubMeetingLocationError: string) =>
     set({ clubMeetingLocationError }),
 
-  maxParticipants: 3,
+  maxParticipants: 0,
   setMaxParticipants: (maxParticipants: number) => set({ maxParticipants }),
 
   isMaxParticipantsValid: true,
