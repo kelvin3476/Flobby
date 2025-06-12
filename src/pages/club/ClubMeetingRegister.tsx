@@ -5,13 +5,94 @@ import Title from '../../components/club/text/Title';
 
 import ClubMeetingTitle from '../../components/club/meetingRegister/ClubMeetingTitle';
 import ClubMeetingTime from '../../components/club/meetingRegister/ClubMeetingTime';
-import ClubMeetingLocation from '../../components/club/meetingRegister/clubMeetingLocation';
+import ClubMeetingLocation from '../../components/club/meetingRegister/ClubMeetingLocation';
 import ClubMeetingMember from '../../components/club/meetingRegister/ClubMeetingMember';
 import ClubMeetingEntryFee from '../../components/club/meetingRegister/ClubMeetingEntryFee';
+import ClubModal from '../../components/modal/ClubModal';
+
+import useClubMeetingRegisterStore from '../../store/club/useClubMeetingRegisterStore';
 
 import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
 
 const ClubMeetingRegister = () => {
+  const {
+    clubMeetingTitle,
+    clubMeetingDate,
+    clubMeetingTime,
+    clubMeetingLocation,
+    maxParticipants,
+    setIsClubMeetingTitleValid,
+    setClubMeetingTitleError,
+    setIsClubMeetingDateValid,
+    setClubMeetingDateError,
+    setIsClubMeetingTimeValid,
+    setClubMeetingTimeError,
+    setIsClubMeetingLocationValid,
+    setClubMeetingLocationError,
+    setIsMaxParticipantsValid,
+    setMaxParticipantsError,
+  } = useClubMeetingRegisterStore();
+
+  const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
+
+  const handleValidChange = () => {
+    let isError = false;
+
+    // 정기 모임명 유효성 검사
+    if (!clubMeetingTitle) {
+      setIsClubMeetingTitleValid(false);
+      setClubMeetingTitleError("제목을 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsClubMeetingTitleValid(true);
+      setClubMeetingTitleError("");
+    }
+
+    // 날짜 유효성 검사
+    if (!clubMeetingDate) {
+      setIsClubMeetingDateValid(false);
+      setClubMeetingDateError("날짜를 선택해 주세요.");
+      isError = true;
+    } else {
+      setIsClubMeetingDateValid(true);
+      setClubMeetingDateError("");
+    }
+
+    // 시간 유효성 검사
+    if (!clubMeetingTime) {
+      setIsClubMeetingTimeValid(false);
+      setClubMeetingTimeError("시간을 선택해 주세요.");
+      isError = true;
+    } else {
+      setIsClubMeetingTimeValid(true);
+      setClubMeetingTimeError("");
+    }
+
+    // 장소 유효성 검사
+    if (!clubMeetingLocation) {
+      setIsClubMeetingLocationValid(false);
+      setClubMeetingLocationError("장소를 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsClubMeetingLocationValid(true);
+      setClubMeetingLocationError("");
+    }
+
+    // 모집 인원 유효성 검사
+    if (!maxParticipants) {
+      setIsMaxParticipantsValid(false);
+      setMaxParticipantsError("인원 수를 입력해 주세요.");
+      isError = true;
+    } else {
+      setIsMaxParticipantsValid(true);
+      setMaxParticipantsError("");
+    }
+
+    if (isError) return;
+
+    setModalStep(1);
+  };
+
   return (
     <div className="club-meeting-register-container">
       <Title
@@ -40,12 +121,27 @@ const ClubMeetingRegister = () => {
             <button type="button" className="club-meeting-register-cancel">
               취소
             </button>
-            <button type="button" className="club-meeting-register-submit">
+            <button type="button" className="club-meeting-register-submit" onClick={handleValidChange}>
               등록
             </button>
           </div>
         </div>
       </div>
+      {modalStep && (
+        <ClubModal 
+          message={modalStep === 1 ? "정기 모임을 등록할까요?" : "정기 모임이 등록되었어요."}
+          showIcon={modalStep === 1}
+          showCancelButton={modalStep === 1}
+          onConfirm={async () => {
+            if (modalStep === 1) {
+              setModalStep(2);
+            } else {
+              setModalStep(null);
+            }
+          }}
+          onCancel={() => setModalStep(null)}
+        />
+      )}
     </div>
   );
 };
