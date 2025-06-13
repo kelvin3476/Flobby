@@ -33,6 +33,11 @@ export default class Main {
     return await http.get(`/club/search?keyword=${searchKeyword}`);
   }
 
+  /* 모임 가입 신청 */
+  static async applyClub(clubId: number) {
+    return await http.post(`/club/apply`, clubId);
+  }
+
   /* 정기 모임 생성 */
   static async createClubMeeting(createClubMeetingData: CreateClubMeetingData, clubId: number) {
     return await http.post(`/club/${clubId}/clubmeeting/register`, createClubMeetingData);

@@ -5,9 +5,12 @@ import Tag from "../../tag/Tag";
 import Button from "../../button/Button";
 import DropDownModal from "../../modal/DropDownModal";
 
+import Main from '../../../api/main/Main';
+
 import "../../../styles/club/detail/DetailInfo.scss";
 
 interface DetailInfoProps {
+  clubId: string;
   role: string | null; 
   isMember: boolean;
   clubName: string;
@@ -19,6 +22,7 @@ interface DetailInfoProps {
 }
 
 const DetailInfo = ({
+  clubId,
   role,
   isMember,
   clubName,
@@ -118,7 +122,7 @@ const DetailInfo = ({
             <Button 
             type="button"
             className="info-content-btn-yes"
-            onClick={() => {}} // TODO: 가입인사 모달창 추가하기
+            onClick={() => Main.applyClub(Number(clubId))} // TODO: 가입인사 모달창 추가하기
             title="가입 신청하기"
             />
           ) : (
