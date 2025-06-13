@@ -54,12 +54,6 @@ interface ClubMeetingRegisterStore {
   /* 정기모임 참가비 */
   entryFee: string;
   setEntryFee: (entryFee: string) => void;
-
-  isEntryFeeValid: boolean;
-  setIsEntryFeeValid: (isEntryFeeValid: boolean) => void;
-
-  entryFeeError: string;
-  setEntryFeeError: (entryFeeError: string) => void;
 }
 
 const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
@@ -108,7 +102,7 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
   setClubMeetingLocationError: (clubMeetingLocationError: string) =>
     set({ clubMeetingLocationError }),
 
-  maxParticipants: 3,
+  maxParticipants: 0,
   setMaxParticipants: (maxParticipants: number) => set({ maxParticipants }),
 
   isMaxParticipantsValid: true,
@@ -121,12 +115,6 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
 
   entryFee: '',
   setEntryFee: (entryFee: string) => set({ entryFee }),
-
-  isEntryFeeValid: true,
-  setIsEntryFeeValid: (isEntryFeeValid: boolean) => set({ isEntryFeeValid }),
-
-  entryFeeError: '',
-  setEntryFeeError: (entryFeeError: string) => set({ entryFeeError }),
 }));
 
 export default useClubMeetingRegisterStore;

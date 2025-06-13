@@ -57,7 +57,7 @@ const ClubDescription = ({ className }) => {
   return (
     <div className={`desc-container ${className}`}>
       <label className="up-wrapper">
-        <Label labelTitle="모임 소개"/>
+        <Label labelTitle="모임 소개" isRequired />
         <input 
           type="text"
           placeholder="제목을 입력해 주세요."

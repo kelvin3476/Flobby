@@ -26,7 +26,7 @@ const ClubMeetingLocation = () => {
   };
   return (
     <div className="club-meeting-content-container">
-      <Label labelTitle="장소" />
+      <Label labelTitle="장소" isRequired />
       <input
         type="text"
         placeholder="장소를 입력해 주세요."

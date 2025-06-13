@@ -5,14 +5,15 @@ import "../../../styles/club/register/Label.scss";
 interface LabelProps {
   className?: string;
   labelTitle: string;
+  isRequired?: boolean;
 }
 
-const Label = ({ className, labelTitle }: LabelProps) => {
+const Label = ({ className, labelTitle, isRequired }: LabelProps) => {
 
   return (
     <div className={`label-container ${className}`}>
       <label>{labelTitle}</label>
-      <span>*</span>
+      {isRequired && <span>*</span>}
     </div>
   );
 };

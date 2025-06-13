@@ -71,7 +71,7 @@ const ClubMeetingDate = () => {
 
   return (
     <div className="club-meeting-date-wrapper">
-      <Label labelTitle="날짜" />
+      <Label labelTitle="날짜" isRequired />
       <div className="club-meeting-date-container" ref={triggerRef}>
         <div className="club-meeting-date-content-box">
           <div className="club-meeting-date-calendar-icon"></div>

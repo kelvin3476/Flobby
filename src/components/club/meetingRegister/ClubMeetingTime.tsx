@@ -44,7 +44,7 @@ const ClubMeetingTime = () => {
 
   return (
     <div className="club-meeting-content-container">
-      <Label labelTitle="시간" />
+      <Label labelTitle="시간" isRequired />
       <div className="club-meeting-time-switch-box">
         <div
           className={`time-switch-button ${activeButton === 'day' ? 'active' : ''}`}
