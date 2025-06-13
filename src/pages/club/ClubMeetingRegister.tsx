@@ -196,7 +196,7 @@ const ClubMeetingRegister = () => {
             } else {
               setModalStep(null);
               await handleSubmitClubMeetingForm();
-              nav('/club/list/register')
+              nav(`/club/${clubId}`)
             }
           }}
           onCancel={() => setModalStep(null)}
