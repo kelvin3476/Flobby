@@ -5,10 +5,11 @@ import MainHeader from '../../components/header/MainHeader';
 import Title from '../../components/club/text/Title';
 import Tab from '../../components/tab/Tab';
 import ClubList from "../../components/club/list/ClubList";
+import RecommendClubList from "../../components/club/detail/RecommendClubList";
 
 import useMainPage from '../../hooks/main/useMainPage';
 
-import { clubItem, onedayItem } from '../../api/ApiTypes';
+import { clubItem, onedayItem, RecommendClubListItem } from '../../api/ApiTypes';
 import { ClubController } from "../../services/club/controllers/ClubController";
 
 import logger from '../../utils/Logger';
@@ -24,6 +25,7 @@ const ClubSearch = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('oneday');
   const [onedayList, setOnedayList] = React.useState<onedayItem[]>([]); /* TODO: 원데이 데이터도 추후 추가 예정 */
   const [clubList, setClubList] = React.useState<clubItem[]>([]);
+  const [recommendClubList, setRecommendClubList] = React.useState<RecommendClubListItem[]>([]); /* 추천 모임 리스트 */
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
@@ -45,6 +47,7 @@ const ClubSearch = () => {
       logger.log('모임 검색 키워드:', searchKeyword);
       const clubListData = await clubController.searchClubList(searchKeyword);
       setClubList(clubListData);
+      // setRecommendClubList(clubListData.recommendClubList) /* TODO: 추천 모임 리스트 데이터 내려오면 추후 연동 */
     } catch (error) {
       logger.error('모임 검색 실패:', error);
     }
@@ -67,16 +70,20 @@ const ClubSearch = () => {
                 <div className='club-search-empty'>검색 결과가 없어요. 다른 키워드로 검색해 보세요.</div>
               </div>
             </div>
-            <button
-                type="button"
-                /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
-                onClick={() =>
-                    accessToken ? navigate('/club/register') : navigate('/login')
-                }
-            >
-              <div className="club-search-exception-icon"></div>
-              <span>원하는 모임이 없나요? 직접 모임을 만들 수 있어요!</span>
-            </button>
+            <div className='club-search-empty'>
+              <button
+                  type="button"
+                  /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
+                  onClick={() =>
+                      accessToken ? navigate('/club/register') : navigate('/login')
+                  }
+              >
+                <div className="club-search-exception-icon"></div>
+                <span>원하는 모임이 없나요? 직접 모임을 만들 수 있어요!</span>
+              </button>
+
+              <RecommendClubList recommendClubList={recommendClubList} isDetailPage={false} />
+            </div>
           </>
         ) : (
           <>

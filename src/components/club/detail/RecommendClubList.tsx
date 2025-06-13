@@ -17,7 +17,7 @@ const RecommendClubList = ({
     <div className="recommend-club-list-container">
       <Title
         className="club-detail-item-sub-title"
-        titleName="이 모임과 비슷한 모임이에요"
+        titleName={isDetailPage ? '이 모임과 비슷한 모임이에요' : '이런 모임은 어때요?'}
       />
       <div className="recommend-club-list">
         {recommendClubList.map((recommendClubItem, index) => {
