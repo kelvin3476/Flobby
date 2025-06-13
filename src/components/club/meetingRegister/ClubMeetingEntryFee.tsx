@@ -6,23 +6,11 @@ const ClubMeetingEntryFee = () => {
   const {
     entryFee,
     setEntryFee,
-    isEntryFeeValid,
-    setIsEntryFeeValid,
-    entryFeeError,
-    setEntryFeeError,
   } = useClubMeetingRegisterStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEntryFee(value);
-
-    if (value.trim() === '') {
-      setIsEntryFeeValid(false);
-      setEntryFeeError('제목을 입력해 주세요.');
-    } else {
-      setIsEntryFeeValid(true);
-      setEntryFeeError('');
-    }
   };
 
   return (
@@ -34,7 +22,6 @@ const ClubMeetingEntryFee = () => {
         value={entryFee}
         onChange={handleChange}
       />
-      {!isEntryFeeValid && <div className="error">{entryFeeError}</div>}
     </div>
   );
 };
