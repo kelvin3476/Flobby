@@ -9,7 +9,7 @@ import RecommendClubList from "../../components/club/detail/RecommendClubList";
 
 import useMainPage from '../../hooks/main/useMainPage';
 
-import { clubItem, onedayItem, RecommendClubListItem } from '../../api/ApiTypes';
+import { clubItem, ClubSearchItem, onedayItem } from '../../api/ApiTypes';
 import { ClubController } from "../../services/club/controllers/ClubController";
 
 import logger from '../../utils/Logger';
@@ -25,7 +25,7 @@ const ClubSearch = () => {
   const [currentTab, setCurrentTab] = React.useState<string>('oneday');
   const [onedayList, setOnedayList] = React.useState<onedayItem[]>([]); /* TODO: 원데이 데이터도 추후 추가 예정 */
   const [clubList, setClubList] = React.useState<clubItem[]>([]);
-  const [recommendClubList, setRecommendClubList] = React.useState<RecommendClubListItem[]>([]); /* 추천 모임 리스트 */
+  const [dataType, setDataType] = React.useState<string>('Search Data'); /* 검색 데이터 타입 (Search Data or Recommend Data) */
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
@@ -45,9 +45,14 @@ const ClubSearch = () => {
 
     try {
       logger.log('모임 검색 키워드:', searchKeyword);
-      const clubListData = await clubController.searchClubList(searchKeyword);
-      setClubList(clubListData);
-      // setRecommendClubList(clubListData.recommendClubList) /* TODO: 추천 모임 리스트 데이터 내려오면 추후 연동 */
+      const clubListData: ClubSearchItem = await clubController.searchClubList(searchKeyword);
+      logger.log('모임 검색 결과:', clubListData);
+      setDataType(clubListData.dataType); /* 데이터 타입 설정 */
+      if (clubListData.dataType === 'Search Data') {
+        setClubList(clubListData.clubList);
+      } else if (clubListData.dataType === 'Recommend Data') {
+        setClubList(clubListData.clubList);
+      }
     } catch (error) {
       logger.error('모임 검색 실패:', error);
     }
@@ -62,7 +67,7 @@ const ClubSearch = () => {
     <div className='club-search-wrapper'>
       <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
       <div className='club-search-container'>
-        {clubList.length === 0 && onedayList.length === 0 ? (
+        {dataType === 'Recommend Data' ? (
           <>
             <div className='club-search-title-container'>
               <Title titleName="검색 결과" />
@@ -82,7 +87,8 @@ const ClubSearch = () => {
                 <span>원하는 모임이 없나요? 직접 모임을 만들 수 있어요!</span>
               </button>
 
-              <RecommendClubList recommendClubList={recommendClubList} isDetailPage={false} />
+              {/* TODO: 추천 모임 개수는 몇개 까지 표출 할지 웹 기획 정의 필요 후 수정 필요 (일단 앞에서부터 4개 노출) */}
+              <RecommendClubList recommendClubList={clubList.slice(0, 4)} isDetailPage={true} pageType={'search'} />
             </div>
           </>
         ) : (

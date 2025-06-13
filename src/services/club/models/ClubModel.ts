@@ -1,4 +1,4 @@
-import { clubItem, ClubItemDetail, CreateClubMeetingData } from '../../../api/ApiTypes';
+import {clubItem, ClubItemDetail, ClubSearchItem, CreateClubMeetingData} from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 
 import logger from '../../../utils/Logger';
@@ -71,14 +71,13 @@ export class ClubModel {
   }
 
   /* 모임 검색 api */
-  async searchClubList(searchKeyword?: string): Promise<clubItem[]> {
+  async searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
     try {
       const response = await Main.searchClubList(searchKeyword);
       const { code, message, data } = response.data;
       if (code === 1000) {
         // API 호출 성공
-        this.clubListData = data;
-        return this.clubListData;
+        return data;
       } else if (code === 1001) {
         // API 호출 실패
         throw new Error(message || '모임 검색 데이터를 가져오지 못했습니다.');

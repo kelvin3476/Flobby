@@ -1,4 +1,4 @@
-import { clubItem, ClubItemDetail, CreateClubMeetingData } from '../../../api/ApiTypes';
+import {clubItem, ClubItemDetail, ClubSearchItem, CreateClubMeetingData} from '../../../api/ApiTypes';
 import { ClubModel } from '../models/ClubModel';
 
 export class ClubController {
@@ -28,7 +28,7 @@ export class ClubController {
     return this.model.selectClubDetail(clubId);
   }
 
-  searchClubList(searchKeyword?: string): Promise<clubItem[]> {
+  searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
     return this.model.searchClubList(searchKeyword);
   }
 

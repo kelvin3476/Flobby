@@ -113,6 +113,14 @@
       .recommend-club-list-container {
         width: 100%;
         max-width: 1060px; /* 1060px 로 추천 모임 리스트 컨테이너 max-width 값 고정 */
+
+        .recommend-club-list {
+          gap: 20px; /* 모임 검색 결과 페이지 > 추천 모임 리스트 아이템 간 가로 간격 20px 조정 */
+
+          .club-item-container {
+            max-width: 250px; /* 모임 검색 결과 페이지 > 250px 로 추천 모임 리스트 아이템 max-width 값 고정 */
+          }
+        }
       }
     }
 

@@ -176,6 +176,16 @@ export interface ClubDTO {
   subCategory: string;
 }
 
+/* -------------------- 모임 검색 api 타입 -------------------- */
+
+/* 모임 검색 response 데이터 타입 */
+export interface ClubSearchItem {
+  clubList: clubItem[];
+  dataType: 'Search Data' | 'Recommend Data';
+}
+
+/* -------------------- 정기 모임 api 타입 -------------------- */
+
 /* 정기 모임 데이터 타입 */
 export interface ClubMeetingListItem {
   clubMeetingDate: string;
