@@ -49,7 +49,6 @@ const ClubMemberList = ({
         }}
       >
         <span>멤버 더보기</span>
-        <div className="club-member-more-icon"></div>
       </button>
     </div>
   );
