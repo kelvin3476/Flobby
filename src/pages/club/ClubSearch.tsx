@@ -46,7 +46,6 @@ const ClubSearch = () => {
     try {
       logger.log('모임 검색 키워드:', searchKeyword);
       const clubListData: ClubSearchItem = await clubController.searchClubList(searchKeyword);
-      logger.log('모임 검색 결과:', clubListData);
       setDataType(clubListData.dataType); /* 데이터 타입 설정 */
       if (clubListData.dataType === 'Search Data') {
         setClubList(clubListData.clubList);
@@ -87,7 +86,7 @@ const ClubSearch = () => {
                 <span>원하는 모임이 없나요? 직접 모임을 만들 수 있어요!</span>
               </button>
 
-              {/* TODO: 추천 모임 개수는 몇개 까지 표출 할지 웹 기획 정의 필요 후 수정 필요 (일단 앞에서부터 4개 노출) */}
+              {/* 추천 모임 개수는 앞에서부터 4개 노출 */}
               <RecommendClubList recommendClubList={clubList.slice(0, 4)} isDetailPage={true} pageType={'search'} />
             </div>
           </>
