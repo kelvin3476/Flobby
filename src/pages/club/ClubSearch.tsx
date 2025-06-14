@@ -77,7 +77,7 @@ const ClubSearch = () => {
             <div className='club-search-empty'>
               <button
                   type="button"
-                  /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
+                  /* 로그인 유저 : 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
                   onClick={() =>
                       accessToken ? navigate('/club/register') : navigate('/login')
                   }
