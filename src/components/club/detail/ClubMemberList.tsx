@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Title from '../text/Title';
-import { useNavigate } from 'react-router-dom';
 import ClubMemberItem from './ClubMemberItem';
 import { ClubMemberListItem } from '../../../api/ApiTypes';
 import '../../../styles/club/detail/ClubMemberList.scss';
@@ -16,28 +15,12 @@ const ClubMemberList = ({
   clubId,
   clubMemberList,
 }: ClubMemberListProps) => {
-  const navigate = useNavigate();
-
   const [openMemberList, setOpenMemberList] = useState<boolean>(false);
 
   return (
     <div className="club-detail-member-container">
       <div className="club-detail-member-title-box">
         <Title className="club-detail-item-sub-title" titleName="멤버 소개" />
-        {/* 멤버 관리 버튼 영역(모임장, 운영진 권한) */}
-        {role === 'LEADER' || role === 'MANAGER' ? (
-          <div
-            className="club-detail-member-admin-button-container"
-            onClick={() => navigate(`/club/${clubId}/member/management`)}
-          >
-            <div className="club-detail-member-admin-icon"></div>
-            <div className="club-detail-member-admin-text">
-              <span>멤버 관리</span>
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
       </div>
 
       {/* 멤버리스트 map */}

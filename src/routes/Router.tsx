@@ -47,10 +47,6 @@ const Router: React.FC = () => {
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
         <Route
-          path="/club/:clubId/member/management"
-          element={<ClubMemberManagement />}
-        />
-        <Route
           path="/club/:clubId/clubmeeting/register"
           element={<ClubMeetingRegister />}
         />

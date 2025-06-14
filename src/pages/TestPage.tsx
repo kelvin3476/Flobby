@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ClubMeetingRegister from './club/ClubMeetingRegister';
 
 const TestPage = () => {
-  return <></>;
+  return (
+    <>
+      <ClubMeetingRegister />
+    </>
+  );
 };
 
 export default TestPage;
