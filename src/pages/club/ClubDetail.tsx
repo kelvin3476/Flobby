@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import useMainPage from "../../hooks/main/useMainPage";
+import useMainPage from '../../hooks/main/useMainPage';
 
 import { ClubController } from '../../services/club/controllers/ClubController';
 
@@ -81,48 +81,51 @@ const ClubDetail = () => {
   ];
 
   return (
-    <div className='club-detail-wrapper'>
-      <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
+    <div className="club-detail-wrapper">
+      <MainHeader
+        accessToken={accessToken}
+        mainDataList={mainDataList}
+        setMainDataList={setMainDataList}
+      />
 
-      <div className='club-detail-container'>
+      <div className="club-detail-container">
         <Tab
-            tabs={tabItems}
-            currentTab={currentTab}
-            onTabChange={setCurrentTab}
+          tabs={tabItems}
+          currentTab={currentTab}
+          onTabChange={setCurrentTab}
         />
 
-        <div className='club-detail-content'>
+        <div className="club-detail-content">
           {currentTab === 'home' && clubInfo && (
-              <>
-                <DetailInfo
-                    clubId={clubId}
-                    role={role}
-                    isMember={isMember}
-                    clubName={clubInfo.clubName}
-                    location={clubInfo.location}
-                    currentMembers={clubInfo.currentMembers}
-                    maxMembers={clubInfo.maxMembers}
-                    clubImage={clubInfo.clubImage}
-                    subCategory={clubInfo.subCategory}
-                />
-                <DetailDescription description={clubInfo.description} />
-                <ClubMeetingList
-                    clubMeetingList={clubMeetingList}
-                    loginMemberId={loginMemberId}
-                    role={role}
-                    isMember={isMember}
-                    clubId={clubId}
-                />
-                <ClubMemberList
-                    role={role}
-                    clubId={clubId}
-                    clubMemberList={clubMemberList}
-                />
-                <RecommendClubList
-                    recommendClubList={recommendClubList}
-                    isDetailPage={window.location.pathname === `/club/${clubId}`}
-                />
-              </>
+            <>
+              <DetailInfo
+                clubId={clubId}
+                role={role}
+                isMember={isMember}
+                clubName={clubInfo.clubName}
+                location={clubInfo.location}
+                currentMembers={clubInfo.currentMembers}
+                maxMembers={clubInfo.maxMembers}
+                clubImage={clubInfo.clubImage}
+                subCategory={clubInfo.subCategory}
+              />
+              <DetailDescription description={clubInfo.description} />
+              <ClubMeetingList
+                clubMeetingList={clubMeetingList}
+                loginMemberId={loginMemberId}
+                role={role}
+                isMember={isMember}
+                clubId={clubId}
+              />
+              <ClubMemberList
+                clubMemberList={clubMemberList}
+                setCurrentTab={setCurrentTab}
+              />
+              <RecommendClubList
+                recommendClubList={recommendClubList}
+                isDetailPage={window.location.pathname === `/club/${clubId}`}
+              />
+            </>
           )}
 
           {currentTab === 'board' && <div>게시판 탭 준비중</div>}
