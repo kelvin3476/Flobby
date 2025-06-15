@@ -23,7 +23,6 @@ import ClubRegister from '../pages/club/ClubRegister';
 import ClubDetail from '../pages/club/ClubDetail';
 import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
 import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
-import ClubMemberManagement from '../components/club/detail/ClubMemberManagement';
 import ClubSearch from '../pages/club/ClubSearch';
 
 const Router: React.FC = () => {
