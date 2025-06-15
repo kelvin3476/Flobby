@@ -13,8 +13,6 @@ const ClubMemberList = ({
   clubMemberList,
   setCurrentTab,
 }: ClubMemberListProps) => {
-  const [openMemberList, setOpenMemberList] = useState<boolean>(false);
-
   return (
     <div className="club-detail-member-container">
       <div className="club-detail-member-title-box">
@@ -24,7 +22,7 @@ const ClubMemberList = ({
       {/* 멤버리스트 map */}
       <div className="club-member-list-container">
         {clubMemberList.map((memberItem, index) => {
-          if (!openMemberList && index >= 5) return null;
+          if (index >= 5) return null;
 
           return (
             <div className="club-member-list" key={memberItem.clubMemberId}>
@@ -44,7 +42,6 @@ const ClubMemberList = ({
         type="button"
         className="club-member-more-button"
         onClick={() => {
-          setOpenMemberList(!openMemberList);
           setCurrentTab('member');
         }}
       >

@@ -22,6 +22,7 @@ import ClubMemberList from '../../components/club/detail/ClubMemberList';
 import RecommendClubList from '../../components/club/detail/RecommendClubList';
 
 import '../../styles/club/detail/ClubDetail.scss';
+import ClubMemberManagement from '../../components/club/detail/ClubMemberManagement';
 
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -129,7 +130,13 @@ const ClubDetail = () => {
           )}
 
           {currentTab === 'board' && <div>게시판 탭 준비중</div>}
-          {currentTab === 'member' && <div>멤버 탭 준비중</div>}
+          {currentTab === 'member' && (
+            <ClubMemberManagement
+              clubMemberList={clubMemberList}
+              currentMembers={clubInfo.currentMembers}
+              maxMembers={clubInfo.maxMembers}
+            />
+          )}
         </div>
       </div>
     </div>
