@@ -23,7 +23,7 @@ import ClubRegister from '../pages/club/ClubRegister';
 import ClubDetail from '../pages/club/ClubDetail';
 import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
 import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
-import ClubMemberManagement from '../pages/club/ClubMemberManagement';
+import ClubMemberManagement from '../components/club/detail/ClubMemberManagement';
 import ClubSearch from '../pages/club/ClubSearch';
 
 const Router: React.FC = () => {
@@ -46,10 +46,6 @@ const Router: React.FC = () => {
         <Route path="/club/list" element={<ClubAll />} />
         <Route path="/club/register" element={<ClubRegister />} />
         <Route path="/club/:clubId" element={<ClubDetail />} />
-        <Route
-          path="/club/:clubId/member/management"
-          element={<ClubMemberManagement />}
-        />
         <Route
           path="/club/:clubId/clubmeeting/register"
           element={<ClubMeetingRegister />}
