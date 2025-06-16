@@ -8,6 +8,7 @@ import SearchBar from '../main/search_bar/SearchBar';
 import Button from '../button/Button';
 import DropDownModal from '../modal/DropDownModal';
 
+import Logout from '../../api/logout/Logout';
 import { MainData } from '../../api/ApiTypes';
 
 import '../../styles/header/MainHeader.scss';
@@ -76,9 +77,11 @@ const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setM
             <DropDownModal 
               className="profile-modal" 
               items={["마이페이지", "로그아웃"]}
-              onItemClick={(item, idx) => {
+              onItemClick={async (item, idx) => {
                 if (item === "로그아웃") {
                   // 로그아웃 로직
+                  await Logout.webLogout();
+                  window.location.reload();
                 } else if (item === "마이페이지") {
                   // 마이페이지 라우팅
                 }
