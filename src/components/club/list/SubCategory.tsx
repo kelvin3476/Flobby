@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
 import { setCookie } from '../../../utils/Cookie';
 import { HobbyCategory } from '../../../api/ApiTypes';
@@ -10,6 +10,21 @@ interface SubCategoryProps {
 
 const SubCategory = ({ categoryList }: SubCategoryProps) => {
   const { mainCategory, subCategory, setSubCategory } = useClubCategoryStore();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const [isMultiLine, setIsMultiLine] = useState(false);
+
+  useEffect(() => {
+    if (!boxRef.current) return;
+
+    const boxHeight = boxRef.current.offsetHeight;
+    const firstSpan = boxRef.current.querySelector('span');
+
+    if (firstSpan) {
+      const lineHeight = parseFloat(getComputedStyle(firstSpan).lineHeight);
+      setIsMultiLine(boxHeight > lineHeight * 1.5);
+    }
+  }, [categoryList, mainCategory]);
 
   // 선택된 메인 카테고리에 해당하는 카테고리 리스트
   const selectedCategoryData = categoryList.find(
@@ -34,19 +49,20 @@ const SubCategory = ({ categoryList }: SubCategoryProps) => {
   return (
     mainCategory !== '전체' &&
     subCategoryList.length > 0 && (
-      <div className="sub-category-container">
-        <div className="sub-category-box">
-          {subCategoryList.map((subCategoryItem, index) => {
-            return (
-              <span
-                key={subCategoryItem}
-                onClick={() => handleClickSubCategory(subCategoryItem)}
-                className={subCategory === subCategoryItem ? 'active' : ''}
-              >
-                {subCategoryItem}
-              </span>
-            );
-          })}
+      <div
+        className={`sub-category-container ${isMultiLine ? 'multi-line' : ''}`}
+      >
+        <div className="sub-category-box" ref={boxRef}>
+          {subCategoryList.map((subCategoryItem, index) => (
+            <span
+              key={index}
+              onClick={() => handleClickSubCategory(subCategoryItem)}
+              className={subCategory === subCategoryItem ? 'active' : ''}
+              ref={spanRef}
+            >
+              {subCategoryItem}
+            </span>
+          ))}
         </div>
       </div>
     )
