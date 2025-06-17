@@ -26,7 +26,7 @@ const ClubAll = () => {
 
   const { mainCategory, subCategory } = useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
-  const [clubList, setClubList] = useState<clubItem[]>([]);
+  const [clubList, setClubList] = useState<clubItem[] | null>([]);
 
   const [selectedRegion, setSelectedRegion] = useState<string>('');
 
