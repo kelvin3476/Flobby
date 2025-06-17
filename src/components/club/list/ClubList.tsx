@@ -14,7 +14,7 @@ const ClubList = ({ clubList, accessToken }: ClubListProps) => {
   return (
     <div className="club-list-container">
       <div className="club-list-box">
-        {clubList ? (
+        {clubList && clubList.length > 0 ? (
           /* 모임 있을 경우 */
           clubList
             .reduce((rows, clubItem, index) => {
