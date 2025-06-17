@@ -4,6 +4,7 @@ import { RegionListController } from '../../services/region/controllers/RegionLi
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import logger from '../../utils/Logger';
 import { getCookie } from '../../utils/Cookie';
+import Label from '../club/register/Label';
 import '../../styles/dropdown/CommonDropDown.scss';
 
 const RegionDropDown = ({ className }) => {
@@ -64,10 +65,7 @@ const RegionDropDown = ({ className }) => {
 
   return (
     <div className={`dropdown-group-container ${className}`}>
-      <div className="dropdown-label-box">
-        <span className="dropdown-label">지역</span>
-        <span className="dropdown-required">*</span>
-      </div>
+      <Label labelTitle="지역" isRequired />
       <div className="dropdown-box">
         <DropDown
           options={Object.keys(regionListController.model.regionList)}

@@ -3,6 +3,7 @@ import DropDown from './Dropdown';
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import { HobbyCategory } from '../../api/ApiTypes';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
+import Label from '../club/register/Label';
 import '../../styles/dropdown/CommonDropDown.scss';
 
 const CategoryDropDown = ({ className }) => {
@@ -37,10 +38,7 @@ const CategoryDropDown = ({ className }) => {
 
   return (
     <div className={`dropdown-group-container ${className}`}>
-      <div className="dropdown-label-box">
-        <span className="dropdown-label">카테고리</span>
-        <span className="dropdown-required">*</span>
-      </div>
+      <Label labelTitle="카테고리" isRequired />
       <div className="dropdown-box">
         <DropDown
           options={mainCategories}
