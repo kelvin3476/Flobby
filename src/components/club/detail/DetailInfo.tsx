@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Tag from "../../tag/Tag";
 import Button from "../../button/Button";
@@ -34,6 +34,7 @@ const DetailInfo = ({
 }: DetailInfoProps) => {
   const [ isOptionClicked, setIsOptionClicked ] = useState(false);
   const nav = useNavigate();
+  const { clubIds } = useParams<{ clubIds: string }>();
 
   let optionItems: string[] = [];
   if (role === "LEADER") {
@@ -53,7 +54,7 @@ const DetailInfo = ({
         nav("/club/edit/:id"); // TODO: 추후 수정
         break;
       case "정기 모임 등록":
-        nav("/club/meeting/register"); // TODO: 추후 수정
+        nav(`/club/${clubIds}/clubmeeting/register`); // TODO: 추후 수정
         break;
       case "멤버 관리":
         nav("/club/member/manage"); // TODO: 추후 수정
