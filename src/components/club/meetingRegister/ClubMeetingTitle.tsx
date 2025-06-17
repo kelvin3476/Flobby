@@ -27,8 +27,9 @@ const ClubMeetingTitle = () => {
 
   return (
     <div className="club-meeting-content-container">
-      <Label labelTitle="정기 모임명" isRequired />
+      <Label labelTitle="정기 모임명" isRequired htmlFor="club-meeting-title" />
       <input
+        id="club-meeting-title"
         type="text"
         placeholder="모임명을 입력해 주세요."
         value={clubMeetingTitle}

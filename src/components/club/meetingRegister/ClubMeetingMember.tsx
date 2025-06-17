@@ -42,8 +42,9 @@ const ClubMeetingMember = () => {
 
   return (
     <div className="club-meeting-content-container">
-      <Label labelTitle="모집 인원" isRequired />
+      <Label labelTitle="모집 인원" isRequired htmlFor="club-meeting-member" />
       <input
+        id="club-meeting-member"
         type="text"
         placeholder="인원 수를 입력해 주세요. (3~100명)"
         value={inputValue}
