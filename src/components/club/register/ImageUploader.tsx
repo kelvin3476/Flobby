@@ -7,6 +7,7 @@ import DragAndDropHandler from '../../../utils/DragAndDropHandler';
 import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
 import LoadingSpinnerController from '../../controllers/LoadingSpinnerController';
 import '../../../styles/club/register/ImageUploader.scss';
+import Button from '../../button/Button';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -132,7 +133,11 @@ const ImageUploader = () => {
 
   return (
     <div className="image-uploader-container">
-      <Label className="image-uploader" labelTitle="대표 이미지 첨부" isRequired></Label>
+      <Label
+        className="image-uploader"
+        labelTitle="대표 이미지 첨부"
+        isRequired
+      ></Label>
 
       <div className="image-uploader-box">
         <div className="image-uploader" ref={dragAreaRef} tabIndex={0}>
