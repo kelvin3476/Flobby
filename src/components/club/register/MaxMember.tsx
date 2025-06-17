@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import '../../../styles/club/register/MaxMember.scss';
 import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
+import Label from './Label';
+import '../../../styles/club/register/MaxMember.scss';
 
 const MaxMember = ({ className }) => {
-  const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } = useClubRegisterStore();
+  const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } =
+    useClubRegisterStore();
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,19 +13,19 @@ const MaxMember = ({ className }) => {
     if (/^\d*$/.test(value)) {
       setInputValue(value);
       setIsMaxValid(true);
-      setMaxError("");
+      setMaxError('');
     }
   };
 
   const handleBlur = () => {
     if (inputValue === '') {
       setIsMaxValid(false);
-      setMaxError("인원 수를 입력해 주세요.");
+      setMaxError('인원 수를 입력해 주세요.');
       return;
     }
 
     let memberCount = Number(inputValue);
-    
+
     if (isNaN(memberCount)) return;
     if (memberCount < 3) memberCount = 3;
     else if (memberCount > 100) memberCount = 100;
@@ -34,11 +36,9 @@ const MaxMember = ({ className }) => {
 
   return (
     <div className={`max-member-container`}>
-      <div className="max-member-label-box">
-        <span className="max-member-label">모임 규모</span>
-        <span className="max-member-required">*</span>
-      </div>
+      <Label labelTitle="모임 규모" isRequired htmlFor="max-member" />
       <input
+        id="max-member"
         type="text"
         value={inputValue}
         onChange={handleChange}
