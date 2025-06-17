@@ -36,7 +36,7 @@ const DetailInfo = ({
   const nav = useNavigate();
 
   let optionItems: string[] = [];
-  if (role === "leader") {
+  if (role === "LEADER") {
     // 모임장일 경우
     optionItems = ["모임 수정", "정기 모임 등록", "멤버 관리"];
   } else if (isMember && role !== null) {
