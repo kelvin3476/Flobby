@@ -46,12 +46,12 @@ const useSuccessSignupForm = () => {
         term2: JSON.parse(localStorage.getItem('agreement-storage')).state.privacyAgree ? 'Y' : 'N',
         term3: JSON.parse(localStorage.getItem('agreement-storage')).state.marketingAgree ? 'Y' : 'N',
         profilePhoto: '',
-        region1: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[0]}`,
-        region2: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[1]}`,
-        region3: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[2]}`,
-        interest1: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[0]}`,
-        interest2: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[1]}`,
-        interest3: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[2]}`,
+        region1: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[0] ?? ''}`,
+        region2: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[1] ?? ''}`,
+        region3: `${JSON.parse(localStorage.getItem('region-storage')).state.selectedRegionIds[2] ?? ''}`,
+        interest1: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[0] ?? ''}`,
+        interest2: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[1] ?? ''}`,
+        interest3: `${JSON.parse(localStorage.getItem('hobby-storage')).state.selectedHobbies[2] ?? ''}`,
     }
 
     const finalSocialSignUpHandler = () => {
