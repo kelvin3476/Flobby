@@ -1,6 +1,6 @@
 export function setCookie(name: string, value: string, days = 1) {
-  const maxAge = days * 86400; // 하루 기준
-  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; max-age=${maxAge}; path=/; domain=flobby.co.kr; SameSite=None; Secure`;
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires}; path=/; domain=flobby.co.kr; SameSite=None; Secure`;
 }
 
 export function getCookie(name: string): string | undefined {
