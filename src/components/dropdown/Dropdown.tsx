@@ -32,7 +32,6 @@ const DropDown = ({
           setIsDropDownOpen(!isDropDownOpen);
         }}
       >
-        {}
         <div
           className={`drop-down-label ${disabled ? 'disabled' : ''} ${
             !activeItem ? 'placeholder' : ''
