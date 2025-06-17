@@ -5,7 +5,7 @@ import '../../../styles/club/list/ClubList.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface ClubListProps {
-  clubList: clubItem[];
+  clubList: clubItem[] | null;
   accessToken: string | null;
 }
 const ClubList = ({ clubList, accessToken }: ClubListProps) => {
@@ -14,7 +14,7 @@ const ClubList = ({ clubList, accessToken }: ClubListProps) => {
   return (
     <div className="club-list-container">
       <div className="club-list-box">
-        {clubList?.length > 0 ? (
+        {clubList ? (
           /* 모임 있을 경우 */
           clubList
             .reduce((rows, clubItem, index) => {
