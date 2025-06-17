@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import "../../../styles/club/register/Label.scss";
+import '../../../styles/club/register/Label.scss';
 
 interface LabelProps {
   className?: string;
   labelTitle: string;
   isRequired?: boolean;
+  htmlFor?: string;
 }
 
-const Label = ({ className, labelTitle, isRequired }: LabelProps) => {
-
+const Label = ({ className, labelTitle, isRequired, htmlFor }: LabelProps) => {
   return (
-    <div className={`label-container ${className}`}>
-      <label>{labelTitle}</label>
-      {isRequired && <span>*</span>}
-    </div>
+    <label htmlFor={htmlFor} className={`label-container ${className}`}>
+      <span className="label-title">{labelTitle}</span>
+      {isRequired && <span className="label-required">*</span>}
+    </label>
   );
 };
 
