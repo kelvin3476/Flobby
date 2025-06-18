@@ -105,11 +105,6 @@
               font-weight: 500;
               line-height: 150%;
   
-              &:focus {
-                border: 1px solid #191919;
-                outline: none;
-              }
-  
               &::placeholder {
                 color: #9ea4aa;
               }
@@ -130,10 +125,6 @@
               font-weight: 500;
               line-height: 150%;
   
-              &:focus {
-                outline: 1px solid #191919;
-              }
-  
               &::placeholder {
                 color: #9ea4aa;
               }
@@ -142,12 +133,14 @@
   
           input.warning {
             border: 1px solid #F94E51 !important;
-            outline: none;
           }
 
           input.valid {
             border: 1px solid #764BF6 !important;
-            outline: none;
+          }
+
+          input:focus:not(.warning):not(.valid) {
+            border: 1px solid #191919;
           }
   
           .show-password {
