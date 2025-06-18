@@ -82,6 +82,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setM
                   // 로그아웃 로직
                   await Logout.webLogout();
                   window.location.reload();
+                  localStorage.removeItem('token-storage'); /* 토큰 관련 정보 localstorage 초기화 */
                 } else if (item === "마이페이지") {
                   // 마이페이지 라우팅
                 }

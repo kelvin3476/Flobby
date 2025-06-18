@@ -30,7 +30,7 @@ const useLoginForm = () => {
     setLoginErrorMessage,
   } = useLoginStore();
 
-  const { setAccessToken, setIsAuthenticated } = useAuthStore();
+  const { setAccessToken, setTokenExpirationTime, setIsAuthenticated } = useAuthStore();
 
   const handleEmailBlur = () => {
     if (!email) {
@@ -103,7 +103,7 @@ const useLoginForm = () => {
                   .then(response => {
                     if (response.data.code === 1000) {
                       setAccessToken(response.data.data); // access token authStore in-memory 저장 (브라우저 새로고침시 초기화)
-                      // localStorage.setItem('accessToken', response.data.data);
+                      setTokenExpirationTime(JSON.parse(atob(response.data.data.split('.')[1])).exp);
                       setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
                       navigate('/'); // 메인 페이지로 이동
                     } else {
