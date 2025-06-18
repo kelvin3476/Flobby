@@ -17,7 +17,10 @@ const useEmailForm = () => {
         return emailRegex.test(email);
     };
 
-    const handleEmailBlur = () => {
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const email = e.target.value;
+        setEmail(email);
+
         if (email.length > 0 && !isValidEmail(email)) {
             setIsEmailValid(false);
             setEmailError(['warning','올바른 이메일 형식으로 입력해 주세요.']);
@@ -25,9 +28,6 @@ const useEmailForm = () => {
             setIsEmailValid(true);
             setEmailError(['default','']);
         }
-    }
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
     }
 
     return {
@@ -37,7 +37,6 @@ const useEmailForm = () => {
         setIsEmailValid,
         emailError,
         setEmailError,
-        handleEmailBlur,
         handleEmailChange,
     }
 }
