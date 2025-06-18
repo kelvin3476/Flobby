@@ -4,310 +4,307 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  gap: 50px;
-  letter-spacing: -0.3px;
   padding-top: 236px;
 
-  .registration-title {
+  .registration-wrapper {
     display: flex;
     flex-direction: column;
-    width: 380px;
-    gap: 12px;
+    align-items: center;
 
-    .Header {
-      font-size: 36px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 140%;
-    }
+    .registration-title {
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
 
-  }
-
-  main {
-    gap: 0;
-
-    p.require {
-      color: #72787F;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 150%;
-      text-align: right;
-
-      span {
-        color: #F94E51;
-        font-size: 12px;
-        vertical-align: super;
+      .required-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 480px;
+        border-bottom: 2px solid #191919;
+        padding-bottom: 9px;
+      }
+  
+      .Header {
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 42px;
+        letter-spacing: -0.3px;
       }
     }
+  
+    > main {
 
-    ul.user-form {
-      list-style: none;
-      border-top: 2px solid #191919;
-      width: 480px;
-      margin-top: 0;
-      margin-bottom: 60px;
-
-      li {
-        width: 380px;
+      ul.user-form {
         margin-top: 24px;
-
-        label {
-          font-size: 18px;
-          text-align: left;
-          display: block;
-          margin-bottom: 10px;
-          line-height: 140%;
-          font-weight: 600;
-
-          span {
-            color: #F94E51;
-            font-size: 12px;
-            vertical-align: super;
-          }
-        }
-
-        .radio-ul {
-          list-style: none;
-          display: flex;
-          padding-left: 0;
-
-          li {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 20px;
+        width: 480px;
+        list-style: none;
+  
+        > li {
+  
+          .radio-ul {
+            margin-top: 16px;
             display: flex;
-            height: 24px;
-            width: 100px;
-            margin-top: 0;
+            padding: 0 256px 0 6px;
+            gap: 15px;
+  
+            > li {
+              display: flex;
+              align-items: center;
+              height: 24px;
+  
+              > label {
+                width: 45px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 24px;
+              }
+            }
+  
+            input[type="radio"] {
+              -webkit-appearance: none; // 웹킷 브라우저에서 기본 스타일 제거
+              -moz-appearance: none; // 모질라 브라우저에서 기본 스타일 제거
+              appearance: none; // 기본 브라우저에서 기본 스타일 제거
+              border-radius: 50%;
+              outline: none; // focus 시에 나타나는 기본 스타일 제거
+              cursor: pointer;
+              width: 24px;
+              height: 24px;
+              border: 1px solid #C9CDD2;
+              margin-right: 12px;
+            }
+  
+            input.checked {
+              background-color: #fff; // 체크 시 내부 원 색상
+              border: 6px solid #764BF6; // 라인이 아닌, 라인과 원 사이 색상
+              box-shadow: 0 0 0 1px #764BF6; // 라인
+            }
+          }
+  
+          div.input-box {
+            position: relative;
+            display: flex;
+            width: 380px;
+            gap: 8px;
+  
+            input {
+              display: inline-block;
+              width: 252px;
+              height: 48px;
+              padding: 12px;
+              outline: none;
 
-            label {
+              border: 1px solid #E8EBED;
+              border-radius: 6px;
               font-size: 16px;
-              font-style: normal;
               font-weight: 500;
               line-height: 150%;
-              margin-bottom: 0;
+  
+              &:focus {
+                border: 1px solid #191919;
+                outline: none;
+              }
+  
+              &::placeholder {
+                color: #9ea4aa;
+              }
+            }
+  
+            input.long {
+              display: inline-block;
+              position: relative;
+              width: 380px;
+              height: 48px;
+              padding: 12px;
+              border: 1px solid #E8EBED;
+              border-radius: 6px;
+              outline: none;
+              
+              font-size: 16px;
+              color: #191919;
+              font-weight: 500;
+              line-height: 150%;
+  
+              &:focus {
+                outline: 1px solid #191919;
+              }
+  
+              &::placeholder {
+                color: #9ea4aa;
+              }
             }
           }
+  
+          input.warning {
+            border: 1px solid #F94E51 !important;
+            outline: none;
+          }
 
-
-          input[type="radio"] {
-            -webkit-appearance: none; // 웹킷 브라우저에서 기본 스타일 제거
-            -moz-appearance: none; // 모질라 브라우저에서 기본 스타일 제거
-            appearance: none; // 기본 브라우저에서 기본 스타일 제거
-            border-radius: 50%;
-            outline: none; // focus 시에 나타나는 기본 스타일 제거
+          input.valid {
+            border: 1px solid #764BF6 !important;
+            outline: none;
+          }
+  
+          .show-password {
             cursor: pointer;
-            width: 20px;
-            height: 20px;
-            border: 1px solid #C9CDD2;
-            margin-right: 12px;
-
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 18px;
+            right: 12px;
+            background-image: url("../../assets/svg/signup/signup_eyes.svg");
           }
-
-          input.checked {
-            background-color: #fff; // 체크 시 내부 원 색상
-            border: 6px solid #764BF6; // 라인이 아닌, 라인과 원 사이 색상
-            box-shadow: 0 0 0 1px #764BF6; // 라인
-          }
+  
         }
-
-        div.input-box {
-          width: 380px;
-          position: relative;
-          display: flex;
-          justify-content: space-between;
-
-          input {
-            width: 276px;
-            color: #191919;
-            font-size: 16px;
-            padding: 12px;
-            border: 1px solid #E8EBED;
-            border-radius: 6px;
-            font-weight: 500;
-            line-height: 150%;
-            height: 48px;
-            outline: none;
-            display: inline-block;
-
-            &:focus {
-              outline: 1px solid #191919;
-
-            }
-
-            &::placeholder {
-              color: #9ea4aa;
-            }
-
-          }
-
-          input.long {
-            width: 380px;
-            position: relative;
-            color: #191919;
-            font-size: 16px;
-            padding: 12px;
-            border: 1px solid #E8EBED;
-            border-radius: 6px;
-            font-weight: 500;
-            line-height: 150%;
-            height: 48px;
-            outline: none;
-            display: inline-block;
-
-            &:focus {
-              outline: 1px solid #191919;
-
-            }
-
-            &::placeholder {
-              color: #9ea4aa;
-            }
-          }
-
-        }
-
-        input.warning {
-          outline: 1px solid #F94E51;
-        }
-
-        .show-password {
-          cursor: pointer;
-          width: 24px;
-          height: 24px;
-          position: absolute;
-          top: 18px;
-          right: 12px;
-          background-image: url("../../assets/svg/signup/signup_eyes.svg");
-        }
-
       }
     }
-  }
+  
+    .check-btn {
+      width: 96px;
+      height: 48px;
+      color: #C9CDD2;
+      border: 1px solid #C9CDD2;
+      text-align: center;
+      border-radius: 6px;
+      background-color: #fff;
+      margin-top: 6px;
 
-  .check-btn {
-    width: 96px;
-    height: 48px;
-    color: #C9CDD2;
-    border: 1px solid #C9CDD2;
-    text-align: center;
-    border-radius: 6px;
-    background-color: #fff;
-    margin-top: 6px;
-    font-weight: 500;
-  }
-
-  .active {
-    cursor: pointer;
-    border: 1px solid #764BF6;
-    color: #764BF6;
-    font-weight: 500;
-  }
-
-  .next {
-    cursor: pointer;
-    border: none;
-    width: 480px;
-    height: 60px;
-    border-radius: 6px;
-    background-color: #8b5cf6;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    color: #fff;
-    opacity: 0.3;
-
-    &.active {
-      opacity: 1;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 21px;
+      letter-spacing: -0.3px;
     }
+  
+    .active {
+      cursor: pointer;
+      border: 1px solid #764BF6;
+      color: #764BF6;
+      font-weight: 500;
+    }
+  
+    .next {
+      margin-top: 60px;
+      cursor: pointer;
+      border: none;
+      width: 480px;
+      height: 60px;
+      border-radius: 6px;
+      background-color: #8b5cf6;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      color: #fff;
+      opacity: 0.3;
+  
+      &.active {
+        opacity: 1;
+      }
+    }
+  
+    .disable {
+      opacity: 0.3;
+      cursor: default;
+    }
+  
+    .timer {
+      color: #F94E51;
+      position: absolute;
+      top: 23px;
+      right: 7px;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: -0.3px;
+      font-weight: 500;
+    }
+  
+    //.reset-2{
+    //  cursor: pointer;
+    //  position: absolute;
+    //  top: 25px;
+    //  right: 44px;
+    //  width: 20px;
+    //  height: 20px;
+    //  background-image: url("../../assets/svg/signup/signup_reset.svg");
+    //  background-repeat: no-repeat;
+    //  background-size: 100%;
+    //  border: none;
+    //  display: none;
+    //}
+  
+  
+    p.default {
+      color: #72787F;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: left;
+      margin-top: 6px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+  
+    p.warning {
+      color: #F94E51;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: left;
+      margin-top: 6px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+  
+    p.valid {
+      color: #03B240;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: left;
+      margin-top: 6px;
+      letter-spacing: -0.3px;
+      font-weight: 500;
+    }
+  
+    .reset {
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 140px;
+      width: 20px;
+      height: 20px;
+      background-image: url("../../assets/svg/signup/signup_reset.svg");
+      background-position: center;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      border: none;
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+    .right12 {
+      right: 12px;
+    }
+    .right45 {
+      right: 45px;
+    }
+
+    .nickname-check-icon {
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 20px;
+      right: 140px;
+      background-image: url("../../assets/svg/signup/user-info-checked.svg");
+    }
+
   }
 
-  .disable {
-    opacity: 0.3;
-    cursor: default;
-  }
-
-  .timer {
-    color: #F94E51;
-    position: absolute;
-    top: 23px;
-    right: 7px;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: -0.3px;
-    font-weight: 500;
-  }
-
-  //.reset-2{
-  //  cursor: pointer;
-  //  position: absolute;
-  //  top: 25px;
-  //  right: 44px;
-  //  width: 20px;
-  //  height: 20px;
-  //  background-image: url("../../assets/svg/signup/signup_reset.svg");
-  //  background-repeat: no-repeat;
-  //  background-size: 100%;
-  //  border: none;
-  //  display: none;
-  //}
-
-
-  p.default {
-    color: #72787F;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: left;
-    margin-top: 6px;
-    font-weight: 500;
-    letter-spacing: -0.3px;
-  }
-
-  p.warning {
-    color: #F94E51;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: left;
-    margin-top: 6px;
-    font-weight: 500;
-    letter-spacing: -0.3px;
-  }
-
-  p.valid {
-    color: #03B240;
-    font-size: 14px;
-    line-height: 21px;
-    text-align: left;
-    margin-top: 6px;
-    letter-spacing: -0.3px;
-    font-weight: 500;
-  }
-
-
-
-
-  .reset {
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 115px;
-    width: 20px;
-    height: 20px;
-    background-image: url("../../assets/svg/signup/signup_reset.svg");
-    background-position: center;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border: none;
-    display: none;
-  }
-  .show {
-    display: block;
-  }
-  .right12 {
-    right: 12px;
-  }
-  .right45 {
-    right: 45px;
-  }
 
   > footer {
     width: 100vw;

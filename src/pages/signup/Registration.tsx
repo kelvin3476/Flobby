@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/login/Header';
 import Button from '../../components/button/Button';
 import SignUpInput from '../../components/input/SignUpInput';
+import RequiredText from '../../components/club/text/RequiredText';
+import Label from '../../components/club/register/Label';
 import ProgressBar from '../../components/signup/ProgressBar';
-
-import '../../styles/signup/Registration.scss';
 
 import useNicknameForm from '../../hooks/signup/nickname/useNicknameForm';
 // import usePhoneForm from '../../hooks/signup/phone/usePhoneForm';
@@ -18,13 +18,15 @@ import useCitizenStore from '../../store/citizenship/useCitizenStore';
 import SignUp from "../../api/signup/SignUp";
 import { WebTempSignupData } from "../../api/ApiTypes";
 
+import '../../styles/signup/Registration.scss';
+
 const Registration = () => {
   const navigate = useNavigate();
+
   const {
     nickname,
     isNicknameValid,
     nicknameError,
-    handleNicknameBlur,
     handleNicknameChange,
     checkDuplicatedNickname,
   } = useNicknameForm();
@@ -43,7 +45,6 @@ const Registration = () => {
     email,
     isEmailValid,
     emailError,
-    handleEmailBlur,
     handleEmailChange,
   } = useEmailForm();
 
@@ -53,8 +54,6 @@ const Registration = () => {
     checkPassword,
     passwordError,
     checkPasswordError,
-    handlePasswordBlur,
-    handleCheckPasswordBlur,
     handlePasswordChange,
     toggleShowPassword,
   } = usePasswordForm();
@@ -120,188 +119,167 @@ const Registration = () => {
   return (
     <div className="registration-container">
       <ProgressBar />
-      {/* 회원가입 헤더 */}
-      <div className="registration-title">
-        <Header className="Header" headerTitle="회원가입" />
-      </div>
-
-      {/* 회원가입 메인 컨텐츠 */}
-      <main>
-        <p className={'require'}>
-          <span>*</span>필수 입력 사항
-        </p>
-
-        <ul className="user-form">
-          {/* 닉네임 입력 부분 */}
-          <li>
-            <label htmlFor="nickname" className="nickname">
-              닉네임<span>*</span>
-            </label>
-            <div className={'input-box'}>
-              <SignUpInput
-                type="text"
-                name="nickname"
-                value={nickname}
-                onChange={handleNicknameChange}
-                onBlur={handleNicknameBlur}
-                placeholder="닉네임을 입력해 주세요."
-                maxLength={12}
-                errorMessage={nicknameError}
-                isValid={isNicknameValid}
-              />
-              <Button
-                className={isNicknameValid ? 'check-btn active' : 'check-btn'}
-                title="중복 확인"
-                onClick={() =>
-                  isNicknameValid && checkDuplicatedNickname(nickname)
-                }
-              />
-            </div>
-          </li>
-
-          {/*TODO: 1차 MVP 개발에서 휴대폰 번호 입력 및 인증 절차 제외 */}
-          {/* 휴대폰 번호 입력 부분 */}
-          {/*<li>*/}
-          {/*  <label htmlFor="phone" className="phone">*/}
-          {/*    휴대폰 번호<span>*</span>*/}
-          {/*  </label>*/}
-          {/*  <div className={'input-box'}>*/}
-          {/*    <SignUpInput*/}
-          {/*      type="text"*/}
-          {/*      name="phone"*/}
-          {/*      value={phone}*/}
-          {/*      onChange={handlePhoneChange}*/}
-          {/*      onBlur={handlePhoneBlur}*/}
-          {/*      isValid={isPhoneValid}*/}
-          {/*      maxLength={11}*/}
-          {/*      placeholder="숫자만 입력해 주세요."*/}
-          {/*    />*/}
-          {/*    <Button*/}
-          {/*      className={isPhoneValid ? 'check-btn active' : 'check-btn'}*/}
-          {/*      title="본인 인증"*/}
-          {/*      onClick={() => isPhoneValid && sendVerificationCode(phone)}*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</li>*/}
-          {/*<li>*/}
-          {/*  <label htmlFor="verification-code" className="verification-code">*/}
-          {/*    인증 번호<span>*</span>*/}
-          {/*  </label>*/}
-          {/*  <div className="input-box">*/}
-          {/*    <SignUpInput*/}
-          {/*      type="text"*/}
-          {/*      name="verification-code"*/}
-          {/*      className="long"*/}
-          {/*      value={code}*/}
-          {/*      timer={display}*/}
-          {/*      onChange={handleCodeChange}*/}
-          {/*      onBlur={handleCodeBlur}*/}
-          {/*      isValid={isPhoneValid}*/}
-          {/*      maxLength={6}*/}
-          {/*      placeholder="인증 번호를 입력해 주세요."*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</li>*/}
-
-          {/* 이메일 입력 (socialType이 없을 경우 렌더링 안함) */}
-          {!localStorage.getItem('socialType') && (
+      <div className="registration-wrapper">
+        <div className="registration-title">
+          <Header className="Header" headerTitle="회원가입" />
+          <RequiredText />
+        </div>
+        <main>
+          <ul className="user-form">
             <li>
-              <label htmlFor="email" className="email">
-                이메일<span>*</span>
-              </label>
-              <div className="input-box">
+              <Label htmlFor="nickname" labelTitle='닉네임' isRequired />
+              <div className={'input-box'}>
                 <SignUpInput
-                  type="email"
-                  name="email"
-                  className="long"
-                  value={email}
-                  onChange={handleEmailChange}
-                  onBlur={handleEmailBlur}
-                  isValid={isEmailValid}
-                  errorMessage={emailError}
-                  maxLength={121}
-                  placeholder="이메일을 입력해 주세요."
+                  type="text"
+                  name="nickname"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                  placeholder="닉네임을 입력해 주세요."
+                  maxLength={12}
+                  errorMessage={nicknameError}
+                  isValid={isNicknameValid}
+                />
+                <Button
+                  className={isNicknameValid ? 'check-btn active' : 'check-btn'}
+                  title="중복 확인"
+                  onClick={() =>
+                    isNicknameValid && checkDuplicatedNickname(nickname)
+                  }
                 />
               </div>
             </li>
-          )}
 
-          {/* 비밀번호 입력 (socialType이 없을 경우 렌더링 안함) */}
-          {!localStorage.getItem('socialType') && (
-            <li>
-              <label htmlFor="password" className="password">
-                비밀번호<span>*</span>
-              </label>
-              <div className="input-box">
-                <SignUpInput
-                  type="password"
-                  name="password"
-                  className="long"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  onBlur={handlePasswordBlur}
-                  isValid={isPasswordValid}
-                  onClick={e => toggleShowPassword(e)}
-                  errorMessage={passwordError}
-                  maxLength={20}
-                  placeholder="비밀번호를 입력해 주세요."
-                />
-              </div>
-            </li>
-          )}
+            {/*TODO: 1차 MVP 개발에서 휴대폰 번호 입력 및 인증 절차 제외 */}
+            {/* 휴대폰 번호 입력 부분 */}
+            {/*<li>*/}
+            {/*  <label htmlFor="phone" className="phone">*/}
+            {/*    휴대폰 번호<span>*</span>*/}
+            {/*  </label>*/}
+            {/*  <div className={'input-box'}>*/}
+            {/*    <SignUpInput*/}
+            {/*      type="text"*/}
+            {/*      name="phone"*/}
+            {/*      value={phone}*/}
+            {/*      onChange={handlePhoneChange}*/}
+            {/*      onBlur={handlePhoneBlur}*/}
+            {/*      isValid={isPhoneValid}*/}
+            {/*      maxLength={11}*/}
+            {/*      placeholder="숫자만 입력해 주세요."*/}
+            {/*    />*/}
+            {/*    <Button*/}
+            {/*      className={isPhoneValid ? 'check-btn active' : 'check-btn'}*/}
+            {/*      title="본인 인증"*/}
+            {/*      onClick={() => isPhoneValid && sendVerificationCode(phone)}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</li>*/}
+            {/*<li>*/}
+            {/*  <label htmlFor="verification-code" className="verification-code">*/}
+            {/*    인증 번호<span>*</span>*/}
+            {/*  </label>*/}
+            {/*  <div className="input-box">*/}
+            {/*    <SignUpInput*/}
+            {/*      type="text"*/}
+            {/*      name="verification-code"*/}
+            {/*      className="long"*/}
+            {/*      value={code}*/}
+            {/*      timer={display}*/}
+            {/*      onChange={handleCodeChange}*/}
+            {/*      onBlur={handleCodeBlur}*/}
+            {/*      isValid={isPhoneValid}*/}
+            {/*      maxLength={6}*/}
+            {/*      placeholder="인증 번호를 입력해 주세요."*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</li>*/}
 
-          {/* 비밀번호 확인 (socialType이 없을 경우 렌더링 안함) */}
-          {!localStorage.getItem('socialType') && (
-            <li>
-              <label htmlFor="checkPassword" className="checkPassword">
-                비밀번호 확인<span>*</span>
-              </label>
-              <div className="input-box">
-                <SignUpInput
-                  type="password"
-                  name="checkPassword"
-                  className="long"
-                  value={checkPassword}
-                  onChange={handlePasswordChange}
-                  onBlur={handleCheckPasswordBlur}
-                  isValid={isPasswordValid}
-                  onClick={e => toggleShowPassword(e)}
-                  errorMessage={checkPasswordError}
-                  maxLength={20}
-                  placeholder="비밀번호를 한 번 더 입력해 주세요."
-                />
-              </div>
-            </li>
-          )}
-
-          {/* 내/외국인 입력 부분 */}
-          <li>
-            <label>
-              내국인 / 외국인<span>*</span>
-            </label>
-            <ul className="radio-ul">
-              {citizenship.map(item => (
-                <li key={item.display}>
-                  <input
-                    type={'radio'}
-                    id={item.display}
-                    className={foreigner == item.value ? 'checked' : ''}
-                    onClick={() => setForeigner(foreigner)}
+            {/* 이메일 입력 (socialType이 없을 경우 렌더링 안함) */}
+            {!localStorage.getItem('socialType') && (
+              <li>
+                <Label htmlFor='email' labelTitle='이메일' isRequired/>
+                <div className="input-box">
+                  <SignUpInput
+                    type="email"
+                    name="email"
+                    className="long"
+                    value={email}
+                    onChange={handleEmailChange}
+                    isValid={isEmailValid}
+                    errorMessage={emailError}
+                    maxLength={121}
+                    placeholder="이메일을 입력해 주세요."
                   />
-                  <label htmlFor={item.display}> {item.display}</label>
-                </li>
-              ))}
-            </ul>
-          </li>
-        </ul>
+                </div>
+              </li>
+            )}
 
-        {/* 다음 스텝 버튼 */}
+            {/* 비밀번호 입력 (socialType이 없을 경우 렌더링 안함) */}
+            {!localStorage.getItem('socialType') && (
+              <li>
+                <Label htmlFor='password' labelTitle='비밀번호' isRequired/>
+                <div className="input-box">
+                  <SignUpInput
+                    type="password"
+                    name="password"
+                    className="long"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    isValid={isPasswordValid}
+                    onClick={e => toggleShowPassword(e)}
+                    errorMessage={passwordError}
+                    maxLength={20}
+                    placeholder="비밀번호를 입력해 주세요."
+                  />
+                </div>
+              </li>
+            )}
+
+            {/* 비밀번호 확인 (socialType이 없을 경우 렌더링 안함) */}
+            {!localStorage.getItem('socialType') && (
+              <li>
+                <Label htmlFor='checkPassword' labelTitle='비밀번호 확인' isRequired/>
+                <div className="input-box">
+                  <SignUpInput
+                    type="password"
+                    name="checkPassword"
+                    className="long"
+                    value={checkPassword}
+                    onChange={handlePasswordChange}
+                    isValid={isPasswordValid}
+                    onClick={e => toggleShowPassword(e)}
+                    errorMessage={checkPasswordError}
+                    maxLength={20}
+                    placeholder="비밀번호를 한 번 더 입력해 주세요."
+                  />
+                </div>
+              </li>
+            )}
+
+            {/* 내/외국인 입력 부분 */}
+            <li>
+              <Label labelTitle='내국인 / 외국인' isRequired/>
+              <ul className="radio-ul">
+                {citizenship.map(item => (
+                  <li key={item.display}>
+                    <input
+                      type={'radio'}
+                      id={item.display}
+                      className={foreigner == item.value ? 'checked' : ''}
+                      onClick={() => setForeigner(foreigner)}
+                    />
+                    <label htmlFor={item.display}> {item.display}</label>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </main>
         <Button
           className={`next ${changeNextButtonStyle(localStorage.getItem('socialType'))}`}
           title="다음"
           onClick={() => !localStorage.getItem('socialType') ? tempSignupHandler({ email: email, nickname: nickname, localPassword: password }) : tempSocialSignupHandler(nickname, foreigner)}
         />
-      </main>
+      </div>
       <footer>
         <div className="info-line1"></div>
         <div className="info-line2"></div>
