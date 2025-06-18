@@ -1,15 +1,15 @@
 .tab-container {
   display: flex;
-  width: 920px;
+  width: 100%;
   height: 55px;
   align-items: center;
-  border-bottom: 1px solid #E8EBED;
+  border-bottom: 1px solid #e8ebed;
 
   .tab-btns {
     display: flex;
     gap: 8px;
     height: 55px;
-    
+
     .tab-btn {
       display: flex;
       align-items: center;
@@ -23,7 +23,7 @@
       line-height: 33.6px;
       letter-spacing: -0.3px;
       white-space: nowrap;
-      color: #9EA4AA;
+      color: #9ea4aa;
       cursor: pointer;
 
       &.active {
