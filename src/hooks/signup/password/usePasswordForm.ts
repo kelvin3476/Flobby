@@ -41,15 +41,7 @@ const usePasswordForm = () => {
         setIsPasswordValid(true);
         setPasswordError(['default', '문자+숫자+특수문자 조합 8~20자리']);
       }
-
-      if (checkPassword.length > 0) {
-        if (value !== checkPassword) {
-          setCheckPasswordError(['warning', '비밀번호가 일치하지 않습니다.']);
-        } else {
-          setCheckPasswordError(['default', '']);
-        }
-      }
-    } else {
+    } else if (name === 'checkPassword') {
       setCheckPassword(value);
 
       if (password !== value) {

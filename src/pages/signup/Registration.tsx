@@ -242,7 +242,7 @@ const Registration = () => {
                   <SignUpInput
                     type="password"
                     name="checkPassword"
-                    className="long"
+                    className={`long ${checkPasswordError[0]}`}
                     value={checkPassword}
                     onChange={handlePasswordChange}
                     isValid={isPasswordValid}

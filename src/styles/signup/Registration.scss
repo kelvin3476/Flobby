@@ -131,14 +131,15 @@
             }
           }
   
-          input.warning {
-            border: 1px solid #F94E51 !important;
-          }
-
+          
           input.valid {
             border: 1px solid #764BF6 !important;
           }
-
+          
+          input.warning {
+            border: 1px solid #F94E51 !important;
+          }
+          
           input:focus:not(.warning):not(.valid) {
             border: 1px solid #191919;
           }
