@@ -12,6 +12,7 @@ import useClubCategoryStore from '../../store/club/useClubCategoryStore';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import { ClubController } from '../../services/club/controllers/ClubController';
 import { clubItem, HobbyCategory } from '../../api/ApiTypes';
+import { setCookie } from '../../utils/Cookie';
 import FabDefaultIcon from '../../assets/svg/club/clublist/floating_button_default.svg';
 import FabDefaultCancelIcon from '../../assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '../../assets/svg/club/clublist/floating_button_club_register.svg';
@@ -24,7 +25,7 @@ const ClubAll = () => {
 
   logger.log('[cluball: accessToken]', accessToken);
 
-  const { mainCategory, subCategory } = useClubCategoryStore();
+  const { mainCategory, setMainCategory, subCategory, setSubCategory } = useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
   const [clubList, setClubList] = useState<clubItem[] | null>([]);
 
@@ -81,6 +82,14 @@ const ClubAll = () => {
     return () => {
       window.removeEventListener('regionChanged', handleRegionChange);
     };
+  }, []);
+
+  // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
+  useEffect(() => {
+    setMainCategory('전체');
+    setSubCategory('');
+    setCookie('mainCategory', '전체');
+    setCookie('subCategory', '', 0);
   }, []);
 
   return (
