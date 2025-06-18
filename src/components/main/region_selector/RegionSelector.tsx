@@ -11,14 +11,19 @@ interface RegionSelectorProps {
   setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
 }
 
-const RegionSelector: React.FC<RegionSelectorProps> = ({ mainDataList, setMainDataList }: RegionSelectorProps) => {
+const RegionSelector: React.FC<RegionSelectorProps> = ({
+  mainDataList,
+  setMainDataList,
+}: RegionSelectorProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const regionContextController = RegionContextController.getInstance();
 
   const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
-  const [selectedRegion, setSelectedRegion] = useState<RegionItem>(DEFAULT_REGION);
-  const [isRegionSelectorOpen, setIsRegionSelectorOpen] = useState<boolean>(false);
+  const [selectedRegion, setSelectedRegion] =
+    useState<RegionItem>(DEFAULT_REGION);
+  const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
+    useState<boolean>(false);
 
   const handleRegionChange = (region: RegionItem) => {
     regionContextController.setSelectedRegion(region);
@@ -48,6 +53,27 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({ mainDataList, setMainDa
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+
+  // 새로고침시 선택지역 초기화 코드
+  // TODO: 관심지역 초기화 코드도 필요(로그인 유지 구현되면)
+  useEffect(() => {
+    const controller = RegionContextController.getInstance();
+
+    const selectedRegion = controller.getSelectedRegion();
+
+    // 만약 디폴트 값과 같다면 쿠키값으로 상태 업데이트(쿠키값이 디폴트 값이어도 상관없으므로)
+    if (selectedRegion.regionId === DEFAULT_REGION.regionId) {
+      controller.model.initFromCookie();
+    }
+
+    const preferRegionList = localStorage.getItem('preferRegionsList');
+    if (preferRegionList) {
+      controller.setPreferRegionsList(JSON.parse(preferRegionList));
+    }
+
+    setSelectedRegion(controller.getSelectedRegion());
+    setPreferRegions(controller.getPreferRegionsList());
   }, []);
 
   return (
