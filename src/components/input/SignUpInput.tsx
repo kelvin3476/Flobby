@@ -7,7 +7,6 @@ interface InputProps {
   value: string;
   onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: () => void;
   isValid: boolean;
   errorMessage?: [string, string];
   placeholder: string;
@@ -55,7 +54,6 @@ const SignUpInput: React.FC<InputProps> = ({
   name,
   value,
   onChange,
-  onBlur,
   isValid,
   errorMessage,
   className,
@@ -64,7 +62,15 @@ const SignUpInput: React.FC<InputProps> = ({
   timer,
   show,
 }) => {
-  const isValidWarning = value.length > 0 && !isValid ? 'warning' : '';
+  const isWarning = value.length > 0 && !isValid && errorMessage?.[0] === 'warning';
+  const isValidClass = value.length > 0 && isValid && errorMessage?.[0] === 'valid';
+  const classNames = [
+    className ? className : '',
+    isWarning ? 'warning' : '',
+    isValidClass ? 'valid' : '',
+  ].join(' ');
+
+  const isNicknameCheckSuccess = errorMessage?.[1] === '사용 가능한 닉네임입니다.';
 
   const inputType =
     type !== 'password' ? type : show?.includes(name) ? 'text' : type;
@@ -76,20 +82,25 @@ const SignUpInput: React.FC<InputProps> = ({
         name={name}
         value={value}
         onChange={onChange}
-        onBlur={onBlur}
         placeholder={placeholder}
-        className={`${className ? className : ''} ${isValidWarning}`}
+        className={classNames}
         maxLength={maxLength}
         style={{ position: 'relative' }}
       />
-      <ResetButton name={name} value={value} onChange={onChange} />
+      {name === 'nickname' && isNicknameCheckSuccess ? (
+        <span 
+          className="nickname-check-icon"
+        />
+      ): (
+        <ResetButton name={name} value={value} onChange={onChange} />
+      )}
+
       {name === 'verification-code' ? (
         <span className="timer">{timer}</span>
       ) : name === 'password' || name === 'checkPassword' ? (
         <span className="show-password" onClick={handleShowPassword}></span>
-      ) : (
-        ''
-      )}
+      ) : ('')}
+
       {errorMessage && <p className={errorMessage[0]}>{errorMessage[1]}</p>}
     </div>
   );
