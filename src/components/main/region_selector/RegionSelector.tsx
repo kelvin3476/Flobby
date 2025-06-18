@@ -64,7 +64,7 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({
 
     // 만약 디폴트 값과 같다면 쿠키값으로 상태 업데이트(쿠키값이 디폴트 값이어도 상관없으므로)
     if (selectedRegion.regionId === DEFAULT_REGION.regionId) {
-      controller.model.initFromCookie();
+      controller.model.initFromCashingData();
     }
 
     const preferRegionList = localStorage.getItem('preferRegionsList');

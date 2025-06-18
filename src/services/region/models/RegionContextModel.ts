@@ -57,7 +57,7 @@ export class RegionContextModel {
   };
 
   // 쿠키값으로 선택지역 초기화하는 코드
-  initFromCookie(): void {
+  initFromCashingData(): void {
     const regionIdInCookie = getCookie('regionId');
     const regionNameInCookie = getCookie('regionName');
     const preferRegionList = localStorage.getItem('preferRegionsList');
