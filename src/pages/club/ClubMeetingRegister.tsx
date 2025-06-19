@@ -194,6 +194,7 @@ const ClubMeetingRegister = () => {
         <ClubModal 
           message={modalStep === 1 ? "정기 모임을 등록할까요?" : "정기 모임이 등록되었어요."}
           showIcon={modalStep === 1}
+          iconType='check'
           showCancelButton={modalStep === 1}
           onConfirm={async () => {
             if (modalStep === 1) {

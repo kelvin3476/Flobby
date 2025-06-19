@@ -248,6 +248,7 @@ const ClubRegister = () => {
               : '정상적으로 처리되었습니다.'
           }
           showIcon={modalStep === 1}
+          iconType="check"
           showCancelButton={modalStep === 1}
           onConfirm={async () => {
             if (modalStep === 1) {
