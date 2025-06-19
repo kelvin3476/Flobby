@@ -10,6 +10,7 @@ interface InputProps {
     isValid: boolean;
     errorMessage: string;
     placeholder: string;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,6 +22,7 @@ const Input: React.FC<InputProps> = ({
     isValid,
     errorMessage,
     placeholder,
+    onKeyDown,
 }) => {
     return (
         <>
@@ -28,6 +30,7 @@ const Input: React.FC<InputProps> = ({
                 type={type}
                 value={value}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 placeholder={placeholder}
                 className={!isValid ? 'error' : ''}
