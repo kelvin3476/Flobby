@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Label from './Label';
 import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
 
 import '../../../styles/club/register/ClubDescription.scss';
 
-const ClubDescription = ({ className }) => {
+interface ClubDescriptionProps {
+  className?: string;
+  prevClubDesc?: string;
+  prevClubName?: string;
+}
+
+const ClubDescription = ({ className, prevClubDesc, prevClubName }) => {
   const {
     clubName,
     setClubName,
@@ -52,6 +58,12 @@ const ClubDescription = ({ className }) => {
       setDescError('');
     }
   };
+
+  // 수정페이지 이전 데이터 업데이트
+  useEffect(() => {
+    setClubName(prevClubName);
+    setDescription(prevClubDesc);
+  }, [prevClubDesc, prevClubName]);
 
   return (
     <div className={`desc-container ${className}`}>

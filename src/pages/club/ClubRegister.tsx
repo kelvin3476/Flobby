@@ -177,17 +177,28 @@ const ClubRegister = () => {
             <div className="up-and-right">
               <RegionDropDown
                 className="register-region"
-                prevRegion={clubItemData?.clubDTO.location}
+                prevRegion={isEditPage ? clubItemData?.clubDTO.location : null}
               />
               <CategoryDropDown
                 className="register-category"
-                prevSubCategory={clubItemData?.clubDTO.subCategory}
+                prevSubCategory={
+                  isEditPage ? clubItemData?.clubDTO.subCategory : null
+                }
                 isEditPage={isEditPage}
               />
-              <MaxMember className="register-member" />
+              <MaxMember
+                className="register-member"
+                prevMaxMember={
+                  isEditPage ? clubItemData?.clubDTO.maxMembers : null
+                }
+              />
             </div>
           </div>
-          <ClubDescription className="register-club" />
+          <ClubDescription
+            className="register-club"
+            prevClubName={isEditPage ? clubItemData?.clubDTO.clubName : null}
+            prevClubDesc={isEditPage ? clubItemData?.clubDTO.description : null}
+          />
           <div className="buttons">
             <Button
               className="cancel-btn"
