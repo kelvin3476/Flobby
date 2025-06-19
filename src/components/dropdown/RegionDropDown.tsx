@@ -26,12 +26,18 @@ const RegionDropDown = ({ className }) => {
         const selectedRegionId = Number(getCookie('regionId'));
         if (selectedRegionId) {
           for (const [mainRegion, subRegions] of Object.entries(response)) {
-            const selectedSubRegion = subRegions.filter(subRegion => !subRegion.regionName.includes("전체")).find(
+            const selectedSubRegion = subRegions.find(
               region => region.regionId === selectedRegionId,
             );
             if (selectedSubRegion) {
-              setSelectedSubRegion(selectedSubRegion.regionName);
-              setSelectedMainRegion(mainRegion);
+              /* 하위 지역이 전체인 경우 > 하위 지역의 앞글자 와 상위 지역과 같은 경우 > 해당 상위 지역 으로 저장 */
+              if (selectedSubRegion.regionName.split(' ')[0] === mainRegion) {
+                setSelectedMainRegion(mainRegion);
+              } else {
+                /* 하위 지역이 전체가 아닌 경우 > 하위 지역 및 상위 지역 그대로 저장 */
+                setSelectedSubRegion(selectedSubRegion.regionName);
+                setSelectedMainRegion(mainRegion);
+              }
             }
           }
         }
@@ -70,7 +76,7 @@ const RegionDropDown = ({ className }) => {
         <DropDown
           options={Object.keys(regionListController.model.regionList)}
           placeholder="상위 지역"
-          defaultItem={selectedMainRegion}
+          defaultItem={selectedSubRegion === null ? null : selectedMainRegion} /* 하위 지역이 null 인 경우 (00 전체) > 상위 지역 null 처리 및 아닌 경우엔 자동 선택된 상위 지역 노출 */
           disabled={false}
           onSelect={handleMainSelect}
         />
