@@ -10,7 +10,11 @@ interface ClubDescriptionProps {
   prevClubName?: string;
 }
 
-const ClubDescription = ({ className, prevClubDesc, prevClubName }) => {
+const ClubDescription = ({
+  className,
+  prevClubDesc,
+  prevClubName,
+}: ClubDescriptionProps) => {
   const {
     clubName,
     setClubName,
