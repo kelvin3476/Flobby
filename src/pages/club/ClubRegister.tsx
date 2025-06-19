@@ -242,7 +242,7 @@ const ClubRegister = () => {
 
       {modalStep && (
         <ClubModal
-          message={
+          mainMessage={
             modalStep === 1
               ? '등록 하시겠습니까?'
               : '정상적으로 처리되었습니다.'
