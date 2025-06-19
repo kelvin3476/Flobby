@@ -49,11 +49,9 @@ const MainCategory = ({ categoryList }: MainCategoryProps) => {
             <div
               className={`main-category-item-container ${mainCategory === data.mainCategory ? 'active' : ''}`}
               key={data.mainCategory}
+              onClick={() => handleClickMainCategory(data.mainCategory)}
             >
-              <div
-                className="main-category-item-box"
-                onClick={() => handleClickMainCategory(data.mainCategory)}
-              >
+              <div className="main-category-item-box">
                 <div
                   className={`main-category-icon ${CategorySlugMap[data.mainCategory] || ''}`}
                 ></div>
