@@ -53,7 +53,8 @@ const DetailInfo = ({
   const handleItemClick = (item: string) => {
     switch (item) {
       case '모임 수정':
-        nav('/club/edit/:id'); // TODO: 추후 수정
+        // nav(`/club/edit/${clubId}`);
+        nav('/club/edit', { state: clubId });
         break;
       case '정기 모임 등록':
         nav(`/club/${clubIds}/clubmeeting/register`); // TODO: 추후 수정

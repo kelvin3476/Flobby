@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
 import Label from './Label';
 import '../../../styles/club/register/MaxMember.scss';
 
-const MaxMember = ({ className }) => {
+interface classNameProps {
+  className?: string;
+  prevMaxMember?: number | null;
+}
+
+const MaxMember = ({ className, prevMaxMember }: classNameProps) => {
   const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } =
     useClubRegisterStore();
   const [inputValue, setInputValue] = useState('');
@@ -34,8 +39,13 @@ const MaxMember = ({ className }) => {
     setMaxMembers(memberCount);
   };
 
+  // 수정페이지 이전 데이터 업데이트
+  useEffect(() => {
+    if (prevMaxMember) setInputValue(prevMaxMember.toString());
+  }, [prevMaxMember]);
+
   return (
-    <div className={`max-member-container`}>
+    <div className={`max-member-container ${className}`}>
       <Label labelTitle="모임 규모" isRequired htmlFor="max-member" />
       <input
         id="max-member"

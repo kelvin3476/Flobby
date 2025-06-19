@@ -1,6 +1,5 @@
 import { HobbyCategory } from '../../../api/ApiTypes';
 import SignUp from '../../../api/signup/SignUp';
-import logger from '../../../utils/Logger';
 
 export const CategorySlugMap: Record<string, string> = {
   전체: 'entire',
@@ -23,7 +22,6 @@ export class CategoryListModel {
 
       if (code === 1000) {
         // API 호출 성공
-        logger.log('categoryList response.data', data);
         this.categoryList = data;
         return this.categoryList;
       } else if (code === 1001) {
