@@ -14,6 +14,12 @@ const ClubMemberManagement = ({
   currentMembers,
   maxMembers,
 }: ClubMemberManagementProps) => {
+
+  /* 멤버 탭 최초 진입시 스크롤 최상단 고정 */
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="club-member-management-container">
       {/* 타이틀 */}
