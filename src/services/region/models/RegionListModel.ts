@@ -11,7 +11,7 @@ export class RegionListModel {
   }
 
   async getRegionList(): Promise<Record<string, RegionItem[]>> {
-    if (this.initialized) return;
+    if (this.initialized) return this.regionList;
 
     try {
       const response = await SignUp.getRegionList();
