@@ -5,8 +5,16 @@ import { HobbyCategory } from '../../api/ApiTypes';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import Label from '../club/register/Label';
 import '../../styles/dropdown/CommonDropDown.scss';
+import logger from '../../utils/Logger';
 
-const CategoryDropDown = ({ className }) => {
+interface CategoryDropDownProps {
+  className?: string;
+  prevMainCategory?: string;
+  prevSubCategory?: string;
+  isEditPage?: boolean;
+}
+
+const CategoryDropDown = ({ className, prevSubCategory, isEditPage }) => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
   const {
@@ -36,6 +44,25 @@ const CategoryDropDown = ({ className }) => {
     categoryList.find(item => item.mainCategory === mainCategory)
       ?.subCategories ?? [];
 
+  useEffect(() => {
+    categoryListController
+      .getCategoryList()
+      .then(response => {
+        if (prevSubCategory) {
+          for (const { mainCategory, subCategories } of response) {
+            if (subCategories.includes(prevSubCategory)) {
+              setMainCategory(mainCategory);
+              console.log(mainCategory);
+              setSubCategory(prevSubCategory);
+            }
+          }
+        }
+      })
+      .catch(err => {
+        logger.error(err);
+      });
+  }, [prevSubCategory]);
+
   return (
     <div className={`dropdown-group-container ${className}`}>
       <Label labelTitle="카테고리" isRequired />
@@ -44,6 +71,7 @@ const CategoryDropDown = ({ className }) => {
           options={mainCategories}
           placeholder="상위 카테고리"
           disabled={false}
+          defaultItem={isEditPage ? mainCategory : null}
           onSelect={(value: string) => {
             setMainCategory(value);
             setSubCategory(null);
@@ -56,7 +84,7 @@ const CategoryDropDown = ({ className }) => {
           options={subCategories}
           placeholder="하위 카테고리"
           disabled={mainCategory === ''}
-          defaultItem={subCategories.includes(subCategory) ? subCategory : null}
+          defaultItem={isEditPage ? subCategory : null}
           onSelect={(value: string) => {
             setSubCategory(value);
             setIsCategoryValid(true);

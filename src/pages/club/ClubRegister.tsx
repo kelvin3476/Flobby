@@ -179,7 +179,11 @@ const ClubRegister = () => {
                 className="register-region"
                 prevRegion={clubItemData?.clubDTO.location}
               />
-              <CategoryDropDown className="register-category" />
+              <CategoryDropDown
+                className="register-category"
+                prevSubCategory={clubItemData?.clubDTO.subCategory}
+                isEditPage={isEditPage}
+              />
               <MaxMember className="register-member" />
             </div>
           </div>
