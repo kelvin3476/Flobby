@@ -19,10 +19,10 @@ function App() {
     }
   }, [accessToken, isAuthenticated]);
 
-  /* 새로고침 시 호출되는 함수 */
+  /* 새로고침 또는 브라우저 탭 종료 후 다시 재진입시 호출되는 함수 */
   React.useEffect(() => {
-    /* 새로고침 시 실행 */
-    if ((performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming).type === "reload") handleRefresh();
+    /* 새로고침 또는 브라우저 탭 종료 후 다시 재진입시 호출 */
+    handleRefresh();
   }, []);
 
   return <Router />;
