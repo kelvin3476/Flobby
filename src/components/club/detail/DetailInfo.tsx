@@ -10,6 +10,7 @@ import Main from '../../../api/main/Main';
 import '../../../styles/club/detail/DetailInfo.scss';
 
 interface DetailInfoProps {
+  accessToken: string | null;
   clubId: string;
   role: string | null;
   isMember: boolean;
@@ -22,6 +23,7 @@ interface DetailInfoProps {
 }
 
 const DetailInfo = ({
+  accessToken,
   clubId,
   role,
   isMember,
@@ -119,7 +121,9 @@ const DetailInfo = ({
           <Button
             type="button"
             className="info-content-btn-yes"
-            onClick={() => Main.applyClub(Number(clubId))} // TODO: 가입인사 모달창 추가하기
+            onClick={() => {
+              accessToken ? Main.applyClub(Number(clubId)) : nav('/login');
+            }} // TODO: 가입인사 모달창 추가하기
             title="가입 신청하기"
           />
         ) : (

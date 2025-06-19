@@ -95,6 +95,7 @@ const ClubDetail = () => {
           {currentTab === 'home' && clubInfo && (
             <>
               <DetailInfo
+                accessToken={accessToken}
                 clubId={clubId}
                 role={role}
                 isMember={isMember}
