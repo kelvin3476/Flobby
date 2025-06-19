@@ -1,0 +1,135 @@
+.text-modal-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.40);
+
+  .text-modal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 544px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.08);
+    padding: 20px;
+
+    .text-modal-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 504px;
+      gap: 20px;
+
+      .text-modal-up {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .text-modal-title {
+          color: #191919;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 24.2px;
+          letter-spacing: -0.3px;
+          align-self: flex-start;
+        }
+
+        .text-area {
+          display: flex;
+          position: relative;
+          width: 100%;
+          height: 174px;
+
+          .text-textarea {
+            width: 544px;
+            height: 174px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #E8EBED;
+            resize: none;
+
+            font-family: Pretendard;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            color: #191919;
+            line-height: 24px;
+            letter-spacing: -0.3px;
+
+            &::placeholder {
+              color: #9EA4AA;
+            }
+          }
+          > textarea:focus {
+            outline: none;
+          }
+
+          .text-count {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            color: #9EA4AA;
+            line-height: 24px;
+            letter-spacing: -0.3px;
+          }
+        }
+
+        .text-modal-err {
+          text-align: start;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          color: #F94E51;
+          line-height: 21px;
+          letter-spacing: -0.3px;
+          margin-top: -8px;
+        }
+      }
+
+      .text-modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+
+        .text-modal-cancel-btn,
+        .text-modal-submit-btn {
+          width: 96px;
+          height: 48px;
+          cursor: pointer;
+          border-radius: 6px;
+
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 21px;
+          letter-spacing: -0.3px;
+        }
+
+        .text-modal-cancel-btn {
+          background-color: #fff;
+          border: 1px solid #C9CDD2;
+          color: #454C53;
+        }
+
+        .text-modal-submit-btn {
+          background-color: #764bf6;
+          border: 1px solid #764bf6;
+          color: #fff;
+        }
+      }
+    }
+
+  }
+}
