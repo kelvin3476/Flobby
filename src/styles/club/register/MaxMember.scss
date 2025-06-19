@@ -16,10 +16,20 @@
     align-self: stretch;
 
     border-radius: 6px;
-    border: 1px solid#E8EBED;
+    border: 1px solid #E8EBED;
 
     &:focus {
       outline: none;
+    }
+
+    &::placeholder {
+      color: #9EA4AA;
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.3px;
     }
   }
 
