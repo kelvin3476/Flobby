@@ -51,7 +51,6 @@ const CategoryDropDown = ({ className, prevSubCategory, isEditPage }) => {
           for (const { mainCategory, subCategories } of response) {
             if (subCategories.includes(prevSubCategory)) {
               setMainCategory(mainCategory);
-              console.log(mainCategory);
               setSubCategory(prevSubCategory);
             }
           }
