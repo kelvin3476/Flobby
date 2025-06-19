@@ -39,10 +39,10 @@ const ClubDetail = () => {
     RecommendClubListItem[]
   >([]);
 
-  /* 모임 상세 페이지 최초 진입시 스크롤 최상단 고정 */
+  /* 모임 상세 페이지 진입 시 스크롤 최상단 고정 */
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (clubId) requestAnimationFrame(() => window.scrollTo(0, 0))
+  }, [clubId]);
 
   React.useEffect(() => {
     if (!clubId) {
