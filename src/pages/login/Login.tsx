@@ -19,11 +19,20 @@ const Login = () => {
     const {
         inputType,
         email,
+        setEmail,
         isEmailValid,
+        setIsEmailValid,
         emailError,
+        setEmailError,
         password,
+        setPassword,
         isPasswordValid,
+        setIsPasswordValid,
         passwordError,
+        setPasswordError,
+        setPasswordVisible,
+        setMaintainLogin,
+        setLoginErrorMessage,
         handleEmailBlur,
         handleEmailChange,
         handlePasswordBlur,
@@ -34,6 +43,19 @@ const Login = () => {
         handleMaintainLogin,
         loginErrorMessage,
     } = useLoginForm();
+
+    /* 로그인 페이지 최초 진입시 상태 초기화 */
+    React.useEffect(() => {
+      setEmail('');
+      setIsEmailValid(true);
+      setEmailError('');
+      setPassword('');
+      setIsPasswordValid(true);
+      setPasswordError('');
+      setPasswordVisible(false);
+      setMaintainLogin(false);
+      setLoginErrorMessage('');
+    }, []);
 
     return (
       <div className="login-container">

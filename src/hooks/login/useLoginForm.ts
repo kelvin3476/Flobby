@@ -171,6 +171,9 @@ const useLoginForm = () => {
     maintainLogin,
     handleMaintainLogin,
     loginErrorMessage,
+    setPasswordVisible,
+    setMaintainLogin,
+    setLoginErrorMessage,
   };
 };
 
