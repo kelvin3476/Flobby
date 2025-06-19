@@ -5,10 +5,10 @@ import '../../../styles/club/register/MaxMember.scss';
 
 interface classNameProps {
   className?: string;
-  prevMaxMember?: number;
+  prevMaxMember?: number | null;
 }
 
-const MaxMember = ({ className, prevMaxMember }) => {
+const MaxMember = ({ className, prevMaxMember }: classNameProps) => {
   const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } =
     useClubRegisterStore();
   const [inputValue, setInputValue] = useState('');
@@ -41,7 +41,7 @@ const MaxMember = ({ className, prevMaxMember }) => {
 
   // 수정페이지 이전 데이터 업데이트
   useEffect(() => {
-    setInputValue(prevMaxMember);
+    if (prevMaxMember) setInputValue(prevMaxMember.toString());
   }, [prevMaxMember]);
 
   return (

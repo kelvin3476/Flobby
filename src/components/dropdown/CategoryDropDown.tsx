@@ -9,8 +9,7 @@ import logger from '../../utils/Logger';
 
 interface CategoryDropDownProps {
   className?: string;
-  prevMainCategory?: string;
-  prevSubCategory?: string;
+  prevSubCategory?: string | null;
   isEditPage?: boolean;
 }
 

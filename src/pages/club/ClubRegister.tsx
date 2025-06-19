@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import MainHeader from '../../components/header/MainHeader';
 import ImageUploader from '../../components/club/register/ImageUploader';
@@ -44,7 +44,8 @@ const ClubRegister = () => {
     setMaxError,
   } = useClubRegisterStore();
   const navigate = useNavigate();
-  const { clubId } = useParams();
+  const loc = useLocation();
+  const clubId = loc.state;
 
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);

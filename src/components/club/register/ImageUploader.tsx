@@ -11,7 +11,7 @@ import '../../../styles/club/register/ImageUploader.scss';
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 interface ImageUploaderProps {
-  prevImage?: string;
+  prevImage?: string | null;
 }
 
 const ImageUploader = ({ prevImage }: ImageUploaderProps) => {
@@ -136,7 +136,7 @@ const ImageUploader = ({ prevImage }: ImageUploaderProps) => {
 
   // prev 이미지 있으면 url 상태 업데이트
   useEffect(() => {
-    setImageUrl(prevImage);
+    if (prevImage) setImageUrl(prevImage);
   }, [prevImage]);
 
   return (

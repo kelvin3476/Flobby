@@ -9,7 +9,7 @@ import '../../styles/dropdown/CommonDropDown.scss';
 
 interface RegionDropDownProps {
   className?: string;
-  prevRegion?: string;
+  prevRegion?: string | null;
 }
 
 const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
@@ -57,6 +57,8 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
     regionListController
       .getRegionList()
       .then(response => {
+        if (!prevRegion) return;
+
         const selectedRegionName = prevRegion;
         if (selectedRegionName) {
           for (const [mainRegion, subRegions] of Object.entries(response)) {
@@ -78,7 +80,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
 
-    const subRegions = regionListController.model.regionList[regionName].filter(subRegion => !subRegion.regionName.includes("전체"));
+    const subRegions = regionListController.model.regionList[regionName].filter(
+      subRegion => !subRegion.regionName.includes('전체'),
+    );
     if (subRegions && subRegions.length > 0) {
       const firstSub = subRegions[0];
       setSelectedSubRegion(firstSub.regionName);
@@ -89,8 +93,12 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
   const subList =
     selectedMainRegion &&
-    regionListController.model.regionList[selectedMainRegion].filter(subRegion => !subRegion.regionName.includes("전체"))
-      ? regionListController.model.regionList[selectedMainRegion].filter(subRegion => !subRegion.regionName.includes("전체"))
+    regionListController.model.regionList[selectedMainRegion].filter(
+      subRegion => !subRegion.regionName.includes('전체'),
+    )
+      ? regionListController.model.regionList[selectedMainRegion].filter(
+          subRegion => !subRegion.regionName.includes('전체'),
+        )
       : [];
 
   const handleLocation = (regionId: number) => {
@@ -104,7 +112,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
         <DropDown
           options={Object.keys(regionListController.model.regionList)}
           placeholder="상위 지역"
-          defaultItem={selectedSubRegion === null ? null : selectedMainRegion} /* 하위 지역이 null 인 경우 (00 전체) > 상위 지역 null 처리 및 아닌 경우엔 자동 선택된 상위 지역 노출 */
+          defaultItem={
+            selectedSubRegion === null ? null : selectedMainRegion
+          } /* 하위 지역이 null 인 경우 (00 전체) > 상위 지역 null 처리 및 아닌 경우엔 자동 선택된 상위 지역 노출 */
           disabled={false}
           onSelect={handleMainSelect}
         />
