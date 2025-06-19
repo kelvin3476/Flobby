@@ -39,6 +39,11 @@ const ClubDetail = () => {
     RecommendClubListItem[]
   >([]);
 
+  /* 모임 상세 페이지 최초 진입시 스크롤 최상단 고정 */
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   React.useEffect(() => {
     if (!clubId) {
       logger.error('모임 ID가 제공되지 않았습니다.');
