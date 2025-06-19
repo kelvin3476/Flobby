@@ -26,7 +26,7 @@ const RegionDropDown = ({ className }) => {
         const selectedRegionId = Number(getCookie('regionId'));
         if (selectedRegionId) {
           for (const [mainRegion, subRegions] of Object.entries(response)) {
-            const selectedSubRegion = subRegions.find(
+            const selectedSubRegion = subRegions.filter(subRegion => !subRegion.regionName.includes("전체")).find(
               region => region.regionId === selectedRegionId,
             );
             if (selectedSubRegion) {
@@ -44,7 +44,7 @@ const RegionDropDown = ({ className }) => {
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
 
-    const subRegions = regionListController.model.regionList[regionName];
+    const subRegions = regionListController.model.regionList[regionName].filter(subRegion => !subRegion.regionName.includes("전체"));
     if (subRegions && subRegions.length > 0) {
       const firstSub = subRegions[0];
       setSelectedSubRegion(firstSub.regionName);
@@ -55,8 +55,8 @@ const RegionDropDown = ({ className }) => {
 
   const subList =
     selectedMainRegion &&
-    regionListController.model.regionList[selectedMainRegion]
-      ? regionListController.model.regionList[selectedMainRegion]
+    regionListController.model.regionList[selectedMainRegion].filter(subRegion => !subRegion.regionName.includes("전체"))
+      ? regionListController.model.regionList[selectedMainRegion].filter(subRegion => !subRegion.regionName.includes("전체"))
       : [];
 
   const handleLocation = (regionId: number) => {
@@ -69,12 +69,14 @@ const RegionDropDown = ({ className }) => {
       <div className="dropdown-box">
         <DropDown
           options={Object.keys(regionListController.model.regionList)}
+          placeholder="상위 지역"
           defaultItem={selectedMainRegion}
           disabled={false}
           onSelect={handleMainSelect}
         />
         <DropDown
           options={subList.map(item => item.regionName)}
+          placeholder="하위 지역"
           defaultItem={selectedSubRegion}
           disabled={!selectedMainRegion}
           onSelect={(regionName: string) => {
