@@ -38,6 +38,11 @@ export default class Main {
     return await http.post(`/club/apply`, clubId);
   }
 
+  /* 모임 탈퇴 신청 */
+  static async leaveClub(clubId: number) {
+    return await http.post(`/club/leave`, clubId);
+  }
+
   /* 정기 모임 생성 */
   static async createClubMeeting(createClubMeetingData: CreateClubMeetingData, clubId: number) {
     return await http.post(`/club/${clubId}/clubmeeting/register`, createClubMeetingData);

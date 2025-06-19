@@ -66,6 +66,7 @@ const DetailInfo = ({
         break;
       case '모임 탈퇴':
         // TODO: 모달창 로직 추가
+        Main.leaveClub(Number(clubId)); /* 모임 탈퇴 api 적용 */
         break;
     }
   };
