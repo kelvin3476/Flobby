@@ -31,6 +31,12 @@ export class RegionContextController {
     return this.model.getPreferRegionsList();
   }
 
+  setPreferRegionsList(regionList: RegionItem[]): void {
+    this.model.setPreferRegionsList(regionList);
+
+    localStorage.setItem('preferRegionsList', JSON.stringify(regionList));
+  }
+
   // 선택 지역 데이터 가져오기
   getSelectedRegion(): RegionItem {
     return this.model.getSelectedRegion();
@@ -39,8 +45,10 @@ export class RegionContextController {
   // 선택 지역 데이터 설정하기
   setSelectedRegion(region: RegionItem): void {
     this.model.setSelectedRegion(region);
+
     // 쿠키에 저장
     setCookie('regionId', region.regionId.toString());
+    setCookie('regionName', region.regionName.toString());
 
     // 지역 변경 이벤트 전파
     window.dispatchEvent(new CustomEvent('regionChanged', { detail: region }));

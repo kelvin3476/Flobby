@@ -19,7 +19,11 @@ interface MainHeaderProps {
   setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
 }
 
-const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setMainDataList }: MainHeaderProps) => {
+const MainHeader: React.FC<MainHeaderProps> = ({
+  accessToken,
+  mainDataList,
+  setMainDataList,
+}: MainHeaderProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const nav = useNavigate();
   const hasAccessToken = !!accessToken;
@@ -35,7 +39,10 @@ const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setM
           <div className="up-wrapper">
             <div className="left-wrapper">
               <Logo className="header-logo" onClick={() => nav('/')} />
-              <RegionSelector mainDataList={mainDataList} setMainDataList={setMainDataList} />
+              <RegionSelector
+                mainDataList={mainDataList}
+                setMainDataList={setMainDataList}
+              />
             </div>
             <div className="right-wrapper">
               <SearchBar />
@@ -74,20 +81,22 @@ const MainHeader: React.FC<MainHeaderProps> = ({ accessToken, mainDataList, setM
             </div>
           </div>
           {isClicked && (
-            <DropDownModal 
-              className="profile-modal" 
-              items={["마이페이지", "로그아웃"]}
+            <DropDownModal
+              className="profile-modal"
+              items={['마이페이지', '로그아웃']}
               onItemClick={async (item, idx) => {
-                if (item === "로그아웃") {
+                if (item === '로그아웃') {
                   // 로그아웃 로직
                   await Logout.webLogout();
                   window.location.reload();
-                  localStorage.removeItem('token-storage'); /* 토큰 관련 정보 localstorage 초기화 */
-                } else if (item === "마이페이지") {
+                  localStorage.removeItem('token-storage');
+                  localStorage.removeItem('preferRegionsList');
+                } else if (item === '마이페이지') {
                   // 마이페이지 라우팅
                 }
               }}
-            /> )}
+            />
+          )}
           <div className="down-wrapper">
             <TextButton
               className="club-btn"
