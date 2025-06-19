@@ -53,7 +53,7 @@ const DetailInfo = ({
   const handleItemClick = (item: string) => {
     switch (item) {
       case '모임 수정':
-        nav('/club/edit/:id'); // TODO: 추후 수정
+        nav(`/club/edit/${clubId}`);
         break;
       case '정기 모임 등록':
         nav(`/club/${clubIds}/clubmeeting/register`); // TODO: 추후 수정
@@ -113,7 +113,7 @@ const DetailInfo = ({
           {isOptionClicked && (
             <DropDownModal
               className="club-detail-option-modal"
-              items={optionItems}
+              items={['모임 수정', '정기 모임 등록', '멤버 관리']}
               onItemClick={handleItemClick}
             />
           )}
