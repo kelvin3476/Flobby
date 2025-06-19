@@ -113,9 +113,7 @@ const DetailInfo = ({
           {isOptionClicked && (
             <DropDownModal
               className="club-detail-option-modal"
-              // TODO: test용 삭제 예정
-              items={['모임 수정', '정기 모임 등록', '멤버 관리']}
-              // items={optionItems}
+              items={optionItems}
               onItemClick={handleItemClick}
             />
           )}
