@@ -51,7 +51,7 @@ const ClubRegister = () => {
   const loc = useLocation();
   const clubId = loc.state;
 
-  const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
+  const [modalStep, setModalStep] = useState<null | "confirm" | "complete">(null);
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
@@ -113,7 +113,7 @@ const ClubRegister = () => {
 
     if (isError) return;
 
-    setModalStep(1);
+    setModalStep("confirm");
   };
 
   const handleSubmitClubRegistrationForm = async () => {
@@ -243,16 +243,16 @@ const ClubRegister = () => {
       {modalStep && (
         <ClubModal
           mainMessage={
-            modalStep === 1
+            modalStep === "confirm"
               ? '등록 하시겠습니까?'
               : '정상적으로 처리되었습니다.'
           }
-          showIcon={modalStep === 1}
+          showIcon={modalStep === "confirm"}
           iconType="check"
-          showCancelButton={modalStep === 1}
+          showCancelButton={modalStep === "confirm"}
           onConfirm={async () => {
-            if (modalStep === 1) {
-              setModalStep(2);
+            if (modalStep === "confirm") {
+              setModalStep("complete");
             } else {
               setModalStep(null);
               await handleSubmitClubRegistrationForm();
