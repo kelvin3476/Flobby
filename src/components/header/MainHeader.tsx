@@ -89,6 +89,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                   // 로그아웃 로직
                   await Logout.webLogout();
                   window.location.reload();
+                  localStorage.removeItem('token-storage');
                   localStorage.removeItem('preferRegionsList');
                 } else if (item === '마이페이지') {
                   // 마이페이지 라우팅
