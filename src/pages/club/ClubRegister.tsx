@@ -175,7 +175,10 @@ const ClubRegister = () => {
               prevImage={isEditPage ? clubItemData?.clubDTO.clubImage : null}
             />
             <div className="up-and-right">
-              <RegionDropDown className="register-region" />
+              <RegionDropDown
+                className="register-region"
+                prevRegion={clubItemData?.clubDTO.location}
+              />
               <CategoryDropDown className="register-category" />
               <MaxMember className="register-member" />
             </div>

@@ -7,7 +7,12 @@ import { getCookie } from '../../utils/Cookie';
 import Label from '../club/register/Label';
 import '../../styles/dropdown/CommonDropDown.scss';
 
-const RegionDropDown = ({ className }) => {
+interface RegionDropDownProps {
+  className?: string;
+  prevRegion?: string;
+}
+
+const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   const regionListController = RegionListController.getInstance();
 
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
@@ -46,6 +51,29 @@ const RegionDropDown = ({ className }) => {
         logger.error(err);
       });
   }, []);
+
+  // 수정페이지 호출 로직
+  useEffect(() => {
+    regionListController
+      .getRegionList()
+      .then(response => {
+        const selectedRegionName = prevRegion;
+        if (selectedRegionName) {
+          for (const [mainRegion, subRegions] of Object.entries(response)) {
+            const selectedSubRegion = subRegions.find(
+              region => region.regionName === prevRegion,
+            );
+            if (selectedSubRegion) {
+              setSelectedSubRegion(selectedSubRegion.regionName);
+              setSelectedMainRegion(mainRegion);
+            }
+          }
+        }
+      })
+      .catch(err => {
+        logger.error(err);
+      });
+  }, [prevRegion]);
 
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
