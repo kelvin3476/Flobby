@@ -28,6 +28,7 @@ const ClubAll = () => {
   const { mainCategory, setMainCategory, subCategory, setSubCategory } = useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
   const [clubList, setClubList] = useState<clubItem[] | null>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [selectedRegion, setSelectedRegion] = useState<string>('');
 
@@ -56,6 +57,7 @@ const ClubAll = () => {
   const clubController = ClubController.getInstance();
 
   const fetchClubItemsList = async () => {
+    setIsLoading(true);
     if (!mainCategory || mainCategory === '전체') {
       const clubListData = await clubController.getClubList();
       setClubList(clubListData);
@@ -65,6 +67,7 @@ const ClubAll = () => {
       );
       setClubList(clubListData);
     }
+    setIsLoading(false);
   };
 
   // 카테고리 값 변경 시 모임 목록 업데이트
@@ -107,7 +110,7 @@ const ClubAll = () => {
             className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
           >
             <SubCategory categoryList={categoryList} />
-            <ClubList clubList={clubList} accessToken={accessToken} />
+            <ClubList clubList={clubList} accessToken={accessToken} isLoading={isLoading} />
           </div>
         </div>
       </div>
