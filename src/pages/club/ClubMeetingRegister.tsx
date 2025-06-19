@@ -49,6 +49,11 @@ const ClubMeetingRegister = () => {
 
   const clubController = ClubController.getInstance();
 
+  /* 정기 모임 등록 페이지 최초 진입 시 스크롤 최상단 고정 */
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleValidChange = () => {
     let isError = false;
 
