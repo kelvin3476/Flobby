@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import MainHeader from '../../components/header/MainHeader';
@@ -21,6 +21,7 @@ import logger from '../../utils/Logger';
 import { ClubController } from '../../services/club/controllers/ClubController';
 
 import '../../styles/club/register/ClubRegister.scss';
+import { ClubItemDetail } from '../../api/ApiTypes';
 
 const ClubRegister = () => {
   const {
@@ -44,7 +45,9 @@ const ClubRegister = () => {
   } = useClubRegisterStore();
   const navigate = useNavigate();
   const { clubId } = useParams();
+
   const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
+  const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
@@ -136,7 +139,23 @@ const ClubRegister = () => {
     }
   };
 
+  /* 모임 수정 페이지 로직 */
   const isEditPage = window.location.pathname.startsWith('/club/edit');
+
+  useEffect(() => {
+    if (isEditPage) {
+      try {
+        const fetchClubItemData = async () => {
+          const data = await clubController.selectClubDetail(Number(clubId));
+          setClubItemData(data);
+        };
+
+        fetchClubItemData();
+      } catch (error) {
+        logger.error('clubRegister', error);
+      }
+    }
+  }, [clubId, isEditPage]);
 
   return (
     <div className="register-container">
@@ -152,7 +171,9 @@ const ClubRegister = () => {
         </div>
         <div className="register-content">
           <div className="register-up">
-            <ImageUploader />
+            <ImageUploader
+              prevImage={isEditPage ? clubItemData?.clubDTO.clubImage : null}
+            />
             <div className="up-and-right">
               <RegionDropDown className="register-region" />
               <CategoryDropDown className="register-category" />

@@ -10,7 +10,11 @@ import '../../../styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-const ImageUploader = () => {
+interface ImageUploaderProps {
+  prevImage?: string;
+}
+
+const ImageUploader = ({ prevImage }: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragAreaRef = useRef<HTMLDivElement>(null);
   const [filePicker, setFilePicker] = useState<FilePickerInput<File> | null>(
@@ -129,6 +133,11 @@ const ImageUploader = () => {
     const file = e.target.files?.[0];
     if (file) handleFile(file);
   };
+
+  // prev 이미지 있으면 url 상태 업데이트
+  useEffect(() => {
+    setImageUrl(prevImage);
+  }, [prevImage]);
 
   return (
     <div className="image-uploader-container">
