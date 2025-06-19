@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../button/Button';
+import ClubModal from '../../modal/ClubModal';
 import '../../../styles/club/detail/ClubMeetingItem.scss';
 
 interface ClubMeetingProps {
@@ -33,6 +34,7 @@ const ClubMeetingItem = ({
   entryfee,
   clubId,
 }: ClubMeetingProps) => {
+  const [modalStep, setModalStep] = useState<null | "confirm" | "complete">(null);
   const navigate = useNavigate();
 
   const handleClickModifyButton = () => {
@@ -156,7 +158,7 @@ const ClubMeetingItem = ({
                     type="button"
                     className="club-meeting-button-apply"
                     title="참석"
-                    onClick={() => {}}
+                    onClick={() => setModalStep("confirm")}
                   />
                 )}
               </>
@@ -164,6 +166,27 @@ const ClubMeetingItem = ({
           </>
         ) : null}
       </div>
+
+      {modalStep && (
+        <ClubModal 
+          mainMessage={
+            modalStep === "confirm"
+              ? "참석하시겠습니까?"
+              : "정상적으로 처리되었습니다."
+          }
+          showIcon={modalStep === "confirm"}
+          iconType='check'
+          showCancelButton={modalStep === "confirm"}
+          onConfirm={() => {
+            if (modalStep === "confirm") {
+              setModalStep("complete");
+            } else {
+              setModalStep(null);
+            }
+          }}
+          onCancel={() => setModalStep(null)}
+        />
+      ) }
     </div>
   );
 };
