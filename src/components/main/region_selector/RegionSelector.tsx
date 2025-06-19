@@ -58,22 +58,22 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({
   // 새로고침시 선택지역 초기화 코드
   // TODO: 관심지역 초기화 코드도 필요(로그인 유지 구현되면)
   useEffect(() => {
-    const controller = RegionContextController.getInstance();
-
-    const selectedRegion = controller.getSelectedRegion();
+    const selectedRegion = regionContextController.getSelectedRegion();
 
     // 만약 디폴트 값과 같다면 쿠키값으로 상태 업데이트(쿠키값이 디폴트 값이어도 상관없으므로)
     if (selectedRegion.regionId === DEFAULT_REGION.regionId) {
-      controller.model.initFromCashingData();
+      regionContextController.model.initFromCashingData();
     }
 
     const preferRegionList = localStorage.getItem('preferRegionsList');
     if (preferRegionList) {
-      controller.setPreferRegionsList(JSON.parse(preferRegionList));
+      regionContextController.setPreferRegionsList(
+        JSON.parse(preferRegionList),
+      );
     }
 
-    setSelectedRegion(controller.getSelectedRegion());
-    setPreferRegions(controller.getPreferRegionsList());
+    setSelectedRegion(regionContextController.getSelectedRegion());
+    setPreferRegions(regionContextController.getPreferRegionsList());
   }, []);
 
   return (
