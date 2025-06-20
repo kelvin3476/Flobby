@@ -23,6 +23,7 @@ interface DetailInfoProps {
   maxMembers: number;
   clubImage: string;
   subCategory: string;
+  fetchClubDetail: () => Promise<void>;
 }
 
 const DetailInfo = ({
@@ -36,6 +37,7 @@ const DetailInfo = ({
   maxMembers,
   clubImage,
   subCategory,
+  fetchClubDetail,
 }: DetailInfoProps) => {
   const [isOptionClicked, setIsOptionClicked] = useState(false);
   const [modalStep, setModalStep] = useState<null | "text" | "confirm" | "complete" | "select">(null);
@@ -79,7 +81,7 @@ const DetailInfo = ({
     }
   };
 
-  const handleModalSubmit = async() => {
+  const handleModalSubmit = async () => {
     if (modalMode === "greeting") {
       await Main.applyClub(Number(clubId));
     } else if (modalMode === "report") {
@@ -220,6 +222,7 @@ const DetailInfo = ({
               await handleModalSubmit();
               setModalStep("complete");
             } else if (modalStep === "complete") {
+              await fetchClubDetail();
               setModalStep(null);
               setModalMode(null);
             }
