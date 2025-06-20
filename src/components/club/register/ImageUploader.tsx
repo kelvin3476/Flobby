@@ -161,30 +161,38 @@ const ImageUploader = ({ prevImage }: ImageUploaderProps) => {
                   <span>이미지 선택</span>
                 </button>
               </div>
+
               {isLoading && (
                 <div className="spinner-box">
-                  {' '}
                   <LoadingSpinnerController />
                 </div>
               )}
             </div>
           ) : (
-            <div className="image-uploader-info-box">
-              <div className="add-photo-icon"></div>
-              <div className="image-uploader-info">
-                <div className="image-uploader-info-text-box">
-                  <span>이미지를 드래그하여 업로드하세요.</span>
-                  <span>5MB 이하의 이미지 파일만 등록할 수 있습니다.</span>
+            <>
+              <div className="image-uploader-info-box">
+                <div className="add-photo-icon"></div>
+                <div className="image-uploader-info">
+                  <div className="image-uploader-info-text-box">
+                    <span>이미지를 드래그하여 업로드하세요.</span>
+                    <span>5MB 이하의 이미지 파일만 등록할 수 있습니다.</span>
+                  </div>
+                  <button
+                    className="image-uploader-btn"
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    <span>이미지 선택</span>
+                  </button>
                 </div>
-                <button
-                  className="image-uploader-btn"
-                  type="button"
-                  onClick={handleClick}
-                >
-                  <span>이미지 선택</span>
-                </button>
               </div>
-            </div>
+
+              {isLoading && (
+                <div className="overlay">
+                  <LoadingSpinnerController />
+                </div>
+              )}
+            </>
           )}
 
           <input
