@@ -32,23 +32,126 @@ const ClubMemberManagement = ({
       </div>
 
       {/* 멤버 리스트 */}
-      <div className="club-member-management-list-container">
-        {clubMemberList.map(memberItem => {
-          return (
-            <div
-              className="club-member-management-list"
-              key={memberItem.clubMemberId}
-            >
+      {/* 모임장 권한 */}
+      {loginUserRole && loginUserRole === 'LEADER' && (
+        <div className="club-member-management-list-container">
+          {clubMemberList.map((memberItem, index) => {
+            return (
+              <div className="club-member-management-list-box">
+                <div className="club-member-management-list">
+                  {/* 아이템 영역 */}
+                  <ClubMemberItem
+                    clubMemberId={memberItem.clubMemberId}
+                    nickname={memberItem.nickname}
+                    role={memberItem.role}
+                    profilePhoto={memberItem.profilePhoto}
+                  />
+
+                  {/* 버튼 영역 */}
+                  {/* 모임장 권한: 모임장 양도, 운영진 해제, 강퇴*/}
+                  {memberItem.role !== 'LEADER' && (
+                    <div className="club-member-management-btn-container">
+                      <button
+                        type="button"
+                        className="club-member-management-btn transfer-leader"
+                      >
+                        모임장 양도
+                      </button>
+
+                      {/* 운영진: 운영진 해제 버튼 노출 / 일반 멤버: 등록 버튼 노출 */}
+                      {memberItem.role === 'MANAGER' && (
+                        <button
+                          type="button"
+                          className="club-member-management-btn remove-manager"
+                        >
+                          운영진 해제
+                        </button>
+                      )}
+                      {memberItem.role === 'MEMBER' && (
+                        <button
+                          type="button"
+                          className="club-member-management-btn remove-manager"
+                        >
+                          운영진 등록
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        className="club-member-management-btn kick-member"
+                      >
+                        강퇴
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* 구분선 */}
+                <div
+                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
+                ></div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 운영진 권한 */}
+      {loginUserRole && loginUserRole === 'MANAGER' && (
+        <div className="club-member-management-list-container">
+          {clubMemberList.map((memberItem, index) => {
+            return (
+              <div className="club-member-management-list-box">
+                <div className="club-member-management-list">
+                  {/* 아이템 영역 */}
+                  <ClubMemberItem
+                    clubMemberId={memberItem.clubMemberId}
+                    nickname={memberItem.nickname}
+                    role={memberItem.role}
+                    profilePhoto={memberItem.profilePhoto}
+                  />
+
+                  {/* 버튼 영역 */}
+                  {/* 운영진 권한: 강퇴*/}
+                  {memberItem.role === 'MEMBER' && (
+                    <div className="club-member-management-btn-container">
+                      {/* 모임장 & 운영진 공통 권한 */}
+                      <button
+                        type="button"
+                        className="club-member-management-btn kick-member"
+                      >
+                        강퇴
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* 구분선 */}
+                <div
+                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
+                ></div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* 일반 사용자(비로그인 유저 & 모임 일반 멤버) 권한 */}
+      {(loginUserRole === null || loginUserRole === 'MEMBER') && (
+        <div className="club-member-management-list-container">
+          {clubMemberList.map(memberItem => {
+            return (
               <ClubMemberItem
                 clubMemberId={memberItem.clubMemberId}
                 nickname={memberItem.nickname}
                 role={memberItem.role}
                 profilePhoto={memberItem.profilePhoto}
+                key={memberItem.clubMemberId}
               />
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

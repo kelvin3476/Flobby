@@ -17,7 +17,10 @@ const ClubMemberItem = ({
   return (
     <div className="club-detail-member-item-container" key={clubMemberId}>
       <div className="club-detail-member-info-box">
-        <img src={profilePhoto} alt="프로필 이미지" />
+        <img
+          src={profilePhoto || '/img/header/profile-ex.jpg'}
+          alt="프로필 이미지"
+        />
         <span>{nickname}</span>
       </div>
       <div
