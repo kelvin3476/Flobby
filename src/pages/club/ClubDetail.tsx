@@ -46,11 +46,6 @@ const ClubDetail = () => {
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  /* 모임 상세 페이지 진입 시 스크롤 최상단 고정 */
-  React.useEffect(() => {
-    if (clubId) requestAnimationFrame(() => window.scrollTo(0, 0));
-  }, [clubId]);
-
   React.useEffect(() => {
     if (!clubId) {
       logger.error('모임 ID가 제공되지 않았습니다.');
