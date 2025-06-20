@@ -26,9 +26,12 @@ import { ClubItemDetail } from '../../api/ApiTypes';
 const ClubRegister = () => {
   const {
     clubName,
+    setClubName,
     description,
+    setDescription,
     location,
     maxMembers,
+    setMaxMembers,
     file,
     setIsImageFileValid,
     setImageFileError,
@@ -41,6 +44,7 @@ const ClubRegister = () => {
     setIsMaxValid,
     setTitleError,
     setDescError,
+    setDescCount,
     setMaxError,
   } = useClubRegisterStore();
   const navigate = useNavigate();
@@ -157,6 +161,24 @@ const ClubRegister = () => {
       }
     }
   }, [clubId, isEditPage]);
+
+  /* 모임 등록 페이지 최초 진입시 상태 초기화 */
+  useEffect(() => {
+    setClubName('');
+    setDescription('');
+    setIsTitleValid(true);
+    setIsDescValid(true);
+    setTitleError('');
+    setDescError('');
+    setDescCount(0);
+    setIsCategoryValid(true);
+    setCategoryError('');
+    setMaxMembers(0);
+    setIsMaxValid(true);
+    setMaxError('');
+    setIsImageFileValid(true);
+    setImageFileError('');
+  }, []);
 
   return (
     <div className="register-container">
