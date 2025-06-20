@@ -6,16 +6,16 @@ import '../../../styles/club/detail/ClubMeetingItem.scss';
 
 interface ClubMeetingProps {
   meetingId: number; // 정기 모임 id
-  loginMemberId: number;
-  meetingLeaderId: number;
+  loginMemberId: number; // 현재 로그인 유저의 id
+  meetingLeaderId: number; // 정기 모임 생성자의 id
   clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingLocation: string;
   maxParticipants: number;
   currentParticipants: number;
   isApplied: boolean;
-  isMember: boolean;
-  role: string;
+  isMember: boolean; // 모임의 멤버인지 여부
+  loginUserRole: string | null; // 현재 로그인 유저의 해당 모임에 대한 role
   entryfee: string;
   clubId: string; // 모임 id
 }
@@ -36,7 +36,7 @@ const ClubMeetingItem = ({
   currentParticipants,
   isApplied,
   isMember,
-  role,
+  loginUserRole,
   entryfee,
   clubId,
 }: ClubMeetingProps) => {
@@ -142,7 +142,8 @@ const ClubMeetingItem = ({
           /* 모임장 & 운영진, 일반 사용자 두 가지 케이스로 분기 */
           <>
             {/* 모임장 & 운영진일 경우 정기 모임 수정/삭제 권한 O */}
-            {role === 'leader' || role === 'manager' ? (
+            {loginUserRole &&
+            (loginUserRole === 'leader' || loginUserRole === 'manager') ? (
               <>
                 <Button
                   type="button"
