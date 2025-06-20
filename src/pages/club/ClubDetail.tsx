@@ -107,50 +107,58 @@ const ClubDetail = () => {
           onTabChange={setCurrentTab}
         />
 
-        <div className="club-detail-content">
-          {currentTab === 'home' && clubInfo && (
-            <>
-              <DetailInfo
-                accessToken={accessToken}
-                clubId={clubId}
-                loginUserRole={loginUserRole}
-                isMember={isMember}
-                clubName={clubInfo.clubName}
-                location={clubInfo.location}
-                currentMembers={clubInfo.currentMembers}
-                maxMembers={clubInfo.maxMembers}
-                clubImage={clubInfo.clubImage}
-                subCategory={clubInfo.subCategory}
-              />
-              <DetailDescription description={clubInfo.description} />
-              <ClubMeetingList
-                clubMeetingList={clubMeetingList}
-                loginMemberId={loginMemberId}
-                loginUserRole={loginUserRole}
-                isMember={isMember}
-                clubId={clubId}
-              />
-              <ClubMemberList
-                clubMemberList={clubMemberList}
-                setCurrentTab={setCurrentTab}
-              />
-              <RecommendClubList
-                recommendClubList={recommendClubList}
-                isDetailPage={window.location.pathname === `/club/${clubId}`}
-              />
-            </>
-          )}
+        {isLoading ? (
+          <LoadingSpinnerController />
+        ) : (
+          <>
+            <div className="club-detail-content">
+              {currentTab === 'home' && clubInfo && (
+                <>
+                  <DetailInfo
+                    accessToken={accessToken}
+                    clubId={clubId}
+                    loginUserRole={loginUserRole}
+                    isMember={isMember}
+                    clubName={clubInfo.clubName}
+                    location={clubInfo.location}
+                    currentMembers={clubInfo.currentMembers}
+                    maxMembers={clubInfo.maxMembers}
+                    clubImage={clubInfo.clubImage}
+                    subCategory={clubInfo.subCategory}
+                  />
+                  <DetailDescription description={clubInfo.description} />
+                  <ClubMeetingList
+                    clubMeetingList={clubMeetingList}
+                    loginMemberId={loginMemberId}
+                    loginUserRole={loginUserRole}
+                    isMember={isMember}
+                    clubId={clubId}
+                  />
+                  <ClubMemberList
+                    clubMemberList={clubMemberList}
+                    setCurrentTab={setCurrentTab}
+                  />
+                  <RecommendClubList
+                    recommendClubList={recommendClubList}
+                    isDetailPage={
+                      window.location.pathname === `/club/${clubId}`
+                    }
+                  />
+                </>
+              )}
 
-          {currentTab === 'board' && <div>게시판 탭 준비중</div>}
-          {currentTab === 'member' && (
-            <ClubMemberManagement
-              clubMemberList={clubMemberList}
-              currentMembers={clubInfo.currentMembers}
-              maxMembers={clubInfo.maxMembers}
-              loginUserRole={loginUserRole}
-            />
-          )}
-        </div>
+              {currentTab === 'board' && <div>게시판 탭 준비중</div>}
+              {currentTab === 'member' && (
+                <ClubMemberManagement
+                  clubMemberList={clubMemberList}
+                  currentMembers={clubInfo.currentMembers}
+                  maxMembers={clubInfo.maxMembers}
+                  loginUserRole={loginUserRole}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
