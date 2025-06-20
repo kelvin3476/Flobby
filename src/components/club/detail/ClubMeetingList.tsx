@@ -9,14 +9,14 @@ import '../../../styles/club/detail/ClubMeetingList.scss';
 interface ClubMeetingListProps {
   clubMeetingList: ClubMeetingListItem[];
   loginMemberId: number;
-  role: string;
+  loginUserRole: string | null;
   isMember: boolean;
   clubId: string;
 }
 const ClubMeetingList = ({
   clubMeetingList,
   loginMemberId,
-  role,
+  loginUserRole,
   isMember,
   clubId,
 }: ClubMeetingListProps) => {
@@ -39,7 +39,7 @@ const ClubMeetingList = ({
               isMember={isMember}
               loginMemberId={loginMemberId}
               meetingLeaderId={clubMeetingItem.meetingLeaderId}
-              role={role}
+              loginUserRole={loginUserRole}
               entryfee={clubMeetingItem.entryfee}
               meetingId={clubMeetingItem.meetingId}
               clubId={clubId}

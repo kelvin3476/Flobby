@@ -15,7 +15,7 @@ import '../../../styles/club/detail/DetailInfo.scss';
 interface DetailInfoProps {
   accessToken: string | null;
   clubId: string;
-  role: string | null;
+  loginUserRole: string | null;
   isMember: boolean;
   clubName: string;
   location: string;
@@ -28,7 +28,7 @@ interface DetailInfoProps {
 const DetailInfo = ({
   accessToken,
   clubId,
-  role,
+  loginUserRole,
   isMember,
   clubName,
   location,
@@ -45,10 +45,10 @@ const DetailInfo = ({
   const { clubIds } = useParams<{ clubIds: string }>();
 
   let optionItems: string[] = [];
-  if (role === 'LEADER') {
+  if (loginUserRole === 'LEADER') {
     // 모임장일 경우
     optionItems = ['모임 수정', '정기 모임 등록', '멤버 관리'];
-  } else if (isMember && role !== null) {
+  } else if (isMember && loginUserRole !== null) {
     // 운영진 포함 모임 가입자의 경우
     optionItems = ['정기 모임 등록', '모임 신고', '모임 탈퇴'];
   } else {
@@ -137,7 +137,7 @@ const DetailInfo = ({
             />
           )}
         </div>
-        {role === null ? (
+        {loginUserRole === null ? (
           <Button
             type="button"
             className="info-content-btn-yes"

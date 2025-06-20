@@ -12,7 +12,12 @@ import ClubMemberManagement from '../../components/club/detail/ClubMemberManagem
 
 import useMainPage from '../../hooks/main/useMainPage';
 
-import { ClubDTO, ClubMeetingListItem, ClubMemberListItem, RecommendClubListItem } from '../../api/ApiTypes';
+import {
+  ClubDTO,
+  ClubMeetingListItem,
+  ClubMemberListItem,
+  RecommendClubListItem,
+} from '../../api/ApiTypes';
 import { ClubController } from '../../services/club/controllers/ClubController';
 
 import logger from '../../utils/Logger';
@@ -27,7 +32,7 @@ const ClubDetail = () => {
 
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
-  const [role, setRole] = useState<string | null>(null);
+  const [loginUserRole, setLoginUserRole] = useState<string | null>(null);
   const [currentTab, setCurrentTab] = useState<string>('home');
   const [clubInfo, setClubInfo] = useState<ClubDTO>(null);
   const [clubMeetingList, setClubMeetingList] = useState<ClubMeetingListItem[]>(
@@ -60,7 +65,7 @@ const ClubDetail = () => {
         setClubMeetingList(response.clubMeetingList);
         setIsMember(response.isMember);
         setLoginMemberId(response.loginMemberId);
-        setRole(response.role);
+        setLoginUserRole(response.role);
         setClubMeetingList(response.clubMeetingList);
         setClubMemberList(response.clubMemberList);
         setRecommendClubList(response.recommendClubList);
@@ -103,45 +108,48 @@ const ClubDetail = () => {
           <>
             <div className="club-detail-content">
               {currentTab === 'home' && clubInfo && (
-                  <>
-                    <DetailInfo
-                        accessToken={accessToken}
-                        clubId={clubId}
-                        role={role}
-                        isMember={isMember}
-                        clubName={clubInfo.clubName}
-                        location={clubInfo.location}
-                        currentMembers={clubInfo.currentMembers}
-                        maxMembers={clubInfo.maxMembers}
-                        clubImage={clubInfo.clubImage}
-                        subCategory={clubInfo.subCategory}
-                    />
-                    <DetailDescription description={clubInfo.description} />
-                    <ClubMeetingList
-                        clubMeetingList={clubMeetingList}
-                        loginMemberId={loginMemberId}
-                        role={role}
-                        isMember={isMember}
-                        clubId={clubId}
-                    />
-                    <ClubMemberList
-                        clubMemberList={clubMemberList}
-                        setCurrentTab={setCurrentTab}
-                    />
-                    <RecommendClubList
-                        recommendClubList={recommendClubList}
-                        isDetailPage={window.location.pathname === `/club/${clubId}`}
-                    />
-                  </>
+                <>
+                  <DetailInfo
+                    accessToken={accessToken}
+                    clubId={clubId}
+                    loginUserRole={loginUserRole}
+                    isMember={isMember}
+                    clubName={clubInfo.clubName}
+                    location={clubInfo.location}
+                    currentMembers={clubInfo.currentMembers}
+                    maxMembers={clubInfo.maxMembers}
+                    clubImage={clubInfo.clubImage}
+                    subCategory={clubInfo.subCategory}
+                  />
+                  <DetailDescription description={clubInfo.description} />
+                  <ClubMeetingList
+                    clubMeetingList={clubMeetingList}
+                    loginMemberId={loginMemberId}
+                    loginUserRole={loginUserRole}
+                    isMember={isMember}
+                    clubId={clubId}
+                  />
+                  <ClubMemberList
+                    clubMemberList={clubMemberList}
+                    setCurrentTab={setCurrentTab}
+                  />
+                  <RecommendClubList
+                    recommendClubList={recommendClubList}
+                    isDetailPage={
+                      window.location.pathname === `/club/${clubId}`
+                    }
+                  />
+                </>
               )}
 
               {currentTab === 'board' && <div>게시판 탭 준비중</div>}
               {currentTab === 'member' && (
-                  <ClubMemberManagement
-                      clubMemberList={clubMemberList}
-                      currentMembers={clubInfo.currentMembers}
-                      maxMembers={clubInfo.maxMembers}
-                  />
+                <ClubMemberManagement
+                  clubMemberList={clubMemberList}
+                  currentMembers={clubInfo.currentMembers}
+                  maxMembers={clubInfo.maxMembers}
+                  loginUserRole={loginUserRole}
+                />
               )}
             </div>
           </>
