@@ -43,7 +43,7 @@ const ClubMeetingRegister = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const nav = useNavigate();
 
-  const [modalStep, setModalStep] = useState<null | 1 | 2>(null);
+  const [modalStep, setModalStep] = useState<null | "confirm" | "complete">(null);
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
@@ -109,7 +109,7 @@ const ClubMeetingRegister = () => {
 
     if (isError) return;
 
-    setModalStep(1);
+    setModalStep("confirm");
   };
 
   const formattedDate = (input: string): string => {
@@ -192,12 +192,13 @@ const ClubMeetingRegister = () => {
 
       {modalStep && (
         <ClubModal 
-          message={modalStep === 1 ? "정기 모임을 등록할까요?" : "정기 모임이 등록되었어요."}
-          showIcon={modalStep === 1}
-          showCancelButton={modalStep === 1}
+          mainMessage={modalStep === "confirm" ? "정기 모임을 등록할까요?" : "정기 모임이 등록되었어요."}
+          showIcon={modalStep === "confirm"}
+          iconType='check'
+          showCancelButton={modalStep === "confirm"}
           onConfirm={async () => {
-            if (modalStep === 1) {
-              setModalStep(2);
+            if (modalStep === "confirm") {
+              setModalStep("complete");
             } else {
               setModalStep(null);
               await handleSubmitClubMeetingForm();
