@@ -28,9 +28,6 @@ const ClubMeetingDate = () => {
           setClubMeetingDate(
             `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
           );
-          console.log(
-            `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
-          );
 
           setIsClubMeetingDateValid(true);
           setClubMeetingDateError('');
