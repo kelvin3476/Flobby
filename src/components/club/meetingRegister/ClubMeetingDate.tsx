@@ -66,6 +66,19 @@ const ClubMeetingDate = () => {
     };
   }, [clubMeetingDate, isTouched]);
 
+  const formatDateWithDay = (date: string): string => {
+    if (!date) return '';
+    const selectedDate = new Date(date);
+
+    const yy = String(selectedDate.getFullYear()).slice(2);
+    const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(selectedDate.getDate()).padStart(2, '0');
+    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    const day = days[selectedDate.getDay()];
+
+    return `${yy}.${mm}.${dd} (${day})`;
+  };
+
   return (
     <div className="club-meeting-date-wrapper">
       <Label labelTitle="날짜" isRequired />
@@ -75,12 +88,12 @@ const ClubMeetingDate = () => {
           <div
             className={`club-meeting-date ${clubMeetingDate ? 'filled' : ''}`}
           >
-            {clubMeetingDate || '날짜 선택'}
+            {formatDateWithDay(clubMeetingDate) || '날짜 선택'}
           </div>
         </div>
         <div className="club-meeting-date-dropdown-icon"></div>
-        <div className="datepicker-container" ref={datepickerRef} />
       </div>
+      <div className="datepicker-container" ref={datepickerRef} />
       {!isClubMeetingDateValid && (
         <div className="error">{clubMeetingDateError}</div>
       )}

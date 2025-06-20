@@ -5,7 +5,7 @@ type DatePickerOptions = {
 
 export default class DatePicker {
   private container: HTMLElement;
-  private currentDate: Date; // 현재 날짜
+  private currentDate: Date; // 현재 선택 날짜
   private today: Date; // 오늘 날짜
   private selectedDate: Date | null = null; // 선택된 날짜
   private options: DatePickerOptions;
@@ -24,15 +24,13 @@ export default class DatePicker {
     this.render(); // 캘린더 그리기
     this.hide(); // 트리거 전에는 숨기기
 
-    this.attachOutsideClickHandler(); // 외부 클릭 이벤트 핸들러 등록
+    // 외부 클릭 이벤트 핸들러 등록
+    this.attachOutsideClickHandler();
+
     // 트리거 이벤트 핸들러 등록
     if (this.options.trigger) {
       this.options.trigger.addEventListener('click', e => {
         e.stopPropagation();
-
-        // if (!this.container.contains(e.target as Node)) {
-        //   this.hide();
-        // }
 
         this.container.style.display === 'block' ? this.hide() : this.show();
       });
@@ -67,19 +65,17 @@ export default class DatePicker {
     const prev = document.createElement('button');
     prev.classList.add('datepicker-header-prev-button');
     prev.addEventListener('click', e => {
+      e.stopPropagation();
       this.currentDate.setMonth(this.currentDate.getMonth() - 1);
       this.render();
-
-      this.container.style.display === 'block' ? this.hide() : this.show();
     });
 
     const next = document.createElement('button');
     next.classList.add('datepicker-header-next-button');
-    next.addEventListener('click', () => {
+    next.addEventListener('click', e => {
+      e.stopPropagation();
       this.currentDate.setMonth(this.currentDate.getMonth() + 1);
       this.render();
-
-      this.container.style.display === 'block' ? this.hide() : this.show();
     });
 
     const title = document.createElement('span');
@@ -128,15 +124,56 @@ export default class DatePicker {
 
       const dateOffset = i - firstDay;
 
+      /* 이전 달 날짜 */
       if (dateOffset < 0) {
-        // 이전 달 날짜
         const day = prevMonthLastDate + dateOffset + 1;
+        const thisDate = new Date(year, month - 1, day);
+
         dayCell.textContent = String(day);
-        dayCell.classList.add('disabled');
+
+        // 일요일 클래스 추가
+        if (new Date(year, month - 1, day).getDay() === 0)
+          dayCell.classList.add('sunday');
+
+        // 오늘보다 이전 날짜면 비활성화
+        // 오늘 기준 다음 달 달력부터는 이전 달 날짜도 활성화
+        if (
+          year < this.today.getFullYear() ||
+          (year === this.today.getFullYear() && month <= this.today.getMonth())
+        ) {
+          dayCell.classList.add('disabled');
+        } else {
+          // 클릭 이벤트 추가
+          dayCell.addEventListener('click', e => {
+            e.stopPropagation();
+            this.selectDate(thisDate);
+          });
+
+          // selected 클래스 추가
+          if (
+            this.selectedDate &&
+            this.isSameDate(thisDate, this.selectedDate)
+          ) {
+            dayCell.classList.add('selected');
+          }
+        }
       } else if (dateOffset >= lastDate) {
         // 다음 달 날짜
-        dayCell.textContent = String(dateOffset - lastDate + 1);
-        dayCell.classList.add('disabled');
+        const day = dateOffset - lastDate + 1;
+        const thisDate = new Date(year, month + 1, day);
+
+        dayCell.textContent = String(day);
+
+        // 클릭 이벤트 추가
+        dayCell.addEventListener('click', e => {
+          e.stopPropagation();
+          this.selectDate(thisDate);
+        });
+
+        // selected 클래스 추가
+        if (this.selectedDate && this.isSameDate(thisDate, this.selectedDate)) {
+          dayCell.classList.add('selected');
+        }
       } else {
         // 현재 달 날짜
         const day = dateOffset + 1;
@@ -156,12 +193,14 @@ export default class DatePicker {
           // 오늘보다 이전인 날짜는 disabled
           dayCell.classList.add('disabled');
         } else {
+          // 클릭 이벤트 추가
           dayCell.addEventListener('click', e => {
             e.stopPropagation();
             this.selectDate(thisDate);
           });
         }
 
+        // selected 클래스 추가
         if (this.selectedDate && this.isSameDate(thisDate, this.selectedDate)) {
           dayCell.classList.add('selected');
         }
@@ -178,6 +217,8 @@ export default class DatePicker {
     if (date < this.today) return;
 
     this.selectedDate = date;
+    this.currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
+
     this.options.onSelect?.(date);
     this.render();
     this.hide();
