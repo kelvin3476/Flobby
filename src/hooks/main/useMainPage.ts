@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../../utils/Logger';
 import useAuthStore from "../../store/auth/useAuthStore";
 import useMainDataStore from "../../store/main/useMainDataStore";
@@ -5,6 +6,8 @@ import Login from "../../api/login/Login";
 import Logout from '../../api/logout/Logout';
 
 const useMainPage = () => {
+    const [isTokenValid, setIsTokenValid] = React.useState<boolean>(false); // 토큰 유효성 검사 상태
+
     const {
         accessToken,
         setAccessToken,
@@ -26,6 +29,7 @@ const useMainPage = () => {
             .then(response => {
                 if (response.data.code === 1000) {
                     setAccessToken(response.data.data);
+                    setIsTokenValid(true); // 토큰 유효성 검사 성공
                 } else {
                     logger.error('엑세스 토큰 재발급 실패', response.data.code);
                 }
@@ -75,6 +79,7 @@ const useMainPage = () => {
         handleRefresh,
         mainDataList,
         setMainDataList,
+        isTokenValid,
     }
 }
 

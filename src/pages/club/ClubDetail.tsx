@@ -28,7 +28,7 @@ import '../../styles/club/detail/ClubDetail.scss';
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken, mainDataList, setMainDataList, isTokenValid } = useMainPage();
 
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
@@ -46,40 +46,40 @@ const ClubDetail = () => {
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    if (!clubId) {
-      logger.error('모임 ID가 제공되지 않았습니다.');
-      return;
+  const fetchClubDetail = React.useCallback(async () => {
+    setIsLoading(true);
+    try {
+      // 여기에 API 호출 로직을 추가하세요.
+      logger.log(`모임 ID: ${clubId}`);
+      const response = await ClubController.getInstance().selectClubDetail(
+          Number(clubId),
+      );
+      setClubInfo(response.clubDTO);
+      setClubMeetingList(response.clubMeetingList);
+      setIsMember(response.isMember);
+      setLoginMemberId(response.loginMemberId);
+      setLoginUserRole(response.role);
+      setClubMeetingList(response.clubMeetingList);
+      setClubMemberList(response.clubMemberList);
+      setRecommendClubList(response.recommendClubList);
+      logger.log('모임 상세 정보:', response);
+    } catch (error) {
+      logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
+    } finally {
+      setIsLoading(false);
+      window.scrollTo(0, 0);
     }
+  }, [clubId]);
+
+  React.useEffect(() => {
+    if (!clubId) return console.log('모임 ID가 없습니다.');
+
+    /* 로그인 유저 + 새로고침 o + 토큰 재발급 x */
+    if (accessToken === null && !isTokenValid) return console.log('토큰이 유효하지 않습니다.');
 
     // 모임 상세 정보를 가져오는 API 호출
-    const fetchClubDetail = async () => {
-      setIsLoading(true);
-      try {
-        // 여기에 API 호출 로직을 추가하세요.
-        logger.log(`모임 ID: ${clubId}`);
-        const response = await ClubController.getInstance().selectClubDetail(
-          Number(clubId),
-        );
-        setClubInfo(response.clubDTO);
-        setClubMeetingList(response.clubMeetingList);
-        setIsMember(response.isMember);
-        setLoginMemberId(response.loginMemberId);
-        setLoginUserRole(response.role);
-        setClubMeetingList(response.clubMeetingList);
-        setClubMemberList(response.clubMemberList);
-        setRecommendClubList(response.recommendClubList);
-        logger.log('모임 상세 정보:', response);
-      } catch (error) {
-        logger.error('모임 상세 정보를 가져오는 중 오류 발생:', error);
-      } finally {
-        setIsLoading(false);
-        window.scrollTo(0, 0);
-      }
-    };
-
     fetchClubDetail();
-  }, [clubId]);
+  }, [clubId, accessToken, isTokenValid, fetchClubDetail]);
 
   const tabItems = [
     { label: '홈', key: 'home' },
@@ -120,6 +120,7 @@ const ClubDetail = () => {
                     maxMembers={clubInfo.maxMembers}
                     clubImage={clubInfo.clubImage}
                     subCategory={clubInfo.subCategory}
+                    fetchClubDetail={fetchClubDetail}
                   />
                   <DetailDescription description={clubInfo.description} />
                   <ClubMeetingList
