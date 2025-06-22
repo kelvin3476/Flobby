@@ -144,6 +144,36 @@ const ClubRegister = () => {
     }
   };
 
+  const handleEditClubRegistrationForm = async () => {
+    const formData = new FormData();
+    
+    // 이미지가 있는 경우에만 추가
+    if (file) {
+      logger.log('file', file);
+      formData.append('file', file);
+    }
+
+    const jsonData = {
+      clubName: clubName,
+      description: description,
+      mainCategory: mainCategory,
+      subCategory: subCategory,
+      location: location,
+      maxMembers: maxMembers,
+    };
+
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(jsonData)], { type: 'application/json' }),
+    );
+
+    try {
+      await clubController.editClub(Number(clubId), formData);
+    } catch (error) {
+      console.error('모임 수정 요청 실패', error);
+    }
+  };
+
   /* 모임 수정 페이지 로직 */
   const isEditPage = window.location.pathname.startsWith('/club/edit');
 
@@ -189,7 +219,7 @@ const ClubRegister = () => {
       />
       <div className="register-main">
         <div className="register-title">
-          <Title titleName="모임 등록" />
+          {isEditPage ? <Title titleName="모임 수정" /> : <Title titleName="모임 등록" />}
           <RequiredText />
         </div>
         <div className="register-content">
@@ -255,7 +285,7 @@ const ClubRegister = () => {
               setModalStep("complete");
             } else {
               setModalStep(null);
-              await handleSubmitClubRegistrationForm();
+              isEditPage ? handleEditClubRegistrationForm() : handleSubmitClubRegistrationForm();
               navigate('/club/list');
             }
           }}

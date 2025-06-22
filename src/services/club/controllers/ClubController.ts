@@ -24,6 +24,10 @@ export class ClubController {
     return this.model.createClub(createClubData);
   }
 
+  editClub(clubId: number, editClubData: FormData): Promise<void> {
+    return this.model.editClub(clubId, editClubData);
+  }
+
   selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     return this.model.selectClubDetail(clubId);
   }

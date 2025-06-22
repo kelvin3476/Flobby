@@ -16,6 +16,15 @@ export default class Main {
     });
   }
 
+  /* 모임 게시글 수정 */
+  static async editClub(clubId: number, editClubData: FormData) {
+    return await http.put(`/club/edit/${clubId}`, editClubData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
+
   /* 모임 상세 조회 */
   static async getClubDetail(clubId: number) {
     return await http.get(`/club/${clubId}`);

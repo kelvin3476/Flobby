@@ -49,6 +49,26 @@ export class ClubModel {
     }
   }
 
+  /* 모임 수정 api */
+  async editClub(clubId: number, editClubData: FormData): Promise<void> {
+    try {
+      const response = await Main.editClub(clubId, editClubData);
+      const { code, message } = response.data;
+      if (code === 1000) {
+        // API 호출 성공
+        logger.log('모임 게시글이 성공적으로 수정되었습니다.');
+      } else if (code === 1001) {
+        // API 호출 실패
+        throw new Error(message || '모임 게시글을 수정하지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
+      }
+    } catch (error: any) {
+      logger.error(error.message || '모임 수정 api 요청 실패');
+    }
+  }
+
   /* 모임 아이템 선택시 상세 정보 불러 오는 api */
   async selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     try {
