@@ -63,14 +63,14 @@ const ClubMeetingTime = () => {
       <div className="club-meeting-dropdown-box">
         <DropDown
           options={times.map(time => time + '시')}
-          defaultItem="시 선택"
           disabled={false}
+          placeholder="시 선택"
           onSelect={setTime}
         />
         <DropDown
           options={minutes.map(minute => minute + '분')}
-          defaultItem="분 선택"
           disabled={false}
+          placeholder="분 선택"
           onSelect={setMinute}
         />
       </div>
