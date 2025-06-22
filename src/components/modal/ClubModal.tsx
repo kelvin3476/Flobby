@@ -9,6 +9,8 @@ interface ClubModalProps {
   showIcon?: boolean;
   iconType?: 'check' | 'warn';
   showCancelButton?: boolean;
+  confirmText?: string;
+  cancelText?: string;
   onConfirm: () => void;
   onCancel?: () => void;
 }
@@ -19,6 +21,8 @@ const ClubModal = ({
   showIcon,
   iconType,
   showCancelButton,
+  confirmText = "확인",
+  cancelText = "취소",
   onConfirm, 
   onCancel,
 }: ClubModalProps) => {
@@ -41,9 +45,9 @@ const ClubModal = ({
           </div>
           <div className="modal-buttons">
             {showCancelButton && (
-              <Button className="modal-cancel-btn" title="취소" onClick={onCancel}/>
+              <Button className="modal-cancel-btn" title={cancelText} onClick={onCancel}/>
             )}
-            <Button className="modal-confirm-btn" title="확인" onClick={onConfirm}/>
+            <Button className="modal-confirm-btn" title={confirmText} onClick={onConfirm}/>
           </div>
         </div>
       </div>
