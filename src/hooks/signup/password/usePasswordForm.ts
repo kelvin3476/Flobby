@@ -22,8 +22,8 @@ const usePasswordForm = () => {
   } = usePasswordStore();
 
   const isValidPassword = (password: string) => {
-    /* 문자+숫자+특수문자 조합 8~20자리 정규식 체크 */
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+={}\[\]:;"'<>,.?/-]).{8,20}$/;
+    /* 문자+숫자+특수문자 조합 8~20자리 정규식 체크 (ASCII 코드 특수문자 32자 조건: ! @ # $ % ^ & * ( ) _ + - = [ ] { } ; : ' " , . < > / ? \ | ) */
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{8,20}$/;
 
     return passwordRegex.test(password);
   };
