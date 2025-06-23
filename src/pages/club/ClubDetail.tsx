@@ -28,7 +28,7 @@ import '../../styles/club/detail/ClubDetail.scss';
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
 
-  const { accessToken, mainDataList, setMainDataList, isTokenValid } = useMainPage();
+  const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
@@ -74,12 +74,18 @@ const ClubDetail = () => {
   React.useEffect(() => {
     if (!clubId) return console.log('모임 ID가 없습니다.');
 
-    /* 로그인 유저 + 새로고침 o + 토큰 재발급 x */
-    if (accessToken === null && !isTokenValid) return console.log('토큰이 유효하지 않습니다.');
-
-    // 모임 상세 정보를 가져오는 API 호출
-    fetchClubDetail();
-  }, [clubId, accessToken, isTokenValid, fetchClubDetail]);
+    /* 비로그인 시 모임 상세 호출 */
+    if (!localStorage.getItem('token-storage')) {
+      /* 모임 상세 정보를 가져오는 API 호출 */
+      fetchClubDetail();
+    } else {
+      /* 로그인 상태 에서 새로 고침 시 재발급 된 토큰이 유효한 경우 */
+      if (accessToken && (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming).type === "reload") {
+        /* 모임 상세 정보를 가져오는 API 호출 */
+        fetchClubDetail();
+      }
+    }
+  }, [clubId, accessToken, fetchClubDetail]);
 
   const tabItems = [
     { label: '홈', key: 'home' },
