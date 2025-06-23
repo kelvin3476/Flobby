@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../../components/login/Header";
+import LogoHeader from "../../components/header/LogoHeader";
 import Button from "../../components/button/Button";
 import ProgressBar from "../../components/signup/ProgressBar";
 
@@ -25,6 +26,7 @@ const Region = () => {
 
   return (
     <div className="region-container">
+      <LogoHeader />
       <ProgressBar />
       <div className="region-title">
         <Header className="Header" headerTitle="주로 활동하는 지역이 어디신가요?" />
@@ -97,10 +99,6 @@ const Region = () => {
             onClick={() => nav("/signup/hobby")} />
         </div>
       </main>
-      <footer>
-        <div className="region-line1"></div>
-        <div className="region-line2"></div>
-      </footer>
     </div>
   );
 };

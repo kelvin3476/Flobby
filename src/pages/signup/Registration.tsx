@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Header from '../../components/login/Header';
+import LogoHeader from '../../components/header/LogoHeader';
 import Button from '../../components/button/Button';
 import SignUpInput from '../../components/input/SignUpInput';
 import RequiredText from '../../components/club/text/RequiredText';
@@ -118,6 +119,7 @@ const Registration = () => {
 
   return (
     <div className="registration-container">
+      <LogoHeader />
       <ProgressBar />
       <div className="registration-wrapper">
         <div className="registration-title">
@@ -280,10 +282,6 @@ const Registration = () => {
           onClick={() => !localStorage.getItem('socialType') ? tempSignupHandler({ email: email, nickname: nickname, localPassword: password }) : tempSocialSignupHandler(nickname, foreigner)}
         />
       </div>
-      <footer>
-        <div className="info-line1"></div>
-        <div className="info-line2"></div>
-      </footer>
     </div>
   );
 };

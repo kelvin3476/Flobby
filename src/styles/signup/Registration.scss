@@ -2,14 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding-top: 236px;
+  min-height: 1559px;
+  
+  .progress-container {
+    margin-top: 80px;
+  }
 
   .registration-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 60px;
 
     .registration-title {
       display: flex;
@@ -297,25 +300,5 @@
       background-image: url("../../assets/svg/signup/user-info-checked.svg");
     }
 
-  }
-
-
-  > footer {
-    width: 100vw;
-    height: 336px;
-    padding-top: 200px;
-
-    > .info-line1,
-    .info-line2 {
-      border-top: 1px solid #E8EBED;
-    }
-
-    .info-line1 {
-      height: 56px;
-    }
-
-    .info-line2 {
-      height: 90px;
-    }
   }
 }

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useHobbyStore from '../../store/signup/useHobbyStore';
+import { CategorySlugMap } from '../../services/category/models/CategoryListModel';
 
 import Header from '../../components/login/Header';
-import '../../styles/signup/SelectHobbies.scss';
+import LogoHeader from '../../components/header/LogoHeader';
 import Button from '../../components/button/Button';
 import ProgressBar from '../../components/signup/ProgressBar';
+
+import '../../styles/signup/SelectHobbies.scss';
 
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 
@@ -73,6 +76,7 @@ const SelectHobbies = () => {
 
   return (
     <div className="hobby-container">
+      <LogoHeader />
       <ProgressBar />
       <div className="hobby-title">
         <Header className="Header" headerTitle="어떤 취미에 관심이 있으신가요?"/>
@@ -88,7 +92,7 @@ const SelectHobbies = () => {
             {hobbyCategoryList.map((categoryObj, index) => (
                 <div key={index}>
                   <div className="title">
-                    <span className="circle"></span>
+                    <span className={`circle ${CategorySlugMap[categoryObj.mainCategory] || ""}`}></span>
                     <span className="text">{categoryObj.mainCategory}</span>
                     <button
                         className={isHobbyListHidden(index)? 'hide' : 'show'}
@@ -133,10 +137,6 @@ const SelectHobbies = () => {
           />
         </div>
       </main>
-      <footer>
-        <div className="hobby-line1"></div>
-        <div className="hobby-line2"></div>
-      </footer>
     </div>
   );
 };

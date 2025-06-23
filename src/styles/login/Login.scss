@@ -1,271 +1,281 @@
 .login-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  gap: 48px;
+  min-height: 1264px;
+  gap: 149px;
 
-  > main {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    gap: 40px;
+  .login-logo {
+    width: 380px;
+    height: 35px;
+    margin-bottom: 8px;
+  }
 
-    .input-container {
+  .login-wrapper {
+
+    > main {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-
-      > label {
-        position: relative;
+      gap: 40px;
+      margin-bottom: 80px;
+  
+      .input-container {
         display: flex;
         flex-direction: column;
-        gap: 6px;
-
-        > input {
-          flex: 1;
-          padding: 12px;
-          border: 1px solid #E8EBED;
-          border-radius: 6px;
-
-          color: #191919;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 500;
-        }
-
-        > input:focus {
-          outline: none;
-          border: 1px solid #191919;
-        }
-
-        .password {
-          position: absolute;
-          right: 10px;
-          top: 11px;
-          background-image: url("../../assets/svg/login/login_password_hide.svg");
-          width: 24px;
-          height: 24px;
-          border: none;
-          background-color: transparent;
-          cursor: pointer;
-
-          &.active {
-            background-image: url("../../assets/svg/login/login_password_show.svg");
-          }
-        }
-
-        .reset {
-          display: none;
-          position: absolute;
-          right: 10px;
-          top: 12.25px;
-          background-image: url("../../assets/svg/login/login_reset_button.svg");
-          width: 20px;
-          height: 20px;
-          border: none;
-          background-color: transparent;
-          cursor: pointer;
-        }
-
-        .reset-password {
-          display: none;
-          position: absolute;
-          right: 40px;
-          top: 12.25px;
-          background-image: url("../../assets/svg/login/login_reset_button.svg");
-          width: 20px;
-          height: 20px;
-          border: none;
-          background-color: transparent;
-          cursor: pointer;
-        }
-
-        &:focus-within > .password,
-        &:focus-within > .reset,
-        &:focus-within > .reset-password {
-          display: block;
-        }
-      }
-
-      > label > input.error {
-        border: 1px solid #F94E51;
-      }
-
-      .error-message {
-        text-align: start;
-        color: #F94E51;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-      }
-
-      .support-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-
-        .support-container {
+        gap: 16px;
+  
+        > label {
+          position: relative;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 8px;
-
-          .checkbox-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-
-            > input[type="checkbox"] {
-              cursor: pointer;
-              -webkit-appearance: none;
-              -moz-appearance: none;
-              appearance: none;
-              background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
-              width: 20px;
-              height: 20px;
-            }
-
-            > input[type="checkbox"]:checked {
-              background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
-            }
-
-            > label {
-              color: #72787F;
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 500;
-            }
-
-          }
-
-          > span {
-            cursor: pointer;
-            color: #72787F;
-            font-size: 14px;
+          flex-direction: column;
+          gap: 6px;
+  
+          > input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #E8EBED;
+            border-radius: 6px;
+  
+            color: #191919;
+            font-size: 16px;
             font-style: normal;
             font-weight: 500;
           }
-
+  
+          > input:focus {
+            outline: none;
+            border: 1px solid #191919;
+          }
+  
+          .password {
+            position: absolute;
+            right: 10px;
+            top: 11px;
+            background-image: url("../../assets/svg/login/login_password_hide.svg");
+            width: 24px;
+            height: 24px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+  
+            &.active {
+              background-image: url("../../assets/svg/login/login_password_show.svg");
+            }
+          }
+  
+          .reset {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 12.25px;
+            background-image: url("../../assets/svg/login/login_reset_button.svg");
+            width: 20px;
+            height: 20px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+          }
+  
+          .reset-password {
+            display: none;
+            position: absolute;
+            right: 40px;
+            top: 12.25px;
+            background-image: url("../../assets/svg/login/login_reset_button.svg");
+            width: 20px;
+            height: 20px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+          }
+  
+          &:focus-within > .password,
+          &:focus-within > .reset,
+          &:focus-within > .reset-password {
+            display: block;
+          }
         }
-
-        .login-error-message {
+  
+        > label > input.error {
+          border: 1px solid #F94E51;
+        }
+  
+        .error-message {
           text-align: start;
           color: #F94E51;
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
         }
+  
+        .support-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+  
+          .support-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+  
+            .checkbox-container {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 8px;
+  
+              > input[type="checkbox"] {
+                cursor: pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url("../../assets/svg/login/login_checkbox_unchecked.svg");
+                width: 20px;
+                height: 20px;
+              }
+  
+              > input[type="checkbox"]:checked {
+                background-image: url("../../assets/svg/login/login_checkbox_checked.svg");
+              }
+  
+              > label {
+                color: #72787F;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+              }
+  
+            }
+  
+            > span {
+              cursor: pointer;
+              color: #72787F;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+            }
+  
+          }
+  
+          .login-error-message {
+            text-align: start;
+            color: #F94E51;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+          }
+        }
       }
-    }
-
-    .login-button {
-      cursor: pointer;
-      background-color: #764BF6;
-      border: none;
-      border-radius: 6px;
-      padding: 12px 10px;
-      height: 60px;
-
-      color: #fff;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-    }
-
-    .social-login-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      .social-login-title {
-        color: #72787F;
-        font-size: 14px;
+  
+      .login-button {
+        cursor: pointer;
+        background-color: #764BF6;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 10px;
+        height: 60px;
+  
+        color: #fff;
+        font-size: 16px;
         font-style: normal;
-        font-weight: 500;
-        position: relative;
-        text-align: center;
+        font-weight: 600;
       }
-
-      .social-login-title::before,
-      .social-login-title::after {
-        content: '';
-        background-color: #E8EBED;
-        display: block;
-        height: 1.5px;
-        position: absolute;
-        top: 50%;
-        width: 25%;
-      }
-
-      .social-login-title::before {
-        left: 0;
-      }
-
-      .social-login-title::after {
-        right: 0;
-      }
-
-      .social-login-button-container {
+  
+      .social-login-container {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         gap: 16px;
-        padding: 0 38px;
-
-        .kakao-login-button {
-          cursor: pointer;
-          border: none;
-          background-color: #fff;
-          background-image: url("../../assets/svg/login/login_kakao.svg");
-          width: 48px;
-          height: 48px;
-          flex-shrink: 0;
+  
+        .social-login-title {
+          color: #72787F;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          position: relative;
+          text-align: center;
         }
-
-        .naver-login-button {
-          cursor: pointer;
-          border: none;
-          background-color: #fff;
-          background-image: url("../../assets/svg/login/login_naver.svg");
-          width: 48px;
-          height: 48px;
-          flex-shrink: 0;
+  
+        .social-login-title::before,
+        .social-login-title::after {
+          content: '';
+          background-color: #E8EBED;
+          display: block;
+          height: 1.5px;
+          position: absolute;
+          top: 50%;
+          width: 25%;
         }
-
-        .apple-login-button {
-          cursor: pointer;
-          border: none;
-          background-color: #fff;
-          background-image: url("../../assets/svg/login/login_apple.svg");
-          width: 48px;
-          height: 48px;
-          flex-shrink: 0;
+  
+        .social-login-title::before {
+          left: 0;
         }
-
-        .google-login-button {
-          cursor: pointer;
-          border: none;
-          background-color: #fff;
-          background-image: url("../../assets/svg/login/login_google.svg");
-          width: 48px;
-          height: 48px;
-          flex-shrink: 0;
+  
+        .social-login-title::after {
+          right: 0;
         }
-
-        .facebook-login-button {
-          cursor: pointer;
-          border: none;
-          background-color: #fff;
-          background-image: url("../../assets/svg/login/login_facebook.svg");
-          width: 48px;
-          height: 48px;
-          flex-shrink: 0;
+  
+        .social-login-button-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 0 38px;
+  
+          .kakao-login-button {
+            cursor: pointer;
+            border: none;
+            background-color: #fff;
+            background-image: url("../../assets/svg/login/login_kakao.svg");
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+          }
+  
+          .naver-login-button {
+            cursor: pointer;
+            border: none;
+            background-color: #fff;
+            background-image: url("../../assets/svg/login/login_naver.svg");
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+          }
+  
+          .apple-login-button {
+            cursor: pointer;
+            border: none;
+            background-color: #fff;
+            background-image: url("../../assets/svg/login/login_apple.svg");
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+          }
+  
+          .google-login-button {
+            cursor: pointer;
+            border: none;
+            background-color: #fff;
+            background-image: url("../../assets/svg/login/login_google.svg");
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+          }
+  
+          .facebook-login-button {
+            cursor: pointer;
+            border: none;
+            background-color: #fff;
+            background-image: url("../../assets/svg/login/login_facebook.svg");
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+          }
         }
       }
     }
   }
+
 
 }
 
