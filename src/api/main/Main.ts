@@ -52,6 +52,11 @@ export default class Main {
     return await http.post(`/club/leave`, clubId);
   }
 
+  /* 모임 멤버 강퇴 */
+  static async banClubMember(clubId: number, memberId: number) {
+    return await http.post(`/club/ban`, { clubId, memberId });
+  }
+
   /* 정기 모임 생성 */
   static async createClubMeeting(createClubMeetingData: CreateClubMeetingData, clubId: number) {
     return await http.post(`/club/${clubId}/clubmeeting/register`, createClubMeetingData);

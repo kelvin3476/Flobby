@@ -3,6 +3,7 @@ import { ClubMemberListItem } from '../../../api/ApiTypes';
 import ClubMemberItem from './ClubMemberItem';
 import ClubModal from '../../modal/ClubModal';
 import '../../../styles/club/detail/ClubMemberManagement.scss';
+import Main from '../../../api/main/Main';
 
 interface ClubMemberManagementProps {
   clubMemberList: ClubMemberListItem[];
@@ -128,7 +129,8 @@ const ClubMemberManagement = ({
 
   const handleModalConfirm = async() => {
     if (modal?.phase === "confirm") {
-      // 기능별 api 연동
+      /* TODO: 기능별 api 연동 */
+      await Main.banClubMember(Number(window.location.pathname.split('/')[2]), modal.member.clubMemberId); /* 모임 강퇴 api */
       setModal((prev) => prev && { ...prev, phase: "complete" });
     } else if (modal?.phase === "complete") {
       setModal(null);
