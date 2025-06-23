@@ -17,7 +17,6 @@ const ProgressBar: React.FC = () => {
     "/signup/user-info": "step-user-info",
     "/signup/region": "step-region",
     "/signup/hobby": "step-hobby",
-    "/signup/success": "step-success",
   };
 
   useEffect(() => {
@@ -30,11 +29,9 @@ const ProgressBar: React.FC = () => {
 
   return (
     <div className="progress-container">
-        <div className="line1"></div>
-        <div className="line2"></div>
         <div 
-          className="progress-bar"
-          style={{"--step-name": step} as React.CSSProperties}
+          className="progress-line"
+          style={{ "--step-name": step } as React.CSSProperties}
         ></div>
     </div>
   );
