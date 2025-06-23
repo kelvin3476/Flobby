@@ -79,9 +79,26 @@
       background: #F7F8F9;
 
       .circle {
-        width: 28px;
-        height: 28px;
-        background-image: url("../../assets/svg/signup/signup_ellipse.svg");
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        background-color: #191919;
+        
+        $categories: (
+          sports,
+          music,
+          art,
+          travel,
+          leisure,
+          self-improvement
+        );
+
+        @each $category in $categories {
+          &.#{$category} {
+            mask: url('../../assets/svg/club/register/category/category-#{$category}.svg');
+            mask-size: contain;
+          }
+        }
       }
 
       .text {

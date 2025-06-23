@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useHobbyStore from '../../store/signup/useHobbyStore';
+import { CategorySlugMap } from '../../services/category/models/CategoryListModel';
 
 import Header from '../../components/login/Header';
 import LogoHeader from '../../components/header/LogoHeader';
@@ -91,7 +92,7 @@ const SelectHobbies = () => {
             {hobbyCategoryList.map((categoryObj, index) => (
                 <div key={index}>
                   <div className="title">
-                    <span className="circle"></span>
+                    <span className={`circle ${CategorySlugMap[categoryObj.mainCategory] || ""}`}></span>
                     <span className="text">{categoryObj.mainCategory}</span>
                     <button
                         className={isHobbyListHidden(index)? 'hide' : 'show'}
