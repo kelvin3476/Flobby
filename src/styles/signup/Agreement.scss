@@ -10,9 +10,9 @@ $font-color-basic: #72787F;
 .agreement-container {
   display: flex;
   flex-direction: column;
-  gap: 200px;
+  min-height: 1559px;
+  gap: 80px;
   align-items: center;
-  padding-top: 346px;
 
   .agreement-wrapper {
     display: flex;
@@ -136,24 +136,6 @@ $font-color-basic: #72787F;
       &.active {
         opacity: 1;
       }
-    }
-  }
-  
-  > footer {
-    width: 100vw;
-    height: 336px;
-
-    > .agreement-line1,
-    .agreement-line2 {
-      border-top: 1px solid #E8EBED;
-    }
-
-    .agreement-line1 {
-      height: 56px;
-    }
-
-    .agreement-line2 {
-      height: 90px;
     }
   }
 }

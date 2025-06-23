@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "../../components/login/Header";
+import LogoHeader from "../../components/header/LogoHeader";
 import Button from "../../components/button/Button";
 import Checkbox from "../../components/checkbox/Checkbox";
 import AgreementModal from "../../components/signup/AgreementModal";
@@ -50,6 +51,7 @@ const Agreement = () => {
 
   return (
     <div className="agreement-container">
+      <LogoHeader />
       <ProgressBar  />
       <div className="agreement-wrapper">
         <div className="agreement-title">
@@ -103,10 +105,6 @@ const Agreement = () => {
             title="다음" onClick={acceptAgree}
         />
       </div>
-      <footer>
-        <div className="agreement-line1"></div>
-        <div className="agreement-line2"></div>
-      </footer>
     </div>
   );
 };
