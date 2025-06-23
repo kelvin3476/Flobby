@@ -139,7 +139,7 @@ const ClubMeetingRegister = () => {
       clubMeetingTime: formattedTimeTo,
       clubMeetingLocation,
       maxParticipants,
-      ...(entryFee && { entryFee }),
+      entryfee: entryFee,
     }
 
     try {
