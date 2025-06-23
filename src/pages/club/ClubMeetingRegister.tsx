@@ -28,16 +28,22 @@ const ClubMeetingRegister = () => {
     clubMeetingLocation,
     maxParticipants,
     entryFee,
+    setClubMeetingTitle,
     setIsClubMeetingTitleValid,
     setClubMeetingTitleError,
+    setClubMeetingDate,
     setIsClubMeetingDateValid,
     setClubMeetingDateError,
+    setClubMeetingTime,
     setIsClubMeetingTimeValid,
     setClubMeetingTimeError,
+    setClubMeetingLocation,
     setIsClubMeetingLocationValid,
     setClubMeetingLocationError,
+    setMaxParticipants,
     setIsMaxParticipantsValid,
     setMaxParticipantsError,
+    setEntryFee,
   } = useClubMeetingRegisterStore();
 
   const { clubId } = useParams<{ clubId: string }>();
@@ -51,6 +57,24 @@ const ClubMeetingRegister = () => {
 
   /* 정기 모임 등록 페이지 최초 진입 시 스크롤 최상단 고정 */
   React.useEffect(() => {
+    /* 정기 모임 등록 상태 관리 초기화 */
+    setClubMeetingTitle('');
+    setIsClubMeetingTitleValid(true);
+    setClubMeetingTitleError('');
+    setClubMeetingDate('');
+    setIsClubMeetingDateValid(true);
+    setClubMeetingDateError('');
+    setClubMeetingTime('');
+    setIsClubMeetingTimeValid(true);
+    setClubMeetingTimeError('');
+    setClubMeetingLocation('');
+    setIsClubMeetingLocationValid(true);
+    setClubMeetingLocationError('');
+    setMaxParticipants(0);
+    setIsMaxParticipantsValid(true);
+    setMaxParticipantsError('');
+    setEntryFee('');
+
     window.scrollTo(0, 0);
   }, []);
 
