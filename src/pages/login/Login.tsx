@@ -1,9 +1,8 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/login/Header.js";
-import LogoHeader from '../../components/header/LogoHeader.js';
-import Logo from '../../components/logo/Logo.js';
+import LogoHeader from '../../components/header/LogoHeader';
+import Logo from '../../components/logo/Logo';
 import Footer from "../../components/login/Footer";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
