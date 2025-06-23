@@ -12,6 +12,8 @@ interface EmailStore {
     /* 이메일 에러 상태 관리 */
     emailError: [string,string];
     setEmailError: (emailError: [string,string]) => void;
+
+    clearEmail: () => void;
 }
 
 const useEmailStore = create<EmailStore>((set) => ({
@@ -23,6 +25,12 @@ const useEmailStore = create<EmailStore>((set) => ({
 
     emailError: ['default',''],
     setEmailError: (emailError: [string,string]) => set({ emailError }),
+
+    clearEmail: () => set({
+      email: '',
+      isEmailValid: true,
+      emailError: ['default',''],
+    })
 }));
 
 export default useEmailStore;

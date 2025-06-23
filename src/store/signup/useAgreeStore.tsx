@@ -19,6 +19,8 @@ interface AgreeStore {
     privacyAgree: boolean;
     marketingAgree: boolean;
   };
+
+  clearAgreements: () => void;
 }
 
 const useAgreeStore = create<AgreeStore>()(
@@ -60,6 +62,15 @@ const useAgreeStore = create<AgreeStore>()(
       getAgreements: () => {
         const { serviceAgree, privacyAgree, marketingAgree } = get();
         return { serviceAgree, privacyAgree, marketingAgree };
+      },
+
+      clearAgreements: () => {
+        set(() => ({
+          allAgree: false,
+          serviceAgree: false,
+          privacyAgree: false,
+          marketingAgree: false,
+        }));
       },
     }),
     {

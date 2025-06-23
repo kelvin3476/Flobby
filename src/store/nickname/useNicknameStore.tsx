@@ -12,6 +12,8 @@ interface NicknameStore {
     /* 닉네임 에러 상태 관리 className, errorMessage */
     nicknameError: [string,string];
     setNicknameError: (nicknameError: [string,string]) => void;
+
+    clearNickname: () => void;
 }
 
 const useNicknameStore = create<NicknameStore>((set) => ({
@@ -23,6 +25,12 @@ const useNicknameStore = create<NicknameStore>((set) => ({
 
     nicknameError: ['default','문자+숫자 조합 2~12자리'],
     setNicknameError: (nicknameError: [string,string]) => set({ nicknameError }),
+
+    clearNickname: () => set({
+      nickname: '',
+      isNicknameValid: false,
+      nicknameError: ['default','문자+숫자 조합 2~12자리'],
+    })
 }));
 
 export default useNicknameStore;

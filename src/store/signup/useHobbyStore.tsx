@@ -11,6 +11,8 @@ interface HobbyStore {
 
   warning: boolean;
   setWarning: (value: boolean) => void;
+
+  clearHobby: () => void;
 }
 
 const useHobbyStore = create<HobbyStore>()(
@@ -54,6 +56,13 @@ const useHobbyStore = create<HobbyStore>()(
         
       warning: false,
       setWarning: (value) => set({ warning: value }),
+      clearHobby: () =>
+        set({
+          selectedHobbies: [],
+          hobbyCount: 0,
+          hideHobbyList: [],
+          warning: false,
+        }),
     }),
     {
       name: 'hobby-storage',

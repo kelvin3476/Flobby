@@ -24,6 +24,8 @@ interface PasswordStore {
     /*비밀번호 보기*/
     showPassword : object,
     setShowPassword : (showPassword:string) => void;
+
+    clearPassword: () => void;
 }
 
 const usePasswordStore = create<PasswordStore>(set => ({
@@ -54,5 +56,14 @@ const usePasswordStore = create<PasswordStore>(set => ({
                 }
             };
         }),
+
+    clearPassword: () => set({
+        password: '',
+        checkPassword: '',
+        isPasswordValid: false,
+        passwordError: ['default','문자+숫자+특수문자 조합 8~20자리'],
+        checkPasswordError: ['default',''],
+        showPassword: { password: false, checkPassword: false }
+    })
 }));
 export default usePasswordStore;

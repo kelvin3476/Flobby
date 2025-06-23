@@ -25,6 +25,8 @@ interface RegionStore {
 
   cityDistrictMap: Record<string, RegionArray[]>; 
   setCityDistrictMap: (data: Record<string, RegionArray[]>) => void; 
+
+  clearRegion: () => void;
 }
 
 const RegionValue = (
@@ -101,8 +103,15 @@ const useRegionStore = create<RegionStore>()(
           cityDistrictMap: data,
           selectedRegionNames: regionNames,
         });
-      }
-      
+      },      
+      clearRegion: () =>
+        set({
+          selectedRegionNames: [],
+          selectedRegionIds: [],
+          activeCity: "서울",
+          warning: false,
+          cityDistrictMap: {},
+        })
     }),
     {
       name: "region-storage",
