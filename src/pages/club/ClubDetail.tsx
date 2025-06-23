@@ -71,6 +71,7 @@ const ClubDetail = () => {
     }
   }, [clubId]);
 
+  /* 모임 상세 페이지 > 모임 상세 정보 가져오기 (새로고침 o) */
   React.useEffect(() => {
     if (!clubId) return console.log('모임 ID가 없습니다.');
 
@@ -86,6 +87,16 @@ const ClubDetail = () => {
       }
     }
   }, [clubId, accessToken, fetchClubDetail]);
+
+  /* 모임 상세 페이지 첫 진입 시 모임 상세 정보 가져오기 (새로고침 x) */
+  React.useEffect(() => {
+    if (!clubId) return;
+
+    if (accessToken) {
+      /* 로그인 상태에서 모임 상세 정보를 가져오는 API 호출 */
+      fetchClubDetail();
+    }
+  }, []);
 
   const tabItems = [
     { label: '홈', key: 'home' },
