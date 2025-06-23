@@ -33,6 +33,7 @@ const ClubRegister = () => {
     maxMembers,
     setMaxMembers,
     file,
+    setFile,
     setIsImageFileValid,
     setImageFileError,
     mainCategory,
@@ -183,6 +184,18 @@ const ClubRegister = () => {
         const fetchClubItemData = async () => {
           const data = await clubController.selectClubDetail(Number(clubId));
           setClubItemData(data);
+
+          /* 모임 수정 일때 기존 입력한 데이터 다시 불러와서 상태값 저장 */
+          setClubName(data.clubDTO.clubName);
+          setFile(data.clubDTO.clubImage);
+          setDescription(data.clubDTO.description);
+          setMaxMembers(data.clubDTO.maxMembers);
+          setDescCount(data.clubDTO.description.length);
+          setIsTitleValid(true);
+          setIsDescValid(true);
+          setIsCategoryValid(true);
+          setIsMaxValid(true);
+          setIsImageFileValid(true);
         };
 
         fetchClubItemData();
@@ -194,20 +207,23 @@ const ClubRegister = () => {
 
   /* 모임 등록 페이지 최초 진입시 상태 초기화 */
   useEffect(() => {
-    setClubName('');
-    setDescription('');
-    setIsTitleValid(true);
-    setIsDescValid(true);
-    setTitleError('');
-    setDescError('');
-    setDescCount(0);
-    setIsCategoryValid(true);
-    setCategoryError('');
-    setMaxMembers(0);
-    setIsMaxValid(true);
-    setMaxError('');
-    setIsImageFileValid(true);
-    setImageFileError('');
+    /* 모임 수정 페이지가 아닐 때만 (모임 등록 페이지 일때 상태 초기화) */
+    if (!isEditPage) {
+      setClubName('');
+      setDescription('');
+      setIsTitleValid(true);
+      setIsDescValid(true);
+      setTitleError('');
+      setDescError('');
+      setDescCount(0);
+      setIsCategoryValid(true);
+      setCategoryError('');
+      setMaxMembers(0);
+      setIsMaxValid(true);
+      setMaxError('');
+      setIsImageFileValid(true);
+      setImageFileError('');
+    }
   }, []);
 
   return (
