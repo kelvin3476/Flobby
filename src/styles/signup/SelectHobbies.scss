@@ -95,7 +95,7 @@
 
         @each $category in $categories {
           &.#{$category} {
-            mask: url('../../assets/svg/club/register/category/category-#{$category}.svg');
+            mask: url('../../assets/svg/club/register/category/category-#{$category}.svg') no-repeat center;
             mask-size: contain;
           }
         }
