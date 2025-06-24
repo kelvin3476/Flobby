@@ -32,6 +32,8 @@ const MainHeader: React.FC<MainHeaderProps> = ({
     setMainDataList(mainDataList);
   }, []);
 
+  if (localStorage.getItem('token-storage') && !accessToken) return <div style={{ height: '145px' }} />; // 헤더 최소 높이 유지;
+
   return (
     <header className="header-container">
       <div className="header-wrapper">
