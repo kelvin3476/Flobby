@@ -129,8 +129,28 @@ const ClubMemberManagement = ({
 
   const handleModalConfirm = async() => {
     if (modal?.phase === "confirm") {
-      /* TODO: 기능별 api 연동 */
-      await Main.banClubMember(Number(window.location.pathname.split('/')[2]), modal.member.clubMemberId); /* 모임 강퇴 api */
+
+      switch (modal.type) {
+        case "TRANSFER_LEADER":
+          /* 모임장 양도 API 연동 */
+          break;
+
+        case "REMOVE_MANAGER":
+          /* 운영진 해제 API 연동 */
+          break;
+
+        case "REGISTER_MANAGER":
+          /* 운영진 등록 API 연동 */
+          break;
+
+        case "KICK":
+          await Main.banClubMember(Number(window.location.pathname.split('/')[2]), modal.member.clubMemberId);
+          break;
+        
+        default:
+          break;
+      }
+      
       setModal((prev) => prev && { ...prev, phase: "complete" });
     } else if (modal?.phase === "complete") {
       setModal(null);
