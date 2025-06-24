@@ -6,6 +6,7 @@ import '../../../styles/club/detail/ClubMemberManagement.scss';
 import Main from '../../../api/main/Main';
 
 interface ClubMemberManagementProps {
+  clubId: string;
   clubMemberList: ClubMemberListItem[];
   currentMembers: number;
   maxMembers: number;
@@ -115,6 +116,7 @@ const getModalProps = (modal: ModalState | null) => {
 };
 
 const ClubMemberManagement = ({
+  clubId,
   clubMemberList,
   currentMembers,
   maxMembers,
@@ -144,10 +146,7 @@ const ClubMemberManagement = ({
           break;
 
         case "KICK":
-          await Main.banClubMember(Number(window.location.pathname.split('/')[2]), modal.member.clubMemberId);
-          break;
-        
-        default:
+          await Main.banClubMember(Number(clubId), modal.member.clubMemberId);
           break;
       }
       

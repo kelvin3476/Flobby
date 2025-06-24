@@ -163,6 +163,7 @@ const ClubDetail = () => {
               {currentTab === 'board' && <div>게시판 탭 준비중</div>}
               {currentTab === 'member' && (
                 <ClubMemberManagement
+                  clubId={clubId}
                   clubMemberList={clubMemberList}
                   currentMembers={clubInfo.currentMembers}
                   maxMembers={clubInfo.maxMembers}
