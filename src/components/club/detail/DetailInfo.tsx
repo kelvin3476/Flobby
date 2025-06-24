@@ -41,7 +41,7 @@ const DetailInfo = ({
 }: DetailInfoProps) => {
   const [isOptionClicked, setIsOptionClicked] = useState(false);
   const [modalStep, setModalStep] = useState<null | "text" | "confirm" | "complete" | "select">(null);
-  const [modalMode, setModalMode] = useState<null | "greeting" | "report" | "leave">(null);
+  const [modalMode, setModalMode] = useState<null | "greeting" | "report" | "leave" | "full">(null);
 
   const nav = useNavigate();
   const { clubIds } = useParams<{ clubIds: string }>();
@@ -87,7 +87,12 @@ const DetailInfo = ({
 
   const handleModalSubmit = async () => {
     if (modalMode === "greeting") {
-      await Main.applyClub(Number(clubId));
+      try {
+        await Main.applyClub(Number(clubId));
+        setModalStep("complete");
+      } catch (e: any) {
+        /* TODO: 정원초과 백에서 에러코드로 내려줌 */
+      }
     } else if (modalMode === "report") {
       // TODO: 모임 신고 api 추가하기
     } else if (modalMode === "leave") {
@@ -152,6 +157,11 @@ const DetailInfo = ({
                 nav('/login');
                 return;
               }
+              if (currentMembers >= maxMembers) {
+                setModalMode("full");
+                setModalStep("confirm");
+                return;
+              }
               setModalMode("greeting");
               setModalStep("text");
             }}
@@ -191,8 +201,28 @@ const DetailInfo = ({
           }}  
         />
       )}
+
+      {modalStep === "confirm" && modalMode === "full" && (
+        <ClubModal 
+          mainMessage="정원이 모두 찼어요."
+          subMessage="자리가 생기면 알림을 보내드릴까요?"
+          showIcon={true}
+          iconType="warn"
+          showCancelButton={true}
+          confirmText="알림 받기"
+          cancelText="닫기"
+          onConfirm={() => {
+            setModalStep(null);
+            setModalMode(null);
+          }}
+          onCancel={() => {
+            setModalStep(null);
+            setModalMode(null);
+          }}
+        />
+      )}
       
-      {(modalStep === "confirm" || modalStep === "complete") && modalMode && (
+      {(modalStep === "confirm" || modalStep === "complete") && modalMode && modalMode !== "full" && (
         <ClubModal 
           mainMessage={
             modalStep === "confirm" 
