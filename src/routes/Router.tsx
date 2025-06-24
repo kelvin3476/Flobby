@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 
+/* 테스트 페이지 컴포넌트 import */
 import TestPage from '../pages/TestPage';
 
+/* 라우팅 되는 페이지 컴포넌트 import */
 import Main from '../pages/main/Main';
 import Login from '../pages/login/Login';
 import FindPassword from '../pages/password/FindPassword';
@@ -25,6 +27,7 @@ import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
 import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
 import ClubSearch from '../pages/club/ClubSearch';
 
+/* 회원가입 zustand 상태관리 store import */
 import useAgreeStore from '../store/signup/useAgreeStore';
 import useNicknameStore from '../store/nickname/useNicknameStore';
 import useEmailStore from '../store/email/useEmailStore';
