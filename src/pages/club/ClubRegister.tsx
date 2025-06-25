@@ -191,6 +191,7 @@ const ClubRegister = () => {
           setClubName(data.clubDTO.clubName);
           setDescription(data.clubDTO.description);
           setMaxMembers(data.clubDTO.maxMembers);
+
           setDescCount(data.clubDTO.description.length);
           setIsTitleValid(true);
           setIsDescValid(true);
@@ -270,19 +271,36 @@ const ClubRegister = () => {
             </div>
           </div>
           <ClubDescription className="register-club" />
+
+          {/* 버튼 부분 */}
           <div className="buttons">
-            <Button
-              className="cancel-btn"
-              title="취소"
-              onClick={() =>
-                isEditPage ? navigate(`/club/${clubId}`) : window.history.back()
-              }
-            />
-            <Button
-              className="allow-btn"
-              title="등록"
-              onClick={handleValidChange}
-            />
+            <div className="left-wrapper">
+              {isEditPage && (
+                <Button
+                  className="delete-btn"
+                  title="삭제"
+                  onClick={() => {
+                    // TODO: 삭제 api 호출
+                  }}
+                />
+              )}
+            </div>
+            <div className="right-wrapper">
+              <Button
+                className="cancel-btn"
+                title="취소"
+                onClick={() =>
+                  isEditPage
+                    ? navigate(`/club/${clubId}`)
+                    : window.history.back()
+                }
+              />
+              <Button
+                className="allow-btn"
+                title="등록"
+                onClick={handleValidChange}
+              />
+            </div>
           </div>
         </div>
       </div>
