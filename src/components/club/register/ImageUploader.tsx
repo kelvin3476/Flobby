@@ -136,7 +136,12 @@ const ImageUploader = ({ prevImage }: ImageUploaderProps) => {
 
   // prev 이미지 있으면 url 상태 업데이트
   useEffect(() => {
-    if (prevImage) setImageUrl(prevImage);
+    setIsLoading(true);
+
+    if (prevImage) {
+      setImageUrl(prevImage);
+      setIsLoading(false);
+    }
   }, [prevImage]);
 
   return (
