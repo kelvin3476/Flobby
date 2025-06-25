@@ -39,8 +39,8 @@ const MaxMember = ({ className }: classNameProps) => {
     if (inputValue) {
       let memberCount = Number(inputValue);
 
-      if (memberCount && memberCount < 3) memberCount = 3;
-      else if (memberCount && memberCount > 100) memberCount = 100;
+      if (memberCount < 3) memberCount = 3;
+      else if (memberCount > 100) memberCount = 100;
 
       setInputValue(String(memberCount));
       setMaxMembers(memberCount);
