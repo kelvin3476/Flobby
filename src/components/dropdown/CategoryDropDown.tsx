@@ -45,6 +45,7 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
       ?.subCategories ?? [];
 
   // 수정 페이지 로직
+  // 서브카테고리를 기준으로 메인 카테고리 설정
   useEffect(() => {
     for (const { mainCategory, subCategories } of categoryList) {
       if (subCategories.includes(subCategory)) {
