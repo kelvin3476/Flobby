@@ -53,6 +53,8 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   }, []);
 
   // 수정페이지 호출 로직
+  // CLubDTO에서 location: string(지역 이름: regionName)으로 넘어옴 -> props로 받기
+  // regionName으로 상위 지역 찾기
   useEffect(() => {
     regionListController
       .getRegionList()
@@ -101,6 +103,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
         )
       : [];
 
+  // 지역 코드를 상태값에 담음(등록 api 호출 위해)
   const handleLocation = (regionId: number) => {
     setLocation(regionId);
   };

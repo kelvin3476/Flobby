@@ -33,11 +33,11 @@ const ClubRegister = () => {
     maxMembers,
     setMaxMembers,
     file,
-    setFile,
     setIsImageFileValid,
     setImageFileError,
     mainCategory,
     subCategory,
+    setSubCategory,
     setIsCategoryValid,
     setCategoryError,
     setIsTitleValid,
@@ -191,6 +191,7 @@ const ClubRegister = () => {
           setClubName(data.clubDTO.clubName);
           setDescription(data.clubDTO.description);
           setMaxMembers(data.clubDTO.maxMembers);
+          setSubCategory(data.clubDTO.subCategory);
 
           setDescCount(data.clubDTO.description.length);
           setIsTitleValid(true);
@@ -257,9 +258,6 @@ const ClubRegister = () => {
               />
               <CategoryDropDown
                 className="register-category"
-                prevSubCategory={
-                  isEditPage ? clubItemData?.clubDTO.subCategory : null
-                }
                 isEditPage={isEditPage}
               />
               <MaxMember className="register-member" />

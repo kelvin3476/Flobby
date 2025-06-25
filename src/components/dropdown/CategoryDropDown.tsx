@@ -5,15 +5,13 @@ import { HobbyCategory } from '../../api/ApiTypes';
 import { CategoryListController } from '../../services/category/controllers/CategoryListController';
 import Label from '../club/register/Label';
 import '../../styles/dropdown/CommonDropDown.scss';
-import logger from '../../utils/Logger';
 
 interface CategoryDropDownProps {
   className?: string;
-  prevSubCategory?: string | null;
   isEditPage?: boolean;
 }
 
-const CategoryDropDown = ({ className, prevSubCategory, isEditPage }) => {
+const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
 
   const {
@@ -27,6 +25,7 @@ const CategoryDropDown = ({ className, prevSubCategory, isEditPage }) => {
     setCategoryError,
   } = useClubRegisterStore();
 
+  // 카테고리 리스트 api 호출
   const categoryListController = CategoryListController.getInstance();
 
   useEffect(() => {
@@ -37,29 +36,23 @@ const CategoryDropDown = ({ className, prevSubCategory, isEditPage }) => {
     fetchCategoryListData();
   }, []);
 
+  // 메인 카테고리만 필터링 => 메인 카테고리 목록
   const mainCategories = categoryList.map(item => item.mainCategory);
 
+  // 서브 카테고리만 필터링 => 서브 카테고리 목록
   const subCategories =
     categoryList.find(item => item.mainCategory === mainCategory)
       ?.subCategories ?? [];
 
+  // 수정 페이지 로직
   useEffect(() => {
-    categoryListController
-      .getCategoryList()
-      .then(response => {
-        if (prevSubCategory) {
-          for (const { mainCategory, subCategories } of response) {
-            if (subCategories.includes(prevSubCategory)) {
-              setMainCategory(mainCategory);
-              setSubCategory(prevSubCategory);
-            }
-          }
-        }
-      })
-      .catch(err => {
-        logger.error(err);
-      });
-  }, [prevSubCategory]);
+    for (const { mainCategory, subCategories } of categoryList) {
+      if (subCategories.includes(subCategory)) {
+        setMainCategory(mainCategory);
+        setSubCategory(subCategory);
+      }
+    }
+  }, [subCategory]);
 
   return (
     <div className={`dropdown-group-container ${className}`}>
