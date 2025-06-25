@@ -92,6 +92,7 @@ const DetailInfo = ({
         setModalStep("complete");
       } catch (e: any) {
         /* TODO: 정원초과 백에서 에러코드로 내려줌 */
+        console.error("가입에 실패했습니다.", e);
       }
     } else if (modalMode === "report") {
       // TODO: 모임 신고 api 추가하기
@@ -212,6 +213,7 @@ const DetailInfo = ({
           confirmText="알림 받기"
           cancelText="닫기"
           onConfirm={() => {
+            /* TODO: 알림 기능 MVP 이후 구현 예정 */
             setModalStep(null);
             setModalMode(null);
           }}
