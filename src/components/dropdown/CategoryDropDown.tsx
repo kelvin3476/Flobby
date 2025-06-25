@@ -53,7 +53,7 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
         setSubCategory(subCategory);
       }
     }
-  }, [subCategory]);
+  }, [subCategory, categoryList]);
 
   return (
     <div className={`dropdown-group-container ${className}`}>
