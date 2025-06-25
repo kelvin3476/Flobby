@@ -65,7 +65,7 @@ const ClubRegister = () => {
     let isError = false;
 
     // 이미지 유효성 검사
-    if (!file) {
+    if (!isEditPage && !file) {
       setIsImageFileValid(false);
       setImageFileError('이미지를 등록해 주세요.');
       isError = true;
