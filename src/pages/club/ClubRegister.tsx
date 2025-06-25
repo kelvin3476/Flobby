@@ -221,7 +221,7 @@ const ClubRegister = () => {
       setDescCount(0);
       setIsCategoryValid(true);
       setCategoryError('');
-      setMaxMembers(0);
+      setMaxMembers(null);
       setIsMaxValid(true);
       setMaxError('');
       setIsImageFileValid(true);

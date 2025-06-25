@@ -16,33 +16,42 @@ const MaxMember = ({ className }: classNameProps) => {
     maxError,
     setMaxError,
   } = useClubRegisterStore();
-  const [inputValue, setInputValue] = useState(maxMembers || '');
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^\d*$/.test(value)) {
-      setInputValue(value);
+    // 숫저만 입력되도록 검증
+    if (/^\d*$/.test(e.target.value)) {
+      setInputValue(e.target.value);
       setIsMaxValid(true);
       setMaxError('');
-    }
-  };
+    } else if (isNaN(Number(e.target.value))) setInputValue('');
 
-  const handleBlur = () => {
-    if (inputValue === '') {
+    // 값이 비었을 경우 유효성 검사
+    if (e.target.value === '') {
+      setInputValue(null);
       setIsMaxValid(false);
       setMaxError('인원 수를 입력해 주세요.');
       return;
     }
-
-    let memberCount = Number(inputValue);
-
-    if (isNaN(memberCount)) return;
-    if (memberCount < 3) memberCount = 3;
-    else if (memberCount > 100) memberCount = 100;
-
-    setInputValue(String(memberCount));
-    setMaxMembers(memberCount);
   };
+
+  const handleBlur = () => {
+    if (inputValue) {
+      let memberCount = Number(inputValue);
+
+      if (memberCount && memberCount < 3) memberCount = 3;
+      else if (memberCount && memberCount > 100) memberCount = 100;
+
+      setInputValue(String(memberCount));
+      setMaxMembers(memberCount);
+    }
+  };
+
+  useEffect(() => {
+    if (maxMembers) {
+      setInputValue(String(maxMembers));
+    } else setInputValue('');
+  }, [maxMembers]);
 
   return (
     <div className={`max-member-container ${className}`}>
