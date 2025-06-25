@@ -5,13 +5,18 @@ import '../../../styles/club/register/MaxMember.scss';
 
 interface classNameProps {
   className?: string;
-  prevMaxMember?: number | null;
 }
 
-const MaxMember = ({ className, prevMaxMember }: classNameProps) => {
-  const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } =
-    useClubRegisterStore();
-  const [inputValue, setInputValue] = useState('');
+const MaxMember = ({ className }: classNameProps) => {
+  const {
+    maxMembers,
+    setMaxMembers,
+    isMaxValid,
+    setIsMaxValid,
+    maxError,
+    setMaxError,
+  } = useClubRegisterStore();
+  const [inputValue, setInputValue] = useState(maxMembers || '');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -38,11 +43,6 @@ const MaxMember = ({ className, prevMaxMember }: classNameProps) => {
     setInputValue(String(memberCount));
     setMaxMembers(memberCount);
   };
-
-  // 수정페이지 이전 데이터 업데이트
-  useEffect(() => {
-    if (prevMaxMember) setInputValue(prevMaxMember.toString());
-  }, [prevMaxMember]);
 
   return (
     <div className={`max-member-container ${className}`}>

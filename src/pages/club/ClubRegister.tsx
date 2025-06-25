@@ -262,12 +262,7 @@ const ClubRegister = () => {
                 }
                 isEditPage={isEditPage}
               />
-              <MaxMember
-                className="register-member"
-                prevMaxMember={
-                  isEditPage ? clubItemData?.clubDTO.maxMembers : null
-                }
-              />
+              <MaxMember className="register-member" />
             </div>
           </div>
           <ClubDescription className="register-club" />
