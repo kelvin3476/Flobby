@@ -71,6 +71,10 @@ const DetailInfo = ({
         nav('/club/member/manage'); // TODO: 추후 수정
         break;
       case '모임 신고':
+        if (!accessToken) {
+          nav('/login');
+          return;
+        }
         setModalMode("report");
         setModalStep("text");
         break;
