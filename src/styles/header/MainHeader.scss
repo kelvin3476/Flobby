@@ -52,6 +52,7 @@
               border-radius: 6px;
               border: none;
               cursor: pointer;
+              white-space: nowrap; /* 줄바꿈 방지 */
             }
     
             .login-btn {
