@@ -19,19 +19,19 @@ const MaxMember = ({ className }: classNameProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 숫저만 입력되도록 검증
+    // 값이 비었을 경우 유효성 검사
+    if (e.target.value === '') {
+      setInputValue('');
+      setIsMaxValid(false);
+      setMaxError('인원 수를 입력해 주세요.');
+      return;
+    }
+
+    // 숫자만 입력되도록 검증
     if (/^\d*$/.test(e.target.value)) {
       setInputValue(e.target.value);
       setIsMaxValid(true);
       setMaxError('');
-    } else if (isNaN(Number(e.target.value))) setInputValue('');
-
-    // 값이 비었을 경우 유효성 검사
-    if (e.target.value === '') {
-      setInputValue(null);
-      setIsMaxValid(false);
-      setMaxError('인원 수를 입력해 주세요.');
-      return;
     }
   };
 
