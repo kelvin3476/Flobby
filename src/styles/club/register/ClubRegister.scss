@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     .register-title {
       display: flex;
       flex-direction: column;
@@ -22,7 +22,7 @@
         justify-content: flex-end;
         width: 920px;
         margin-top: 54px;
-        border-bottom: 2px solid #C9CDD2;
+        border-bottom: 2px solid #c9cdd2;
         padding-bottom: 9px;
       }
     }
@@ -40,8 +40,7 @@
 
         .register-region,
         .register-category,
-        .register-member
-        {
+        .register-member {
           margin-bottom: 32px;
         }
       }
@@ -53,33 +52,59 @@
       .buttons {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
-        gap: 12px;
+        justify-content: space-between;
+        align-items: center;
 
-        .cancel-btn,
-        .allow-btn
-        {
-          width: 96px;
-          height: 48px;
-          cursor: pointer;
-          border-radius: 6px;
+        .left-wrapper {
+          .delete-btn {
+            width: 96px;
+            height: 48px;
+            cursor: pointer;
+            border-radius: 6px;
+            flex-shrink: 0;
 
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 21px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 21px;
+
+            background-color: #fff;
+            border: 1px solid #764bf6;
+            color: #764bf6;
+          }
         }
 
-        .cancel-btn {
-          background-color: #fff;
-          border: 1px solid #C9CDD2;
-          color: #454C53;
-        }
+        .right-wrapper {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          gap: 12px;
 
-        .allow-btn {
-          background-color: #764BF6;
-          border: 1px solid #764BF6;
-          color: #fff;
+          .cancel-btn,
+          .allow-btn {
+            width: 96px;
+            height: 48px;
+            cursor: pointer;
+            border-radius: 6px;
+            flex-shrink: 0;
+
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 21px;
+          }
+
+          .cancel-btn {
+            background-color: #fff;
+            border: 1px solid #c9cdd2;
+            color: #454c53;
+          }
+
+          .allow-btn {
+            background-color: #764bf6;
+            border: 1px solid #764bf6;
+            color: #fff;
+          }
         }
       }
     }

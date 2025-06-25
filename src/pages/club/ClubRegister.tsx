@@ -33,11 +33,11 @@ const ClubRegister = () => {
     maxMembers,
     setMaxMembers,
     file,
-    setFile,
     setIsImageFileValid,
     setImageFileError,
     mainCategory,
     subCategory,
+    setSubCategory,
     setIsCategoryValid,
     setCategoryError,
     setIsTitleValid,
@@ -52,7 +52,9 @@ const ClubRegister = () => {
   const loc = useLocation();
   const clubId = loc.state;
 
-  const [modalStep, setModalStep] = useState<null | "confirm" | "complete">(null);
+  const [modalStep, setModalStep] = useState<null | 'confirm' | 'complete'>(
+    null,
+  );
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
@@ -63,7 +65,7 @@ const ClubRegister = () => {
     let isError = false;
 
     // 이미지 유효성 검사
-    if (!file) {
+    if (!isEditPage && !file) {
       setIsImageFileValid(false);
       setImageFileError('이미지를 등록해 주세요.');
       isError = true;
@@ -114,7 +116,7 @@ const ClubRegister = () => {
 
     if (isError) return;
 
-    setModalStep("confirm");
+    setModalStep('confirm');
   };
 
   const handleSubmitClubRegistrationForm = async () => {
@@ -147,7 +149,7 @@ const ClubRegister = () => {
 
   const handleEditClubRegistrationForm = async () => {
     const formData = new FormData();
-    
+
     // 이미지가 있는 경우에만 추가
     if (file) {
       logger.log('file', file);
@@ -187,9 +189,10 @@ const ClubRegister = () => {
 
           /* 모임 수정 일때 기존 입력한 데이터 다시 불러와서 상태값 저장 */
           setClubName(data.clubDTO.clubName);
-          setFile(data.clubDTO.clubImage);
           setDescription(data.clubDTO.description);
           setMaxMembers(data.clubDTO.maxMembers);
+          setSubCategory(data.clubDTO.subCategory);
+
           setDescCount(data.clubDTO.description.length);
           setIsTitleValid(true);
           setIsDescValid(true);
@@ -218,7 +221,7 @@ const ClubRegister = () => {
       setDescCount(0);
       setIsCategoryValid(true);
       setCategoryError('');
-      setMaxMembers(0);
+      setMaxMembers(null);
       setIsMaxValid(true);
       setMaxError('');
       setIsImageFileValid(true);
@@ -235,9 +238,14 @@ const ClubRegister = () => {
       />
       <div className="register-main">
         <div className="register-title">
-          {isEditPage ? <Title titleName="모임 수정" /> : <Title titleName="모임 등록" />}
+          {isEditPage ? (
+            <Title titleName="모임 수정" />
+          ) : (
+            <Title titleName="모임 등록" />
+          )}
           <RequiredText />
         </div>
+
         <div className="register-content">
           <div className="register-up">
             <ImageUploader
@@ -250,37 +258,42 @@ const ClubRegister = () => {
               />
               <CategoryDropDown
                 className="register-category"
-                prevSubCategory={
-                  isEditPage ? clubItemData?.clubDTO.subCategory : null
-                }
                 isEditPage={isEditPage}
               />
-              <MaxMember
-                className="register-member"
-                prevMaxMember={
-                  isEditPage ? clubItemData?.clubDTO.maxMembers : null
-                }
-              />
+              <MaxMember className="register-member" />
             </div>
           </div>
-          <ClubDescription
-            className="register-club"
-            prevClubName={isEditPage ? clubItemData?.clubDTO.clubName : null}
-            prevClubDesc={isEditPage ? clubItemData?.clubDTO.description : null}
-          />
+          <ClubDescription className="register-club" />
+
+          {/* 버튼 부분 */}
           <div className="buttons">
-            <Button
-              className="cancel-btn"
-              title="취소"
-              onClick={() =>
-                isEditPage ? navigate(`/club/${clubId}`) : window.history.back()
-              }
-            />
-            <Button
-              className="allow-btn"
-              title="등록"
-              onClick={handleValidChange}
-            />
+            <div className="left-wrapper">
+              {isEditPage && (
+                <Button
+                  className="delete-btn"
+                  title="삭제"
+                  onClick={() => {
+                    // TODO: 삭제 api 호출
+                  }}
+                />
+              )}
+            </div>
+            <div className="right-wrapper">
+              <Button
+                className="cancel-btn"
+                title="취소"
+                onClick={() =>
+                  isEditPage
+                    ? navigate(`/club/${clubId}`)
+                    : window.history.back()
+                }
+              />
+              <Button
+                className="allow-btn"
+                title="등록"
+                onClick={handleValidChange}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -289,19 +302,21 @@ const ClubRegister = () => {
       {modalStep && (
         <ClubModal
           mainMessage={
-            modalStep === "confirm"
+            modalStep === 'confirm'
               ? '등록 하시겠습니까?'
               : '정상적으로 처리되었습니다.'
           }
-          showIcon={modalStep === "confirm"}
+          showIcon={modalStep === 'confirm'}
           iconType="check"
-          showCancelButton={modalStep === "confirm"}
+          showCancelButton={modalStep === 'confirm'}
           onConfirm={async () => {
-            if (modalStep === "confirm") {
-              setModalStep("complete");
+            if (modalStep === 'confirm') {
+              setModalStep('complete');
             } else {
               setModalStep(null);
-              isEditPage ? handleEditClubRegistrationForm() : handleSubmitClubRegistrationForm();
+              isEditPage
+                ? handleEditClubRegistrationForm()
+                : handleSubmitClubRegistrationForm();
               navigate('/club/list');
             }
           }}

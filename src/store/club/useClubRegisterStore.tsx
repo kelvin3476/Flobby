@@ -32,14 +32,14 @@ interface ClubRegisterStore {
   location: number;
   setLocation: (location: number) => void;
 
-  isCategoryValid: boolean,
+  isCategoryValid: boolean;
   setIsCategoryValid: (isCategoryValid: boolean) => void;
 
-  categoryError: string,
+  categoryError: string;
   setCategoryError: (categoryError: string) => void;
 
-  maxMembers: number;
-  setMaxMembers: (maxMember: number) => void;
+  maxMembers: number | null;
+  setMaxMembers: (maxMember: number | null) => void;
 
   isMaxValid: boolean;
   setIsMaxValid: (isMaxValid: boolean) => void;
@@ -73,10 +73,10 @@ const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   isDescValid: true,
   setIsDescValid: (isDescValid: boolean) => set({ isDescValid }),
 
-  titleError: "",
+  titleError: '',
   setTitleError: (titleError: string) => set({ titleError }),
 
-  descError: "",
+  descError: '',
   setDescError: (descError: string) => set({ descError }),
 
   descCount: 0,
@@ -94,16 +94,16 @@ const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   isCategoryValid: true,
   setIsCategoryValid: (isCategoryValid: boolean) => set({ isCategoryValid }),
 
-  categoryError: "",
+  categoryError: '',
   setCategoryError: (categoryError: string) => set({ categoryError }),
 
-  maxMembers: 0,
-  setMaxMembers: (maxMembers: number) => set({ maxMembers }),
+  maxMembers: null,
+  setMaxMembers: (maxMembers: number | null) => set({ maxMembers }),
 
   isMaxValid: true,
   setIsMaxValid: (isMaxValid: boolean) => set({ isMaxValid }),
 
-  maxError: "",
+  maxError: '',
   setMaxError: (maxError: string) => set({ maxError }),
 
   file: null,

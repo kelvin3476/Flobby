@@ -5,44 +5,53 @@ import '../../../styles/club/register/MaxMember.scss';
 
 interface classNameProps {
   className?: string;
-  prevMaxMember?: number | null;
 }
 
-const MaxMember = ({ className, prevMaxMember }: classNameProps) => {
-  const { setMaxMembers, isMaxValid, setIsMaxValid, maxError, setMaxError } =
-    useClubRegisterStore();
-  const [inputValue, setInputValue] = useState('');
+const MaxMember = ({ className }: classNameProps) => {
+  const {
+    maxMembers,
+    setMaxMembers,
+    isMaxValid,
+    setIsMaxValid,
+    maxError,
+    setMaxError,
+  } = useClubRegisterStore();
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^\d*$/.test(value)) {
-      setInputValue(value);
+    // 값이 비었을 경우 유효성 검사
+    if (e.target.value === '') {
+      setInputValue('');
+      setIsMaxValid(false);
+      setMaxError('인원 수를 입력해 주세요.');
+      return;
+    }
+
+    // 숫자만 입력되도록 검증
+    if (/^\d*$/.test(e.target.value)) {
+      setInputValue(e.target.value);
       setIsMaxValid(true);
       setMaxError('');
     }
   };
 
   const handleBlur = () => {
-    if (inputValue === '') {
-      setIsMaxValid(false);
-      setMaxError('인원 수를 입력해 주세요.');
-      return;
+    if (inputValue) {
+      let memberCount = Number(inputValue);
+
+      if (memberCount < 3) memberCount = 3;
+      else if (memberCount > 100) memberCount = 100;
+
+      setInputValue(String(memberCount));
+      setMaxMembers(memberCount);
     }
-
-    let memberCount = Number(inputValue);
-
-    if (isNaN(memberCount)) return;
-    if (memberCount < 3) memberCount = 3;
-    else if (memberCount > 100) memberCount = 100;
-
-    setInputValue(String(memberCount));
-    setMaxMembers(memberCount);
   };
 
-  // 수정페이지 이전 데이터 업데이트
   useEffect(() => {
-    if (prevMaxMember) setInputValue(prevMaxMember.toString());
-  }, [prevMaxMember]);
+    if (maxMembers) {
+      setInputValue(String(maxMembers));
+    } else setInputValue('');
+  }, [maxMembers]);
 
   return (
     <div className={`max-member-container ${className}`}>
