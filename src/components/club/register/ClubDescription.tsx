@@ -6,15 +6,9 @@ import '../../../styles/club/register/ClubDescription.scss';
 
 interface ClubDescriptionProps {
   className?: string;
-  prevClubDesc?: string | null;
-  prevClubName?: string | null;
 }
 
-const ClubDescription = ({
-  className,
-  prevClubDesc,
-  prevClubName,
-}: ClubDescriptionProps) => {
+const ClubDescription = ({ className }: ClubDescriptionProps) => {
   const {
     clubName,
     setClubName,
@@ -62,12 +56,6 @@ const ClubDescription = ({
       setDescError('');
     }
   };
-
-  // 수정페이지 이전 데이터 업데이트
-  useEffect(() => {
-    if (prevClubName) setClubName(prevClubName);
-    if (prevClubDesc) setDescription(prevClubDesc);
-  }, [prevClubDesc, prevClubName]);
 
   return (
     <div className={`desc-container ${className}`}>
