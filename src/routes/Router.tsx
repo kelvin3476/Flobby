@@ -24,7 +24,6 @@ import ClubAll from '../pages/club/ClubAll';
 import ClubRegister from '../pages/club/ClubRegister';
 import ClubDetail from '../pages/club/ClubDetail';
 import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
-import ClubMeetingEdit from '../pages/club/ClubMeetingEdit';
 import ClubSearch from '../pages/club/ClubSearch';
 
 /* 회원가입 zustand 상태관리 store import */
@@ -49,7 +48,7 @@ const RouterContent: React.FC = () => {
 
   /* 회원가입 관련 페이지 이탈시 localstorage clear 처리 */
   React.useEffect(() => {
-    if (!location.pathname.startsWith("/signup")) {
+    if (!location.pathname.startsWith('/signup')) {
       clearAgreements(); // 모든 약관 동의 상태 초기화
       clearNickname(); // 닉네임 상태 초기화
       clearEmail(); // 이메일 상태 초기화
@@ -57,22 +56,22 @@ const RouterContent: React.FC = () => {
       clearCitizen(); // 국적 상태 초기화
       clearRegion(); // 지역 상태 초기화
       clearHobby(); // 취미 상태 초기화
-      
+
       // 회원가입 관련 페이지 이탈시 localStorage에서 관련 정보 제거
-      localStorage.removeItem("agreement-storage");
-      localStorage.removeItem("signupTempInfoId");
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("foreigner");
-      localStorage.removeItem("region-storage");
-      localStorage.removeItem("hobby-storage");
+      localStorage.removeItem('agreement-storage');
+      localStorage.removeItem('signupTempInfoId');
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('foreigner');
+      localStorage.removeItem('region-storage');
+      localStorage.removeItem('hobby-storage');
 
       // 소셜 로그인 관련 정보 제거
-      localStorage.removeItem("socialType")
-      localStorage.removeItem("kakao_account");
-      localStorage.removeItem("naver_account");
-      localStorage.removeItem("apple_account");
-      localStorage.removeItem("google_account");
-      localStorage.removeItem("facebook_account");
+      localStorage.removeItem('socialType');
+      localStorage.removeItem('kakao_account');
+      localStorage.removeItem('naver_account');
+      localStorage.removeItem('apple_account');
+      localStorage.removeItem('google_account');
+      localStorage.removeItem('facebook_account');
     }
   }, [location.pathname]);
 
@@ -100,8 +99,8 @@ const RouterContent: React.FC = () => {
         element={<ClubMeetingRegister />}
       />
       <Route
-        path="/club/:clubId/clubmeeting/:meetingId/edit"
-        element={<ClubMeetingEdit />}
+        path="/club/:clubId/clubmeeting/edit"
+        element={<ClubMeetingRegister />}
       />
       <Route path="/club/search" element={<ClubSearch />} />
     </Routes>
