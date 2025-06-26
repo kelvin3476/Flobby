@@ -69,7 +69,7 @@ const DetailInfo = ({
         nav('/club/edit', { state: clubId });
         break;
       case '정기 모임 등록':
-        nav(`/club/${clubIds}/clubmeeting/register`); // TODO: 추후 수정
+        nav(`/club/${clubIds}/clubmeeting/register`);
         break;
       case '멤버 관리':
         nav('/club/member/manage'); // TODO: 추후 수정
