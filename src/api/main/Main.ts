@@ -47,9 +47,14 @@ export default class Main {
     return await http.post(`/club/apply`, clubId);
   }
 
+  /* 모임 탈퇴 사유 리스트 */
+  static async getLeaveClubReasonList() {
+    return await http.get(`/club/leave/start`);
+  }
+
   /* 모임 탈퇴 신청 */
-  static async leaveClub(clubId: number) {
-    return await http.post(`/club/leave`, clubId);
+  static async leaveClub(clubId: number, reason: string) {
+    return await http.post(`/club/leave`, { clubId, reason });
   }
 
   /* 모임 멤버 강퇴 */

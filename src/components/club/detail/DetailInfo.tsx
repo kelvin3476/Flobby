@@ -42,6 +42,7 @@ const DetailInfo = ({
   const [isOptionClicked, setIsOptionClicked] = useState(false);
   const [modalStep, setModalStep] = useState<null | "text" | "confirm" | "complete" | "select">(null);
   const [modalMode, setModalMode] = useState<null | "greeting" | "report" | "leave" | "full">(null);
+  const [reason, setReason] = useState<string>('');
 
   const nav = useNavigate();
   const { clubIds } = useParams<{ clubIds: string }>();
@@ -97,7 +98,7 @@ const DetailInfo = ({
     } else if (modalMode === "report") {
       // TODO: 모임 신고 api 추가하기
     } else if (modalMode === "leave") {
-      await Main.leaveClub(Number(clubId));
+      await Main.leaveClub(Number(clubId), reason);
     }
     setModalStep("complete");
   };
@@ -199,6 +200,7 @@ const DetailInfo = ({
           }}
           onSubmit={(value) => {
             setModalStep("confirm");
+            setReason(value);
           }}  
         />
       )}

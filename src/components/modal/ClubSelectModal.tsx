@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Button from "../button/Button";
+
+import Main from '../../api/main/Main';
+
+import logger from '../../utils/Logger';
 
 import "../../styles/modal/ClubSelectModal.scss";
 
@@ -10,19 +14,30 @@ interface ClubSelectModalProps {
   onSubmit: (value: string) => void;
 }
 
-const LEAVE_OPTIONS = [
-  "모임이 잘 맞지 않아요.",
-  "모임 시간이 안 맞거나 거리가 멀어요.",
-  "개인 사정으로 참여할 수 없게 되었어요.",
-  "다른 모임에 가입했어요.",
-  "모임 운영이 제대로 되지 않아요.",
-  "직접 입력할게요.",
-];
-
 const ClubSelectModal = ({ title, onClose, onSubmit }: ClubSelectModalProps) => {
+  const [leaveReasonList, setLeaveReasonList] = useState<string[]>([]);
   const [text, setText] = useState("");
   const [selected, setSelected] = useState<string>("");
   const [err, setErr] = useState("");
+
+  useEffect(() => {
+    const fetchLeaveClubReasonList = async () => {
+      try {
+        // 모임 탈퇴 사유 리스트를 불러오는 API 호출
+        const response = await Main.getLeaveClubReasonList();
+        const { code, data, message } = response.data;
+        if (code === 1000) {
+          setLeaveReasonList(data);
+        } else {
+          logger.log('모임 탈퇴 사유 리스트를 불러오는 데 실패:', message);
+        }
+      } catch (error) {
+        logger.log('모임 탈퇴 사유 리스트를 불러오는 중 오류 발생:', error);
+      }
+    }
+
+    fetchLeaveClubReasonList();
+  }, []);
 
   const handleLeaveSubmit = () => {
     if (!selected) {
@@ -31,7 +46,7 @@ const ClubSelectModal = ({ title, onClose, onSubmit }: ClubSelectModalProps) => 
     }
 
     setErr("");
-    onSubmit(selected === "직접 입력할게요." ? text.trim() : selected);
+    onSubmit(selected === "직접 입력할게요" ? text.trim() : selected);
   };
 
   return (
@@ -41,14 +56,14 @@ const ClubSelectModal = ({ title, onClose, onSubmit }: ClubSelectModalProps) => 
           <div className="select-modal-up">
             <div className="select-modal-title">{title}</div>
             <ul className="long-radio">
-              {LEAVE_OPTIONS.map((item, idx) => (
+              {leaveReasonList.map((item, idx) => (
                 <li key={idx}>
                   <label 
                     className="radio-label"
                     onClick={() => {
                       if (selected === item) {
                         setSelected("");
-                        if (item === "직접 입력할게요.") setText("");
+                        if (item === "직접 입력할게요") setText("");
                       }
                     }}
                   >
@@ -64,7 +79,7 @@ const ClubSelectModal = ({ title, onClose, onSubmit }: ClubSelectModalProps) => 
                     />
                     {item}
                   </label>
-                  {item === "직접 입력할게요." && selected === item && (
+                  {item === "직접 입력할게요" && selected === item && (
                     <textarea 
                       className="radio-text"
                       value={text}
