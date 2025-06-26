@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import Title from '../../components/club/text/Title';
 import ClubModal from '../../components/modal/ClubModal';
@@ -48,6 +48,8 @@ const ClubMeetingRegister = () => {
 
   const { clubId } = useParams<{ clubId: string }>();
   const nav = useNavigate();
+  const loc = useLocation();
+  const meetingId = loc.state;
 
   const [modalStep, setModalStep] = useState<null | 'confirm' | 'complete'>(
     null,
