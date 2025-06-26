@@ -34,7 +34,6 @@ const ClubMeetingTime = () => {
             : hour;
       const formattedHour = String(convertedHour).padStart(2, '0');
       const formattedTime = `${formattedHour}:${minute}`;
-      console.log(`${formattedHour}:${minute}`);
 
       setClubMeetingTime(formattedTime);
       setIsClubMeetingTimeValid(true);
