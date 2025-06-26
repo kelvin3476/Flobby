@@ -1,6 +1,7 @@
 type DatePickerOptions = {
   onSelect?: (date: Date) => void;
   trigger?: HTMLElement;
+  initialDate?: Date;
 };
 
 export default class DatePicker {
@@ -15,7 +16,13 @@ export default class DatePicker {
     this.container = container;
     this.options = options;
     this.today = this.stripTime(new Date());
-    this.currentDate = new Date(this.today);
+
+    if (options.initialDate) {
+      this.setInitialDate(options.initialDate);
+      console.log(options.initialDate);
+    } else {
+      this.currentDate = new Date(this.today);
+    }
 
     this.init();
   }
@@ -255,5 +262,16 @@ export default class DatePicker {
         this.hide();
       }
     });
+  }
+
+  /* 초기값 리셋 함수 */
+  public setInitialDate(date: Date) {
+    this.selectedDate = this.stripTime(date);
+    this.currentDate = new Date(
+      this.selectedDate.getFullYear(),
+      this.selectedDate.getMonth(),
+      1,
+    );
+    this.render();
   }
 }

@@ -68,7 +68,7 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
   setClubMeetingTitleError: (clubMeetingTitleError: string) =>
     set({ clubMeetingTitleError }),
 
-  clubMeetingDate: '',
+  clubMeetingDate: '', // ex) "2025-07-11" 형식
   setClubMeetingDate: (clubMeetingDate: string) => set({ clubMeetingDate }),
 
   isClubMeetingDateValid: true,
