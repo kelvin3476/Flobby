@@ -28,13 +28,6 @@ export default class SignUp {
         return await http.get(`/user-email/${email}/exists`);
     }
 
-    /* TODO: 백엔드 배포 작업 완료되면 추후 프론트단 리스트 교체 작업 필요 */
-    /* 지역 리스트 불러오기 */
-    static async getRegionList() {
-        return await http.get(`/profile/region-list`);
-    }
-
-    /* TODO: 백엔드 배포 작업 완료되면 추후 프론트단 리스트 교체 작업 필요 */
     /* 취미 리스트 불러오기 */
     static async getHobbyList() {
         return await http.get(`/profile/category-list`);

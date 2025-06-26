@@ -10,20 +10,20 @@ import PopularPost from '../../components/main/popular_post/PopularPost';
 
 import useMainPage from '../../hooks/main/useMainPage';
 
-import { RegionContextController } from '../../services/region/controllers/RegionContextController';
+import { MainDataController } from '../../services/main/controllers/MainDataController';
 import { MainData } from '../../api/ApiTypes';
 
 import '../../styles/main/Main.scss';
 
 const Main = () => {
-  const regionContextController = RegionContextController.getInstance();
+  const mainDataController = MainDataController.getInstance();
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
   React.useEffect(() => {
     const fetchMainData = async () => {
       try {
-        const mainData: MainData = await regionContextController.getMainData();
+        const mainData: MainData = await mainDataController.getMainData();
         setMainDataList(mainData);
       } catch (error) {
         logger.error('메인 데이터 가져오기 실패:', error);
@@ -36,7 +36,7 @@ const Main = () => {
   return (
     <div className="responsive-container">
       <main>
-        <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
+        <MainHeader accessToken={accessToken} />
         <CarouselBanner />
         <ClubPost mainDataList={mainDataList} setMainDataList={setMainDataList} />
         <OnedayPost mainDataList={mainDataList} setMainDataList={setMainDataList} />

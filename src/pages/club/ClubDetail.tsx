@@ -28,7 +28,7 @@ import '../../styles/club/detail/ClubDetail.scss';
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const [isMember, setIsMember] = useState<boolean>(false);
   const [loginMemberId, setLoginMemberId] = useState<number | null>(null);
@@ -108,8 +108,6 @@ const ClubDetail = () => {
     <div className="club-detail-wrapper">
       <MainHeader
         accessToken={accessToken}
-        mainDataList={mainDataList}
-        setMainDataList={setMainDataList}
       />
 
       <div className="club-detail-container">

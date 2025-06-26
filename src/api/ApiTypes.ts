@@ -126,10 +126,17 @@ export interface boardItem {
 
 /* 메인 페이지 모임, 원데이, 실시간 인기 게시글 데이터셋 */
 export interface MainData {
-  region: RegionItem[];
   clubItems: clubItem[];
   onedayItems: onedayItem[];
   boardItems: boardItem[];
+}
+
+/* -------------------- 지역 모달 관심 지역 리스트 및 선택 지역 api 타입 -------------------- */
+
+/* 지역 모달 관심 지역 리스트 및 선택 지역 응답 데이터 타입 */
+export interface ModalRegionListData {
+  interestRegionList?: RegionItem[] | [];
+  regionList: Record<string, RegionItem[]> | [];
   selectedRegion: RegionItem;
 }
 

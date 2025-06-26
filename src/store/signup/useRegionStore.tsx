@@ -23,8 +23,8 @@ interface RegionStore {
 
   removeRegion: (regionName: string) => void;
 
-  cityDistrictMap: Record<string, RegionArray[]>; 
-  setCityDistrictMap: (data: Record<string, RegionArray[]>) => void; 
+  cityDistrictMap: Record<string, RegionArray[]> | [];
+  setCityDistrictMap: (data: Record<string, RegionArray[]> | []) => void;
 
   clearRegion: () => void;
 }

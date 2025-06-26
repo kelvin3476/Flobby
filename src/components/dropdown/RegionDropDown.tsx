@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from './Dropdown';
-import { RegionListController } from '../../services/region/controllers/RegionListController';
+import { ModalRegionListController } from '../../services/region/controllers/ModalRegionListController';
 import useClubRegisterStore from '../../store/club/useClubRegisterStore';
 import logger from '../../utils/Logger';
 import { getCookie } from '../../utils/Cookie';
@@ -13,7 +13,7 @@ interface RegionDropDownProps {
 }
 
 const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
-  const regionListController = RegionListController.getInstance();
+  const modalRegionListController = ModalRegionListController.getInstance();
 
   const [selectedMainRegion, setSelectedMainRegion] = useState<string | null>(
     null,
@@ -25,12 +25,12 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   const { setLocation } = useClubRegisterStore();
 
   useEffect(() => {
-    regionListController
-      .getRegionList()
+    modalRegionListController
+      .getModalRegionList()
       .then(response => {
         const selectedRegionId = Number(getCookie('regionId'));
         if (selectedRegionId) {
-          for (const [mainRegion, subRegions] of Object.entries(response)) {
+          for (const [mainRegion, subRegions] of Object.entries(response.regionList)) {
             const selectedSubRegion = subRegions.find(
               region => region.regionId === selectedRegionId,
             );
@@ -56,14 +56,14 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   // CLubDTO에서 location: string(지역 이름: regionName)으로 넘어옴 -> props로 받기
   // regionName으로 상위 지역 찾기
   useEffect(() => {
-    regionListController
-      .getRegionList()
+    modalRegionListController
+      .getModalRegionList()
       .then(response => {
         if (!prevRegion) return;
 
         const selectedRegionName = prevRegion;
         if (selectedRegionName) {
-          for (const [mainRegion, subRegions] of Object.entries(response)) {
+          for (const [mainRegion, subRegions] of Object.entries(response.regionList)) {
             const selectedSubRegion = subRegions.find(
               region => region.regionName === prevRegion,
             );
@@ -82,7 +82,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
 
-    const subRegions = regionListController.model.regionList[regionName].filter(
+    const subRegions = modalRegionListController.model.modalRegionList.regionList[regionName].filter(
       subRegion => !subRegion.regionName.includes('전체'),
     );
     if (subRegions && subRegions.length > 0) {
@@ -95,10 +95,10 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
   const subList =
     selectedMainRegion &&
-    regionListController.model.regionList[selectedMainRegion].filter(
+    modalRegionListController.model.modalRegionList.regionList[selectedMainRegion].filter(
       subRegion => !subRegion.regionName.includes('전체'),
     )
-      ? regionListController.model.regionList[selectedMainRegion].filter(
+      ? modalRegionListController.model.modalRegionList.regionList[selectedMainRegion].filter(
           subRegion => !subRegion.regionName.includes('전체'),
         )
       : [];
@@ -113,7 +113,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
       <Label labelTitle="지역" isRequired />
       <div className="dropdown-box">
         <DropDown
-          options={Object.keys(regionListController.model.regionList)}
+          options={Object.keys(modalRegionListController.model.modalRegionList.regionList)}
           placeholder="상위 지역"
           defaultItem={
             selectedSubRegion === null ? null : selectedMainRegion

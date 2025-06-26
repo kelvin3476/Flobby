@@ -10,7 +10,7 @@ import ClubItem from './ClubItem';
 import logger from '../../../utils/Logger';
 
 import { clubItem, MainData } from '../../../api/ApiTypes';
-import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
+import { MainDataController } from '../../../services/main/controllers/MainDataController';
 import { ClubController } from '../../../services/club/controllers/ClubController';
 
 import '../../../styles/main/club/ClubPost.scss';
@@ -22,7 +22,7 @@ interface ClubPostProps {
 
 const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: ClubPostProps) => {
   const [clubData, setClubData] = React.useState<clubItem[]>([]);
-  const regionContextController = RegionContextController.getInstance();
+  const mainDataController = MainDataController.getInstance();
   const clubController = ClubController.getInstance();
 
   React.useEffect(() => {
@@ -35,7 +35,7 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
   React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
     const handleRegionChange = () => {
-      regionContextController.getMainData()
+      mainDataController.getMainData()
         .then((mainData: MainData) => {
           setMainDataList(mainData);
           setClubData([...mainData.clubItems]);

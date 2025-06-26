@@ -1,7 +1,6 @@
 import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
-import { RegionContextController } from '../../../services/region/controllers/RegionContextController';
-import { RegionListController } from '../../../services/region/controllers/RegionListController';
+import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
 
 interface RegionSelectorModalProps {
@@ -22,24 +21,21 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   const [activeCity, setActiveCity] = useState<string>('');
   const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
 
-  const regionListController = RegionListController.getInstance();
-  const regionController = RegionContextController.getInstance();
+  const modalRegionListController = ModalRegionListController.getInstance();
 
   const handleSelectRegion = async (region: RegionItem) => {
     setSelectedRegion(region);
     setActiveTown(region);
     onClose();
-
-    await regionController.getMainData();
   };
 
   useEffect(() => {
     const fetchRegionListData = async () => {
-      await regionListController.getRegionList();
+      await modalRegionListController.getModalRegionList();
 
-      if (regionListController.model.regionList && selectedRegion.regionId) {
+      if (modalRegionListController.model.modalRegionList.regionList && selectedRegion.regionId) {
         const cityEntry = Object.entries(
-          regionListController.model.regionList,
+            modalRegionListController.model.modalRegionList.regionList,
         ).find(([city, towns]) =>
           towns.some(town => town.regionId === selectedRegion.regionId),
         );
@@ -58,7 +54,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
       }
     };
     fetchRegionListData();
-  }, [regionListController.model.regionList, selectedRegion]);
+  }, [modalRegionListController.model.modalRegionList.regionList, selectedRegion]);
 
   return (
     <>
@@ -114,8 +110,8 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
           </div>
           <div className="select-region-content">
             <div className="select-region-city">
-              {Object.keys(regionListController.model.regionList).length > 0 &&
-                Object.keys(regionListController.model.regionList)
+              {Object.keys(modalRegionListController.model.modalRegionList.regionList).length > 0 &&
+                Object.keys(modalRegionListController.model.modalRegionList.regionList)
                   .reduce((rows, city, index) => {
                     if (index % 4 === 0) rows.push([]);
                     rows[rows.length - 1].push(city);
@@ -141,7 +137,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
 
                       {activeCity && citiesInRow.includes(activeCity) && (
                         <div className="select-region-town">
-                          {regionListController.model.regionList[
+                          {modalRegionListController.model.modalRegionList.regionList[
                             activeCity
                           ].map(town => (
                             <div

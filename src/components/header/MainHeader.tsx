@@ -9,28 +9,19 @@ import Button from '../button/Button';
 import DropDownModal from '../modal/DropDownModal';
 
 import Logout from '../../api/logout/Logout';
-import { MainData } from '../../api/ApiTypes';
 
 import '../../styles/header/MainHeader.scss';
 
 interface MainHeaderProps {
   accessToken: string | null;
-  mainDataList: MainData;
-  setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
 }
 
 const MainHeader: React.FC<MainHeaderProps> = ({
   accessToken,
-  mainDataList,
-  setMainDataList,
 }: MainHeaderProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const nav = useNavigate();
   const hasAccessToken = !!accessToken;
-
-  useEffect(() => {
-    setMainDataList(mainDataList);
-  }, []);
 
   return (
     <header className="header-container">
@@ -39,10 +30,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
           <div className="up-wrapper">
             <div className="left-wrapper">
               <Logo className="header-logo" onClick={() => nav('/')} />
-              <RegionSelector
-                mainDataList={mainDataList}
-                setMainDataList={setMainDataList}
-              />
+              <RegionSelector accessToken={accessToken} />
             </div>
             <div className="right-wrapper">
               <SearchBar />

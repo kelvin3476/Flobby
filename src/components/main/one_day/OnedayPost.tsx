@@ -10,7 +10,7 @@ import OnedayItem from './OnedayItem';
 import logger from '../../../utils/Logger';
 
 import { onedayItem, MainData } from '../../../api/ApiTypes';
-import { RegionContextController } from "../../../services/region/controllers/RegionContextController";
+import { MainDataController } from "../../../services/main/controllers/MainDataController";
 
 import '../../../styles/main/one_day/OnedayPost.scss';
 
@@ -21,7 +21,7 @@ interface OnedayPostProps {
 
 const OnedayPost: React.FC<OnedayPostProps> = ({ mainDataList, setMainDataList }: OnedayPostProps) => {
   const [ onedayData, setOnedayData ] = React.useState<onedayItem[]>([]);
-  const regionContextController: RegionContextController = RegionContextController.getInstance();
+  const mainDataController: MainDataController = MainDataController.getInstance();
 
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
@@ -33,7 +33,7 @@ const OnedayPost: React.FC<OnedayPostProps> = ({ mainDataList, setMainDataList }
   React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
     const handleRegionChange = () => {
-      regionContextController.getMainData()
+      mainDataController.getMainData()
         .then((mainData: MainData) => {
           setMainDataList(mainData);
           setOnedayData([...mainData.onedayItems]);

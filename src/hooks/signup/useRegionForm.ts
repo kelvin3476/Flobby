@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 import useRegionStore from "../../store/signup/useRegionStore";
-import SignUp from "../../api/signup/SignUp";
+import { ModalRegionListController } from "../../services/region/controllers/ModalRegionListController";
 
 const useRegionForm = () => {
   const { 
@@ -17,6 +17,8 @@ const useRegionForm = () => {
   } = useRegionStore();
 
   const townRef = useRef<HTMLDivElement>(null);
+
+  const modalRegionListController = ModalRegionListController.getInstance();
 
   const handleSelect = (city: string, district: string) => {
     const region = `${city} ${district}`;
@@ -36,24 +38,12 @@ const useRegionForm = () => {
   };
 
   useEffect(() => {
-    const fetchRegions = async() => {
-
+    const fetchRegions = async () => {
       try {
-        const response = await SignUp.getRegionList();
-        const { code, message, data } = response.data;
-
-        if (code === 1000) {
-          // API 호출 성공
-          setCityDistrictMap(data);
-        } else if (code === 1001) {
-          // API 호출 실패
-          throw new Error(message || "데이터를 가져오지 못했습니다.");
-        } else if (code === 1002) {
-          // API 예외 발생
-          throw new Error(message || "서버 오류가 발생했습니다.");
-        }
-      } catch (err: any) {
-        console.log(err.message || "데이터 로드 실패");
+        const response = await modalRegionListController.getModalRegionList();
+        setCityDistrictMap(response.regionList);
+      } catch (error) {
+        console.error('지역 데이터 불러오기 실패', error);
       }
     };
 
