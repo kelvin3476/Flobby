@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import Title from '../../components/club/text/Title';
@@ -19,6 +19,7 @@ import { CreateClubMeetingData } from '../../api/ApiTypes';
 import { ClubController } from '../../services/club/controllers/ClubController';
 
 import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
+import logger from '../../utils/Logger';
 
 const ClubMeetingRegister = () => {
   const {
@@ -140,6 +141,7 @@ const ClubMeetingRegister = () => {
     setModalStep('confirm');
   };
 
+  // 날짜 형식 변환 (-> "2025-07-11")
   const formattedDate = (input: string): string => {
     const date = new Date(input);
     const year = date.getFullYear();
@@ -148,6 +150,7 @@ const ClubMeetingRegister = () => {
     return `${year}-${month}-${day}`;
   };
 
+  // 시간 형식 변환
   const formattedTime = (input: string): string => {
     return input.replace('분', '').trim();
   };
@@ -175,6 +178,62 @@ const ClubMeetingRegister = () => {
     } catch (error) {
       console.error('정기 모임 등록 요청 실패:', error);
     }
+  };
+
+  /* 모임 수정 페이지 로직 */
+  const isEditPage = window.location.pathname.startsWith(
+    `/club/${clubId}/clubmeeting/edit`,
+  );
+
+  useEffect(() => {
+    if (isEditPage) {
+      try {
+        const fetchClubMeetingItemData = async () => {
+          const data = await clubController.selectClubDetail(Number(clubId));
+          const selectedClubMeeting = data.clubMeetingList.find(
+            item => item.meetingId === meetingId,
+          );
+
+          setClubMeetingTitle(selectedClubMeeting.clubMeetingTitle);
+          setIsClubMeetingTitleValid(true);
+          setClubMeetingTitleError('');
+          setClubMeetingDate(
+            reformattedDate(selectedClubMeeting.clubMeetingDate),
+          );
+          setIsClubMeetingDateValid(true);
+          setClubMeetingDateError('');
+          setClubMeetingTime(selectedClubMeeting.clubMeetingTime);
+          setIsClubMeetingTimeValid(true);
+          setClubMeetingTimeError('');
+          setClubMeetingLocation(selectedClubMeeting.clubMeetingLocation);
+          setIsClubMeetingLocationValid(true);
+          setClubMeetingLocationError('');
+          setMaxParticipants(selectedClubMeeting.maxParticipants);
+          setIsMaxParticipantsValid(true);
+          setMaxParticipantsError('');
+          setEntryFee(selectedClubMeeting.entryfee);
+          console.log(clubMeetingTitle);
+          console.log(clubMeetingDate);
+
+          console.log(clubMeetingTime);
+          console.log(clubMeetingLocation);
+          console.log(maxParticipants);
+          console.log(entryFee);
+        };
+
+        fetchClubMeetingItemData();
+      } catch (error) {
+        logger.error('ClubMeetingRegister', error);
+      }
+    }
+  }, [clubId, meetingId, isEditPage]);
+
+  // 요청값 "2025-07-11"
+  // 응답값은 "25.06.27 (금)" -> 요일 제거 & 형식 맞춰 다시 형식 변환하여 저장
+  const reformattedDate = (date: string): string => {
+    const [yy, mm, dd] = date.split(' ')[0].split('.');
+    const fullYear = 2000 + Number(yy);
+    return `${fullYear}-${mm}-${dd}`;
   };
 
   return (
