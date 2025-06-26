@@ -40,8 +40,12 @@ const DetailInfo = ({
   fetchClubDetail,
 }: DetailInfoProps) => {
   const [isOptionClicked, setIsOptionClicked] = useState(false);
-  const [modalStep, setModalStep] = useState<null | "text" | "confirm" | "complete" | "select">(null);
-  const [modalMode, setModalMode] = useState<null | "greeting" | "report" | "leave" | "full">(null);
+  const [modalStep, setModalStep] = useState<
+    null | 'text' | 'confirm' | 'complete' | 'select'
+  >(null);
+  const [modalMode, setModalMode] = useState<
+    null | 'greeting' | 'report' | 'leave' | 'full'
+  >(null);
   const [reason, setReason] = useState<string>('');
 
   const nav = useNavigate();
@@ -62,7 +66,6 @@ const DetailInfo = ({
   const handleItemClick = (item: string) => {
     switch (item) {
       case '모임 수정':
-        // nav(`/club/edit/${clubId}`);
         nav('/club/edit', { state: clubId });
         break;
       case '정기 모임 등록':
@@ -76,31 +79,31 @@ const DetailInfo = ({
           nav('/login');
           return;
         }
-        setModalMode("report");
-        setModalStep("text");
+        setModalMode('report');
+        setModalStep('text');
         break;
       case '모임 탈퇴':
-        setModalMode("leave");
-        setModalStep("select");
+        setModalMode('leave');
+        setModalStep('select');
         break;
     }
   };
 
   const handleModalSubmit = async () => {
-    if (modalMode === "greeting") {
+    if (modalMode === 'greeting') {
       try {
         await Main.applyClub(Number(clubId));
-        setModalStep("complete");
+        setModalStep('complete');
       } catch (e: any) {
         /* TODO: 정원초과 백에서 에러코드로 내려줌 */
-        console.error("가입에 실패했습니다.", e);
+        console.error('가입에 실패했습니다.', e);
       }
-    } else if (modalMode === "report") {
+    } else if (modalMode === 'report') {
       // TODO: 모임 신고 api 추가하기
-    } else if (modalMode === "leave") {
+    } else if (modalMode === 'leave') {
       await Main.leaveClub(Number(clubId), reason);
     }
-    setModalStep("complete");
+    setModalStep('complete');
   };
 
   return (
@@ -160,12 +163,12 @@ const DetailInfo = ({
                 return;
               }
               if (currentMembers >= maxMembers) {
-                setModalMode("full");
-                setModalStep("confirm");
+                setModalMode('full');
+                setModalStep('confirm');
                 return;
               }
-              setModalMode("greeting");
-              setModalStep("text");
+              setModalMode('greeting');
+              setModalStep('text');
             }}
             title="가입 신청하기"
           />
@@ -179,34 +182,39 @@ const DetailInfo = ({
         )}
       </div>
 
-      {modalStep === "text" && (modalMode === "greeting" || modalMode === "report") && (
-        <ClubTextModal 
-          type={modalMode}
-          title={modalMode === "greeting" ? "가입 인사를 작성해 주세요!" : "신고하려는 이유가 무엇인가요?"}
-          onClose={() => {
-            setModalStep(null);
-            setModalMode(null);
-          }}
-          onSubmit={() => setModalStep("confirm")}
-        />
-      )}
+      {modalStep === 'text' &&
+        (modalMode === 'greeting' || modalMode === 'report') && (
+          <ClubTextModal
+            type={modalMode}
+            title={
+              modalMode === 'greeting'
+                ? '가입 인사를 작성해 주세요!'
+                : '신고하려는 이유가 무엇인가요?'
+            }
+            onClose={() => {
+              setModalStep(null);
+              setModalMode(null);
+            }}
+            onSubmit={() => setModalStep('confirm')}
+          />
+        )}
 
-      {modalStep === "select" && modalMode === "leave" && (
-        <ClubSelectModal 
+      {modalStep === 'select' && modalMode === 'leave' && (
+        <ClubSelectModal
           title="모임을 탈퇴하려는 이유를 알려주세요!"
           onClose={() => {
             setModalStep(null);
             setModalMode(null);
           }}
-          onSubmit={(value) => {
-            setModalStep("confirm");
+          onSubmit={value => {
+            setModalStep('confirm');
             setReason(value);
-          }}  
+          }}
         />
       )}
 
-      {modalStep === "confirm" && modalMode === "full" && (
-        <ClubModal 
+      {modalStep === 'confirm' && modalMode === 'full' && (
+        <ClubModal
           mainMessage="정원이 모두 찼어요."
           subMessage="자리가 생기면 알림을 보내드릴까요?"
           showIcon={true}
@@ -225,51 +233,49 @@ const DetailInfo = ({
           }}
         />
       )}
-      
-      {(modalStep === "confirm" || modalStep === "complete") && modalMode && modalMode !== "full" && (
-        <ClubModal 
-          mainMessage={
-            modalStep === "confirm" 
-              ? (modalMode === "greeting" 
-                ? "모임에 가입할까요?" 
-                : modalMode === "report" 
-                  ? "모임을 신고할까요?"
-                  : "모임을 탈퇴할까요?"
-                ) 
-              : modalMode === "greeting" 
-                ? "모임 가입이 완료되었어요!" 
-                : modalMode === "report"
-                  ? "모임 신고가 완료되었어요!"
-                  : "모임 탈퇴가 완료되었어요!"
-          }
-          subMessage={
-            modalStep === "confirm"
-              ? (modalMode === "greeting" 
-                ? "작성하신 가입 인사는 모임 게시판에 업로드됩니다."
-                : modalMode === "leave"
-                  ? "모임을 탈퇴해도 내가 등록한 게시글은 삭제되지 않아요."
-                  : undefined
-              )
-              : undefined
-          }
-          showIcon={modalStep === "confirm"}
-          iconType={modalMode === "greeting" ? "check" : "warn"}
-          showCancelButton={modalStep === "confirm"}
-          onConfirm={async() => {
-            if (modalStep === "confirm") {
-              await handleModalSubmit();
-              setModalStep("complete");
-            } else if (modalStep === "complete") {
-              await fetchClubDetail();
-              setModalStep(null);
-              setModalMode(null);
-            }
-          }}
-          onCancel={() => setModalStep(null)}
-        />
-      )}
 
-      
+      {(modalStep === 'confirm' || modalStep === 'complete') &&
+        modalMode &&
+        modalMode !== 'full' && (
+          <ClubModal
+            mainMessage={
+              modalStep === 'confirm'
+                ? modalMode === 'greeting'
+                  ? '모임에 가입할까요?'
+                  : modalMode === 'report'
+                    ? '모임을 신고할까요?'
+                    : '모임을 탈퇴할까요?'
+                : modalMode === 'greeting'
+                  ? '모임 가입이 완료되었어요!'
+                  : modalMode === 'report'
+                    ? '모임 신고가 완료되었어요!'
+                    : '모임 탈퇴가 완료되었어요!'
+            }
+            subMessage={
+              modalStep === 'confirm'
+                ? modalMode === 'greeting'
+                  ? '작성하신 가입 인사는 모임 게시판에 업로드됩니다.'
+                  : modalMode === 'leave'
+                    ? '모임을 탈퇴해도 내가 등록한 게시글은 삭제되지 않아요.'
+                    : undefined
+                : undefined
+            }
+            showIcon={modalStep === 'confirm'}
+            iconType={modalMode === 'greeting' ? 'check' : 'warn'}
+            showCancelButton={modalStep === 'confirm'}
+            onConfirm={async () => {
+              if (modalStep === 'confirm') {
+                await handleModalSubmit();
+                setModalStep('complete');
+              } else if (modalStep === 'complete') {
+                await fetchClubDetail();
+                setModalStep(null);
+                setModalMode(null);
+              }
+            }}
+            onCancel={() => setModalStep(null)}
+          />
+        )}
     </div>
   );
 };
