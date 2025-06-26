@@ -72,7 +72,7 @@ const DetailInfo = ({
         nav(`/club/${clubIds}/clubmeeting/register`);
         break;
       case '멤버 관리':
-        nav('/club/member/manage'); // TODO: 추후 수정
+        nav('/club/member/manage');
         break;
       case '모임 신고':
         if (!accessToken) {
