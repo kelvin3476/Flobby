@@ -5,6 +5,7 @@ import { RegionItem } from '../../../api/ApiTypes';
 import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
 import '../../../styles/main/region_selector/RegionSelector.scss';
 import { getCookie } from '../../../utils/Cookie';
+import logger from '../../../utils/Logger';
 
 interface RegionSelectorProps {
   accessToken: string | null;
@@ -75,6 +76,7 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
     if (!localStorage.getItem('token-storage')) {
       /* 지역 모달 정보를 가져오는 API 호출 */
       fetchModalRegionList();
+      logger.log('비로그인 상태 지역 모달 정보 api 호출');
     } else {
       /* 로그인 상태 에서 새로 고침 시 재발급 된 토큰이 유효한 경우 */
       if (
