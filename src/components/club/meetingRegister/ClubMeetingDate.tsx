@@ -5,7 +5,11 @@ import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 import '../../../styles/club/meeting_register/ClubMeetingDate.scss';
 
-const ClubMeetingDate = () => {
+interface ClubMeetingDateProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
   const datepickerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const datePickerInstance = useRef<DatePicker | null>(null);
@@ -51,13 +55,13 @@ const ClubMeetingDate = () => {
 
   // 수정페이지: 데이트 피커 초기값 업데이트 로직
   useEffect(() => {
-    if (datePickerInstance.current && clubMeetingDate) {
+    if (isEditPage && datePickerInstance.current && clubMeetingDate) {
       const initialDate = parseDateString(clubMeetingDate);
       if (initialDate) {
         datePickerInstance.current.setInitialDate(initialDate);
       }
     }
-  }, [clubMeetingDate]);
+  }, [clubMeetingDate, isEditPage]);
 
   // 외부 클릭시 유효성 검사
   useEffect(() => {

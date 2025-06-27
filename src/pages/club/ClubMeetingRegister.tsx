@@ -320,7 +320,7 @@ const ClubMeetingRegister = () => {
           <div className="club-meeting-register-content-area">
             <div className="club-meeting-register-content">
               <ClubMeetingTitle />
-              <ClubMeetingDate />
+              <ClubMeetingDate isEditPage={isEditPage} />
               <ClubMeetingTime isEditPage={isEditPage} />
               <ClubMeetingLocation />
               <ClubMeetingMember />
