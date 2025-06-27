@@ -10,6 +10,7 @@ interface ClubMeetingProps {
   meetingLeaderId: number; // 정기 모임 생성자의 id
   clubMeetingTitle: string;
   clubMeetingDate: string;
+  clubMeetingTime: string;
   clubMeetingLocation: string;
   maxParticipants: number;
   currentParticipants: number;
@@ -31,6 +32,7 @@ const ClubMeetingItem = ({
   meetingLeaderId,
   clubMeetingTitle,
   clubMeetingDate,
+  clubMeetingTime,
   clubMeetingLocation,
   maxParticipants,
   currentParticipants,
@@ -101,6 +103,8 @@ const ClubMeetingItem = ({
             <div className="club-meeting-date-icon"></div>
             <div className="club-meeting-date">
               <span>{clubMeetingDate}</span>
+              <span>{clubMeetingTime}</span>
+              {/* TODO: 데이터 수정에 따라 디자인 gap 추가 요청 -> 필요 */}
             </div>
           </div>
 
