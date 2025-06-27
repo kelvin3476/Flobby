@@ -1,4 +1,9 @@
-import {clubItem, ClubItemDetail, ClubSearchItem, CreateClubMeetingData} from '../../../api/ApiTypes';
+import {
+  clubItem,
+  ClubItemDetail,
+  ClubSearchItem,
+  CreateClubMeetingData,
+} from '../../../api/ApiTypes';
 import { ClubModel } from '../models/ClubModel';
 
 export class ClubController {
@@ -36,7 +41,17 @@ export class ClubController {
     return this.model.searchClubList(searchKeyword);
   }
 
-  createClubMeeting(createClubMeetingData: CreateClubMeetingData, clubId: number): Promise<void> {
+  createClubMeeting(
+    createClubMeetingData: CreateClubMeetingData,
+    clubId: number,
+  ): Promise<void> {
     return this.model.createClubMeeting(createClubMeetingData, clubId);
+  }
+
+  editClubMeeting(
+    editClubMeetingData: CreateClubMeetingData,
+    clubmeetingId: number,
+  ): Promise<void> {
+    return this.model.editClubMeeting(editClubMeetingData, clubmeetingId);
   }
 }
