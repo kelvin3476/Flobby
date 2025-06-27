@@ -234,9 +234,15 @@ const ClubMeetingRegister = () => {
       try {
         const fetchClubMeetingItemData = async () => {
           const data = await clubController.selectClubDetail(Number(clubId));
+
           const selectedClubMeeting = data.clubMeetingList.find(
             item => item.meetingId === meetingId,
           );
+
+          if (!selectedClubMeeting) {
+            logger.error('해당 meetingId에 맞는 모임을 찾을 수 없습니다.');
+            return;
+          }
 
           // 시간 형식 변환(응답값 -> 요청값)
           const { time, meridiem } = reformattedTime(
