@@ -78,7 +78,7 @@ export default class Main {
     editClubMeetingData: CreateClubMeetingData,
     clubmeetingId: number,
   ) {
-    return await http.post(
+    return await http.put(
       `/clubmeeting/edit/${clubmeetingId}`,
       editClubMeetingData,
     );
