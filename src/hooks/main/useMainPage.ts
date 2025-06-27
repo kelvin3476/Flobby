@@ -24,14 +24,15 @@ const useMainPage = () => {
         /* HTTP Only Cookie에 저장된 refreshToken 으로 accessToken 재발급 요청 */
         Login.reGenerateJwtToken()
             .then(response => {
-                if (response.data.code === 1000) {
+                if (response.data.code === 6000) {
                     setAccessToken(response.data.data);
                 } else {
                     logger.error('엑세스 토큰 재발급 실패', response.data.code);
                 }
             })
             .catch(error => {
-                if (error.data.code === 1002) {
+                if (error.response.data.code === 6002) {
+                    logger.error('리프레시 토큰 값 null', error.response.data.message);
                     logger.error('엑세스 토큰 재발급 api 요청 실패', error);
                 }
             });
