@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
 import { DEFAULT_REGION } from '../../../services/region/models/ModalRegionListModel'
 import { RegionItem } from '../../../api/ApiTypes';
@@ -10,7 +10,7 @@ interface RegionSelectorProps {
   accessToken: string | null;
 }
 
-const RegionSelector: React.FC<RegionSelectorProps> = ({ accessToken }: RegionSelectorProps) => {
+const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const modalRegionListController = ModalRegionListController.getInstance();
@@ -42,27 +42,28 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({ accessToken }: RegionSe
     };
   }, []);
 
-  const fetchModalRegionList = useCallback(async () => {
+  /* TODO: 1. 사용자 최초 로그인 후 발급 받는 토큰 과 함께 지역 api 호출 작업 플로우 구성 필요
+           2. 1번 이후 지역 api 에서 주는 관심 지역이 있을시에 첫번째 값이 선택되게끔 작업 필요
+  */
+  const fetchModalRegionList = async () => {
     try {
       const response = await modalRegionListController.getModalRegionList();
-      console.log('[response]', response);
-      if (response.interestRegionList.length > 0) {
-        console.log('[1]', 1);
-        setSelectedRegion(modalRegionListController.getInterestRegionList()[0])
-      } else {
-        if (getCookie('regionId') && getCookie('regionName')) {
-          console.log('[2]', 2);
-          setSelectedRegion({ regionId: Number(getCookie('regionId')), regionName: decodeURIComponent(getCookie('regionName')) });
-        } else {
-          console.log('[3]', 3);
-          setSelectedRegion(response.selectedRegion);
-        }
+      /* 선택한 지역 과 쿠키에 저장된 지역 아이디 값이 같은 경우 */
+      if (modalRegionListController.getSelectedRegion().regionId === Number(getCookie('regionId'))) {
+        setSelectedRegion(modalRegionListController.getSelectedRegion());
+        modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
+        return;
       }
+
+      /* 그 외 케이스 */
+      setSelectedRegion(response.selectedRegion);
+      modalRegionListController.setSelectedRegion(response.selectedRegion);
       setPreferRegions(response.interestRegionList);
+      modalRegionListController.setInterestRegionList(response.interestRegionList);
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
     }
-  }, []);
+  };
 
   useEffect(() => {
     /* 비로그인 시 지역 모달 정보 API 호출 */
@@ -76,15 +77,7 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({ accessToken }: RegionSe
         fetchModalRegionList();
       }
     }
-  }, [accessToken, fetchModalRegionList]);
-
-  /* 지역 모달 관심 지역 리스트, 선택 지역, 지역 리스트 데이터 useEffect 호출 */
-  useEffect(() => {
-    if (accessToken) {
-      /* 로그인 상태에서 지역 모달 정보를 가져오는 API 호출 */
-      fetchModalRegionList();
-    }
-  }, []);
+  }, [accessToken, selectedRegion]);
 
   return (
     <div className="region-selector">
