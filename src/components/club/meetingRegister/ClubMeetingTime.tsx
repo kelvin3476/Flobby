@@ -5,7 +5,11 @@ import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegis
 
 import '../../../styles/club/meeting_register/ClubMeetingTime.scss';
 
-const ClubMeetingTime = () => {
+interface ClubMeetingTimeProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
   const [activeButton, setActiveButton] = useState<string>('');
   const [time, setTime] = useState<string>('');
   const [minute, setMinute] = useState<string>('');
@@ -25,7 +29,7 @@ const ClubMeetingTime = () => {
 
   useEffect(() => {
     if (activeButton && time && minute) {
-      const hour = parseInt(time); // 1~12
+      const hour = parseInt(time);
       const convertedHour =
         activeButton === 'night'
           ? hour === 12
@@ -50,6 +54,21 @@ const ClubMeetingTime = () => {
       : setActiveButton('night');
   }, [clubMeetingTimeMeridiem]);
 
+  // 시간 형식 "14:15" -> 14 -> 2로 변환 필요
+  const reconvertedHour = (time: string): { time: string; minute: string } => {
+    const [hh, mm] = time.split(':');
+    const hour = parseInt(hh, 10);
+
+    let formatHour = '';
+    if (hour === 0 || hour === 12) {
+      formatHour = '12';
+    } else {
+      formatHour = String(hour % 12);
+    }
+
+    return { time: formatHour, minute: mm };
+  };
+
   return (
     <div className="club-meeting-content-container">
       <Label labelTitle="시간" isRequired />
@@ -71,17 +90,23 @@ const ClubMeetingTime = () => {
       <div className="club-meeting-dropdown-box">
         <DropDown
           options={times.map(time => time + '시')}
-          defaultItem={clubMeetingTime.split(':')[0]}
+          defaultItem={
+            (isEditPage && reconvertedHour(clubMeetingTime).time + '시') || ''
+          }
           disabled={false}
           placeholder="시 선택"
           onSelect={setTime}
         />
         <DropDown
           options={minutes.map(minute => minute + '분')}
-          defaultItem={clubMeetingTime.split(':')[1]}
+          defaultItem={
+            (isEditPage && reconvertedHour(clubMeetingTime).minute + '분') || ''
+          }
           disabled={false}
           placeholder="분 선택"
-          onSelect={setMinute}
+          onSelect={selectedMinute => {
+            setMinute(selectedMinute.replace('분', ''));
+          }}
         />
       </div>
       {!isClubMeetingTimeValid && (

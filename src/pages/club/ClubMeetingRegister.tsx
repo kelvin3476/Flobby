@@ -156,6 +156,7 @@ const ClubMeetingRegister = () => {
     return input.replace('분', '').trim();
   };
 
+  // 정기 모임 등록
   const handleSubmitClubMeetingForm = async () => {
     if (!clubId) {
       console.error('clubId가 없습니다.');
@@ -221,8 +222,9 @@ const ClubMeetingRegister = () => {
           setEntryFee(selectedClubMeeting.entryfee);
           console.log(clubMeetingTitle);
           console.log(clubMeetingDate);
-          console.log(time);
-          console.log(meridiem);
+          console.log('time', time);
+          console.log('meridiem', meridiem);
+          console.log('clubMeetingTime', selectedClubMeeting.clubMeetingTime);
           console.log(clubMeetingLocation);
           console.log(maxParticipants);
           console.log(entryFee);
@@ -277,7 +279,7 @@ const ClubMeetingRegister = () => {
             <div className="club-meeting-register-content">
               <ClubMeetingTitle />
               <ClubMeetingDate />
-              <ClubMeetingTime />
+              <ClubMeetingTime isEditPage={isEditPage} />
               <ClubMeetingLocation />
               <ClubMeetingMember />
               <ClubMeetingEntryFee />
