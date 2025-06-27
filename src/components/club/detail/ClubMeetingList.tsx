@@ -32,6 +32,7 @@ const ClubMeetingList = ({
               key={clubMeetingItem.meetingId}
               clubMeetingTitle={clubMeetingItem.clubMeetingTitle}
               clubMeetingDate={clubMeetingItem.clubMeetingDate}
+              clubMeetingTime={clubMeetingItem.clubMeetingTime}
               clubMeetingLocation={clubMeetingItem.clubMeetingLocation}
               maxParticipants={clubMeetingItem.maxParticipants}
               currentParticipants={clubMeetingItem.currentParticipants}
