@@ -57,7 +57,7 @@ const ClubMeetingRegister = () => {
     null,
   );
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const clubController = ClubController.getInstance();
 
@@ -182,10 +182,52 @@ const ClubMeetingRegister = () => {
     }
   };
 
+  // 모달 메세지
+  const MESSAGES = {
+    confirm: {
+      edit: '정기 모임을 수정하시겠습니까?',
+      create: '정기 모임을 등록할까요?',
+    },
+    done: {
+      edit: '정기 모임이 수정되었어요.',
+      create: '정기 모임이 등록되었어요.',
+    },
+  };
+
+  /* ---------------- */
   /* 모임 수정 페이지 로직 */
+  /* ---------------- */
+
+  // 정기모임 페이지 확인값
   const isEditPage = window.location.pathname.startsWith(
     `/club/${clubId}/clubmeeting/edit`,
   );
+
+  // 정기 모임 수정
+  const handleEditClubMeetingForm = async () => {
+    if (!meetingId) {
+      console.error('meetingId가 없습니다.');
+      return;
+    }
+
+    const formattedDateTo = formattedDate(clubMeetingDate);
+    const formattedTimeTo = formattedTime(clubMeetingTime);
+
+    const payload: CreateClubMeetingData = {
+      clubMeetingTitle,
+      clubMeetingDate: formattedDateTo,
+      clubMeetingTime: formattedTimeTo,
+      clubMeetingLocation,
+      maxParticipants,
+      entryfee: entryFee,
+    };
+
+    try {
+      await clubController.editClubMeeting(payload, meetingId);
+    } catch (error) {
+      console.error('정기 모임 등록 요청 실패:', error);
+    }
+  };
 
   useEffect(() => {
     if (isEditPage) {
@@ -263,7 +305,7 @@ const ClubMeetingRegister = () => {
       <MainHeader accessToken={accessToken} />
       <div className="club-meeting-register-wrapper">
         <Title
-          titleName="정기 모임 등록"
+          titleName={isEditPage ? '정기 모임 수정' : '정기 모임 등록'}
           className="club-meeting-register-title"
         />
 
@@ -275,6 +317,7 @@ const ClubMeetingRegister = () => {
             </div>
             <div className="line"></div>
           </div>
+
           <div className="club-meeting-register-content-area">
             <div className="club-meeting-register-content">
               <ClubMeetingTitle />
@@ -284,21 +327,40 @@ const ClubMeetingRegister = () => {
               <ClubMeetingMember />
               <ClubMeetingEntryFee />
             </div>
+
+            {/* 버튼 */}
             <div className="club-meeting-register-button-container">
-              <button
-                type="button"
-                className="club-meeting-register-cancel"
-                onClick={() => nav(`/club/${clubId}`)}
-              >
-                취소
-              </button>
-              <button
-                type="button"
-                className="club-meeting-register-submit"
-                onClick={handleValidChange}
-              >
-                등록
-              </button>
+              <div className="left-wrapper">
+                {isEditPage ? (
+                  <button
+                    type="button"
+                    className="club-meeting-delete-btn"
+                    onClick={() => {
+                      // TODO: 삭제 api 연동
+                    }}
+                  >
+                    삭제
+                  </button>
+                ) : (
+                  <></>
+                )}
+              </div>
+              <div className="right-wrapper">
+                <button
+                  type="button"
+                  className="club-meeting-register-cancel-btn"
+                  onClick={() => nav(`/club/${clubId}`)}
+                >
+                  취소
+                </button>
+                <button
+                  type="button"
+                  className="club-meeting-register-submit-btn"
+                  onClick={handleValidChange}
+                >
+                  등록
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -309,8 +371,12 @@ const ClubMeetingRegister = () => {
         <ClubModal
           mainMessage={
             modalStep === 'confirm'
-              ? '정기 모임을 등록할까요?'
-              : '정기 모임이 등록되었어요.'
+              ? isEditPage
+                ? MESSAGES.confirm.edit
+                : MESSAGES.confirm.create
+              : isEditPage
+                ? MESSAGES.done.edit
+                : MESSAGES.done.create
           }
           showIcon={modalStep === 'confirm'}
           iconType="check"
@@ -320,7 +386,11 @@ const ClubMeetingRegister = () => {
               setModalStep('complete');
             } else {
               setModalStep(null);
-              await handleSubmitClubMeetingForm();
+
+              isEditPage
+                ? await handleEditClubMeetingForm()
+                : await handleSubmitClubMeetingForm();
+
               nav(`/club/${clubId}`);
             }
           }}

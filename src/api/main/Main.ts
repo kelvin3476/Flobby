@@ -63,7 +63,24 @@ export default class Main {
   }
 
   /* 정기 모임 생성 */
-  static async createClubMeeting(createClubMeetingData: CreateClubMeetingData, clubId: number) {
-    return await http.post(`/club/${clubId}/clubmeeting/register`, createClubMeetingData);
+  static async createClubMeeting(
+    createClubMeetingData: CreateClubMeetingData,
+    clubId: number,
+  ) {
+    return await http.post(
+      `/club/${clubId}/clubmeeting/register`,
+      createClubMeetingData,
+    );
+  }
+
+  /* 정기 모임 수정 */
+  static async editClubMeeting(
+    editClubMeetingData: CreateClubMeetingData,
+    clubmeetingId: number,
+  ) {
+    return await http.post(
+      `/clubmeeting/edit/${clubmeetingId}`,
+      editClubMeetingData,
+    );
   }
 }
