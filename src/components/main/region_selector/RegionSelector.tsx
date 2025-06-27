@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import RegionSelectorModal from './RegionSelectorModal';
-import { DEFAULT_REGION } from '../../../services/region/models/ModalRegionListModel'
+import { DEFAULT_REGION } from '../../../services/region/models/ModalRegionListModel';
 import { RegionItem } from '../../../api/ApiTypes';
-import { ModalRegionListController } from "../../../services/region/controllers/ModalRegionListController";
+import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
 import '../../../styles/main/region_selector/RegionSelector.scss';
 import { getCookie } from '../../../utils/Cookie';
 
@@ -15,7 +15,6 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
 
   const modalRegionListController = ModalRegionListController.getInstance();
 
-  const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
   const [selectedRegion, setSelectedRegion] =
     useState<RegionItem>(DEFAULT_REGION);
   const [isRegionSelectorOpen, setIsRegionSelectorOpen] =
@@ -49,17 +48,23 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
     try {
       const response = await modalRegionListController.getModalRegionList();
       /* 선택한 지역 과 쿠키에 저장된 지역 아이디 값이 같은 경우 */
-      if (modalRegionListController.getSelectedRegion().regionId === Number(getCookie('regionId'))) {
+      if (
+        modalRegionListController.getSelectedRegion().regionId ===
+        Number(getCookie('regionId'))
+      ) {
         setSelectedRegion(modalRegionListController.getSelectedRegion());
-        modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
+        modalRegionListController.setSelectedRegion(
+          modalRegionListController.getSelectedRegion(),
+        );
         return;
       }
 
       /* 그 외 케이스 */
       setSelectedRegion(response.selectedRegion);
       modalRegionListController.setSelectedRegion(response.selectedRegion);
-      setPreferRegions(response.interestRegionList);
-      modalRegionListController.setInterestRegionList(response.interestRegionList);
+      modalRegionListController.setInterestRegionList(
+        response.interestRegionList,
+      );
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
     }
@@ -72,7 +77,14 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
       fetchModalRegionList();
     } else {
       /* 로그인 상태 에서 새로 고침 시 재발급 된 토큰이 유효한 경우 */
-      if (accessToken && (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming).type === "reload") {
+      if (
+        accessToken &&
+        (
+          performance.getEntriesByType(
+            'navigation',
+          )[0] as PerformanceNavigationTiming
+        ).type === 'reload'
+      ) {
         /* 지역 모달 정보를 가져오는 API 호출 */
         fetchModalRegionList();
       }
@@ -95,7 +107,7 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
 
       {isRegionSelectorOpen && (
         <RegionSelectorModal
-          preferRegions={preferRegions}
+          modalRegionListController={modalRegionListController}
           onClose={() => setIsRegionSelectorOpen(false)}
           modalRef={modalRef}
           selectedRegion={selectedRegion}
