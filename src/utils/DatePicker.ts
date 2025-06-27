@@ -19,7 +19,6 @@ export default class DatePicker {
 
     if (options.initialDate) {
       this.setInitialDate(options.initialDate);
-      console.log(options.initialDate);
     } else {
       this.currentDate = new Date(this.today);
     }
