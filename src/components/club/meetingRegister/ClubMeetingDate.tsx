@@ -21,9 +21,9 @@ const ClubMeetingDate = () => {
   } = useClubMeetingRegisterStore();
 
   useEffect(() => {
-    if (datepickerRef.current) {
+    if (datepickerRef.current && triggerRef.current) {
       datePickerInstance.current = new DatePicker(datepickerRef.current, {
-        trigger: triggerRef.current!,
+        trigger: triggerRef.current,
         initialDate: null,
         onSelect: date => {
           const selectedDate = new Date(date);
@@ -49,6 +49,7 @@ const ClubMeetingDate = () => {
     }
   }, []);
 
+  // 수정페이지: 데이트 피커 초기값 업데이트 로직
   useEffect(() => {
     if (datePickerInstance.current && clubMeetingDate) {
       const initialDate = parseDateString(clubMeetingDate);
@@ -58,6 +59,7 @@ const ClubMeetingDate = () => {
     }
   }, [clubMeetingDate]);
 
+  // 외부 클릭시 유효성 검사
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
