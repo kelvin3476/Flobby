@@ -31,6 +31,10 @@ interface ClubMeetingRegisterStore {
   clubMeetingTimeError: string;
   setClubMeetingTimeError: (clubMeetingTimeError: string) => void;
 
+  /* 오전/오후 */
+  clubMeetingTimeMeridiem: string;
+  setClubMeetingTimeMeridiem: (clubMeetingTimeMeridiem: string) => void;
+
   /* 정기모임 장소 */
   clubMeetingLocation: string;
   setClubMeetingLocation: (clubMeetingLocation: string) => void;
@@ -79,7 +83,7 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
   setClubMeetingDateError: (clubMeetingDateError: string) =>
     set({ clubMeetingDateError }),
 
-  clubMeetingTime: '',
+  clubMeetingTime: '', // ex) "HH:mm" 형식
   setClubMeetingTime: (clubMeetingTime: string) => set({ clubMeetingTime }),
 
   isClubMeetingTimeValid: true,
@@ -89,6 +93,11 @@ const useClubMeetingRegisterStore = create<ClubMeetingRegisterStore>(set => ({
   clubMeetingTimeError: '',
   setClubMeetingTimeError: (clubMeetingTimeError: string) =>
     set({ clubMeetingTimeError }),
+
+  clubMeetingTimeMeridiem: '', // ex) "오전", "오후"
+  setClubMeetingTimeMeridiem(clubMeetingTimeMeridiem: string) {
+    set({ clubMeetingTimeMeridiem });
+  },
 
   clubMeetingLocation: '',
   setClubMeetingLocation: (clubMeetingLocation: string) =>

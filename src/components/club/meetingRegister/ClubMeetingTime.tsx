@@ -11,11 +11,13 @@ const ClubMeetingTime = () => {
   const [minute, setMinute] = useState<string>('');
 
   const {
+    clubMeetingTime,
     setClubMeetingTime,
     isClubMeetingTimeValid,
     setIsClubMeetingTimeValid,
     clubMeetingTimeError,
     setClubMeetingTimeError,
+    clubMeetingTimeMeridiem,
   } = useClubMeetingRegisterStore();
 
   const times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -41,6 +43,13 @@ const ClubMeetingTime = () => {
     }
   }, [activeButton, time, minute]);
 
+  // 수정 페이지 오전/오후 상태 업데이트
+  useEffect(() => {
+    clubMeetingTimeMeridiem === '오전'
+      ? setActiveButton('day')
+      : setActiveButton('night');
+  }, [clubMeetingTimeMeridiem]);
+
   return (
     <div className="club-meeting-content-container">
       <Label labelTitle="시간" isRequired />
@@ -62,12 +71,14 @@ const ClubMeetingTime = () => {
       <div className="club-meeting-dropdown-box">
         <DropDown
           options={times.map(time => time + '시')}
+          defaultItem={clubMeetingTime.split(':')[0]}
           disabled={false}
           placeholder="시 선택"
           onSelect={setTime}
         />
         <DropDown
           options={minutes.map(minute => minute + '분')}
+          defaultItem={clubMeetingTime.split(':')[1]}
           disabled={false}
           placeholder="분 선택"
           onSelect={setMinute}

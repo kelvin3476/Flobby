@@ -38,6 +38,7 @@ const ClubMeetingRegister = () => {
     setClubMeetingTime,
     setIsClubMeetingTimeValid,
     setClubMeetingTimeError,
+    setClubMeetingTimeMeridiem,
     setClubMeetingLocation,
     setIsClubMeetingLocationValid,
     setClubMeetingLocationError,
@@ -194,6 +195,11 @@ const ClubMeetingRegister = () => {
             item => item.meetingId === meetingId,
           );
 
+          // 시간 형식 변환(응답값 -> 요청값)
+          const { time, meridiem } = reformattedTime(
+            selectedClubMeeting.clubMeetingTime,
+          );
+
           setClubMeetingTitle(selectedClubMeeting.clubMeetingTitle);
           setIsClubMeetingTitleValid(true);
           setClubMeetingTitleError('');
@@ -202,7 +208,8 @@ const ClubMeetingRegister = () => {
           );
           setIsClubMeetingDateValid(true);
           setClubMeetingDateError('');
-          setClubMeetingTime(selectedClubMeeting.clubMeetingTime);
+          setClubMeetingTime(time);
+          setClubMeetingTimeMeridiem(meridiem);
           setIsClubMeetingTimeValid(true);
           setClubMeetingTimeError('');
           setClubMeetingLocation(selectedClubMeeting.clubMeetingLocation);
@@ -214,8 +221,8 @@ const ClubMeetingRegister = () => {
           setEntryFee(selectedClubMeeting.entryfee);
           console.log(clubMeetingTitle);
           console.log(clubMeetingDate);
-
-          console.log(clubMeetingTime);
+          console.log(time);
+          console.log(meridiem);
           console.log(clubMeetingLocation);
           console.log(maxParticipants);
           console.log(entryFee);
@@ -229,11 +236,24 @@ const ClubMeetingRegister = () => {
   }, [clubId, meetingId, isEditPage]);
 
   // 요청값 "2025-07-11"
-  // 응답값은 "25.06.27 (금)" -> 요일 제거 & 형식 맞춰 다시 형식 변환하여 저장
+  // 응답값 "25.06.27 (금)" -> 요일 제거 & 형식 맞춰 다시 형식 변환하여 저장
   const reformattedDate = (date: string): string => {
     const [yy, mm, dd] = date.split(' ')[0].split('.');
-    const fullYear = 2000 + Number(yy);
-    return `${fullYear}-${mm}-${dd}`;
+    return `20${yy}-${mm}-${dd}`;
+  };
+
+  // 요청값 "06:00"
+  // 응답값 "오전 06:00" -> meridiem, time으로 구분
+  const reformattedTime = (
+    time: string,
+  ): { time: string; meridiem: string } => {
+    const [meridiem, timeStr] = time.split(' ');
+    let [hh, mm] = timeStr.split(':').map(Number);
+    if (meridiem === '오전' && hh === 12) hh = 0;
+    if (meridiem === '오후' && hh !== 12) hh += 12;
+    const reformattedTime = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+
+    return { time: reformattedTime, meridiem };
   };
 
   return (
