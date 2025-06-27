@@ -231,11 +231,7 @@ const ClubRegister = () => {
 
   return (
     <div className="register-container">
-      <MainHeader
-        accessToken={accessToken}
-        mainDataList={mainDataList}
-        setMainDataList={setMainDataList}
-      />
+      <MainHeader accessToken={accessToken} />
       <div className="register-main">
         <div className="register-title">
           {isEditPage ? (

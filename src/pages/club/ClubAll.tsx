@@ -25,12 +25,11 @@ const ClubAll = () => {
 
   logger.log('[cluball: accessToken]', accessToken);
 
-  const { mainCategory, setMainCategory, subCategory, setSubCategory } = useClubCategoryStore();
+  const { mainCategory, setMainCategory, subCategory, setSubCategory } =
+    useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
   const [clubList, setClubList] = useState<clubItem[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const [selectedRegion, setSelectedRegion] = useState<string>('');
 
   // 카테고리 목록 컨트롤러
   const categoryListController = CategoryListController.getInstance();
@@ -97,11 +96,7 @@ const ClubAll = () => {
 
   return (
     <div className="club-all-wrapper">
-      <MainHeader
-        accessToken={accessToken}
-        mainDataList={mainDataList}
-        setMainDataList={setMainDataList}
-      />
+      <MainHeader accessToken={accessToken} />
       <div className="club-all-content-container">
         <MainCategory categoryList={categoryList} />
         <div className="club-all-content">
@@ -110,7 +105,11 @@ const ClubAll = () => {
             className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
           >
             <SubCategory categoryList={categoryList} />
-            <ClubList clubList={clubList} accessToken={accessToken} isLoading={isLoading} />
+            <ClubList
+              clubList={clubList}
+              accessToken={accessToken}
+              isLoading={isLoading}
+            />
           </div>
         </div>
       </div>

@@ -49,7 +49,9 @@ const ClubMeetingRegister = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const nav = useNavigate();
 
-  const [modalStep, setModalStep] = useState<null | "confirm" | "complete">(null);
+  const [modalStep, setModalStep] = useState<null | 'confirm' | 'complete'>(
+    null,
+  );
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
@@ -84,56 +86,56 @@ const ClubMeetingRegister = () => {
     // 정기 모임명 유효성 검사
     if (!clubMeetingTitle) {
       setIsClubMeetingTitleValid(false);
-      setClubMeetingTitleError("제목을 입력해 주세요.");
+      setClubMeetingTitleError('제목을 입력해 주세요.');
       isError = true;
     } else {
       setIsClubMeetingTitleValid(true);
-      setClubMeetingTitleError("");
+      setClubMeetingTitleError('');
     }
 
     // 날짜 유효성 검사
     if (!clubMeetingDate) {
       setIsClubMeetingDateValid(false);
-      setClubMeetingDateError("날짜를 선택해 주세요.");
+      setClubMeetingDateError('날짜를 선택해 주세요.');
       isError = true;
     } else {
       setIsClubMeetingDateValid(true);
-      setClubMeetingDateError("");
+      setClubMeetingDateError('');
     }
 
     // 시간 유효성 검사
     if (!clubMeetingTime) {
       setIsClubMeetingTimeValid(false);
-      setClubMeetingTimeError("시간을 선택해 주세요.");
+      setClubMeetingTimeError('시간을 선택해 주세요.');
       isError = true;
     } else {
       setIsClubMeetingTimeValid(true);
-      setClubMeetingTimeError("");
+      setClubMeetingTimeError('');
     }
 
     // 장소 유효성 검사
     if (!clubMeetingLocation) {
       setIsClubMeetingLocationValid(false);
-      setClubMeetingLocationError("장소를 입력해 주세요.");
+      setClubMeetingLocationError('장소를 입력해 주세요.');
       isError = true;
     } else {
       setIsClubMeetingLocationValid(true);
-      setClubMeetingLocationError("");
+      setClubMeetingLocationError('');
     }
 
     // 모집 인원 유효성 검사
     if (!maxParticipants) {
       setIsMaxParticipantsValid(false);
-      setMaxParticipantsError("인원 수를 입력해 주세요.");
+      setMaxParticipantsError('인원 수를 입력해 주세요.');
       isError = true;
     } else {
       setIsMaxParticipantsValid(true);
-      setMaxParticipantsError("");
+      setMaxParticipantsError('');
     }
 
     if (isError) return;
 
-    setModalStep("confirm");
+    setModalStep('confirm');
   };
 
   const formattedDate = (input: string): string => {
@@ -150,7 +152,7 @@ const ClubMeetingRegister = () => {
 
   const handleSubmitClubMeetingForm = async () => {
     if (!clubId) {
-      console.error("clubId가 없습니다.");
+      console.error('clubId가 없습니다.');
       return;
     }
 
@@ -164,18 +166,18 @@ const ClubMeetingRegister = () => {
       clubMeetingLocation,
       maxParticipants,
       entryfee: entryFee,
-    }
+    };
 
     try {
       await clubController.createClubMeeting(payload, Number(clubId));
     } catch (error) {
       console.error('정기 모임 등록 요청 실패:', error);
     }
-  }
+  };
 
   return (
     <div className="club-meeting-register-container">
-      <MainHeader accessToken={accessToken} mainDataList={mainDataList} setMainDataList={setMainDataList} />
+      <MainHeader accessToken={accessToken} />
       <div className="club-meeting-register-wrapper">
         <Title
           titleName="정기 모임 등록"
@@ -200,33 +202,43 @@ const ClubMeetingRegister = () => {
               <ClubMeetingEntryFee />
             </div>
             <div className="club-meeting-register-button-container">
-              <button type="button" className="club-meeting-register-cancel" onClick={() => nav(`/club/${clubId}`)}>
+              <button
+                type="button"
+                className="club-meeting-register-cancel"
+                onClick={() => nav(`/club/${clubId}`)}
+              >
                 취소
               </button>
-              <button type="button" className="club-meeting-register-submit" onClick={handleValidChange}>
+              <button
+                type="button"
+                className="club-meeting-register-submit"
+                onClick={handleValidChange}
+              >
                 등록
               </button>
             </div>
           </div>
         </div>
       </div>
-      <footer>
-        {/* 추후 footer 추가 */}
-      </footer>
+      <footer>{/* 추후 footer 추가 */}</footer>
 
       {modalStep && (
-        <ClubModal 
-          mainMessage={modalStep === "confirm" ? "정기 모임을 등록할까요?" : "정기 모임이 등록되었어요."}
-          showIcon={modalStep === "confirm"}
-          iconType='check'
-          showCancelButton={modalStep === "confirm"}
+        <ClubModal
+          mainMessage={
+            modalStep === 'confirm'
+              ? '정기 모임을 등록할까요?'
+              : '정기 모임이 등록되었어요.'
+          }
+          showIcon={modalStep === 'confirm'}
+          iconType="check"
+          showCancelButton={modalStep === 'confirm'}
           onConfirm={async () => {
-            if (modalStep === "confirm") {
-              setModalStep("complete");
+            if (modalStep === 'confirm') {
+              setModalStep('complete');
             } else {
               setModalStep(null);
               await handleSubmitClubMeetingForm();
-              nav(`/club/${clubId}`)
+              nav(`/club/${clubId}`);
             }
           }}
           onCancel={() => setModalStep(null)}
