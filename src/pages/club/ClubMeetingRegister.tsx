@@ -225,7 +225,7 @@ const ClubMeetingRegister = () => {
     try {
       await clubController.editClubMeeting(payload, meetingId);
     } catch (error) {
-      console.error('정기 모임 등록 요청 실패:', error);
+      console.error('정기 모임 수정 요청 실패:', error);
     }
   };
 
@@ -262,14 +262,6 @@ const ClubMeetingRegister = () => {
           setIsMaxParticipantsValid(true);
           setMaxParticipantsError('');
           setEntryFee(selectedClubMeeting.entryfee);
-          console.log(clubMeetingTitle);
-          console.log(clubMeetingDate);
-          console.log('time', time);
-          console.log('meridiem', meridiem);
-          console.log('clubMeetingTime', selectedClubMeeting.clubMeetingTime);
-          console.log(clubMeetingLocation);
-          console.log(maxParticipants);
-          console.log(entryFee);
         };
 
         fetchClubMeetingItemData();
@@ -303,6 +295,7 @@ const ClubMeetingRegister = () => {
   return (
     <div className="club-meeting-register-container">
       <MainHeader accessToken={accessToken} />
+
       <div className="club-meeting-register-wrapper">
         <Title
           titleName={isEditPage ? '정기 모임 수정' : '정기 모임 등록'}
