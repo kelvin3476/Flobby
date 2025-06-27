@@ -53,7 +53,7 @@ const ClubMeetingRegister = () => {
     null,
   );
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const clubController = ClubController.getInstance();
 

@@ -34,7 +34,7 @@ const ClubSearch = () => {
       'Search Data',
     ); /* 검색 데이터 타입 (Search Data or Recommend Data) */
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const tabItems = [
     { label: '원데이', key: 'oneday' },

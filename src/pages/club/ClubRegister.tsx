@@ -57,7 +57,7 @@ const ClubRegister = () => {
   );
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const clubController = ClubController.getInstance();
 
