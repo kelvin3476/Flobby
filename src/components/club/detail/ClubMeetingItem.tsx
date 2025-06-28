@@ -104,7 +104,6 @@ const ClubMeetingItem = ({
             <div className="club-meeting-date">
               <span>{clubMeetingDate}</span>
               <span>{clubMeetingTime}</span>
-              {/* TODO: 데이터 수정에 따라 디자인 gap 추가 요청 -> 필요 */}
             </div>
           </div>
 
