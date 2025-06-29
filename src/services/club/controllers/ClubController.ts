@@ -54,4 +54,8 @@ export class ClubController {
   ): Promise<void> {
     return this.model.editClubMeeting(editClubMeetingData, clubmeetingId);
   }
+
+  deleteClubMeeting(clubmeetingId: number): Promise<void> {
+    return this.model.deleteClubMeeting(clubmeetingId);
+  }
 }
