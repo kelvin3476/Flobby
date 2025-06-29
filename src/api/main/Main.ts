@@ -83,4 +83,9 @@ export default class Main {
       editClubMeetingData,
     );
   }
+
+  /* 정기 모임 삭제 */
+  static async deleteClubMeeting(clubmeetingId: number) {
+    return await http.patch(`/clubmeeting/delete/${clubmeetingId}`);
+  }
 }
