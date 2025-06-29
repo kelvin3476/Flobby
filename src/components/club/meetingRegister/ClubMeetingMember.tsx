@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 import Label from '../register/Label';
 
-const ClubMeetingMember = () => {
+interface ClubMeetingMemberProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingMember = ({ isEditPage }: ClubMeetingMemberProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const {
@@ -42,7 +46,7 @@ const ClubMeetingMember = () => {
 
   // 수정페이지에서 inputValue 상태값으로 업데이트
   useEffect(() => {
-    if (maxParticipants) setInputValue(String(maxParticipants));
+    if (isEditPage && maxParticipants) setInputValue(String(maxParticipants));
   }, [maxParticipants]);
 
   return (

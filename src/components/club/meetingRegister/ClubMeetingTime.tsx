@@ -55,19 +55,25 @@ const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
   }, [clubMeetingTimeMeridiem]);
 
   // 시간 형식 "14:15" -> 14 -> 2로 변환 필요
-  const reconvertedHour = (time: string): { time: string; minute: string } => {
+  const reconvertedHour = (time: string): { time: number; minute: string } => {
     const [hh, mm] = time.split(':');
-    const hour = parseInt(hh, 10);
 
-    let formatHour = '';
+    const hour = Number(hh);
+
+    let formatHour = 0;
     if (hour === 0 || hour === 12) {
-      formatHour = '12';
+      formatHour = 12;
     } else {
-      formatHour = String(hour % 12);
+      formatHour = hour % 12;
     }
 
     return { time: formatHour, minute: mm };
   };
+
+  useEffect(() => {
+    setTime(String(reconvertedHour(clubMeetingTime).time));
+    setMinute(String(reconvertedHour(clubMeetingTime).minute));
+  }, []);
 
   return (
     <div className="club-meeting-content-container">
@@ -90,18 +96,14 @@ const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
       <div className="club-meeting-dropdown-box">
         <DropDown
           options={times.map(time => time + '시')}
-          defaultItem={
-            (isEditPage && reconvertedHour(clubMeetingTime).time + '시') || ''
-          }
+          defaultItem={isEditPage && time + '시'}
           disabled={false}
           placeholder="시 선택"
           onSelect={setTime}
         />
         <DropDown
           options={minutes.map(minute => minute + '분')}
-          defaultItem={
-            (isEditPage && reconvertedHour(clubMeetingTime).minute + '분') || ''
-          }
+          defaultItem={isEditPage && minute + '분'}
           disabled={false}
           placeholder="분 선택"
           onSelect={selectedMinute => {

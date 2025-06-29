@@ -387,7 +387,7 @@ const ClubMeetingRegister = () => {
               <ClubMeetingDate isEditPage={isEditPage} />
               <ClubMeetingTime isEditPage={isEditPage} />
               <ClubMeetingLocation />
-              <ClubMeetingMember />
+              <ClubMeetingMember isEditPage={isEditPage} />
               <ClubMeetingEntryFee />
             </div>
 
