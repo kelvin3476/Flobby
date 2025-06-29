@@ -2,7 +2,7 @@ import {
   clubItem,
   ClubItemDetail,
   ClubSearchItem,
-  CreateClubMeetingData,
+  ClubMeetingData,
 } from '../../../api/ApiTypes';
 import Main from '../../../api/main/Main';
 
@@ -117,7 +117,7 @@ export class ClubModel {
 
   /* 정기 모임 등록 api */
   async createClubMeeting(
-    createClubMeetingData: CreateClubMeetingData,
+    createClubMeetingData: ClubMeetingData,
     clubId: number,
   ): Promise<void> {
     try {
@@ -142,7 +142,7 @@ export class ClubModel {
 
   /* 정기 모임 수정 api */
   async editClubMeeting(
-    editClubMeetingData: CreateClubMeetingData,
+    editClubMeetingData: ClubMeetingData,
     clubmeetingId: number,
   ): Promise<void> {
     try {

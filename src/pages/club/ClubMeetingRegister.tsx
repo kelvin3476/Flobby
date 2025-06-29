@@ -15,7 +15,7 @@ import ClubMeetingEntryFee from '../../components/club/meetingRegister/ClubMeeti
 import useClubMeetingRegisterStore from '../../store/club/useClubMeetingRegisterStore';
 import useMainPage from '../../hooks/main/useMainPage';
 
-import { CreateClubMeetingData } from '../../api/ApiTypes';
+import { ClubMeetingData } from '../../api/ApiTypes';
 import { ClubController } from '../../services/club/controllers/ClubController';
 
 import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
@@ -170,7 +170,7 @@ const ClubMeetingRegister = () => {
     const formattedDateTo = formattedDate(clubMeetingDate);
     const formattedTimeTo = formattedTime(clubMeetingTime);
 
-    const payload: CreateClubMeetingData = {
+    const payload: ClubMeetingData = {
       clubMeetingTitle,
       clubMeetingDate: formattedDateTo,
       clubMeetingTime: formattedTimeTo,
@@ -205,7 +205,7 @@ const ClubMeetingRegister = () => {
     const formattedDateTo = formattedDate(clubMeetingDate);
     const formattedTimeTo = formattedTime(clubMeetingTime);
 
-    const payload: CreateClubMeetingData = {
+    const payload: ClubMeetingData = {
       clubMeetingTitle,
       clubMeetingDate: formattedDateTo,
       clubMeetingTime: formattedTimeTo,
