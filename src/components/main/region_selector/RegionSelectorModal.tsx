@@ -2,9 +2,10 @@ import React, { RefObject, useEffect, useState } from 'react';
 import { RegionItem } from '../../../api/ApiTypes';
 import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
 import '../../../styles/main/region_selector/RegionSelectorModal.scss';
+import logger from '../../../utils/Logger';
 
 interface RegionSelectorModalProps {
-  preferRegions: RegionItem[];
+  modalRegionListController: ModalRegionListController;
   onClose: () => void;
   modalRef: RefObject<HTMLDivElement>;
   selectedRegion: RegionItem;
@@ -12,7 +13,7 @@ interface RegionSelectorModalProps {
 }
 
 const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
-  preferRegions,
+  modalRegionListController,
   onClose,
   modalRef,
   selectedRegion,
@@ -20,8 +21,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
 }) => {
   const [activeCity, setActiveCity] = useState<string>('');
   const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
-
-  const modalRegionListController = ModalRegionListController.getInstance();
+  const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
 
   const handleSelectRegion = async (region: RegionItem) => {
     setSelectedRegion(region);
@@ -33,13 +33,17 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
     const fetchRegionListData = async () => {
       await modalRegionListController.getModalRegionList();
 
-      if (modalRegionListController.model.modalRegionList.regionList && selectedRegion.regionId) {
+      if (
+        modalRegionListController.model.modalRegionList.regionList &&
+        selectedRegion.regionId
+      ) {
         const cityEntry = Object.entries(
-            modalRegionListController.model.modalRegionList.regionList,
+          modalRegionListController.model.modalRegionList.regionList,
         ).find(([city, towns]) =>
           towns.some(town => town.regionId === selectedRegion.regionId),
         );
 
+        // 선택 지역을 활성된 지역으로 업데이트
         if (cityEntry) {
           setActiveCity(cityEntry[0]);
 
@@ -52,9 +56,21 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
           }
         }
       }
+
+      // 지역 목록 모델에 저장되어 있는 관심 지역 상태 업데이트
+      setPreferRegions(modalRegionListController.model.getInterestRegionList());
+
+      logger.log(
+        '지역 선택 모달 관심 지역 리스트 :',
+        modalRegionListController.model.interestRegionList,
+      );
     };
+
     fetchRegionListData();
-  }, [modalRegionListController.model.modalRegionList.regionList, selectedRegion]);
+  }, [
+    modalRegionListController.model.modalRegionList.regionList,
+    selectedRegion,
+  ]);
 
   return (
     <>
@@ -110,8 +126,12 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
           </div>
           <div className="select-region-content">
             <div className="select-region-city">
-              {Object.keys(modalRegionListController.model.modalRegionList.regionList).length > 0 &&
-                Object.keys(modalRegionListController.model.modalRegionList.regionList)
+              {Object.keys(
+                modalRegionListController.model.modalRegionList.regionList,
+              ).length > 0 &&
+                Object.keys(
+                  modalRegionListController.model.modalRegionList.regionList,
+                )
                   .reduce((rows, city, index) => {
                     if (index % 4 === 0) rows.push([]);
                     rows[rows.length - 1].push(city);

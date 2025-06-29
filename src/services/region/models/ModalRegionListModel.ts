@@ -1,7 +1,7 @@
 import { ModalRegionListData, RegionItem } from '../../../api/ApiTypes';
 import Region from '../../../api/region/Region';
 import { getCookie, setCookie } from '../../../utils/Cookie';
-import logger from '../../../utils/Logger'
+import logger from '../../../utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {
@@ -15,7 +15,7 @@ export class ModalRegionListModel {
     interestRegionList: [],
     regionList: [],
     selectedRegion: DEFAULT_REGION,
-  }
+  };
 
   interestRegionList: RegionItem[] = [];
   regionList: Record<string, RegionItem[]>;

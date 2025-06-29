@@ -57,7 +57,7 @@ const ClubRegister = () => {
   );
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
-  const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  const { accessToken } = useMainPage();
 
   const clubController = ClubController.getInstance();
 
@@ -231,11 +231,7 @@ const ClubRegister = () => {
 
   return (
     <div className="register-container">
-      <MainHeader
-        accessToken={accessToken}
-        mainDataList={mainDataList}
-        setMainDataList={setMainDataList}
-      />
+      <MainHeader accessToken={accessToken} />
       <div className="register-main">
         <div className="register-title">
           {isEditPage ? (
