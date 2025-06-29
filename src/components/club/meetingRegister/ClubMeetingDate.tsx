@@ -5,10 +5,16 @@ import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 import '../../../styles/club/meeting_register/ClubMeetingDate.scss';
 
-const ClubMeetingDate = () => {
+interface ClubMeetingDateProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
   const datepickerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
-  const [isTouched, setIsTouched] = useState(false);
+  const datePickerInstance = useRef<DatePicker | null>(null);
+  const [isTouched, setIsTouched] = useState<boolean>(false);
+
   const {
     clubMeetingDate,
     setClubMeetingDate,
@@ -19,9 +25,10 @@ const ClubMeetingDate = () => {
   } = useClubMeetingRegisterStore();
 
   useEffect(() => {
-    if (datepickerRef.current) {
-      new DatePicker(datepickerRef.current, {
+    if (datepickerRef.current && triggerRef.current) {
+      datePickerInstance.current = new DatePicker(datepickerRef.current, {
         trigger: triggerRef.current,
+        initialDate: null,
         onSelect: date => {
           const selectedDate = new Date(date);
 
@@ -31,16 +38,32 @@ const ClubMeetingDate = () => {
 
           setIsClubMeetingDateValid(true);
           setClubMeetingDateError('');
-          setIsTouched(true);
         },
       });
+    }
 
-      triggerRef.current?.addEventListener('click', () => {
-        setIsTouched(true);
-      });
+    if (triggerRef.current) {
+      const handleClick = () => setIsTouched(true);
+
+      triggerRef.current.addEventListener('click', handleClick);
+
+      return () => {
+        triggerRef.current?.removeEventListener('click', handleClick);
+      };
     }
   }, []);
 
+  // 수정페이지: 데이트 피커 초기값 업데이트 로직
+  useEffect(() => {
+    if (isEditPage && datePickerInstance.current && clubMeetingDate) {
+      const initialDate = parseDateString(clubMeetingDate);
+      if (initialDate) {
+        datePickerInstance.current.setInitialDate(initialDate);
+      }
+    }
+  }, [clubMeetingDate, isEditPage]);
+
+  // 외부 클릭시 유효성 검사
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -77,6 +100,19 @@ const ClubMeetingDate = () => {
     const day = days[selectedDate.getDay()];
 
     return `${yy}.${mm}.${dd} (${day})`;
+  };
+
+  // clubMeetingDate: "2025-07-11" 형식 Date 객체로 변환하는 함수
+  const parseDateString = (dateStr: string): Date | null => {
+    if (!dateStr) return null;
+
+    const [yyyy, mm, dd] = dateStr.split('-');
+
+    const year = Number(yyyy);
+    const month = Number(mm) - 1;
+    const day = Number(dd);
+
+    return new Date(year, month, day);
   };
 
   return (

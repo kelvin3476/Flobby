@@ -230,7 +230,7 @@ export interface RecommendClubListItem {
 }
 
 /* 정기 모임 생성시 필요한 json 데이터셋 */
-export interface CreateClubMeetingData {
+export interface ClubMeetingData {
   clubMeetingTitle: string;
   clubMeetingDate: string;
   clubMeetingTime: string;

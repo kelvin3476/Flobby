@@ -90,7 +90,7 @@
         .club-meeting-date {
           display: flex;
           align-items: center;
-          gap: 2px;
+          gap: 6px;
 
           > span {
             @include content-span-style();
