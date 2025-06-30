@@ -88,11 +88,11 @@ const Login = () => {
                   isValid={isPasswordValid}
                   errorMessage={passwordError}
                   placeholder="비밀번호를 입력해 주세요."
-                  onKeyDown={(event) => {
+                  onKeyDown={async (event) => {
                     if (email === '' || password === '') return; /* 이메일 또는 패스워드 미 입력시 return */
                     /* 키보드 엔터 시 로그인 api 호출 */
                     if (event.key === 'Enter') {
-                      webLogin(maintainLogin);
+                      await webLogin(maintainLogin);
                     }
                   }}
                 />
@@ -115,7 +115,7 @@ const Login = () => {
             </div>
 
             {/* 로그인 버튼 */}
-            <Button className="login-button" title="로그인" onClick={() => webLogin(maintainLogin)}/>
+            <Button className="login-button" title="로그인" onClick={async () => await webLogin(maintainLogin)}/>
 
             {/* 소셜 로그인 */}
             <div className="social-login-container">
