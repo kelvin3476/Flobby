@@ -60,7 +60,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                     >
                       <img
                         className="profile-btn"
-                        src="../../img/header/profile-ex.jpg"
+                        src={"../../img/header/profile-ex.jpg"}
                       />
                     </div>
                   </>
@@ -78,7 +78,6 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                   await Logout.webLogout();
                   window.location.reload();
                   localStorage.removeItem('token-storage');
-                  localStorage.removeItem('preferRegionsList');
                 } else if (item === '마이페이지') {
                   // 마이페이지 라우팅
                 }
