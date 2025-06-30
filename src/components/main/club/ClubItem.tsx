@@ -79,21 +79,22 @@ const ClubItem = ({
           <div className="club-item-club-name">{clubName}</div>
 
           <div className="club-item-information-sub-container">
-            {/* 모임 */}
-            {postCategory && (
-              <>
-                <div className="club-item-post-category-container">
-                  <span className="club-item-post-category">
-                    {postCategory}
-                  </span>
-                </div>
+            {/*/!* 모임 *!/*/}
+            {/*{postCategory && (*/}
+            {/*  <>*/}
+            {/*    <div className="club-item-post-category-container">*/}
+            {/*      <span className="club-item-post-category">*/}
+            {/*        {postCategory}*/}
+            {/*      </span>*/}
+            {/*    </div>*/}
 
-                <span className="club-item-divider-icon"></span>
-              </>
-            )}
+            {/*    <span className="club-item-divider-icon"></span>*/}
+            {/*  </>*/}
+            {/*)}*/}
             {/* 모임 위치 */}
             <div className="club-item-location-container">
-              {isDetailPage && <div className="club-item-location-icon"></div>}
+              {/*{isDetailPage && <div className="club-item-location-icon"></div>}*/}
+              <div className="club-item-location-icon"></div>
               <span className="club-item-location">{locationName}</span>
             </div>
 
