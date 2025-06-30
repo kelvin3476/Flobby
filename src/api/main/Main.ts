@@ -52,6 +52,11 @@ export default class Main {
     return await http.post(`/club/apply`, clubId);
   }
 
+  /* 모임 신고 */
+  static async reportClub(clubId: number, reportReason: string) {
+    return await http.post(`/club/report`, { clubId, reportReason });
+  }
+
   /* 모임 탈퇴 사유 리스트 */
   static async getLeaveClubReasonList() {
     return await http.get(`/club/leave/start`);
