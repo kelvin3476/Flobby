@@ -67,7 +67,7 @@ const ClubItem = ({
         {/* 모임 아이템 태그 */}
         <div className="club-item-tag-container">
           <Tag
-            label={`${category} / ${subCategory}`}
+            label={subCategory}
             type="club"
             color="purple"
           />
