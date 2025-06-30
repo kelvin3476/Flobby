@@ -93,4 +93,29 @@ export default class Main {
   static async deleteClubMeeting(clubmeetingId: number) {
     return await http.patch(`/clubmeeting/delete/${clubmeetingId}`);
   }
+
+  /* 정기 모임 참여 */
+  static async participationClubMeeting(clubmeetingId: number) {
+    return await http.post(`/clubmeeting/${clubmeetingId}/participation`);
+  }
+
+  /* 정기 모임 취소 */
+  static async cancelClubMeeting(clubmeetingId: number) {
+    return await http.patch(`/clubmeeting/${clubmeetingId}/cancel`);
+  }
+
+  /* 모임장 양도 */
+  static async leaderChange(clubId: number, memberId: number) {
+    return await http.post(`/club/leader/change`, { clubId, memberId });
+  }
+
+  /* 운영진 등록 */
+  static async assignManager(clubId: number, memberId: number) {
+    return await http.post(`/club/manager/assign`, { clubId, memberId });
+  }
+
+  /* 운영진 해제 */
+  static async revokeManager(clubId: number, memberId: number) {
+    return await http.post(`/club/manager/revoke`, { clubId, memberId });
+  }
 }
