@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Main from '../../../api/main/Main';
+
 import Button from '../../button/Button';
 import ClubModal from '../../modal/ClubModal';
+
 import '../../../styles/club/detail/ClubMeetingItem.scss';
+import logger from '../../../utils/Logger';
 
 interface ClubMeetingProps {
   meetingId: number; // 정기 모임 id
@@ -19,6 +24,7 @@ interface ClubMeetingProps {
   loginUserRole: string | null; // 현재 로그인 유저의 해당 모임에 대한 role
   entryfee: string;
   clubId: string; // 모임 id
+  fetchClubDetail: () => Promise<void>;
 }
 
 type ModalStep =
@@ -41,8 +47,10 @@ const ClubMeetingItem = ({
   loginUserRole,
   entryfee,
   clubId,
+  fetchClubDetail,
 }: ClubMeetingProps) => {
   const [modalStep, setModalStep] = useState<ModalStep>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleClickModifyButton = () => {
@@ -53,19 +61,30 @@ const ClubMeetingItem = ({
     setModalStep({ type, phase: 'confirm' });
   };
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async() => {
     if (!modalStep) return;
+    setIsLoading(true);
 
-    if (modalStep.type === 'attend') {
-      // TODO: 정기모임 참석 api 연동
-    } else if (modalStep.type === 'cancel') {
-      // TODO: 정기모임 취소 api 연동
+    try {
+      if (modalStep.type === 'attend') {
+        await Main.participationClubMeeting(Number(meetingId));
+      } else if (modalStep.type === 'cancel') {
+        await Main.cancelClubMeeting(Number(meetingId));
+      }
+      await fetchClubDetail();
+      setModalStep({ ...modalStep, phase: 'complete' });
+    } catch (error) {
+      console.log('정기 모임 참여 요청 실패:', error);
+    } finally {
+      setIsLoading(false);
     }
-    setModalStep({ ...modalStep, phase: 'complete' });
+
   };
 
   const getModalProps = () => {
-    if (!modalStep) return;
+    if (!modalStep) {
+      return { mainMessage: "", showIcon: false, iconType: "check" }as const;
+    }
 
     if (modalStep.type === 'attend') {
       return {
