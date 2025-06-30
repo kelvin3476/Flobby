@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import '../../styles/dropdown/Dropdown.scss';
 
 interface DropDownProps {
@@ -16,6 +16,7 @@ const DropDown = ({
   placeholder,
   onSelect,
 }: DropDownProps) => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(defaultItem);
 
@@ -23,8 +24,18 @@ const DropDown = ({
     setActiveItem(defaultItem);
   }, [defaultItem]);
 
+  /* 드랍 다운 외부 영역 클릭시 닫히는 로직 */
+  useEffect(() => {
+    const handleClickOutSide = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) setIsDropDownOpen(false);
+    }
+
+    document.addEventListener('mousedown', handleClickOutSide);
+    return () => document.removeEventListener('mousedown', handleClickOutSide);
+  }, []);
+
   return (
-    <div className="drop-down-wrapper">
+    <div className="drop-down-wrapper" ref={dropdownRef}>
       <div
         className={`drop-down-container ${isDropDownOpen ? 'active' : ''}`}
         onClick={() => {

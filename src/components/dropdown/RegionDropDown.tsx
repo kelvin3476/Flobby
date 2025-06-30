@@ -125,7 +125,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
           options={subList.map(item => item.regionName)}
           placeholder="하위 지역"
           defaultItem={selectedSubRegion}
-          disabled={!selectedMainRegion}
+          disabled={
+            selectedSubRegion === null ? true : !selectedMainRegion
+          } /* 하위 지역이 null 인 경우 (00 전체) > disabled 처리 및 아닌 경우엔 선택 가능 하게끔 처리 */
           onSelect={(regionName: string) => {
             setSelectedSubRegion(regionName);
             const matchedRegion = subList.find(
