@@ -12,6 +12,7 @@ interface ClubMeetingListProps {
   loginUserRole: string | null;
   isMember: boolean;
   clubId: string;
+  fetchClubDetail: () => Promise<void>;
 }
 const ClubMeetingList = ({
   clubMeetingList,
@@ -19,6 +20,7 @@ const ClubMeetingList = ({
   loginUserRole,
   isMember,
   clubId,
+  fetchClubDetail,
 }: ClubMeetingListProps) => {
   const navigate = useNavigate();
 
@@ -44,6 +46,7 @@ const ClubMeetingList = ({
               entryfee={clubMeetingItem.entryfee}
               meetingId={clubMeetingItem.meetingId}
               clubId={clubId}
+              fetchClubDetail={fetchClubDetail}
             />
           ))
         ) : (
