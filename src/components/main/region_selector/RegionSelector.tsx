@@ -4,7 +4,6 @@ import { DEFAULT_REGION } from '../../../services/region/models/ModalRegionListM
 import { RegionItem } from '../../../api/ApiTypes';
 import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
 import '../../../styles/main/region_selector/RegionSelector.scss';
-import { getCookie } from '../../../utils/Cookie';
 import logger from '../../../utils/Logger';
 
 interface RegionSelectorProps {
@@ -42,73 +41,19 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
     };
   }, []);
 
-  /* TODO: 1. 사용자 최초 로그인 후 발급 받는 토큰 과 함께 지역 api 호출 작업 플로우 구성 필요
-           2. 1번 이후 지역 api 에서 주는 관심 지역이 있을시에 첫번째 값이 선택되게끔 작업 필요
+  /* 
+    1. 사용자 최초 로그인 후 발급 받는 토큰 과 함께 지역 api 호출 작업 플로우
+    2. 1번 이후 지역 api 에서 주는 관심 지역이 있을시에 첫번째 값이 선택
   */
   const fetchModalRegionList = async () => {
     try {
       const response = await modalRegionListController.getModalRegionList();
-      // /* 선택한 지역 과 쿠키에 저장된 지역 아이디 값이 같은 경우 */
-      // if (
-      //   modalRegionListController.getSelectedRegion().regionId ===
-      //   Number(getCookie('regionId'))
-      // ) {
-      //   setSelectedRegion(modalRegionListController.getSelectedRegion());
-      //   modalRegionListController.setSelectedRegion(
-      //     modalRegionListController.getSelectedRegion(),
-      //   );
-      //   return;
-      // }
-
-      console.log('[response]', response);
-
-      /* 관심 지역 첫번째 값과 선택 지역이 다를 경우 관심 지역 첫번째 값으로 세팅 */
-      if (localStorage.getItem('token-storage') && accessToken) {
-        console.log('[cookie regionId]', Number(getCookie('regionId')));
-        console.log('[selectedRegion.regionId]', selectedRegion.regionId);
-        console.log('[response.selectedRegion.regionId]', response.selectedRegion.regionId);
-        /**/
-        if (selectedRegion.regionId === response.selectedRegion.regionId) {
-          if (selectedRegion.regionName === '서울 전체') {
-            console.log('[1]', 1);
-            setSelectedRegion(modalRegionListController.getSelectedRegion());
-            console.log('[selectedRegion]', selectedRegion);
-            modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
-            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
-          } else {
-            console.log('[2]', 2);
-            setSelectedRegion(response.interestRegionList[0])
-            console.log('[selectedRegion]', selectedRegion);
-            modalRegionListController.setSelectedRegion(response.interestRegionList[0]);
-            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
-          }
-          return;
-        } else {
-          /**/
-          if (Number(getCookie('regionId')) === response.selectedRegion.regionId) {
-            console.log('[3]', 3);
-            setSelectedRegion(response.selectedRegion)
-            console.log('[selectedRegion]', selectedRegion);
-            modalRegionListController.setSelectedRegion(response.selectedRegion);
-            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
-            return;
-          } else {
-            /**/
-            console.log('[4]', 4);
-            console.log('[cookie, response.selectedRegion different]');
-            setSelectedRegion(response.selectedRegion);
-            console.log('[selectedRegion]', selectedRegion);
-            modalRegionListController.setSelectedRegion(response.selectedRegion);
-            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
-            return;
-          }
-        }
-      }
-
-      /* 그 외 케이스 */
       setSelectedRegion(response.selectedRegion);
-      modalRegionListController.setSelectedRegion(response.selectedRegion);
-      modalRegionListController.setInterestRegionList(response.interestRegionList);
+      /* 로그인 했을때만 쿠키값 자동 설정 (비로그인 시에는 지역 모달 에서 선택 시에만 쿠키값 설정) */
+      if (accessToken) {
+        modalRegionListController.setSelectedRegion(response.selectedRegion);
+        modalRegionListController.setInterestRegionList(response.interestRegionList);
+      }
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
     }

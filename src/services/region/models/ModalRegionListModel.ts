@@ -1,6 +1,6 @@
 import { ModalRegionListData, RegionItem } from '../../../api/ApiTypes';
 import Region from '../../../api/region/Region';
-import { getCookie, setCookie } from '../../../utils/Cookie';
+import { getCookie } from '../../../utils/Cookie';
 import logger from '../../../utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
@@ -43,8 +43,6 @@ export class ModalRegionListModel {
     } else {
       // 초기 진입시 selectedRegion은 로그인 유저일 경우 관심지역의 첫번째 값, 비로그인 유저의 경우 selectedRegion으로 넘어오는 defaultRegion(서울 전체)값으로 설정
       this.selectedRegion = this.interestRegionList[0] || data.selectedRegion;
-      setCookie('regionId', String(this.selectedRegion.regionId));
-      setCookie('regionName', this.selectedRegion.regionName);
     }
 
     logger.log(
