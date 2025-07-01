@@ -74,7 +74,7 @@ const ClubMeetingItem = ({
       await fetchClubDetail();
       setModalStep({ ...modalStep, phase: 'complete' });
     } catch (error) {
-      console.log('정기 모임 참여 요청 실패:', error);
+      logger.error('정기 모임 참여 요청 실패:', error);
     } finally {
       setIsLoading(false);
     }

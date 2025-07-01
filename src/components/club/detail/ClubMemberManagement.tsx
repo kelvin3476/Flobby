@@ -3,6 +3,7 @@ import { ClubMemberListItem } from '../../../api/ApiTypes';
 import ClubMemberItem from './ClubMemberItem';
 import ClubModal from '../../modal/ClubModal';
 import Main from '../../../api/main/Main';
+import logger from '../../../utils/Logger';
 
 import '../../../styles/club/detail/ClubMemberManagement.scss';
 
@@ -159,7 +160,7 @@ const ClubMemberManagement = ({
         await fetchClubDetail();
         setModal(prev => prev && { ...prev, phase: 'complete' });
       } catch (error) {
-        console.log("요청 실패:", error);
+        logger.error("요청 실패:", error);
       } finally {
         setIsLoading(false);
       }
