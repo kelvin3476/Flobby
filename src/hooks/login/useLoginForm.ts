@@ -109,7 +109,7 @@ const useLoginForm = () => {
                 setAccessToken(response.data.data); // access token authStore in-memory 저장 (브라우저 새로고침시 초기화)
                 setTokenExpirationTime(JSON.parse(atob(response.data.data.split('.')[1])).exp);
                 setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
-                navigate('/'); /* 메인 페이지로 이동 */
+                window.location.replace('/'); /* 하드 리로드 => 메인 페이지로 이동 */
                 break;
               case 1002 /* accessToken 발급 api 예외 */:
                 console.error('JWT 토큰 발급 api 요청 실패', message);

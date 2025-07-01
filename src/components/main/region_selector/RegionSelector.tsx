@@ -48,24 +48,67 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
   const fetchModalRegionList = async () => {
     try {
       const response = await modalRegionListController.getModalRegionList();
-      /* 선택한 지역 과 쿠키에 저장된 지역 아이디 값이 같은 경우 */
-      if (
-        modalRegionListController.getSelectedRegion().regionId ===
-        Number(getCookie('regionId'))
-      ) {
-        setSelectedRegion(modalRegionListController.getSelectedRegion());
-        modalRegionListController.setSelectedRegion(
-          modalRegionListController.getSelectedRegion(),
-        );
-        return;
+      // /* 선택한 지역 과 쿠키에 저장된 지역 아이디 값이 같은 경우 */
+      // if (
+      //   modalRegionListController.getSelectedRegion().regionId ===
+      //   Number(getCookie('regionId'))
+      // ) {
+      //   setSelectedRegion(modalRegionListController.getSelectedRegion());
+      //   modalRegionListController.setSelectedRegion(
+      //     modalRegionListController.getSelectedRegion(),
+      //   );
+      //   return;
+      // }
+
+      console.log('[response]', response);
+
+      /* 관심 지역 첫번째 값과 선택 지역이 다를 경우 관심 지역 첫번째 값으로 세팅 */
+      if (localStorage.getItem('token-storage') && accessToken) {
+        console.log('[cookie regionId]', Number(getCookie('regionId')));
+        console.log('[selectedRegion.regionId]', selectedRegion.regionId);
+        console.log('[response.selectedRegion.regionId]', response.selectedRegion.regionId);
+        /**/
+        if (selectedRegion.regionId === response.selectedRegion.regionId) {
+          if (selectedRegion.regionName === '서울 전체') {
+            console.log('[1]', 1);
+            setSelectedRegion(modalRegionListController.getSelectedRegion());
+            console.log('[selectedRegion]', selectedRegion);
+            modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
+            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
+          } else {
+            console.log('[2]', 2);
+            setSelectedRegion(response.interestRegionList[0])
+            console.log('[selectedRegion]', selectedRegion);
+            modalRegionListController.setSelectedRegion(response.interestRegionList[0]);
+            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
+          }
+          return;
+        } else {
+          /**/
+          if (Number(getCookie('regionId')) === response.selectedRegion.regionId) {
+            console.log('[3]', 3);
+            setSelectedRegion(response.selectedRegion)
+            console.log('[selectedRegion]', selectedRegion);
+            modalRegionListController.setSelectedRegion(response.selectedRegion);
+            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
+            return;
+          } else {
+            /**/
+            console.log('[4]', 4);
+            console.log('[cookie, response.selectedRegion different]');
+            setSelectedRegion(response.selectedRegion);
+            console.log('[selectedRegion]', selectedRegion);
+            modalRegionListController.setSelectedRegion(response.selectedRegion);
+            console.log('[modalRegionListController.getSelectedRegion()]', modalRegionListController.getSelectedRegion());
+            return;
+          }
+        }
       }
 
       /* 그 외 케이스 */
       setSelectedRegion(response.selectedRegion);
       modalRegionListController.setSelectedRegion(response.selectedRegion);
-      modalRegionListController.setInterestRegionList(
-        response.interestRegionList,
-      );
+      modalRegionListController.setInterestRegionList(response.interestRegionList);
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
     }
@@ -77,21 +120,11 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
       /* 지역 모달 정보를 가져오는 API 호출 */
       fetchModalRegionList();
       logger.log('비로그인 상태 지역 모달 정보 api 호출');
-    } else {
-      /* 로그인 상태 에서 새로 고침 시 재발급 된 토큰이 유효한 경우 */
-      if (
-        accessToken &&
-        (
-          performance.getEntriesByType(
-            'navigation',
-          )[0] as PerformanceNavigationTiming
-        ).type === 'reload'
-      ) {
-        /* 지역 모달 정보를 가져오는 API 호출 */
-        fetchModalRegionList();
-      }
+    } else if (accessToken) {
+      /* accessToken 이 유효한 경우 => 지역 모달 정보를 가져 오는 API 호출 */
+      fetchModalRegionList();
     }
-  }, [accessToken, selectedRegion]);
+  }, [accessToken]);
 
   return (
     <div className="region-selector">
