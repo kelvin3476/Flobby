@@ -45,6 +45,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
                 /* 하위 지역이 전체가 아닌 경우 > 하위 지역 및 상위 지역 그대로 저장 */
                 setSelectedSubRegion(selectedSubRegion.regionName);
                 setSelectedMainRegion(mainRegion);
+                setLocation(selectedSubRegion.regionId);
               }
             }
           }
@@ -75,6 +76,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
             if (selectedSubRegion) {
               setSelectedSubRegion(selectedSubRegion.regionName);
               setSelectedMainRegion(mainRegion);
+              setLocation(selectedSubRegion.regionId);
             }
           }
         }

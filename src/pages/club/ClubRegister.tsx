@@ -240,6 +240,8 @@ const ClubRegister = () => {
       setMaxError('');
       setIsImageFileValid(true);
       setImageFileError('');
+      setIsLocationValid(true);
+      setLocationError('');
     }
   }, []);
 
