@@ -52,9 +52,13 @@ const ClubRegister = () => {
   const loc = useLocation();
   const clubId = loc.state;
 
-  const [modalStep, setModalStep] = useState<null | 'confirm' | 'complete'>(
+  const [modalStep, setModalStep] = useState<
+    null | 'warn' | 'confirm' | 'complete'
+  >(null);
+  const [buttonType, setButtonType] = useState<null | 'register' | 'delete'>(
     null,
   );
+
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
 
   const { accessToken } = useMainPage();
@@ -116,6 +120,7 @@ const ClubRegister = () => {
 
     if (isError) return;
 
+    setButtonType('register');
     setModalStep('confirm');
   };
 
@@ -229,6 +234,73 @@ const ClubRegister = () => {
     }
   }, []);
 
+  /* 정기 모임 삭제 */
+  const handleDeleteClubMeeting = async () => {
+    try {
+      await clubController.deleteClub(clubId);
+    } catch (error) {
+      console.error('모임 삭제 요청 실패', error);
+    }
+  };
+
+  // 모달 이벤트 핸들러 함수
+  const handleModalConfirm = async () => {
+    if (modalStep === 'confirm') {
+      if (isEditPage) {
+        await handleEditClubRegistrationForm();
+      } else {
+        await handleSubmitClubRegistrationForm();
+      }
+      setModalStep('complete');
+    } else if (modalStep === 'warn') {
+      await handleDeleteClubMeeting();
+      setModalStep('complete');
+    } else {
+      setModalStep(null);
+      navigate('/club/list');
+    }
+  };
+
+  /* 모달 메세지 */
+  const MESSAGES = {
+    confirm: {
+      edit: '저장하시겠습니까?',
+      create: '등록 하시겠습니까?',
+      delete: '삭제하시겠습니까?',
+    },
+    done: {
+      edit: '정상적으로 처리되었습니다.',
+      create: '정상적으로 처리되었습니다.',
+      delete: '정상적으로 처리되었습니다.',
+    },
+  };
+
+  const handleModalMessages = (buttonType: 'register' | 'delete') => {
+    if (buttonType === 'register') {
+      // 등록 버튼
+      if (isEditPage) {
+        if (modalStep === 'confirm') {
+          return MESSAGES.confirm.edit;
+        } else {
+          return MESSAGES.done.edit;
+        }
+      } else {
+        if (modalStep === 'confirm') {
+          return MESSAGES.confirm.create;
+        } else {
+          return MESSAGES.done.create;
+        }
+      }
+    } else if (buttonType === 'delete') {
+      // 삭제 버튼
+      if (modalStep === 'warn') {
+        return MESSAGES.confirm.delete;
+      } else {
+        return MESSAGES.done.delete;
+      }
+    }
+  };
+
   return (
     <div className="register-container">
       <MainHeader accessToken={accessToken} />
@@ -269,7 +341,9 @@ const ClubRegister = () => {
                   className="delete-btn"
                   title="삭제"
                   onClick={() => {
-                    // TODO: 삭제 api 호출
+                    console.log('삭제 버튼 클릭!');
+                    setButtonType('delete');
+                    setModalStep('warn');
                   }}
                 />
               )}
@@ -297,25 +371,11 @@ const ClubRegister = () => {
 
       {modalStep && (
         <ClubModal
-          mainMessage={
-            modalStep === 'confirm'
-              ? '등록 하시겠습니까?'
-              : '정상적으로 처리되었습니다.'
-          }
-          showIcon={modalStep === 'confirm'}
-          iconType="check"
-          showCancelButton={modalStep === 'confirm'}
-          onConfirm={async () => {
-            if (modalStep === 'confirm') {
-              setModalStep('complete');
-            } else {
-              setModalStep(null);
-              isEditPage
-                ? handleEditClubRegistrationForm()
-                : handleSubmitClubRegistrationForm();
-              navigate('/club/list');
-            }
-          }}
+          mainMessage={handleModalMessages(buttonType)}
+          showIcon={modalStep === 'confirm' || modalStep === 'warn'}
+          iconType={modalStep === 'warn' ? 'warn' : 'check'}
+          showCancelButton={modalStep === 'confirm' || modalStep === 'warn'}
+          onConfirm={handleModalConfirm}
           onCancel={() => setModalStep(null)}
         />
       )}

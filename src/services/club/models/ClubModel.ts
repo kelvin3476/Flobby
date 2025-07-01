@@ -74,6 +74,26 @@ export class ClubModel {
     }
   }
 
+  /* 모임 삭제 api */
+  async deleteClub(clubId: number): Promise<void> {
+    try {
+      const response = await Main.deleteClub(clubId);
+      const { code, message } = response.data;
+      if (code === 1000) {
+        // API 호출 성공
+        logger.log('모임 게시글이 성공적으로 삭제되었습니다.');
+      } else if (code === 1001) {
+        // API 호출 실패
+        throw new Error(message || '모임 게시글을 삭제하지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
+      }
+    } catch (error: any) {
+      logger.error(error.message || '모임 삭제 api 요청 실패');
+    }
+  }
+
   /* 모임 아이템 선택시 상세 정보 불러 오는 api */
   async selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     try {
