@@ -170,15 +170,26 @@ export default class DatePicker {
 
         dayCell.textContent = String(day);
 
-        // 클릭 이벤트 추가
-        dayCell.addEventListener('click', e => {
-          e.stopPropagation();
-          this.selectDate(thisDate);
-        });
+        // 오늘보다 이전달이면 다음달 날짜 비활성화
+        if (
+          year < this.today.getFullYear() ||
+          (year === this.today.getFullYear() && month < this.today.getMonth())
+        ) {
+          dayCell.classList.add('disabled');
+        } else {
+          // 클릭 이벤트 추가
+          dayCell.addEventListener('click', e => {
+            e.stopPropagation();
+            this.selectDate(thisDate);
+          });
 
-        // selected 클래스 추가
-        if (this.selectedDate && this.isSameDate(thisDate, this.selectedDate)) {
-          dayCell.classList.add('selected');
+          // selected 클래스 추가
+          if (
+            this.selectedDate &&
+            this.isSameDate(thisDate, this.selectedDate)
+          ) {
+            dayCell.classList.add('selected');
+          }
         }
       } else {
         // 현재 달 날짜
