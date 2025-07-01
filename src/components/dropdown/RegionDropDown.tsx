@@ -76,6 +76,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
             if (selectedSubRegion) {
               setSelectedSubRegion(selectedSubRegion.regionName);
               setSelectedMainRegion(mainRegion);
+              setLocation(selectedSubRegion.regionId);
             }
           }
         }
