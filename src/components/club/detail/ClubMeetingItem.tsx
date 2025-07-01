@@ -171,7 +171,7 @@ const ClubMeetingItem = ({
           <>
             {/* 모임장 & 운영진일 경우 정기 모임 수정/삭제 권한 O */}
             {loginUserRole &&
-            (loginUserRole === 'leader' || loginUserRole === 'manager') ? (
+            (loginUserRole === 'LEADER' || loginUserRole === 'MANAGER') ? (
               <>
                 <Button
                   type="button"
