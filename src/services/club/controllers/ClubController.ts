@@ -33,6 +33,10 @@ export class ClubController {
     return this.model.editClub(clubId, editClubData);
   }
 
+  deleteClub(clubId: number): Promise<void> {
+    return this.model.deleteClub(clubId);
+  }
+
   selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     return this.model.selectClubDetail(clubId);
   }

@@ -25,6 +25,11 @@ export default class Main {
     });
   }
 
+  /* 모임 게시글 삭제 */
+  static async deleteClub(clubId: number) {
+    return await http.post(`/club/delete`, clubId);
+  }
+
   /* 모임 상세 조회 */
   static async getClubDetail(clubId: number) {
     return await http.get(`/club/${clubId}`);

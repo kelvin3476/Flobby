@@ -29,8 +29,14 @@ interface ClubRegisterStore {
   subCategory: string;
   setSubCategory: (subcategory: string) => void;
 
-  location: number;
-  setLocation: (location: number) => void;
+  location: number | null;
+  setLocation: (location: number | null) => void;
+
+  isLocationValid: boolean;
+  setIsLocationValid: (isLocationValid: boolean) => void;
+
+  locationError: string;
+  setLocationError: (locationError: string) => void;
 
   isCategoryValid: boolean;
   setIsCategoryValid: (isCategoryValid: boolean) => void;
@@ -88,8 +94,14 @@ const useClubRegisterStore = create<ClubRegisterStore>(set => ({
   subCategory: '',
   setSubCategory: (subCategory: string) => set({ subCategory }),
 
-  location: DEFAULT_REGION.regionId,
+  location: null,
   setLocation: (location: number) => set({ location }),
+
+  isLocationValid: true,
+  setIsLocationValid: (isLocationValid: boolean) => set({ isLocationValid }),
+
+  locationError: '',
+  setLocationError: (locationError: string) => set({ locationError }),
 
   isCategoryValid: true,
   setIsCategoryValid: (isCategoryValid: boolean) => set({ isCategoryValid }),
