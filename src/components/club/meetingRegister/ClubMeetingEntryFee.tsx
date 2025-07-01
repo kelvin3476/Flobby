@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
-
 interface ClubMeetingEntryFeeProps {
   isEditPage: boolean;
 }
 
 const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
-  const { entryFee, setEntryFee } = useClubMeetingRegisterStore();
+  const { 
+    entryFee, 
+    setEntryFee,
+    isEntryFeeValid,
+    setIsEntryFeeValid,
+    entryFeeError,
+    setEntryFeeError
+  } = useClubMeetingRegisterStore();
 
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -15,6 +21,14 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
     const value = e.target.value;
     setInputValue(value);
     setEntryFee(value);
+
+    if (value.length > 9) {
+      setIsEntryFeeValid(false);
+      setEntryFeeError('참가비는 최대 10자까지 작성할 수 있어요.');
+    } else {
+      setIsEntryFeeValid(true);
+      setEntryFeeError('');
+    }
   };
 
   useEffect(() => {
@@ -30,7 +44,11 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
         placeholder="참가비를 입력해 주세요."
         value={inputValue}
         onChange={handleChange}
+        maxLength={10}
       />
+      {!isEntryFeeValid && (
+        <span className='error'>{entryFeeError}</span>
+      )}
     </div>
   );
 };
