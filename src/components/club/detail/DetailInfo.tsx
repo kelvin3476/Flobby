@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import Tag from '../../tag/Tag';
@@ -51,6 +51,13 @@ const DetailInfo = ({
   const nav = useNavigate();
   const { clubIds } = useParams<{ clubIds: string }>();
 
+  useEffect(() => {
+    if (loginUserRole === null && currentMembers >= maxMembers) {
+      setModalMode("full");
+      setModalStep("confirm");
+    }
+  }, [currentMembers, maxMembers, loginUserRole]);
+
   let optionItems: string[] = [];
   if (loginUserRole === 'LEADER') {
     // 모임장일 경우
@@ -99,7 +106,7 @@ const DetailInfo = ({
         console.error('가입에 실패했습니다.', e);
       }
     } else if (modalMode === 'report') {
-      // TODO: 모임 신고 api 추가하기
+      await Main.reportClub(Number(clubId), reason);
     } else if (modalMode === 'leave') {
       await Main.leaveClub(Number(clubId), reason);
     }
@@ -156,7 +163,7 @@ const DetailInfo = ({
         {loginUserRole === null ? (
           <Button
             type="button"
-            className="info-content-btn-yes"
+            className={`info-content-btn-yes` + (currentMembers >= maxMembers ? ' info-content-btn-no' : "")}
             onClick={() => {
               if (!accessToken) {
                 nav('/login');
@@ -195,7 +202,10 @@ const DetailInfo = ({
               setModalStep(null);
               setModalMode(null);
             }}
-            onSubmit={() => setModalStep('confirm')}
+            onSubmit={(value: string) => {
+              setReason(value);
+              setModalStep('confirm');
+            }}
           />
         )}
 
