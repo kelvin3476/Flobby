@@ -11,7 +11,10 @@ interface LabelProps {
 
 const Label = ({ className, labelTitle, isRequired, htmlFor }: LabelProps) => {
   return (
-    <label htmlFor={htmlFor} className={`label-container ${className}`}>
+    <label
+      htmlFor={htmlFor}
+      className={`label-container ${className ? className : ''}`}
+    >
       <span className="label-title">{labelTitle}</span>
       {isRequired && <span className="label-required">*</span>}
     </label>

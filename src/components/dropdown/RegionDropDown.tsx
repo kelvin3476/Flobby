@@ -22,7 +22,8 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
     null,
   );
 
-  const { setLocation } = useClubRegisterStore();
+  const { setLocation, isLocationValid, locationError } =
+    useClubRegisterStore();
 
   useEffect(() => {
     modalRegionListController
@@ -30,14 +31,16 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
       .then(response => {
         const selectedRegionId = Number(getCookie('regionId'));
         if (selectedRegionId) {
-          for (const [mainRegion, subRegions] of Object.entries(response.regionList)) {
+          for (const [mainRegion, subRegions] of Object.entries(
+            response.regionList,
+          )) {
             const selectedSubRegion = subRegions.find(
               region => region.regionId === selectedRegionId,
             );
             if (selectedSubRegion) {
               /* 하위 지역이 전체인 경우 > 하위 지역의 앞글자 와 상위 지역과 같은 경우 > 해당 상위 지역 으로 저장 */
               if (selectedSubRegion.regionName.split(' ')[0] === mainRegion) {
-                setSelectedMainRegion(mainRegion);
+                setSelectedMainRegion(null);
               } else {
                 /* 하위 지역이 전체가 아닌 경우 > 하위 지역 및 상위 지역 그대로 저장 */
                 setSelectedSubRegion(selectedSubRegion.regionName);
@@ -63,7 +66,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
         const selectedRegionName = prevRegion;
         if (selectedRegionName) {
-          for (const [mainRegion, subRegions] of Object.entries(response.regionList)) {
+          for (const [mainRegion, subRegions] of Object.entries(
+            response.regionList,
+          )) {
             const selectedSubRegion = subRegions.find(
               region => region.regionName === prevRegion,
             );
@@ -82,9 +87,10 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
 
-    const subRegions = modalRegionListController.model.modalRegionList.regionList[regionName].filter(
-      subRegion => !subRegion.regionName.includes('전체'),
-    );
+    const subRegions =
+      modalRegionListController.model.modalRegionList.regionList[
+        regionName
+      ].filter(subRegion => !subRegion.regionName.includes('전체'));
     if (subRegions && subRegions.length > 0) {
       const firstSub = subRegions[0];
       setSelectedSubRegion(firstSub.regionName);
@@ -95,17 +101,20 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
   const subList =
     selectedMainRegion &&
-    modalRegionListController.model.modalRegionList.regionList[selectedMainRegion].filter(
-      subRegion => !subRegion.regionName.includes('전체'),
-    )
-      ? modalRegionListController.model.modalRegionList.regionList[selectedMainRegion].filter(
-          subRegion => !subRegion.regionName.includes('전체'),
-        )
+    modalRegionListController.model.modalRegionList.regionList[
+      selectedMainRegion
+    ].filter(subRegion => !subRegion.regionName.includes('전체'))
+      ? modalRegionListController.model.modalRegionList.regionList[
+          selectedMainRegion
+        ].filter(subRegion => !subRegion.regionName.includes('전체'))
       : [];
 
   // 지역 코드를 상태값에 담음(등록 api 호출 위해)
   const handleLocation = (regionId: number) => {
-    setLocation(regionId);
+    // 값이 있을때만 저장
+    if (selectedMainRegion && selectedSubRegion) {
+      setLocation(regionId);
+    } else setLocation(null);
   };
 
   return (
@@ -113,7 +122,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
       <Label labelTitle="지역" isRequired />
       <div className="dropdown-box">
         <DropDown
-          options={Object.keys(modalRegionListController.model.modalRegionList.regionList)}
+          options={Object.keys(
+            modalRegionListController.model.modalRegionList.regionList,
+          )}
           placeholder="상위 지역"
           defaultItem={
             selectedSubRegion === null ? null : selectedMainRegion
@@ -139,6 +150,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
           }}
         />
       </div>
+      {!isLocationValid && <div className="err-message">{locationError}</div>}
     </div>
   );
 };

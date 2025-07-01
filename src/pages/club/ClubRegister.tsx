@@ -27,11 +27,8 @@ const ClubRegister = () => {
   const {
     clubName,
     setClubName,
-    description,
-    setDescription,
-    location,
-    maxMembers,
-    setMaxMembers,
+    setIsTitleValid,
+    setTitleError,
     file,
     setIsImageFileValid,
     setImageFileError,
@@ -40,13 +37,18 @@ const ClubRegister = () => {
     setSubCategory,
     setIsCategoryValid,
     setCategoryError,
-    setIsTitleValid,
-    setIsDescValid,
-    setIsMaxValid,
-    setTitleError,
-    setDescError,
+    description,
+    setDescription,
     setDescCount,
+    setIsDescValid,
+    setDescError,
+    maxMembers,
+    setMaxMembers,
+    setIsMaxValid,
     setMaxError,
+    location,
+    setIsLocationValid,
+    setLocationError,
   } = useClubRegisterStore();
   const navigate = useNavigate();
   const loc = useLocation();
@@ -76,6 +78,13 @@ const ClubRegister = () => {
     } else {
       setIsImageFileValid(true);
       setImageFileError('');
+    }
+
+    // 지역 유효성 검사
+    if (!location) {
+      setIsLocationValid(false);
+      setLocationError('지역을 선택해 주세요.');
+      isError = true;
     }
 
     // 카테고리 유효성 검사
