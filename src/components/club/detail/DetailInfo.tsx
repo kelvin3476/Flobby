@@ -163,7 +163,7 @@ const DetailInfo = ({
         {loginUserRole === null ? (
           <Button
             type="button"
-            className={`info-content-btn-yes` + (currentMembers >= maxMembers ? ' info-content-btn-no' : "")}
+            className={`info-content-btn-yes ${currentMembers >= maxMembers ? 'info-content-btn-no' : "" }`}
             onClick={() => {
               if (!accessToken) {
                 nav('/login');
