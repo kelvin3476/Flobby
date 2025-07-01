@@ -171,10 +171,7 @@ export default class DatePicker {
         dayCell.textContent = String(day);
 
         // 오늘보다 이전달이면 다음달 날짜 비활성화
-        if (
-          year < this.today.getFullYear() ||
-          (year === this.today.getFullYear() && month < this.today.getMonth())
-        ) {
+        if (thisDate < this.today) {
           dayCell.classList.add('disabled');
         } else {
           // 클릭 이벤트 추가
