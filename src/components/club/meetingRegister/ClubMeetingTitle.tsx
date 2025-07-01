@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 
-const ClubMeetingTitle = () => {
+interface ClubMeetingTitleProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingTitle = ({ isEditPage }: ClubMeetingTitleProps) => {
   const {
     clubMeetingTitle,
     setClubMeetingTitle,
@@ -12,9 +16,11 @@ const ClubMeetingTitle = () => {
     setClubMeetingTitleError,
   } = useClubMeetingRegisterStore();
 
+  const [inputValue, setInputValue] = useState<string>('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setClubMeetingTitle(value);
+    setInputValue(value);
 
     if (value.trim() === '') {
       setIsClubMeetingTitleValid(false);
@@ -25,6 +31,14 @@ const ClubMeetingTitle = () => {
     }
   };
 
+  const handleBlur = () => {
+    setClubMeetingTitle(inputValue);
+  };
+
+  useEffect(() => {
+    if (isEditPage && clubMeetingTitle) setInputValue(clubMeetingTitle);
+  }, [clubMeetingTitle]);
+
   return (
     <div className="club-meeting-content-container">
       <Label labelTitle="정기 모임명" isRequired htmlFor="club-meeting-title" />
@@ -32,8 +46,9 @@ const ClubMeetingTitle = () => {
         id="club-meeting-title"
         type="text"
         placeholder="모임명을 입력해 주세요."
-        value={clubMeetingTitle}
+        value={inputValue}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
       {!isClubMeetingTitleValid && (
         <div className="error">{clubMeetingTitleError}</div>

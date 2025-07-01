@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 
-const ClubMeetingEntryFee = () => {
+interface ClubMeetingEntryFeeProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
   const { entryFee, setEntryFee } = useClubMeetingRegisterStore();
+
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setInputValue(value);
     setEntryFee(value);
   };
+
+  useEffect(() => {
+    if (isEditPage && entryFee) setInputValue(entryFee);
+  }, [entryFee]);
 
   return (
     <div className="club-meeting-content-container">
@@ -17,7 +28,7 @@ const ClubMeetingEntryFee = () => {
         id="club-meeting-entryfee"
         type="text"
         placeholder="참가비를 입력해 주세요."
-        value={entryFee}
+        value={inputValue}
         onChange={handleChange}
       />
     </div>

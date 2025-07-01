@@ -24,6 +24,8 @@ const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
     setClubMeetingDateError,
   } = useClubMeetingRegisterStore();
 
+  const [date, setDate] = useState<string>('');
+
   useEffect(() => {
     if (datepickerRef.current && triggerRef.current) {
       datePickerInstance.current = new DatePicker(datepickerRef.current, {
@@ -35,6 +37,7 @@ const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
           setClubMeetingDate(
             `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`,
           );
+          setDate(formatDateWithDay(String(selectedDate)));
 
           setIsClubMeetingDateValid(true);
           setClubMeetingDateError('');
@@ -59,6 +62,7 @@ const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
       const initialDate = parseDateString(clubMeetingDate);
       if (initialDate) {
         datePickerInstance.current.setInitialDate(initialDate);
+        setDate(formatDateWithDay(clubMeetingDate));
       }
     }
   }, [clubMeetingDate, isEditPage]);
@@ -121,10 +125,8 @@ const ClubMeetingDate = ({ isEditPage }: ClubMeetingDateProps) => {
       <div className="club-meeting-date-container" ref={triggerRef}>
         <div className="club-meeting-date-content-box">
           <div className="club-meeting-date-calendar-icon"></div>
-          <div
-            className={`club-meeting-date ${clubMeetingDate ? 'filled' : ''}`}
-          >
-            {formatDateWithDay(clubMeetingDate) || '날짜 선택'}
+          <div className={`club-meeting-date ${date ? 'filled' : ''}`}>
+            {date || '날짜 선택'}
           </div>
         </div>
         <div className="club-meeting-date-dropdown-icon"></div>
