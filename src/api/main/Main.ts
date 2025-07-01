@@ -52,6 +52,11 @@ export default class Main {
     return await http.post(`/club/apply`, clubId);
   }
 
+  /* 모임 신고 */
+  static async reportClub(clubId: number, reportReason: string) {
+    return await http.post(`/club/report`, { clubId, reportReason });
+  }
+
   /* 모임 탈퇴 사유 리스트 */
   static async getLeaveClubReasonList() {
     return await http.get(`/club/leave/start`);
@@ -92,5 +97,30 @@ export default class Main {
   /* 정기 모임 삭제 */
   static async deleteClubMeeting(clubmeetingId: number) {
     return await http.patch(`/clubmeeting/delete/${clubmeetingId}`);
+  }
+
+  /* 정기 모임 참여 */
+  static async participationClubMeeting(clubmeetingId: number) {
+    return await http.post(`/clubmeeting/${clubmeetingId}/participation`);
+  }
+
+  /* 정기 모임 취소 */
+  static async cancelClubMeeting(clubmeetingId: number) {
+    return await http.patch(`/clubmeeting/${clubmeetingId}/cancel`);
+  }
+
+  /* 모임장 양도 */
+  static async leaderChange(clubId: number, memberId: number) {
+    return await http.post(`/club/leader/change`, { clubId, memberId });
+  }
+
+  /* 운영진 등록 */
+  static async assignManager(clubId: number, memberId: number) {
+    return await http.post(`/club/manager/assign`, { clubId, memberId });
+  }
+
+  /* 운영진 해제 */
+  static async revokeManager(clubId: number, memberId: number) {
+    return await http.post(`/club/manager/revoke`, { clubId, memberId });
   }
 }

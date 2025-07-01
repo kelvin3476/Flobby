@@ -144,6 +144,7 @@ const ClubDetail = () => {
                     loginUserRole={loginUserRole}
                     isMember={isMember}
                     clubId={clubId}
+                    fetchClubDetail={fetchClubDetail}
                   />
                   <ClubMemberList
                     clubMemberList={clubMemberList}
@@ -166,6 +167,7 @@ const ClubDetail = () => {
                   currentMembers={clubInfo.currentMembers}
                   maxMembers={clubInfo.maxMembers}
                   loginUserRole={loginUserRole}
+                  fetchClubDetail={fetchClubDetail}
                 />
               )}
             </div>

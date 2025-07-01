@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { ClubMemberListItem } from '../../../api/ApiTypes';
 import ClubMemberItem from './ClubMemberItem';
 import ClubModal from '../../modal/ClubModal';
-import '../../../styles/club/detail/ClubMemberManagement.scss';
 import Main from '../../../api/main/Main';
+import logger from '../../../utils/Logger';
+
+import '../../../styles/club/detail/ClubMemberManagement.scss';
 
 interface ClubMemberManagementProps {
   clubId: string;
@@ -11,6 +13,7 @@ interface ClubMemberManagementProps {
   currentMembers: number;
   maxMembers: number;
   loginUserRole: string | null; // 현재 로그인 유저의 해당 모임에 대한 role
+  fetchClubDetail: () => Promise<void>;
 }
 
 type ModalActionType =
@@ -122,8 +125,10 @@ const ClubMemberManagement = ({
   currentMembers,
   maxMembers,
   loginUserRole,
+  fetchClubDetail,
 }: ClubMemberManagementProps) => {
   const [modal, setModal] = useState<ModalState | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /* 멤버 탭 최초 진입시 스크롤 최상단 고정 */
   React.useEffect(() => {
@@ -132,25 +137,33 @@ const ClubMemberManagement = ({
 
   const handleModalConfirm = async () => {
     if (modal?.phase === 'confirm') {
-      switch (modal.type) {
-        case 'TRANSFER_LEADER':
-          /* 모임장 양도 API 연동 */
-          break;
+      setIsLoading(true);
 
-        case 'REMOVE_MANAGER':
-          /* 운영진 해제 API 연동 */
-          break;
-
-        case 'REGISTER_MANAGER':
-          /* 운영진 등록 API 연동 */
-          break;
-
-        case 'KICK':
-          await Main.banClubMember(Number(clubId), modal.member.clubMemberId);
-          break;
+      try {
+        switch (modal.type) {
+          case 'TRANSFER_LEADER':
+            await Main.leaderChange(Number(clubId), modal.member.clubMemberId);
+            break;
+  
+          case 'REMOVE_MANAGER':
+            await Main.revokeManager(Number(clubId), modal.member.clubMemberId);
+            break;
+  
+          case 'REGISTER_MANAGER':
+            await Main.assignManager(Number(clubId), modal.member.clubMemberId);
+            break;
+  
+          case 'KICK':
+            await Main.banClubMember(Number(clubId), modal.member.clubMemberId);
+            break;
+        }
+        await fetchClubDetail();
+        setModal(prev => prev && { ...prev, phase: 'complete' });
+      } catch (error) {
+        logger.error("요청 실패:", error);
+      } finally {
+        setIsLoading(false);
       }
-
-      setModal(prev => prev && { ...prev, phase: 'complete' });
     } else if (modal?.phase === 'complete') {
       setModal(null);
     }
