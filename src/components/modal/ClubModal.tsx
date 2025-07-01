@@ -13,6 +13,7 @@ interface ClubModalProps {
   cancelText?: string;
   onConfirm: () => void;
   onCancel?: () => void;
+  disabled?: boolean;
 }
 
 const ClubModal = ({ 
@@ -25,6 +26,7 @@ const ClubModal = ({
   cancelText = "취소",
   onConfirm, 
   onCancel,
+  disabled,
 }: ClubModalProps) => {
 
   return (
@@ -33,11 +35,11 @@ const ClubModal = ({
         <div className="modal-wrapper">
           <div className="modal-up">
             {showIcon && (
-              <img 
+              <img
                 className="modal-icon"
                 src={
                   iconType === 'check'
-                    ? "../../../img/modal/modal-checked.png" 
+                    ? "../../../img/modal/modal-checked.png"
                     : "../../../img/modal/modal-warn.png"
                 }/>)}
             <div className="modal-main-message">{mainMessage}</div>
@@ -47,7 +49,7 @@ const ClubModal = ({
             {showCancelButton && (
               <Button className="modal-cancel-btn" title={cancelText} onClick={onCancel}/>
             )}
-            <Button className="modal-confirm-btn" title={confirmText} onClick={onConfirm}/>
+            <Button className={`modal-confirm-btn ${disabled ? 'disabled' : ''}`} title={confirmText} onClick={onConfirm} disabled={disabled} />
           </div>
         </div>
       </div>

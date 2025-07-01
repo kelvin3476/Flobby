@@ -59,6 +59,7 @@ const ClubMeetingRegister = () => {
   const [buttonType, setButtonType] = useState<null | 'register' | 'delete'>(
     null,
   );
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const { accessToken } = useMainPage();
 
@@ -306,19 +307,29 @@ const ClubMeetingRegister = () => {
 
   // 모달 이벤트 핸들러 함수
   const handleModalConfirm = async () => {
-    if (modalStep === 'confirm') {
-      if (isEditPage) {
-        await handleEditClubMeetingForm();
+    if (isProcessing) return;
+
+    setIsProcessing(true);
+
+    try {
+      if (modalStep === 'confirm') {
+        if (isEditPage) {
+          await handleEditClubMeetingForm();
+        } else {
+          await handleSubmitClubMeetingForm();
+        }
+        setModalStep('complete');
+      } else if (modalStep === 'warn') {
+        await handleDeleteClubMeeting();
+        setModalStep('complete');
       } else {
-        await handleSubmitClubMeetingForm();
+        setModalStep(null);
+        nav(`/club/${clubId}`);
       }
-      setModalStep('complete');
-    } else if (modalStep === 'warn') {
-      await handleDeleteClubMeeting();
-      setModalStep('complete');
-    } else {
-      setModalStep(null);
-      nav(`/club/${clubId}`);
+    } catch (error) {
+      logger.error('모달 확인 버튼 클릭 후 각 해당 요청 처리 중 에러:', error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -439,6 +450,7 @@ const ClubMeetingRegister = () => {
           showCancelButton={modalStep === 'confirm' || modalStep === 'warn'}
           onConfirm={handleModalConfirm}
           onCancel={() => setModalStep(null)}
+          disabled={isProcessing}
         />
       )}
     </div>

@@ -94,6 +94,10 @@
           background-color: #764bf6;
           border: 1px solid #764bf6;
           color: #fff;
+
+          &.disabled {
+            opacity: 0.3;
+          }
         }
       }
     }
