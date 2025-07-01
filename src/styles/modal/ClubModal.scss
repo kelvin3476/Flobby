@@ -11,7 +11,8 @@
   height: 100vh;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.40);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
 
   .club-modal-container {
     display: flex;
@@ -56,42 +57,42 @@
           font-weight: 600;
           line-height: 25.2px;
           letter-spacing: -0.3px;
-          color: #72787F;
+          color: #72787f;
           margin-top: 8px;
           white-space: pre-line;
         }
       }
-  
+
       .modal-buttons {
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         justify-content: flex-end;
         gap: 8px;
-  
+
         .modal-cancel-btn,
         .modal-confirm-btn {
           width: 96px;
           height: 48px;
           cursor: pointer;
           border-radius: 6px;
-  
+
           font-size: 14px;
           font-style: normal;
           font-weight: 600;
           line-height: 21px;
           letter-spacing: -0.3px;
         }
-  
+
         .modal-cancel-btn {
           background-color: #fff;
-          border: 1px solid #C9CDD2;
-          color: #454C53;
+          border: 1px solid #c9cdd2;
+          color: #454c53;
         }
-  
+
         .modal-confirm-btn {
-          background-color: #764BF6;
-          border: 1px solid #764BF6;
+          background-color: #764bf6;
+          border: 1px solid #764bf6;
           color: #fff;
         }
       }
