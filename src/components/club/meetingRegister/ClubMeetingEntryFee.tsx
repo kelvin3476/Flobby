@@ -22,7 +22,7 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
     setInputValue(value);
     setEntryFee(value);
 
-    if (value.length > 9) {
+    if (value.length > 10) {
       setIsEntryFeeValid(false);
       setEntryFeeError('참가비는 최대 10자까지 작성할 수 있어요.');
     } else {
@@ -44,7 +44,6 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
         placeholder="참가비를 입력해 주세요."
         value={inputValue}
         onChange={handleChange}
-        maxLength={10}
       />
       {!isEntryFeeValid && (
         <span className='error'>{entryFeeError}</span>
