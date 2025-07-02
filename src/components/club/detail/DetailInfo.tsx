@@ -175,7 +175,7 @@ const DetailInfo = ({
         {loginUserRole === null ? (
           <Button
             type="button"
-            className={`info-content-btn-yes ${currentMembers >= maxMembers ? 'info-content-btn-no' : "" }`}
+            className='info-content-btn-yes'
             onClick={() => {
               if (!accessToken) {
                 nav('/login');
@@ -190,7 +190,6 @@ const DetailInfo = ({
               setModalStep('text');
             }}
             title="가입 신청하기"
-            disabled={currentMembers >= maxMembers}
           />
         ) : (
           <Button
