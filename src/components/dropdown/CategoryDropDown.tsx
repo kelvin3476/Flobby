@@ -32,6 +32,10 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
     const fetchCategoryListData = async () => {
       const categoryListData = await categoryListController.getCategoryList();
       setCategoryList(categoryListData);
+      if (!isEditPage) {
+        setMainCategory('');
+        setSubCategory('');
+      }
     };
     fetchCategoryListData();
   }, []);
@@ -47,13 +51,20 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
   // 수정 페이지 로직
   // 서브카테고리를 기준으로 메인 카테고리 설정
   useEffect(() => {
-    for (const { mainCategory, subCategories } of categoryList) {
-      if (subCategories.includes(subCategory)) {
-        setMainCategory(mainCategory);
-        setSubCategory(subCategory);
+    if (isEditPage) {
+      for (const { mainCategory, subCategories } of categoryList) {
+        if (subCategories.includes(subCategory)) {
+          setMainCategory(mainCategory);
+          setSubCategory(subCategory);
+        }
       }
     }
-  }, [subCategory, categoryList]);
+  }, [subCategory, categoryList, isEditPage]);
+
+  const initCategoryValidation = () => {
+    setIsCategoryValid(true);
+    setCategoryError('')
+  }
 
   return (
     <div className={`dropdown-group-container ${className}`}>
@@ -67,8 +78,9 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
           onSelect={(value: string) => {
             setMainCategory(value);
             setSubCategory(null);
-            setIsCategoryValid(true);
-            setCategoryError('');
+            if (subCategory) {
+              initCategoryValidation();
+            }
           }}
         />
 
@@ -79,8 +91,9 @@ const CategoryDropDown = ({ className, isEditPage }: CategoryDropDownProps) => {
           defaultItem={isEditPage ? subCategory : null}
           onSelect={(value: string) => {
             setSubCategory(value);
-            setIsCategoryValid(true);
-            setCategoryError('');
+            if (mainCategory) {
+              initCategoryValidation();
+            }
           }}
         />
       </div>
