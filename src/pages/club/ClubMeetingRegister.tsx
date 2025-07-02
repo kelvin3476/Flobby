@@ -29,6 +29,8 @@ const ClubMeetingRegister = () => {
     clubMeetingLocation,
     maxParticipants,
     entryFee,
+    isEntryFeeValid,
+    entryFeeError,
     setClubMeetingTitle,
     setIsClubMeetingTitleValid,
     setClubMeetingTitleError,
@@ -46,6 +48,8 @@ const ClubMeetingRegister = () => {
     setIsMaxParticipantsValid,
     setMaxParticipantsError,
     setEntryFee,
+    setIsEntryFeeValid,
+    setEntryFeeError,
   } = useClubMeetingRegisterStore();
 
   const { clubId } = useParams<{ clubId: string }>();
@@ -139,6 +143,15 @@ const ClubMeetingRegister = () => {
     } else {
       setIsMaxParticipantsValid(true);
       setMaxParticipantsError('');
+    }
+
+    if (entryFee.length > 10) {
+      setIsEntryFeeValid(false);
+      setEntryFeeError("참가비는 최대 10자까지 작성할 수 있어요.");
+      isError = true;
+    } else {
+      setIsEntryFeeValid(true);
+      setEntryFeeError("");
     }
 
     if (isError) return;
