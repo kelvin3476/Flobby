@@ -14,6 +14,7 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
+    setEntryFee(value);
   };
 
   useEffect(() => {
