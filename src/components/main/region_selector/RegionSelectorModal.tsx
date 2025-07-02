@@ -23,7 +23,7 @@ const RegionSelectorModal: React.FC<RegionSelectorModalProps> = ({
   const [activeTown, setActiveTown] = useState<RegionItem | null>(null);
   const [preferRegions, setPreferRegions] = useState<RegionItem[]>([]);
 
-  const handleSelectRegion = async (region: RegionItem) => {
+  const handleSelectRegion = (region: RegionItem) => {
     setSelectedRegion(region);
     setActiveTown(region);
     onClose();
