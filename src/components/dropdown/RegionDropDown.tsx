@@ -31,6 +31,10 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
   } = useClubRegisterStore();
 
   useEffect(() => {
+    if (!prevRegion) {
+      setLocation(null);
+    }
+
     modalRegionListController
       .getModalRegionList()
       .then(response => {
@@ -100,7 +104,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
     const matchedRegion = subList.find(item => item.regionName === regionName);
     if (matchedRegion) {
-      handleLocation(matchedRegion.regionId);
+      handleLocation(matchedRegion);
     }
   }
 
@@ -115,10 +119,10 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
       : [];
 
   // 지역 코드를 상태값에 담음(등록 api 호출 위해)
-  const handleLocation = (regionId: number) => {
+  const handleLocation = (matchedRegion: { regionId: number, regionName: string }) => {
     // 값이 있을때만 저장
-    if (selectedMainRegion && selectedSubRegion) {
-      setLocation(regionId);
+    if (selectedMainRegion && matchedRegion.regionName) {
+      setLocation(matchedRegion.regionId);
       setIsLocationValid(true);
       setLocationError('');
     } else setLocation(null);
@@ -145,7 +149,7 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
           defaultItem={selectedSubRegion}
           disabled={
             selectedMainRegion === null ? true : !selectedMainRegion
-          } /* 하위 지역이 null 인 경우 (00 전체) > disabled 처리 및 아닌 경우엔 선택 가능 하게끔 처리 */
+          } /* 상위 지역이 null 인 경우 (00 전체) > disabled 처리 및 아닌 경우엔 선택 가능 하게끔 처리 */
           onSelect={handleSubSelect}
         />
       </div>
