@@ -68,9 +68,10 @@ const Registration = () => {
 
   const tempSignupHandler = (webTempSignupData: WebTempSignupData = { email: email, nickname: nickname, localPassword: password }) => {
     /* TODO: 닉네임, 이메일, 비밀번호 유효성 검증 로직 따로 분리 필요 + 추후 휴대폰 번호 유효성 검증 로직 추가 필요 */
-    if (webTempSignupData.nickname === '' || webTempSignupData.email === '' && webTempSignupData.localPassword === '') return;
+    if (webTempSignupData.nickname === '' || webTempSignupData.email === '' || webTempSignupData.localPassword === '' || checkPassword === '') return;
     if (!isNicknameValid || !isEmailValid || !isPasswordValid) return;
     if (nicknameError[1] !== '사용 가능한 닉네임입니다.') return;
+    if (checkPasswordError[1] !== '') return;
 
     try {
       SignUp.WebSignupUserInfoInsert(webTempSignupData).then((response) => {
@@ -280,6 +281,7 @@ const Registration = () => {
           className={`next ${changeNextButtonStyle(localStorage.getItem('socialType'))}`}
           title="다음"
           onClick={() => !localStorage.getItem('socialType') ? tempSignupHandler({ email: email, nickname: nickname, localPassword: password }) : tempSocialSignupHandler(nickname, foreigner)}
+          disabled={changeNextButtonStyle(localStorage.getItem('socialType')) !== 'active'}
         />
       </div>
     </div>

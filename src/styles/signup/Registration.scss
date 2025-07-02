@@ -187,7 +187,6 @@
   
     .next {
       margin-top: 60px;
-      cursor: pointer;
       border: none;
       width: 480px;
       height: 60px;
@@ -201,6 +200,7 @@
   
       &.active {
         opacity: 1;
+        cursor: pointer;
       }
     }
   
