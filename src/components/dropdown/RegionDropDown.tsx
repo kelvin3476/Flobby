@@ -22,8 +22,13 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
     null,
   );
 
-  const { setLocation, isLocationValid, locationError } =
-    useClubRegisterStore();
+  const {
+    setLocation,
+    isLocationValid,
+    setIsLocationValid,
+    locationError,
+    setLocationError,
+  } = useClubRegisterStore();
 
   useEffect(() => {
     modalRegionListController
@@ -116,6 +121,8 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
     // 값이 있을때만 저장
     if (selectedMainRegion && selectedSubRegion) {
       setLocation(regionId);
+      setIsLocationValid(true);
+      setLocationError('');
     } else setLocation(null);
   };
 
