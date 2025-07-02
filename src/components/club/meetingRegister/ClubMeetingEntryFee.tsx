@@ -13,13 +13,13 @@ const ClubMeetingEntryFee = ({ isEditPage }: ClubMeetingEntryFeeProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(value);
     setEntryFee(value);
+    setInputValue(value);
   };
 
   useEffect(() => {
     if (isEditPage && entryFee) setInputValue(entryFee);
-  }, [entryFee]);
+  }, [isEditPage, entryFee]);
 
   return (
     <div className="club-meeting-content-container">

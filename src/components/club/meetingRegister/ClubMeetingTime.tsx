@@ -75,7 +75,7 @@ const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
       setTime(String(reconvertedHour(clubMeetingTime).time));
       setMinute(String(reconvertedHour(clubMeetingTime).minute));
     }
-  }, [clubMeetingTime]);
+  }, [isEditPage, clubMeetingTime]);
 
   return (
     <div className="club-meeting-content-container">

@@ -34,7 +34,7 @@ const ClubMeetingLocation = ({ isEditPage }: ClubMeetingLocationProps) => {
 
   useEffect(() => {
     if (isEditPage && clubMeetingLocation) setInputValue(clubMeetingLocation);
-  }, [clubMeetingLocation]);
+  }, [isEditPage, clubMeetingLocation]);
 
   return (
     <div className="club-meeting-content-container">

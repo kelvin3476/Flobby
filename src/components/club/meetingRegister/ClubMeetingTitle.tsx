@@ -21,6 +21,7 @@ const ClubMeetingTitle = ({ isEditPage }: ClubMeetingTitleProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
+    setClubMeetingTitle(value);
 
     if (value.trim() === '') {
       setIsClubMeetingTitleValid(false);
@@ -31,13 +32,9 @@ const ClubMeetingTitle = ({ isEditPage }: ClubMeetingTitleProps) => {
     }
   };
 
-  const handleBlur = () => {
-    setClubMeetingTitle(inputValue);
-  };
-
   useEffect(() => {
     if (isEditPage && clubMeetingTitle) setInputValue(clubMeetingTitle);
-  }, [clubMeetingTitle]);
+  }, [isEditPage, clubMeetingTitle]);
 
   return (
     <div className="club-meeting-content-container">
@@ -48,7 +45,6 @@ const ClubMeetingTitle = ({ isEditPage }: ClubMeetingTitleProps) => {
         placeholder="모임명을 입력해 주세요."
         value={inputValue}
         onChange={handleChange}
-        onBlur={handleBlur}
       />
       {!isClubMeetingTitleValid && (
         <div className="error">{clubMeetingTitleError}</div>
