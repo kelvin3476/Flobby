@@ -93,18 +93,16 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
 
   const handleMainSelect = (regionName: string) => {
     setSelectedMainRegion(regionName);
-
-    const subRegions =
-      modalRegionListController.model.modalRegionList.regionList[
-        regionName
-      ].filter(subRegion => !subRegion.regionName.includes('전체'));
-    if (subRegions && subRegions.length > 0) {
-      const firstSub = subRegions[0];
-      setSelectedSubRegion(firstSub.regionName);
-    } else {
-      setSelectedSubRegion(null);
-    }
   };
+
+  const handleSubSelect = (regionName: string) => {
+    setSelectedSubRegion(regionName);
+
+    const matchedRegion = subList.find(item => item.regionName === regionName);
+    if (matchedRegion) {
+      handleLocation(matchedRegion.regionId);
+    }
+  }
 
   const subList =
     selectedMainRegion &&
@@ -146,17 +144,9 @@ const RegionDropDown = ({ className, prevRegion }: RegionDropDownProps) => {
           placeholder="하위 지역"
           defaultItem={selectedSubRegion}
           disabled={
-            selectedSubRegion === null ? true : !selectedMainRegion
+            selectedMainRegion === null ? true : !selectedMainRegion
           } /* 하위 지역이 null 인 경우 (00 전체) > disabled 처리 및 아닌 경우엔 선택 가능 하게끔 처리 */
-          onSelect={(regionName: string) => {
-            setSelectedSubRegion(regionName);
-            const matchedRegion = subList.find(
-              item => item.regionName === regionName,
-            );
-            if (matchedRegion) {
-              handleLocation(matchedRegion.regionId);
-            }
-          }}
+          onSelect={handleSubSelect}
         />
       </div>
       {!isLocationValid && <div className="err-message">{locationError}</div>}
