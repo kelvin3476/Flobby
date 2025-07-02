@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import Tag from '../../tag/Tag';
@@ -50,13 +50,6 @@ const DetailInfo = ({
 
   const nav = useNavigate();
   const { clubIds } = useParams<{ clubIds: string }>();
-
-  useEffect(() => {
-    if (loginUserRole === null && currentMembers >= maxMembers) {
-      setModalMode("full");
-      setModalStep("confirm");
-    }
-  }, [currentMembers, maxMembers, loginUserRole]);
 
   let optionItems: string[] = [];
   if (loginUserRole === 'LEADER') {
@@ -197,6 +190,7 @@ const DetailInfo = ({
               setModalStep('text');
             }}
             title="가입 신청하기"
+            disabled={currentMembers >= maxMembers}
           />
         ) : (
           <Button
