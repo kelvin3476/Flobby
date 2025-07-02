@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Label from '../register/Label';
 import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
 
-const ClubMeetingLocation = () => {
+interface ClubMeetingLocationProps {
+  isEditPage: boolean;
+}
+
+const ClubMeetingLocation = ({ isEditPage }: ClubMeetingLocationProps) => {
   const {
     clubMeetingLocation,
     setClubMeetingLocation,
@@ -12,8 +16,11 @@ const ClubMeetingLocation = () => {
     setClubMeetingLocationError,
   } = useClubMeetingRegisterStore();
 
+  const [inputValue, setInputValue] = useState<string>('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setInputValue(value);
     setClubMeetingLocation(value);
 
     if (value.trim() === '') {
@@ -24,6 +31,11 @@ const ClubMeetingLocation = () => {
       setClubMeetingLocationError('');
     }
   };
+
+  useEffect(() => {
+    if (isEditPage && clubMeetingLocation) setInputValue(clubMeetingLocation);
+  }, [isEditPage, clubMeetingLocation]);
+
   return (
     <div className="club-meeting-content-container">
       <Label labelTitle="장소" isRequired htmlFor="club-meeting-location" />
@@ -31,7 +43,7 @@ const ClubMeetingLocation = () => {
         id="club-meeting-location"
         type="text"
         placeholder="장소를 입력해 주세요."
-        value={clubMeetingLocation}
+        value={inputValue}
         onChange={handleChange}
       />
       {!isClubMeetingLocationValid && (
