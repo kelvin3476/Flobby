@@ -45,6 +45,7 @@ const ClubMeetingTitle = ({ isEditPage }: ClubMeetingTitleProps) => {
         placeholder="모임명을 입력해 주세요."
         value={inputValue}
         onChange={handleChange}
+        maxLength={14} /* 정기 모임 등록/수정 시 모임명 14자 까지 제한 (웹/앱 기획 통일) */
       />
       {!isClubMeetingTitleValid && (
         <div className="error">{clubMeetingTitleError}</div>
