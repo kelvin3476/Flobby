@@ -48,11 +48,14 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
   const fetchModalRegionList = async () => {
     try {
       const response = await modalRegionListController.getModalRegionList();
-      setSelectedRegion(response.selectedRegion);
       /* 로그인 했을때만 쿠키값 자동 설정 (비로그인 시에는 지역 모달 에서 선택 시에만 쿠키값 설정) */
       if (accessToken) {
-        modalRegionListController.setSelectedRegion(response.selectedRegion);
+        modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
+        setSelectedRegion(modalRegionListController.getSelectedRegion());
         modalRegionListController.setInterestRegionList(response.interestRegionList);
+      } else {
+        /* 비 로그인 시에도 다른 페이지 이동 또는 새로 고침 시 화면상 보여 지는 지역 유지 */
+        setSelectedRegion(modalRegionListController.getSelectedRegion());
       }
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
