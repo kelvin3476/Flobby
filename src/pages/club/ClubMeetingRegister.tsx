@@ -120,6 +120,10 @@ const ClubMeetingRegister = () => {
       setIsClubMeetingTimeValid(false);
       setClubMeetingTimeError('시간을 선택해 주세요.');
       isError = true;
+    } else if (new Date(`${clubMeetingDate} ${clubMeetingTime}`).getTime() < new Date().getTime() + 30 * 60 * 1000) {
+      setIsClubMeetingTimeValid(false);
+      setClubMeetingTimeError('현재 시각을 기준으로 30분 이후부터 설정할 수 있어요');
+      isError = true;
     } else {
       setIsClubMeetingTimeValid(true);
       setClubMeetingTimeError('');
