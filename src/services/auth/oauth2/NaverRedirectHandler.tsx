@@ -27,6 +27,7 @@ const NaverRedirectHandler = () => {
                                         /* TODO: accessToken 처리 방식 고민 더 해보고 수정 필요 */
                                         setAccessToken(response.data.data); // access token in-memory 저장 (브라우저 새로고침시 초기화)
                                         setTokenExpirationTime(JSON.parse(atob(response.data.data.split('.')[1])).exp);
+                                        localStorage.setItem('lastSocialLogin', 'naver');
                                         navigate('/')
                                     } else {
                                         console.error('토큰 발급 실패');

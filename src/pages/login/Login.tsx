@@ -45,6 +45,33 @@ const Login = () => {
         loginErrorMessage,
     } = useLoginForm();
 
+    const [lastSocialLogin, setLastSocialLogin] = React.useState('');
+    const buttonRefs = {
+      kakao: React.useRef(null),
+      naver: React.useRef(null),
+      apple: React.useRef(null),
+      google: React.useRef(null),
+      facebook: React.useRef(null),
+    };
+    const [tooltipStyle, setTooltipStyle] = React.useState({});
+
+    React.useEffect(() => {
+      const lastLogin = localStorage.getItem('lastSocialLogin');
+      setLastSocialLogin(lastLogin);
+
+      if (lastLogin && buttonRefs[lastLogin]?.current) {
+        const btn = buttonRefs[lastLogin].current;
+        const rect = btn.getBoundingClientRect();
+
+        // 위치 계산 후 스타일 지정 (예: 버튼 바로 아래 4px 떨어진 위치)
+        setTooltipStyle({
+          position: 'absolute',
+          top: `${rect.top + rect.height + 4 + window.scrollY}px`,
+          left: `${rect.left + rect.width / 2 - 67}px`, // 중앙 정렬 (툴팁 너비: 134px)
+        });
+      }
+    }, []);
+
     /* 로그인 페이지 최초 진입시 상태 초기화 */
     React.useEffect(() => {
       setEmail('');
@@ -122,12 +149,18 @@ const Login = () => {
               <div className="social-login-title">간편하게 SNS 로그인</div>
 
               <div className="social-login-button-container">
-                <Button className="kakao-login-button" onClick={KakaoLogin} />
-                <Button className="naver-login-button" onClick={NaverLogin} />
-                <Button className="apple-login-button" onClick={() => console.log('애플 소셜 로그인 버튼 클릭!!')} />
-                <Button className="google-login-button" onClick={() => console.log('구글 소셜 로그인 버튼 클릭!!')} />
-                <Button className="facebook-login-button" onClick={() => console.log('페이스북 소셜 로그인 버튼 클릭!!')} />
+                <Button className="kakao-login-button" onClick={KakaoLogin} buttonRef={buttonRefs.kakao} />
+                <Button className="naver-login-button" onClick={NaverLogin} buttonRef={buttonRefs.naver} />
+                <Button className="apple-login-button" onClick={() => console.log('애플 소셜 로그인 버튼 클릭!!')} buttonRef={buttonRefs.apple} />
+                <Button className="google-login-button" onClick={() => console.log('구글 소셜 로그인 버튼 클릭!!')} buttonRef={buttonRefs.google} />
+                <Button className="facebook-login-button" onClick={() => console.log('페이스북 소셜 로그인 버튼 클릭!!')} buttonRef={buttonRefs.facebook} />
               </div>
+
+              {lastSocialLogin && (
+                <div className='recent-login-tooltip' style={tooltipStyle}>
+                  <span>최근에 로그인했어요</span>
+                </div>
+              )}
             </div>
           </main>
 
