@@ -2,12 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
+  position: relative;
 
   .club-detail-member-info-box {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
 
     > img {
       width: 24px;
@@ -24,27 +25,90 @@
       line-height: 150%;
       letter-spacing: -0.3px;
     }
+
+    .club-detail-member-role-icon {
+      &.leader {
+        width: 12px;
+        height: 11px;
+        flex-shrink: 0;
+        position: absolute;
+        bottom: 2px;
+        left: 18px;
+
+        background: url('../../../assets/svg/club/detail/club_detail_member_icon_leader.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 12px 11px;
+      }
+
+      &.manager {
+        width: 12px;
+        height: 9px;
+        flex-shrink: 0;
+        position: absolute;
+        bottom: 2px;
+        left: 18px;
+
+        background: url('../../../assets/svg/club/detail/club_detail_member_icon_manager.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 12px 9px;
+      }
+
+      &.member {
+        display: none;
+      }
+    }
   }
 
-  .club-detail-member-role-icon {
+  .club-detail-member-new-tag {
+    display: flex;
     width: 24px;
     height: 24px;
+    padding: 3px 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     flex-shrink: 0;
 
-    &.leader {
-      background: url('../../../assets/svg/club/detail/club_detail_member_icon_leader.svg');
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+    > span {
+      display: flex;
+      width: 24px;
+      height: 17px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
 
-    &.manager {
-      background: url('../../../assets/svg/club/detail/club_detail_member_icon_manager.svg');
-      background-position: center;
-      background-repeat: no-repeat;
+      color: #f94e51;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+      cursor: default;
     }
+  }
 
-    &.member {
-      display: none;
+  .club-detail-member-me-tag {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-radius: 4px;
+    background: #e8ebed;
+
+    > span {
+      color: #72787f;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.3px;
+      cursor: default;
     }
   }
 }

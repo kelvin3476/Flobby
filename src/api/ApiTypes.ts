@@ -215,6 +215,7 @@ export interface ClubMemberListItem {
   nickname: string;
   profilePhoto: string;
   role: ClubRoleType;
+  isNew: boolean;
 }
 
 /* 추천 모임 데이터 타입 */
