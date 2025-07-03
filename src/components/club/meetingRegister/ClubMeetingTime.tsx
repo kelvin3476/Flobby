@@ -15,6 +15,7 @@ const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
   const [minute, setMinute] = useState<string>('');
 
   const {
+    clubMeetingDate,
     clubMeetingTime,
     setClubMeetingTime,
     isClubMeetingTimeValid,
@@ -42,8 +43,13 @@ const ClubMeetingTime = ({ isEditPage }: ClubMeetingTimeProps) => {
       const formattedTime = `${formattedHour}:${minute}`;
 
       setClubMeetingTime(formattedTime);
-      setIsClubMeetingTimeValid(true);
-      setClubMeetingTimeError('');
+      if (new Date(`${clubMeetingDate} ${clubMeetingTime}`).getTime() < new Date().getTime() + 30 * 60 * 1000) {
+        setIsClubMeetingTimeValid(false);
+        setClubMeetingTimeError('현재 시각을 기준으로 30분 이후부터 설정할 수 있어요');
+      } else {
+        setIsClubMeetingTimeValid(true);
+        setClubMeetingTimeError('');
+      }
     }
   }, [activeButton, time, minute]);
 
