@@ -56,7 +56,7 @@ const ClubMemberList = ({
         )}
 
         {withoutLoginUserMemberList.map((memberItem, index) => {
-          if (index < 5)
+          if (loginUserItem && index < 4)
             return (
               <div className="club-member-list" key={memberItem.clubMemberId}>
                 <ClubMemberItem
@@ -69,6 +69,20 @@ const ClubMemberList = ({
                 />
               </div>
             );
+          else if (!loginUserItem && index < 5) {
+            return (
+              <div className="club-member-list" key={memberItem.clubMemberId}>
+                <ClubMemberItem
+                  clubMemberId={memberItem.clubMemberId}
+                  nickname={memberItem.nickname}
+                  role={memberItem.role}
+                  profilePhoto={memberItem.profilePhoto}
+                  isNew={memberItem.isNew}
+                  isLoginUser={false}
+                />
+              </div>
+            );
+          }
         })}
       </div>
 

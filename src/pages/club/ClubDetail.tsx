@@ -174,6 +174,7 @@ const ClubDetail = () => {
                   maxMembers={clubInfo.maxMembers}
                   loginUserRole={loginUserRole}
                   fetchClubDetail={fetchClubDetail}
+                  loginMemberId={loginMemberId}
                 />
               )}
             </div>
