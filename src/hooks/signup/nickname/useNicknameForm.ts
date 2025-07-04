@@ -13,7 +13,7 @@ const useNicknameForm = () => {
   } = useNicknameStore();
 
   const isValidNickname = (nickname: string) => {
-    const nicknameRegex = /^(?=.*[a-zA-Z가-힣])(?=.*\d)[a-zA-Z가-힣\d]{2,12}$/;
+    const nicknameRegex = /^[a-zA-Z0-9가-힣_]{2,12}$/;
 
     return nicknameRegex.test(nickname);
   };
@@ -24,10 +24,10 @@ const useNicknameForm = () => {
 
     if (!isValidNickname(nickname)) {
       setIsNicknameValid(false);
-      setNicknameError(['warning', '문자+숫자 조합 2~12자리를 입력해 주세요.']);
+      setNicknameError(['warning', '한글, 영어, 숫자, (_) 조합 2~12자리를 입력해 주세요.']);
     } else {
       setIsNicknameValid(true);
-      setNicknameError(['default', '문자+숫자 조합 2~12자리']);
+      setNicknameError(['default', '한글, 영어, 숫자, (_) 조합 2~12자']);
     }
   };
 

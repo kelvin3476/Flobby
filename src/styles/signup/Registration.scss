@@ -246,6 +246,9 @@
     }
   
     p.warning {
+      width: 252px; /* 영역 고정 */
+      white-space: nowrap; /* 줄바꿈 방지 */
+
       color: #F94E51;
       font-size: 14px;
       line-height: 21px;

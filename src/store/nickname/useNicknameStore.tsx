@@ -23,13 +23,13 @@ const useNicknameStore = create<NicknameStore>((set) => ({
     isNicknameValid: false,
     setIsNicknameValid: (isNicknameValid: boolean) => set({ isNicknameValid }),
 
-    nicknameError: ['default','문자+숫자 조합 2~12자리'],
+    nicknameError: ['default','한글, 영어, 숫자, (_) 조합 2~12자'],
     setNicknameError: (nicknameError: [string,string]) => set({ nicknameError }),
 
     clearNickname: () => set({
       nickname: '',
       isNicknameValid: false,
-      nicknameError: ['default','문자+숫자 조합 2~12자리'],
+      nicknameError: ['default','한글, 영어, 숫자, (_) 조합 2~12자'],
     })
 }));
 
