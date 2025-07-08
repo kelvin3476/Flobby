@@ -181,6 +181,7 @@ const ClubMemberManagement = ({
     setModal({ type, member, phase: 'confirm' });
   };
 
+  // 로그인 유저 저장 로직
   useEffect(() => {
     // 멤버 리스트에 로그인 유저가 있으면 찾아서 저장
     const loginUser = clubMemberList.find(
@@ -192,6 +193,7 @@ const ClubMemberManagement = ({
     const filteredMemberList = clubMemberList.filter(
       member => member.clubMemberId !== loginMemberId,
     );
+
     setWithoutLoginUserMemberList(filteredMemberList);
   }, [clubMemberList, loginMemberId]);
 
@@ -206,143 +208,96 @@ const ClubMemberManagement = ({
       </div>
 
       {/* 멤버 리스트 */}
-      {/* 모임장 권한 */}
-      {loginUserRole && loginUserRole === 'LEADER' && (
-        <div className="club-member-management-list-container">
-          {loginUserItem && (
-            <div className="club-member-management-login-user-box">
-              <div className="club-member-management-login-user-item">
-                <ClubMemberItem
-                  clubMemberId={loginUserItem.clubMemberId}
-                  nickname={loginUserItem.nickname}
-                  role={loginUserItem.role}
-                  profilePhoto={loginUserItem.profilePhoto}
-                  isLoginUser={true}
-                />
-              </div>
-
-              <div className="divider"></div>
+      <div className="club-member-management-list-container">
+        {/* 로그인 유저 */}
+        {loginUserItem && (
+          <div className="club-member-management-login-user-box">
+            <div className="club-member-management-login-user-item">
+              <ClubMemberItem
+                clubMemberId={loginUserItem.clubMemberId}
+                nickname={loginUserItem.nickname}
+                role={loginUserItem.role}
+                profilePhoto={loginUserItem.profilePhoto}
+                isLoginUser={true}
+              />
             </div>
-          )}
 
-          {withoutLoginUserMemberList.map((memberItem, index) => {
-            return (
-              <div
-                className="club-member-management-list-box"
-                key={memberItem.clubMemberId}
-              >
-                <div className="club-member-management-list">
-                  {/* 아이템 영역 */}
-                  <ClubMemberItem
-                    clubMemberId={memberItem.clubMemberId}
-                    nickname={memberItem.nickname}
-                    role={memberItem.role}
-                    profilePhoto={memberItem.profilePhoto}
-                    isNew={memberItem.isNew}
-                    isLoginUser={false}
-                  />
+            <div className="divider"></div>
+          </div>
+        )}
 
-                  {/* 버튼 영역 */}
-                  {/* 모임장 권한: 모임장 양도, 운영진 해제, 강퇴*/}
-                  {memberItem.role !== 'LEADER' && (
-                    <div className="club-member-management-btn-container">
+        {/* 로그인 유저를 제외한 리스트 */}
+        {withoutLoginUserMemberList.map((memberItem, index) => {
+          return (
+            <div
+              className="club-member-management-list-box"
+              key={memberItem.clubMemberId}
+            >
+              <div className="club-member-management-list">
+                {/* 아이템 영역 */}
+                <ClubMemberItem
+                  clubMemberId={memberItem.clubMemberId}
+                  nickname={memberItem.nickname}
+                  role={memberItem.role}
+                  profilePhoto={memberItem.profilePhoto}
+                  isNew={memberItem.isNew}
+                  isLoginUser={false}
+                />
+
+                {/* 버튼 영역 */}
+                {/* 모임장 권한: 모임장 양도, 운영진 등록/해제, 강퇴*/}
+                {loginUserRole && loginUserRole === 'LEADER' && (
+                  <div className="club-member-management-btn-container">
+                    <button
+                      type="button"
+                      className="club-member-management-btn transfer-leader"
+                      onClick={() =>
+                        onClickButton('TRANSFER_LEADER', memberItem)
+                      }
+                    >
+                      모임장 양도
+                    </button>
+
+                    {/* 운영진: 운영진 해제 버튼 노출 / 일반 멤버: 등록 버튼 노출 */}
+                    {memberItem.role === 'MANAGER' && (
                       <button
                         type="button"
-                        className="club-member-management-btn transfer-leader"
+                        className="club-member-management-btn remove-manager"
                         onClick={() =>
-                          onClickButton('TRANSFER_LEADER', memberItem)
+                          onClickButton('REMOVE_MANAGER', memberItem)
                         }
                       >
-                        모임장 양도
+                        운영진 해제
                       </button>
+                    )}
 
-                      {/* 운영진: 운영진 해제 버튼 노출 / 일반 멤버: 등록 버튼 노출 */}
-                      {memberItem.role === 'MANAGER' && (
-                        <button
-                          type="button"
-                          className="club-member-management-btn remove-manager"
-                          onClick={() =>
-                            onClickButton('REMOVE_MANAGER', memberItem)
-                          }
-                        >
-                          운영진 해제
-                        </button>
-                      )}
-
-                      {memberItem.role === 'MEMBER' && (
-                        <button
-                          type="button"
-                          className="club-member-management-btn remove-manager"
-                          onClick={() =>
-                            onClickButton('REGISTER_MANAGER', memberItem)
-                          }
-                        >
-                          운영진 등록
-                        </button>
-                      )}
-
+                    {memberItem.role === 'MEMBER' && (
                       <button
                         type="button"
-                        className="club-member-management-btn kick-member"
-                        onClick={() => onClickButton('KICK', memberItem)}
+                        className="club-member-management-btn remove-manager"
+                        onClick={() =>
+                          onClickButton('REGISTER_MANAGER', memberItem)
+                        }
                       >
-                        강퇴
+                        운영진 등록
                       </button>
-                    </div>
-                  )}
-                </div>
+                    )}
 
-                {/* 구분선 */}
-                <div
-                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                    <button
+                      type="button"
+                      className="club-member-management-btn kick-member"
+                      onClick={() => onClickButton('KICK', memberItem)}
+                    >
+                      강퇴
+                    </button>
+                  </div>
+                )}
 
-      {/* 운영진 권한 */}
-      {loginUserRole && loginUserRole === 'MANAGER' && (
-        <div className="club-member-management-list-container">
-          {loginUserItem && (
-            <div className="club-member-management-login-user-box">
-              <div className="club-member-management-login-user-item">
-                <ClubMemberItem
-                  clubMemberId={loginUserItem.clubMemberId}
-                  nickname={loginUserItem.nickname}
-                  role={loginUserItem.role}
-                  profilePhoto={loginUserItem.profilePhoto}
-                  isLoginUser={true}
-                />
-              </div>
-
-              <div className="divider"></div>
-            </div>
-          )}
-
-          {withoutLoginUserMemberList.map((memberItem, index) => {
-            return (
-              <div
-                className="club-member-management-list-box"
-                key={memberItem.clubMemberId}
-              >
-                <div className="club-member-management-list">
-                  {/* 아이템 영역 */}
-                  <ClubMemberItem
-                    clubMemberId={memberItem.clubMemberId}
-                    nickname={memberItem.nickname}
-                    role={memberItem.role}
-                    profilePhoto={memberItem.profilePhoto}
-                    isNew={memberItem.isNew}
-                    isLoginUser={false}
-                  />
-
-                  {/* 버튼 영역 */}
-                  {/* 운영진 권한: 강퇴*/}
-                  {memberItem.role === 'MEMBER' && (
+                {/* 운영진 권한: 일반 멤버 강퇴 */}
+                {loginUserRole &&
+                  loginUserRole === 'MANAGER' &&
+                  memberItem.role === 'MEMBER' && (
                     <div className="club-member-management-btn-container">
-                      {/* 모임장 & 운영진 공통 권한 */}
                       <button
                         type="button"
                         className="club-member-management-btn kick-member"
@@ -352,63 +307,16 @@ const ClubMemberManagement = ({
                       </button>
                     </div>
                   )}
-                </div>
-
-                {/* 구분선 */}
-                <div
-                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* 일반 사용자(비로그인 유저 & 모임 일반 멤버) 권한 */}
-      {(loginUserRole === null || loginUserRole === 'MEMBER') && (
-        <div className="club-member-management-list-container">
-          {loginUserItem && (
-            <div className="club-member-management-login-user-box">
-              <div className="club-member-management-login-user-item">
-                <ClubMemberItem
-                  clubMemberId={loginUserItem.clubMemberId}
-                  nickname={loginUserItem.nickname}
-                  role={loginUserItem.role}
-                  profilePhoto={loginUserItem.profilePhoto}
-                  isLoginUser={true}
-                />
               </div>
 
-              <div className="divider"></div>
-            </div>
-          )}
-
-          {withoutLoginUserMemberList.map((memberItem, index) => {
-            return (
+              {/* 구분선 */}
               <div
-                className="club-member-management-list-box"
-                key={memberItem.clubMemberId}
-              >
-                <div className="club-member-management-list">
-                  <ClubMemberItem
-                    clubMemberId={memberItem.clubMemberId}
-                    nickname={memberItem.nickname}
-                    role={memberItem.role}
-                    profilePhoto={memberItem.profilePhoto}
-                    isNew={memberItem.isNew}
-                    isLoginUser={false}
-                  />
-                </div>
-
-                {/* 구분선 */}
-                <div
-                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
+              ></div>
+            </div>
+          );
+        })}
+      </div>
 
       {modal && (
         <ClubModal

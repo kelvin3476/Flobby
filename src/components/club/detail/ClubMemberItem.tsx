@@ -8,6 +8,7 @@ interface ClubMemberListProps {
   role: string | null;
   isNew?: boolean;
   isLoginUser: boolean;
+  isMemberTab?: boolean;
 }
 
 const ClubMemberItem = ({
@@ -17,6 +18,7 @@ const ClubMemberItem = ({
   role,
   isNew,
   isLoginUser,
+  isMemberTab,
 }: ClubMemberListProps) => {
   return (
     <div className="club-detail-member-item-container" key={clubMemberId}>
@@ -24,12 +26,13 @@ const ClubMemberItem = ({
         <img
           src={profilePhoto || '/img/header/profile-ex.jpg'}
           alt="프로필 이미지"
+          className={isMemberTab ? 'member-tab' : ''}
         />
         <span>{nickname}</span>
 
         {/* 권한 아이콘 */}
         <div
-          className={`club-detail-member-role-icon ${role ? role.toLocaleLowerCase() : ''}`}
+          className={`club-detail-member-role-icon ${role ? role.toLocaleLowerCase() : ''} ${isMemberTab ? 'member-tab' : ''}`}
         ></div>
       </div>
 
