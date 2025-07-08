@@ -34,7 +34,7 @@ const ClubMemberList = ({
       member => member.clubMemberId !== loginMemberId,
     );
     setWithoutLoginUserMemberList(filteredMemberList);
-  }, [clubMemberList]);
+  }, [clubMemberList, loginMemberId]);
 
   return (
     <div className="club-detail-member-container">
