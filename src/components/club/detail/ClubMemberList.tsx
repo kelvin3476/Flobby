@@ -60,7 +60,6 @@ const ClubMemberList = ({
             return (
               <div className="club-member-list" key={memberItem.clubMemberId}>
                 <ClubMemberItem
-                  key={memberItem.clubMemberId}
                   clubMemberId={memberItem.clubMemberId}
                   nickname={memberItem.nickname}
                   role={memberItem.role}
@@ -74,7 +73,6 @@ const ClubMemberList = ({
             return (
               <div className="club-member-list" key={memberItem.clubMemberId}>
                 <ClubMemberItem
-                  key={memberItem.clubMemberId}
                   clubMemberId={memberItem.clubMemberId}
                   nickname={memberItem.nickname}
                   role={memberItem.role}
