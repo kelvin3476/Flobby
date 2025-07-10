@@ -52,7 +52,7 @@ const ClubDetail = () => {
       // 여기에 API 호출 로직을 추가하세요.
       logger.log(`모임 ID: ${clubId}`);
       const response = await ClubController.getInstance().selectClubDetail(
-          Number(clubId),
+        Number(clubId),
       );
       setClubInfo(response.clubDTO);
       setClubMeetingList(response.clubMeetingList);
@@ -81,7 +81,14 @@ const ClubDetail = () => {
       fetchClubDetail();
     } else {
       /* 로그인 상태 에서 새로 고침 시 재발급 된 토큰이 유효한 경우 */
-      if (accessToken && (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming).type === "reload") {
+      if (
+        accessToken &&
+        (
+          performance.getEntriesByType(
+            'navigation',
+          )[0] as PerformanceNavigationTiming
+        ).type === 'reload'
+      ) {
         /* 모임 상세 정보를 가져오는 API 호출 */
         fetchClubDetail();
       }
@@ -106,9 +113,7 @@ const ClubDetail = () => {
 
   return (
     <div className="club-detail-wrapper">
-      <MainHeader
-        accessToken={accessToken}
-      />
+      <MainHeader accessToken={accessToken} />
 
       <div className="club-detail-container">
         <Tab
@@ -149,6 +154,7 @@ const ClubDetail = () => {
                   <ClubMemberList
                     clubMemberList={clubMemberList}
                     setCurrentTab={setCurrentTab}
+                    loginMemberId={loginMemberId}
                   />
                   <RecommendClubList
                     recommendClubList={recommendClubList}
@@ -168,6 +174,7 @@ const ClubDetail = () => {
                   maxMembers={clubInfo.maxMembers}
                   loginUserRole={loginUserRole}
                   fetchClubDetail={fetchClubDetail}
+                  loginMemberId={loginMemberId}
                 />
               )}
             </div>

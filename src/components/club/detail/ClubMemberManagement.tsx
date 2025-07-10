@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ClubMemberListItem } from '../../../api/ApiTypes';
 import ClubMemberItem from './ClubMemberItem';
 import ClubModal from '../../modal/ClubModal';
@@ -14,6 +14,7 @@ interface ClubMemberManagementProps {
   maxMembers: number;
   loginUserRole: string | null; // 현재 로그인 유저의 해당 모임에 대한 role
   fetchClubDetail: () => Promise<void>;
+  loginMemberId: number | null;
 }
 
 type ModalActionType =
@@ -126,9 +127,16 @@ const ClubMemberManagement = ({
   maxMembers,
   loginUserRole,
   fetchClubDetail,
+  loginMemberId,
 }: ClubMemberManagementProps) => {
   const [modal, setModal] = useState<ModalState | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loginUserItem, setLoginUserItem] = useState<ClubMemberListItem | null>(
+    null,
+  );
+  const [withoutLoginUserMemberList, setWithoutLoginUserMemberList] = useState<
+    ClubMemberListItem[]
+  >([]);
 
   /* 멤버 탭 최초 진입시 스크롤 최상단 고정 */
   React.useEffect(() => {
@@ -144,15 +152,15 @@ const ClubMemberManagement = ({
           case 'TRANSFER_LEADER':
             await Main.leaderChange(Number(clubId), modal.member.clubMemberId);
             break;
-  
+
           case 'REMOVE_MANAGER':
             await Main.revokeManager(Number(clubId), modal.member.clubMemberId);
             break;
-  
+
           case 'REGISTER_MANAGER':
             await Main.assignManager(Number(clubId), modal.member.clubMemberId);
             break;
-  
+
           case 'KICK':
             await Main.banClubMember(Number(clubId), modal.member.clubMemberId);
             break;
@@ -160,7 +168,7 @@ const ClubMemberManagement = ({
         await fetchClubDetail();
         setModal(prev => prev && { ...prev, phase: 'complete' });
       } catch (error) {
-        logger.error("요청 실패:", error);
+        logger.error('요청 실패:', error);
       } finally {
         setIsLoading(false);
       }
@@ -173,6 +181,22 @@ const ClubMemberManagement = ({
     setModal({ type, member, phase: 'confirm' });
   };
 
+  // 로그인 유저 저장 로직
+  useEffect(() => {
+    // 멤버 리스트에 로그인 유저가 있으면 찾아서 저장
+    const loginUser = clubMemberList.find(
+      member => member.clubMemberId === loginMemberId,
+    );
+    setLoginUserItem(loginUser ?? null);
+
+    // 로그인 유저를 제외한 리스트
+    const filteredMemberList = clubMemberList.filter(
+      member => member.clubMemberId !== loginMemberId,
+    );
+
+    setWithoutLoginUserMemberList(filteredMemberList);
+  }, [clubMemberList, loginMemberId]);
+
   return (
     <div className="club-member-management-container">
       {/* 타이틀 */}
@@ -184,100 +208,96 @@ const ClubMemberManagement = ({
       </div>
 
       {/* 멤버 리스트 */}
-      {/* 모임장 권한 */}
-      {loginUserRole && loginUserRole === 'LEADER' && (
-        <div className="club-member-management-list-container">
-          {clubMemberList.map((memberItem, index) => {
-            return (
-              <div className="club-member-management-list-box">
-                <div className="club-member-management-list">
-                  {/* 아이템 영역 */}
-                  <ClubMemberItem
-                    clubMemberId={memberItem.clubMemberId}
-                    nickname={memberItem.nickname}
-                    role={memberItem.role}
-                    profilePhoto={memberItem.profilePhoto}
-                  />
+      <div className="club-member-management-list-container">
+        {/* 로그인 유저 */}
+        {loginUserItem && (
+          <div className="club-member-management-login-user-box">
+            <div className="club-member-management-login-user-item">
+              <ClubMemberItem
+                clubMemberId={loginUserItem.clubMemberId}
+                nickname={loginUserItem.nickname}
+                role={loginUserItem.role}
+                profilePhoto={loginUserItem.profilePhoto}
+                isLoginUser={true}
+              />
+            </div>
 
-                  {/* 버튼 영역 */}
-                  {/* 모임장 권한: 모임장 양도, 운영진 해제, 강퇴*/}
-                  {memberItem.role !== 'LEADER' && (
-                    <div className="club-member-management-btn-container">
+            <div className="divider"></div>
+          </div>
+        )}
+
+        {/* 로그인 유저를 제외한 리스트 */}
+        {withoutLoginUserMemberList.map((memberItem, index) => {
+          return (
+            <div
+              className="club-member-management-list-box"
+              key={memberItem.clubMemberId}
+            >
+              <div className="club-member-management-list">
+                {/* 아이템 영역 */}
+                <ClubMemberItem
+                  clubMemberId={memberItem.clubMemberId}
+                  nickname={memberItem.nickname}
+                  role={memberItem.role}
+                  profilePhoto={memberItem.profilePhoto}
+                  isNew={memberItem.isNew}
+                  isLoginUser={false}
+                />
+
+                {/* 버튼 영역 */}
+                {/* 모임장 권한: 모임장 양도, 운영진 등록/해제, 강퇴*/}
+                {loginUserRole && loginUserRole === 'LEADER' && (
+                  <div className="club-member-management-btn-container">
+                    <button
+                      type="button"
+                      className="club-member-management-btn transfer-leader"
+                      onClick={() =>
+                        onClickButton('TRANSFER_LEADER', memberItem)
+                      }
+                    >
+                      모임장 양도
+                    </button>
+
+                    {/* 운영진: 운영진 해제 버튼 노출 / 일반 멤버: 등록 버튼 노출 */}
+                    {memberItem.role === 'MANAGER' && (
                       <button
                         type="button"
-                        className="club-member-management-btn transfer-leader"
+                        className="club-member-management-btn remove-manager"
                         onClick={() =>
-                          onClickButton('TRANSFER_LEADER', memberItem)
+                          onClickButton('REMOVE_MANAGER', memberItem)
                         }
                       >
-                        모임장 양도
+                        운영진 해제
                       </button>
+                    )}
 
-                      {/* 운영진: 운영진 해제 버튼 노출 / 일반 멤버: 등록 버튼 노출 */}
-                      {memberItem.role === 'MANAGER' && (
-                        <button
-                          type="button"
-                          className="club-member-management-btn remove-manager"
-                          onClick={() =>
-                            onClickButton('REMOVE_MANAGER', memberItem)
-                          }
-                        >
-                          운영진 해제
-                        </button>
-                      )}
-                      {memberItem.role === 'MEMBER' && (
-                        <button
-                          type="button"
-                          className="club-member-management-btn remove-manager"
-                          onClick={() =>
-                            onClickButton('REGISTER_MANAGER', memberItem)
-                          }
-                        >
-                          운영진 등록
-                        </button>
-                      )}
-
+                    {memberItem.role === 'MEMBER' && (
                       <button
                         type="button"
-                        className="club-member-management-btn kick-member"
-                        onClick={() => onClickButton('KICK', memberItem)}
+                        className="club-member-management-btn remove-manager"
+                        onClick={() =>
+                          onClickButton('REGISTER_MANAGER', memberItem)
+                        }
                       >
-                        강퇴
+                        운영진 등록
                       </button>
-                    </div>
-                  )}
-                </div>
+                    )}
 
-                {/* 구분선 */}
-                <div
-                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                    <button
+                      type="button"
+                      className="club-member-management-btn kick-member"
+                      onClick={() => onClickButton('KICK', memberItem)}
+                    >
+                      강퇴
+                    </button>
+                  </div>
+                )}
 
-      {/* 운영진 권한 */}
-      {loginUserRole && loginUserRole === 'MANAGER' && (
-        <div className="club-member-management-list-container">
-          {clubMemberList.map((memberItem, index) => {
-            return (
-              <div className="club-member-management-list-box" key={index}>
-                <div className="club-member-management-list">
-                  {/* 아이템 영역 */}
-                  <ClubMemberItem
-                    clubMemberId={memberItem.clubMemberId}
-                    nickname={memberItem.nickname}
-                    role={memberItem.role}
-                    profilePhoto={memberItem.profilePhoto}
-                  />
-
-                  {/* 버튼 영역 */}
-                  {/* 운영진 권한: 강퇴*/}
-                  {memberItem.role === 'MEMBER' && (
+                {/* 운영진 권한: 일반 멤버 강퇴 */}
+                {loginUserRole &&
+                  loginUserRole === 'MANAGER' &&
+                  memberItem.role === 'MEMBER' && (
                     <div className="club-member-management-btn-container">
-                      {/* 모임장 & 운영진 공통 권한 */}
                       <button
                         type="button"
                         className="club-member-management-btn kick-member"
@@ -287,34 +307,17 @@ const ClubMemberManagement = ({
                       </button>
                     </div>
                   )}
-                </div>
-
-                {/* 구분선 */}
-                <div
-                  className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
-                ></div>
               </div>
-            );
-          })}
-        </div>
-      )}
 
-      {/* 일반 사용자(비로그인 유저 & 모임 일반 멤버) 권한 */}
-      {(loginUserRole === null || loginUserRole === 'MEMBER') && (
-        <div className="club-member-management-list-container">
-          {clubMemberList.map((memberItem, index) => {
-            return (
-              <ClubMemberItem
-                clubMemberId={memberItem.clubMemberId}
-                nickname={memberItem.nickname}
-                role={memberItem.role}
-                profilePhoto={memberItem.profilePhoto}
-                key={index}
-              />
-            );
-          })}
-        </div>
-      )}
+              {/* 구분선 */}
+              <div
+                className={`divider ${clubMemberList.length - 1 === index ? 'last' : ''}`}
+              ></div>
+            </div>
+          );
+        })}
+      </div>
+
       {modal && (
         <ClubModal
           {...getModalProps(modal)}
