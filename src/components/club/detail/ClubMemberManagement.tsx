@@ -187,7 +187,7 @@ const ClubMemberManagement = ({
     const loginUser = clubMemberList.find(
       member => member.clubMemberId === loginMemberId,
     );
-    setLoginUserItem(loginUser || null);
+    setLoginUserItem(loginUser ?? null);
 
     // 로그인 유저를 제외한 리스트
     const filteredMemberList = clubMemberList.filter(
