@@ -236,6 +236,7 @@ const ClubMemberManagement = ({
               <div className="club-member-management-list">
                 {/* 아이템 영역 */}
                 <ClubMemberItem
+                  key={memberItem.clubMemberId}
                   clubMemberId={memberItem.clubMemberId}
                   nickname={memberItem.nickname}
                   role={memberItem.role}
