@@ -69,8 +69,9 @@ const ClubMeetingItem = ({
             /* 정기 모임 참석 신청 후 성공 케이스 */
             setModalStep('complete');
           } else if (code === 1001) {
-              if (message === "정원이 모두 찼어요.") {
+              if (message === "정기모임의 참여인원이 초과되었습니다.") {
                 /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
+                setModalMode('attend');
                 setModalStep('full');
               } else {
               /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
@@ -86,12 +87,18 @@ const ClubMeetingItem = ({
             /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
           }
         }
-      } catch (error) {
+      } catch (error: any) {
+        const errRes = error.response?.data;
+        if (errRes && errRes.code === 1001) {
+          if (errRes.message === "정기모임의 참여인원이 초과되었습니다.") {
+            setModalMode('attend');
+            setModalStep('full');
+            return;
+          }
+        }
         logger.error('정기 모임 참석/취소 중 오류 발생:', error);
         setModalStep(null);
         setModalMode(null);
-      } finally {
-        setIsLoading(false);
       }
     }
   };
@@ -221,7 +228,14 @@ const ClubMeetingItem = ({
                     type="button"
                     className="club-meeting-button-apply"
                     title="참석"
-                    onClick={() => handleOpenModal('attend')}
+                    onClick={() => {
+                      if(currentParticipants >= maxParticipants) {
+                        setModalStep('full');
+                        setModalMode('attend');
+                        return;
+                      }
+                      handleOpenModal('attend');
+                    }}
                   />
                 )}
               </>
@@ -257,7 +271,14 @@ const ClubMeetingItem = ({
                     type="button"
                     className="club-meeting-button-apply"
                     title="참석"
-                    onClick={() => handleOpenModal('attend')}
+                    onClick={() => {
+                      if(currentParticipants >= maxParticipants) {
+                        setModalStep('full');
+                        setModalMode('attend');
+                        return;
+                      }
+                      handleOpenModal('attend');
+                    }}
                   />
                 )}
               </>
@@ -266,7 +287,24 @@ const ClubMeetingItem = ({
         ) : null}
       </div>
 
-      {modalStep === 'confirm' && modalProps && (
+      {modalStep === 'full' && (
+        <ClubModal
+          mainMessage='정원이 모두 찼어요.'
+          subMessage='자리가 생기면 알림을 보내드릴까요?'
+          showIcon={true}
+          iconType='warn'
+          showCancelButton={true}
+          confirmText='알림 받기'
+          cancelText='닫기'
+          onConfirm={handleModalClose}
+          onCancel={() => {
+            setModalStep(null);
+            setModalMode(null);
+          }}
+        />
+      )}
+
+      {modalStep === 'confirm' && (
         <ClubModal
           {...modalProps}
           onConfirm={handleModalConfirm}
@@ -277,7 +315,7 @@ const ClubMeetingItem = ({
         />
       )}
 
-      {(modalStep === 'complete' || modalStep === 'full') && modalProps && (
+      {modalStep === 'complete' && (
         <ClubModal
           {...modalProps}
           onConfirm={handleModalClose}
