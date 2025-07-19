@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../button/Button";
+import LoadingSpinnerController from "../controllers/LoadingSpinnerController";
 
 import "../../styles/modal/ClubModal.scss";
 
@@ -14,6 +15,7 @@ interface ClubModalProps {
   onConfirm: () => void;
   onCancel?: () => void;
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 const ClubModal = ({ 
@@ -27,30 +29,39 @@ const ClubModal = ({
   onConfirm, 
   onCancel,
   disabled,
+  isLoading = false,
 }: ClubModalProps) => {
 
   return (
     <div className="club-modal-back">
       <div className={`club-modal-container ${!showCancelButton ? "single" : ""}`}>
         <div className="modal-wrapper">
-          <div className="modal-up">
-            {showIcon && (
-              <img
-                className="modal-icon"
-                src={
-                  iconType === 'check'
-                    ? "../../../img/modal/modal-checked.png"
-                    : "../../../img/modal/modal-warn.png"
-                }/>)}
-            <div className="modal-main-message">{mainMessage}</div>
-            {subMessage && <div className="modal-sub-message">{subMessage}</div>}
-          </div>
-          <div className="modal-buttons">
-            {showCancelButton && (
-              <Button className="modal-cancel-btn" title={cancelText} onClick={onCancel}/>
-            )}
-            <Button className={`modal-confirm-btn ${disabled ? 'disabled' : ''}`} title={confirmText} onClick={onConfirm} disabled={disabled} />
-          </div>
+          {isLoading ? (
+            <div className="modal-loading-wrapper">
+              <LoadingSpinnerController />
+            </div>
+          ) : (
+            <>
+              <div className="modal-up">
+                {showIcon && (
+                  <img
+                    className="modal-icon"
+                    src={
+                      iconType === 'check'
+                        ? "../../../img/modal/modal-checked.png"
+                        : "../../../img/modal/modal-warn.png"
+                    }/>)}
+                <div className="modal-main-message">{mainMessage}</div>
+                {subMessage && <div className="modal-sub-message">{subMessage}</div>}
+              </div>
+              <div className="modal-buttons">
+                {showCancelButton && (
+                  <Button className="modal-cancel-btn" title={cancelText} onClick={onCancel}/>
+                )}
+                <Button className={`modal-confirm-btn ${disabled ? 'disabled' : ''}`} title={confirmText} onClick={onConfirm} disabled={disabled} />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
