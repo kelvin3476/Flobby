@@ -59,47 +59,56 @@ const ClubMeetingItem = ({
   };
 
   const handleModalConfirm = async () => {
-    if (modalStep === 'confirm' && modalMode) {
-      setIsLoading(true);
-      try {
-        if (modalMode === 'attend') {
-          const response = await Main.participationClubMeeting(Number(meetingId));
-          const { code, message } = response.data;
-          if (code === 1000) {
-            /* 정기 모임 참석 신청 후 성공 케이스 */
-            setModalStep('complete');
-          } else if (code === 1001) {
-              if (message === "정기모임의 참여인원이 초과되었습니다.") {
-                /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
-                setModalMode('attend');
-                setModalStep('full');
+    if (isLoading) return; 
+
+    setIsLoading(true);
+
+    try {
+      
+      if (modalStep === 'confirm' && modalMode) {
+        setIsLoading(true);
+        try {
+          if (modalMode === 'attend') {
+            const response = await Main.participationClubMeeting(Number(meetingId));
+            const { code, message } = response.data;
+            if (code === 1000) {
+              /* 정기 모임 참석 신청 후 성공 케이스 */
+              setModalStep('complete');
+            } else if (code === 1001) {
+                if (message === "정기모임의 참여인원이 초과되었습니다.") {
+                  /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
+                  setModalMode('attend');
+                  setModalStep('full');
+                } else {
+                /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
+              }
+            }
+          } else if (modalMode === 'cancel') {
+              const response = await Main.cancelClubMeeting(Number(meetingId));
+              const { code } = response.data;
+              if (code === 1000) {
+                /* 정기 모임 참석 취소 후 성공 케이스 */
+                setModalStep('complete');
               } else {
               /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
             }
           }
-        } else if (modalMode === 'cancel') {
-            const response = await Main.cancelClubMeeting(Number(meetingId));
-            const { code } = response.data;
-            if (code === 1000) {
-              /* 정기 모임 참석 취소 후 성공 케이스 */
-              setModalStep('complete');
-            } else {
-            /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
+        } catch (error: any) {
+          const errRes = error.response?.data;
+          if (errRes && errRes.code === 1001) {
+            if (errRes.message === "정기모임의 참여인원이 초과되었습니다.") {
+              setModalMode('attend');
+              setModalStep('full');
+              return;
+            }
           }
+          logger.error('정기 모임 참석/취소 중 오류 발생:', error);
+          setModalStep(null);
+          setModalMode(null);
         }
-      } catch (error: any) {
-        const errRes = error.response?.data;
-        if (errRes && errRes.code === 1001) {
-          if (errRes.message === "정기모임의 참여인원이 초과되었습니다.") {
-            setModalMode('attend');
-            setModalStep('full');
-            return;
-          }
-        }
-        logger.error('정기 모임 참석/취소 중 오류 발생:', error);
-        setModalStep(null);
-        setModalMode(null);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -312,6 +321,7 @@ const ClubMeetingItem = ({
             setModalMode(null);
             setModalStep(null);
           }}
+          isLoading={isLoading}
         />
       )}
 
@@ -323,6 +333,7 @@ const ClubMeetingItem = ({
             setModalStep(null);
             setModalMode(null);
           }}
+          isLoading={isLoading}
         />
       )}
     </div>
