@@ -323,6 +323,7 @@ const ClubMemberManagement = ({
           {...getModalProps(modal)}
           onConfirm={handleModalConfirm}
           onCancel={() => setModal(null)}
+          isLoading={isLoading}
         />
       )}
     </div>
