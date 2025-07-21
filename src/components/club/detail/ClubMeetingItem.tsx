@@ -135,7 +135,7 @@ const ClubMeetingItem = ({
         mainMessage:'정상적으로 처리되었습니다.',
         showIcon: false,
         iconType: 'check' as const,
-        showcancelButton: false,
+        showCancelButton: false,
       };
     }
     if (modalStep === 'full') {
