@@ -468,6 +468,7 @@ const ClubMeetingRegister = () => {
           onConfirm={handleModalConfirm}
           onCancel={() => setModalStep(null)}
           disabled={isProcessing}
+          isLoading={isProcessing}
         />
       )}
     </div>

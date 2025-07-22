@@ -47,6 +47,7 @@ const DetailInfo = ({
     null | 'greeting' | 'report' | 'leave' | 'full'
   >(null);
   const [reason, setReason] = useState<string>('');
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   const nav = useNavigate();
   const { clubIds } = useParams<{ clubIds: string }>();
@@ -90,38 +91,47 @@ const DetailInfo = ({
   };
 
   const handleModalSubmit = async () => {
-    if (modalMode === 'greeting') {
-      const response = await Main.applyClub(Number(clubId));
-      const { code, message } = response.data
-      if (code === 1000) {
-        /* 모임 가입 신청 후 성공 케이스 */
-        setModalStep('complete');
-      } else if (code === 1001) {
-        if (message === "정원이 모두 찼어요.") {
-          /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
-          setModalMode("full");
+    if (isProcessing) return; 
+    setIsProcessing(true);
+
+    try {
+      if (modalMode === 'greeting') {
+        const response = await Main.applyClub(Number(clubId));
+        const { code, message } = response.data
+        if (code === 1000) {
+          /* 모임 가입 신청 후 성공 케이스 */
+          setModalStep('complete');
+        } else if (code === 1001) {
+          if (message === "정원이 모두 찼어요.") {
+            /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
+            setModalMode("full");
+          } else {
+            /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
+          }
+        }
+      } else if (modalMode === 'report') {
+        const response = await Main.reportClub(Number(clubId), reason);
+        const { code } = response.data
+        if (code === 1000) {
+          /* 모임 신고 후 성공 케이스 */
+          setModalStep('complete');
+        } else {
+          /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
+        }
+      } else if (modalMode === 'leave') {
+        const response = await Main.leaveClub(Number(clubId), reason);
+        const { code } = response.data
+        if (code === 1000) {
+          /* 모임 탈퇴 신청 후 성공 케이스 */
+          setModalStep('complete');
         } else {
           /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
         }
       }
-    } else if (modalMode === 'report') {
-      const response = await Main.reportClub(Number(clubId), reason);
-      const { code } = response.data
-      if (code === 1000) {
-        /* 모임 신고 후 성공 케이스 */
-        setModalStep('complete');
-      } else {
-        /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
-      }
-    } else if (modalMode === 'leave') {
-      const response = await Main.leaveClub(Number(clubId), reason);
-      const { code } = response.data
-      if (code === 1000) {
-        /* 모임 탈퇴 신청 후 성공 케이스 */
-        setModalStep('complete');
-      } else {
-        /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
-      }
+    } catch (error) {
+        console.error('모임 처리 중 오류 발생:', error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -253,6 +263,7 @@ const DetailInfo = ({
             setModalStep(null);
             setModalMode(null);
           }}
+          isLoading={isProcessing}
         />
       )}
 
@@ -295,6 +306,7 @@ const DetailInfo = ({
               }
             }}
             onCancel={() => setModalStep(null)}
+            isLoading={isProcessing}
           />
         )}
     </div>

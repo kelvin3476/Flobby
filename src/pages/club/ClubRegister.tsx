@@ -62,6 +62,7 @@ const ClubRegister = () => {
   );
 
   const [clubItemData, setClubItemData] = useState<ClubItemDetail | null>(null);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   const { accessToken } = useMainPage();
 
@@ -256,21 +257,31 @@ const ClubRegister = () => {
 
   // 모달 이벤트 핸들러 함수
   const handleModalConfirm = async () => {
-    if (modalStep === 'confirm') {
-      if (isEditPage) {
-        await handleEditClubRegistrationForm();
+    if (isProcessing) return; 
+
+    setIsProcessing(true);
+
+    try {
+      if (modalStep === 'confirm') {
+        if (isEditPage) {
+          await handleEditClubRegistrationForm();
+        } else {
+          await handleSubmitClubRegistrationForm();
+        }
+        setModalStep('complete');
+      } else if (modalStep === 'warn') {
+        await handleDeleteClubMeeting();
+        setModalStep('complete');
       } else {
-        await handleSubmitClubRegistrationForm();
+        setModalStep(null);
+        navigate('/club/list');
       }
-      setModalStep('complete');
-    } else if (modalStep === 'warn') {
-      await handleDeleteClubMeeting();
-      setModalStep('complete');
-    } else {
-      setModalStep(null);
-      navigate('/club/list');
+    } catch (error) {
+      console.error('요청 실패', error);
+    } finally {
+      setIsProcessing(false);
     }
-  };
+  }
 
   /* 모달 메세지 */
   const MESSAGES = {
@@ -388,6 +399,7 @@ const ClubRegister = () => {
           showCancelButton={modalStep === 'confirm' || modalStep === 'warn'}
           onConfirm={handleModalConfirm}
           onCancel={() => setModalStep(null)}
+          isLoading={isProcessing}
         />
       )}
     </div>
