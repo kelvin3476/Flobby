@@ -5,21 +5,37 @@
 
   &.active {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 4px;
   }
 
-  > img {
-    width: 40px;
-    height: 40px;
-    animation: spin 3s linear infinite;
+  .ball {
+    list-style: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #764bf6;
+
+    &:nth-child(1) {
+      animation: bounce 2.1s ease-in-out infinite;
+    }
+
+    &:nth-child(2) {
+      animation: bounce 2.1s ease-in-out 0.3s infinite;
+    }
+
+    &:nth-child(3) {
+      animation: bounce 2.1s ease-in-out 0.6s infinite;
+    }
   }
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@keyframes bounce {
+  50% {
+    transform: translateY(-18px);
+    width: 6px;
+    height: 6px;
+    opacity: 0.5;
   }
 }
