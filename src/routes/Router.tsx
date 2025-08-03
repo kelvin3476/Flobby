@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 
+/* (GA4) gtag 페이지 추적 커스텀 훅 */
+import { useGtagPageTracking } from '../hooks/gtag/useGtagPageTracking';
+
 /* 테스트 페이지 컴포넌트 import */
 import TestPage from '../pages/TestPage';
 
@@ -37,6 +40,8 @@ import useHobbyStore from '../store/signup/useHobbyStore';
 
 const RouterContent: React.FC = () => {
   const location = useLocation();
+
+  useGtagPageTracking(); // GA4 페이지 트래킹 커스텀 훅 호출
 
   const { clearAgreements } = useAgreeStore();
   const { clearNickname } = useNicknameStore();
