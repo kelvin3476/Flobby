@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flobby</title>
 
@@ -15,7 +15,8 @@
     gtag('js', new Date());
 
     gtag('config', 'G-3094XR81MN', {
-      debug_mode: true /* 디버그 모드 true => GA4 콘솔에서 실시간 디버깅 가능 */
+      send_page_view: false, // SPA 환경이므로 자동 페이지뷰 비활성화
+      debug_mode: true, /* 디버그 모드 true => GA4 콘솔에서 실시간 디버깅 가능 */
     });
   </script>
 </head>
