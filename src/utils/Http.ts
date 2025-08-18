@@ -12,13 +12,22 @@ import Logout from '../api/logout/Logout';
 /* 커스텀 axios request config 타입 정의 */
 type CustomAxiosRequestConfig = AxiosRequestConfig & InternalAxiosRequestConfig;
 
+/* 서버 환경에 따른 api base 호스팅 url 변경 */
+const changeHostUrl = () => {
+  switch (window.location.hostname) {
+    case 'localhost':
+      return import.meta.env.VITE_API_LOCAL_BASE_URL;
+    case 'dev.flobby.co.kr':
+      return import.meta.env.VITE_API_DEV_BASE_URL;
+    case 'www.flobby.co.kr':
+      return import.meta.env.VITE_API_PROD_BASE_URL;
+  }
+}
+
 /* 기본 axios 인스턴스 설정 */
 export const axiosInstance: AxiosInstance = axios.create({
   /* 프론트 배포 주소 => package.json: proxy url 로 요청 => 백엔드 배포 api 서버로 요청 */
-  baseURL:
-    window.location.hostname === 'localhost'
-      ? import.meta.env.VITE_API_DEV_BASE_URL
-      : import.meta.env.VITE_API_PROD_BASE_URL,
+  baseURL: changeHostUrl(),
   headers: {
     'Content-Type': 'application/json',
   },

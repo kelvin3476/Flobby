@@ -11,7 +11,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prod": "./deploy.sh"
+    "deploy": "./deploy.sh"
   },
   "proxy": "http://220.93.95.108:13960",
   "dependencies": {
