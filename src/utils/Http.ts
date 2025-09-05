@@ -21,6 +21,8 @@ const changeHostUrl = () => {
       return import.meta.env.VITE_API_DEV_BASE_URL;
     case 'www.flobby.co.kr':
       return import.meta.env.VITE_API_PROD_BASE_URL;
+    case 'flobby.co.kr':
+      return import.meta.env.VITE_API_PROD_BASE_URL;
   }
 }
 
