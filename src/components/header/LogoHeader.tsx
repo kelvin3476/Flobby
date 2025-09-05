@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Logo from "../logo/Logo";
+import Logo from "@/components/logo/Logo";
 
-import "../../styles/header/LogoHeader.scss";
+import "@/styles/header/LogoHeader.scss";
 
 const LogoHeader = () => {
   const nav = useNavigate();

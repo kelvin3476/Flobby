@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
-import Button from '../../button/Button';
+import Button from '@/components/button/Button';
 
-import OnedayItem from './OnedayItem';
+import OnedayItem from '@/components/main/one_day/OnedayItem';
 
-import logger from '../../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import { onedayItem, MainData } from '../../../api/ApiTypes';
-import { MainDataController } from "../../../services/main/controllers/MainDataController";
+import { onedayItem, MainData } from '@/api/ApiTypes';
+import { MainDataController } from '@/services/main/controllers/MainDataController';
 
-import '../../../styles/main/one_day/OnedayPost.scss';
+import '@/styles/main/one_day/OnedayPost.scss';
 
 interface OnedayPostProps {
   mainDataList: MainData;

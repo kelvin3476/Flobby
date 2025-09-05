@@ -1,18 +1,18 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-import LogoHeader from '../../components/header/LogoHeader';
-import Logo from '../../components/logo/Logo';
-import Footer from "../../components/login/Footer";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import LogoHeader from '@/components/header/LogoHeader';
+import Logo from '@/components/logo/Logo';
+import Footer from "@/components/login/Footer";
+import Input from "@/components/input/Input";
+import Button from "@/components/button/Button";
 
-import useLoginForm from "../../hooks/login/useLoginForm";
+import useLoginForm from "@/hooks/login/useLoginForm";
 
-import KakaoLogin from "../../services/auth/oauth2/KakaoLogin";
-import NaverLogin from "../../services/auth/oauth2/NaverLogin";
+import KakaoLogin from "@/services/auth/oauth2/KakaoLogin";
+import NaverLogin from "@/services/auth/oauth2/NaverLogin";
 
-import '../../styles/login/Login.scss';
+import '@/styles/login/Login.scss';
 
 const Login = () => {
     const navigate = useNavigate();

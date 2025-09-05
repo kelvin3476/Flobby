@@ -1,5 +1,5 @@
 import React from "react";
-import useAgreeStore from "../../store/signup/useAgreeStore";
+import useAgreeStore from "@/store/signup/useAgreeStore";
 
 import { useNavigate } from "react-router-dom";
 

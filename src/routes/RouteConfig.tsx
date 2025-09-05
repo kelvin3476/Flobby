@@ -2,24 +2,24 @@
 import React from 'react';
 
 /* 라우팅 되는 페이지 컴포넌트 import */
-import TestPage from '../pages/TestPage';
-import Main from '../pages/main/Main';
-import Login from '../pages/login/Login';
-import FindPassword from '../pages/password/FindPassword';
-import ResetPassword from '../pages/password/ResetPassword';
-import SuccessPassword from '../pages/password/SuccessPassword';
-import Agreement from '../pages/signup/Agreement';
-import Registration from '../pages/signup/Registration';
-import Region from '../pages/signup/Region';
-import SelectHobbies from '../pages/signup/SelectHobbies';
-import SuccessSignUp from '../pages/signup/SuccessSignUp';
-import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
-import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
-import ClubAll from '../pages/club/ClubAll';
-import ClubRegister from '../pages/club/ClubRegister';
-import ClubDetail from '../pages/club/ClubDetail';
-import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
-import ClubSearch from '../pages/club/ClubSearch';
+import TestPage from '@/pages/TestPage';
+import Main from '@/pages/main/Main';
+import Login from '@/pages/login/Login';
+import FindPassword from '@/pages/password/FindPassword';
+import ResetPassword from '@/pages/password/ResetPassword';
+import SuccessPassword from '@/pages/password/SuccessPassword';
+import Agreement from '@/pages/signup/Agreement';
+import Registration from '@/pages/signup/Registration';
+import Region from '@/pages/signup/Region';
+import SelectHobbies from '@/pages/signup/SelectHobbies';
+import SuccessSignUp from '@/pages/signup/SuccessSignUp';
+import KakaoRedirectHandler from '@/services/auth/oauth2/KakaoRedirectHandler';
+import NaverRedirectHandler from '@/services/auth/oauth2/NaverRedirectHandler';
+import ClubAll from '@/pages/club/ClubAll';
+import ClubRegister from '@/pages/club/ClubRegister';
+import ClubDetail from '@/pages/club/ClubDetail';
+import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
+import ClubSearch from '@/pages/club/ClubSearch';
 
 export const RouteConfig = [
   { path: '/test', element: <TestPage />, title: '테스트' },

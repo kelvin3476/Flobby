@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import useLoadingStore from "../../store/loading/useLoadingStore";
+import useLoadingStore from "@/store/loading/useLoadingStore";
 
 const useLoadingForm = () => {
 

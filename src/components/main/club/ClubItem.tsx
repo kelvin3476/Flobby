@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Tag from '../../tag/Tag';
+import Tag from '@/components/tag/Tag';
 
-import '../../../styles/main/club/ClubItem.scss';
+import '@/styles/main/club/ClubItem.scss';
 
 interface ClubItemProps {
   clubId: number;

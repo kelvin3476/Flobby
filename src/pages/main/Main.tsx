@@ -1,19 +1,19 @@
 import React from 'react';
 
-import logger from '../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import MainHeader from '../../components/header/MainHeader';
-import CarouselBanner from '../../components/carousel/CarouselBanner';
-import ClubPost from '../../components/main/club/ClubPost';
-import OnedayPost from '../../components/main/one_day/OnedayPost';
-import PopularPost from '../../components/main/popular_post/PopularPost';
+import MainHeader from '@/components/header/MainHeader';
+import CarouselBanner from '@/components/carousel/CarouselBanner';
+import ClubPost from '@/components/main/club/ClubPost';
+import OnedayPost from '@/components/main/one_day/OnedayPost';
+import PopularPost from '@/components/main/popular_post/PopularPost';
 
-import useMainPage from '../../hooks/main/useMainPage';
+import useMainPage from '@/hooks/main/useMainPage';
 
-import { MainDataController } from '../../services/main/controllers/MainDataController';
-import { MainData } from '../../api/ApiTypes';
+import { MainDataController } from '@/services/main/controllers/MainDataController';
+import { MainData } from '@/api/ApiTypes';
 
-import '../../styles/main/Main.scss';
+import '@/styles/main/Main.scss';
 
 const Main = () => {
   const mainDataController = MainDataController.getInstance();

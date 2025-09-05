@@ -1,8 +1,8 @@
 import React from 'react';
-import Title from '../text/Title';
-import { clubItem, RecommendClubListItem } from '../../../api/ApiTypes';
-import ClubItem from '../../main/club/ClubItem';
-import '../../../styles/club/detail/RecommendClubList.scss';
+import Title from '@/components/club/text/Title';
+import { clubItem, RecommendClubListItem } from '@/api/ApiTypes';
+import ClubItem from '@/components/main/club/ClubItem';
+import '@/styles/club/detail/RecommendClubList.scss';
 
 interface RecommendClubListProps {
   recommendClubList: RecommendClubListItem[] | clubItem[];

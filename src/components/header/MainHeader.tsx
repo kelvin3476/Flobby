@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '../logo/Logo';
-import RegionSelector from '../main/region_selector/RegionSelector';
-import TextButton from '../button/TextButton';
-import SearchBar from '../main/search_bar/SearchBar';
-import Button from '../button/Button';
-import DropDownModal from '../modal/DropDownModal';
+import Logo from '@/components/logo/Logo';
+import RegionSelector from '@/components/main/region_selector/RegionSelector';
+import TextButton from '@/components/button/TextButton';
+import SearchBar from '@/components/main/search_bar/SearchBar';
+import Button from '@/components/button/Button';
+import DropDownModal from '@/components/modal/DropDownModal';
 
-import Logout from '../../api/logout/Logout';
+import Logout from '@/api/logout/Logout';
 
-import '../../styles/header/MainHeader.scss';
+import '@/styles/header/MainHeader.scss';
 
 interface MainHeaderProps {
   accessToken: string | null;

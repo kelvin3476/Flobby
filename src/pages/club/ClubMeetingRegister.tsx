@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
-import Title from '../../components/club/text/Title';
-import ClubModal from '../../components/modal/ClubModal';
-import MainHeader from '../../components/header/MainHeader';
+import Title from '@/components/club/text/Title';
+import ClubModal from '@/components/modal/ClubModal';
+import MainHeader from '@/components/header/MainHeader';
 
-import ClubMeetingTitle from '../../components/club/meetingRegister/ClubMeetingTitle';
-import ClubMeetingDate from '../../components/club/meetingRegister/ClubMeetingDate';
-import ClubMeetingTime from '../../components/club/meetingRegister/ClubMeetingTime';
-import ClubMeetingLocation from '../../components/club/meetingRegister/ClubMeetingLocation';
-import ClubMeetingMember from '../../components/club/meetingRegister/ClubMeetingMember';
-import ClubMeetingEntryFee from '../../components/club/meetingRegister/ClubMeetingEntryFee';
+import ClubMeetingTitle from '@/components/club/meetingRegister/ClubMeetingTitle';
+import ClubMeetingDate from '@/components/club/meetingRegister/ClubMeetingDate';
+import ClubMeetingTime from '@/components/club/meetingRegister/ClubMeetingTime';
+import ClubMeetingLocation from '@/components/club/meetingRegister/ClubMeetingLocation';
+import ClubMeetingMember from '@/components/club/meetingRegister/ClubMeetingMember';
+import ClubMeetingEntryFee from '@/components/club/meetingRegister/ClubMeetingEntryFee';
 
-import useClubMeetingRegisterStore from '../../store/club/useClubMeetingRegisterStore';
-import useMainPage from '../../hooks/main/useMainPage';
+import useClubMeetingRegisterStore from '@/store/club/useClubMeetingRegisterStore';
+import useMainPage from '@/hooks/main/useMainPage';
 
-import { ClubMeetingData } from '../../api/ApiTypes';
-import { ClubController } from '../../services/club/controllers/ClubController';
+import { ClubMeetingData } from '@/api/ApiTypes';
+import { ClubController } from '@/services/club/controllers/ClubController';
 
-import '../../styles/club/meeting_register/ClubMeetingRegister.scss';
-import logger from '../../utils/Logger';
+import '@/styles/club/meeting_register/ClubMeetingRegister.scss';
+import logger from '@/utils/Logger';
 
 const ClubMeetingRegister = () => {
   const {

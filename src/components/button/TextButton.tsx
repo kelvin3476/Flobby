@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/button/TextButton.scss";
+import "@/styles/button/TextButton.scss";
 
 interface TextButtonProps {
   className?: string;

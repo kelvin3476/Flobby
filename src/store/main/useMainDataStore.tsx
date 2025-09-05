@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
-import { MainData } from '../../api/ApiTypes';
-import { DEFAULT_REGION } from "../../services/region/models/ModalRegionListModel";
+import { MainData } from '@/api/ApiTypes';
+import { DEFAULT_REGION } from "@/services/region/models/ModalRegionListModel";
 
 interface MainDataStore {
     mainDataList: MainData; /* 메인 api 전체 데이터 */

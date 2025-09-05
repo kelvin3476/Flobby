@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
-import Label from '../register/Label';
+import useClubMeetingRegisterStore from '@/store/club/useClubMeetingRegisterStore';
+import Label from '@/components/club/register/Label';
 
 interface ClubMeetingMemberProps {
   isEditPage: boolean;

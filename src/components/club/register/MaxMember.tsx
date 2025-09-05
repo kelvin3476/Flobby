@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
-import Label from './Label';
-import '../../../styles/club/register/MaxMember.scss';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
+import Label from '@/components/club/register/Label';
+import '@/styles/club/register/MaxMember.scss';
 
 interface classNameProps {
   className?: string;

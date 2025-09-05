@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import MainHeader from '../../components/header/MainHeader';
-import Title from '../../components/club/text/Title';
-import Tab from '../../components/tab/Tab';
-import ClubList from '../../components/club/list/ClubList';
-import RecommendClubList from '../../components/club/detail/RecommendClubList';
+import MainHeader from '@/components/header/MainHeader';
+import Title from '@/components/club/text/Title';
+import Tab from '@/components/tab/Tab';
+import ClubList from '@/components/club/list/ClubList';
+import RecommendClubList from '@/components/club/detail/RecommendClubList';
 
-import useMainPage from '../../hooks/main/useMainPage';
+import useMainPage from '@/hooks/main/useMainPage';
 
-import { clubItem, ClubSearchItem, onedayItem } from '../../api/ApiTypes';
-import { ClubController } from '../../services/club/controllers/ClubController';
+import { clubItem, ClubSearchItem, onedayItem } from '@/api/ApiTypes';
+import { ClubController } from '@/services/club/controllers/ClubController';
 
-import logger from '../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import '../../styles/club/search/ClubSearch.scss';
+import '@/styles/club/search/ClubSearch.scss';
 
 const ClubSearch = () => {
   const navigate = useNavigate();

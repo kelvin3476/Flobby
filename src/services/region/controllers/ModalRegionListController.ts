@@ -1,6 +1,6 @@
-import { ModalRegionListModel } from '../models/ModalRegionListModel';
-import { ModalRegionListData, RegionItem } from '../../../api/ApiTypes';
-import { setCookie } from "../../../utils/Cookie";
+import { ModalRegionListModel } from '@/services/region/models/ModalRegionListModel';
+import { ModalRegionListData, RegionItem } from '@/api/ApiTypes';
+import { setCookie } from '@/utils/Cookie';
 
 export class ModalRegionListController {
   private static instance: ModalRegionListController;

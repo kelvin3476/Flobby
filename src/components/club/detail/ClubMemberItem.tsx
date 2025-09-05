@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/club/detail/ClubMemberItem.scss';
+import '@/styles/club/detail/ClubMemberItem.scss';
 
 interface ClubMemberListProps {
   clubMemberId: number;

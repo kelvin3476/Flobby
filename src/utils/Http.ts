@@ -4,10 +4,10 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import logger from './Logger';
-import useAuthStore from '../store/auth/useAuthStore';
-import Login from '../api/login/Login';
-import Logout from '../api/logout/Logout';
+import logger from '@/utils/Logger';
+import useAuthStore from '@/store/auth/useAuthStore';
+import Login from '@/api/login/Login';
+import Logout from '@/api/logout/Logout';
 
 /* 커스텀 axios request config 타입 정의 */
 type CustomAxiosRequestConfig = AxiosRequestConfig & InternalAxiosRequestConfig;

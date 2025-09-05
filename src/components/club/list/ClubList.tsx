@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ClubItem from '../../main/club/ClubItem';
-import { clubItem } from '../../../api/ApiTypes';
+import ClubItem from '@/components/main/club/ClubItem';
+import { clubItem } from '@/api/ApiTypes';
 
-import LoadingSpinnerController from '../../controllers/LoadingSpinnerController';
-import '../../../styles/club/list/ClubList.scss';
+import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
+import '@/styles/club/list/ClubList.scss';
 
 interface ClubListProps {
   clubList: clubItem[] | null;

@@ -1,6 +1,6 @@
-import { MainData } from '../../../api/ApiTypes';
-import Main from '../../../api/main/Main';
-import logger from '../../../utils/Logger';
+import { MainData } from '@/api/ApiTypes';
+import Main from '@/api/main/Main';
+import logger from '@/utils/Logger';
 
 export class MainDataModel {
   /* 메인 데이터 초기값 */

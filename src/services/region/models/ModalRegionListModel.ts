@@ -1,7 +1,7 @@
-import { ModalRegionListData, RegionItem } from '../../../api/ApiTypes';
-import Region from '../../../api/region/Region';
-import { getCookie } from '../../../utils/Cookie';
-import logger from '../../../utils/Logger';
+import { ModalRegionListData, RegionItem } from '@/api/ApiTypes';
+import Region from '@/api/region/Region';
+import { getCookie } from '@/utils/Cookie';
+import logger from '@/utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {

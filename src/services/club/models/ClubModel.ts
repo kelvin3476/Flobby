@@ -3,10 +3,10 @@ import {
   ClubItemDetail,
   ClubSearchItem,
   ClubMeetingData,
-} from '../../../api/ApiTypes';
-import Main from '../../../api/main/Main';
+} from '@/api/ApiTypes';
+import Main from '@/api/main/Main';
 
-import logger from '../../../utils/Logger';
+import logger from '@/utils/Logger';
 
 export class ClubModel {
   clubListData: clubItem[] = [];

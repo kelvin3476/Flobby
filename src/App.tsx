@@ -1,7 +1,7 @@
 import React from "react";
-import Router from "./routes/Router";
-import useMainPage from "./hooks/main/useMainPage";
-import './App.css';
+import Router from "@/routes/Router";
+import useMainPage from "@/hooks/main/useMainPage";
+import '@/App.css';
 
 function App() {
   const { accessToken, isAuthenticated, reGenerateAccessToken, calculateRemainingTime, handleRefresh } = useMainPage();

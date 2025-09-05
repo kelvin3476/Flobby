@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import MainHeader from '../../components/header/MainHeader';
-import Tab from '../../components/tab/Tab';
-import DetailInfo from '../../components/club/detail/DetailInfo';
-import DetailDescription from '../../components/club/detail/DetailDescription';
-import ClubMeetingList from '../../components/club/detail/ClubMeetingList';
-import ClubMemberList from '../../components/club/detail/ClubMemberList';
-import RecommendClubList from '../../components/club/detail/RecommendClubList';
-import ClubMemberManagement from '../../components/club/detail/ClubMemberManagement';
+import MainHeader from '@/components/header/MainHeader';
+import Tab from '@/components/tab/Tab';
+import DetailInfo from '@/components/club/detail/DetailInfo';
+import DetailDescription from '@/components/club/detail/DetailDescription';
+import ClubMeetingList from '@/components/club/detail/ClubMeetingList';
+import ClubMemberList from '@/components/club/detail/ClubMemberList';
+import RecommendClubList from '@/components/club/detail/RecommendClubList';
+import ClubMemberManagement from '@/components/club/detail/ClubMemberManagement';
 
-import useMainPage from '../../hooks/main/useMainPage';
+import useMainPage from '@/hooks/main/useMainPage';
 
 import {
   ClubDTO,
   ClubMeetingListItem,
   ClubMemberListItem,
   RecommendClubListItem,
-} from '../../api/ApiTypes';
-import { ClubController } from '../../services/club/controllers/ClubController';
+} from '@/api/ApiTypes';
+import { ClubController } from '@/services/club/controllers/ClubController';
 
-import logger from '../../utils/Logger';
-import LoadingSpinnerController from '../../components/controllers/LoadingSpinnerController';
+import logger from '@/utils/Logger';
+import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
 
-import '../../styles/club/detail/ClubDetail.scss';
+import '@/styles/club/detail/ClubDetail.scss';
 
 const ClubDetail = () => {
   const { clubId } = useParams<{ clubId: string }>();

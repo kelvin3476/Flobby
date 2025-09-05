@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useLoginStore from '../../store/login/useLoginStore';
-import useAuthStore from '../../store/auth/useAuthStore';
+import useLoginStore from '@/store/login/useLoginStore';
+import useAuthStore from '@/store/auth/useAuthStore';
 
-import Login from '../../api/login/Login';
+import Login from '@/api/login/Login';
 
 const useLoginForm = () => {
   const navigate = useNavigate();

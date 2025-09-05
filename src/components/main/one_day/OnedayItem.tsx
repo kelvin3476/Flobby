@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Tag from '../../tag/Tag';
+import Tag from '@/components/tag/Tag';
 
-import "../../../styles/main/one_day/OnedayItem.scss";
+import "@/styles/main/one_day/OnedayItem.scss";
 
 interface OnedayItemProps {
   category: string;

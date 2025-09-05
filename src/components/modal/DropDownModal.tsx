@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/modal/DropDownModal.scss";
+import "@/styles/modal/DropDownModal.scss";
 
 interface DropDownModalProps {
   className: string;

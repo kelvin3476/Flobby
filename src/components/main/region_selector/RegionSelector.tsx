@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import RegionSelectorModal from './RegionSelectorModal';
-import { DEFAULT_REGION } from '../../../services/region/models/ModalRegionListModel';
-import { RegionItem } from '../../../api/ApiTypes';
-import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
-import '../../../styles/main/region_selector/RegionSelector.scss';
-import logger from '../../../utils/Logger';
+import RegionSelectorModal from '@/components/main/region_selector/RegionSelectorModal';
+import { DEFAULT_REGION } from '@/services/region/models/ModalRegionListModel';
+import { RegionItem } from '@/api/ApiTypes';
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
+import '@/styles/main/region_selector/RegionSelector.scss';
+import logger from '@/utils/Logger';
 
 interface RegionSelectorProps {
   accessToken: string | null;

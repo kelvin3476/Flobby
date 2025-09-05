@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import Button from "../button/Button";
+import Button from "@/components/button/Button";
 
-import Main from '../../api/main/Main';
+import Main from '@/api/main/Main';
 
-import logger from '../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import "../../styles/modal/ClubSelectModal.scss";
+import "@/styles/modal/ClubSelectModal.scss";
 
 interface ClubSelectModalProps {
   title: string;

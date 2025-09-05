@@ -1,5 +1,5 @@
-import { HobbyCategory } from '../../../api/ApiTypes';
-import SignUp from '../../../api/signup/SignUp';
+import { HobbyCategory } from '@/api/ApiTypes';
+import SignUp from '@/api/signup/SignUp';
 
 export const CategorySlugMap: Record<string, string> = {
   전체: 'entire',

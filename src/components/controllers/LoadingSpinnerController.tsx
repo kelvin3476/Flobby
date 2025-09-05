@@ -1,7 +1,7 @@
 import React from "react";
-import useLoadingForm from "../../hooks/loading/useLoadingForm";
+import useLoadingForm from "@/hooks/loading/useLoadingForm";
 
-import "../../styles/loading/loading.scss";
+import "@/styles/loading/loading.scss";
 
 const LoadingSpinnerController: React.FC = () => {
   const { isLoading } = useLoadingForm();

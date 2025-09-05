@@ -1,12 +1,12 @@
 import React from "react";
 
-import Header from "../../components/login/Header";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import Header from "@/components/login/Header";
+import Input from "@/components/input/Input";
+import Button from "@/components/button/Button";
 
-import useEmailForm from "../../hooks/email/useEmailForm";
+import useEmailForm from "@/hooks/email/useEmailForm";
 
-import "../../styles/password/FindPassword.scss";
+import "@/styles/password/FindPassword.scss";
 
 const FindPassword = () => {
     const {

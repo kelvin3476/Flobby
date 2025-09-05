@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import DropDown from './Dropdown';
-import useClubRegisterStore from '../../store/club/useClubRegisterStore';
-import { HobbyCategory } from '../../api/ApiTypes';
-import { CategoryListController } from '../../services/category/controllers/CategoryListController';
-import Label from '../club/register/Label';
-import '../../styles/dropdown/CommonDropDown.scss';
+import DropDown from '@/components/dropdown/Dropdown';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
+import { HobbyCategory } from '@/api/ApiTypes';
+import { CategoryListController } from '@/services/category/controllers/CategoryListController';
+import Label from '@/components/club/register/Label';
+import '@/styles/dropdown/CommonDropDown.scss';
 
 interface CategoryDropDownProps {
   className?: string;

@@ -1,4 +1,4 @@
-import { http } from '../../utils/Http';
+import { http } from '@/utils/Http';
 import { WebLoginData, GenerateTokenData, PasswordData} from "../ApiTypes";
 
 export default class Login {

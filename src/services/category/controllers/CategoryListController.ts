@@ -1,5 +1,5 @@
-import { CategoryListModel } from "../models/CategoryListModel";
-import { HobbyCategory } from "../../../api/ApiTypes";
+import { CategoryListModel } from "@/services/category/models/CategoryListModel";
+import { HobbyCategory } from '@/api/ApiTypes';
 
 export class CategoryListController {
   private static instance: CategoryListController;

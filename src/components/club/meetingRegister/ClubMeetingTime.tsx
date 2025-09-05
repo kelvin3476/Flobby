@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Label from '../register/Label';
-import DropDown from '../../dropdown/Dropdown';
-import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
+import Label from '@/components/club/register/Label';
+import DropDown from '@/components/dropdown/Dropdown';
+import useClubMeetingRegisterStore from '@/store/club/useClubMeetingRegisterStore';
 
-import '../../../styles/club/meeting_register/ClubMeetingTime.scss';
+import '@/styles/club/meeting_register/ClubMeetingTime.scss';
 
 interface ClubMeetingTimeProps {
   isEditPage: boolean;

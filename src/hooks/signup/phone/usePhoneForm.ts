@@ -1,8 +1,8 @@
 import React from 'react';
-import usePhoneStore from "../../../store/phone/usePhoneStore";
-import {http} from "../../../utils/Http";
-import useVerificationCodeStore from "../../../store/verificationcode/useVerificationCodeStore";
-import useVerificationCodeForm from "../../verificationcode/useVerificationCodeForm";
+import usePhoneStore from "@/store/phone/usePhoneStore";
+import { http } from '@/utils/Http';
+import useVerificationCodeStore from "@/store/verificationcode/useVerificationCodeStore";
+import useVerificationCodeForm from "@/hooks/verificationcode/useVerificationCodeForm";
 
 const usePhoneForm = () => {
   const {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import DropDown from './Dropdown';
-import { ModalRegionListController } from '../../services/region/controllers/ModalRegionListController';
-import useClubRegisterStore from '../../store/club/useClubRegisterStore';
-import logger from '../../utils/Logger';
-import { getCookie } from '../../utils/Cookie';
-import Label from '../club/register/Label';
-import '../../styles/dropdown/CommonDropDown.scss';
+import DropDown from '@/components/dropdown/Dropdown';
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
+import logger from '@/utils/Logger';
+import { getCookie } from '@/utils/Cookie';
+import Label from '@/components/club/register/Label';
+import '@/styles/dropdown/CommonDropDown.scss';
 
 interface RegionDropDownProps {
   className?: string;

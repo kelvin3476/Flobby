@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../button/Button";
 
-import "../../styles/login/Footer.scss";
+import "@/styles/login/Footer.scss";
 
 interface FooterProps {
     footerTitle: string;

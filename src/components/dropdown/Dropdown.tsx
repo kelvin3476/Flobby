@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import '../../styles/dropdown/Dropdown.scss';
+import '@/styles/dropdown/Dropdown.scss';
 
 interface DropDownProps {
   options: any[];

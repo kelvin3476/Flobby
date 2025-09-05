@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import MainHeader from '../../components/header/MainHeader';
-import ImageUploader from '../../components/club/register/ImageUploader';
-import RegionDropDown from '../../components/dropdown/RegionDropDown';
-import CategoryDropDown from '../../components/dropdown/CategoryDropDown';
-import MaxMember from '../../components/club/register/MaxMember';
-import ClubDescription from '../../components/club/register/ClubDescription';
+import MainHeader from '@/components/header/MainHeader';
+import ImageUploader from '@/components/club/register/ImageUploader';
+import RegionDropDown from '@/components/dropdown/RegionDropDown';
+import CategoryDropDown from '@/components/dropdown/CategoryDropDown';
+import MaxMember from '@/components/club/register/MaxMember';
+import ClubDescription from '@/components/club/register/ClubDescription';
 
-import Button from '../../components/button/Button';
-import Title from '../../components/club/text/Title';
-import RequiredText from '../../components/club/text/RequiredText';
-import ClubModal from '../../components/modal/ClubModal';
+import Button from '@/components/button/Button';
+import Title from '@/components/club/text/Title';
+import RequiredText from '@/components/club/text/RequiredText';
+import ClubModal from '@/components/modal/ClubModal';
 
-import useMainPage from '../../hooks/main/useMainPage';
-import useClubRegisterStore from '../../store/club/useClubRegisterStore';
+import useMainPage from '@/hooks/main/useMainPage';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
 
-import logger from '../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import { ClubController } from '../../services/club/controllers/ClubController';
+import { ClubController } from '@/services/club/controllers/ClubController';
 
-import '../../styles/club/register/ClubRegister.scss';
-import { ClubItemDetail } from '../../api/ApiTypes';
+import '@/styles/club/register/ClubRegister.scss';
+import { ClubItemDetail } from '@/api/ApiTypes';
 
 const ClubRegister = () => {
   const {

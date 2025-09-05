@@ -1,7 +1,7 @@
 // src/hooks/useGtagPageTracking.ts
 import { useEffect } from 'react';
 import { useLocation, matchPath } from 'react-router-dom';
-import { RouteConfig } from '../../routes/RouteConfig';
+import { RouteConfig } from '@/routes/RouteConfig';
 
 export function useGtagPageTracking() {
   const location = useLocation();

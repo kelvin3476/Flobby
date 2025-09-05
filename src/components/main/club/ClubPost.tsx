@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
-import Button from '../../button/Button';
+import Button from '@/components/button/Button';
 
-import ClubItem from './ClubItem';
+import ClubItem from '@/components/main/club/ClubItem';
 
-import logger from '../../../utils/Logger';
+import logger from '@/utils/Logger';
 
-import { clubItem, MainData } from '../../../api/ApiTypes';
-import { MainDataController } from '../../../services/main/controllers/MainDataController';
-import { ClubController } from '../../../services/club/controllers/ClubController';
+import { clubItem, MainData } from '@/api/ApiTypes';
+import { MainDataController } from '@/services/main/controllers/MainDataController';
+import { ClubController } from '@/services/club/controllers/ClubController';
 
-import '../../../styles/main/club/ClubPost.scss';
+import '@/styles/main/club/ClubPost.scss';
 
 interface ClubPostProps {
   mainDataList: MainData;

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import DatePicker from '../../../utils/DatePicker';
+import DatePicker from '@/utils/DatePicker';
 
-import Label from '../register/Label';
-import useClubMeetingRegisterStore from '../../../store/club/useClubMeetingRegisterStore';
-import '../../../styles/club/meeting_register/ClubMeetingDate.scss';
+import Label from '@/components/club/register/Label';
+import useClubMeetingRegisterStore from '@/store/club/useClubMeetingRegisterStore';
+import '@/styles/club/meeting_register/ClubMeetingDate.scss';
 
 interface ClubMeetingDateProps {
   isEditPage: boolean;

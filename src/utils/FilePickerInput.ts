@@ -1,4 +1,4 @@
-import logger from './Logger';
+import logger from '@/utils/Logger';
 
 export default class FilePickerInput<T> {
   private fileInput: HTMLInputElement;

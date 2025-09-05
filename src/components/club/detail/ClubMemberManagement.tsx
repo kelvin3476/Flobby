@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ClubMemberListItem } from '../../../api/ApiTypes';
-import ClubMemberItem from './ClubMemberItem';
-import ClubModal from '../../modal/ClubModal';
-import Main from '../../../api/main/Main';
-import logger from '../../../utils/Logger';
+import { ClubMemberListItem } from '@/api/ApiTypes';
+import ClubMemberItem from '@/components/club/detail/ClubMemberItem';
+import ClubModal from '@/components/modal/ClubModal';
+import Main from '@/api/main/Main';
+import logger from '@/utils/Logger';
 
-import '../../../styles/club/detail/ClubMemberManagement.scss';
+import '@/styles/club/detail/ClubMemberManagement.scss';
 
 interface ClubMemberManagementProps {
   clubId: string;

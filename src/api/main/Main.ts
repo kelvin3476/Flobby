@@ -1,4 +1,4 @@
-import { http } from '../../utils/Http';
+import { http } from '@/utils/Http';
 import { ClubMeetingData } from '../ApiTypes';
 
 export default class Main {

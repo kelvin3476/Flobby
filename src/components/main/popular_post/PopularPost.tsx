@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PopularItem from "./PopularItem";
-import { boardItem, MainData } from '../../../api/ApiTypes';
+import PopularItem from "@/components/main/popular_post/PopularItem";
+import { boardItem, MainData } from '@/api/ApiTypes';
 
-import "../../../styles/main/popular_post/PopularPost.scss";
+import "@/styles/main/popular_post/PopularPost.scss";
 
 interface BoardPostProps {
   mainDataList: MainData;

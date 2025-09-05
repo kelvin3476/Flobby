@@ -1,4 +1,4 @@
-import { http } from '../../utils/Http';
+import { http } from '@/utils/Http';
 
 export default class SocialLogin {
     static async KakaoLogin(code: string) {

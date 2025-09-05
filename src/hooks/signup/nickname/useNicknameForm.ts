@@ -1,6 +1,6 @@
 import React from 'react';
-import useNicknameStore from '../../../store/nickname/useNicknameStore';
-import SignUp from '../../../api/signup/SignUp';
+import useNicknameStore from '@/store/nickname/useNicknameStore';
+import SignUp from '@/api/signup/SignUp';
 
 const useNicknameForm = () => {
   const {

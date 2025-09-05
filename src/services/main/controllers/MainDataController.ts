@@ -1,5 +1,5 @@
-import { MainDataModel } from '../models/MainDataModel';
-import { MainData } from '../../../api/ApiTypes';
+import { MainDataModel } from '@/services/main/models/MainDataModel';
+import { MainData } from '@/api/ApiTypes';
 
 export class MainDataController {
   private static instance: MainDataController;

@@ -2,42 +2,42 @@ import React from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 
 /* (GA4) gtag 페이지 추적 커스텀 훅 */
-import { useGtagPageTracking } from '../hooks/gtag/useGtagPageTracking';
+import { useGtagPageTracking } from '@/hooks/gtag/useGtagPageTracking';
 
 /* 테스트 페이지 컴포넌트 import */
-// import TestPage from '../pages/TestPage';
+// import TestPage from '@/pages/TestPage';
 
 /* 라우팅 되는 페이지 컴포넌트 import */
-// import Main from '../pages/main/Main';
-// import Login from '../pages/login/Login';
-// import FindPassword from '../pages/password/FindPassword';
-// import ResetPassword from '../pages/password/ResetPassword';
-// import SuccessPassword from '../pages/password/SuccessPassword';
+// import Main from '@/pages/main/Main';
+// import Login from '@/pages/login/Login';
+// import FindPassword from '@/pages/password/FindPassword';
+// import ResetPassword from '@/pages/password/ResetPassword';
+// import SuccessPassword from '@/pages/password/SuccessPassword';
 //
-// import Agreement from '../pages/signup/Agreement';
-// import Registration from '../pages/signup/Registration';
-// import Region from '../pages/signup/Region';
-// import SelectHobbies from '../pages/signup/SelectHobbies';
-// import SuccessSignUp from '../pages/signup/SuccessSignUp';
+// import Agreement from '@/pages/signup/Agreement';
+// import Registration from '@/pages/signup/Registration';
+// import Region from '@/pages/signup/Region';
+// import SelectHobbies from '@/pages/signup/SelectHobbies';
+// import SuccessSignUp from '@/pages/signup/SuccessSignUp';
 //
-// import KakaoRedirectHandler from '../services/auth/oauth2/KakaoRedirectHandler';
-// import NaverRedirectHandler from '../services/auth/oauth2/NaverRedirectHandler';
+// import KakaoRedirectHandler from '@/services/auth/oauth2/KakaoRedirectHandler';
+// import NaverRedirectHandler from '@/services/auth/oauth2/NaverRedirectHandler';
 //
-// import ClubAll from '../pages/club/ClubAll';
-// import ClubRegister from '../pages/club/ClubRegister';
-// import ClubDetail from '../pages/club/ClubDetail';
-// import ClubMeetingRegister from '../pages/club/ClubMeetingRegister';
-// import ClubSearch from '../pages/club/ClubSearch';
-import { RouteConfig } from './RouteConfig';
+// import ClubAll from '@/pages/club/ClubAll';
+// import ClubRegister from '@/pages/club/ClubRegister';
+// import ClubDetail from '@/pages/club/ClubDetail';
+// import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
+// import ClubSearch from '@/pages/club/ClubSearch';
+import { RouteConfig } from '@/routes/RouteConfig';
 
 /* 회원가입 zustand 상태관리 store import */
-import useAgreeStore from '../store/signup/useAgreeStore';
-import useNicknameStore from '../store/nickname/useNicknameStore';
-import useEmailStore from '../store/email/useEmailStore';
-import usePasswordStore from '../store/signup/usePasswordStore';
-import useCitizenStore from '../store/citizenship/useCitizenStore';
-import useRegionStore from '../store/signup/useRegionStore';
-import useHobbyStore from '../store/signup/useHobbyStore';
+import useAgreeStore from '@/store/signup/useAgreeStore';
+import useNicknameStore from '@/store/nickname/useNicknameStore';
+import useEmailStore from '@/store/email/useEmailStore';
+import usePasswordStore from '@/store/signup/usePasswordStore';
+import useCitizenStore from '@/store/citizenship/useCitizenStore';
+import useRegionStore from '@/store/signup/useRegionStore';
+import useHobbyStore from '@/store/signup/useHobbyStore';
 
 const RouterContent: React.FC = () => {
   const location = useLocation();

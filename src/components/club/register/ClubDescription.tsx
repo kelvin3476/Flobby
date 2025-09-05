@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import Label from './Label';
-import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
+import React from 'react';
+import Label from '@/components/club/register/Label';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
 
-import '../../../styles/club/register/ClubDescription.scss';
+import '@/styles/club/register/ClubDescription.scss';
 
 interface ClubDescriptionProps {
   className?: string;

@@ -1,5 +1,5 @@
 import React from "react";
-import useEmailStore from "../../store/email/useEmailStore";
+import useEmailStore from "@/store/email/useEmailStore";
 
 const useEmailForm = () => {
 

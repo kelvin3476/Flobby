@@ -1,13 +1,13 @@
 import React from "react";
 
-import Header from "../../components/login/Header";
-import Button from "../../components/button/Button";
-import Modal from "../../components/join/Modal";
+import Header from "@/components/login/Header";
+import Button from "@/components/button/Button";
+import Modal from "@/components/join/Modal";
 
-import useAgreeForm from "../../hooks/join/useAgreeForm";
-import useModalForm from "../../hooks/join/useModalForm";
+import useAgreeForm from "@/hooks/join/useAgreeForm";
+import useModalForm from "@/hooks/join/useModalForm";
 
-import "../../styles/join/Agreement.scss";
+import "@/styles/join/Agreement.scss";
 
 const Agreement = () => {
 

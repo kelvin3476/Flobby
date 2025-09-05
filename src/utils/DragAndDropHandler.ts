@@ -1,4 +1,4 @@
-import logger from './Logger';
+import logger from '@/utils/Logger';
 
 type FileDropHandlerEvents = 'file-over' | 'file-drop-cancel' | 'file-drop';
 

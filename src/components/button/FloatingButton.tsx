@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/button/FloatingButton.scss";
+import "@/styles/button/FloatingButton.scss";
 
 interface Option {
   icon: string;

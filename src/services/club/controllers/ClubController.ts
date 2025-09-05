@@ -3,8 +3,8 @@ import {
   ClubItemDetail,
   ClubSearchItem,
   ClubMeetingData,
-} from '../../../api/ApiTypes';
-import { ClubModel } from '../models/ClubModel';
+} from '@/api/ApiTypes';
+import { ClubModel } from '@/services/club/models/ClubModel';
 
 export class ClubController {
   private static instance: ClubController;

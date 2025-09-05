@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClubCategoryStore from '../../../store/club/useClubCategoryStore';
-import { setCookie } from '../../../utils/Cookie';
-import { HobbyCategory } from '../../../api/ApiTypes';
-import '../../../styles/club/list/SubCategory.scss';
+import useClubCategoryStore from '@/store/club/useClubCategoryStore';
+import { setCookie } from '@/utils/Cookie';
+import { HobbyCategory } from '@/api/ApiTypes';
+import '@/styles/club/list/SubCategory.scss';
 
 interface SubCategoryProps {
   categoryList: HobbyCategory[];

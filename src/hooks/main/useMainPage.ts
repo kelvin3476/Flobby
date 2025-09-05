@@ -1,8 +1,8 @@
-import logger from '../../utils/Logger';
-import useAuthStore from "../../store/auth/useAuthStore";
-import useMainDataStore from "../../store/main/useMainDataStore";
-import Login from "../../api/login/Login";
-import Logout from '../../api/logout/Logout';
+import logger from '@/utils/Logger';
+import useAuthStore from "@/store/auth/useAuthStore";
+import useMainDataStore from "@/store/main/useMainDataStore";
+import Login from "@/api/login/Login";
+import Logout from '@/api/logout/Logout';
 
 const useMainPage = () => {
     const {

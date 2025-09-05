@@ -1,5 +1,5 @@
 import React from 'react';
-import useVerificationCodeStore from '../../store/verificationcode/useVerificationCodeStore';
+import useVerificationCodeStore from '@/store/verificationcode/useVerificationCodeStore';
 
 const useVerificationCodeForm = () => {
   const {code, setCode, timer,display,setDisplay } = useVerificationCodeStore();

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../../styles/club/text/RequiredText.scss";
+import "@/styles/club/text/RequiredText.scss";
 
 const RequiredText = () => {
   return (

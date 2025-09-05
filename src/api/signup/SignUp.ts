@@ -1,4 +1,4 @@
-import { http } from "../../utils/Http";
+import { http } from '@/utils/Http';
 import { SocialSignupData, WebTempSignupData, WebSignupData } from "../ApiTypes";
 
 export default class SignUp {

@@ -1,5 +1,5 @@
 import React from 'react';
-import usePasswordStore from '../../../store/signup/usePasswordStore';
+import usePasswordStore from '@/store/signup/usePasswordStore';
 
 const usePasswordForm = () => {
   const {

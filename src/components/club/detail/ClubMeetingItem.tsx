@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Main from '../../../api/main/Main';
+import Main from '@/api/main/Main';
 
-import Button from '../../button/Button';
-import ClubModal from '../../modal/ClubModal';
+import Button from '@/components/button/Button';
+import ClubModal from '@/components/modal/ClubModal';
 
-import '../../../styles/club/detail/ClubMeetingItem.scss';
-import logger from '../../../utils/Logger';
+import '@/styles/club/detail/ClubMeetingItem.scss';
+import logger from '@/utils/Logger';
 
 interface ClubMeetingProps {
   meetingId: number; // 정기 모임 id

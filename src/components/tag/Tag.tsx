@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/tag/Tag.scss";
+import "@/styles/tag/Tag.scss";
 
 interface TagProps {
   label: string;

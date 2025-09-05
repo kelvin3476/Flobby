@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useClubRegisterStore from '../../../store/club/useClubRegisterStore';
-import logger from '../../../utils/Logger';
-import FilePickerInput from '../../../utils/FilePickerInput';
-import Label from './Label';
-import DragAndDropHandler from '../../../utils/DragAndDropHandler';
-import { ImageExtensionConverter } from '../../../utils/ImageExtensionConverter';
-import LoadingSpinnerController from '../../controllers/LoadingSpinnerController';
-import '../../../styles/club/register/ImageUploader.scss';
+import useClubRegisterStore from '@/store/club/useClubRegisterStore';
+import logger from '@/utils/Logger';
+import FilePickerInput from '@/utils/FilePickerInput';
+import Label from '@/components/club/register/Label';
+import DragAndDropHandler from '@/utils/DragAndDropHandler';
+import { ImageExtensionConverter } from '@/utils/ImageExtensionConverter';
+import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
+import '@/styles/club/register/ImageUploader.scss';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 

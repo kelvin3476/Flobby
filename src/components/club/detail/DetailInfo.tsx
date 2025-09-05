@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import Tag from '../../tag/Tag';
-import Button from '../../button/Button';
-import DropDownModal from '../../modal/DropDownModal';
-import ClubModal from '../../modal/ClubModal';
-import ClubTextModal from '../../modal/ClubTextModal';
-import ClubSelectModal from '../../modal/ClubSelectModal';
+import Tag from '@/components/tag/Tag';
+import Button from '@/components/button/Button';
+import DropDownModal from '@/components/modal/DropDownModal';
+import ClubModal from '@/components/modal/ClubModal';
+import ClubTextModal from '@/components/modal/ClubTextModal';
+import ClubSelectModal from '@/components/modal/ClubSelectModal';
 
-import Main from '../../../api/main/Main';
+import Main from '@/api/main/Main';
 
-import '../../../styles/club/detail/DetailInfo.scss';
+import '@/styles/club/detail/DetailInfo.scss';
 
 interface DetailInfoProps {
   accessToken: string | null;

@@ -1,8 +1,8 @@
 import React, { RefObject, useEffect, useState } from 'react';
-import { RegionItem } from '../../../api/ApiTypes';
-import { ModalRegionListController } from '../../../services/region/controllers/ModalRegionListController';
-import '../../../styles/main/region_selector/RegionSelectorModal.scss';
-import logger from '../../../utils/Logger';
+import { RegionItem } from '@/api/ApiTypes';
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
+import '@/styles/main/region_selector/RegionSelectorModal.scss';
+import logger from '@/utils/Logger';
 
 interface RegionSelectorModalProps {
   modalRegionListController: ModalRegionListController;

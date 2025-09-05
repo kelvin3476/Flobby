@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Button from "../button/Button";
+import Button from "@/components/button/Button";
 
-import "../../styles/modal/ClubTextModal.scss";
+import "@/styles/modal/ClubTextModal.scss";
 
 interface ClubTextModalProps {
   type: "greeting" | "report";

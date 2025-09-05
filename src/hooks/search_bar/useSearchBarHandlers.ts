@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useSearchKeywordStore from '../../store/main/useSearchKeywordStore';
+import useSearchKeywordStore from '@/store/main/useSearchKeywordStore';
 
 export default function useSearchBarHandlers() {
   const navigate = useNavigate();

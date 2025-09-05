@@ -1,8 +1,8 @@
 import React from "react";
 
-import Title from "../text/Title";
+import Title from "@/components/club/text/Title";
 
-import "../../../styles/club/detail/DetailDescription.scss";
+import "@/styles/club/detail/DetailDescription.scss";
 
 interface DetailDescriptionProps {
   description: string;

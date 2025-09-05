@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
-import useRegionStore from "../../store/signup/useRegionStore";
-import { ModalRegionListController } from "../../services/region/controllers/ModalRegionListController";
+import useRegionStore from "@/store/signup/useRegionStore";
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
 
 const useRegionForm = () => {
   const { 

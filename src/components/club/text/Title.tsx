@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../../styles/club/text/Title.scss";
+import "@/styles/club/text/Title.scss";
 
 interface TitleProps {
   className?: string;

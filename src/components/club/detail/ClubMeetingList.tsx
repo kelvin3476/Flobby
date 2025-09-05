@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Title from '../text/Title';
-import ClubMeetingItem from './ClubMeetingItem';
-import Button from '../../button/Button';
-import { ClubMeetingListItem } from '../../../api/ApiTypes';
-import '../../../styles/club/detail/ClubMeetingList.scss';
+import Title from '@/components/club/text/Title';
+import ClubMeetingItem from '@/components/club/detail/ClubMeetingItem';
+import Button from '@/components/button/Button';
+import { ClubMeetingListItem } from '@/api/ApiTypes';
+import '@/styles/club/detail/ClubMeetingList.scss';
 
 interface ClubMeetingListProps {
   clubMeetingList: ClubMeetingListItem[];

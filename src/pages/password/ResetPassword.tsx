@@ -1,12 +1,12 @@
 import React from "react";
 
-import Header from "../../components/login/Header";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import Header from "@/components/login/Header";
+import Input from "@/components/input/Input";
+import Button from "@/components/button/Button";
 
-import usePasswordForm from "../../hooks/password/usePasswordForm";
+import usePasswordForm from "@/hooks/password/usePasswordForm";
 
-import "../../styles/password/ResetPassword.scss";
+import "@/styles/password/ResetPassword.scss";
 
 const ResetPassword = () => {
 

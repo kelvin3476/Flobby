@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../styles/tab/Tab.scss";
+import "@/styles/tab/Tab.scss";
 
 interface TabItem {
   label: string;

@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "../button/Button";
-import LoadingSpinnerController from "../controllers/LoadingSpinnerController";
+import Button from "@/components/button/Button";
+import LoadingSpinnerController from "@/components/controllers/LoadingSpinnerController";
 
-import "../../styles/modal/ClubModal.scss";
+import "@/styles/modal/ClubModal.scss";
 
 interface ClubModalProps {
   mainMessage: string;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Title from '../text/Title';
-import ClubMemberItem from './ClubMemberItem';
-import { ClubMemberListItem } from '../../../api/ApiTypes';
-import '../../../styles/club/detail/ClubMemberList.scss';
+import Title from '@/components/club/text/Title';
+import ClubMemberItem from '@/components/club/detail/ClubMemberItem';
+import { ClubMemberListItem } from '@/api/ApiTypes';
+import '@/styles/club/detail/ClubMemberList.scss';
 
 interface ClubMemberListProps {
   clubMemberList: ClubMemberListItem[];

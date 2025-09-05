@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/login/Header";
-import Button from "../../components/button/Button";
+import Header from "@/components/login/Header";
+import Button from "@/components/button/Button";
 
-import "../../styles/password/SuccessPassword.scss";
+import "@/styles/password/SuccessPassword.scss";
 
 const SuccessPassword = () => {
     const navigate = useNavigate();

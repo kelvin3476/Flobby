@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import SocialLogin from "../../../api/login/SocialLogin";
-import Login from '../../../api/login/Login';
-import LoadingSpinnerController from "../../../components/controllers/LoadingSpinnerController";
-import useAuthStore from "../../../store/auth/useAuthStore";
+import SocialLogin from "@/api/login/SocialLogin";
+import Login from '@/api/login/Login';
+import LoadingSpinnerController from "@/components/controllers/LoadingSpinnerController";
+import useAuthStore from "@/store/auth/useAuthStore";
 
 const KakaoRedirectHandler = () => {
     const navigate = useNavigate();
