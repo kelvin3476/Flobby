@@ -261,3 +261,12 @@ export interface SearchChallengeData {
   recruitFlag: boolean; // 모집중 버튼 flag
   createdAt: string;
 }
+
+export type challengeSortType = 'popular' | 'new' | 'deadline';
+
+/* 인기 검색어 api */
+export interface PopularKeywordData {
+  keyword: string;
+  searchCount: number;
+  rank: number;
+}

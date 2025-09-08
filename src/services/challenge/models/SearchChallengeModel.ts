@@ -1,20 +1,37 @@
-import { SearchChallengeData } from './../../../api/ApiTypes';
+import {
+  challengeSortType,
+  PopularKeywordData,
+  SearchChallengeData,
+} from './../../../api/ApiTypes';
 import SearchChallenge from '../../../api/challenge/SearchChallenge';
 import logger from '../../../utils/Logger';
+import { BaseSearchModel } from './BaseSearchModel';
 
-export class SearchChallengeModel {
+export class SearchChallengeModel extends BaseSearchModel {
   searchChallengeData: SearchChallengeData[] = [];
 
   /* 챌린지 검색 결과 불러오는 api */
   async getSearchChallengeData(
     keyword: string,
-  ): Promise<SearchChallengeData[]> {
+    sort: challengeSortType = 'popular',
+  ): Promise<{
+    challenges: SearchChallengeData[];
+    keywords: PopularKeywordData[];
+  }> {
     try {
-      const response = await SearchChallenge.getSearchChallengeData(keyword);
+      const response = await SearchChallenge.getSearchChallengeData(
+        keyword,
+        sort,
+      );
       const { code, message, data } = response.data;
       if (code === 1000) {
         this.searchChallengeData = data;
-        return this.searchChallengeData;
+
+        const keywords = this.popularKeywordList.length
+          ? this.popularKeywordList
+          : await this.getPopularKeywords();
+
+        return { challenges: this.searchChallengeData, keywords };
       } else if (code === 1001) {
         throw new Error(message || '검색 결과를 가져오지 못했습니다.');
       } else if (code === 1002) {
