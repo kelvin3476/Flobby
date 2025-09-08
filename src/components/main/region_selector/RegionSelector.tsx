@@ -5,6 +5,7 @@ import { RegionItem } from '@/api/ApiTypes';
 import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
 import '@/styles/main/region_selector/RegionSelector.scss';
 import logger from '@/utils/Logger';
+import { setCookie } from '@/utils/Cookie';
 
 interface RegionSelectorProps {
   accessToken: string | null;
@@ -48,14 +49,29 @@ const RegionSelector = ({ accessToken }: RegionSelectorProps) => {
   const fetchModalRegionList = async () => {
     try {
       const response = await modalRegionListController.getModalRegionList();
-      /* 로그인 했을때만 쿠키값 자동 설정 (비로그인 시에는 지역 모달 에서 선택 시에만 쿠키값 설정) */
+      /* 로그인 했을때 쿠키값 자동 설정 로직 */
       if (accessToken) {
-        modalRegionListController.setSelectedRegion(modalRegionListController.getSelectedRegion());
+        modalRegionListController.setSelectedRegion(
+          modalRegionListController.getSelectedRegion(),
+        );
         setSelectedRegion(modalRegionListController.getSelectedRegion());
-        modalRegionListController.setInterestRegionList(response.interestRegionList);
+        modalRegionListController.setInterestRegionList(
+          response.interestRegionList,
+        );
       } else {
-        /* 비 로그인 시에도 다른 페이지 이동 또는 새로 고침 시 화면상 보여 지는 지역 유지 */
-        setSelectedRegion(modalRegionListController.getSelectedRegion());
+        /* 비 로그인 시 디폴트 지역값으로 쿠키값 셋팅 */
+        /* 만약 지역 선택 모달을 통해 지역을 셋팅한 경우, 디폴트 지역과 다른 지역이라면 선택 지역 업데이트 */
+        if (
+          modalRegionListController.getSelectedRegion().regionId !==
+            DEFAULT_REGION.regionId &&
+          modalRegionListController.getSelectedRegion().regionName !==
+            DEFAULT_REGION.regionName
+        ) {
+          setSelectedRegion(modalRegionListController.getSelectedRegion());
+        } else {
+          setCookie('regionId', DEFAULT_REGION.regionId.toString());
+          setCookie('regionName', DEFAULT_REGION.regionName);
+        }
       }
     } catch (error) {
       console.error('지역 목록을 가져오는 중 오류 발생:', error);
