@@ -8,7 +8,7 @@ interface LogoProps {
 
 const Logo = ({ className, onClick }: LogoProps) => {
   return (
-    <img src={logo} alt="Flobby 로고" className={className} onClick={onClick} />
+    <img src={logo} alt="Flobby" className={className} onClick={onClick} />
   );
 };
 
