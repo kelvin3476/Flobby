@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/components/logo/Logo';
 import RegionSelector from '@/components/main/region_selector/RegionSelector';
-import TextButton from '@/components/button/TextButton';
 import SearchBar from '@/components/main/search_bar/SearchBar';
 import Button from '@/components/button/Button';
 import DropDownModal from '@/components/modal/DropDownModal';
@@ -84,23 +83,6 @@ const MainHeader: React.FC<MainHeaderProps> = ({
               }}
             />
           )}
-          <div className="down-wrapper">
-            <TextButton
-              className="club-btn"
-              buttonName="모임"
-              onClick={() => nav('/club/list')}
-            />
-            <TextButton
-              className="oneday-btn"
-              buttonName="원데이"
-              onClick={() => nav('/oneday/all')}
-            />
-            <TextButton
-              className="community-btn"
-              buttonName="정보공유"
-              onClick={() => nav('/community/all')}
-            />
-          </div>
         </div>
       </div>
     </header>
