@@ -7,6 +7,7 @@ export default function useSearchBarHandlers() {
   const { searchKeyword, setSearchKeyword } = useSearchKeywordStore();
 
   const [isTyping, setIsTyping] = useState(false);
+  const [isOpenSearchModal, setIsOpenSearchModal] = useState(false);
 
   const isResetButtonClicked = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,6 +33,7 @@ export default function useSearchBarHandlers() {
 
   const handleFocusSearchInput = () => {
     setIsTyping(searchKeyword.length > 0);
+    setIsOpenSearchModal(true);
   };
 
   const handleBlurSearchInput = () => {
@@ -58,6 +60,7 @@ export default function useSearchBarHandlers() {
   return {
     searchKeyword,
     isTyping,
+    isOpenSearchModal,
     inputRef,
 
     handleSubmitSearchForm,
@@ -66,5 +69,6 @@ export default function useSearchBarHandlers() {
     handleBlurSearchInput,
     handleClickResetBtn,
     handleMouseDownResetBtn,
+    setIsOpenSearchModal,
   };
 }
