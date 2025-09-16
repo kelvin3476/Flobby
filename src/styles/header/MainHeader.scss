@@ -81,11 +81,11 @@
               }
 
               .notice-btn {
-                background-image: url("../../assets/svg/header/notice.svg");
+                background-image: url("@/assets/svg/header/notice.svg");
               }
 
               .saved-btn {
-                background-image: url("../../assets/svg/header/saved-default.svg");
+                background-image: url("@/assets/svg/header/saved-default.svg");
               }
 
               .profile-wrapper {
@@ -123,8 +123,9 @@
       .profile-modal {
         height: 82px;
         position: absolute;
-        right: 0;
-        bottom: -11.5px;
+        right: -220px;
+        bottom: -83.5px;
+        z-index: 2;
       }
 
       .down-wrapper {
