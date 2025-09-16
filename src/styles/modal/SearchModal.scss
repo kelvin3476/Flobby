@@ -1,0 +1,162 @@
+@mixin trending-search-keyword-box {
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+
+    .trending-search-keyword-rank {
+      color: var(--black-191919, #191919);
+      text-align: center;
+
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 150%; /* 21px */
+      letter-spacing: -0.3px;
+
+      &.top3 {
+        color: var(--main-purple-300, #764BF6);
+      }
+    }
+
+    .trending-search-keyword {
+      cursor: pointer;
+
+      color: var(--black-191919, #191919);
+
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 21px */
+      letter-spacing: -0.3px;
+    }
+  }
+}
+
+// 검색창 오버레이
+.search-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.search-modal-container {
+  position: absolute;
+  top: calc(100% + 8px);
+
+  display: flex;
+  padding: 20px 17px 20px 20px;
+
+  width: 420px;
+  min-height: fit-content;
+  z-index: 1001;
+
+  border-radius: 10px;
+  background: var(--white, #FFF);
+
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.10);
+
+  .search-modal-sub-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 36px;
+
+    .recent-search-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .recent-search-header {
+        display: flex;
+        align-items: center;
+        gap: 258px;
+
+        .recent-search-title {
+          color: var(--black-191919, #191919);
+
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 150%; /* 24px */
+          letter-spacing: -0.3px;
+        }
+
+        .recent-search-delete-all {
+          cursor: pointer;
+
+          color: var(--gray-gray-50072787-f, #72787F);
+
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+        }
+      }
+
+      .recent-search-keyword-container {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+
+        .recent-search-keyword-empty {
+          color: var(--gray-gray-50072787-f, #72787F);
+
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+        }
+      }
+    }
+
+    .trending-search-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+
+      .trending-search-title {
+        text-align: left;
+        color: var(--black-191919, #191919);
+
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.3px;
+      }
+
+      .trending-search-keyword-container {
+        display: flex;
+        align-items: center;
+        gap: 122px;
+
+        .left-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+
+          @include trending-search-keyword-box
+        }
+
+        .right-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+
+          @include trending-search-keyword-box
+        }
+      }
+    }
+  }
+}
