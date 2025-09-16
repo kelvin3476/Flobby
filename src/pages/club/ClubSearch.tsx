@@ -16,6 +16,14 @@ import logger from '@/utils/Logger';
 
 import '@/styles/club/search/ClubSearch.scss';
 
+const clubList = [
+  { idx: 1, keyword: 'test' },
+  { idx: 2, keyword: 'test2' },
+  { idx: 3, keyword: 'test3' },
+  { idx: 4, keyword: 'test4' },
+  { idx: 5, keyword: 'test5' },
+]
+
 const ClubSearch = () => {
   const navigate = useNavigate();
   /* 검색 키워드 url 에서 추출후 디코딩 */
@@ -28,7 +36,7 @@ const ClubSearch = () => {
   const [onedayList, setOnedayList] = React.useState<onedayItem[]>(
     [],
   ); /* TODO: 원데이 데이터도 추후 추가 예정 */
-  const [clubList, setClubList] = React.useState<clubItem[]>([]);
+  // const [clubList, setClubList] = React.useState<clubItem[]>([]);
   const [dataType, setDataType] =
     React.useState<string>(
       'Search Data',
@@ -43,32 +51,32 @@ const ClubSearch = () => {
 
   const clubController = ClubController.getInstance();
 
-  /* 검색 결과 불러오는 메소드 */
-  const fetchSearchList = async () => {
-    if (!searchKeyword) {
-      logger.warn('검색 키워드가 제공되지 않았습니다.');
-      return;
-    }
-
-    try {
-      logger.log('모임 검색 키워드:', searchKeyword);
-      const clubListData: ClubSearchItem =
-        await clubController.searchClubList(searchKeyword);
-      setDataType(clubListData.dataType); /* 데이터 타입 설정 */
-      if (clubListData.dataType === 'Search Data') {
-        setClubList(clubListData.clubList);
-      } else if (clubListData.dataType === 'Recommend Data') {
-        setClubList(clubListData.clubList);
-      }
-    } catch (error) {
-      logger.error('모임 검색 실패:', error);
-    }
-  };
-
-  /* 초기 검색 결과 페이지 진입시 호출 */
-  React.useEffect(() => {
-    fetchSearchList();
-  }, [searchKeyword]);
+  // /* 검색 결과 불러오는 메소드 */
+  // const fetchSearchList = async () => {
+  //   if (!searchKeyword) {
+  //     logger.warn('검색 키워드가 제공되지 않았습니다.');
+  //     return;
+  //   }
+  //
+  //   try {
+  //     logger.log('모임 검색 키워드:', searchKeyword);
+  //     const clubListData: ClubSearchItem =
+  //       await clubController.searchClubList(searchKeyword);
+  //     setDataType(clubListData.dataType); /* 데이터 타입 설정 */
+  //     if (clubListData.dataType === 'Search Data') {
+  //       setClubList(clubListData.clubList);
+  //     } else if (clubListData.dataType === 'Recommend Data') {
+  //       setClubList(clubListData.clubList);
+  //     }
+  //   } catch (error) {
+  //     logger.error('모임 검색 실패:', error);
+  //   }
+  // };
+  //
+  // /* 초기 검색 결과 페이지 진입시 호출 */
+  // React.useEffect(() => {
+  //   fetchSearchList();
+  // }, [searchKeyword]);
 
   return (
     <div className="club-search-wrapper">
@@ -107,17 +115,18 @@ const ClubSearch = () => {
         ) : (
           <>
             <div className="club-search-title-container">
-              <Title titleName="검색 결과" />
-              <div className="club-search-sub-title-container">
-                <div className="club-search-keyword-container">
-                  <span className="club-search-keyword">'{searchKeyword}'</span>
-                  <span>에 대한</span>
-                </div>
-                <div className="club-search-count-container">
-                  <span className="club-search-count">{clubList.length}</span>
-                  <span>개 결과가 검색되었습니다.</span>
-                </div>
-              </div>
+              {/*<Title titleName="검색 결과" />*/}
+              {/*<div className="club-search-sub-title-container">*/}
+              {/*  <div className="club-search-keyword-container">*/}
+              {/*    <span className="club-search-keyword">'{searchKeyword}'</span>*/}
+              {/*    <span>에 대한</span>*/}
+              {/*  </div>*/}
+              {/*  <div className="club-search-count-container">*/}
+              {/*    <span className="club-search-count">{clubList.length}</span>*/}
+              {/*    <span>개 결과가 검색되었습니다.</span>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+              <div className='club-search-title'>'{searchKeyword}'에 대한 <span>{clubList.length}</span> 개의 검색 결과</div>
             </div>
             <div className="club-search-content-container">
               <Tab

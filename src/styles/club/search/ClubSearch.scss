@@ -21,52 +21,66 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    //width: 100%;
     gap: 32px;
 
     .club-search-title-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      //flex-direction: column;
+      //align-items: center;
       width: 100%;
       gap: 12px;
 
-      .club-search-sub-title-container {
-        display: flex;
-        align-items: center;
-        gap: 4px;
+      .club-search-title {
+        color: var(--black-191919, #191919);
 
-        .club-search-keyword-container {
-          @include common-sub-title;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%; /* 42px */
+        letter-spacing: -0.3px;
 
-          .club-search-keyword {
-            color: #764BF6;
-
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 150%; /* 24px */
-            letter-spacing: -0.3px;
-          }
-        }
-
-        .club-search-count-container {
-          @include common-sub-title;
-
-          .club-search-count {
-            color: #26282B;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 150%; /* 24px */
-            letter-spacing: -0.3px;
-          }
-        }
-
-        .club-search-empty {
-          @include common-sub-title;
+        > span {
+          color: var(--main-purple-300, #764BF6);
         }
       }
+
+      //.club-search-sub-title-container {
+      //  display: flex;
+      //  align-items: center;
+      //  gap: 4px;
+      //
+      //  .club-search-keyword-container {
+      //    @include common-sub-title;
+      //
+      //    .club-search-keyword {
+      //      color: #764BF6;
+      //
+      //      font-size: 16px;
+      //      font-style: normal;
+      //      font-weight: 600;
+      //      line-height: 150%; /* 24px */
+      //      letter-spacing: -0.3px;
+      //    }
+      //  }
+      //
+      //  .club-search-count-container {
+      //    @include common-sub-title;
+      //
+      //    .club-search-count {
+      //      color: #26282B;
+      //      font-size: 16px;
+      //      font-style: normal;
+      //      font-weight: 500;
+      //      line-height: 150%; /* 24px */
+      //      letter-spacing: -0.3px;
+      //    }
+      //  }
+      //
+      //  .club-search-empty {
+      //    @include common-sub-title;
+      //  }
+      //}
     }
 
 
@@ -112,13 +126,13 @@
 
       .recommend-club-list-container {
         width: 100%;
-        max-width: 1060px; /* 1060px 로 추천 모임 리스트 컨테이너 max-width 값 고정 */
+        //max-width: 1060px; /* 1060px 로 추천 모임 리스트 컨테이너 max-width 값 고정 */
 
         .recommend-club-list {
           gap: 20px; /* 모임 검색 결과 페이지 > 추천 모임 리스트 아이템 간 가로 간격 20px 조정 */
 
           .club-item-container {
-            max-width: 250px; /* 모임 검색 결과 페이지 > 250px 로 추천 모임 리스트 아이템 max-width 값 고정 */
+            //max-width: 250px; /* 모임 검색 결과 페이지 > 250px 로 추천 모임 리스트 아이템 max-width 값 고정 */
           }
         }
       }
@@ -132,7 +146,7 @@
       gap: 40px;
 
       .tab-container {
-        width: fit-content; /* 탭 아이템 개수에 따라 width 값 조절 (언더바 길이 조정) */
+        //width: fit-content; /* 탭 아이템 개수에 따라 width 값 조절 (언더바 길이 조정) */
       }
     }
   }
