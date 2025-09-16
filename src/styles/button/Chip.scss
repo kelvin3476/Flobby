@@ -1,0 +1,38 @@
+.chip-container {
+  display: inline-flex;
+  height: 26px;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+
+  border-radius: 5px;
+  border: 1px solid var(--gray-gray-100-e-8-ebed, #E8EBED);
+  cursor: pointer;
+
+  .chip-text {
+    color: var(--black-191919, #191919);
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 18px */
+    letter-spacing: -0.3px;
+  }
+
+  .chip-text-delete-btn {
+    cursor: pointer;
+
+    border: none;
+
+    width: 12px;
+    height: 12px;
+    aspect-ratio: 1/1;
+
+    background-color: transparent;
+    background-image: url("@/assets/svg/button/chip-reset-btn.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
