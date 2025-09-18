@@ -1,4 +1,4 @@
-@import "@/styles/mixins/Presets.scss";
+@use "@/styles/mixins/Presets" as Presets;
 
 @mixin common-sub-title {
   color: #72787F;
@@ -66,7 +66,7 @@
             .club-search-keyword {
 
               &.long {
-                @include abbreviation();
+                @include Presets.abbreviation();
               }
             }
           }
@@ -210,7 +210,7 @@
           .club-search-keyword {
 
             &.long {
-              @include abbreviation();
+              @include Presets.abbreviation();
             }
           }
         }
