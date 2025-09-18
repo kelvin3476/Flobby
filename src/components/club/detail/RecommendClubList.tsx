@@ -19,7 +19,7 @@ const RecommendClubList = ({
     <div className="recommend-club-list-container">
       <Title
         className="club-detail-item-sub-title"
-        titleName={pageType === 'search' ? '이런 모임은 어때요?' : '이 모임과 비슷한 모임이에요'}
+        titleName={pageType === 'search' ? '이런 챌린지는 어때요?' : '이 챌린지와 비슷한 챌린지에요'}
       />
       <div className="recommend-club-list">
         {recommendClubList.map((recommendClubItem, index) => {

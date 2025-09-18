@@ -22,7 +22,7 @@ const ClubList = ({ clubList, accessToken, isLoading }: ClubListProps) => {
           /* 모임 있을 경우 */
           clubList
             .reduce((rows, clubItem, index) => {
-              if (index % 4 === 0) rows.push([]);
+              if (index % 5 === 0) rows.push([]);
               rows[rows.length - 1].push(clubItem);
               return rows;
             }, [])
@@ -30,7 +30,7 @@ const ClubList = ({ clubList, accessToken, isLoading }: ClubListProps) => {
               <div className="club-row" key={rowIndex}>
                 {clubItemsInRow.map(clubItemInRow => (
                   <ClubItem
-                    className={'club-list-item'}
+                    // className={'club-list-item'}
                     key={clubItemInRow.clubId}
                     clubId={clubItemInRow.clubId}
                     photo={clubItemInRow.photo}
