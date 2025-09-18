@@ -1,0 +1,97 @@
+.select-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+
+  // 💡 기본 클릭/포커스 효과 제거
+  user-select: none; // 텍스트 선택 방지
+  -webkit-tap-highlight-color: transparent; // 모바일 터치 하이라이트 제거 (특히 iOS)
+  outline: none;
+
+  &__label {
+    color: var(--black-191919, #191919);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.3px;
+  }
+
+  &__arrow {
+    width: 24px;
+    height: 24px;
+
+    background-image: url("@/assets/svg/selectbox/select-box-arrow-down.svg");
+
+    &.up {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__options {
+    position: absolute;
+    right: 320px;
+    top: 341px;
+
+    display: flex;
+    width: 254px;
+    height: 155px;
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    z-index: 1001;
+
+    border-radius: 10px;
+    background: var(--white, #FFF);
+
+    /* modal-shadow1 */
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.10);
+
+    &_title {
+      color: var(--black-191919, #191919);
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.3px;
+    }
+  }
+
+  &__option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+
+    color: var(--black-191919, #191919);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+    letter-spacing: -0.3px;
+
+    &.selected {
+      color: var(--main-purple-300, #764BF6);
+
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 21px */
+      letter-spacing: -0.3px;
+    }
+
+    > i {
+      width: 16px;
+      height: 16px;
+
+      background-image: url("@/assets/svg/selectbox/select-box-check-active.svg");
+    }
+  }
+}

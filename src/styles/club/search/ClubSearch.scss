@@ -1,3 +1,5 @@
+@import "@/styles/mixins/Presets.scss";
+
 @mixin common-sub-title {
   color: #72787F;
   font-size: 16px;
@@ -22,7 +24,162 @@
     flex-direction: column;
     align-items: center;
     //width: 100%;
-    gap: 32px;
+    //gap: 32px;
+    gap: 42px;
+
+    &.empty {
+      gap: 140px;
+    }
+
+    .club-search-empty-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+
+      .club-search-title-container {
+        display: flex;
+        //flex-direction: column;
+        //align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 12px;
+
+        .club-search-title {
+          text-align: left;
+          color: var(--black-191919, #191919);
+
+          font-size: 30px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 140%; /* 42px */
+          letter-spacing: -0.3px;
+
+          .club-search-keyword-wrapper {
+            display: inline-flex;
+            align-items: center;
+            max-width: 370px;
+
+            .club-search-quote {
+              color: var(--black-191919, #191919);
+            }
+
+            .club-search-keyword {
+
+              &.long {
+                @include abbreviation();
+              }
+            }
+          }
+
+          .club-search-keyword-result-count {
+            color: var(--main-purple-300, #764BF6);
+          }
+        }
+
+        .club-search-sub-title-container {
+          @include common-sub-title;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+
+          .club-search-keyword-container {
+            @include common-sub-title;
+
+            .club-search-keyword {
+              color: #764BF6;
+
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 150%; /* 24px */
+              letter-spacing: -0.3px;
+            }
+          }
+
+          .club-search-count-container {
+            @include common-sub-title;
+
+            .club-search-count {
+              color: #26282B;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 150%; /* 24px */
+              letter-spacing: -0.3px;
+            }
+          }
+
+          .club-search-empty {
+            color: #000;
+            text-align: center;
+
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%; /* 42px */
+            letter-spacing: -0.3px;
+          }
+        }
+      }
+
+      .club-search-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        //gap: 160px;
+        gap: 120px;
+
+        > button {
+          display: flex;
+          width: 415px;
+          height: 60px;
+          padding: 12px 30px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          border-radius: 6px;
+          background: #26282b;
+          border: none;
+          cursor: pointer;
+
+          .club-search-exception-icon {
+            width: 12px;
+            height: 12px;
+            aspect-ratio: 1/1;
+
+            background-image: url('../../../assets/svg/club/clublist/club_list_exception_handle_add_button.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          > span {
+            white-space: nowrap;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+          }
+        }
+
+        .recommend-club-list-container {
+          width: 100%;
+          //max-width: 1060px; /* 1060px 로 추천 모임 리스트 컨테이너 max-width 값 고정 */
+
+          .recommend-club-list {
+            gap: 20px; /* 모임 검색 결과 페이지 > 추천 모임 리스트 아이템 간 가로 간격 20px 조정 */
+
+            .club-item-container {
+              //max-width: 250px; /* 모임 검색 결과 페이지 > 250px 로 추천 모임 리스트 아이템 max-width 값 고정 */
+            }
+          }
+        }
+      }
+    }
 
     .club-search-title-container {
       display: flex;
@@ -32,6 +189,7 @@
       gap: 12px;
 
       .club-search-title {
+        text-align: left;
         color: var(--black-191919, #191919);
 
         font-size: 30px;
@@ -40,7 +198,24 @@
         line-height: 140%; /* 42px */
         letter-spacing: -0.3px;
 
-        > span {
+        .club-search-keyword-wrapper {
+          display: inline-flex;
+          align-items: center;
+          max-width: 370px;
+
+          .club-search-quote {
+            color: var(--black-191919, #191919);
+          }
+
+          .club-search-keyword {
+
+            &.long {
+              @include abbreviation();
+            }
+          }
+        }
+
+        .club-search-keyword-result-count {
           color: var(--main-purple-300, #764BF6);
         }
       }
@@ -82,7 +257,6 @@
       //  }
       //}
     }
-
 
     .club-search-empty {
       display: flex;
@@ -143,10 +317,56 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      gap: 40px;
+      gap: 20px;
 
       .tab-container {
         //width: fit-content; /* 탭 아이템 개수에 따라 width 값 조절 (언더바 길이 조정) */
+      }
+
+      .club-search-content-sub-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        .club-search-filter-container {
+          display: flex;
+          justify-content: space-between;
+          align-content: center;
+          width: 100%;
+
+          .club-search-filter-button {
+            // 💡 기본 클릭/포커스 효과 제거
+            user-select: none; // 텍스트 선택 방지
+            -webkit-tap-highlight-color: transparent; // 모바일 터치 하이라이트 제거 (특히 iOS)
+            outline: none;
+
+            display: flex;
+            padding: 10px 16px;
+            justify-content: center;
+            align-items: center;
+            height: 44px;
+            gap: 8px;
+
+            cursor: pointer;
+
+            border-radius: 24px;
+            border: 1px solid var(--gray-gray-100-e-8-ebed, #E8EBED);
+            background: var(--white, #FFF);
+            color: var(--gray-gray-600454-c-53, #454C53);
+
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 24px */
+            letter-spacing: -0.3px;
+
+            &.active {
+              border: 1px solid var(--main-purple-300, #764BF6);
+              background: var(--purple-Purple50, #F1EDFE);
+              color: var(--main-purple-300, #764BF6);
+            }
+          }
+        }
       }
     }
   }

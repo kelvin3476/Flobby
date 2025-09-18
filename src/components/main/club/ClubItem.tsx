@@ -19,6 +19,7 @@ interface ClubItemProps {
   postCategory?: string;
   subCategory?: string;
   isDetailPage?: boolean;
+  recruitDday?: string;
 }
 
 const ClubItem = ({
@@ -33,6 +34,7 @@ const ClubItem = ({
   postCategory,
   subCategory,
   isDetailPage,
+  recruitDday,
 }: ClubItemProps) => {
   const navigate = useNavigate();
   const [isHeartActive, setIsHeartActive] = React.useState(false);
@@ -59,24 +61,25 @@ const ClubItem = ({
               setIsHeartActive(prev => !prev);
             }}
           ></span>
+          <span className='club-item-d-day'>{recruitDday ?? '모집 D-12'}</span>
         </div>
       </div>
 
       {/* 모임 아이템 내용 */}
       <div className="club-item-content-container">
-        {/* 모임 아이템 태그 */}
-        <div className="club-item-tag-container">
-          <Tag
-            label={subCategory}
-            type="club"
-            color="purple"
-          />
-        </div>
+        {/* 모임 이름 */}
+        <div className="club-item-club-name">{clubName}</div>
 
         {/* 모임 아이템 정보 */}
         <div className="club-item-information-container">
-          {/* 모임 이름 */}
-          <div className="club-item-club-name">{clubName}</div>
+          {/* 모임 아이템 태그 */}
+          <div className="club-item-tag-container">
+            <Tag
+              label={subCategory}
+              type="club"
+              color="purple"
+            />
+          </div>
 
           <div className="club-item-information-sub-container">
             {/*/!* 모임 *!/*/}
