@@ -27,10 +27,10 @@ const SearchBar: React.FC = () => {
       <form className="search-bar-form" onSubmit={handleSubmitSearchForm}>
         <div className="input-container">
           <input
+            id='search-bar-input'
             ref={inputRef}
             className="search-bar-input"
             type="text"
-            name="search"
             placeholder="검색어를 입력해 주세요."
             value={searchKeyword}
             onChange={handleChangeSearchInput}
