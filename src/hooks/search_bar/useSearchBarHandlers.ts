@@ -20,6 +20,7 @@ export default function useSearchBarHandlers() {
       setSearchKeyword(''); /* input 필드 입력값 초기화 */
       inputRef.current?.blur();
       setIsTyping(false);
+      setIsOpenSearchModal(false);
 
       /* 검색어가 있는 경우에만 검색 페이지로 이동 */
       navigate(`/club/search?keyword=${searchKeyword}`);
