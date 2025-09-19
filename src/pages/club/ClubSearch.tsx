@@ -165,10 +165,10 @@ const ClubSearch = () => {
                   </span>
                   <span className="club-search-quote">'</span>
                 </span>
-                {searchKeyword.length > 7 ? <br></br> : ''}에 대한{' '}
+                {searchKeyword.length > 7 ? <br></br> : ''}에 대한
                 <span className="club-search-keyword-result-count">
                   {clubList.length}
-                </span>{' '}
+                </span>
                 개의 검색 결과
               </div>
             </div>
