@@ -3,6 +3,8 @@ import React from 'react';
 import Chip from '@/components/button/Chip';
 
 import '@/styles/modal/SearchModal.scss';
+import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
+import { PopularKeywordData } from '@/api/ApiTypes';
 
 interface SearchModalProps {
   onClose: () => void;
@@ -19,27 +21,30 @@ const recentSearchData = [
   '최근 검색입니다',
   '검색어입니다',
   '마지막 검색어입니다',
-]
-
-const trendingSearchData = [
-  { idx: 1, keyword: '인기 검색어' },
-  { idx: 2, keyword: '인기 검색어' },
-  { idx: 3, keyword: '인기 검색어' },
-  { idx: 4, keyword: '인기 검색어' },
-  { idx: 5, keyword: '인기 검색어' },
-  { idx: 6, keyword: '인기 검색어' },
-  { idx: 7, keyword: '인기 검색어' },
-  { idx: 8, keyword: '인기 검색어' },
-  { idx: 9, keyword: '인기 검색어' },
-  { idx: 10, keyword: '인기 검색어' },
-]
+];
 
 const SearchModal = ({ onClose }: SearchModalProps) => {
+  const [popularKeywordList, setPopularKeywordList] = React.useState<
+    PopularKeywordData[]
+  >([]);
+
+  const challengeController = SearchChallengeController.getInstance();
+
+  const getPopularKeywords = async () => {
+    const popularKeywordData = await challengeController.getPopularKeywords();
+    if (popularKeywordData) setPopularKeywordList(popularKeywordData);
+  };
 
   React.useEffect(() => {
+    getPopularKeywords();
+
     const updateOverlayPosition = () => {
-      const mainHeader = document.querySelector('.header-container') as HTMLElement;
-      const searchModalOverlay = document.querySelector('.search-modal-overlay') as HTMLElement;
+      const mainHeader = document.querySelector(
+        '.header-container',
+      ) as HTMLElement;
+      const searchModalOverlay = document.querySelector(
+        '.search-modal-overlay',
+      ) as HTMLElement;
 
       if (mainHeader && searchModalOverlay) {
         const mainHeaderHeight = mainHeader.offsetHeight;
@@ -57,7 +62,7 @@ const SearchModal = ({ onClose }: SearchModalProps) => {
           searchModalOverlay.style.height = `${windowHeight - mainHeaderHeight}px`; // 헤더 아래로 화면 채움
         }
       }
-    }
+    };
 
     updateOverlayPosition();
     window.addEventListener('resize', updateOverlayPosition);
@@ -67,12 +72,19 @@ const SearchModal = ({ onClose }: SearchModalProps) => {
       window.removeEventListener('resize', updateOverlayPosition);
       window.removeEventListener('scroll', updateOverlayPosition);
     };
-  }, [])
+  }, []);
 
-  const renderedItems = trendingSearchData.map((item, idx) => (
+  const renderedItems = popularKeywordList.map((item, idx) => (
     <div key={idx}>
-      <span className={`trending-search-keyword-rank ${idx < 3 ? "top3" : ""}`}>{item.idx}</span>
-      <span className="trending-search-keyword" onClick={() => console.log('인기 검색어 클릭!!')}>{item.keyword}</span>
+      <span className={`trending-search-keyword-rank ${idx < 3 ? 'top3' : ''}`}>
+        {item.rank}
+      </span>
+      <span
+        className={`trending-search-keyword ${item.keyword.length >= 12 ? 'long' : ''}`}
+        onClick={() => console.log('인기 검색어 클릭!!')}
+      >
+        {item.keyword}
+      </span>
     </div>
   ));
 
@@ -82,25 +94,43 @@ const SearchModal = ({ onClose }: SearchModalProps) => {
       <div className="search-modal-overlay" onClick={onClose}></div>
 
       {/* 검색창 모달 */}
-      <div className="search-modal-container" onClick={e => e.stopPropagation()}>
-        <div className="search-modal-sub-container" onClick={e => e.stopPropagation()}>
+      <div
+        className="search-modal-container"
+        onClick={e => e.stopPropagation()}
+      >
+        <div
+          className="search-modal-sub-container"
+          onClick={e => e.stopPropagation()}
+        >
           <div className="recent-search-container">
             <div className="recent-search-header">
               <span className="recent-search-title">최근 검색어</span>
-              <span className="recent-search-delete-all" onClick={() => console.log('최근 검색어 전체 지우기!!')}>모두 지우기</span>
+              <span
+                className="recent-search-delete-all"
+                onClick={() => console.log('최근 검색어 전체 지우기!!')}
+              >
+                모두 지우기
+              </span>
             </div>
             <div className="recent-search-keyword-container">
-              {recentSearchData.length > 0 ?
+              {recentSearchData.length > 0 ? (
                 recentSearchData.map((item, idx) => (
-                <Chip key={idx} text={item} onClick={() => console.log('최근 검색어 클릭!!')} onDelete={() => console.log('최근 검색어 삭제!!')} />
-              )) : (
-                  <span className="recent-search-keyword-empty">최근 검색어가 없습니다</span>
-                )
-              }
+                  <Chip
+                    key={idx}
+                    text={item}
+                    onClick={() => console.log('최근 검색어 클릭!!')}
+                    onDelete={() => console.log('최근 검색어 삭제!!')}
+                  />
+                ))
+              ) : (
+                <span className="recent-search-keyword-empty">
+                  최근 검색어가 없습니다
+                </span>
+              )}
             </div>
           </div>
           <div className="trending-search-container">
-            <div className='trending-search-title'>인기 검색어</div>
+            <div className="trending-search-title">인기 검색어</div>
             <div className="trending-search-keyword-container">
               <div className="left-section">
                 {renderedItems.filter((_, idx) => idx < 5)}
@@ -114,6 +144,6 @@ const SearchModal = ({ onClose }: SearchModalProps) => {
       </div>
     </>
   );
-}
+};
 
 export default SearchModal;
