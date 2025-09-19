@@ -1,4 +1,4 @@
-import { SearchChallengeData } from '../../../api/ApiTypes';
+import { PopularKeywordData, SearchChallengeData } from '../../../api/ApiTypes';
 import { SearchChallengeModel } from '../models/SearchChallengeModel';
 
 export class SearchChallengeController {
@@ -18,5 +18,9 @@ export class SearchChallengeController {
 
   getSearchChallengeData(keyword: string): Promise<SearchChallengeData[]> {
     return this.model.getSearchChallengeData(keyword);
+  }
+
+  getPopularKeywords(): Promise<PopularKeywordData[]> {
+    return this.model.getPopularKeywords();
   }
 }

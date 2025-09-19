@@ -14,9 +14,7 @@ export class SearchChallengeModel extends BaseSearchModel {
   async getSearchChallengeData(
     keyword: string,
     sort: challengeSortType = 'popular',
-  ): Promise<{
-    challenges: SearchChallengeData[];
-  }> {
+  ): Promise<SearchChallengeData[]> {
     try {
       const response = await SearchChallenge.getSearchChallengeData(
         keyword,
@@ -26,7 +24,7 @@ export class SearchChallengeModel extends BaseSearchModel {
       if (code === 1000) {
         this.searchChallengeData = data;
 
-        return { challenges: this.searchChallengeData };
+        return this.searchChallengeData;
       } else if (code === 1001) {
         throw new Error(message || '검색 결과를 가져오지 못했습니다.');
       } else if (code === 1002) {
