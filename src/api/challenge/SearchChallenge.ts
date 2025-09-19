@@ -10,7 +10,7 @@ export default class SearchChallenge {
     return await http.get(`/challenge/search?keyword=${keyword}&sort=${sort}`);
   }
 
-  /* 인기 검색어 리스트(기본적으로 10개 정렬해서 넘어옴, 웹은 상위 5개만 노출) */
+  /* 인기 검색어 리스트 */
   static async getPopularKeywords() {
     return await http.get('/popular-keywords');
   }

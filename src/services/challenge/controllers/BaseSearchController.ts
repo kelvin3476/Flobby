@@ -18,7 +18,6 @@ export class BaseSearchController {
 
   async getPopularKeywords(): Promise<PopularKeywordData[]> {
     const keywords = await this.model.getPopularKeywords();
-
-    return keywords ? keywords.slice(0, 5) : [];
+    return keywords;
   }
 }
