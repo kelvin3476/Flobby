@@ -1,5 +1,5 @@
-import { PopularKeywordData, SearchChallengeData } from '../../../api/ApiTypes';
-import { SearchChallengeModel } from '../models/SearchChallengeModel';
+import { PopularKeywordData, SearchChallengeData } from '@/api/ApiTypes';
+import { SearchChallengeModel } from '@/services/challenge/models/SearchChallengeModel';
 
 export class SearchChallengeController {
   private static instance: SearchChallengeController;
