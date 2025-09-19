@@ -16,7 +16,6 @@ export class SearchChallengeModel extends BaseSearchModel {
     sort: challengeSortType = 'popular',
   ): Promise<{
     challenges: SearchChallengeData[];
-    keywords: PopularKeywordData[];
   }> {
     try {
       const response = await SearchChallenge.getSearchChallengeData(
@@ -27,11 +26,7 @@ export class SearchChallengeModel extends BaseSearchModel {
       if (code === 1000) {
         this.searchChallengeData = data;
 
-        const keywords = this.popularKeywordList.length
-          ? this.popularKeywordList
-          : await this.getPopularKeywords();
-
-        return { challenges: this.searchChallengeData, keywords };
+        return { challenges: this.searchChallengeData };
       } else if (code === 1001) {
         throw new Error(message || '검색 결과를 가져오지 못했습니다.');
       } else if (code === 1002) {
@@ -40,5 +35,10 @@ export class SearchChallengeModel extends BaseSearchModel {
     } catch (err: any) {
       logger.error(err.message || '챌린지 검색 결과 api 요청 실패');
     }
+  }
+
+  async getPopularKeywords(): Promise<PopularKeywordData[]> {
+    await this.getPopularKeywords();
+    return this.popularKeywordList;
   }
 }
