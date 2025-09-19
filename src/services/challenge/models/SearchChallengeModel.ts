@@ -1,20 +1,20 @@
 import {
   challengeSortType,
   PopularKeywordData,
-  SearchChallengeData,
+  getSearchChallengeResponse,
 } from '@/api/ApiTypes';
 import SearchChallenge from '@/api/challenge/SearchChallenge';
 import logger from '@/utils/Logger';
 import { BaseSearchModel } from '@/services/challenge/models/BaseSearchModel';
 
 export class SearchChallengeModel extends BaseSearchModel {
-  searchChallengeData: SearchChallengeData[] = [];
+  searchChallengeData: getSearchChallengeResponse;
 
   /* 챌린지 검색 결과 불러오는 api */
   async getSearchChallengeData(
     keyword: string,
     sort: challengeSortType = 'popular',
-  ): Promise<SearchChallengeData[]> {
+  ): Promise<getSearchChallengeResponse> {
     try {
       const response = await SearchChallenge.getSearchChallengeData(
         keyword,

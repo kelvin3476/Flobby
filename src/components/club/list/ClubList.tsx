@@ -2,13 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ClubItem from '@/components/main/club/ClubItem';
-import { clubItem } from '@/api/ApiTypes';
+import { SearchChallengeData } from '@/api/ApiTypes';
 
 import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
 import '@/styles/club/list/ClubList.scss';
 
 interface ClubListProps {
-  clubList: clubItem[] | null;
+  clubList: SearchChallengeData[] | null;
   accessToken: string | null;
   isLoading?: boolean;
 }
@@ -54,18 +54,18 @@ const ClubList = ({ clubList, accessToken, isLoading }: ClubListProps) => {
           /* 모임 없을 경우 예외 처리 */
           <div className="club-list-exception-box">
             <div className="club-list-exception-text-box">
-                <span>근처에 개설된 모임이 없어요.</span>
-                <span>지역을 바꾸거나 다른 카테고리의 모임을 살펴보세요.</span>
+              <span>근처에 개설된 모임이 없어요.</span>
+              <span>지역을 바꾸거나 다른 카테고리의 모임을 살펴보세요.</span>
             </div>
             <button
-                type="button"
-                /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
-                onClick={() =>
-                    accessToken ? navigate('/club/register') : navigate('/login')
-                }
+              type="button"
+              /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
+              onClick={() =>
+                accessToken ? navigate('/club/register') : navigate('/login')
+              }
             >
-                <div className="club-list-exception-icon"></div>
-                <span>직접 모임을 만들어 보세요!</span>
+              <div className="club-list-exception-icon"></div>
+              <span>직접 모임을 만들어 보세요!</span>
             </button>
           </div>
         )}

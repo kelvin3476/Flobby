@@ -245,6 +245,12 @@ export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
 /* -------------------- 챌린지 검색 api 타입 -------------------- */
 
 /* 챌린지 검색 api(default: 인기순) */
+export interface getSearchChallengeResponse {
+  challengeCount: number;
+  challengeSearchList: SearchChallengeData[];
+  // TODO: 추천 챌린지 추가
+}
+
 export interface SearchChallengeData {
   challengeId: number;
   challengeName: string;

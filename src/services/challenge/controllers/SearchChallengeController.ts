@@ -1,4 +1,4 @@
-import { PopularKeywordData, SearchChallengeData } from '@/api/ApiTypes';
+import { PopularKeywordData, getSearchChallengeResponse } from '@/api/ApiTypes';
 import { SearchChallengeModel } from '@/services/challenge/models/SearchChallengeModel';
 
 export class SearchChallengeController {
@@ -16,7 +16,7 @@ export class SearchChallengeController {
     return SearchChallengeController.instance;
   }
 
-  getSearchChallengeData(keyword: string): Promise<SearchChallengeData[]> {
+  getSearchChallengeData(keyword: string): Promise<getSearchChallengeResponse> {
     return this.model.getSearchChallengeData(keyword);
   }
 
