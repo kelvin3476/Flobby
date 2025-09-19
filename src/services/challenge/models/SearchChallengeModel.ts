@@ -36,7 +36,7 @@ export class SearchChallengeModel extends BaseSearchModel {
   }
 
   async getPopularKeywords(): Promise<PopularKeywordData[]> {
-    await this.getPopularKeywords();
+    await super.getPopularKeywords();
     return this.popularKeywordList;
   }
 }
