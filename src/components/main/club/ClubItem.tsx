@@ -61,7 +61,7 @@ const ClubItem = ({
               setIsHeartActive(prev => !prev);
             }}
           ></span>
-          <span className='club-item-d-day'>{recruitDday ?? '모집 D-12'}</span>
+          <span className="club-item-d-day">{recruitDday ?? '모집 D-12'}</span>
         </div>
       </div>
 
@@ -74,11 +74,7 @@ const ClubItem = ({
         <div className="club-item-information-container">
           {/* 모임 아이템 태그 */}
           <div className="club-item-tag-container">
-            <Tag
-              label={subCategory}
-              type="club"
-              color="purple"
-            />
+            <Tag label={subCategory} type="club" color="purple" />
           </div>
 
           <div className="club-item-information-sub-container">

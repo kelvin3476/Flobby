@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import MainHeader from '@/components/header/MainHeader';
-import Title from '@/components/club/text/Title';
 import Button from '@/components/button/Button';
 import Tab from '@/components/tab/Tab';
 import { Option, SelectBox } from '@/components/selectbox/SelectBox';
@@ -14,36 +13,13 @@ import useMainPage from '@/hooks/main/useMainPage';
 import {
   onedayItem,
   getSearchChallengeResponse,
-  SearchChallengeData,
+  ChallengeData,
 } from '@/api/ApiTypes';
 
 import logger from '@/utils/Logger';
 
 import '@/styles/club/search/ClubSearch.scss';
 import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
-
-const clubList = [
-  {
-    clubId: 1,
-    photo: 'example.png',
-    hostId: 1,
-    hostNickname: 'test',
-    category: '스포츠',
-    maxMember: '10',
-    clubName: 'test',
-    regionId: '218',
-    locationName: '강남구',
-    currentMembers: 3,
-    subCategory: '축구',
-    postCategory: '스포츠',
-  },
-  { idx: 1, keyword: 'test' },
-  { idx: 2, keyword: 'test2' },
-  { idx: 3, keyword: 'test3' },
-  { idx: 4, keyword: 'test4' },
-  { idx: 5, keyword: 'test5' },
-  { idx: 6, keyword: 'test6' },
-];
 
 const selectBoxOptions: Option<string>[] = [
   { label: '인기순', value: 'popular' },
@@ -63,12 +39,11 @@ const ClubSearch = () => {
   const [feedList, setFeedList] = React.useState<onedayItem[]>(
     [],
   ); /* TODO: 피드 데이터도 추후 추가 예정 */
-  const [clubList, setClubList] = React.useState<SearchChallengeData[]>([]);
+  const [challengeList, setChallengeList] = React.useState<ChallengeData[]>([]);
+  const [challengePopularList, setChallengePopularList] = React.useState<
+    ChallengeData[]
+  >([]);
   const [challengeCount, setChallengeCount] = React.useState<number>(0);
-  const [dataType, setDataType] =
-    React.useState<string>(
-      'Search Data',
-    ); /* 검색 데이터 타입 (Search Data or Recommend Data) */
 
   const [deadLine, setDeadLine] = React.useState<boolean>(false);
   const [select, setSelect] = React.useState<string>('popular');
@@ -93,21 +68,14 @@ const ClubSearch = () => {
       logger.log('모임 검색 키워드:', searchKeyword);
       const challengeListData: getSearchChallengeResponse =
         await challengeController.getSearchChallengeData(searchKeyword);
-      // setDataType(challengeListData.dataType); /* 데이터 타입 설정 */
 
-      // TODO: 데이터에 추천 챌린지 추가되면 분기
-      // if (challengeListData.dataType === 'Search Data') {
-      // setClubList(challengeListData.challengeSearchList);
-      // } else if (challengeListData.dataType === 'Recommend Data') {
-      // setClubList(challengeListData.clubList);
-      // }
-
-      // 테스트용 코드
       if (challengeListData) {
-        setClubList(challengeListData.challengeSearchList);
+        setChallengeList(challengeListData.challengeSearchList);
+        setChallengePopularList(challengeListData.challengePopularList);
         setChallengeCount(challengeListData.challengeCount);
       } else {
-        setClubList([]);
+        setChallengeList([]);
+        setChallengePopularList([]);
         setChallengeCount(0);
       }
     } catch (error) {
@@ -118,15 +86,16 @@ const ClubSearch = () => {
   /* 초기 검색 결과 페이지 진입시 호출 */
   React.useEffect(() => {
     fetchSearchList();
+    console.log(challengePopularList);
   }, [searchKeyword]);
 
   return (
     <div className="club-search-wrapper">
       <MainHeader accessToken={accessToken} />
       <div
-        className={`club-search-container ${dataType === 'Recommend Data' ? 'empty' : ''}`}
+        className={`club-search-container ${challengePopularList.length > 0 ? 'empty' : ''}`}
       >
-        {dataType === 'Recommend Data' ? (
+        {challengePopularList.length > 0 ? (
           <>
             <Tab
               tabs={tabItems}
@@ -161,11 +130,11 @@ const ClubSearch = () => {
                   </button>
 
                   {/* 추천 모임 개수는 앞에서부터 5개 노출 */}
-                  {/* <RecommendClubList
-                    recommendClubList={clubList.slice(0, 5)}
+                  <RecommendClubList
+                    recommendClubList={challengePopularList.slice(0, 5)}
                     isDetailPage={true}
                     pageType={'search'}
-                  /> */}
+                  />
                 </div>
               </div>
             )}
@@ -214,7 +183,11 @@ const ClubSearch = () => {
                       onChange={setSelect}
                     />
                   </div>
-                  <ClubList clubList={clubList} accessToken={accessToken} />
+                  <ClubList
+                    clubList={challengeList}
+                    accessToken={accessToken}
+                    pageType="search"
+                  />
                 </div>
               )}
             </div>
