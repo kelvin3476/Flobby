@@ -3,6 +3,7 @@
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  position: relative;
 
   // 💡 기본 클릭/포커스 효과 제거
   user-select: none; // 텍스트 선택 방지
@@ -23,7 +24,7 @@
     width: 24px;
     height: 24px;
 
-    background-image: url("@/assets/svg/selectbox/select-box-arrow-down.svg");
+    background-image: url('@/assets/svg/selectbox/select-box-arrow-down.svg');
 
     &.up {
       transform: rotate(180deg);
@@ -32,8 +33,9 @@
 
   &__options {
     position: absolute;
-    right: 320px;
-    top: 341px;
+    right: 0px;
+    top: 44px;
+    margin: 0;
 
     display: flex;
     width: 254px;
@@ -46,10 +48,10 @@
     z-index: 1001;
 
     border-radius: 10px;
-    background: var(--white, #FFF);
+    background: var(--white, #fff);
 
     /* modal-shadow1 */
-    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.10);
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
 
     &_title {
       color: var(--black-191919, #191919);
@@ -78,7 +80,7 @@
     letter-spacing: -0.3px;
 
     &.selected {
-      color: var(--main-purple-300, #764BF6);
+      color: var(--main-purple-300, #764bf6);
 
       font-size: 14px;
       font-style: normal;
@@ -91,7 +93,7 @@
       width: 16px;
       height: 16px;
 
-      background-image: url("@/assets/svg/selectbox/select-box-check-active.svg");
+      background-image: url('@/assets/svg/selectbox/select-box-check-active.svg');
     }
   }
 }
