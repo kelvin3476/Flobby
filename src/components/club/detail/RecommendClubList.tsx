@@ -27,10 +27,10 @@ const RecommendClubList = ({
       />
       {recommendClubList.length > 0 && (
         <div className="recommend-club-list">
-          {recommendClubList.map((recommendClubItem, index) => {
+          {recommendClubList.map(recommendClubItem => {
             return (
               <ClubItem
-                key={index}
+                key={recommendClubItem.challengeId}
                 clubId={recommendClubItem.challengeId}
                 clubName={recommendClubItem.challengeName}
                 photo={recommendClubItem.mainPhotoUrl}

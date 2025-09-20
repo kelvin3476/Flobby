@@ -66,7 +66,7 @@ const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
   }, []);
 
   const renderedItems = popularKeywordList.map((item, idx) => (
-    <div key={idx}>
+    <div key={item.rank}>
       <span className={`trending-search-keyword-rank ${idx < 3 ? 'top3' : ''}`}>
         {item.rank}
       </span>

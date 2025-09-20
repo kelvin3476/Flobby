@@ -260,7 +260,7 @@ export interface ChallengeData {
   currentMember: number;
   regionId: number;
   regionName: string;
-  photoUrl: string;
+  mainPhotoUrl: string;
   recruitEndDate: string;
   recruitDday: string;
   wishCount: number;
