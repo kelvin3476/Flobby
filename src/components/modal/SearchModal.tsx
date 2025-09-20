@@ -5,6 +5,7 @@ import Chip from '@/components/button/Chip';
 import '@/styles/modal/SearchModal.scss';
 import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
 import { PopularKeywordData } from '@/api/ApiTypes';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchModalProps {
   onClose: () => void;
@@ -25,6 +26,8 @@ const recentSearchData = [
 ];
 
 const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const updateOverlayPosition = () => {
       const mainHeader = document.querySelector(
@@ -69,7 +72,10 @@ const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
       </span>
       <span
         className={`trending-search-keyword ${item.keyword.length >= 12 ? 'long' : ''}`}
-        onClick={() => console.log('인기 검색어 클릭!!')}
+        onClick={() => {
+          navigate(`/club/search?keyword=${item.keyword}`);
+          onClose();
+        }}
       >
         {item.keyword}
       </span>
