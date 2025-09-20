@@ -89,6 +89,10 @@ const ClubSearch = () => {
     console.log(challengePopularList);
   }, [searchKeyword]);
 
+  const recruitingChallengeList = challengeList.filter(
+    item => item.recruitFlag,
+  );
+
   return (
     <div className="club-search-wrapper">
       <MainHeader accessToken={accessToken} />
@@ -152,9 +156,9 @@ const ClubSearch = () => {
                   </span>
                   <span className="club-search-quote">'</span>
                 </span>
-                {searchKeyword.length > 7 ? <br></br> : ''}에 대한
+                {searchKeyword.length > 7 ? <br></br> : ''}에 대한{' '}
                 <span className="club-search-keyword-result-count">
-                  {challengeCount}
+                  {deadLine ? recruitingChallengeList.length : challengeCount}
                 </span>
                 개의 검색 결과
               </div>
@@ -184,7 +188,9 @@ const ClubSearch = () => {
                     />
                   </div>
                   <ClubList
-                    clubList={challengeList}
+                    clubList={
+                      deadLine ? recruitingChallengeList : challengeList
+                    }
                     accessToken={accessToken}
                     pageType="search"
                   />
