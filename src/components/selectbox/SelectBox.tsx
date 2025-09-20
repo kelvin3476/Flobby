@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '@/styles/selectbox/SelectBox.scss';
+import { challengeSortType } from '@/api/ApiTypes';
 
 export type Option<T = string> = {
   label: string;
@@ -14,17 +15,17 @@ export type SelectBoxProps<T = string> = {
   className?: string;
 };
 
-export function SelectBox<T extends string | number>({
-                                                          options,
-                                                          value,
-                                                          onChange,
-                                                          placeholder = 'default',
-                                                          className = '',
-                                                        }: SelectBoxProps<T>) {
+export function SelectBox<T extends string | number | challengeSortType>({
+  options,
+  value,
+  onChange,
+  placeholder = 'default',
+  className = '',
+}: SelectBoxProps<T>) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const selectedOption = options.find((opt) => opt.value === value);
+  const selectedOption = options.find(opt => opt.value === value);
 
   const handleSelect = (option: Option<T>) => {
     onChange(option.value);
@@ -43,26 +44,32 @@ export function SelectBox<T extends string | number>({
   }, []);
 
   return (
-    <div ref={ref} className={`select-box ${className}`} onClick={() => setIsOpen((prev) => !prev)}>
-      <span className='select-box__label'>{selectedOption?.label || placeholder}</span>
+    <div
+      ref={ref}
+      className={`select-box ${className}`}
+      onClick={() => setIsOpen(prev => !prev)}
+    >
+      <span className="select-box__label">
+        {selectedOption?.label || placeholder}
+      </span>
       <span className={`select-box__arrow ${isOpen ? 'up' : ''}`}></span>
 
       {isOpen && (
         <ul className="select-box__options">
-          <span className='select-box__options_title'>정렬 기준</span>
-          {options.map((opt) => (
+          <span className="select-box__options_title">정렬 기준</span>
+          {options.map(opt => (
             <li
               key={`${opt.value}`}
               className={`select-box__option ${
                 opt.value === value ? 'selected' : ''
               }`}
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation(); // 여기서 버블링 막기
-                handleSelect(opt)
+                handleSelect(opt);
               }}
             >
               {opt.label}
-              {opt.value === value && (<i></i>)}
+              {opt.value === value && <i></i>}
             </li>
           ))}
         </ul>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import MainHeader from '@/components/header/MainHeader';
@@ -14,6 +14,7 @@ import {
   onedayItem,
   getSearchChallengeResponse,
   ChallengeData,
+  challengeSortType,
 } from '@/api/ApiTypes';
 
 import logger from '@/utils/Logger';
@@ -21,7 +22,7 @@ import logger from '@/utils/Logger';
 import '@/styles/club/search/ClubSearch.scss';
 import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
 
-const selectBoxOptions: Option<string>[] = [
+const selectBoxOptions: Option<challengeSortType>[] = [
   { label: '인기순', value: 'popular' },
   { label: '최신등록순', value: 'new' },
   { label: '모집 마감일순', value: 'deadline' },
@@ -46,7 +47,11 @@ const ClubSearch = () => {
   const [challengeCount, setChallengeCount] = React.useState<number>(0);
 
   const [deadLine, setDeadLine] = React.useState<boolean>(false);
-  const [select, setSelect] = React.useState<string>('popular');
+  const [select, setSelect] = React.useState<challengeSortType>('popular');
+
+  const isFirst = React.useRef(true);
+  const lastKeyword = React.useRef<string | null>(null);
+  const lastSelect = React.useRef<challengeSortType | null>(null);
 
   const { accessToken } = useMainPage();
 
@@ -58,7 +63,7 @@ const ClubSearch = () => {
   const challengeController = SearchChallengeController.getInstance();
 
   /* 검색 결과 불러오는 메소드 */
-  const fetchSearchList = async () => {
+  const fetchSearchList = async (sort: challengeSortType = 'popular') => {
     if (!searchKeyword) {
       logger.warn('검색 키워드가 제공되지 않았습니다.');
       return;
@@ -67,7 +72,7 @@ const ClubSearch = () => {
     try {
       logger.log('모임 검색 키워드:', searchKeyword);
       const challengeListData: getSearchChallengeResponse =
-        await challengeController.getSearchChallengeData(searchKeyword);
+        await challengeController.getSearchChallengeData(searchKeyword, sort);
 
       if (challengeListData) {
         setChallengeList(challengeListData.challengeSearchList);
@@ -85,9 +90,26 @@ const ClubSearch = () => {
 
   /* 초기 검색 결과 페이지 진입시 호출 */
   React.useEffect(() => {
-    fetchSearchList();
-    console.log(challengePopularList);
+    setSelect('popular');
+    fetchSearchList('popular');
+    isFirst.current = false;
+    lastKeyword.current = searchKeyword;
+    lastSelect.current = 'popular';
   }, [searchKeyword]);
+
+  /* 필터링에 따른 호출 */
+  React.useEffect(() => {
+    if (!isFirst.current) {
+      if (
+        lastKeyword.current === searchKeyword &&
+        lastSelect.current === select
+      ) {
+        return;
+      }
+      fetchSearchList(select);
+      lastSelect.current = select;
+    }
+  }, [select]);
 
   const recruitingChallengeList = challengeList.filter(
     item => item.recruitFlag,
@@ -180,7 +202,7 @@ const ClubSearch = () => {
                       title="모집중만 보기"
                       onClick={() => setDeadLine(!deadLine)}
                     />
-                    <SelectBox<string>
+                    <SelectBox<challengeSortType>
                       options={selectBoxOptions}
                       placeholder="인기순"
                       value={select}

@@ -15,7 +15,6 @@ const RecommendClubList = ({
   isDetailPage,
   pageType,
 }: RecommendClubListProps) => {
-  console.log(recommendClubList.length);
   return (
     <div className="recommend-club-list-container">
       <Title
