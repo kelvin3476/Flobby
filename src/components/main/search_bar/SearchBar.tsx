@@ -12,6 +12,7 @@ const SearchBar: React.FC = () => {
     isTyping,
     isOpenSearchModal,
     inputRef,
+    popularKeywordList,
 
     handleSubmitSearchForm,
     handleChangeSearchInput,
@@ -27,7 +28,7 @@ const SearchBar: React.FC = () => {
       <form className="search-bar-form" onSubmit={handleSubmitSearchForm}>
         <div className="input-container">
           <input
-            id='search-bar-input'
+            id="search-bar-input"
             ref={inputRef}
             className="search-bar-input"
             type="text"
@@ -53,9 +54,10 @@ const SearchBar: React.FC = () => {
       {isOpenSearchModal && (
         <SearchModal
           onClose={() => {
-            setIsOpenSearchModal(false)
-            handleBlurSearchInput()
+            setIsOpenSearchModal(false);
+            handleBlurSearchInput();
           }}
+          popularKeywordList={popularKeywordList}
         />
       )}
     </>

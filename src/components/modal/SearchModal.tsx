@@ -8,6 +8,7 @@ import { PopularKeywordData } from '@/api/ApiTypes';
 
 interface SearchModalProps {
   onClose: () => void;
+  popularKeywordList: PopularKeywordData[];
 }
 
 const recentSearchData = [
@@ -23,21 +24,8 @@ const recentSearchData = [
   '마지막 검색어입니다',
 ];
 
-const SearchModal = ({ onClose }: SearchModalProps) => {
-  const [popularKeywordList, setPopularKeywordList] = React.useState<
-    PopularKeywordData[]
-  >([]);
-
-  const challengeController = SearchChallengeController.getInstance();
-
-  const getPopularKeywords = async () => {
-    const popularKeywordData = await challengeController.getPopularKeywords();
-    if (popularKeywordData) setPopularKeywordList(popularKeywordData);
-  };
-
+const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
   React.useEffect(() => {
-    getPopularKeywords();
-
     const updateOverlayPosition = () => {
       const mainHeader = document.querySelector(
         '.header-container',
