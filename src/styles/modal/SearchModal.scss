@@ -1,9 +1,13 @@
+@use '@/styles/mixins/Presets' as Presets;
+
+$trending-gap: 20px;
+
 @mixin trending-search-keyword-box {
   > div {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
 
     .trending-search-keyword-rank {
       color: var(--black-191919, #191919);
@@ -14,9 +18,10 @@
       font-weight: 600;
       line-height: 150%; /* 21px */
       letter-spacing: -0.3px;
+      min-width: 23px;
 
       &.top3 {
-        color: var(--main-purple-300, #764BF6);
+        color: var(--main-purple-300, #764bf6);
       }
     }
 
@@ -30,6 +35,10 @@
       font-weight: 500;
       line-height: 150%; /* 21px */
       letter-spacing: -0.3px;
+
+      &.long {
+        @include Presets.abbreviation();
+      }
     }
   }
 }
@@ -58,9 +67,9 @@
   z-index: 1001;
 
   border-radius: 10px;
-  background: var(--white, #FFF);
+  background: var(--white, #fff);
 
-  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
 
   .search-modal-sub-container {
     display: flex;
@@ -91,7 +100,7 @@
         .recent-search-delete-all {
           cursor: pointer;
 
-          color: var(--gray-gray-50072787-f, #72787F);
+          color: var(--gray-gray-50072787-f, #72787f);
 
           font-size: 12px;
           font-style: normal;
@@ -107,7 +116,7 @@
         flex-wrap: wrap;
 
         .recent-search-keyword-empty {
-          color: var(--gray-gray-50072787-f, #72787F);
+          color: var(--gray-gray-50072787-f, #72787f);
 
           font-size: 12px;
           font-style: normal;
@@ -137,24 +146,29 @@
       .trending-search-keyword-container {
         display: flex;
         align-items: center;
-        gap: 122px;
+        justify-content: space-between;
+        gap: $trending-gap;
 
         .left-section {
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
+          height: 100%;
+          min-width: calc((100% - $trending-gap) / 2);
           gap: 8px;
 
-          @include trending-search-keyword-box
+          @include trending-search-keyword-box;
         }
 
         .right-section {
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
+          height: 100%;
+          min-width: calc((100% - $trending-gap) / 2);
           gap: 8px;
 
-          @include trending-search-keyword-box
+          @include trending-search-keyword-box;
         }
       }
     }

@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSearchKeywordStore from '@/store/main/useSearchKeywordStore';
+import { PopularKeywordData } from '@/api/ApiTypes';
+import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
 
 export default function useSearchBarHandlers() {
   const navigate = useNavigate();
@@ -11,6 +13,25 @@ export default function useSearchBarHandlers() {
 
   const isResetButtonClicked = useRef(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const [popularKeywordList, setPopularKeywordList] = useState<
+    PopularKeywordData[]
+  >([]);
+
+  const challengeController = SearchChallengeController.getInstance();
+
+  const getPopularKeywords = async () => {
+    const popularKeywordData = await challengeController.getPopularKeywords();
+    if (popularKeywordData) setPopularKeywordList(popularKeywordData);
+  };
+
+  useEffect(() => {
+    getPopularKeywords();
+  }, []);
+
+  useEffect(() => {
+    if (isOpenSearchModal) getPopularKeywords();
+  }, [isOpenSearchModal]);
 
   const handleSubmitSearchForm = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -63,6 +84,7 @@ export default function useSearchBarHandlers() {
     isTyping,
     isOpenSearchModal,
     inputRef,
+    popularKeywordList,
 
     handleSubmitSearchForm,
     handleChangeSearchInput,

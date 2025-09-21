@@ -241,3 +241,38 @@ export interface ClubMeetingData {
 }
 
 export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
+
+/* -------------------- 챌린지 검색 api 타입 -------------------- */
+
+/* 챌린지 검색 api(default: 인기순) */
+export interface getSearchChallengeResponse {
+  challengeCount: number;
+  challengeSearchList: ChallengeData[];
+  challengePopularList: ChallengeData[];
+}
+
+export interface ChallengeData {
+  challengeId: number;
+  challengeName: string;
+  mainCategory: string;
+  subCategory: string;
+  maxMember: number;
+  currentMember: number;
+  regionId: number;
+  regionName: string;
+  mainPhotoUrl: string;
+  recruitEndDate: string;
+  recruitDday: string;
+  wishCount: number;
+  recruitFlag: boolean; // 모집중 버튼 flag
+  createdAt: string;
+}
+
+export type challengeSortType = 'popular' | 'new' | 'deadline';
+
+/* 인기 검색어 api */
+export interface PopularKeywordData {
+  keyword: string;
+  searchCount: number;
+  rank: number;
+}
