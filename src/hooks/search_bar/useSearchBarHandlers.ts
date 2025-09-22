@@ -38,13 +38,9 @@ export default function useSearchBarHandlers() {
   useEffect(() => {
     const storedHistory = localStorage.getItem('search-history');
     if (storedHistory) {
-      try {
-        const parsedHistory = JSON.parse(storedHistory);
-        if (Array.isArray(parsedHistory)) {
-          setRecentKeywordList(parsedHistory);
-        }
-      } catch {
-        setRecentKeywordList([]);
+      const parsedHistory = JSON.parse(storedHistory);
+      if (Array.isArray(parsedHistory)) {
+        setRecentKeywordList(parsedHistory);
       }
     }
   }, []);
