@@ -108,7 +108,7 @@ const SearchModal = ({
               {recentKeywordList.length > 0 ? (
                 recentKeywordList.map((item, idx) => (
                   <Chip
-                    key={idx}
+                    key={item}
                     text={item}
                     onClick={() => {
                       navigate(`/club/search?keyword=${item}`);
