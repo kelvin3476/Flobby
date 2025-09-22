@@ -3,7 +3,6 @@ import React from 'react';
 import Chip from '@/components/button/Chip';
 
 import '@/styles/modal/SearchModal.scss';
-import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
 import { PopularKeywordData } from '@/api/ApiTypes';
 import { useNavigate } from 'react-router-dom';
 import useSearchKeywordStore from '@/store/main/useSearchKeywordStore';
