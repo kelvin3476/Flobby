@@ -6,27 +6,25 @@ import '@/styles/modal/SearchModal.scss';
 import { SearchChallengeController } from '@/services/challenge/controllers/SearchChallengeController';
 import { PopularKeywordData } from '@/api/ApiTypes';
 import { useNavigate } from 'react-router-dom';
+import useSearchKeywordStore from '@/store/main/useSearchKeywordStore';
 
 interface SearchModalProps {
   onClose: () => void;
   popularKeywordList: PopularKeywordData[];
+  recentKeywordList: string[];
+  onClearRecent: () => void;
+  onDeleteRecent: (keyword: string) => void;
 }
 
-const recentSearchData = [
-  '최근 검색어',
-  '최근 검색',
-  '최근',
-  '검색',
-  '최근입니다',
-  '최근입니다',
-  '검색어',
-  '최근 검색입니다',
-  '검색어입니다',
-  '마지막 검색어입니다',
-];
-
-const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
+const SearchModal = ({
+  onClose,
+  popularKeywordList,
+  recentKeywordList,
+  onClearRecent,
+  onDeleteRecent,
+}: SearchModalProps) => {
   const navigate = useNavigate();
+  const { searchKeyword } = useSearchKeywordStore();
 
   React.useEffect(() => {
     const updateOverlayPosition = () => {
@@ -101,19 +99,22 @@ const SearchModal = ({ onClose, popularKeywordList }: SearchModalProps) => {
               <span className="recent-search-title">최근 검색어</span>
               <span
                 className="recent-search-delete-all"
-                onClick={() => console.log('최근 검색어 전체 지우기!!')}
+                onClick={onClearRecent}
               >
                 모두 지우기
               </span>
             </div>
             <div className="recent-search-keyword-container">
-              {recentSearchData.length > 0 ? (
-                recentSearchData.map((item, idx) => (
+              {recentKeywordList.length > 0 ? (
+                recentKeywordList.map((item, idx) => (
                   <Chip
                     key={idx}
                     text={item}
-                    onClick={() => console.log('최근 검색어 클릭!!')}
-                    onDelete={() => console.log('최근 검색어 삭제!!')}
+                    onClick={() => {
+                      navigate(`/club/search?keyword=${item}`);
+                      onClose();
+                    }}
+                    onDelete={() => onDeleteRecent(item)}
                   />
                 ))
               ) : (

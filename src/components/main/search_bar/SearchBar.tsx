@@ -13,6 +13,7 @@ const SearchBar: React.FC = () => {
     isOpenSearchModal,
     inputRef,
     popularKeywordList,
+    recentKeywordList,
 
     handleSubmitSearchForm,
     handleChangeSearchInput,
@@ -21,6 +22,8 @@ const SearchBar: React.FC = () => {
     handleClickResetBtn,
     handleMouseDownResetBtn,
     setIsOpenSearchModal,
+    clearRecentKeywords,
+    deleteRecentKeyword,
   } = useSearchBarHandlers();
 
   return (
@@ -58,6 +61,9 @@ const SearchBar: React.FC = () => {
             handleBlurSearchInput();
           }}
           popularKeywordList={popularKeywordList}
+          recentKeywordList={recentKeywordList}
+          onClearRecent={clearRecentKeywords}
+          onDeleteRecent={deleteRecentKeyword}
         />
       )}
     </>
