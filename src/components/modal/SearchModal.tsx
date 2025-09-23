@@ -113,6 +113,7 @@ const SearchModal = ({
                     key={item}
                     text={item}
                     onClick={() => {
+                      uploadKeywordHistory(item);
                       navigate(`/club/search?keyword=${item}`);
                       onClose();
                     }}

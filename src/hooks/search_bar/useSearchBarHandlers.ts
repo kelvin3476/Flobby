@@ -48,13 +48,12 @@ export default function useSearchBarHandlers() {
   const uploadKeywordHistory = (keyword: string = searchKeyword) => {
     if (!keyword) return;
 
-    let updatedList = [...recentKeywordList];
-    const index = updatedList.findIndex(k => k === keyword);
-    if (index !== -1) {
-      updatedList.splice(index, 1);
-    } else if (updatedList.length >= 10) {
-      updatedList.pop();
+    let updatedList = recentKeywordList.filter(k => k !== keyword);
+
+    if (updatedList.length >= 10) {
+      updatedList = updatedList.slice(0, 9);
     }
+
     updatedList.unshift(keyword);
 
     setRecentKeywordList(updatedList);
@@ -75,8 +74,6 @@ export default function useSearchBarHandlers() {
   const handleSubmitSearchForm = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
     if (searchKeyword.length > 0) {
-      console.log(searchKeyword, '검색어 제출!'); // test
-
       /* 최근 검색어 업로드 */
       uploadKeywordHistory(searchKeyword);
 
