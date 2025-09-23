@@ -45,18 +45,18 @@ export default function useSearchBarHandlers() {
     }
   }, []);
 
-  const uploadKeywordHistory = () => {
+  const uploadKeywordHistory = (keyword: string = searchKeyword) => {
+    if (!keyword) return;
+
     let updatedList = [...recentKeywordList];
-    const index = updatedList.findIndex(k => k === searchKeyword);
+    const index = updatedList.findIndex(k => k === keyword);
     if (index !== -1) {
       updatedList.splice(index, 1);
-      updatedList.unshift(searchKeyword);
-    } else {
-      if (updatedList.length >= 10) {
-        updatedList.pop();
-      }
-      updatedList.unshift(searchKeyword);
+    } else if (updatedList.length >= 10) {
+      updatedList.pop();
     }
+    updatedList.unshift(keyword);
+
     setRecentKeywordList(updatedList);
     localStorage.setItem('search-history', JSON.stringify(updatedList));
   };
@@ -78,7 +78,7 @@ export default function useSearchBarHandlers() {
       console.log(searchKeyword, '검색어 제출!'); // test
 
       /* 최근 검색어 업로드 */
-      uploadKeywordHistory();
+      uploadKeywordHistory(searchKeyword);
 
       setSearchKeyword(''); /* input 필드 입력값 초기화 */
       inputRef.current?.blur();
@@ -138,5 +138,6 @@ export default function useSearchBarHandlers() {
     setIsOpenSearchModal,
     clearRecentKeywords,
     deleteRecentKeyword,
+    uploadKeywordHistory,
   };
 }

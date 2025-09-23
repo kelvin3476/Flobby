@@ -24,6 +24,7 @@ const SearchBar: React.FC = () => {
     setIsOpenSearchModal,
     clearRecentKeywords,
     deleteRecentKeyword,
+    uploadKeywordHistory,
   } = useSearchBarHandlers();
 
   return (
@@ -64,6 +65,7 @@ const SearchBar: React.FC = () => {
           recentKeywordList={recentKeywordList}
           onClearRecent={clearRecentKeywords}
           onDeleteRecent={deleteRecentKeyword}
+          uploadKeywordHistory={uploadKeywordHistory}
         />
       )}
     </>

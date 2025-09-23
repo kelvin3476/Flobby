@@ -13,6 +13,7 @@ interface SearchModalProps {
   recentKeywordList: string[];
   onClearRecent: () => void;
   onDeleteRecent: (keyword: string) => void;
+  uploadKeywordHistory: (keyword?: string) => void;
 }
 
 const SearchModal = ({
@@ -21,9 +22,10 @@ const SearchModal = ({
   recentKeywordList,
   onClearRecent,
   onDeleteRecent,
+  uploadKeywordHistory,
 }: SearchModalProps) => {
   const navigate = useNavigate();
-  const { searchKeyword } = useSearchKeywordStore();
+  const { setSearchKeyword } = useSearchKeywordStore();
 
   React.useEffect(() => {
     const updateOverlayPosition = () => {
@@ -70,6 +72,7 @@ const SearchModal = ({
       <span
         className={`trending-search-keyword ${item.keyword.length >= 12 ? 'long' : ''}`}
         onClick={() => {
+          uploadKeywordHistory(item.keyword);
           navigate(`/club/search?keyword=${item.keyword}`);
           onClose();
         }}
