@@ -18,6 +18,8 @@ export default function useSearchBarHandlers() {
     PopularKeywordData[]
   >([]);
 
+  const [recentKeywordList, setRecentKeywordList] = useState<string[]>([]);
+
   const challengeController = SearchChallengeController.getInstance();
 
   const getPopularKeywords = async () => {
@@ -33,10 +35,47 @@ export default function useSearchBarHandlers() {
     if (isOpenSearchModal) getPopularKeywords();
   }, [isOpenSearchModal]);
 
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('search-history');
+    if (storedHistory) {
+      const parsedHistory = JSON.parse(storedHistory);
+      if (Array.isArray(parsedHistory)) {
+        setRecentKeywordList(parsedHistory);
+      }
+    }
+  }, []);
+
+  const uploadKeywordHistory = (keyword: string = searchKeyword) => {
+    if (!keyword) return;
+
+    let updatedList = recentKeywordList.filter(k => k !== keyword);
+
+    if (updatedList.length >= 10) {
+      updatedList = updatedList.slice(0, 9);
+    }
+
+    updatedList.unshift(keyword);
+
+    setRecentKeywordList(updatedList);
+    localStorage.setItem('search-history', JSON.stringify(updatedList));
+  };
+
+  const clearRecentKeywords = () => {
+    setRecentKeywordList([]);
+    localStorage.removeItem('search-history');
+  };
+
+  const deleteRecentKeyword = (keyword: string) => {
+    const updated = recentKeywordList.filter(k => k !== keyword);
+    setRecentKeywordList(updated);
+    localStorage.setItem('search-history', JSON.stringify(updated));
+  };
+
   const handleSubmitSearchForm = (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
     if (searchKeyword.length > 0) {
-      console.log(searchKeyword, '검색어 제출!'); // test
+      /* 최근 검색어 업로드 */
+      uploadKeywordHistory(searchKeyword);
 
       setSearchKeyword(''); /* input 필드 입력값 초기화 */
       inputRef.current?.blur();
@@ -85,6 +124,7 @@ export default function useSearchBarHandlers() {
     isOpenSearchModal,
     inputRef,
     popularKeywordList,
+    recentKeywordList,
 
     handleSubmitSearchForm,
     handleChangeSearchInput,
@@ -93,5 +133,8 @@ export default function useSearchBarHandlers() {
     handleClickResetBtn,
     handleMouseDownResetBtn,
     setIsOpenSearchModal,
+    clearRecentKeywords,
+    deleteRecentKeyword,
+    uploadKeywordHistory,
   };
 }
