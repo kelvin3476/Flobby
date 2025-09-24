@@ -91,27 +91,27 @@ const DetailInfo = ({
   };
 
   const handleModalSubmit = async () => {
-    if (isProcessing) return; 
+    if (isProcessing) return;
     setIsProcessing(true);
 
     try {
       if (modalMode === 'greeting') {
         const response = await Main.applyClub(Number(clubId));
-        const { code, message } = response.data
+        const { code, message } = response.data;
         if (code === 1000) {
           /* 모임 가입 신청 후 성공 케이스 */
           setModalStep('complete');
         } else if (code === 1001) {
-          if (message === "정원이 모두 찼어요.") {
+          if (message === '정원이 모두 찼어요.') {
             /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
-            setModalMode("full");
+            setModalMode('full');
           } else {
             /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
           }
         }
       } else if (modalMode === 'report') {
         const response = await Main.reportClub(Number(clubId), reason);
-        const { code } = response.data
+        const { code } = response.data;
         if (code === 1000) {
           /* 모임 신고 후 성공 케이스 */
           setModalStep('complete');
@@ -120,7 +120,7 @@ const DetailInfo = ({
         }
       } else if (modalMode === 'leave') {
         const response = await Main.leaveClub(Number(clubId), reason);
-        const { code } = response.data
+        const { code } = response.data;
         if (code === 1000) {
           /* 모임 탈퇴 신청 후 성공 케이스 */
           setModalStep('complete');
@@ -129,7 +129,7 @@ const DetailInfo = ({
         }
       }
     } catch (error) {
-        console.error('모임 처리 중 오류 발생:', error);
+      console.error('모임 처리 중 오류 발생:', error);
     } finally {
       setIsProcessing(false);
     }
@@ -141,7 +141,7 @@ const DetailInfo = ({
       <div className="detail-info-content">
         <div className="info-content-form">
           <div className="info-content-items">
-            <Tag label={subCategory} type="club" color="purple" />
+            <Tag label={subCategory} type="challenge" color="purple" />
             <div className="info-items-btns">
               <button className="items-btns-heart"></button>
               <button
@@ -185,7 +185,7 @@ const DetailInfo = ({
         {loginUserRole === null ? (
           <Button
             type="button"
-            className='info-content-btn-yes'
+            className="info-content-btn-yes"
             onClick={() => {
               if (!accessToken) {
                 nav('/login');

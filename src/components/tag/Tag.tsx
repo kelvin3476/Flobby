@@ -1,15 +1,16 @@
-import React from "react";
-import "@/styles/tag/Tag.scss";
+import React from 'react';
+import '@/styles/tag/Tag.scss';
 
 interface TagProps {
   label: string;
-  type: string;
-  color: string;
+  type: 'challenge' | 'profile';
+  color: 'gray' | 'purple';
+  size?: 'default' | 'long';
 }
 
-const Tag: React.FC<TagProps> = ({ label, type, color }) => {
+const Tag: React.FC<TagProps> = ({ label, type, color, size }) => {
   return (
-    <span className={`tag ${type} ${color}`}>{label}</span>
+    <span className={`tag ${type} ${color} ${size ? size : ''}`}>{label}</span>
   );
 };
 
