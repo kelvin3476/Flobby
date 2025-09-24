@@ -2,9 +2,9 @@ import { GetMyInfoResponse } from '@/api/ApiTypes';
 import MyPage from '@/api/mypage/MyPage';
 
 export class MyInfoModel {
-  myInfoData: GetMyInfoResponse[] = [];
+  myInfoData: GetMyInfoResponse;
 
-  async getMyInfo(): Promise<GetMyInfoResponse[]> {
+  async getMyInfo(): Promise<GetMyInfoResponse> {
     try {
       const response = await MyPage.getMyInfo();
       const { code, message, data } = response.data;

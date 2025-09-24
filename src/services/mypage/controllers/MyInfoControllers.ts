@@ -20,7 +20,7 @@ export class MyInfoController {
     return MyInfoController.instance;
   }
 
-  public async getMyInfo(): Promise<GetMyInfoResponse[]> {
+  public async getMyInfo(): Promise<GetMyInfoResponse> {
     return await this.model.getMyInfo();
   }
 }

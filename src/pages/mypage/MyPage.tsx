@@ -2,10 +2,10 @@ import Title from '@/components/club/text/Title';
 import MainHeader from '@/components/header/MainHeader';
 import useMainPage from '@/hooks/main/useMainPage';
 import React from 'react';
-import '@/styles/mypage/mypage.scss';
 import ProfileInfo from '@/components/mypage/main/ProfileInfo';
 import ChallengeTabs from '@/components/mypage/main/ChallengeTabs';
 import ChallengeListBox from '@/components/mypage/main/ChallengeListBox';
+import '@/styles/mypage/MyPage.scss';
 
 const MyPage = () => {
   const { accessToken } = useMainPage();

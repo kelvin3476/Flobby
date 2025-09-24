@@ -1,0 +1,98 @@
+.profile-info-wrapper {
+  display: flex;
+  gap: 20px;
+
+  .profile-img-container {
+    width: 76px;
+    height: 76px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+
+    > img {
+      width: 76px;
+      height: 76px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .profile-info-container {
+    display: flex;
+    width: 506px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+
+    .profile-info-top-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .profile-info-nickname {
+        color: #191919;
+        text-align: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 33.6px;
+        letter-spacing: -0.3px;
+      }
+
+      .profile-info-email {
+        color: #72787f;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: -0.3px;
+      }
+    }
+
+    .profile-info-bottom-container {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+
+      .interest-region-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .icon-region {
+          width: 24px;
+          height: 24px;
+          background-image: url('/img/mypage/icon_location.png');
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        .interest-regions {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+      }
+
+      .interest-category-container {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .icon-category {
+          width: 24px;
+          height: 24px;
+          background-image: url('/img/mypage/icon-category.png');
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        .interest-categories {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+      }
+    }
+  }
+}
