@@ -3,6 +3,7 @@ import { GetMyInfoResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
 import Tag from '@/components/tag/Tag';
 import '@/styles/mypage/ProfileInfo.scss';
+import Button from '@/components/button/Button';
 
 const profileTestData = {
   profilePhotoUrl: '/img/header/profile-ex2.jpg',
@@ -31,54 +32,70 @@ const ProfileInfo = () => {
 
   return (
     <div className="profile-info-wrapper">
-      <div className="profile-img-container">
-        <img
-          src={
-            profileTestData?.profilePhotoUrl
-              ? profileTestData.profilePhotoUrl
-              : '/img/header/profile-ex2.jpg'
-          }
-        />
+      <div className="profile-info-main-box">
+        <div className="profile-img-container">
+          <img
+            src={
+              profileTestData?.profilePhotoUrl
+                ? profileTestData.profilePhotoUrl
+                : '/img/header/profile-ex2.jpg'
+            }
+          />
+        </div>
+
+        <div className="profile-info-container">
+          <div className="profile-info-top-container">
+            <span className="profile-info-nickname">
+              {profileTestData?.nickname}
+            </span>
+            <span className="profile-info-email">{profileTestData?.email}</span>
+          </div>
+          <div className="profile-info-bottom-container">
+            <div className="interest-region-container">
+              <div className="icon-region"></div>
+              <div className="interest-regions">
+                {profileTestData?.interestRegions?.map(region => {
+                  return (
+                    <Tag
+                      label={region.regionName}
+                      type="profile"
+                      color="gray"
+                      size="default"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="interest-category-container">
+              <div className="icon-category"></div>
+              <div className="interest-categories">
+                {profileTestData?.interestCategory?.map(category => {
+                  return (
+                    <Tag
+                      label={category}
+                      type="profile"
+                      color="gray"
+                      size="default"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="profile-info-container">
-        <div className="profile-info-top-container">
-          <span className="profile-info-nickname">
-            {profileTestData?.nickname}
-          </span>
-          <span className="profile-info-email">{profileTestData?.email}</span>
-        </div>
-        <div className="profile-info-bottom-container">
-          <div className="interest-region-container">
-            <div className="icon-region"></div>
-            <div className="interest-regions">
-              {profileTestData?.interestRegions?.map(region => {
-                return (
-                  <Tag
-                    label={region.regionName}
-                    type="profile"
-                    color="gray"
-                    size="default"
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="interest-category-container">
-            <div className="icon-category"></div>
-            <div className="interest-categories">
-              {profileTestData?.interestCategory?.map(category => {
-                return (
-                  <Tag
-                    label={category}
-                    type="profile"
-                    color="gray"
-                    size="default"
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
+
+      <div className="profile-info-btn-container">
+        <Button
+          title="프로필 관리"
+          onClick={() => console.log('프로필 관리 버튼 클릭!')}
+          className="profile-info-btn"
+        />
+        <Button
+          title="내 피드"
+          onClick={() => console.log('내 피드 버튼 클릭!')}
+          className="profile-info-btn"
+        />
       </div>
     </div>
   );

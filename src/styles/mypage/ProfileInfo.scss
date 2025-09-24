@@ -1,97 +1,140 @@
 .profile-info-wrapper {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
 
-  .profile-img-container {
-    width: 76px;
-    height: 76px;
-    aspect-ratio: 1/1;
-    border-radius: 100%;
+  .profile-info-main-box {
+    display: flex;
+    gap: 20px;
 
-    > img {
+    .profile-img-container {
       width: 76px;
       height: 76px;
+      aspect-ratio: 1/1;
       border-radius: 100%;
-      object-fit: cover;
+
+      > img {
+        width: 76px;
+        height: 76px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .profile-info-container {
+      display: flex;
+      width: 506px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+
+      .profile-info-top-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .profile-info-nickname {
+          color: #191919;
+          text-align: center;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 33.6px;
+          letter-spacing: -0.3px;
+        }
+
+        .profile-info-email {
+          color: #72787f;
+          text-align: center;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -0.3px;
+        }
+      }
+
+      .profile-info-bottom-container {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+
+        .interest-region-container {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          .icon-region {
+            width: 24px;
+            height: 24px;
+            background-image: url('/img/mypage/icon_location.png');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .interest-regions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+        }
+
+        .interest-category-container {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          .icon-category {
+            width: 24px;
+            height: 24px;
+            background-image: url('/img/mypage/icon-category.png');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .interest-categories {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+        }
+      }
     }
   }
 
-  .profile-info-container {
+  .profile-info-btn-container {
     display: flex;
-    width: 506px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
+    width: 170px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
 
-    .profile-info-top-container {
-      display: flex;
+    .profile-info-btn {
+      display: inline-flex;
+      padding: 5px 14px;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
+      border-radius: 6px;
+      border: 1px solid #e8ebed;
+      background: #fff;
+      flex-shrink: 0;
 
-      .profile-info-nickname {
-        color: #191919;
-        text-align: center;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 33.6px;
-        letter-spacing: -0.3px;
-      }
+      color: #191919;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 21px;
+      letter-spacing: -0.3px;
 
-      .profile-info-email {
-        color: #72787f;
-        text-align: center;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 24px;
-        letter-spacing: -0.3px;
-      }
-    }
-
-    .profile-info-bottom-container {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-
-      .interest-region-container {
-        display: flex;
+      &:hover {
+        display: inline-flex;
+        padding: 5px 14px;
+        justify-content: center;
         align-items: center;
-        gap: 6px;
-
-        .icon-region {
-          width: 24px;
-          height: 24px;
-          background-image: url('/img/mypage/icon_location.png');
-          background-position: center;
-          background-repeat: no-repeat;
-        }
-
-        .interest-regions {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-      }
-
-      .interest-category-container {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-
-        .icon-category {
-          width: 24px;
-          height: 24px;
-          background-image: url('/img/mypage/icon-category.png');
-          background-position: center;
-          background-repeat: no-repeat;
-        }
-
-        .interest-categories {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
+        border-radius: 6px;
+        border: 1px solid #e8ebed;
+        background: #e8ebed;
+        cursor: pointer;
       }
     }
   }

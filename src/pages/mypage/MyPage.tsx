@@ -13,7 +13,7 @@ const MyPage = () => {
     <div className="mypage-wrapper">
       <MainHeader accessToken={accessToken} />
       <div className="mypage-content-container">
-        <Title titleName="마이페이지" />
+        <Title titleName="마이페이지" className="my-page-title" />
         <div className="mypage-header">
           <ProfileInfo />
           <ChallengeTabs />
