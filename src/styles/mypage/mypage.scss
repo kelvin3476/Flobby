@@ -1,0 +1,29 @@
+.mypage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 58px;
+
+  min-height: 100vh;
+
+  .mypage-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+
+    .mypage-header {
+      display: flex;
+      flex-direction: column;
+      gap: 37px;
+      min-width: 920px;
+    }
+
+    .mypage-challenge-box {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+  }
+}
