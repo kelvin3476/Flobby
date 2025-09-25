@@ -22,6 +22,7 @@ export class MyInfoModel {
       }
     } catch (err: any) {
       console.log(err.message || '데이터 로드 실패');
+      throw err;
     }
   }
 }
