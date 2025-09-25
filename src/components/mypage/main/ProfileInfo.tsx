@@ -5,17 +5,17 @@ import Tag from '@/components/tag/Tag';
 import '@/styles/mypage/ProfileInfo.scss';
 import Button from '@/components/button/Button';
 
-const profileTestData = {
-  profilePhotoUrl: '/img/header/profile-ex2.jpg',
-  nickname: '예시 닉네임',
-  email: 'email@naver.com',
-  interestRegions: [
-    { regionId: 218, regionName: '강남구' },
-    { regionId: 197, regionName: '관악구' },
-    { regionId: 199, regionName: '동작구' },
-  ],
-  interestCategory: ['자전거', '캠핑', '힙합·락'],
-};
+// const profileTestData = {
+//   profilePhotoUrl: '/img/header/profile-ex2.jpg',
+//   nickname: '예시 닉네임',
+//   email: 'email@naver.com',
+//   interestRegions: [
+//     { regionId: 218, regionName: '강남구' },
+//     { regionId: 197, regionName: '관악구' },
+//     { regionId: 199, regionName: '동작구' },
+//   ],
+//   interestCategory: ['자전거', '캠핑', '힙합·락'],
+// };
 
 const ProfileInfo = () => {
   const [infoData, setInfoData] = useState<GetMyInfoResponse | null>(null);
@@ -36,8 +36,8 @@ const ProfileInfo = () => {
         <div className="profile-img-container">
           <img
             src={
-              profileTestData?.profilePhotoUrl
-                ? profileTestData.profilePhotoUrl
+              infoData?.profilePhotoUrl
+                ? infoData.profilePhotoUrl
                 : '/img/header/profile-ex2.jpg'
             }
           />
@@ -45,18 +45,17 @@ const ProfileInfo = () => {
 
         <div className="profile-info-container">
           <div className="profile-info-top-container">
-            <span className="profile-info-nickname">
-              {profileTestData?.nickname}
-            </span>
-            <span className="profile-info-email">{profileTestData?.email}</span>
+            <span className="profile-info-nickname">{infoData?.nickname}</span>
+            <span className="profile-info-email">{infoData?.email}</span>
           </div>
           <div className="profile-info-bottom-container">
             <div className="interest-region-container">
               <div className="icon-region"></div>
               <div className="interest-regions">
-                {profileTestData?.interestRegions?.map(region => {
+                {infoData?.interestRegions?.map(region => {
                   return (
                     <Tag
+                      key={region.regionId}
                       label={region.regionName}
                       type="profile"
                       color="gray"
@@ -69,9 +68,10 @@ const ProfileInfo = () => {
             <div className="interest-category-container">
               <div className="icon-category"></div>
               <div className="interest-categories">
-                {profileTestData?.interestCategory?.map(category => {
+                {infoData?.interestCategory?.map(category => {
                   return (
                     <Tag
+                      key={category}
                       label={category}
                       type="profile"
                       color="gray"

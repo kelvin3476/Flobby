@@ -45,6 +45,7 @@ const ChallengeList = ({
       {challengeList?.map(item => {
         return (
           <ChallengeItemHorizontal
+            key={item.challengeId}
             challengeId={item.challengeId}
             challengeName={item.challengeName}
             mainCategory={item.mainCategory}

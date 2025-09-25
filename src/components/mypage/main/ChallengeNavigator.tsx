@@ -13,6 +13,7 @@ const ChallengeNavigator = () => {
       {challengeNavigatorData?.map(data => {
         return (
           <div
+            key={data.type}
             className="challenge-navigator-item-box"
             onClick={() => console.log(`${data.label} box click!`)}
           >
