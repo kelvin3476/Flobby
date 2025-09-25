@@ -5,18 +5,6 @@ import Tag from '@/components/tag/Tag';
 import '@/styles/mypage/ProfileInfo.scss';
 import Button from '@/components/button/Button';
 
-// const profileTestData = {
-//   profilePhotoUrl: '/img/header/profile-ex2.jpg',
-//   nickname: '예시 닉네임',
-//   email: 'email@naver.com',
-//   interestRegions: [
-//     { regionId: 218, regionName: '강남구' },
-//     { regionId: 197, regionName: '관악구' },
-//     { regionId: 199, regionName: '동작구' },
-//   ],
-//   interestCategory: ['자전거', '캠핑', '힙합·락'],
-// };
-
 const ProfileInfo = () => {
   const [infoData, setInfoData] = useState<GetMyInfoResponse | null>(null);
   const myInfoController = MyInfoController.getInstance();
