@@ -1,6 +1,6 @@
 .challenge-list-container {
   display: flex;
-  width: 450px;
+  min-width: 450px;
   padding: 22px 20px;
   flex-direction: column;
   align-items: flex-start;

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
 
   .profile-info-main-box {
     display: flex;
@@ -39,7 +40,7 @@
           font-size: 24px;
           font-style: normal;
           font-weight: 600;
-          line-height: 33.6px;
+          line-height: 140%; /* 33.6px */
           letter-spacing: -0.3px;
         }
 
@@ -49,7 +50,7 @@
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
-          line-height: 24px;
+          line-height: 150%; /* 24px */
           letter-spacing: -0.3px;
         }
       }
@@ -67,7 +68,7 @@
           .icon-region {
             width: 24px;
             height: 24px;
-            background-image: url('/img/mypage/icon_location.png');
+            background-image: url('../../assets/svg/mypage/icon_location_black.svg');
             background-position: center;
             background-repeat: no-repeat;
           }
@@ -87,7 +88,7 @@
           .icon-category {
             width: 24px;
             height: 24px;
-            background-image: url('/img/mypage/icon-category.png');
+            background-image: url('../../assets/svg/mypage/icon_category_black.svg');
             background-position: center;
             background-repeat: no-repeat;
           }
@@ -123,7 +124,7 @@
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      line-height: 21px;
+      line-height: 150%; /* 21px */
       letter-spacing: -0.3px;
 
       &:hover {

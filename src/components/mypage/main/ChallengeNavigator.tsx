@@ -17,7 +17,10 @@ const ChallengeNavigator = () => {
             onClick={() => console.log(`${data.label} box click!`)}
           >
             <div className="challenge-navigator-item-label">{data.label}</div>
-            <div className="challenge-navigator-item-count">{data.count}개</div>
+            <div className="challenge-navigator-item-count">
+              <span>{data.count}</span>
+              <span>개</span>
+            </div>
           </div>
         );
       })}
