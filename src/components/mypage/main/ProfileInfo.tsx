@@ -88,12 +88,18 @@ const ProfileInfo = () => {
       <div className="profile-info-btn-container">
         <Button
           title="프로필 관리"
-          onClick={() => console.log('프로필 관리 버튼 클릭!')}
+          onClick={() => {
+            // TODO: 프로필 관리 페이지로 이동
+            console.log('프로필 관리 버튼 클릭!');
+          }}
           className="profile-info-btn"
         />
         <Button
           title="내 피드"
-          onClick={() => console.log('내 피드 버튼 클릭!')}
+          onClick={() => {
+            // TODO: 내 피드 페이지로 이동
+            console.log('내 피드 버튼 클릭!');
+          }}
           className="profile-info-btn"
         />
       </div>

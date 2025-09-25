@@ -15,7 +15,10 @@ const ChallengeNavigator = () => {
           <div
             key={data.type}
             className="challenge-navigator-item-box"
-            onClick={() => console.log(`${data.label} box click!`)}
+            onClick={() => {
+              // TODO: 클릭 시 각 챌린지 조회 화면으로 이동
+              console.log(`${data.label} box click!`);
+            }}
           >
             <div className="challenge-navigator-item-label">{data.label}</div>
             <div className="challenge-navigator-item-count">

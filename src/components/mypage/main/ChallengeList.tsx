@@ -33,7 +33,7 @@ const ChallengeList = ({
         <div
           className="challenge-list-link-to-all-btn-container"
           onClick={() => {
-            // TODO: 해당 챌린지 전체 보기 페이지로 이동
+            // TODO: 클릭시 각 챌린지 전체 보기 페이지로 이동
             console.log('전체 보기 버튼 클릭!');
           }}
         >
