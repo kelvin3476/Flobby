@@ -30,7 +30,13 @@ const ChallengeList = ({
     <div className="challenge-list-container">
       <div className="challenge-list-header">
         <span>{title}</span>
-        <div className="challenge-list-link-to-all-btn-container">
+        <div
+          className="challenge-list-link-to-all-btn-container"
+          onClick={() => {
+            // TODO: 해당 챌린지 전체 보기 페이지로 이동
+            console.log('전체 보기 버튼 클릭!');
+          }}
+        >
           <span>전체 보기</span>
           <div className="challenge-list-link-to-all-icon-next"></div>
         </div>

@@ -37,7 +37,7 @@ const ChallengeItemHorizontal = ({
   createdAt,
 }: ChallengeItemProps) => {
   const [isHeartActive, setIsHeartActive] = React.useState(false);
-  console.log(challengeName.length);
+
   return (
     <div className="challenge-item-horizontal-container">
       <div className="challenge-item-horizontal-thumbnail-wrapper">
@@ -45,7 +45,9 @@ const ChallengeItemHorizontal = ({
           src={mainPhotoUrl ? mainPhotoUrl : '/img/main/club/thumbnail1.png'}
           alt="challenge-item-horizontal-thumbnail-image"
         />
-        <span className="challenge-item-horizontal-d-day">{recruitDday}</span>
+        {recruitFlag && (
+          <span className="challenge-item-horizontal-d-day">{recruitDday}</span>
+        )}
       </div>
 
       <div className="challenge-item-horizontal-content-wrapper">
