@@ -284,6 +284,6 @@ export interface GetMyInfoResponse {
   profilePhotoUrl: string;
   nickname: string;
   email: string;
-  interestRegions: number[];
+  interestRegions: RegionItem;
   interestCategory: string[];
 }
