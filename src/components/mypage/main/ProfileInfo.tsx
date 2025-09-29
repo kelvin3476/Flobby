@@ -26,7 +26,7 @@ const ProfileInfo = () => {
             src={
               infoData?.profilePhotoUrl
                 ? infoData.profilePhotoUrl
-                : '/img/header/profile-ex2.jpg'
+                : '/img/mypage/icon_profile.png'
             }
           />
         </div>

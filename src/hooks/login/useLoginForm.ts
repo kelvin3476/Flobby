@@ -113,7 +113,7 @@ const useLoginForm = () => {
                 );
                 setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
                 window.location.hostname === 'localhost'
-                  ? navigate('/')
+                  ? navigate('/mypage')
                   : window.location.replace(
                       '/',
                     ); /* 하드 리로드 => 메인 페이지로 이동 */

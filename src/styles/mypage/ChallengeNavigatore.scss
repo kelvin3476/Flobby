@@ -14,6 +14,10 @@
     gap: 4px;
     cursor: pointer;
 
+    &:hover {
+      background: #e8ebed;
+    }
+
     .challenge-navigator-item-label {
       color: #454c53;
       font-size: 16px;
