@@ -40,33 +40,51 @@ const ProfileInfo = () => {
             <div className="interest-region-container">
               <div className="icon-region"></div>
               <div className="interest-regions">
-                {infoData?.interestRegions?.map(region => {
-                  return (
-                    <Tag
-                      key={region.regionId}
-                      label={region.regionName}
-                      type="profile"
-                      color="gray"
-                      size="default"
-                    />
-                  );
-                })}
+                {infoData?.interestRegions.length > 0 ? (
+                  infoData?.interestRegions?.map(region => {
+                    return (
+                      <Tag
+                        key={region.regionId}
+                        label={region.regionName}
+                        type="profile"
+                        color="gray"
+                        size="default"
+                      />
+                    );
+                  })
+                ) : (
+                  <Tag
+                    label="관심 지역을 설정해 주세요"
+                    type="profile"
+                    color="gray"
+                    size="default"
+                  />
+                )}
               </div>
             </div>
             <div className="interest-category-container">
               <div className="icon-category"></div>
               <div className="interest-categories">
-                {infoData?.interestCategory?.map(category => {
-                  return (
-                    <Tag
-                      key={category}
-                      label={category}
-                      type="profile"
-                      color="gray"
-                      size="default"
-                    />
-                  );
-                })}
+                {infoData?.interestCategory.length > 0 ? (
+                  infoData?.interestCategory?.map(category => {
+                    return (
+                      <Tag
+                        key={category}
+                        label={category}
+                        type="profile"
+                        color="gray"
+                        size="default"
+                      />
+                    );
+                  })
+                ) : (
+                  <Tag
+                    label="관심 카테고리를 설정해 주세요"
+                    type="profile"
+                    color="gray"
+                    size="default"
+                  />
+                )}
               </div>
             </div>
           </div>
