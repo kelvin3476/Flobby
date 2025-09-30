@@ -42,27 +42,37 @@ const ChallengeList = ({
         </div>
       </div>
 
-      {challengeList?.map(item => {
-        return (
-          <ChallengeItemHorizontal
-            key={item.challengeId}
-            challengeId={item.challengeId}
-            challengeName={item.challengeName}
-            mainCategory={item.mainCategory}
-            subCategory={item.subCategory}
-            maxMember={item.maxMember}
-            currentMember={item.currentMember}
-            regionId={item.regionId}
-            regionName={item.regionName}
-            mainPhotoUrl={item.mainPhotoUrl}
-            recruitEndDate={item.recruitEndDate}
-            recruitDday={item.recruitDday}
-            wishCount={item.wishCount}
-            recruitFlag={item.recruitFlag}
-            createdAt={item.createdAt}
-          />
-        );
-      })}
+      {challengeList ? (
+        challengeList?.map(item => {
+          return (
+            <ChallengeItemHorizontal
+              key={item.challengeId}
+              challengeId={item.challengeId}
+              challengeName={item.challengeName}
+              mainCategory={item.mainCategory}
+              subCategory={item.subCategory}
+              maxMember={item.maxMember}
+              currentMember={item.currentMember}
+              regionId={item.regionId}
+              regionName={item.regionName}
+              mainPhotoUrl={item.mainPhotoUrl}
+              recruitEndDate={item.recruitEndDate}
+              recruitDday={item.recruitDday}
+              wishCount={item.wishCount}
+              recruitFlag={item.recruitFlag}
+              createdAt={item.createdAt}
+            />
+          );
+        })
+      ) : (
+        <div className="challenge-list-empty">
+          <div className="challenge-list-empty-text">
+            진행 중인 챌린지가 없어요
+            <br />
+            새로운 챌린지를 시작해 보세요
+          </div>
+        </div>
+      )}
     </div>
   );
 };

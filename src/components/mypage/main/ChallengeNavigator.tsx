@@ -7,6 +7,7 @@ const challengeNavigatorData = [
   { type: 'interested', label: '관심 챌린지', count: 3 },
   { type: 'recentlyViewed', label: '최근 본 챌린지', count: 3 },
 ];
+
 const ChallengeNavigator = () => {
   return (
     <div className="challenge-navigator-wrapper">

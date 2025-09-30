@@ -54,4 +54,22 @@
       }
     }
   }
+
+  .challenge-list-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    .challenge-list-empty-text {
+      color: #9ea4aa;
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 21px */
+      letter-spacing: -0.3px;
+    }
+  }
 }
