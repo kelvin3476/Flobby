@@ -59,7 +59,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                     >
                       <img
                         className="profile-btn"
-                        src={"../../img/header/profile-ex2.jpg"}
+                        src={'../../img/header/icon_profile_header.png'}
                         alt=""
                       />
                     </div>

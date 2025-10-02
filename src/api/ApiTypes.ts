@@ -276,3 +276,14 @@ export interface PopularKeywordData {
   searchCount: number;
   rank: number;
 }
+
+/* -------------------- 마이페이지 api 타입 -------------------- */
+
+/* 마이페이지 조회 api */
+export interface GetMyInfoResponse {
+  profilePhotoUrl: string;
+  nickname: string;
+  email: string;
+  interestRegions: RegionItem[];
+  interestCategory: string[];
+}

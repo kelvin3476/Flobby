@@ -30,7 +30,8 @@ const useLoginForm = () => {
     setLoginErrorMessage,
   } = useLoginStore();
 
-  const { setAccessToken, setTokenExpirationTime, setIsAuthenticated } = useAuthStore();
+  const { setAccessToken, setTokenExpirationTime, setIsAuthenticated } =
+    useAuthStore();
 
   const handleEmailBlur = () => {
     if (!email) {
@@ -107,9 +108,15 @@ const useLoginForm = () => {
             switch (code) {
               case 1000 /* accessToken 발급 성공 */:
                 setAccessToken(response.data.data); // access token authStore in-memory 저장 (브라우저 새로고침시 초기화)
-                setTokenExpirationTime(JSON.parse(atob(response.data.data.split('.')[1])).exp);
+                setTokenExpirationTime(
+                  JSON.parse(atob(response.data.data.split('.')[1])).exp,
+                );
                 setIsAuthenticated(maintainLogin); // 로그인 상태 authStore in-memory 저장 (브라우저 새로고침시 초기화) /* TODO: maintainLogin: true, 로그인 유지 else 유지 안함 */
-                window.location.hostname === 'localhost' ? navigate('/') : window.location.replace('/'); /* 하드 리로드 => 메인 페이지로 이동 */
+                window.location.hostname === 'localhost'
+                  ? navigate('/')
+                  : window.location.replace(
+                      '/',
+                    ); /* 하드 리로드 => 메인 페이지로 이동 */
                 break;
               case 1002 /* accessToken 발급 api 예외 */:
                 console.error('JWT 토큰 발급 api 요청 실패', message);
@@ -131,7 +138,9 @@ const useLoginForm = () => {
     } catch (error) {
       switch (error.response?.data?.code) {
         case 1001:
-          setLoginErrorMessage('아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.')
+          setLoginErrorMessage(
+            '아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해 주세요.',
+          );
           break;
         case 1002:
           console.error('로그인 api 요청 실패', error);

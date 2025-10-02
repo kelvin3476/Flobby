@@ -1,5 +1,5 @@
-$purple-bg: #F1EDFE;
-$purple-text: #764BF6;
+$purple-bg: #f1edfe;
+$purple-text: #764bf6;
 $gray-bg: #f7f8f9;
 $gray-text: #72787f;
 
@@ -12,41 +12,36 @@ $gray-text: #72787f;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
-  padding: 4px 10px;
-  border-radius: 100px;
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
   letter-spacing: -0.3px;
+  flex-shrink: 0;
 
-  &.club {
-    &.purple {
-      @include tag-color($purple-bg, $purple-text);
-    }
-  
-    &.gray {
-      @include tag-color($gray-bg, $gray-text);
-    }
+  // type
+  &.challenge {
+    padding: 4px 10px;
+    border-radius: 100px;
   }
 
-  &.one-day {
-    &.purple {
-      @include tag-color($purple-bg, $purple-text);
-    }
-  
-    &.gray {
-      @include tag-color($gray-bg, $gray-text);
-    }
+  // size
+  &.default {
+    height: 24px;
+    padding: 0px 10px;
+    border-radius: 5px;
   }
 
-  &.popular-posts {
-    &.purple {
-      @include tag-color($purple-bg, $purple-text);
-    }
-  
-    &.gray {
-      @include tag-color($gray-bg, $gray-text);
-    }
+  &.long {
+    padding: 3px 15px;
+    border-radius: 6px;
+  }
+
+  // color
+  &.purple {
+    @include tag-color($purple-bg, $purple-text);
+  }
+
+  &.gray {
+    @include tag-color($gray-bg, $gray-text);
   }
 }

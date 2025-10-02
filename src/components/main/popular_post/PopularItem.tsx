@@ -1,7 +1,7 @@
-import React from "react";
-import Tag from "@/components/tag/Tag";
+import React from 'react';
+import Tag from '@/components/tag/Tag';
 
-import "@/styles/main/popular_post/PopularItem.scss";
+import '@/styles/main/popular_post/PopularItem.scss';
 
 interface PopularItemProps {
   tag: string;
@@ -10,14 +10,13 @@ interface PopularItemProps {
   date: string;
 }
 
-const PopularItem = ({ tag, title, likes, date }: PopularItemProps) =>  {
-
+const PopularItem = ({ tag, title, likes, date }: PopularItemProps) => {
   return (
     <div className="item-container">
       <div className="item-wrapper">
         <div className="item-top">
           <div className="item-tag">
-            <Tag label={tag} type="popular-posts" color="gray"/>
+            <Tag label={tag} type="challenge" color="gray" />
           </div>
         </div>
 

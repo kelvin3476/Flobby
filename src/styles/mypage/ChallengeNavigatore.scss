@@ -1,0 +1,45 @@
+.challenge-navigator-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background: #f7f8f9;
+
+  .challenge-navigator-item-box {
+    display: flex;
+    width: 230px;
+    height: 124px;
+    padding: 31px 63px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background: #e8ebed;
+    }
+
+    .challenge-navigator-item-label {
+      color: #454c53;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.3px;
+    }
+
+    .challenge-navigator-item-count {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+
+      > span {
+        color: #191919;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 140%; /* 33.6px */
+        letter-spacing: -0.3px;
+      }
+    }
+  }
+}
