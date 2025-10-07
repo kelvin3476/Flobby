@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
 import Tag from '@/components/tag/Tag';
@@ -6,6 +7,8 @@ import '@/styles/mypage/ProfileInfo.scss';
 import Button from '@/components/button/Button';
 
 const ProfileInfo = () => {
+  const navigate = useNavigate();
+
   const [infoData, setInfoData] = useState<GetMyInfoResponse | null>(null);
   const myInfoController = MyInfoController.getInstance();
 
@@ -95,8 +98,7 @@ const ProfileInfo = () => {
         <Button
           title="프로필 관리"
           onClick={() => {
-            // TODO: 프로필 관리 페이지로 이동
-            console.log('프로필 관리 버튼 클릭!');
+            navigate('/mypage/profile');
           }}
           className="profile-info-btn"
         />

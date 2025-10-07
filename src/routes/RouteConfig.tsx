@@ -21,6 +21,7 @@ import ClubDetail from '@/pages/club/ClubDetail';
 import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
 import ClubSearch from '@/pages/club/ClubSearch';
 import MyPage from '@/pages/mypage/MyPage';
+import ProfileManagement from '@/pages/mypage/ProfileManagement';
 
 export const RouteConfig = [
   { path: '/test', element: <TestPage />, title: '테스트' },
@@ -83,4 +84,5 @@ export const RouteConfig = [
   { path: '/club/search', element: <ClubSearch />, title: '모임 검색' },
 
   { path: '/mypage', element: <MyPage />, title: '마이 페이지' },
+  { path: '/mypage/profile', element: <ProfileManagement />, title: '프로필 관리' },
 ];
