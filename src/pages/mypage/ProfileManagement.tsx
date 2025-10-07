@@ -321,6 +321,7 @@ const ProfileManagement = () => {
               setModalStep('complete');
             } else {
               await editProfileInfoHandler();
+              await fetchProfileInfo();
               setModalStep(null);
               setIsOpenProfileModal(false);
             }
