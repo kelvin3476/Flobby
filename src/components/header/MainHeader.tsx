@@ -80,6 +80,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                   localStorage.removeItem('token-storage');
                 } else if (item === '마이페이지') {
                   // 마이페이지 라우팅
+                  nav('/mypage')
                 }
               }}
             />

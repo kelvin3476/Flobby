@@ -1,0 +1,300 @@
+.category-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.30);
+  z-index: 1000;
+}
+
+.category-modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // 정중앙 정렬
+  display: flex;
+  flex-direction: column;
+  width: 528px;
+  height: 687px;
+  gap: 24px;
+  padding: 26px 24px;
+
+  z-index: 1001;
+
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.08);
+
+  .hobby-title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .Header {
+      color: var(--black-191919, #191919);
+      text-align: center;
+
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%; /* 33.6px */
+      letter-spacing: -0.3px;
+    }
+
+    > span {
+      color: var(--gray-gray-50072787-f, #72787F);
+      text-align: center;
+
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.3px;
+    }
+  }
+
+  > main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+
+    .hobby {
+      border: 1px solid #E8EBED;
+      border-radius: 6px;
+
+      .category {
+        width: 350px;
+        height: 476px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #E8EBED;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #9EA4AA;
+          border-radius: 100px;
+        }
+
+        .title {
+          width: 344px;
+          display: flex;
+          height: 48px;
+          box-sizing: border-box;
+          padding: 12px 16px;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          align-self: stretch;
+          border-radius: 4px 0 0 4px;
+          background: #F7F8F9;
+
+          .circle {
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            background-color: #191919;
+
+            $categories: (
+                    sports,
+                    music,
+                    art,
+                    travel,
+                    leisure,
+                    self-improvement
+            );
+
+            @each $category in $categories {
+              &.#{$category} {
+                mask: url('../../assets/svg/club/register/category/category-#{$category}.svg') no-repeat center;
+                mask-size: contain;
+              }
+            }
+          }
+
+          .text {
+            display: flex;
+            height: 24px;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            flex: 1 0 0;
+            color: #191919;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.3px;
+          }
+
+          button {
+            border: none;
+            background-color: transparent;
+            width: 24px;
+            height: 24px;
+            position: relative;
+
+          }
+
+          button.show {
+            transform: rotate(-180deg);
+            background-image: url("../../assets/svg/signup/signup_arrow.svg");
+          }
+
+          button.hide {
+            background-image: url("../../assets/svg/signup/signup_arrow.svg");
+          }
+        }
+
+        .hobby-ul {
+          width: 328px;
+          padding: 0 4px 0 12px;
+          gap: 4px;
+          display: flex;
+          flex-wrap: wrap;
+          margin: 12px 0 28px 0;
+
+          li {
+            list-style: none;
+
+            input {
+              display: none;
+            }
+          }
+
+          label {
+            cursor: pointer;
+            box-sizing: border-box;
+            display: flex;
+            height: 40px;
+            padding: 8px 12px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            border-radius: 6px;
+            color: #72787F;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+            border: 1px solid #E8EBED;
+          }
+
+          label.checked {
+            border: 1px solid #764BF6;
+            color: #764BF6;
+            background: #F1EDFE;
+          }
+        }
+
+        ul.hide {
+          display: none;
+        }
+      }
+
+
+      .selected-box {
+        position: absolute;
+        width: 130px;
+        top: 0;
+        right: -4px;
+
+        ul {
+          margin: 0;
+          padding: 12px;
+
+          li {
+            list-style: none;
+            margin: 12px 0;
+            width: 98px;
+            border-radius: 6px;
+            padding: 8px 9px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background: 0 #F7F8F9;
+            color: #72787F;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .text {
+              min-width: 55px;
+              text-align: left;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+        }
+      }
+
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      align-self: flex-end;
+
+      .cancel-btn {
+        cursor: pointer;
+        width: 96px;
+        height: 48px;
+
+        border-radius: 6px;
+        border: 1px solid var(--gray-gray-200-c-9-cdd-2, #C9CDD2);
+        background: var(--white, #FFF);
+
+        color: var(--gray-gray-600454-c-53, #454C53);
+        text-align: center;
+
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%; /* 21px */
+        letter-spacing: -0.3px;
+      }
+    }
+
+    .save-btn {
+      cursor: pointer;
+      width: 96px;
+      height: 48px;
+
+      border-radius: 6px;
+      border: 1px solid var(--main-purple-300, #764BF6);
+      background: var(--main-purple-300, #764BF6);
+
+      color: var(--white, #FFF);
+      text-align: center;
+
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 150%; /* 21px */
+      letter-spacing: -0.3px;
+    }
+
+    .delete {
+      cursor: pointer;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-image: url("../../assets/svg/signup/signup_delete.svg");
+    }
+  }
+}

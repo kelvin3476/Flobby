@@ -10,4 +10,15 @@
   border: none;
   text-decoration: none;
   cursor: pointer;
+
+  &.gray {
+    color: var(--gray-gray-4009-ea-4-aa, #9EA4AA);
+    text-align: center;
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+    letter-spacing: -0.3px;
+  }
 }
