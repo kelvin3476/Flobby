@@ -1,4 +1,4 @@
-import { GetMyInfoResponse } from '@/api/ApiTypes';
+import { GetMyInfoResponse, GetProfileDetailResponse } from '@/api/ApiTypes';
 import { MyInfoModel } from '../models/MyInfoModel';
 
 export class MyInfoController {
@@ -22,5 +22,13 @@ export class MyInfoController {
 
   public async getMyInfo(): Promise<GetMyInfoResponse> {
     return await this.model.getMyInfo();
+  }
+
+  public async getProfileDetail(): Promise<GetProfileDetailResponse> {
+    return await this.model.getProfileDetail();
+  }
+
+  public async editProfileDetail(data: FormData) {
+    return await this.model.editProfileDetail(data);
   }
 }
