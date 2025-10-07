@@ -141,7 +141,7 @@ const inProgressChallenges: ChallengeData[] = [
   },
 ];
 
-export const completedChallenges: ChallengeData[] = [
+const completedChallenges: ChallengeData[] = [
   {
     challengeId: 101,
     challengeName: '8월 아침 기상 챌린지',
