@@ -15,7 +15,7 @@ import SelectHobbies from '@/pages/signup/SelectHobbies';
 import SuccessSignUp from '@/pages/signup/SuccessSignUp';
 import KakaoRedirectHandler from '@/services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '@/services/auth/oauth2/NaverRedirectHandler';
-import ClubAll from '@/pages/club/ClubAll';
+import ChallengeAll from '@/pages/club/ChallengeAll';
 import ClubRegister from '@/pages/club/ClubRegister';
 import ClubDetail from '@/pages/club/ClubDetail';
 import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
@@ -65,7 +65,7 @@ export const RouteConfig = [
     title: '네이버 소셜 로그인',
   },
 
-  { path: '/club/list', element: <ClubAll />, title: '모임 전체' },
+  { path: '/club/list', element: <ChallengeAll />, title: '모임 전체' },
   { path: '/club/register', element: <ClubRegister />, title: '모임 등록' },
   { path: '/club/:clubId', element: <ClubDetail />, title: '모임 상세' },
   { path: '/club/edit', element: <ClubRegister />, title: '모임 수정' },
@@ -84,5 +84,9 @@ export const RouteConfig = [
   { path: '/club/search', element: <ClubSearch />, title: '모임 검색' },
 
   { path: '/mypage', element: <MyPage />, title: '마이 페이지' },
-  { path: '/mypage/profile', element: <ProfileManagement />, title: '프로필 관리' },
+  {
+    path: '/mypage/profile',
+    element: <ProfileManagement />,
+    title: '프로필 관리',
+  },
 ];

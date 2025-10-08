@@ -19,11 +19,11 @@ import FabClubRegisterIcon from '@/assets/svg/club/clublist/floating_button_club
 import FabOnedayRegisterIcon from '@/assets/svg/club/clublist/floating_button_oneday_register.svg';
 import '@/styles/main/club/ClubAll.scss';
 
-const ClubAll = () => {
+const ChallengeAll = () => {
   const navigate = useNavigate();
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
-  logger.log('[cluball: accessToken]', accessToken);
+  logger.log('[ChallengeAll: accessToken]', accessToken);
 
   const { mainCategory, setMainCategory, subCategory, setSubCategory } =
     useClubCategoryStore();
@@ -55,15 +55,15 @@ const ClubAll = () => {
   }, [mainDataList]);
 
   // 모임 목록 컨트롤러
-  const clubController = ChallengeController.getInstance();
+  const challengeController = ChallengeController.getInstance();
 
-  const fetchClubItemsList = async () => {
+  const fetchChallengeItemList = async () => {
     setIsLoading(true);
     if (!mainCategory || mainCategory === '전체') {
-      const challengeListData = await clubController.getChallengeList();
+      const challengeListData = await challengeController.getChallengeList();
       setChallengeList(challengeListData);
     } else {
-      const challengeListData = await clubController.getChallengeList(
+      const challengeListData = await challengeController.getChallengeList(
         encodeURIComponent(mainCategory),
       );
       setChallengeList(challengeListData);
@@ -73,13 +73,13 @@ const ClubAll = () => {
 
   // 카테고리 값 변경 시 모임 목록 업데이트
   useEffect(() => {
-    fetchClubItemsList();
+    fetchChallengeItemList();
   }, [mainCategory, subCategory]);
 
   // 지역 변경 시 모임 목록 업데이트
   useEffect(() => {
     const handleRegionChange = () => {
-      fetchClubItemsList();
+      fetchChallengeItemList();
     };
 
     window.addEventListener('regionChanged', handleRegionChange);
@@ -137,4 +137,4 @@ const ClubAll = () => {
   );
 };
 
-export default ClubAll;
+export default ChallengeAll;
