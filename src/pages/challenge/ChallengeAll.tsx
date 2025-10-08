@@ -129,9 +129,7 @@ const ChallengeAll = () => {
         <MainCategory categoryList={categoryList} />
         <div className="challenge-all-content">
           <Title titleName={title} />
-          <div
-            className={`challenge-all-sub-content ${challengeList.length === 0 ? 'empty' : ''}`}
-          >
+          <div className="challenge-all-sub-content">
             <SubCategory categoryList={categoryList} />
             <ChallengeList
               challengeList={challengeList}
