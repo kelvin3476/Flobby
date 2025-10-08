@@ -33,13 +33,13 @@ const RecommendClubList = ({
                 key={recommendClubItem.challengeId}
                 clubId={recommendClubItem.challengeId}
                 clubName={recommendClubItem.challengeName}
-                photo={recommendClubItem.photoUrl}
-                category={recommendClubItem.mainCategory}
-                subCategory={recommendClubItem.subCategory}
-                currentMembers={recommendClubItem.currentMember}
+                photoUrl={recommendClubItem.photoUrl}
+                mainCategory={recommendClubItem.mainCategory}
+                // subCategory={recommendClubItem.subCategory}
+                currentMember={recommendClubItem.currentMember}
                 maxMember={recommendClubItem.maxMember}
-                locationName={recommendClubItem.regionName}
-                isDetailPage={isDetailPage}
+                regionName={recommendClubItem.regionName}
+                // isDetailPage={isDetailPage}
                 recruitDday={recommendClubItem.recruitDday}
               />
             );

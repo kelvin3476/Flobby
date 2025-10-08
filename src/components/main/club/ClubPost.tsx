@@ -115,16 +115,16 @@ const ClubPost: React.FC<ClubPostProps> = ({
                     <ChallengeItem
                       key={idx}
                       clubId={item.clubId}
-                      photo={item.photo}
+                      photoUrl={item.photo}
                       // hostId={item.hostId}
                       // hostNickname={item.hostNickname}
-                      category={item.category}
+                      mainCategory={item.category}
                       maxMember={item.maxMember}
                       clubName={item.clubName}
-                      locationName={item.locationName}
-                      currentMembers={item.currentMembers}
-                      subCategory={item.subCategory}
-                      postCategory={item.postCategory}
+                      regionName={item.locationName}
+                      currentMember={item.currentMembers}
+                      // subCategory={item.subCategory}
+                      // postCategory={item.postCategory}
                     />
                   </SwiperSlide>
                 );

@@ -1,5 +1,5 @@
 /* 모임 아이템 컨테이너 */
-.club-item-container {
+.challenge-item-container {
   display: flex;
   flex-direction: column;
   width: 240px;
@@ -7,16 +7,8 @@
   gap: 16px;
   cursor: pointer;
 
-  /* 모임 전체 페이지 속성 */
-  &.club-list-item {
-    width: 250px;
-    height: 363px;
-    max-width: 250px;
-    align-items: flex-start;
-  }
-
   /* 모임 아이템 썸네일 */
-  .club-item-thumbnail-wrapper {
+  .challenge-item-thumbnail-wrapper {
     position: relative;
     width: 100%;
     height: auto;
@@ -38,10 +30,14 @@
       right: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 67.72%, rgba(0, 0, 0, 0.26) 105.96%);
+      background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 67.72%,
+        rgba(0, 0, 0, 0.26) 105.96%
+      );
     }
 
-    .club-item-heart-icon-wrapper {
+    .challenge-item-heart-icon-wrapper {
       position: absolute;
       top: 0;
       right: 0;
@@ -49,7 +45,7 @@
       height: 100%;
       padding: 16px;
 
-      .club-item-thumbnail-heart-icon {
+      .challenge-item-thumbnail-heart-icon {
         position: absolute;
         top: 16px;
         right: 16px;
@@ -68,7 +64,7 @@
         }
       }
 
-      .club-item-d-day {
+      .challenge-item-d-day {
         position: absolute;
         top: 16px;
         left: 16px;
@@ -83,10 +79,10 @@
 
         border-radius: 4px;
         opacity: 0.8;
-        background: var(--gray-gray-80026282-b, #26282B);
+        background: var(--gray-gray-80026282-b, #26282b);
         backdrop-filter: blur(2px);
 
-        color: #FFF;
+        color: #fff;
         text-align: justify;
 
         font-size: 14px;
@@ -99,7 +95,7 @@
   }
 
   /* 모임 아이템 내용 */
-  .club-item-content-container {
+  .challenge-item-content-container {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -107,7 +103,7 @@
     height: 97px;
 
     /* 모임 이름 */
-    .club-item-club-name {
+    .challenge-item-club-name {
       display: flex;
       align-items: center;
       width: 100%;
@@ -124,20 +120,20 @@
     }
 
     /* 모임 아이템 정보 */
-    .club-item-information-container {
+    .challenge-item-information-container {
       display: flex;
       flex-direction: column;
       gap: 8px;
       align-items: flex-start;
 
       /* 모임 아이템 태그 */
-      .club-item-tag-container {
+      .challenge-item-tag-container {
         display: flex;
         align-items: center;
         gap: 8px;
       }
 
-      .club-item-information-sub-container {
+      .challenge-item-information-sub-container {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -147,12 +143,12 @@
         //padding-left: 4px;
 
         /* 모임 */
-        .club-item-post-category-container {
+        .challenge-item-post-category-container {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          .club-item-post-category {
+          .challenge-item-post-category {
             color: #72787f;
 
             font-size: 16px;
@@ -164,12 +160,12 @@
         }
 
         /* 모임 위치 */
-        .club-item-location-container {
+        .challenge-item-location-container {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          .club-item-location-icon {
+          .challenge-item-location-icon {
             width: 24px;
             height: 24px;
 
@@ -178,7 +174,7 @@
             background-repeat: no-repeat;
           }
 
-          .club-item-location {
+          .challenge-item-location {
             color: #72787f;
 
             font-size: 16px;
@@ -190,7 +186,7 @@
         }
 
         /* 모임 정보 구분선 아이콘 */
-        .club-item-divider-icon {
+        .challenge-item-divider-icon {
           width: 2px;
           height: 8px;
           background-image: url('../../../assets/svg/main/club/main_club_icon_divider.svg');
@@ -200,12 +196,12 @@
         }
 
         /* 모임 현재 인원 */
-        .club-item-current-members-container {
+        .challenge-item-current-members-container {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          .club-item-current-members-icon {
+          .challenge-item-current-members-icon {
             width: 24px;
             height: 24px;
             background-image: url('../../../assets/svg/main/club/main_club_icon_member.svg');
@@ -214,12 +210,12 @@
             background-position: center;
           }
 
-          .club-item-member-container {
+          .challenge-item-member-container {
             display: flex;
             flex-direction: row;
             gap: 2px;
 
-            .club-item-member-count {
+            .challenge-item-member-count {
               color: #72787f;
 
               font-size: 16px;
@@ -228,7 +224,7 @@
               line-height: 150%;
               letter-spacing: -0.3px;
 
-              .club-item-member-number {
+              .challenge-item-member-number {
                 color: #191919;
               }
             }

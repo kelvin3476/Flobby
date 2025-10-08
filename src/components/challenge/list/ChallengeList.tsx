@@ -10,7 +10,7 @@ interface ChallengeListProps {
   challengeList: ChallengeItemType[] | null;
   accessToken: string | null;
   isLoading?: boolean;
-  pageType?: string; // search, list, ...
+  pageType?: string; // search, ...
 }
 const ChallengeList = ({
   challengeList,
@@ -20,13 +20,27 @@ const ChallengeList = ({
 }: ChallengeListProps) => {
   const navigate = useNavigate();
 
+  const exceptionTexts = {
+    search: {
+      primary: '검색 결과가 없어요',
+      secondary: '다른 키워드로 검색해 보세요.',
+    },
+    default: {
+      primary: '근처에 개설된 챌린지가 없어요',
+      secondary: '지역을 바꾸거나 다른 카테고리의 챌린지를 살펴보세요',
+    },
+  };
+
   return (
     <div className="challenge-all-list-container">
       {challengeList && challengeList.length > 0 ? (
         /* challengeList 있을 경우 */
         challengeList
           .reduce((rows, challengeItem, index) => {
-            if (index % 5 === 0) rows.push([]);
+            /* 검색 페이지일 경우 5개씩, 그 외 페이지는 4개씩 */
+            const rowCount = pageType === 'search' ? 5 : 4;
+
+            if (index % rowCount === 0) rows.push([]);
             rows[rows.length - 1].push(challengeItem);
             return rows;
           }, [])
@@ -36,14 +50,12 @@ const ChallengeList = ({
                 <ChallengeItem
                   key={challengeItemInRow.challengeId}
                   clubId={challengeItemInRow.challengeId}
-                  photo={challengeItemInRow.photoUrl}
-                  category={challengeItemInRow.mainCategory}
+                  photoUrl={challengeItemInRow.photoUrl}
+                  mainCategory={challengeItemInRow.mainCategory}
                   maxMember={challengeItemInRow.maxMember}
                   clubName={challengeItemInRow.challengeName}
-                  locationName={challengeItemInRow.locationName}
-                  currentMembers={challengeItemInRow.currentMembers}
-                  subCategory={challengeItemInRow.subCategory}
-                  postCategory={challengeItemInRow.postCategory}
+                  regionName={challengeItemInRow.regionName}
+                  currentMember={challengeItemInRow.currentMember}
                 />
               ))}
             </div>
@@ -54,16 +66,18 @@ const ChallengeList = ({
       ) : (
         /* challengeList 없을 경우 예외 처리 */
         <div className="challenge-all-list-exception-box">
-          <div className="challenge-all-list-exception-text-box">
+          <div
+            className={`challenge-all-list-exception-text-box ${pageType === 'search' ? 'search' : 'default'}`}
+          >
             <span>
               {pageType === 'search'
-                ? '검색 결과가 없어요'
-                : '근처에 개설된 챌린지가 없어요'}
+                ? exceptionTexts.search.primary
+                : exceptionTexts.default.primary}
             </span>
             <span>
               {pageType === 'search'
-                ? '다른 키워드로 검색해 보세요.'
-                : '지역을 바꾸거나 다른 카테고리의 챌린지를 살펴보세요'}
+                ? exceptionTexts.search.secondary
+                : exceptionTexts.default.secondary}
             </span>
           </div>
           <button
