@@ -107,11 +107,10 @@ const ChallengeAll = () => {
     let newTitle = '';
     if (mainCategory === '전체') {
       newTitle = `${regionController.model.selectedRegion.regionName} 챌린지`;
-      setTitle(newTitle);
     } else {
       newTitle = `${regionController.model.selectedRegion.regionName} ${mainCategory} 챌린지`;
-      setTitle(newTitle);
     }
+    setTitle(newTitle);
   }, [regionController.model.selectedRegion, mainCategory]);
 
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
