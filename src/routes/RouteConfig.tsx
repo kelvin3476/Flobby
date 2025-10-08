@@ -65,7 +65,7 @@ export const RouteConfig = [
     title: '네이버 소셜 로그인',
   },
 
-  { path: '/club/list', element: <ChallengeAll />, title: '모임 전체' },
+  { path: '/challenge/list', element: <ChallengeAll />, title: '모임 전체' },
   { path: '/club/register', element: <ClubRegister />, title: '모임 등록' },
   { path: '/club/:clubId', element: <ClubDetail />, title: '모임 상세' },
   { path: '/club/edit', element: <ClubRegister />, title: '모임 수정' },
