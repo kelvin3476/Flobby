@@ -90,7 +90,7 @@ export interface clubItem {
   hostId: number;
   hostNickname: string;
   category: string;
-  maxMember: string;
+  maxMember: number;
   clubName: string;
   regionId: string;
   locationName: string;

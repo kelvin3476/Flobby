@@ -36,7 +36,7 @@ const ChallengeList = ({
       {challengeList && challengeList.length > 0 ? (
         /* challengeList 있을 경우 */
         challengeList
-          .reduce((rows, challengeItem, index) => {
+          .reduce<ChallengeItemType[][]>((rows, challengeItem, index) => {
             /* 검색 페이지일 경우 5개씩, 그 외 페이지는 4개씩 */
             const rowCount = pageType === 'search' ? 5 : 4;
 

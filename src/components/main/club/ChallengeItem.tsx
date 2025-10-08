@@ -11,7 +11,7 @@ interface ChallengeItemProps {
   // hostId?: number;
   // hostNickname?: string;
   mainCategory: string;
-  maxMember: string;
+  maxMember: number;
   clubName: string;
   regionName: string;
   currentMember: number;

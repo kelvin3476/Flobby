@@ -113,7 +113,7 @@ const ClubPost: React.FC<ClubPostProps> = ({
                 return (
                   <SwiperSlide key={idx}>
                     <ChallengeItem
-                      key={idx}
+                      key={item.clubId}
                       clubId={item.clubId}
                       photoUrl={item.photo}
                       // hostId={item.hostId}

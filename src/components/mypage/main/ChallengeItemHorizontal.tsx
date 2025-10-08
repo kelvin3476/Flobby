@@ -12,7 +12,7 @@ interface ChallengeItemProps {
   currentMember: number;
   regionId: number;
   regionName: string;
-  mainPhotoUrl: string;
+  photoUrl: string;
   recruitEndDate: string;
   recruitDday: string;
   wishCount: number;
@@ -29,7 +29,7 @@ const ChallengeItemHorizontal = ({
   currentMember,
   regionId,
   regionName,
-  mainPhotoUrl,
+  photoUrl,
   recruitEndDate,
   recruitDday,
   wishCount,
@@ -42,7 +42,7 @@ const ChallengeItemHorizontal = ({
     <div className="challenge-item-horizontal-container">
       <div className="challenge-item-horizontal-thumbnail-wrapper">
         <img
-          src={mainPhotoUrl ? mainPhotoUrl : '/img/main/club/thumbnail1.png'}
+          src={photoUrl ? photoUrl : '/img/main/club/thumbnail1.png'}
           alt="challenge-item-horizontal-thumbnail-image"
         />
         {recruitFlag && (

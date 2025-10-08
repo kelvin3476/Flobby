@@ -147,7 +147,7 @@ const ClubSearch = () => {
 
                 {/* 추천 모임 개수는 앞에서부터 5개 노출 */}
                 <RecommendClubList
-                  recommendClubList={challengeList.slice(0, 5)}
+                  recommendClubList={challengePopularList.slice(0, 5)}
                   isDetailPage={true}
                   pageType={'search'}
                 />

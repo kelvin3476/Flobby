@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ChallengeItem } from '@/api/ApiTypes';
+import { ChallengeSearchItem } from '@/api/ApiTypes';
 import ChallengeItemHorizontal from './ChallengeItemHorizontal';
 
 import '@/styles/mypage/MyChallengeList.scss';
 
 interface MyChallengeListProps {
   challengeType: string; // ex) 진행중, 종료, ...
-  challengeList: ChallengeItem[];
+  challengeList: ChallengeSearchItem[];
 }
 
 const MyChallengeList = ({
@@ -55,7 +55,7 @@ const MyChallengeList = ({
               currentMember={item.currentMember}
               regionId={item.regionId}
               regionName={item.regionName}
-              mainPhotoUrl={item.mainPhotoUrl}
+              photoUrl={item.photoUrl}
               recruitEndDate={item.recruitEndDate}
               recruitDday={item.recruitDday}
               wishCount={item.wishCount}
