@@ -1,8 +1,7 @@
 import {
   ClubItemDetail,
-  ClubSearchItem,
   ClubMeetingData,
-  ChallengeItem,
+  ChallengeItemType,
 } from '@/api/ApiTypes';
 import { ChallengeModel } from '@/services/challenge/models/ChallengeModel';
 
@@ -21,7 +20,7 @@ export class ChallengeController {
     return ChallengeController.instance;
   }
 
-  getChallengeList(category?: string): Promise<ChallengeItem[]> {
+  getChallengeList(category?: string): Promise<ChallengeItemType[]> {
     return this.model.getChallengeList(category);
   }
 

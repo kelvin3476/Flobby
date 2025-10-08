@@ -19,9 +19,9 @@ import useClubRegisterStore from '@/store/club/useClubRegisterStore';
 import logger from '@/utils/Logger';
 
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
+import { ClubItemDetail } from '@/api/ApiTypes';
 
 import '@/styles/club/register/ClubRegister.scss';
-import { ClubItemDetail } from '@/api/ApiTypes';
 
 const ClubRegister = () => {
   const {

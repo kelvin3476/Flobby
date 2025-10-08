@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import MainHeader from '@/components/header/MainHeader';
@@ -12,8 +12,8 @@ import useMainPage from '@/hooks/main/useMainPage';
 
 import {
   onedayItem,
+  ChallengeSearchItem,
   getSearchChallengeResponse,
-  ChallengeItem,
   challengeSortType,
 } from '@/api/ApiTypes';
 
@@ -41,9 +41,11 @@ const ClubSearch = () => {
   const [feedList, setFeedList] = React.useState<onedayItem[]>(
     [],
   ); /* TODO: 피드 데이터도 추후 추가 예정 */
-  const [challengeList, setChallengeList] = React.useState<ChallengeItem[]>([]);
+  const [challengeList, setChallengeList] = React.useState<
+    ChallengeSearchItem[]
+  >([]);
   const [challengePopularList, setChallengePopularList] = React.useState<
-    ChallengeItem[]
+    ChallengeSearchItem[]
   >([]);
   const [challengeCount, setChallengeCount] = React.useState<number>(0);
 

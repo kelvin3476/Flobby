@@ -1,19 +1,18 @@
 import {
   ClubItemDetail,
-  ClubSearchItem,
   ClubMeetingData,
-  ChallengeItem,
+  ChallengeItemType,
 } from '@/api/ApiTypes';
 import Main from '@/api/main/Main';
 
 import logger from '@/utils/Logger';
 
 export class ChallengeModel {
-  challengeListData: ChallengeItem[] = [];
+  challengeListData: ChallengeItemType[] = [];
   ClubItemDetailData: ClubItemDetail;
 
   /* 모임 리스트 불러 오는 api */
-  async getChallengeList(mainCategory?: string): Promise<ChallengeItem[]> {
+  async getChallengeList(mainCategory?: string): Promise<ChallengeItemType[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
       const response = await Main.getChallengeList(mainCategory);

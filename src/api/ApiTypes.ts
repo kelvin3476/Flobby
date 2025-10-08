@@ -247,11 +247,11 @@ export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
 /* 챌린지 검색 api(default: 인기순) */
 export interface getSearchChallengeResponse {
   challengeCount: number;
-  challengeSearchList: ChallengeItem[];
-  challengePopularList: ChallengeItem[];
+  challengeSearchList: ChallengeSearchItem[];
+  challengePopularList: ChallengeSearchItem[];
 }
 
-export interface ChallengeItem {
+export interface ChallengeItemType {
   challengeId: number;
   challengeName: string;
   mainCategory: string;
@@ -260,10 +260,13 @@ export interface ChallengeItem {
   currentMember: number;
   regionId: number;
   regionName: string;
-  mainPhotoUrl: string;
+  photoUrl: string;
   recruitEndDate: string;
   recruitDday: string;
   wishCount: number;
+}
+
+export interface ChallengeSearchItem extends ChallengeItemType {
   recruitFlag: boolean; // 모집중 버튼 flag
   createdAt: string;
 }

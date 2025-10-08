@@ -5,12 +5,12 @@ import React from 'react';
 import ProfileInfo from '@/components/mypage/main/ProfileInfo';
 import ChallengeNavigator from '@/components/mypage/main/ChallengeNavigator';
 import MyChallengeList from '@/components/mypage/main/MyChallengeList';
-import { ChallengeItem } from '@/api/ApiTypes';
+import { ChallengeSearchItem } from '@/api/ApiTypes';
 
 import '@/styles/mypage/MyPage.scss';
 
 // test용 mock data
-const inProgressChallenges: ChallengeItem[] = [
+const inProgressChallenges: ChallengeSearchItem[] = [
   {
     challengeId: 1,
     challengeName: '아침 6시 기상 챌린지 같이 도전해요',
@@ -20,7 +20,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 3,
     regionId: 101,
     regionName: '강남구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-01',
     recruitDday: '모집 D-7',
     wishCount: 12,
@@ -36,7 +36,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 2,
     regionId: 102,
     regionName: '서초구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-05',
     recruitDday: '모집 D-11',
     wishCount: 25,
@@ -52,7 +52,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 7,
     regionId: 103,
     regionName: '마포구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-09-30',
     recruitDday: '모집 D-6',
     wishCount: 40,
@@ -68,7 +68,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 15,
     regionId: 104,
     regionName: '송파구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-03',
     recruitDday: '모집 D-9',
     wishCount: 18,
@@ -84,7 +84,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 20,
     regionId: 105,
     regionName: '관악구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-10',
     recruitDday: '모집 D-16',
     wishCount: 33,
@@ -100,7 +100,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 12,
     regionId: 106,
     regionName: '동작구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-09-29',
     recruitDday: '모집 D-5',
     wishCount: 21,
@@ -116,7 +116,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 17,
     regionId: 107,
     regionName: '용산구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-02',
     recruitDday: '모집 D-8',
     wishCount: 29,
@@ -132,7 +132,7 @@ const inProgressChallenges: ChallengeItem[] = [
     currentMember: 26,
     regionId: 108,
     regionName: '종로구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-10-06',
     recruitDday: '모집 D-12',
     wishCount: 37,
@@ -141,7 +141,7 @@ const inProgressChallenges: ChallengeItem[] = [
   },
 ];
 
-const completedChallenges: ChallengeItem[] = [
+const completedChallenges: ChallengeSearchItem[] = [
   {
     challengeId: 101,
     challengeName: '8월 아침 기상 챌린지',
@@ -151,7 +151,7 @@ const completedChallenges: ChallengeItem[] = [
     currentMember: 8,
     regionId: 201,
     regionName: '강서구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-08-31',
     recruitDday: '모집 마감',
     wishCount: 14,
@@ -167,7 +167,7 @@ const completedChallenges: ChallengeItem[] = [
     currentMember: 4,
     regionId: 202,
     regionName: '성북구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-08-15',
     recruitDday: '모집 마감',
     wishCount: 19,
@@ -183,7 +183,7 @@ const completedChallenges: ChallengeItem[] = [
     currentMember: 18,
     regionId: 203,
     regionName: '노원구',
-    mainPhotoUrl: '/img/main/club/thumbnail1.png',
+    photoUrl: '/img/main/club/thumbnail1.png',
     recruitEndDate: '2025-08-20',
     recruitDday: '모집 마감',
     wishCount: 22,

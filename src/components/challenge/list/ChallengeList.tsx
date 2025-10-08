@@ -1,15 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import ClubItem from '@/components/main/club/ClubItem';
-import { ChallengeItem } from '@/api/ApiTypes';
-
+import { ChallengeItemType } from '@/api/ApiTypes';
+import ChallengeItem from '@/components/main/club/ChallengeItem';
 import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
 
 import '@/styles/challenge/list/ChallengeList.scss';
 
 interface ChallengeListProps {
-  challengeList: ChallengeItem[] | null;
+  challengeList: ChallengeItemType[] | null;
   accessToken: string | null;
   isLoading?: boolean;
   pageType?: string; // search, list, ...
@@ -27,27 +25,25 @@ const ChallengeList = ({
       {challengeList && challengeList.length > 0 ? (
         /* challengeList 있을 경우 */
         challengeList
-          .reduce((rows, clubItem, index) => {
+          .reduce((rows, challengeItem, index) => {
             if (index % 5 === 0) rows.push([]);
-            rows[rows.length - 1].push(clubItem);
+            rows[rows.length - 1].push(challengeItem);
             return rows;
           }, [])
-          .map((clubItemsInRow, rowIndex) => (
+          .map((challengeItemsInRow, rowIndex) => (
             <div className="challenge-all-row" key={rowIndex}>
-              {clubItemsInRow.map(clubItemInRow => (
-                <ClubItem
-                  key={clubItemInRow.clubId}
-                  clubId={clubItemInRow.clubId}
-                  photo={clubItemInRow.photo}
-                  hostId={clubItemInRow.hostId}
-                  hostNickname={clubItemInRow.hostNickname}
-                  category={clubItemInRow.category}
-                  maxMember={clubItemInRow.maxMember}
-                  clubName={clubItemInRow.clubName}
-                  locationName={clubItemInRow.locationName}
-                  currentMembers={clubItemInRow.currentMembers}
-                  subCategory={clubItemInRow.subCategory}
-                  postCategory={clubItemInRow.postCategory}
+              {challengeItemsInRow.map(challengeItemInRow => (
+                <ChallengeItem
+                  key={challengeItemInRow.challengeId}
+                  clubId={challengeItemInRow.challengeId}
+                  photo={challengeItemInRow.photoUrl}
+                  category={challengeItemInRow.mainCategory}
+                  maxMember={challengeItemInRow.maxMember}
+                  clubName={challengeItemInRow.challengeName}
+                  locationName={challengeItemInRow.locationName}
+                  currentMembers={challengeItemInRow.currentMembers}
+                  subCategory={challengeItemInRow.subCategory}
+                  postCategory={challengeItemInRow.postCategory}
                 />
               ))}
             </div>

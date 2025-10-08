@@ -5,11 +5,11 @@ import Tag from '@/components/tag/Tag';
 
 import '@/styles/main/club/ClubItem.scss';
 
-interface ClubItemProps {
+interface ChallengeItemProps {
   clubId: number;
   photo: string;
-  hostId?: number;
-  hostNickname?: string;
+  // hostId?: number;
+  // hostNickname?: string;
   category: string;
   maxMember: string;
   clubName: string;
@@ -22,7 +22,7 @@ interface ClubItemProps {
   recruitDday?: string;
 }
 
-const ClubItem = ({
+const ChallengeItem = ({
   clubId,
   category,
   maxMember,
@@ -35,7 +35,7 @@ const ClubItem = ({
   subCategory,
   isDetailPage,
   recruitDday,
-}: ClubItemProps) => {
+}: ChallengeItemProps) => {
   const navigate = useNavigate();
   const [isHeartActive, setIsHeartActive] = React.useState(false);
 
@@ -118,4 +118,4 @@ const ClubItem = ({
   );
 };
 
-export default ClubItem;
+export default ChallengeItem;

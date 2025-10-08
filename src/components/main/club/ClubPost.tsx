@@ -5,7 +5,7 @@ import { Navigation } from 'swiper/modules';
 
 import Button from '@/components/button/Button';
 
-import ClubItem from '@/components/main/club/ClubItem';
+import ChallengeItem from '@/components/main/club/ChallengeItem';
 
 import logger from '@/utils/Logger';
 
@@ -112,12 +112,12 @@ const ClubPost: React.FC<ClubPostProps> = ({
               {clubData.map((item, idx) => {
                 return (
                   <SwiperSlide key={idx}>
-                    <ClubItem
+                    <ChallengeItem
                       key={idx}
                       clubId={item.clubId}
                       photo={item.photo}
-                      hostId={item.hostId}
-                      hostNickname={item.hostNickname}
+                      // hostId={item.hostId}
+                      // hostNickname={item.hostNickname}
                       category={item.category}
                       maxMember={item.maxMember}
                       clubName={item.clubName}
