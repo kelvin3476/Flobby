@@ -4,13 +4,13 @@ import useMainPage from '@/hooks/main/useMainPage';
 import React from 'react';
 import ProfileInfo from '@/components/mypage/main/ProfileInfo';
 import ChallengeNavigator from '@/components/mypage/main/ChallengeNavigator';
-import ChallengeList from '@/components/mypage/main/ChallengeList';
-import { ChallengeData } from '@/api/ApiTypes';
+import MyChallengeList from '@/components/mypage/main/MyChallengeList';
+import { ChallengeItem } from '@/api/ApiTypes';
 
 import '@/styles/mypage/MyPage.scss';
 
 // test용 mock data
-const inProgressChallenges: ChallengeData[] = [
+const inProgressChallenges: ChallengeItem[] = [
   {
     challengeId: 1,
     challengeName: '아침 6시 기상 챌린지 같이 도전해요',
@@ -141,7 +141,7 @@ const inProgressChallenges: ChallengeData[] = [
   },
 ];
 
-const completedChallenges: ChallengeData[] = [
+const completedChallenges: ChallengeItem[] = [
   {
     challengeId: 101,
     challengeName: '8월 아침 기상 챌린지',
@@ -205,11 +205,11 @@ const MyPage = () => {
             <ChallengeNavigator />
           </div>
           <div className="mypage-challenge-box">
-            <ChallengeList
+            <MyChallengeList
               challengeType="progress"
               challengeList={inProgressChallenges.slice(0, 5)}
             />
-            <ChallengeList
+            <MyChallengeList
               challengeType="completed"
               challengeList={completedChallenges.slice(0, 5)}
             />

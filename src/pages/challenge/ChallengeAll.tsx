@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import logger from '@/utils/Logger';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from '@/components/header/MainHeader';
-import MainCategory from '@/components/club/list/MainCategory';
+import MainCategory from '@/components/challenge/list/MainCategory';
 import Title from '@/components/club/text/Title';
-import SubCategory from '@/components/club/list/SubCategory';
-import ChallengeList from '@/components/club/list/ChallengeList';
+import SubCategory from '@/components/challenge/list/SubCategory';
+import ChallengeList from '@/components/challenge/list/ChallengeList';
 import FloatingButton from '@/components/button/FloatingButton';
 import useMainPage from '@/hooks/main/useMainPage';
 import useClubCategoryStore from '@/store/club/useClubCategoryStore';
@@ -17,8 +17,9 @@ import FabDefaultIcon from '@/assets/svg/club/clublist/floating_button_default.s
 import FabDefaultCancelIcon from '@/assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '@/assets/svg/club/clublist/floating_button_club_register.svg';
 import FabOnedayRegisterIcon from '@/assets/svg/club/clublist/floating_button_oneday_register.svg';
-import '@/styles/main/club/ChallengeAll.scss';
 import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
+
+import '@/styles/main/club/ChallengeAll.scss';
 
 const ChallengeAll = () => {
   const navigate = useNavigate();

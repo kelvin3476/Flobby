@@ -3,7 +3,8 @@ import useClubCategoryStore from '@/store/club/useClubCategoryStore';
 import { getCookie, setCookie } from '@/utils/Cookie';
 import { CategorySlugMap } from '@/services/category/models/CategoryListModel';
 import { HobbyCategory } from '@/api/ApiTypes';
-import '@/styles/club/list/MainCategory.scss';
+
+import '@/styles/challenge/list/MainCategory.scss';
 
 interface MainCategoryProps {
   categoryList: HobbyCategory[];

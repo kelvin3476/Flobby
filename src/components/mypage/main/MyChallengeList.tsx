@@ -1,19 +1,19 @@
 import React from 'react';
 
-import '@/styles/mypage/ChallengeList.scss';
-import { ChallengeData } from '@/api/ApiTypes';
-import Button from '@/components/button/Button';
+import { ChallengeItem } from '@/api/ApiTypes';
 import ChallengeItemHorizontal from './ChallengeItemHorizontal';
 
-interface ChallengeListProps {
+import '@/styles/mypage/MyChallengeList.scss';
+
+interface MyChallengeListProps {
   challengeType: string; // ex) 진행중, 종료, ...
-  challengeList: ChallengeData[];
+  challengeList: ChallengeItem[];
 }
 
-const ChallengeList = ({
+const MyChallengeList = ({
   challengeType,
   challengeList,
-}: ChallengeListProps) => {
+}: MyChallengeListProps) => {
   let title;
   switch (challengeType) {
     case 'progress':
@@ -27,18 +27,18 @@ const ChallengeList = ({
   }
 
   return (
-    <div className="challenge-list-container">
-      <div className="challenge-list-header">
+    <div className="my-challenge-list-container">
+      <div className="my-challenge-list-header">
         <span>{title}</span>
         <div
-          className="challenge-list-link-to-all-btn-container"
+          className="my-challenge-list-link-to-all-btn-container"
           onClick={() => {
             // TODO: 클릭시 각 챌린지 전체 보기 페이지로 이동
             console.log('전체 보기 버튼 클릭!');
           }}
         >
           <span>전체 보기</span>
-          <div className="challenge-list-link-to-all-icon-next"></div>
+          <div className="my-challenge-list-link-to-all-icon-next"></div>
         </div>
       </div>
 
@@ -65,8 +65,8 @@ const ChallengeList = ({
           );
         })
       ) : (
-        <div className="challenge-list-empty">
-          <div className="challenge-list-empty-text">
+        <div className="my-challenge-list-empty">
+          <div className="my-challenge-list-empty-text">
             진행 중인 챌린지가 없어요
             <br />
             새로운 챌린지를 시작해 보세요
@@ -77,4 +77,4 @@ const ChallengeList = ({
   );
 };
 
-export default ChallengeList;
+export default MyChallengeList;

@@ -83,7 +83,7 @@ export default function useSearchBarHandlers() {
       setIsOpenSearchModal(false);
 
       /* 검색어가 있는 경우에만 검색 페이지로 이동 */
-      navigate(`/club/search?keyword=${searchKeyword}`);
+      navigate(`/challenge/search?keyword=${searchKeyword}`);
     }
   };
 

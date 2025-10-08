@@ -9,7 +9,7 @@ interface TitleProps {
 
 const Title = ({ className, titleName }: TitleProps) => {
   return (
-    <div className={`challenge-title ${className ? className : ''}`}>
+    <div className={`challenge-all-title ${className ? className : ''}`}>
       {titleName}
     </div>
   );

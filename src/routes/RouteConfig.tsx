@@ -15,11 +15,11 @@ import SelectHobbies from '@/pages/signup/SelectHobbies';
 import SuccessSignUp from '@/pages/signup/SuccessSignUp';
 import KakaoRedirectHandler from '@/services/auth/oauth2/KakaoRedirectHandler';
 import NaverRedirectHandler from '@/services/auth/oauth2/NaverRedirectHandler';
-import ChallengeAll from '@/pages/club/ChallengeAll';
+import ChallengeAll from '@/pages/challenge/ChallengeAll';
 import ClubRegister from '@/pages/club/ClubRegister';
 import ClubDetail from '@/pages/club/ClubDetail';
 import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
-import ClubSearch from '@/pages/club/ClubSearch';
+import ChallengeSearch from '@/pages/challenge/ChallengeSearch';
 import MyPage from '@/pages/mypage/MyPage';
 import ProfileManagement from '@/pages/mypage/ProfileManagement';
 
@@ -81,7 +81,11 @@ export const RouteConfig = [
     title: '정기 모임 수정',
   },
 
-  { path: '/club/search', element: <ClubSearch />, title: '모임 검색' },
+  {
+    path: '/challenge/search',
+    element: <ChallengeSearch />,
+    title: '모임 검색',
+  },
 
   { path: '/mypage', element: <MyPage />, title: '마이 페이지' },
   {

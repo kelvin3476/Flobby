@@ -41,10 +41,6 @@ export class ChallengeController {
     return this.model.selectClubDetail(clubId);
   }
 
-  searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
-    return this.model.searchClubList(searchKeyword);
-  }
-
   createClubMeeting(
     createClubMeetingData: ClubMeetingData,
     clubId: number,

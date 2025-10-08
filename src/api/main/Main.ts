@@ -42,11 +42,6 @@ export default class Main {
       : await http.get(`/challenge/list`);
   }
 
-  /* 모임 검색 조회 */
-  static async searchClubList(searchKeyword?: string) {
-    return await http.get(`/club/search?keyword=${searchKeyword}`);
-  }
-
   /* 모임 가입 신청 */
   static async applyClub(clubId: number) {
     return await http.post(`/club/apply`, clubId);

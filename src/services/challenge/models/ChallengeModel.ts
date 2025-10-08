@@ -115,26 +115,6 @@ export class ChallengeModel {
     }
   }
 
-  /* 모임 검색 api */
-  async searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
-    try {
-      const response = await Main.searchClubList(searchKeyword);
-      const { code, message, data } = response.data;
-      if (code === 1000) {
-        // API 호출 성공
-        return data;
-      } else if (code === 1001) {
-        // API 호출 실패
-        throw new Error(message || '모임 검색 데이터를 가져오지 못했습니다.');
-      } else if (code === 1002) {
-        // API 예외 발생
-        throw new Error(message || '서버 오류가 발생했습니다.');
-      }
-    } catch (error: any) {
-      logger.error(error.message || '모임 검색 api 요청 실패');
-    }
-  }
-
   /* 정기 모임 등록 api */
   async createClubMeeting(
     createClubMeetingData: ClubMeetingData,
