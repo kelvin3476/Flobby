@@ -17,13 +17,21 @@ import FabDefaultIcon from '@/assets/svg/club/clublist/floating_button_default.s
 import FabDefaultCancelIcon from '@/assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '@/assets/svg/club/clublist/floating_button_club_register.svg';
 import FabOnedayRegisterIcon from '@/assets/svg/club/clublist/floating_button_oneday_register.svg';
-import '@/styles/main/club/ClubAll.scss';
+import '@/styles/main/club/ChallengeAll.scss';
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
 
 const ChallengeAll = () => {
   const navigate = useNavigate();
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
-
   logger.log('[ChallengeAll: accessToken]', accessToken);
+
+  // 지역 컨트롤러
+  const regionController = ModalRegionListController.getInstance();
+
+  logger.log(
+    '[ChallengeAll: selectedRegion]',
+    regionController.model.selectedRegion,
+  );
 
   const { mainCategory, setMainCategory, subCategory, setSubCategory } =
     useClubCategoryStore();
@@ -31,7 +39,13 @@ const ChallengeAll = () => {
   const [challengeList, setChallengeList] = useState<ChallengeItem[] | null>(
     [],
   );
+  const [title, setTitle] = useState<string>(
+    `${regionController.model.selectedRegion.regionName} 챌린지`,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  logger.log('[ChallengeAll: mainCategory]', mainCategory);
+  logger.log('[ChallengeAll: subCategory]', subCategory);
 
   // 카테고리 목록 컨트롤러
   const categoryListController = CategoryListController.getInstance();
@@ -88,6 +102,17 @@ const ChallengeAll = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let newTitle = '';
+    if (mainCategory === '전체') {
+      newTitle = `${regionController.model.selectedRegion.regionName} 챌린지`;
+      setTitle(newTitle);
+    } else {
+      newTitle = `${regionController.model.selectedRegion.regionName} ${mainCategory} 챌린지`;
+      setTitle(newTitle);
+    }
+  }, [regionController.model.selectedRegion, mainCategory]);
+
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
   useEffect(() => {
     setMainCategory('전체');
@@ -97,14 +122,14 @@ const ChallengeAll = () => {
   }, []);
 
   return (
-    <div className="club-all-wrapper">
+    <div className="challenge-all-wrapper">
       <MainHeader accessToken={accessToken} />
-      <div className="club-all-content-container">
+      <div className="challenge-all-content-container">
         <MainCategory categoryList={categoryList} />
-        <div className="club-all-content">
-          <Title titleName={mainCategory ? mainCategory : '모임'} />
+        <div className="challenge-all-content">
+          <Title titleName={title} />
           <div
-            className={`club-all-sub-content ${challengeList.length === 0 ? 'empty' : ''}`}
+            className={`challenge-all-sub-content ${challengeList.length === 0 ? 'empty' : ''}`}
           >
             <SubCategory categoryList={categoryList} />
             <ChallengeList
