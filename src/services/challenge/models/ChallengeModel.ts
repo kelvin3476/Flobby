@@ -1,27 +1,27 @@
 import {
-  clubItem,
   ClubItemDetail,
   ClubSearchItem,
   ClubMeetingData,
+  ChallengeItem,
 } from '@/api/ApiTypes';
 import Main from '@/api/main/Main';
 
 import logger from '@/utils/Logger';
 
-export class ClubModel {
-  clubListData: clubItem[] = [];
+export class ChallengeModel {
+  challengeListData: ChallengeItem[] = [];
   ClubItemDetailData: ClubItemDetail;
 
   /* 모임 리스트 불러 오는 api */
-  async getClubList(mainCategory?: string): Promise<clubItem[]> {
+  async getChallengeList(mainCategory?: string): Promise<ChallengeItem[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
-      const response = await Main.getClubList(mainCategory);
+      const response = await Main.getChallengeList(mainCategory);
       const { code, message, data } = response.data;
       if (code === 1000) {
         // API 호출 성공
-        this.clubListData = data;
-        return this.clubListData;
+        this.challengeListData = data;
+        return this.challengeListData;
       } else if (code === 1001) {
         // API 호출 실패
         throw new Error(message || '모임 목록 데이터를 가져오지 못했습니다.');

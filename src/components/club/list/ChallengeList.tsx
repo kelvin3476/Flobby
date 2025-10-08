@@ -2,23 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ClubItem from '@/components/main/club/ClubItem';
-import { ChallengeData, clubItem } from '@/api/ApiTypes';
+import { ChallengeItem } from '@/api/ApiTypes';
 
 import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
 import '@/styles/club/list/ClubList.scss';
 
-interface ClubListProps {
-  clubList: ChallengeData[] | clubItem[] | null;
+interface ChallengeListProps {
+  challengeList: ChallengeItem[] | null;
   accessToken: string | null;
   isLoading?: boolean;
   pageType?: string; // search, list, ...
 }
-const ClubList = ({
-  clubList,
+const ChallengeList = ({
+  challengeList,
   accessToken,
   isLoading,
   pageType,
-}: ClubListProps) => {
+}: ChallengeListProps) => {
   const navigate = useNavigate();
   return (
     <div className="club-list-container">
@@ -26,7 +26,7 @@ const ClubList = ({
         {/* 검색 페이지일 때 분기처리 */}
         {pageType === 'search' ? (
           <>
-            {clubList
+            {challengeList
               .reduce((rows, clubItem, index) => {
                 if (index % 5 === 0) rows.push([]);
                 rows[rows.length - 1].push(clubItem);
@@ -53,9 +53,9 @@ const ClubList = ({
           </>
         ) : (
           <>
-            {clubList && clubList.length > 0 ? (
+            {challengeList && challengeList.length > 0 ? (
               /* 모임 있을 경우 */
-              clubList
+              challengeList
                 .reduce((rows, clubItem, index) => {
                   if (index % 5 === 0) rows.push([]);
                   rows[rows.length - 1].push(clubItem);
@@ -115,4 +115,4 @@ const ClubList = ({
   );
 };
 
-export default ClubList;
+export default ChallengeList;

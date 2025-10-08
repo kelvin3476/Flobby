@@ -36,7 +36,7 @@ export default class Main {
   }
 
   /* 모임 목록 조회 */
-  static async getClubList(mainCategory?: string) {
+  static async getChallengeList(mainCategory?: string) {
     return mainCategory
       ? await http.get(`/club/list?mainCategory=${mainCategory}`)
       : await http.get(`/club/list`);

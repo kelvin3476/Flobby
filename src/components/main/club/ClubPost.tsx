@@ -11,7 +11,6 @@ import logger from '@/utils/Logger';
 
 import { clubItem, MainData } from '@/api/ApiTypes';
 import { MainDataController } from '@/services/main/controllers/MainDataController';
-import { ClubController } from '@/services/club/controllers/ClubController';
 
 import '@/styles/main/club/ClubPost.scss';
 
@@ -20,10 +19,12 @@ interface ClubPostProps {
   setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
 }
 
-const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: ClubPostProps) => {
+const ClubPost: React.FC<ClubPostProps> = ({
+  mainDataList,
+  setMainDataList,
+}: ClubPostProps) => {
   const [clubData, setClubData] = React.useState<clubItem[]>([]);
   const mainDataController = MainDataController.getInstance();
-  const clubController = ClubController.getInstance();
 
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
@@ -35,14 +36,15 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
   React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
     const handleRegionChange = () => {
-      mainDataController.getMainData()
+      mainDataController
+        .getMainData()
         .then((mainData: MainData) => {
           setMainDataList(mainData);
           setClubData([...mainData.clubItems]);
         })
-        .catch((error) => {
+        .catch(error => {
           logger.error('모임 데이터 업데이트 실패:', error);
-        })
+        });
     };
 
     window.addEventListener('regionChanged', handleRegionChange);

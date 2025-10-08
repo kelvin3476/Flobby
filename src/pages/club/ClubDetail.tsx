@@ -18,7 +18,7 @@ import {
   ClubMemberListItem,
   RecommendClubListItem,
 } from '@/api/ApiTypes';
-import { ClubController } from '@/services/club/controllers/ClubController';
+import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 
 import logger from '@/utils/Logger';
 import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
@@ -51,7 +51,7 @@ const ClubDetail = () => {
     try {
       // 여기에 API 호출 로직을 추가하세요.
       logger.log(`모임 ID: ${clubId}`);
-      const response = await ClubController.getInstance().selectClubDetail(
+      const response = await ChallengeController.getInstance().selectClubDetail(
         Number(clubId),
       );
       setClubInfo(response.clubDTO);

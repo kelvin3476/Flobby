@@ -5,13 +5,13 @@ import MainHeader from '@/components/header/MainHeader';
 import MainCategory from '@/components/club/list/MainCategory';
 import Title from '@/components/club/text/Title';
 import SubCategory from '@/components/club/list/SubCategory';
-import ClubList from '@/components/club/list/ClubList';
+import ChallengeList from '@/components/club/list/ChallengeList';
 import FloatingButton from '@/components/button/FloatingButton';
 import useMainPage from '@/hooks/main/useMainPage';
 import useClubCategoryStore from '@/store/club/useClubCategoryStore';
 import { CategoryListController } from '@/services/category/controllers/CategoryListController';
-import { ClubController } from '@/services/club/controllers/ClubController';
-import { clubItem, HobbyCategory } from '@/api/ApiTypes';
+import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
+import { ChallengeItem, HobbyCategory } from '@/api/ApiTypes';
 import { setCookie } from '@/utils/Cookie';
 import FabDefaultIcon from '@/assets/svg/club/clublist/floating_button_default.svg';
 import FabDefaultCancelIcon from '@/assets/svg/club/clublist/floating_button_default_cancel.svg';
@@ -28,7 +28,9 @@ const ClubAll = () => {
   const { mainCategory, setMainCategory, subCategory, setSubCategory } =
     useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
-  const [clubList, setClubList] = useState<clubItem[] | null>([]);
+  const [challengeList, setChallengeList] = useState<ChallengeItem[] | null>(
+    [],
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // 카테고리 목록 컨트롤러
@@ -53,18 +55,18 @@ const ClubAll = () => {
   }, [mainDataList]);
 
   // 모임 목록 컨트롤러
-  const clubController = ClubController.getInstance();
+  const clubController = ChallengeController.getInstance();
 
   const fetchClubItemsList = async () => {
     setIsLoading(true);
     if (!mainCategory || mainCategory === '전체') {
-      const clubListData = await clubController.getClubList();
-      setClubList(clubListData);
+      const challengeListData = await clubController.getChallengeList();
+      setChallengeList(challengeListData);
     } else {
-      const clubListData = await clubController.getClubList(
+      const challengeListData = await clubController.getChallengeList(
         encodeURIComponent(mainCategory),
       );
-      setClubList(clubListData);
+      setChallengeList(challengeListData);
     }
     setIsLoading(false);
   };
@@ -102,11 +104,11 @@ const ClubAll = () => {
         <div className="club-all-content">
           <Title titleName={mainCategory ? mainCategory : '모임'} />
           <div
-            className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
+            className={`club-all-sub-content ${challengeList.length === 0 ? 'empty' : ''}`}
           >
             <SubCategory categoryList={categoryList} />
-            <ClubList
-              clubList={clubList}
+            <ChallengeList
+              challengeList={challengeList}
               accessToken={accessToken}
               isLoading={isLoading}
             />

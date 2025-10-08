@@ -5,7 +5,7 @@ import MainHeader from '@/components/header/MainHeader';
 import Button from '@/components/button/Button';
 import Tab from '@/components/tab/Tab';
 import { Option, SelectBox } from '@/components/selectbox/SelectBox';
-import ClubList from '@/components/club/list/ClubList';
+import ChallengeList from '@/components/club/list/ChallengeList';
 import RecommendClubList from '@/components/club/detail/RecommendClubList';
 
 import useMainPage from '@/hooks/main/useMainPage';
@@ -13,7 +13,7 @@ import useMainPage from '@/hooks/main/useMainPage';
 import {
   onedayItem,
   getSearchChallengeResponse,
-  ChallengeData,
+  ChallengeItem,
   challengeSortType,
 } from '@/api/ApiTypes';
 
@@ -40,9 +40,9 @@ const ClubSearch = () => {
   const [feedList, setFeedList] = React.useState<onedayItem[]>(
     [],
   ); /* TODO: 피드 데이터도 추후 추가 예정 */
-  const [challengeList, setChallengeList] = React.useState<ChallengeData[]>([]);
+  const [challengeList, setChallengeList] = React.useState<ChallengeItem[]>([]);
   const [challengePopularList, setChallengePopularList] = React.useState<
-    ChallengeData[]
+    ChallengeItem[]
   >([]);
   const [challengeCount, setChallengeCount] = React.useState<number>(0);
 
@@ -209,8 +209,8 @@ const ClubSearch = () => {
                       onChange={setSelect}
                     />
                   </div>
-                  <ClubList
-                    clubList={
+                  <ChallengeList
+                    challengeList={
                       deadLine ? recruitingChallengeList : challengeList
                     }
                     accessToken={accessToken}
