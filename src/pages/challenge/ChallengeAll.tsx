@@ -40,6 +40,9 @@ const ChallengeAll = () => {
   const [challengeList, setChallengeList] = useState<
     ChallengeItemType[] | null
   >([]);
+  const [selectedRegion, setSelectedRegion] = useState(
+    regionController.model.selectedRegion,
+  );
   const [title, setTitle] = useState<string>(
     `${regionController.model.selectedRegion.regionName} 챌린지`,
   );
@@ -104,13 +107,30 @@ const ChallengeAll = () => {
   }, []);
 
   useEffect(() => {
-    let newTitle = '';
-    if (mainCategory === '전체') {
-      newTitle = `${regionController.model.selectedRegion.regionName} 챌린지`;
+    const updateTitle = () => {
+      const { selectedRegion } = regionController.model;
+
+      // 메인 카테고리가 '전체'일 경우, 메인 카테고리가 선택되었을 경우 분기
+      const newTitle =
+        mainCategory === '전체'
+          ? `${selectedRegion.regionName} 챌린지`
+          : `${selectedRegion.regionName} ${mainCategory} 챌린지`;
+
+      logger.log('지역 변경', selectedRegion.regionName);
+      setTitle(newTitle);
+    };
+
+    if (regionController.model.initialized) {
+      // 지역 데이터가 이미 초기화된 경우 -> 즉시 타이틀 업데이트
+      updateTitle();
     } else {
-      newTitle = `${regionController.model.selectedRegion.regionName} ${mainCategory} 챌린지`;
+      // 아직 초기화되지 않은 경우 -> regionReady 이벤트가 발생하면 타이틀 업데이트
+      const handleRegionReady = () => {
+        updateTitle();
+        window.removeEventListener('regionReady', handleRegionReady);
+      };
+      window.addEventListener('regionReady', handleRegionReady);
     }
-    setTitle(newTitle);
   }, [regionController.model.selectedRegion, mainCategory]);
 
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
