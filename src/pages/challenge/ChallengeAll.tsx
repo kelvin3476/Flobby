@@ -2,34 +2,51 @@ import React, { useEffect, useState } from 'react';
 import logger from '@/utils/Logger';
 import { useNavigate } from 'react-router-dom';
 import MainHeader from '@/components/header/MainHeader';
-import MainCategory from '@/components/club/list/MainCategory';
+import MainCategory from '@/components/challenge/list/MainCategory';
 import Title from '@/components/club/text/Title';
-import SubCategory from '@/components/club/list/SubCategory';
-import ClubList from '@/components/club/list/ClubList';
+import SubCategory from '@/components/challenge/list/SubCategory';
+import ChallengeList from '@/components/challenge/list/ChallengeList';
 import FloatingButton from '@/components/button/FloatingButton';
 import useMainPage from '@/hooks/main/useMainPage';
 import useClubCategoryStore from '@/store/club/useClubCategoryStore';
 import { CategoryListController } from '@/services/category/controllers/CategoryListController';
-import { ClubController } from '@/services/club/controllers/ClubController';
-import { clubItem, HobbyCategory } from '@/api/ApiTypes';
+import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
+import { ChallengeItemType, HobbyCategory } from '@/api/ApiTypes';
 import { setCookie } from '@/utils/Cookie';
 import FabDefaultIcon from '@/assets/svg/club/clublist/floating_button_default.svg';
 import FabDefaultCancelIcon from '@/assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '@/assets/svg/club/clublist/floating_button_club_register.svg';
 import FabOnedayRegisterIcon from '@/assets/svg/club/clublist/floating_button_oneday_register.svg';
-import '@/styles/main/club/ClubAll.scss';
+import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
 
-const ClubAll = () => {
+import '@/styles/main/club/ChallengeAll.scss';
+
+const ChallengeAll = () => {
   const navigate = useNavigate();
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
+  logger.log('[ChallengeAll: accessToken]', accessToken);
 
-  logger.log('[cluball: accessToken]', accessToken);
+  // 지역 컨트롤러
+  const regionController = ModalRegionListController.getInstance();
+
+  logger.log(
+    '[ChallengeAll: selectedRegion]',
+    regionController.model.selectedRegion,
+  );
 
   const { mainCategory, setMainCategory, subCategory, setSubCategory } =
     useClubCategoryStore();
   const [categoryList, setCategoryList] = useState<HobbyCategory[]>([]);
-  const [clubList, setClubList] = useState<clubItem[] | null>([]);
+  const [challengeList, setChallengeList] = useState<
+    ChallengeItemType[] | null
+  >([]);
+  const [title, setTitle] = useState<string>(
+    `${regionController.model.selectedRegion.regionName} 챌린지`,
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  logger.log('[ChallengeAll: mainCategory]', mainCategory);
+  logger.log('[ChallengeAll: subCategory]', subCategory);
 
   // 카테고리 목록 컨트롤러
   const categoryListController = CategoryListController.getInstance();
@@ -53,31 +70,31 @@ const ClubAll = () => {
   }, [mainDataList]);
 
   // 모임 목록 컨트롤러
-  const clubController = ClubController.getInstance();
+  const challengeController = ChallengeController.getInstance();
 
-  const fetchClubItemsList = async () => {
+  const fetchChallengeItemList = async () => {
     setIsLoading(true);
     if (!mainCategory || mainCategory === '전체') {
-      const clubListData = await clubController.getClubList();
-      setClubList(clubListData);
+      const challengeListData = await challengeController.getChallengeList();
+      setChallengeList(challengeListData);
     } else {
-      const clubListData = await clubController.getClubList(
+      const challengeListData = await challengeController.getChallengeList(
         encodeURIComponent(mainCategory),
       );
-      setClubList(clubListData);
+      setChallengeList(challengeListData);
     }
     setIsLoading(false);
   };
 
   // 카테고리 값 변경 시 모임 목록 업데이트
   useEffect(() => {
-    fetchClubItemsList();
+    fetchChallengeItemList();
   }, [mainCategory, subCategory]);
 
   // 지역 변경 시 모임 목록 업데이트
   useEffect(() => {
     const handleRegionChange = () => {
-      fetchClubItemsList();
+      fetchChallengeItemList();
     };
 
     window.addEventListener('regionChanged', handleRegionChange);
@@ -85,6 +102,16 @@ const ClubAll = () => {
       window.removeEventListener('regionChanged', handleRegionChange);
     };
   }, []);
+
+  useEffect(() => {
+    let newTitle = '';
+    if (mainCategory === '전체') {
+      newTitle = `${regionController.model.selectedRegion.regionName} 챌린지`;
+    } else {
+      newTitle = `${regionController.model.selectedRegion.regionName} ${mainCategory} 챌린지`;
+    }
+    setTitle(newTitle);
+  }, [regionController.model.selectedRegion, mainCategory]);
 
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
   useEffect(() => {
@@ -95,18 +122,16 @@ const ClubAll = () => {
   }, []);
 
   return (
-    <div className="club-all-wrapper">
+    <div className="challenge-all-wrapper">
       <MainHeader accessToken={accessToken} />
-      <div className="club-all-content-container">
+      <div className="challenge-all-content-container">
         <MainCategory categoryList={categoryList} />
-        <div className="club-all-content">
-          <Title titleName={mainCategory ? mainCategory : '모임'} />
-          <div
-            className={`club-all-sub-content ${clubList.length === 0 ? 'empty' : ''}`}
-          >
+        <div className="challenge-all-content">
+          <Title titleName={title} />
+          <div className="challenge-all-sub-content">
             <SubCategory categoryList={categoryList} />
-            <ClubList
-              clubList={clubList}
+            <ChallengeList
+              challengeList={challengeList}
               accessToken={accessToken}
               isLoading={isLoading}
             />
@@ -135,4 +160,4 @@ const ClubAll = () => {
   );
 };
 
-export default ClubAll;
+export default ChallengeAll;

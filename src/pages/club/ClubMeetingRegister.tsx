@@ -16,7 +16,7 @@ import useClubMeetingRegisterStore from '@/store/club/useClubMeetingRegisterStor
 import useMainPage from '@/hooks/main/useMainPage';
 
 import { ClubMeetingData } from '@/api/ApiTypes';
-import { ClubController } from '@/services/club/controllers/ClubController';
+import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 
 import '@/styles/club/meeting_register/ClubMeetingRegister.scss';
 import logger from '@/utils/Logger';
@@ -67,7 +67,7 @@ const ClubMeetingRegister = () => {
 
   const { accessToken } = useMainPage();
 
-  const clubController = ClubController.getInstance();
+  const challengeController = ChallengeController.getInstance();
 
   /* 정기 모임 등록 페이지 최초 진입 시 스크롤 최상단 고정 */
   React.useEffect(() => {
@@ -120,9 +120,14 @@ const ClubMeetingRegister = () => {
       setIsClubMeetingTimeValid(false);
       setClubMeetingTimeError('시간을 선택해 주세요.');
       isError = true;
-    } else if (new Date(`${clubMeetingDate} ${clubMeetingTime}`).getTime() < new Date().getTime() + 30 * 60 * 1000) {
+    } else if (
+      new Date(`${clubMeetingDate} ${clubMeetingTime}`).getTime() <
+      new Date().getTime() + 30 * 60 * 1000
+    ) {
       setIsClubMeetingTimeValid(false);
-      setClubMeetingTimeError('현재 시각을 기준으로 30분 이후부터 설정할 수 있어요');
+      setClubMeetingTimeError(
+        '현재 시각을 기준으로 30분 이후부터 설정할 수 있어요',
+      );
       isError = true;
     } else {
       setIsClubMeetingTimeValid(true);
@@ -151,11 +156,11 @@ const ClubMeetingRegister = () => {
 
     if (entryFee.length > 10) {
       setIsEntryFeeValid(false);
-      setEntryFeeError("참가비는 최대 10자까지 작성할 수 있어요.");
+      setEntryFeeError('참가비는 최대 10자까지 작성할 수 있어요.');
       isError = true;
     } else {
       setIsEntryFeeValid(true);
-      setEntryFeeError("");
+      setEntryFeeError('');
     }
 
     if (isError) return;
@@ -198,7 +203,7 @@ const ClubMeetingRegister = () => {
     };
 
     try {
-      await clubController.createClubMeeting(payload, Number(clubId));
+      await challengeController.createClubMeeting(payload, Number(clubId));
     } catch (error) {
       console.error('정기 모임 등록 요청 실패:', error);
     }
@@ -233,7 +238,7 @@ const ClubMeetingRegister = () => {
     };
 
     try {
-      await clubController.editClubMeeting(payload, meetingId);
+      await challengeController.editClubMeeting(payload, meetingId);
     } catch (error) {
       console.error('정기 모임 수정 요청 실패:', error);
     }
@@ -243,7 +248,9 @@ const ClubMeetingRegister = () => {
     if (isEditPage) {
       try {
         const fetchClubMeetingItemData = async () => {
-          const data = await clubController.selectClubDetail(Number(clubId));
+          const data = await challengeController.selectClubDetail(
+            Number(clubId),
+          );
 
           const selectedClubMeeting = data.clubMeetingList.find(
             item => item.meetingId === meetingId,
@@ -316,7 +323,7 @@ const ClubMeetingRegister = () => {
     }
 
     try {
-      await clubController.deleteClubMeeting(Number(meetingId));
+      await challengeController.deleteClubMeeting(Number(meetingId));
     } catch (error) {
       console.error('모임 삭제 요청 실패', error);
     }

@@ -1,0 +1,108 @@
+.challenge-all-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  .challenge-all-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+  }
+
+  .challenge-all-list-exception-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+
+    .challenge-all-list-exception-text-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+
+      &.default {
+        > span {
+          &:first-of-type {
+            color: #000;
+            text-align: center;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.3px;
+          }
+
+          &:nth-of-type(2) {
+            color: #9ea4aa;
+            text-align: center;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.3px;
+          }
+        }
+      }
+
+      &.search {
+        > span {
+          &:first-of-type {
+            color: #000;
+            text-align: center;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 140%;
+            letter-spacing: -0.3px;
+          }
+
+          &:nth-of-type(2) {
+            color: #72787f;
+            text-align: center;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            letter-spacing: -0.3px;
+          }
+        }
+      }
+    }
+
+    > button {
+      display: flex;
+      height: 60px;
+      padding: 12px 30px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border-radius: 6px;
+      background: #26282b;
+      border: none;
+      cursor: pointer;
+
+      .challenge-all-list-exception-icon {
+        width: 12px;
+        height: 12px;
+
+        background: url('../../../assets/svg/club/clublist/club_list_exception_handle_add_button.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      > span {
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+        letter-spacing: -0.3px;
+      }
+    }
+  }
+}

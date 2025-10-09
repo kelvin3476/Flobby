@@ -1,11 +1,11 @@
 import React from 'react';
 import Title from '@/components/club/text/Title';
-import { ChallengeData, clubItem } from '@/api/ApiTypes';
-import ClubItem from '@/components/main/club/ClubItem';
+import { ChallengeItemType, clubItem } from '@/api/ApiTypes';
+import ChallengeItem from '@/components/main/club/ChallengeItem';
 import '@/styles/club/detail/RecommendClubList.scss';
 
 interface RecommendClubListProps {
-  recommendClubList: clubItem[] | ChallengeData[];
+  recommendClubList: clubItem[] | ChallengeItemType[];
   isDetailPage: boolean;
   pageType?: string; // 페이지 타입 (예: 'search', 'detail')
 }
@@ -29,17 +29,17 @@ const RecommendClubList = ({
         <div className="recommend-club-list">
           {recommendClubList.map(recommendClubItem => {
             return (
-              <ClubItem
+              <ChallengeItem
                 key={recommendClubItem.challengeId}
                 clubId={recommendClubItem.challengeId}
                 clubName={recommendClubItem.challengeName}
-                photo={recommendClubItem.mainPhotoUrl}
-                category={recommendClubItem.mainCategory}
-                subCategory={recommendClubItem.subCategory}
-                currentMembers={recommendClubItem.currentMember}
+                photoUrl={recommendClubItem.photoUrl}
+                mainCategory={recommendClubItem.mainCategory}
+                // subCategory={recommendClubItem.subCategory}
+                currentMember={recommendClubItem.currentMember}
                 maxMember={recommendClubItem.maxMember}
-                locationName={recommendClubItem.regionName}
-                isDetailPage={isDetailPage}
+                regionName={recommendClubItem.regionName}
+                // isDetailPage={isDetailPage}
                 recruitDday={recommendClubItem.recruitDday}
               />
             );

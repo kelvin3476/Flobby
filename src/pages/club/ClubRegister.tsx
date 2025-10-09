@@ -18,10 +18,10 @@ import useClubRegisterStore from '@/store/club/useClubRegisterStore';
 
 import logger from '@/utils/Logger';
 
-import { ClubController } from '@/services/club/controllers/ClubController';
+import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
+import { ClubItemDetail } from '@/api/ApiTypes';
 
 import '@/styles/club/register/ClubRegister.scss';
-import { ClubItemDetail } from '@/api/ApiTypes';
 
 const ClubRegister = () => {
   const {
@@ -66,7 +66,7 @@ const ClubRegister = () => {
 
   const { accessToken } = useMainPage();
 
-  const clubController = ClubController.getInstance();
+  const challengeController = ChallengeController.getInstance();
 
   const handleValidChange = () => {
     let isError = false;
@@ -155,7 +155,7 @@ const ClubRegister = () => {
       );
 
       try {
-        await clubController.createClub(formData);
+        await challengeController.createClub(formData);
       } catch (error) {
         console.error('모임 등록 요청 실패', error);
       }
@@ -186,7 +186,7 @@ const ClubRegister = () => {
     );
 
     try {
-      await clubController.editClub(Number(clubId), formData);
+      await challengeController.editClub(Number(clubId), formData);
     } catch (error) {
       console.error('모임 수정 요청 실패', error);
     }
@@ -199,7 +199,9 @@ const ClubRegister = () => {
     if (isEditPage) {
       try {
         const fetchClubItemData = async () => {
-          const data = await clubController.selectClubDetail(Number(clubId));
+          const data = await challengeController.selectClubDetail(
+            Number(clubId),
+          );
           setClubItemData(data);
 
           /* 모임 수정 일때 기존 입력한 데이터 다시 불러와서 상태값 저장 */
@@ -249,7 +251,7 @@ const ClubRegister = () => {
   /* 정기 모임 삭제 */
   const handleDeleteClubMeeting = async () => {
     try {
-      await clubController.deleteClub(clubId);
+      await challengeController.deleteClub(clubId);
     } catch (error) {
       console.error('모임 삭제 요청 실패', error);
     }
@@ -257,7 +259,7 @@ const ClubRegister = () => {
 
   // 모달 이벤트 핸들러 함수
   const handleModalConfirm = async () => {
-    if (isProcessing) return; 
+    if (isProcessing) return;
 
     setIsProcessing(true);
 
@@ -281,7 +283,7 @@ const ClubRegister = () => {
     } finally {
       setIsProcessing(false);
     }
-  }
+  };
 
   /* 모달 메세지 */
   const MESSAGES = {

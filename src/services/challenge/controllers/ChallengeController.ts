@@ -1,28 +1,27 @@
 import {
-  clubItem,
   ClubItemDetail,
-  ClubSearchItem,
   ClubMeetingData,
+  ChallengeItemType,
 } from '@/api/ApiTypes';
-import { ClubModel } from '@/services/club/models/ClubModel';
+import { ChallengeModel } from '@/services/challenge/models/ChallengeModel';
 
-export class ClubController {
-  private static instance: ClubController;
-  model: ClubModel;
+export class ChallengeController {
+  private static instance: ChallengeController;
+  model: ChallengeModel;
 
   private constructor() {
-    this.model = new ClubModel();
+    this.model = new ChallengeModel();
   }
 
-  static getInstance(): ClubController {
-    if (!ClubController.instance) {
-      ClubController.instance = new ClubController();
+  static getInstance(): ChallengeController {
+    if (!ChallengeController.instance) {
+      ChallengeController.instance = new ChallengeController();
     }
-    return ClubController.instance;
+    return ChallengeController.instance;
   }
 
-  getClubList(category?: string): Promise<clubItem[]> {
-    return this.model.getClubList(category);
+  getChallengeList(category?: string): Promise<ChallengeItemType[]> {
+    return this.model.getChallengeList(category);
   }
 
   createClub(createClubData: FormData): Promise<void> {
@@ -39,10 +38,6 @@ export class ClubController {
 
   selectClubDetail(clubId: number): Promise<ClubItemDetail> {
     return this.model.selectClubDetail(clubId);
-  }
-
-  searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
-    return this.model.searchClubList(searchKeyword);
   }
 
   createClubMeeting(

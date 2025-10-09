@@ -5,13 +5,12 @@ import { Navigation } from 'swiper/modules';
 
 import Button from '@/components/button/Button';
 
-import ClubItem from '@/components/main/club/ClubItem';
+import ChallengeItem from '@/components/main/club/ChallengeItem';
 
 import logger from '@/utils/Logger';
 
 import { clubItem, MainData } from '@/api/ApiTypes';
 import { MainDataController } from '@/services/main/controllers/MainDataController';
-import { ClubController } from '@/services/club/controllers/ClubController';
 
 import '@/styles/main/club/ClubPost.scss';
 
@@ -20,10 +19,12 @@ interface ClubPostProps {
   setMainDataList: React.Dispatch<React.SetStateAction<MainData>>;
 }
 
-const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: ClubPostProps) => {
+const ClubPost: React.FC<ClubPostProps> = ({
+  mainDataList,
+  setMainDataList,
+}: ClubPostProps) => {
   const [clubData, setClubData] = React.useState<clubItem[]>([]);
   const mainDataController = MainDataController.getInstance();
-  const clubController = ClubController.getInstance();
 
   React.useEffect(() => {
     /* 최초 화면 진입 후 렌더링 시 호출 */
@@ -35,14 +36,15 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
   React.useEffect(() => {
     /* 지역 변경 이벤트 핸들러 */
     const handleRegionChange = () => {
-      mainDataController.getMainData()
+      mainDataController
+        .getMainData()
         .then((mainData: MainData) => {
           setMainDataList(mainData);
           setClubData([...mainData.clubItems]);
         })
-        .catch((error) => {
+        .catch(error => {
           logger.error('모임 데이터 업데이트 실패:', error);
-        })
+        });
     };
 
     window.addEventListener('regionChanged', handleRegionChange);
@@ -110,19 +112,19 @@ const ClubPost: React.FC<ClubPostProps> = ({ mainDataList, setMainDataList }: Cl
               {clubData.map((item, idx) => {
                 return (
                   <SwiperSlide key={idx}>
-                    <ClubItem
-                      key={idx}
+                    <ChallengeItem
+                      key={item.clubId}
                       clubId={item.clubId}
-                      photo={item.photo}
-                      hostId={item.hostId}
-                      hostNickname={item.hostNickname}
-                      category={item.category}
+                      photoUrl={item.photo}
+                      // hostId={item.hostId}
+                      // hostNickname={item.hostNickname}
+                      mainCategory={item.category}
                       maxMember={item.maxMember}
                       clubName={item.clubName}
-                      locationName={item.locationName}
-                      currentMembers={item.currentMembers}
-                      subCategory={item.subCategory}
-                      postCategory={item.postCategory}
+                      regionName={item.locationName}
+                      currentMember={item.currentMembers}
+                      // subCategory={item.subCategory}
+                      // postCategory={item.postCategory}
                     />
                   </SwiperSlide>
                 );

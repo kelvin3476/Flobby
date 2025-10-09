@@ -1,27 +1,26 @@
 import {
-  clubItem,
   ClubItemDetail,
-  ClubSearchItem,
   ClubMeetingData,
+  ChallengeItemType,
 } from '@/api/ApiTypes';
 import Main from '@/api/main/Main';
 
 import logger from '@/utils/Logger';
 
-export class ClubModel {
-  clubListData: clubItem[] = [];
+export class ChallengeModel {
+  challengeListData: ChallengeItemType[] = [];
   ClubItemDetailData: ClubItemDetail;
 
   /* 모임 리스트 불러 오는 api */
-  async getClubList(mainCategory?: string): Promise<clubItem[]> {
+  async getChallengeList(mainCategory?: string): Promise<ChallengeItemType[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
-      const response = await Main.getClubList(mainCategory);
+      const response = await Main.getChallengeList(mainCategory);
       const { code, message, data } = response.data;
       if (code === 1000) {
         // API 호출 성공
-        this.clubListData = data;
-        return this.clubListData;
+        this.challengeListData = data;
+        return this.challengeListData;
       } else if (code === 1001) {
         // API 호출 실패
         throw new Error(message || '모임 목록 데이터를 가져오지 못했습니다.');
@@ -112,26 +111,6 @@ export class ClubModel {
       }
     } catch (error: any) {
       logger.error(error.message || '모임 상세 api 요청 실패');
-    }
-  }
-
-  /* 모임 검색 api */
-  async searchClubList(searchKeyword?: string): Promise<ClubSearchItem> {
-    try {
-      const response = await Main.searchClubList(searchKeyword);
-      const { code, message, data } = response.data;
-      if (code === 1000) {
-        // API 호출 성공
-        return data;
-      } else if (code === 1001) {
-        // API 호출 실패
-        throw new Error(message || '모임 검색 데이터를 가져오지 못했습니다.');
-      } else if (code === 1002) {
-        // API 예외 발생
-        throw new Error(message || '서버 오류가 발생했습니다.');
-      }
-    } catch (error: any) {
-      logger.error(error.message || '모임 검색 api 요청 실패');
     }
   }
 

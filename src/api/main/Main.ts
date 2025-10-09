@@ -36,15 +36,10 @@ export default class Main {
   }
 
   /* 모임 목록 조회 */
-  static async getClubList(mainCategory?: string) {
+  static async getChallengeList(mainCategory?: string) {
     return mainCategory
-      ? await http.get(`/club/list?mainCategory=${mainCategory}`)
-      : await http.get(`/club/list`);
-  }
-
-  /* 모임 검색 조회 */
-  static async searchClubList(searchKeyword?: string) {
-    return await http.get(`/club/search?keyword=${searchKeyword}`);
+      ? await http.get(`/challenge/list?mainCategory=${mainCategory}`)
+      : await http.get(`/challenge/list`);
   }
 
   /* 모임 가입 신청 */

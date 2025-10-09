@@ -73,7 +73,7 @@ const SearchModal = ({
         className={`trending-search-keyword ${item.keyword.length >= 12 ? 'long' : ''}`}
         onClick={() => {
           uploadKeywordHistory(item.keyword);
-          navigate(`/club/search?keyword=${item.keyword}`);
+          navigate(`/challenge/search?keyword=${item.keyword}`);
           onClose();
         }}
       >
@@ -114,7 +114,7 @@ const SearchModal = ({
                     text={item}
                     onClick={() => {
                       uploadKeywordHistory(item);
-                      navigate(`/club/search?keyword=${item}`);
+                      navigate(`/challenge/search?keyword=${item}`);
                       onClose();
                     }}
                     onDelete={() => onDeleteRecent(item)}

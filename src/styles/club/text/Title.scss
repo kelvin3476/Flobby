@@ -1,17 +1,19 @@
-@mixin club-title-style {
+@mixin challenge-title-style {
   font-size: 30px;
   font-style: normal;
   font-weight: 600;
   color: #191919;
-  text-align: center;
+  line-height: 140%;
 }
 
-.club-title {
-  @include club-title-style();
+.challenge-all-title {
+  display: flex;
+  align-self: stretch;
+  @include challenge-title-style();
 }
 
 .club-detail-item-sub-title {
-  @include club-title-style();
+  @include challenge-title-style();
 
   font-size: 24px;
   line-height: 140%;

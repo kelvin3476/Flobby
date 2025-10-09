@@ -1,4 +1,4 @@
-.challenge-list-container {
+.my-challenge-list-container {
   display: flex;
   min-width: 450px;
   min-height: 826px;
@@ -12,7 +12,7 @@
   border: 1px solid #e8ebed;
   background: #fff;
 
-  .challenge-list-header {
+  .my-challenge-list-header {
     display: flex;
     width: 100%;
     height: 34px;
@@ -28,7 +28,7 @@
       letter-spacing: -0.3px;
     }
 
-    .challenge-list-link-to-all-btn-container {
+    .my-challenge-list-link-to-all-btn-container {
       display: flex;
       width: 79px;
       align-items: center;
@@ -43,7 +43,7 @@
         letter-spacing: -0.3px;
       }
 
-      .challenge-list-link-to-all-icon-next {
+      .my-challenge-list-link-to-all-icon-next {
         width: 20px;
         height: 20px;
         flex-shrink: 0;
@@ -55,14 +55,14 @@
     }
   }
 
-  .challenge-list-empty {
+  .my-challenge-list-empty {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
 
-    .challenge-list-empty-text {
+    .my-challenge-list-empty-text {
       color: #9ea4aa;
       text-align: center;
       font-size: 14px;

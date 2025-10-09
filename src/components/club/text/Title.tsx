@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "@/styles/club/text/Title.scss";
+import '@/styles/club/text/Title.scss';
 
 interface TitleProps {
   className?: string;
@@ -9,7 +9,9 @@ interface TitleProps {
 
 const Title = ({ className, titleName }: TitleProps) => {
   return (
-    <div className={`club-title ${className}`}>{titleName}</div>
+    <div className={`challenge-all-title ${className ? className : ''}`}>
+      {titleName}
+    </div>
   );
 };
 

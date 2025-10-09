@@ -90,7 +90,7 @@ export interface clubItem {
   hostId: number;
   hostNickname: string;
   category: string;
-  maxMember: string;
+  maxMember: number;
   clubName: string;
   regionId: string;
   locationName: string;
@@ -247,11 +247,11 @@ export type ClubRoleType = 'LEADER' | 'MANAGER' | 'MEMBER' | null;
 /* 챌린지 검색 api(default: 인기순) */
 export interface getSearchChallengeResponse {
   challengeCount: number;
-  challengeSearchList: ChallengeData[];
-  challengePopularList: ChallengeData[];
+  challengeSearchList: ChallengeSearchItem[];
+  challengePopularList: ChallengeSearchItem[];
 }
 
-export interface ChallengeData {
+export interface ChallengeItemType {
   challengeId: number;
   challengeName: string;
   mainCategory: string;
@@ -260,10 +260,13 @@ export interface ChallengeData {
   currentMember: number;
   regionId: number;
   regionName: string;
-  mainPhotoUrl: string;
+  photoUrl: string;
   recruitEndDate: string;
   recruitDday: string;
   wishCount: number;
+}
+
+export interface ChallengeSearchItem extends ChallengeItemType {
   recruitFlag: boolean; // 모집중 버튼 flag
   createdAt: string;
 }
@@ -299,14 +302,15 @@ export interface GetProfileDetailResponse {
 
 /* 프로필 상세 수정 json api */
 export interface PatchProfileDetailJsonResponse {
-  defaultImage?: boolean; /* 기본이미지로 변경시 false로 전달 이미지 변경시 true로 전달 */
-  nickName?: string; /* 닉네임(2~12자, 중복 불가) */
-  interestRegion?: number[] /* 관심지역ID 배열(최대 3개) */
-  interestCategory?: string[] /* 관심카테고리(최대 3개) */
+  defaultImage?: boolean /* 기본이미지로 변경시 false로 전달 이미지 변경시 true로 전달 */;
+  nickName?: string /* 닉네임(2~12자, 중복 불가) */;
+  interestRegion?: number[] /* 관심지역ID 배열(최대 3개) */;
+  interestCategory?: string[] /* 관심카테고리(최대 3개) */;
 }
 
 /* 프로필 상세 수정 api */
-export interface PatchProfileDetailResponse extends PatchProfileDetailJsonResponse{
-  file?: File; /* 프로필 수정 이미지 (프로필 이미지 수정할 경우만) */
-  data?: PatchProfileDetailJsonResponse; /* 프로필 수정 데이터 (수정 할 데이터가 있을때만) */
+export interface PatchProfileDetailResponse
+  extends PatchProfileDetailJsonResponse {
+  file?: File /* 프로필 수정 이미지 (프로필 이미지 수정할 경우만) */;
+  data?: PatchProfileDetailJsonResponse /* 프로필 수정 데이터 (수정 할 데이터가 있을때만) */;
 }
