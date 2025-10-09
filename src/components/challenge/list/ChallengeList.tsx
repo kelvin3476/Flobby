@@ -45,7 +45,10 @@ const ChallengeList = ({
             return rows;
           }, [])
           .map((challengeItemsInRow, rowIndex) => (
-            <div className="challenge-all-row" key={rowIndex}>
+            <div
+              className={`challenge-all-row ${pageType === 'search' ? 'search' : 'default'}`}
+              key={rowIndex}
+            >
               {challengeItemsInRow.map(challengeItemInRow => (
                 <ChallengeItem
                   key={challengeItemInRow.challengeId}

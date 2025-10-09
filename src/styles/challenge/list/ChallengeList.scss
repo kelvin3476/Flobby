@@ -8,8 +8,15 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     align-self: stretch;
+
+    &.default {
+      gap: calc((100% - (240px * 4)) / 3);
+    }
+
+    &.search {
+      gap: calc((100% - (240px * 5)) / 4);
+    }
   }
 
   .challenge-all-list-exception-box {
