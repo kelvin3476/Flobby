@@ -22,7 +22,7 @@ import { ImageExtensionConverter } from '@/utils/ImageExtensionConverter';
 import { GetProfileDetailResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
 
-import defaultProfileIcon from '../../../public/img/mypage/icon_profile.png'
+import defaultProfileIcon from '/img/mypage/icon_profile.png'
 import "@/styles/mypage/ProfileManagement.scss"
 
 const ProfileManagement = () => {

@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { GetMyInfoResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
 import Tag from '@/components/tag/Tag';
-import '@/styles/mypage/ProfileInfo.scss';
 import Button from '@/components/button/Button';
+import defaultProfileIcon from '/img/mypage/icon_profile.png'
+import '@/styles/mypage/ProfileInfo.scss';
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const ProfileInfo = () => {
             src={
               infoData?.profilePhotoUrl
                 ? infoData.profilePhotoUrl
-                : '/img/mypage/icon_profile.png'
+                : defaultProfileIcon
             }
           />
         </div>
