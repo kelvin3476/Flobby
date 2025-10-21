@@ -38,12 +38,6 @@ const SubCategory = ({ categoryList }: SubCategoryProps) => {
     : []; // 값이 없으면 빈배열
 
   const handleClickSubCategory = (subCategory: string) => {
-    if (subCategory === '전체') {
-      setCookie('subCategory', '', 0);
-    } else {
-      setCookie('subCategory', subCategory);
-    }
-
     setSubCategory(subCategory);
   };
 

@@ -36,10 +36,22 @@ export default class Main {
   }
 
   /* 모임 목록 조회 */
-  static async getChallengeList(mainCategory?: string) {
-    return mainCategory
-      ? await http.get(`/challenge/list?mainCategory=${mainCategory}`)
-      : await http.get(`/challenge/list`);
+  static async getChallengeList(
+    recruiting: string,
+    mainCategory?: string,
+    subCategory?: string,
+  ) {
+    const params = new URLSearchParams({ recruiting });
+
+    if (mainCategory && mainCategory !== '전체') {
+      params.append('mainCategory', mainCategory);
+    }
+
+    if (subCategory && subCategory !== '전체') {
+      params.append('subCategory', subCategory);
+    }
+
+    return await http.get(`/challenge/list?${params.toString()}`);
   }
 
   /* 모임 가입 신청 */

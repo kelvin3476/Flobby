@@ -12,10 +12,18 @@ export class ChallengeModel {
   ClubItemDetailData: ClubItemDetail;
 
   /* 모임 리스트 불러 오는 api */
-  async getChallengeList(mainCategory?: string): Promise<ChallengeItemType[]> {
+  async getChallengeList(
+    recruiting: string,
+    mainCategory?: string,
+    subCategory?: string,
+  ): Promise<ChallengeItemType[]> {
     try {
       // mainCategory값을 api에 request param으로 넣어주기(인코딩 x)
-      const response = await Main.getChallengeList(mainCategory);
+      const response = await Main.getChallengeList(
+        recruiting,
+        mainCategory,
+        subCategory,
+      );
       const { code, message, data } = response.data;
       if (code === 1000) {
         // API 호출 성공

@@ -12,12 +12,12 @@ import useClubCategoryStore from '@/store/club/useClubCategoryStore';
 import { CategoryListController } from '@/services/category/controllers/CategoryListController';
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 import { ChallengeItemType, HobbyCategory } from '@/api/ApiTypes';
-import { setCookie } from '@/utils/Cookie';
 import FabDefaultIcon from '@/assets/svg/club/clublist/floating_button_default.svg';
 import FabDefaultCancelIcon from '@/assets/svg/club/clublist/floating_button_default_cancel.svg';
 import FabClubRegisterIcon from '@/assets/svg/club/clublist/floating_button_club_register.svg';
 import FabOnedayRegisterIcon from '@/assets/svg/club/clublist/floating_button_oneday_register.svg';
 import { ModalRegionListController } from '@/services/region/controllers/ModalRegionListController';
+import Button from '@/components/button/Button';
 
 import '@/styles/main/club/ChallengeAll.scss';
 
@@ -47,6 +47,7 @@ const ChallengeAll = () => {
     `${regionController.model.selectedRegion.regionName} 챌린지`,
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isRecruiting, setIsRecruiting] = useState<string>('N');
 
   logger.log('[ChallengeAll: mainCategory]', mainCategory);
   logger.log('[ChallengeAll: subCategory]', subCategory);
@@ -77,22 +78,33 @@ const ChallengeAll = () => {
 
   const fetchChallengeItemList = async () => {
     setIsLoading(true);
-    if (!mainCategory || mainCategory === '전체') {
-      const challengeListData = await challengeController.getChallengeList();
-      setChallengeList(challengeListData);
-    } else {
-      const challengeListData = await challengeController.getChallengeList(
-        encodeURIComponent(mainCategory),
-      );
-      setChallengeList(challengeListData);
-    }
+
+    // if (!mainCategory || mainCategory === '전체') {
+    //   const challengeListData =
+    //     await challengeController.getChallengeList(isRecruiting);
+    //   setChallengeList(challengeListData);
+    // } else {
+    //   const challengeListData = await challengeController.getChallengeList(
+    //     isRecruiting,
+    //     encodeURIComponent(mainCategory),
+    //   );
+    //   setChallengeList(challengeListData);
+    // }
+    const challengeListData = await challengeController.getChallengeList(
+      isRecruiting,
+      mainCategory,
+      subCategory,
+    );
+
+    setChallengeList(challengeListData);
+
     setIsLoading(false);
   };
 
   // 카테고리 값 변경 시 모임 목록 업데이트
   useEffect(() => {
     fetchChallengeItemList();
-  }, [mainCategory, subCategory]);
+  }, [mainCategory, subCategory, isRecruiting]);
 
   // 지역 변경 시 모임 목록 업데이트
   useEffect(() => {
@@ -135,10 +147,8 @@ const ChallengeAll = () => {
 
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
   useEffect(() => {
-    setMainCategory('전체');
+    setMainCategory('');
     setSubCategory('');
-    setCookie('mainCategory', '전체');
-    setCookie('subCategory', '', 0);
   }, []);
 
   return (
@@ -147,7 +157,23 @@ const ChallengeAll = () => {
       <div className="challenge-all-content-container">
         <MainCategory categoryList={categoryList} />
         <div className="challenge-all-content">
-          <Title titleName={title} />
+          <div className="challenge-all-top-container">
+            <div className="challenge-all-title-box">
+              <Title titleName={title} />
+            </div>
+            <div className="divider"></div>
+            <div className="challenge-all-challenging-btn-box">
+              <Button
+                type="button"
+                className={`challenge-all-challenging-btn ${isRecruiting === 'Y' ? 'isRecruiting' : ''}`}
+                title="모집중만 보기"
+                onClick={() => {
+                  setIsRecruiting(isRecruiting === 'N' ? 'Y' : 'N');
+                }}
+              />
+            </div>
+          </div>
+
           <div className="challenge-all-sub-content">
             <SubCategory categoryList={categoryList} />
             <ChallengeList

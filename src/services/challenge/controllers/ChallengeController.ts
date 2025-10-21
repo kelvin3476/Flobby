@@ -20,8 +20,12 @@ export class ChallengeController {
     return ChallengeController.instance;
   }
 
-  getChallengeList(category?: string): Promise<ChallengeItemType[]> {
-    return this.model.getChallengeList(category);
+  getChallengeList(
+    recruiting: string,
+    mainCategory?: string,
+    subCategory?: string,
+  ): Promise<ChallengeItemType[]> {
+    return this.model.getChallengeList(recruiting, mainCategory, subCategory);
   }
 
   createClub(createClubData: FormData): Promise<void> {
