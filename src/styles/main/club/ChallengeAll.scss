@@ -79,12 +79,13 @@
         }
       }
 
-      .challenge-all-sub-content {
+      .challenge-all-list-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 40px;
         width: 100%;
+        position: relative;
 
         .loading-container {
           display: flex;

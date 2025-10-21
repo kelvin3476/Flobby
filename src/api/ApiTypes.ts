@@ -256,8 +256,8 @@ export interface ChallengeItemType {
   challengeName: string;
   mainCategory: string;
   subCategory: string;
-  maxMember: number;
-  currentMember: number;
+  maxMembers: number;
+  currentMembers: number;
   regionId: number;
   regionName: string;
   photoUrl: string;
@@ -266,7 +266,19 @@ export interface ChallengeItemType {
   wishCount: number;
 }
 
-export interface ChallengeSearchItem extends ChallengeItemType {
+export interface ChallengeSearchItem {
+  challengeId: number;
+  challengeName: string;
+  mainCategory: string;
+  subCategory: string;
+  maxMember: number;
+  currentMember: number;
+  regionId: number;
+  regionName: string;
+  photoUrl: string;
+  recruitEndDate: string;
+  recruitDday: string;
+  wishCount: number;
   recruitFlag: boolean; // 모집중 버튼 flag
   createdAt: string;
 }

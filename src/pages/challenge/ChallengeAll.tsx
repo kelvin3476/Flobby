@@ -161,6 +161,7 @@ const ChallengeAll = () => {
             <div className="challenge-all-title-box">
               <Title titleName={title} />
             </div>
+            <SubCategory categoryList={categoryList} />
             <div className="divider"></div>
             <div className="challenge-all-challenging-btn-box">
               <Button
@@ -174,12 +175,12 @@ const ChallengeAll = () => {
             </div>
           </div>
 
-          <div className="challenge-all-sub-content">
-            <SubCategory categoryList={categoryList} />
-            <ChallengeList
+          <div className="challenge-all-list-wrapper">
+            <ChallengeList<ChallengeItemType>
               challengeList={challengeList}
               accessToken={accessToken}
               isLoading={isLoading}
+              hasSubCategoryBox={mainCategory && mainCategory !== '전체'}
             />
           </div>
         </div>

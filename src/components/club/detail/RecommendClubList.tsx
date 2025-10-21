@@ -1,11 +1,16 @@
 import React from 'react';
 import Title from '@/components/club/text/Title';
-import { ChallengeItemType, clubItem } from '@/api/ApiTypes';
+import {
+  ChallengeItemType,
+  ChallengeSearchItem,
+  clubItem,
+} from '@/api/ApiTypes';
 import ChallengeItem from '@/components/main/club/ChallengeItem';
+
 import '@/styles/club/detail/RecommendClubList.scss';
 
 interface RecommendClubListProps {
-  recommendClubList: clubItem[] | ChallengeItemType[];
+  recommendClubList: ChallengeSearchItem[];
   isDetailPage: boolean;
   pageType?: string; // 페이지 타입 (예: 'search', 'detail')
 }
