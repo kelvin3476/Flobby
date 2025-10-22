@@ -21,6 +21,7 @@ import { ImageExtensionConverter } from '@/utils/ImageExtensionConverter';
 
 import { GetProfileDetailResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
+import { CommonBaseController } from '@/services/common/controllers/CommonBaseController';
 
 import defaultProfileIcon from '/img/mypage/icon_profile.png'
 import "@/styles/mypage/ProfileManagement.scss"
@@ -53,6 +54,7 @@ const ProfileManagement = () => {
   const [profileInfoData, setProfileInfoData] = React.useState<GetProfileDetailResponse | null>(null)
 
   const profileInfoController = MyInfoController.getInstance();
+  const commonBaseController = CommonBaseController.getInstance();
 
   const fetchProfileInfo = async () => {
     const profileInfo = await profileInfoController.getProfileDetail()
@@ -322,6 +324,7 @@ const ProfileManagement = () => {
             } else {
               await editProfileInfoHandler();
               await fetchProfileInfo();
+              await commonBaseController.getHeaderInfo();
               setModalStep(null);
               setIsOpenProfileModal(false);
             }
