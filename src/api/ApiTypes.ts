@@ -314,3 +314,8 @@ export interface PatchProfileDetailResponse
   file?: File /* 프로필 수정 이미지 (프로필 이미지 수정할 경우만) */;
   data?: PatchProfileDetailJsonResponse /* 프로필 수정 데이터 (수정 할 데이터가 있을때만) */;
 }
+
+/* -------------------- 공통 api 타입 -------------------- */
+export interface GetHeaderInfoResponse {
+  profilePhotoUrl: string
+}
