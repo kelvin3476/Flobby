@@ -79,17 +79,6 @@ const ChallengeAll = () => {
   const fetchChallengeItemList = async () => {
     setIsLoading(true);
 
-    // if (!mainCategory || mainCategory === '전체') {
-    //   const challengeListData =
-    //     await challengeController.getChallengeList(isRecruiting);
-    //   setChallengeList(challengeListData);
-    // } else {
-    //   const challengeListData = await challengeController.getChallengeList(
-    //     isRecruiting,
-    //     encodeURIComponent(mainCategory),
-    //   );
-    //   setChallengeList(challengeListData);
-    // }
     const challengeListData = await challengeController.getChallengeList(
       isRecruiting,
       mainCategory,
@@ -142,6 +131,10 @@ const ChallengeAll = () => {
         window.removeEventListener('regionReady', handleRegionReady);
       };
       window.addEventListener('regionReady', handleRegionReady);
+
+      return () => {
+        window.removeEventListener('regionReady', handleRegionReady);
+      };
     }
   }, [regionController.model.selectedRegion, mainCategory]);
 
