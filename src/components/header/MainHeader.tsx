@@ -7,8 +7,11 @@ import SearchBar from '@/components/main/search_bar/SearchBar';
 import Button from '@/components/button/Button';
 import DropDownModal from '@/components/modal/DropDownModal';
 
+import { CommonBaseController } from '@/services/common/controllers/CommonBaseController';
+
 import Logout from '@/api/logout/Logout';
 
+import defaultProfileIcon from '/img/header/icon_profile_header.png'
 import '@/styles/header/MainHeader.scss';
 
 interface MainHeaderProps {
@@ -21,6 +24,20 @@ const MainHeader: React.FC<MainHeaderProps> = ({
   const [isClicked, setIsClicked] = useState(false);
   const nav = useNavigate();
   const hasAccessToken = !!accessToken;
+
+  const commonBaseController = CommonBaseController.getInstance();
+
+  const fetchHeaderInfo = async () => {
+    try {
+      await commonBaseController.getHeaderInfo();
+    } catch (error) {
+      console.error('header api load failed', error)
+    }
+  }
+
+  React.useEffect(() => {
+    if (accessToken) fetchHeaderInfo()
+  }, [accessToken])
 
   return (
     <header className="header-container">
@@ -59,7 +76,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({
                     >
                       <img
                         className="profile-btn"
-                        src={'../../img/header/icon_profile_header.png'}
+                        src={commonBaseController.model.headerInfo?.profilePhotoUrl ?? defaultProfileIcon}
                         alt=""
                       />
                     </div>
