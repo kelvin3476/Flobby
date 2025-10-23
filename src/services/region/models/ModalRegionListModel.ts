@@ -10,7 +10,7 @@ export const DEFAULT_REGION: RegionItem = {
 };
 
 export class ModalRegionListModel {
-  private initialized = false;
+  initialized = false;
   modalRegionList: ModalRegionListData = {
     interestRegionList: [],
     regionList: [],
@@ -67,6 +67,10 @@ export class ModalRegionListModel {
         logger.log('지역 모달 데이터', this.modalRegionList);
         this.handleSelectedRegion(data);
         this.initialized = true;
+
+        // 지역 모달 데이터 준비 완료 이벤트
+        window.dispatchEvent(new Event('regionReady'));
+
         return this.modalRegionList;
       } else if (code === 1001) {
         // API 호출 실패

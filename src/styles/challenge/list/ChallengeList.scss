@@ -8,15 +8,34 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     align-self: stretch;
+
+    &.default {
+      gap: calc((100% - (240px * 4)) / 3);
+    }
+
+    &.search {
+      gap: calc((100% - (240px * 5)) / 4);
+    }
   }
 
   .challenge-all-list-exception-box {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 32px;
+    flex-shrink: 0;
+
+    &.has-sub-category {
+      min-height: 184px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &.has-not-sub-category {
+      min-height: 254px;
+    }
 
     .challenge-all-list-exception-text-box {
       display: flex;
@@ -76,14 +95,24 @@
     > button {
       display: flex;
       height: 60px;
-      padding: 12px 30px;
+      padding: 12px 20px;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      flex-shrink: 0;
       border-radius: 6px;
-      background: #26282b;
+      background: var(--main-purple-300, #764bf6);
       border: none;
-      cursor: pointer;
+
+      &.search {
+        display: flex;
+        height: 60px;
+        padding: 12px 30px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: 6px;
+        background: var(--main-purple-300, #764bf6);
+      }
 
       .challenge-all-list-exception-icon {
         width: 12px;
@@ -95,12 +124,13 @@
       }
 
       > span {
-        color: #fff;
+        color: var(--white, #fff);
         text-align: center;
+        font-family: Pretendard;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
-        line-height: 150%;
+        line-height: 150%; /* 24px */
         letter-spacing: -0.3px;
       }
     }

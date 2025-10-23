@@ -1,23 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChallengeItemType } from '@/api/ApiTypes';
+import { ChallengeItemType, ChallengeSearchItem } from '@/api/ApiTypes';
 import ChallengeItem from '@/components/main/club/ChallengeItem';
 import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerController';
 
 import '@/styles/challenge/list/ChallengeList.scss';
 
-interface ChallengeListProps {
-  challengeList: ChallengeItemType[] | null;
+interface ChallengeListProps<
+  T extends ChallengeItemType | ChallengeSearchItem,
+> {
+  challengeList: T[] | null;
   accessToken: string | null;
   isLoading?: boolean;
-  pageType?: string; // search, ...
+  pageType?: 'search' | 'default';
+  hasSubCategoryBox?: boolean;
 }
-const ChallengeList = ({
+
+const ChallengeList = <T extends ChallengeItemType | ChallengeSearchItem>({
   challengeList,
   accessToken,
   isLoading,
   pageType,
-}: ChallengeListProps) => {
+  hasSubCategoryBox,
+}: ChallengeListProps<T>) => {
   const navigate = useNavigate();
 
   const exceptionTexts = {
@@ -36,7 +41,7 @@ const ChallengeList = ({
       {challengeList && challengeList.length > 0 ? (
         /* challengeList 있을 경우 */
         challengeList
-          .reduce<ChallengeItemType[][]>((rows, challengeItem, index) => {
+          .reduce<T[][]>((rows, challengeItem, index) => {
             /* 검색 페이지일 경우 5개씩, 그 외 페이지는 4개씩 */
             const rowCount = pageType === 'search' ? 5 : 4;
 
@@ -45,17 +50,27 @@ const ChallengeList = ({
             return rows;
           }, [])
           .map((challengeItemsInRow, rowIndex) => (
-            <div className="challenge-all-row" key={rowIndex}>
+            <div
+              className={`challenge-all-row ${pageType === 'search' ? 'search' : 'default'}`}
+              key={rowIndex}
+            >
               {challengeItemsInRow.map(challengeItemInRow => (
                 <ChallengeItem
                   key={challengeItemInRow.challengeId}
                   clubId={challengeItemInRow.challengeId}
                   photoUrl={challengeItemInRow.photoUrl}
                   mainCategory={challengeItemInRow.mainCategory}
-                  maxMember={challengeItemInRow.maxMember}
+                  maxMember={
+                    (challengeItemInRow as any).maxMembers ??
+                    (challengeItemInRow as any).maxMember
+                  }
                   clubName={challengeItemInRow.challengeName}
                   regionName={challengeItemInRow.regionName}
-                  currentMember={challengeItemInRow.currentMember}
+                  currentMember={
+                    (challengeItemInRow as any).currentMembers ??
+                    (challengeItemInRow as any).currentMember
+                  }
+                  recruitDday={challengeItemInRow.recruitDday}
                 />
               ))}
             </div>
@@ -65,7 +80,9 @@ const ChallengeList = ({
         <LoadingSpinnerController />
       ) : (
         /* challengeList 없을 경우 예외 처리 */
-        <div className="challenge-all-list-exception-box">
+        <div
+          className={`challenge-all-list-exception-box ${pageType !== 'search' ? (hasSubCategoryBox ? 'has-sub-category' : 'has-not-sub-category') : ''}`}
+        >
           <div
             className={`challenge-all-list-exception-text-box ${pageType === 'search' ? 'search' : 'default'}`}
           >
@@ -82,6 +99,7 @@ const ChallengeList = ({
           </div>
           <button
             type="button"
+            className={pageType === 'search' ? 'search' : ''}
             /* 로그인 유저 : 정기 모임 등록 페이지로 이동, 비로그인 유저 : 로그인 페이지로 이동 */
             onClick={() =>
               accessToken ? navigate('/club/register') : navigate('/login')

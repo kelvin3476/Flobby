@@ -139,7 +139,7 @@ const ClubSearch = () => {
               <div className="challenge-search-empty-container">
                 {/* 예외처리 위한 ChallengeList 컴포넌트 렌더링 */}
                 {/* ChallengeList 내부에서 pageType으로 예외처리 분기 */}
-                <ChallengeList
+                <ChallengeList<ChallengeSearchItem>
                   challengeList={challengeList}
                   accessToken={accessToken}
                   pageType="search"
