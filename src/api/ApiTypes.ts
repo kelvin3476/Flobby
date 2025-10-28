@@ -292,6 +292,28 @@ export interface PopularKeywordData {
   rank: number;
 }
 
+/* -------------------- 챌린지 상세 api 타입 -------------------- */
+
+/* 챌린지 상세 조회 api */
+export interface GetChanllengeDetailResponse {
+  /* TODO: 명세서 확인후 추후 추가 예정 */
+}
+
+/* 챌린지 후기 조회 api */
+export interface GetChallengeReviewResponse {
+  profileImageUrl: string;	// 작성자 프로필 이미지 링크
+  nickname:	string; // 작성자 닉네임
+  seasonNumber:	number; // 챌린지 시즌
+  description: string; // 후기 내용
+  images: { // 후기 이미지 리스트
+    detailRefId: number; // 후기 참조 Id
+    imageUrl: string; // 후기 이미지 링크
+    orderNo: number; // 후기 이미지 순서
+  }
+  likeCount: number; // 후기 좋아요 수
+  liked: boolean // 로그인 한 사용자의 후기 좋아요 여부
+}
+
 /* -------------------- 마이페이지 api 타입 -------------------- */
 
 /* 마이페이지 조회 api */
