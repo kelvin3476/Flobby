@@ -2,16 +2,22 @@ import {
   ClubItemDetail,
   ClubMeetingData,
   ChallengeItemType,
+  GetChanllengeDetailResponse,
+  GetChallengeReviewResponse,
 } from '@/api/ApiTypes';
+
+import Challenge from '@/api/challenge/Challenge';
 import Main from '@/api/main/Main';
 
 import logger from '@/utils/Logger';
 
 export class ChallengeModel {
   challengeListData: ChallengeItemType[] = [];
+  challengeDetail: GetChanllengeDetailResponse;
+  challengeReview: GetChallengeReviewResponse[] = [];
   ClubItemDetailData: ClubItemDetail;
 
-  /* 모임 리스트 불러 오는 api */
+  /* 챌린지 리스트 불러 오는 api */
   async getChallengeList(
     recruiting: string,
     mainCategory?: string,
@@ -31,13 +37,57 @@ export class ChallengeModel {
         return this.challengeListData;
       } else if (code === 1001) {
         // API 호출 실패
-        throw new Error(message || '모임 목록 데이터를 가져오지 못했습니다.');
+        throw new Error(message || '챌린지 목록 데이터를 가져오지 못했습니다.');
       } else if (code === 1002) {
         // API 예외 발생
         throw new Error(message || '서버 오류가 발생했습니다.');
       }
     } catch (err: any) {
-      logger.error(err.message || '모임 목록 api 요청 실패');
+      logger.error(err.message || '챌린지 목록 api 요청 실패');
+    }
+  }
+
+  /* 챌린지 상세 불러 오는 api */
+  async getChallengeDetail(challengeId: number) {
+    try {
+      const response = await Challenge.getChallengeDetail(challengeId);
+      const { code, message, data } = response.data;
+
+      if (code === 1000) {
+        // API 호출 성공
+        this.challengeDetail = data;
+        return this.challengeDetail;
+      } else if (code === 1001) {
+        // API 호출 실패
+        throw new Error(message || '챌린지 상세 데이터를 가져오지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
+      }
+    } catch (error: any) {
+      logger.error(error.message || '챌린지 상세 api 요청 실패');
+    }
+  }
+
+  /* 챌린지 후기 불러 오는 api */
+  async getChallengeReview(challengeId: number) {
+    try {
+      const response = await Challenge.getChallengeReview(challengeId);
+      const { code, message, data } = response.data;
+
+      if (code === 1000) {
+        // API 호출 성공
+        this.challengeReview = data;
+        return this.challengeReview;
+      } else if (code === 1001) {
+        // API 호출 실패
+        throw new Error(message || '챌린지 후기 데이터를 가져오지 못했습니다.');
+      } else if (code === 1002) {
+        // API 예외 발생
+        throw new Error(message || '서버 오류가 발생했습니다.');
+      }
+    } catch (error: any) {
+      logger.error(error.message || '챌린지 후기 api 요청 실패');
     }
   }
 
