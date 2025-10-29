@@ -2,7 +2,7 @@ import {
   ClubItemDetail,
   ClubMeetingData,
   ChallengeItemType,
-  GetChanllengeDetailResponse,
+  GetChallengeDetailResponse,
   GetChallengeReviewResponse,
 } from '@/api/ApiTypes';
 
@@ -13,7 +13,7 @@ import logger from '@/utils/Logger';
 
 export class ChallengeModel {
   challengeListData: ChallengeItemType[] = [];
-  challengeDetail: GetChanllengeDetailResponse;
+  challengeDetail: GetChallengeDetailResponse;
   challengeReview: GetChallengeReviewResponse[] = [];
   ClubItemDetailData: ClubItemDetail;
 

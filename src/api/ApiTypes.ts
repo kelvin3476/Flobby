@@ -294,9 +294,42 @@ export interface PopularKeywordData {
 
 /* -------------------- 챌린지 상세 api 타입 -------------------- */
 
-/* 챌린지 상세 조회 api */
-export interface GetChanllengeDetailResponse {
-  /* TODO: 명세서 확인후 추후 추가 예정 */
+/* 챌린지 상세 프로필 썸네일 */
+export interface GetChallengeRecruitThumnail {
+  title: string; // 챌린지 명
+  dDay: number; // 챌린지 시작 디데이(숫자만 반환)
+  period: Date; // 챌린지 기간
+  challengeRegion: string; // 챌린지 지역
+  mainImage: string; // 챌린지 메인 이미지
+  maxMembers: number; // 챌린지 최대 인원
+  currentMembers: number; // 챌린지 현재 인원
+  mainCategory: string; // 메인 카테고리
+  subCategory: string; // 서브 카테고리
+  challengeLiked:	boolean	// 챌린지 좋아요 여부
+}
+
+/* 챌린지 상세 설명 */
+export interface GetChallengeRecruitDescription {
+  description: string; // 챌린지 설명
+  images: {
+    imageUrl: string; // 챌린지 설명 글에 포함된 이미지
+    orderNo: number; // 이미지 순서
+  }[];
+}
+
+/* 챌린지 상세 qna */
+export interface GetChallengeQnaResponse {
+  questionId: number; // 질문 ID
+  question: string; // 질문 내용
+  memberId: number; // 질문 작성자 ID
+  createdAt: Date; // 질문 등록일
+  isMyQuestion: boolean; // 내가 작성한 질문인지 여부
+  answer: {
+    answerId: number; // 답변 ID
+    answer: string; // 답변 내용
+    memberId: number; // 답변 작성자 ID(챌린지장 ID)
+    createdAt: Date; // 답변 등록일
+  };
 }
 
 /* 챌린지 후기 조회 api */
@@ -309,9 +342,39 @@ export interface GetChallengeReviewResponse {
     detailRefId: number; // 후기 참조 Id
     imageUrl: string; // 후기 이미지 링크
     orderNo: number; // 후기 이미지 순서
-  }
+  }[];
   likeCount: number; // 후기 좋아요 수
-  liked: boolean // 로그인 한 사용자의 후기 좋아요 여부
+  liked: boolean; // 로그인 한 사용자의 후기 좋아요 여부
+}
+
+/* 챌린지 상세 추천 챌린지 */
+export interface GetRecommendChallengesResponse {
+  challengeId: number; // 챌린지 id
+  challengeName: string; // 챌린지 이름
+  mainCategory: string; // 챌린지 상위 카테고리
+  subCategory: string; // 챌린지 하위 카테고리
+  maxMember: number; // 챌린지 최대 인원
+  currentMember: number; // 챌린지 현재 인원
+  regionId: number; // 모임 지역 이름
+  regionName: string; // 모임명
+  mainPhotoUrl:	string;	// 모임 대표 사진 url(S3)
+  recruitEndDate:	Date; // 모집 마감일
+  recruitDday: string; // 모집 마감 D-Day(모집 D-2, 모집 D-Day, 모집 마감)
+  wishCount: number; //	찜 수
+  recruitFlag: boolean //	모집 마감 여부(true: 등록 가능, false: 등록 마감)
+  createdAt: Date; // 챌린지 생성일
+}
+
+/* 챌린지 상세 조회 api */
+export interface GetChallengeDetailResponse {
+  /* TODO: 현 사용자가 챌린지장인지 아닌지에 대한 role 타입 추가 예정 */
+  challengeId: number; // 챌린지 id
+  isParticipated: boolean; // 현재 챌린지 참가 여부
+  recruitThumnail: GetChallengeRecruitThumnail;
+  recruitDescription: GetChallengeRecruitDescription;
+  questions: GetChallengeQnaResponse[];
+  reviews: GetChallengeReviewResponse[];
+  recommendChallenges: GetRecommendChallengesResponse[];
 }
 
 /* -------------------- 마이페이지 api 타입 -------------------- */
