@@ -2,7 +2,7 @@ import {
   ClubItemDetail,
   ClubMeetingData,
   ChallengeItemType,
-  GetChanllengeDetailResponse,
+  GetChallengeDetailResponse,
   GetChallengeReviewResponse,
 } from '@/api/ApiTypes';
 import { ChallengeModel } from '@/services/challenge/models/ChallengeModel';
@@ -30,7 +30,7 @@ export class ChallengeController {
     return this.model.getChallengeList(recruiting, mainCategory, subCategory);
   }
 
-  getChallengeDetail(challengeId: number): Promise<GetChanllengeDetailResponse> {
+  getChallengeDetail(challengeId: number): Promise<GetChallengeDetailResponse> {
     return this.model.getChallengeDetail(challengeId);
   }
 
