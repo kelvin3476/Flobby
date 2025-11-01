@@ -5,7 +5,7 @@ import logger from '@/utils/Logger';
 
 // 비로그인 & 로그인 + 관심 지역 미설정시, 메인 데이터의 기준 지역값
 export const DEFAULT_REGION: RegionItem = {
-  regionId: 288,
+  regionId: 2880,
   regionName: '서울 전체',
 };
 

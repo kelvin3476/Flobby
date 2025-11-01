@@ -16,31 +16,40 @@ import { MainData } from '@/api/ApiTypes';
 import '@/styles/main/Main.scss';
 
 const Main = () => {
-  const mainDataController = MainDataController.getInstance();
+  // const mainDataController = MainDataController.getInstance();
 
   const { accessToken, mainDataList, setMainDataList } = useMainPage();
 
-  React.useEffect(() => {
-    const fetchMainData = async () => {
-      try {
-        const mainData: MainData = await mainDataController.getMainData();
-        setMainDataList(mainData);
-      } catch (error) {
-        logger.error('메인 데이터 가져오기 실패:', error);
-      }
-    };
+  // React.useEffect(() => {
+  //   const fetchMainData = async () => {
+  //     try {
+  //       const mainData: MainData = await mainDataController.getMainData();
+  //       setMainDataList(mainData);
+  //     } catch (error) {
+  //       logger.error('메인 데이터 가져오기 실패:', error);
+  //     }
+  //   };
 
-    fetchMainData();
-  }, []);
+  //   fetchMainData();
+  // }, []);
 
   return (
     <div className="responsive-container">
       <main>
         <MainHeader accessToken={accessToken} />
         <CarouselBanner />
-        <ClubPost mainDataList={mainDataList} setMainDataList={setMainDataList} />
-        <OnedayPost mainDataList={mainDataList} setMainDataList={setMainDataList} />
-        <PopularPost mainDataList={mainDataList} setMainDataList={setMainDataList} />
+        <ClubPost
+          mainDataList={mainDataList}
+          setMainDataList={setMainDataList}
+        />
+        <OnedayPost
+          mainDataList={mainDataList}
+          setMainDataList={setMainDataList}
+        />
+        <PopularPost
+          mainDataList={mainDataList}
+          setMainDataList={setMainDataList}
+        />
       </main>
     </div>
   );
