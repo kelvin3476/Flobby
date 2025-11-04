@@ -143,6 +143,10 @@
         width: 176px;
         height: 130px;
         flex-shrink: 0;
+
+        object-fit: cover;
+
+        aspect-ratio: 176/130;
       }
     }
   }

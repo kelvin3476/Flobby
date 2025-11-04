@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import '@/styles/challenge/review/ChallengeReviewItem.scss';
 import { GetChallengeReviewResponse } from '@/api/ApiTypes';
+import {
+  ChallengeReviewModal,
+  ChallengeReviewModalRef,
+} from './ChallengeReviewModal';
 
 interface ChallengeReviewItemProps {
   challengeReviewItem: GetChallengeReviewResponse;
@@ -12,6 +16,7 @@ const challengeReviewItem = ({
 }: ChallengeReviewItemProps) => {
   const [isActivekebabBtn, setIsActivekebabBtn] = useState<boolean>(false);
   const [isActiveLikeBtn, setIsActiveLikeBtn] = useState<boolean>(false);
+  const modalRef = useRef<ChallengeReviewModalRef>(null);
 
   return (
     <div className="challenge-review-item-wrapper">
@@ -26,6 +31,7 @@ const challengeReviewItem = ({
                   challengeReviewItem.profileImageUrl ||
                   '/img/challenge/review/review_user_profile_img.jpg'
                 }
+                alt="reviewer-profile-img"
               />
 
               <div className="challenge-review-item-user-profile-info">
@@ -59,18 +65,21 @@ const challengeReviewItem = ({
         </div>
 
         {/* images */}
-        <div className="challenge-review-item-img-box">
-          {/* TODO: 팝업 모달 컴포넌트 구현 */}
-          {challengeReviewItem.images.map((img, idx) => {
-            return (
-              <img
-                className="challenge-review-item-img"
-                src={img.imageUrl}
-                key={idx}
-              />
-            );
-          })}
-        </div>
+        {challengeReviewItem.images.length > 0 && (
+          <div className="challenge-review-item-img-box">
+            {/* TODO: 팝업 모달 컴포넌트 구현 */}
+            {challengeReviewItem.images.map((img, idx) => {
+              return (
+                <img
+                  className="challenge-review-item-img"
+                  src={img.imageUrl}
+                  key={idx}
+                  onClick={() => modalRef.current?.open(img.orderNo)}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* likes */}
@@ -85,6 +94,11 @@ const challengeReviewItem = ({
           {challengeReviewItem.likeCount}
         </span>
       </div>
+
+      <ChallengeReviewModal
+        ref={modalRef}
+        images={challengeReviewItem.images}
+      />
     </div>
   );
 };
