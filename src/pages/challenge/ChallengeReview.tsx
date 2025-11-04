@@ -5,18 +5,14 @@ import MainHeader from '@/components/header/MainHeader';
 import '@/styles/challenge/review/ChallengeReview.scss';
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 import { useParams } from 'react-router-dom';
-import { GetChallengeReviewResponse } from '@/api/ApiTypes';
+import { ChallengeReviewItemType } from '@/api/ApiTypes';
 import ChallengeReviewItem from '@/components/challenge/review/ChallengeReviewItem';
-
-// interface ChallengeReviewProps {
-//   title: string;
-// }
 
 const ChallengeReview = () => {
   const { accessToken } = useMainPage();
   const { challengeId } = useParams<{ challengeId }>();
   const [challengeReviewList, setChallengeReviewList] = useState<
-    GetChallengeReviewResponse[]
+    ChallengeReviewItemType[]
   >([]);
   const [challengeTitle, setChallengeTitle] = useState<string>('');
 
@@ -26,19 +22,12 @@ const ChallengeReview = () => {
     const reviewListData =
       await challengeController.getChallengeReview(challengeId);
 
-    setChallengeReviewList(reviewListData);
-  };
-
-  // challenge title
-  const fetchChallengeDetailForTitle = async () => {
-    const challengeDetailData =
-      await challengeController.getChallengeDetail(challengeId);
-    setChallengeTitle(challengeDetailData.recruitThumnail.title);
+    setChallengeReviewList(reviewListData.reviews);
+    setChallengeTitle(reviewListData.challengeName);
   };
 
   useEffect(() => {
     fetchChallengeReview();
-    fetchChallengeDetailForTitle();
   }, []);
 
   return (

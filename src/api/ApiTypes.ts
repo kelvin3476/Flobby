@@ -334,6 +334,11 @@ export interface GetChallengeQnaResponse {
 
 /* 챌린지 후기 조회 api */
 export interface GetChallengeReviewResponse {
+  challengeName: string;
+  reviews: ChallengeReviewItemType[];
+}
+
+export interface ChallengeReviewItemType {
   profileImageUrl: string; // 작성자 프로필 이미지 링크
   nickname: string; // 작성자 닉네임
   seasonNumber: number; // 챌린지 시즌
@@ -341,6 +346,7 @@ export interface GetChallengeReviewResponse {
   images: ChallengeReviewImageType[];
   likeCount: number; // 후기 좋아요 수
   liked: boolean; // 로그인 한 사용자의 후기 좋아요 여부
+  createdAt: string; // 후기 작성일
 }
 
 /* 후기 이미지 리스트 아이템 */

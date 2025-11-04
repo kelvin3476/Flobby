@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
 
 import '@/styles/challenge/review/ChallengeReviewItem.scss';
-import { GetChallengeReviewResponse } from '@/api/ApiTypes';
+import { ChallengeReviewItemType } from '@/api/ApiTypes';
 import {
   ChallengeReviewModal,
   ChallengeReviewModalRef,
 } from './ChallengeReviewModal';
 
 interface ChallengeReviewItemProps {
-  challengeReviewItem: GetChallengeReviewResponse;
+  challengeReviewItem: ChallengeReviewItemType;
 }
 
 const challengeReviewItem = ({
@@ -17,6 +17,8 @@ const challengeReviewItem = ({
   const [isActivekebabBtn, setIsActivekebabBtn] = useState<boolean>(false);
   const [isActiveLikeBtn, setIsActiveLikeBtn] = useState<boolean>(false);
   const modalRef = useRef<ChallengeReviewModalRef>(null);
+  const date = new Date(challengeReviewItem.createdAt);
+  const createdAt = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
   return (
     <div className="challenge-review-item-wrapper">
@@ -43,8 +45,7 @@ const challengeReviewItem = ({
               </div>
             </div>
 
-            {/* TODO: 작성일 백엔드에 확인 */}
-            <div className="challenge-review-item-created-at">6/23</div>
+            <div className="challenge-review-item-created-at">{createdAt}</div>
           </div>
 
           {/* kebab */}

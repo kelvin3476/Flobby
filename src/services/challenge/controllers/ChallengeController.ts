@@ -34,7 +34,7 @@ export class ChallengeController {
     return this.model.getChallengeDetail(challengeId);
   }
 
-  getChallengeReview(challengeId: number): Promise<GetChallengeReviewResponse[]> {
+  getChallengeReview(challengeId: number): Promise<GetChallengeReviewResponse> {
     return this.model.getChallengeReview(challengeId);
   }
 

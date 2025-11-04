@@ -14,7 +14,7 @@ import logger from '@/utils/Logger';
 export class ChallengeModel {
   challengeListData: ChallengeItemType[] = [];
   challengeDetail: GetChallengeDetailResponse;
-  challengeReview: GetChallengeReviewResponse[] = [];
+  challengeReview: GetChallengeReviewResponse;
   ClubItemDetailData: ClubItemDetail;
 
   /* 챌린지 리스트 불러 오는 api */
