@@ -11,7 +11,7 @@ interface ChallengeReviewItemProps {
   challengeReviewItem: ChallengeReviewItemType;
 }
 
-const challengeReviewItem = ({
+const ChallengeReviewItem = ({
   challengeReviewItem,
 }: ChallengeReviewItemProps) => {
   const [isActivekebabBtn, setIsActivekebabBtn] = useState<boolean>(false);
@@ -104,4 +104,4 @@ const challengeReviewItem = ({
   );
 };
 
-export default challengeReviewItem;
+export default ChallengeReviewItem;
