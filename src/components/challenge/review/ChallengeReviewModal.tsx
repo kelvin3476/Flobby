@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper as SwiperCore } from 'swiper';
 
 import '@/styles/challenge/review/ChallengeReviewModal.scss';
 
@@ -17,15 +18,16 @@ export const ChallengeReviewModal = forwardRef<
 >(({ images }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const paginationRef = useRef(null);
+
+  const paginationRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperCore | null>(null);
 
   const multiImages = images.length > 1;
 
   useImperativeHandle(ref, () => ({
     open: orderNo => {
       setActiveIndex(orderNo - 1);
-      setCurrentPage(orderNo);
+
       setIsOpen(true);
     },
     close: () => setIsOpen(false),
@@ -43,20 +45,34 @@ export const ChallengeReviewModal = forwardRef<
       <div className="challenge-review-img-modal-content">
         <Swiper
           initialSlide={activeIndex}
+          onSwiper={swiper => {
+            swiperRef.current = swiper;
+
+            if (multiImages && paginationRef.current) {
+              swiper.params.pagination = {
+                el: paginationRef.current,
+                type: 'fraction',
+                renderFraction: function (currentClass, totalClass) {
+                  return (
+                    '<span class="' +
+                    currentClass +
+                    '"></span>/<span class="' +
+                    totalClass +
+                    '"></span>'
+                  );
+                },
+              };
+              if (swiper.pagination) {
+                swiper.pagination.destroy();
+              }
+              swiper.pagination.init();
+              swiper.pagination.update();
+            }
+          }}
           pagination={
             multiImages
               ? {
-                  el: paginationRef.current,
                   type: 'fraction',
-                  renderFraction: function (currentClass, totalClass) {
-                    return (
-                      '<span class="' +
-                      currentClass +
-                      '"></span>/<span class="' +
-                      totalClass +
-                      '"></span>'
-                    );
-                  },
                 }
               : false
           }
@@ -69,9 +85,6 @@ export const ChallengeReviewModal = forwardRef<
               : false
           }
           modules={[Pagination, Navigation]}
-          onSlideChange={swiper => {
-            setCurrentPage(swiper.activeIndex + 1);
-          }}
         >
           {images.map(img => (
             <SwiperSlide key={img.orderNo}>
@@ -79,11 +92,6 @@ export const ChallengeReviewModal = forwardRef<
             </SwiperSlide>
           ))}
         </Swiper>
-        {multiImages && (
-          <div className="review-img-slide-pagination" ref={paginationRef}>
-            {currentPage}/{images.length}
-          </div>
-        )}
 
         {multiImages && (
           <>
