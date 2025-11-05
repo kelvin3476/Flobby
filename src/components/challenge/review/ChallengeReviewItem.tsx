@@ -77,13 +77,12 @@ const ChallengeReviewItem = ({
         {/* images */}
         {challengeReviewItem.images.length > 0 && (
           <div className="challenge-review-item-img-box">
-            {/* TODO: 팝업 모달 컴포넌트 구현 */}
-            {challengeReviewItem.images.map((img, idx) => {
+            {challengeReviewItem.images.map(img => {
               return (
                 <img
                   className="challenge-review-item-img"
                   src={img.imageUrl}
-                  key={idx}
+                  key={img.orderNo}
                   onClick={() => modalRef.current?.open(img.orderNo)}
                 />
               );
