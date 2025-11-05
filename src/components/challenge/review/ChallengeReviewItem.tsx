@@ -15,10 +15,19 @@ const ChallengeReviewItem = ({
   challengeReviewItem,
 }: ChallengeReviewItemProps) => {
   const [isActivekebabBtn, setIsActivekebabBtn] = useState<boolean>(false);
-  const [isActiveLikeBtn, setIsActiveLikeBtn] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(challengeReviewItem.liked);
+  const [likeCount, setLikeCount] = useState<number>(
+    challengeReviewItem.likeCount,
+  );
   const modalRef = useRef<ChallengeReviewModalRef>(null);
   const date = new Date(challengeReviewItem.createdAt);
   const createdAt = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
+
+  const handleClickLikeBtn = () => {
+    // TODO: 좋아요 api 연동
+    setIsLiked(!isLiked);
+    setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
+  };
 
   return (
     <div className="challenge-review-item-wrapper">
@@ -86,13 +95,13 @@ const ChallengeReviewItem = ({
       {/* likes */}
       <div className="challenge-review-item-like-box">
         <div
-          className={`challenge-review-item-like-icon ${isActiveLikeBtn || challengeReviewItem.liked ? 'isActive' : ''}`}
-          onClick={() => setIsActiveLikeBtn(!isActiveLikeBtn)}
+          className={`challenge-review-item-like-icon ${isLiked || challengeReviewItem.liked ? 'isActive' : ''}`}
+          onClick={handleClickLikeBtn}
         ></div>
         <span
-          className={`challenge-review-item-like-count ${isActiveLikeBtn || challengeReviewItem.liked ? 'isActive' : ''}`}
+          className={`challenge-review-item-like-count ${isLiked || challengeReviewItem.liked ? 'isActive' : ''}`}
         >
-          {challengeReviewItem.likeCount}
+          {likeCount}
         </span>
       </div>
 
