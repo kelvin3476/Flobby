@@ -2,9 +2,9 @@ import { ChallengeReviewImageType } from '@/api/ApiTypes';
 import React, { useRef } from 'react';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 
 import '@/styles/challenge/review/ChallengeReviewModal.scss';
-import { Navigation, Pagination } from 'swiper/modules';
 
 export interface ChallengeReviewModalRef {
   open: (orderNo: number) => void;
@@ -24,8 +24,8 @@ export const ChallengeReviewModal = forwardRef<
 
   useImperativeHandle(ref, () => ({
     open: orderNo => {
-      setActiveIndex(orderNo);
-      setCurrentPage(orderNo + 1);
+      setActiveIndex(orderNo - 1);
+      setCurrentPage(orderNo);
       setIsOpen(true);
     },
     close: () => setIsOpen(false),

@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 
-import '@/styles/challenge/review/ChallengeReviewItem.scss';
 import { ChallengeReviewItemType } from '@/api/ApiTypes';
 import {
   ChallengeReviewModal,
   ChallengeReviewModalRef,
 } from './ChallengeReviewModal';
+
+import '@/styles/challenge/review/ChallengeReviewItem.scss';
 
 interface ChallengeReviewItemProps {
   challengeReviewItem: ChallengeReviewItemType;
