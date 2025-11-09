@@ -305,7 +305,7 @@ export interface GetChallengeRecruitThumnail {
   currentMembers: number; // 챌린지 현재 인원
   mainCategory: string; // 메인 카테고리
   subCategory: string; // 서브 카테고리
-  challengeLiked:	boolean	// 챌린지 좋아요 여부
+  challengeLiked: boolean; // 챌린지 좋아요 여부
 }
 
 /* 챌린지 상세 설명 */
@@ -334,17 +334,26 @@ export interface GetChallengeQnaResponse {
 
 /* 챌린지 후기 조회 api */
 export interface GetChallengeReviewResponse {
-  profileImageUrl: string;	// 작성자 프로필 이미지 링크
-  nickname:	string; // 작성자 닉네임
-  seasonNumber:	number; // 챌린지 시즌
+  challengeName: string;
+  reviews: ChallengeReviewItemType[];
+}
+
+export interface ChallengeReviewItemType {
+  profileImageUrl: string; // 작성자 프로필 이미지 링크
+  nickname: string; // 작성자 닉네임
+  seasonNumber: number; // 챌린지 시즌
   description: string; // 후기 내용
-  images: { // 후기 이미지 리스트
-    detailRefId: number; // 후기 참조 Id
-    imageUrl: string; // 후기 이미지 링크
-    orderNo: number; // 후기 이미지 순서
-  }[];
+  images: ChallengeReviewImageType[];
   likeCount: number; // 후기 좋아요 수
   liked: boolean; // 로그인 한 사용자의 후기 좋아요 여부
+  createdAt: string; // 후기 작성일
+}
+
+/* 후기 이미지 리스트 아이템 */
+export interface ChallengeReviewImageType {
+  detailRefId: number; // 후기 참조 Id
+  imageUrl: string; // 후기 이미지 링크
+  orderNo: number; // 후기 이미지 순서
 }
 
 /* 챌린지 상세 추천 챌린지 */
@@ -357,11 +366,11 @@ export interface GetRecommendChallengesResponse {
   currentMember: number; // 챌린지 현재 인원
   regionId: number; // 모임 지역 이름
   regionName: string; // 모임명
-  mainPhotoUrl:	string;	// 모임 대표 사진 url(S3)
-  recruitEndDate:	Date; // 모집 마감일
+  mainPhotoUrl: string; // 모임 대표 사진 url(S3)
+  recruitEndDate: Date; // 모집 마감일
   recruitDday: string; // 모집 마감 D-Day(모집 D-2, 모집 D-Day, 모집 마감)
   wishCount: number; //	찜 수
-  recruitFlag: boolean //	모집 마감 여부(true: 등록 가능, false: 등록 마감)
+  recruitFlag: boolean; //	모집 마감 여부(true: 등록 가능, false: 등록 마감)
   createdAt: Date; // 챌린지 생성일
 }
 
@@ -414,5 +423,5 @@ export interface PatchProfileDetailResponse
 
 /* -------------------- 공통 api 타입 -------------------- */
 export interface GetHeaderInfoResponse {
-  profilePhotoUrl: string
+  profilePhotoUrl: string;
 }

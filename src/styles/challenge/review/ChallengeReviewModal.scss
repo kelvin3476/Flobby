@@ -1,0 +1,127 @@
+.challenge-review-img-modal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .challenge-review-img-modal-overlay {
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    opacity: 0.8;
+    background: #191919;
+  }
+
+  .challenge-review-img-modal-close-btn {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+
+    background-image: url('../../../assets/svg/challenge/review/challenge_review_img_modal_close.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: fixed;
+    top: 38px;
+    right: 38px;
+
+    cursor: pointer;
+  }
+
+  .challenge-review-img-modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      width: 860px;
+      height: 645px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .review-img-slide-prev-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: calc(50% - 430px - 70px);
+
+      display: flex;
+      width: 60px;
+      height: 60px;
+      padding: 18px 20px 18px 16px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      z-index: 10;
+
+      .review-img-slide-prev-btn-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+
+        background-image: url('../../../assets/svg/challenge/review/challenge_review_arrow_left.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .review-img-slide-next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: calc(50% - 430px - 70px);
+
+      display: flex;
+      width: 60px;
+      height: 60px;
+      padding: 18px 16px 18px 20px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border-radius: 30px;
+      background: #fff;
+      box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      z-index: 10;
+
+      .review-img-slide-next-btn-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+
+        background-image: url('../../../assets/svg/challenge/review/challenge_review_arrow_right.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .swiper-pagination {
+      color: #fff;
+      font-family: Pretendard;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.3px;
+
+      position: fixed;
+      bottom: 32px;
+      transform: translateY(-50%);
+    }
+  }
+}

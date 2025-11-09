@@ -1,0 +1,39 @@
+.challenge-review-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 52px;
+
+  min-height: 100vh;
+
+  .challenge-review-list-wrapper {
+    display: flex;
+    width: 920px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 52px;
+
+    .challenge-review-list-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      align-self: stretch;
+    }
+
+    .challenge-review-list-item-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 36px;
+      align-self: stretch;
+
+      .challenge-review-list-item-divider {
+        width: 920px;
+        height: 1px;
+        background: #e8ebed;
+      }
+    }
+  }
+}

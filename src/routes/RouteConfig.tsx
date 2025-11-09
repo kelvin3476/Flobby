@@ -22,6 +22,7 @@ import ClubMeetingRegister from '@/pages/club/ClubMeetingRegister';
 import ChallengeSearch from '@/pages/challenge/ChallengeSearch';
 import MyPage from '@/pages/mypage/MyPage';
 import ProfileManagement from '@/pages/mypage/ProfileManagement';
+import ChallengeReview from '@/pages/challenge/ChallengeReview';
 
 export const RouteConfig = [
   { path: '/test', element: <TestPage />, title: '테스트' },
@@ -69,6 +70,11 @@ export const RouteConfig = [
   { path: '/club/register', element: <ClubRegister />, title: '모임 등록' },
   { path: '/club/:clubId', element: <ClubDetail />, title: '모임 상세' },
   { path: '/club/edit', element: <ClubRegister />, title: '모임 수정' },
+  {
+    path: 'challenge/:challengeId/review',
+    element: <ChallengeReview />,
+    title: '챌린지 후기',
+  },
 
   {
     path: '/club/:clubId/clubmeeting/register',
