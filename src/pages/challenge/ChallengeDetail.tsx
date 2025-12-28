@@ -1,5 +1,6 @@
 import { GetChallengeDetailResponse } from '@/api/ApiTypes';
-import ChallengeReview from '@/components/challenge/detail/ChallengeDetailReview';
+import ChallengeDetailRecommend from '@/components/challenge/detail/ChallengeDetailRecommend';
+import ChallengeDetailReview from '@/components/challenge/detail/ChallengeDetailReview';
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,9 +23,12 @@ const ChallengeDetail = () => {
   return (
     <>
       챌린지 상세 페이지
-      <ChallengeReview
+      <ChallengeDetailReview
         challengeId={challengeId}
         challengeDetailReview={challengeDetail?.reviews}
+      />
+      <ChallengeDetailRecommend
+        recommendChallenges={challengeDetail?.recommendChallenges}
       />
     </>
   );
