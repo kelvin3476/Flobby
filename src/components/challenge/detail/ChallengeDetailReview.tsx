@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChallengeReviewItemType } from '@/api/ApiTypes';
 import ChallengeDetailReviewItem from './ChallengeDetailReviewItem';
 
-interface ChallengeReviewProps {
+interface ChallengeDetailReviewProps {
   challengeId: number;
   challengeDetailReview: ChallengeReviewItemType[];
 }
@@ -14,7 +14,7 @@ interface ChallengeReviewProps {
 const ChallengeDetailReview = ({
   challengeId,
   challengeDetailReview,
-}: ChallengeReviewProps) => {
+}: ChallengeDetailReviewProps) => {
   const navigate = useNavigate();
   console.log('challengeDetailReview', challengeDetailReview);
 
