@@ -382,7 +382,7 @@ export interface GetChallengeDetailResponse {
   recruitThumnail: GetChallengeRecruitThumnail;
   recruitDescription: GetChallengeRecruitDescription;
   questions: GetChallengeQnaResponse[];
-  reviews: GetChallengeReviewResponse[];
+  reviews: ChallengeReviewItemType[];
   recommendChallenges: GetRecommendChallengesResponse[];
 }
 
