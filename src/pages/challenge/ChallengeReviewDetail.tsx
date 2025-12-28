@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import useMainPage from '@/hooks/main/useMainPage';
 import MainHeader from '@/components/header/MainHeader';
 
-import '@/styles/challenge/review/ChallengeReview.scss';
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 import { useParams } from 'react-router-dom';
 import { ChallengeReviewItemType } from '@/api/ApiTypes';
 import ChallengeReviewItem from '@/components/challenge/review/ChallengeReviewItem';
 
-const ChallengeReview = () => {
+import '@/styles/challenge/review/ChallengeReviewDetail.scss';
+
+const ChallengeReviewDetail = () => {
   const { accessToken } = useMainPage();
   const { challengeId } = useParams<{ challengeId }>();
   const [challengeReviewList, setChallengeReviewList] = useState<
@@ -55,4 +56,4 @@ const ChallengeReview = () => {
   );
 };
 
-export default ChallengeReview;
+export default ChallengeReviewDetail;
