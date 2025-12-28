@@ -39,6 +39,17 @@
       }
     }
 
+    .challenge-detail-review-empty {
+      color: #9ea4aa;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.3px;
+    }
+
     .challenge-detail-review-btn-container {
       width: 100%;
       padding: 0 25px 22px 25px;
