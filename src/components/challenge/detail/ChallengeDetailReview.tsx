@@ -16,7 +16,6 @@ const ChallengeDetailReview = ({
   challengeDetailReview,
 }: ChallengeDetailReviewProps) => {
   const navigate = useNavigate();
-  console.log('challengeDetailReview', challengeDetailReview);
 
   return (
     <div className="challenge-detail-review-container">
