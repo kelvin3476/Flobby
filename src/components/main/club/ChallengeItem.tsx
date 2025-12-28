@@ -40,7 +40,7 @@ const ChallengeItem = ({
     /* 모임 아이템 컨테이너 */
     <div
       className={`challenge-item-container ${className ? className : ''}`}
-      onClick={() => navigate(`/club/${clubId}`)}
+      onClick={() => navigate(`/challenge/${clubId}`)}
     >
       {/* 모임 아이템 썸네일 */}
       <div className="challenge-item-thumbnail-wrapper">

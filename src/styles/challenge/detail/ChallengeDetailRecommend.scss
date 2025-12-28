@@ -1,0 +1,38 @@
+.challenge-detail-recommend-container {
+  width: 820px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+
+  .challenge-detail-recommend-title {
+    font-family: Pretendard;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 140%;
+    letter-spacing: -0.3px;
+    color: #191919;
+  }
+
+  .challenge-detail-recommend-list-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    overflow-x: scroll;
+
+    .challenge-detail-recommend-list-empty {
+      width: 100%;
+      color: #9ea4aa;
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%; /* 25.2px */
+      letter-spacing: -0.3px;
+    }
+  }
+}
