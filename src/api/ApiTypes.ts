@@ -367,11 +367,11 @@ export interface GetRecommendChallengesResponse {
   regionId: number; // 모임 지역 이름
   regionName: string; // 모임명
   mainPhotoUrl: string; // 모임 대표 사진 url(S3)
-  recruitEndDate: Date; // 모집 마감일
+  recruitEndDate: string; // 모집 마감일
   recruitDday: string; // 모집 마감 D-Day(모집 D-2, 모집 D-Day, 모집 마감)
   wishCount: number; //	찜 수
   recruitFlag: boolean; //	모집 마감 여부(true: 등록 가능, false: 등록 마감)
-  createdAt: Date; // 챌린지 생성일
+  createdAt: string; // 챌린지 생성일
 }
 
 /* 챌린지 상세 조회 api */

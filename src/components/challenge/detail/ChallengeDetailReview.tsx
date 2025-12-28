@@ -26,18 +26,18 @@ const ChallengeDetailReview = ({
           {challengeDetailReview &&
             challengeDetailReview.length > 0 &&
             challengeDetailReview?.map((challengeDetailReviewItem, index) => (
-              <>
+              <React.Fragment key={challengeDetailReviewItem.description}>
                 {index !== 0 && (
                   <div className="challenge-detail-review-item-divider"></div>
                 )}
                 <ChallengeDetailReviewItem
                   ChallengeDetailReviewItem={challengeDetailReviewItem}
                 />
-              </>
+              </React.Fragment>
             ))}
 
           {/* TODO: 임치예외처리 => 메세지 확인 필요 */}
-          {challengeDetailReview.length === 0 && (
+          {challengeDetailReview && challengeDetailReview.length === 0 && (
             <div className="challenge-detail-review-empty">
               아직 작성된 후기가 없어요
             </div>
