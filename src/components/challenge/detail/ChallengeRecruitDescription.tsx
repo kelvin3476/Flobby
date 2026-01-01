@@ -9,8 +9,6 @@ interface ChallengeRecruitDescriptionTypeProps {
 }
 
 const ChallengeRecruitDescription = ({ challengeRecruitDescriptionType }: ChallengeRecruitDescriptionTypeProps) => {
-  
-  console.log('[challengeRecruitDescriptionType]', challengeRecruitDescriptionType)
 
   return (
     <div className="challenge-recruit-description-wrapper">
