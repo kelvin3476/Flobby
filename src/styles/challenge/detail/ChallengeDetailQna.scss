@@ -1,0 +1,176 @@
+.challenge-detail-qna-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+
+  .challenge-detail-qna-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+
+    .challenge-detail-qna-header-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      align-self: stretch;
+
+      .challenge-detail-qna-title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        align-self: stretch;
+
+        .challenge-detail-qna-main-title {
+          color: var(--black-191919, #191919);
+
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 140%; /* 33.6px */
+          letter-spacing: -0.3px;
+        }
+
+        .challenge-detail-qna-sub-title {
+          color: var(--gray-gray-50072787-f, #72787F);
+
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 24px */
+          letter-spacing: -0.3px;
+        }
+      }
+
+      .challenge-detail-qna-my-question-btn {
+        display: flex;
+        padding: 5px 16px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        border-radius: 24px;
+        border: 1px solid var(--gray-gray-100-e-8-ebed, #E8EBED);
+        background: var(--white, #FFF);
+
+        color: var(--gray-gray-50072787-f, #72787F);
+
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%; /* 21px */
+        letter-spacing: -0.3px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.isMyQuestion {
+          border-radius: 24px;
+          border: 1px solid var(--main-purple-300, #764BF6);
+          background: var(--purple-Purple50, #F1EDFE);
+
+          color: var(--main-purple-300, #764BF6);
+
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 21px */
+          letter-spacing: -0.3px;
+        }
+      }
+    }
+  }
+
+  .challenge-detail-qna-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+
+    .input-wrap {
+      position: relative;
+      width: 100%;
+      height: 106px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      align-self: stretch;
+
+      > textarea {
+        resize: none;
+        width: 100%;
+        height: 100%;
+        padding: 12px;
+
+        border-radius: 6px;
+        border: 1px solid var(--gray-gray-100-e-8-ebed, #E8EBED);
+        outline: none;
+
+        &::placeholder {
+          position: absolute;
+          left: 12px;
+          top: 8px;
+          pointer-events: none;
+
+          text-align: left;
+          color: var(--gray-gray-4009-ea-4-aa, #9EA4AA);
+
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 24px */
+          letter-spacing: -0.3px;
+        }
+      }
+
+      .counter {
+        position: absolute;
+        right: 10px;
+        bottom: 6px;
+        pointer-events: none;
+
+        text-align: right;
+        color: var(--gray-gray-4009-ea-4-aa, #9EA4AA);
+
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+        letter-spacing: -0.3px;
+      }
+    }
+
+    .challenge-detail-qna-register-btn {
+      cursor: pointer;
+      display: flex;
+      width: 112px;
+      height: 106px;
+      padding: 15px 16px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      border: none;
+      border-radius: 6px;
+      background: var(--main-purple-300, #764BF6);
+
+      color: var(--white, #FFF);
+      text-align: center;
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.3px;
+    }
+  }
+}
