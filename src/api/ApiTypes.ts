@@ -309,7 +309,7 @@ export interface GetChallengeRecruitThumnail {
 }
 
 /* 챌린지 상세 설명 */
-export interface GetChallengeRecruitDescription {
+export interface ChallengeRecruitDescriptionType {
   description: string; // 챌린지 설명
   images: {
     imageUrl: string; // 챌린지 설명 글에 포함된 이미지
@@ -318,7 +318,7 @@ export interface GetChallengeRecruitDescription {
 }
 
 /* 챌린지 상세 qna */
-export interface GetChallengeQnaResponse {
+export interface ChallengeQnaResponse {
   questionId: number; // 질문 ID
   question: string; // 질문 내용
   memberId: number; // 질문 작성자 ID
@@ -380,8 +380,8 @@ export interface GetChallengeDetailResponse {
   challengeId: number; // 챌린지 id
   isParticipated: boolean; // 현재 챌린지 참가 여부
   recruitThumnail: GetChallengeRecruitThumnail;
-  recruitDescription: GetChallengeRecruitDescription;
-  questions: GetChallengeQnaResponse[];
+  recruitDescription: ChallengeRecruitDescriptionType;
+  questions: ChallengeQnaResponse[];
   reviews: ChallengeReviewItemType[];
   recommendChallenges: GetRecommendChallengesResponse[];
 }
