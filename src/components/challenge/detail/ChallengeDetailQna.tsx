@@ -5,6 +5,7 @@ import Button from '@/components/button/Button';
 import { ChallengeQnaResponse } from '@/api/ApiTypes';
 
 import '@/styles/challenge/detail/ChallengeDetailQna.scss';
+import ChallengeDetailQnaItem from './ChallengeDetailQnaItem';
 
 interface ChallengeDetailQnaTypeProps {
   challengeDetailQuestions: ChallengeQnaResponse[];
@@ -12,7 +13,9 @@ interface ChallengeDetailQnaTypeProps {
 
 const MAX_LENGTH = 200;
 
-const ChallengeDetailQna = ({ challengeDetailQuestions }: ChallengeDetailQnaTypeProps) => {
+const ChallengeDetailQna = ({
+  challengeDetailQuestions,
+}: ChallengeDetailQnaTypeProps) => {
   const [isMyQuestion, setIsMyQuestion] = useState<string>('N');
   const [question, setQuestion] = useState<string>('');
 
@@ -50,6 +53,22 @@ const ChallengeDetailQna = ({ challengeDetailQuestions }: ChallengeDetailQnaType
         {/* Q&A 컨텐츠 컨테이너 */}
         <div className="challenge-detail-qna-content-container">
           {/* Q&A 컨텐츠 */}
+          <div className="challenge-detail-qna-content-header">
+            <div className="challenge-detail-qna-content-header-title-column">
+              제목
+            </div>
+            <div className="challenge-detail-qna-content-header-title-answer-status-column">
+              답변 상태
+            </div>
+          </div>
+
+          {challengeDetailQuestions &&
+            challengeDetailQuestions.map(question => (
+              <ChallengeDetailQnaItem
+                key={question.questionId}
+                challengeDetailQuestion={question}
+              />
+            ))}
         </div>
       </div>
 
