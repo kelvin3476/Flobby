@@ -4,6 +4,7 @@
   align-items: flex-start;
   gap: 20px;
   align-self: stretch;
+  width: 820px;
 
   .challenge-detail-qna-container {
     display: flex;
@@ -133,7 +134,8 @@
 
       .challenge-detail-qna-content {
         max-height: 660px;
-        overflow-y: scroll;
+        overflow-y: auto;
+        align-self: stretch;
       }
     }
   }
