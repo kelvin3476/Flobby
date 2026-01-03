@@ -90,10 +90,10 @@
       display: flex;
       flex-direction: column;
       border-top: 1.8px solid #454c53;
-      padding-left: 20px;
       align-self: stretch;
 
       .challenge-detail-qna-content-header {
+        padding-left: 20px;
         display: flex;
         height: 52px;
         align-self: stretch;
@@ -129,6 +129,11 @@
           line-height: 150%; /* 24px */
           letter-spacing: -0.3px;
         }
+      }
+
+      .challenge-detail-qna-content {
+        max-height: 660px;
+        overflow-y: scroll;
       }
     }
   }

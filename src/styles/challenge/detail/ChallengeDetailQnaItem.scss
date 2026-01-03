@@ -3,9 +3,14 @@
   justify-content: flex-end;
   align-items: center;
   align-self: stretch;
-  padding-left: 20px;
+  padding-left: 14px;
   border-top: 1px solid #e8ebed;
 
+  &:hover {
+    background-color: #f7f8f9;
+  }
+
+  /* Q&A 컨테이너 */
   .challenge-detail-qna-item-content-container {
     display: flex;
     flex-direction: column;
@@ -13,11 +18,23 @@
     width: 674px;
     padding: 16px 0;
 
+    /* 질문 영역 */
     .challenge-detail-qna-item-question-container {
       display: flex;
       align-items: center;
       gap: 6px;
 
+      &:hover {
+        .challenge-detail-qna-item-question-content-container {
+          .challenge-detail-qna-item-question-button-container {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.1s ease;
+          }
+        }
+      }
+
+      /* 질문 아이콘 */
       .challenge-detail-qna-item-question-mark-icon {
         width: 22px;
         height: 22px;
@@ -28,22 +45,128 @@
         background-repeat: no-repeat;
       }
 
-      .challenge-detail-qna-item-question-content {
-        color: var(--gray-gray-600454-c-53, #454c53);
-        font-family: Pretendard;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 150%; /* 21px */
-        letter-spacing: -0.3px;
+      .challenge-detail-qna-item-question-content-container {
+        display: flex;
+        gap: 8px;
+
+        /* 질문 내용 */
+        .challenge-detail-qna-item-question-content {
+          display: flex;
+          align-items: center;
+          max-width: 535px;
+          text-align: left;
+
+          color: var(--gray-gray-600454-c-53, #454c53);
+          font-family: Pretendard;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 21px */
+          letter-spacing: -0.3px;
+        }
+
+        /* 질문 수정 & 삭제 버튼 박스 */
+        /* 내가 쓴 질문*/
+        .challenge-detail-qna-item-question-button-container {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          opacity: 0;
+          visibility: hidden;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          .challenge-detail-qna-item-question-edit-button {
+            color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 18px */
+            letter-spacing: -0.3px;
+          }
+
+          .divider {
+            width: 2.8px;
+            height: 10.8px;
+            flex-shrink: 0;
+
+            background: url('../../../assets/svg/challenge/detail/challenge_detail_qna_divider.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .challenge-detail-qna-item-question-delete-button {
+            color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 18px */
+            letter-spacing: -0.3px;
+          }
+        }
+
+        /* 다른 사용자가 쓴 질문*/
+        .challenge-detail-qna-item-question-report-button {
+          color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+          font-family: Pretendard;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .divider {
+          width: 2.8px;
+          height: 10.8px;
+          flex-shrink: 0;
+
+          background: url('../../../assets/svg/challenge/detail/challenge_detail_qna_divider.svg');
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        .challenge-detail-qna-item-question-answer-button {
+          color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+          font-family: Pretendard;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 
+    /* 답변 영역 */
     .challenge-detail-qna-item-answer-container {
       display: flex;
       align-items: center;
       gap: 6px;
       padding-left: 30px;
+
+      &:hover {
+        .challenge-detail-qna-item-answer-content-container {
+          .challenge-detail-qna-item-answer-button-container {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.1s ease;
+          }
+        }
+      }
 
       .challenge-detail-qna-item-answer-mark-icon {
         width: 22px;
@@ -55,23 +178,200 @@
         background-repeat: no-repeat;
       }
 
-      .challenge-detail-qna-item-answer-content {
-        color: var(--gray-gray-50072787-f, #72787f);
-        font-family: Pretendard;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 150%; /* 21px */
-        letter-spacing: -0.3px;
+      .challenge-detail-qna-item-answer-content-container {
+        display: flex;
+        gap: 8px;
+
+        /* 답변 내용*/
+        .challenge-detail-qna-item-answer-content {
+          color: var(--gray-gray-50072787-f, #72787f);
+          font-family: Pretendard;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 21px */
+          letter-spacing: -0.3px;
+        }
+
+        /* 질문 수정 & 삭제 버튼 박스 */
+        .challenge-detail-qna-item-answer-button-container {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          opacity: 0;
+          visibility: hidden;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          .challenge-detail-qna-item-answer-edit-button {
+            color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 18px */
+            letter-spacing: -0.3px;
+          }
+
+          .divider {
+            width: 2.8px;
+            height: 10.8px;
+            flex-shrink: 0;
+
+            background: url('../../../assets/svg/challenge/detail/challenge_detail_qna_divider.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+
+          .challenge-detail-qna-item-answer-delete-button {
+            color: var(--gray-gray-4009-ea-4-aa, #9ea4aa);
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 18px */
+            letter-spacing: -0.3px;
+          }
+        }
+      }
+
+      .challenge-detail-qna-item-answer-textarea-container {
+        display: flex;
+        width: 620px;
+        padding: 10px 12px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid var(--gray-gray-100-e-8-ebed, #e8ebed);
+
+        textarea {
+          outline: none;
+          border: none;
+          min-width: 535px;
+          line-height: 1.5;
+          max-height: calc(1.5em * 2);
+          overflow-y: auto;
+          resize: none;
+
+          color: var(--gray-gray-600454-c-53, #454c53);
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+        }
+
+        .challenge-detail-qna-item-answer-complete-button {
+          flex-shrink: 0;
+          color: var(--purple-Purple500, #5e3cc5);
+          font-family: Pretendard;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 150%; /* 18px */
+          letter-spacing: -0.3px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
   }
 
+  /* 질문 수정 모드 */
+  .challenge-detail-qna-item-question-content-edit-textarea-container {
+    display: flex;
+    width: 620px;
+    padding: 10px 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--gray-gray-100-e-8-ebed, #e8ebed);
+
+    textarea {
+      outline: none;
+      border: none;
+      min-width: 535px;
+      line-height: 1.5;
+      max-height: calc(1.5em * 2);
+      overflow-y: auto;
+      resize: none;
+
+      color: var(--gray-gray-600454-c-53, #454c53);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 18px */
+      letter-spacing: -0.3px;
+    }
+
+    .challenge-detail-qna-item-question-edit-complete-button {
+      flex-shrink: 0;
+      color: var(--purple-Purple500, #5e3cc5);
+      font-family: Pretendard;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 18px */
+      letter-spacing: -0.3px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  /* 답변 수정 모드 */
+  .challenge-detail-qna-item-answer-content-edit-textarea-container {
+    display: flex;
+    width: 620px;
+    padding: 10px 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--gray-gray-100-e-8-ebed, #e8ebed);
+
+    textarea {
+      outline: none;
+      border: none;
+      min-width: 535px;
+      line-height: 1.5;
+      max-height: calc(1.5em * 2);
+      overflow-y: auto;
+      resize: none;
+
+      color: var(--gray-gray-600454-c-53, #454c53);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 18px */
+      letter-spacing: -0.3px;
+    }
+
+    .challenge-detail-qna-item-answer-edit-complete-button {
+      flex-shrink: 0;
+      color: var(--purple-Purple500, #5e3cc5);
+      font-family: Pretendard;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 18px */
+      letter-spacing: -0.3px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  /* 답변 상태 컨테이너 */
   .challenge-detail-qna-item-answer-status-container {
     display: flex;
     width: 126px;
-    height: 78px;
-    // padding: 0 37.5px;
     justify-content: center;
     align-items: center;
     gap: 8px;

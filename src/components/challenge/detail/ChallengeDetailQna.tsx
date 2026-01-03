@@ -52,7 +52,7 @@ const ChallengeDetailQna = ({
 
         {/* Q&A 컨텐츠 컨테이너 */}
         <div className="challenge-detail-qna-content-container">
-          {/* Q&A 컨텐츠 */}
+          {/* Q&A 컨텐츠 헤더*/}
           <div className="challenge-detail-qna-content-header">
             <div className="challenge-detail-qna-content-header-title-column">
               제목
@@ -62,13 +62,20 @@ const ChallengeDetailQna = ({
             </div>
           </div>
 
-          {challengeDetailQuestions &&
-            challengeDetailQuestions.map(question => (
-              <ChallengeDetailQnaItem
-                key={question.questionId}
-                challengeDetailQuestion={question}
-              />
-            ))}
+          {/* Q&A 컨텐츠 list*/}
+          <div className="challenge-detail-qna-content">
+            {challengeDetailQuestions &&
+              challengeDetailQuestions
+                .filter(
+                  question => isMyQuestion !== 'Y' || question.isMyQuestion,
+                )
+                .map(question => (
+                  <ChallengeDetailQnaItem
+                    key={question.questionId}
+                    challengeDetailQuestion={question}
+                  />
+                ))}
+          </div>
         </div>
       </div>
 
