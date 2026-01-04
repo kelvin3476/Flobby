@@ -19,6 +19,10 @@ const MainCategory = ({ categoryList }: MainCategoryProps) => {
     setSubCategory('전체');
   };
 
+  useEffect(() => {
+    console.log('mainCategory', mainCategory);
+  }, []);
+
   return (
     <div className="main-category-container">
       {categoryList &&

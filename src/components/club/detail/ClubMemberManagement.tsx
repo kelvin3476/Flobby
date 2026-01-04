@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ClubMemberListItem } from '@/api/ApiTypes';
 import ClubMemberItem from '@/components/club/detail/ClubMemberItem';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 import Main from '@/api/main/Main';
 import logger from '@/utils/Logger';
 

@@ -295,10 +295,10 @@ export interface PopularKeywordData {
 /* -------------------- 챌린지 상세 api 타입 -------------------- */
 
 /* 챌린지 상세 프로필 썸네일 */
-export interface GetChallengeRecruitThumnail {
+export interface GetChallengeRecruitThumbnail {
   title: string; // 챌린지 명
-  dDay: number; // 챌린지 시작 디데이(숫자만 반환)
-  period: Date; // 챌린지 기간
+  dday: number; // 챌린지 시작 디데이(숫자만 반환)
+  period: string; // 챌린지 기간
   challengeRegion: string; // 챌린지 지역
   mainImage: string; // 챌린지 메인 이미지
   maxMembers: number; // 챌린지 최대 인원
@@ -379,7 +379,7 @@ export interface GetChallengeDetailResponse {
   /* TODO: 현 사용자가 챌린지장인지 아닌지에 대한 role 타입 추가 예정 */
   challengeId: number; // 챌린지 id
   isParticipated: boolean; // 현재 챌린지 참가 여부
-  recruitThumnail: GetChallengeRecruitThumnail;
+  recruitThumnail: GetChallengeRecruitThumbnail;
   recruitDescription: ChallengeRecruitDescriptionType;
   questions: ChallengeQnaResponse[];
   reviews: ChallengeReviewItemType[];

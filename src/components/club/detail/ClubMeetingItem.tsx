@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Main from '@/api/main/Main';
 
 import Button from '@/components/button/Button';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 
 import '@/styles/club/detail/ClubMeetingItem.scss';
 import logger from '@/utils/Logger';
@@ -44,7 +44,9 @@ const ClubMeetingItem = ({
   clubId,
   fetchClubDetail,
 }: ClubMeetingProps) => {
-  const [modalStep, setModalStep] = useState<null | 'confirm' | 'complete' | 'full'>(null);
+  const [modalStep, setModalStep] = useState<
+    null | 'confirm' | 'complete' | 'full'
+  >(null);
   const [modalMode, setModalMode] = useState<null | 'attend' | 'cancel'>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -59,44 +61,45 @@ const ClubMeetingItem = ({
   };
 
   const handleModalConfirm = async () => {
-    if (isLoading) return; 
+    if (isLoading) return;
 
     setIsLoading(true);
 
     try {
-      
       if (modalStep === 'confirm' && modalMode) {
         setIsLoading(true);
         try {
           if (modalMode === 'attend') {
-            const response = await Main.participationClubMeeting(Number(meetingId));
+            const response = await Main.participationClubMeeting(
+              Number(meetingId),
+            );
             const { code, message } = response.data;
             if (code === 1000) {
               /* 정기 모임 참석 신청 후 성공 케이스 */
               setModalStep('complete');
             } else if (code === 1001) {
-                if (message === "정기모임의 참여인원이 초과되었습니다.") {
-                  /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
-                  setModalMode('attend');
-                  setModalStep('full');
-                } else {
+              if (message === '정기모임의 참여인원이 초과되었습니다.') {
+                /* 동시성 이슈로 인해 모임 가입 신청 후 정원이 가득 찬 경우 */
+                setModalMode('attend');
+                setModalStep('full');
+              } else {
                 /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
               }
             }
           } else if (modalMode === 'cancel') {
-              const response = await Main.cancelClubMeeting(Number(meetingId));
-              const { code } = response.data;
-              if (code === 1000) {
-                /* 정기 모임 참석 취소 후 성공 케이스 */
-                setModalStep('complete');
-              } else {
+            const response = await Main.cancelClubMeeting(Number(meetingId));
+            const { code } = response.data;
+            if (code === 1000) {
+              /* 정기 모임 참석 취소 후 성공 케이스 */
+              setModalStep('complete');
+            } else {
               /* TODO: 실패 케이스 모달 문구 및 연동 필요 (추후 작업이 필요함) */
             }
           }
         } catch (error: any) {
           const errRes = error.response?.data;
           if (errRes && errRes.code === 1001) {
-            if (errRes.message === "정기모임의 참여인원이 초과되었습니다.") {
+            if (errRes.message === '정기모임의 참여인원이 초과되었습니다.') {
               setModalMode('attend');
               setModalStep('full');
               return;
@@ -112,7 +115,7 @@ const ClubMeetingItem = ({
     }
   };
 
-  const handleModalClose = async() => {
+  const handleModalClose = async () => {
     setModalStep(null);
     setModalMode(null);
     await fetchClubDetail();
@@ -122,17 +125,18 @@ const ClubMeetingItem = ({
     if (!modalStep || !modalMode) return null;
     if (modalStep === 'confirm') {
       return {
-        mainMessage: modalMode === 'attend'
-          ? '참석하시겠습니까?'
-          : '취소하시겠습니까?',
+        mainMessage:
+          modalMode === 'attend' ? '참석하시겠습니까?' : '취소하시겠습니까?',
         showIcon: true,
-        iconType: (modalMode === 'attend' ? 'check' : 'warn') as 'check' | 'warn',
+        iconType: (modalMode === 'attend' ? 'check' : 'warn') as
+          | 'check'
+          | 'warn',
         showCancelButton: true,
       };
     }
     if (modalStep === 'complete') {
       return {
-        mainMessage:'정상적으로 처리되었습니다.',
+        mainMessage: '정상적으로 처리되었습니다.',
         showIcon: false,
         iconType: 'check' as const,
         showCancelButton: false,
@@ -238,7 +242,7 @@ const ClubMeetingItem = ({
                     className="club-meeting-button-apply"
                     title="참석"
                     onClick={() => {
-                      if(currentParticipants >= maxParticipants) {
+                      if (currentParticipants >= maxParticipants) {
                         setModalStep('full');
                         setModalMode('attend');
                         return;
@@ -281,7 +285,7 @@ const ClubMeetingItem = ({
                     className="club-meeting-button-apply"
                     title="참석"
                     onClick={() => {
-                      if(currentParticipants >= maxParticipants) {
+                      if (currentParticipants >= maxParticipants) {
                         setModalStep('full');
                         setModalMode('attend');
                         return;
@@ -298,13 +302,13 @@ const ClubMeetingItem = ({
 
       {modalStep === 'full' && (
         <ClubModal
-          mainMessage='정원이 모두 찼어요.'
-          subMessage='자리가 생기면 알림을 보내드릴까요?'
+          mainMessage="정원이 모두 찼어요."
+          subMessage="자리가 생기면 알림을 보내드릴까요?"
           showIcon={true}
-          iconType='warn'
+          iconType="warn"
           showCancelButton={true}
-          confirmText='알림 받기'
-          cancelText='닫기'
+          confirmText="알림 받기"
+          cancelText="닫기"
           onConfirm={handleModalClose}
           onCancel={() => {
             setModalStep(null);

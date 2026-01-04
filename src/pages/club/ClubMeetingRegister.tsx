@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import Title from '@/components/club/text/Title';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 import MainHeader from '@/components/header/MainHeader';
 
 import ClubMeetingTitle from '@/components/club/meetingRegister/ClubMeetingTitle';

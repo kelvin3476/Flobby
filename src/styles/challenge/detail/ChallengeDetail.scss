@@ -4,16 +4,24 @@
   align-items: center;
   gap: 52px;
 
-  .challenge-detail-container {
+  .challenge-detail-flex-wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding-bottom: 24px; // 하단 여유 여백 추가
+    align-items: flex-start;
+    gap: 60px;
+    position: relative;
+    padding-right: 460px;
 
-    .challenge-detail-content {
+    .challenge-detail-container {
       display: flex;
       flex-direction: column;
-      gap: 70px;
+      gap: 50px;
+      padding-bottom: 24px; // 하단 여유 여백 추가
+
+      .challenge-detail-content {
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+      }
     }
   }
 }

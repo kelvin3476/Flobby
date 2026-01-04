@@ -3,8 +3,8 @@ import '@/styles/tag/Tag.scss';
 
 interface TagProps {
   label: string;
-  type: 'challenge' | 'profile';
-  color: 'gray' | 'purple';
+  type: 'challenge' | 'profile' | 'thumbnail';
+  color: 'gray' | 'purple' | 'green';
   size?: 'default' | 'long';
 }
 

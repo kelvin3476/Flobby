@@ -139,10 +139,10 @@ const ChallengeAll = () => {
   }, [regionController.model.selectedRegion, mainCategory]);
 
   // 페이지 진입 시 카테고리 상태 및 쿠키 초기화
-  useEffect(() => {
-    setMainCategory('');
-    setSubCategory('');
-  }, []);
+  // useEffect(() => {
+  //   setMainCategory('');
+  //   setSubCategory('');
+  // }, []);
 
   return (
     <div className="challenge-all-wrapper">

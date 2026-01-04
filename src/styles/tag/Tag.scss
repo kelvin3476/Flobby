@@ -2,6 +2,8 @@ $purple-bg: #f1edfe;
 $purple-text: #764bf6;
 $gray-bg: #f7f8f9;
 $gray-text: #72787f;
+$green-bg: rgba(3, 178, 64, 0.1);
+$green-text: #03b240;
 
 @mixin tag-color($bg, $text) {
   background-color: $bg;
@@ -24,6 +26,11 @@ $gray-text: #72787f;
     border-radius: 100px;
   }
 
+  &.thumbnail {
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
   // size
   &.default {
     height: 24px;
@@ -43,5 +50,9 @@ $gray-text: #72787f;
 
   &.gray {
     @include tag-color($gray-bg, $gray-text);
+  }
+
+  &.green {
+    @include tag-color($green-bg, $green-text);
   }
 }

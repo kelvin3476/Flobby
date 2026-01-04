@@ -11,7 +11,7 @@ import LoadingSpinnerController from '@/components/controllers/LoadingSpinnerCon
 
 import RegionModal from '@/components/modal/RegionModal';
 import CategoryModal from '@/components/modal/CategoryModal';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 
 import useMainPage from '@/hooks/main/useMainPage';
 import useNicknameForm from '@/hooks/signup/nickname/useNicknameForm';
@@ -23,13 +23,13 @@ import { GetProfileDetailResponse } from '@/api/ApiTypes';
 import { MyInfoController } from '@/services/mypage/controllers/MyInfoControllers';
 import { CommonBaseController } from '@/services/common/controllers/CommonBaseController';
 
-import defaultProfileIcon from '/img/mypage/icon_profile.png'
-import "@/styles/mypage/ProfileManagement.scss"
+import defaultProfileIcon from '/img/mypage/icon_profile.png';
+import '@/styles/mypage/ProfileManagement.scss';
 
 const ProfileManagement = () => {
   const navigate = useNavigate();
 
-  const { accessToken } = useMainPage()
+  const { accessToken } = useMainPage();
 
   const {
     nickname,
@@ -37,34 +37,38 @@ const ProfileManagement = () => {
     isNicknameValid,
     nicknameError,
     handleNicknameChange,
-  } = useNicknameForm()
+  } = useNicknameForm();
 
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-  const [file, setFile] = React.useState<File | null>(null)
-  const [profileIcon, setProfileIcon] = React.useState<string>(defaultProfileIcon)
+  const [file, setFile] = React.useState<File | null>(null);
+  const [profileIcon, setProfileIcon] =
+    React.useState<string>(defaultProfileIcon);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const [modalStep, setModalStep] = React.useState<string | null>(null)
+  const [modalStep, setModalStep] = React.useState<string | null>(null);
 
   const [isOpenRegionModal, setIsOpenRegionModal] = React.useState(false);
   const [isOpenCategoryModal, setIsOpenCategoryModal] = React.useState(false);
   const [isOpenProfileModal, setIsOpenProfileModal] = React.useState(false);
 
-  const [profileInfoData, setProfileInfoData] = React.useState<GetProfileDetailResponse | null>(null)
+  const [profileInfoData, setProfileInfoData] =
+    React.useState<GetProfileDetailResponse | null>(null);
 
   const profileInfoController = MyInfoController.getInstance();
   const commonBaseController = CommonBaseController.getInstance();
 
   const fetchProfileInfo = async () => {
-    const profileInfo = await profileInfoController.getProfileDetail()
+    const profileInfo = await profileInfoController.getProfileDetail();
     setProfileInfoData(profileInfo);
     setProfileIcon(profileInfo.profileImageUrl || defaultProfileIcon);
     setNickname(profileInfo.nickName || '');
 
     // ⭐ 닉네임 유효성 검사 강제 실행
-    handleNicknameChange({ target: { value: profileInfo.nickName || '' } } as React.ChangeEvent<HTMLInputElement>);
-  }
+    handleNicknameChange({
+      target: { value: profileInfo.nickName || '' },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
 
   React.useEffect(() => {
     fetchProfileInfo();
@@ -108,31 +112,43 @@ const ProfileManagement = () => {
   const editProfileInfoHandler = async () => {
     const formData = new FormData();
 
-    logger.log('defaultImage', profileIcon === defaultProfileIcon)
-    logger.log('nickname', nickname)
-    logger.log('interestRegion', JSON.parse(localStorage.getItem('region-storage'))?.state?.selectedRegionIds)
-    logger.log('interestCategory', JSON.parse(localStorage.getItem('hobby-storage'))?.state?.selectedHobbies)
+    logger.log('defaultImage', profileIcon === defaultProfileIcon);
+    logger.log('nickname', nickname);
+    logger.log(
+      'interestRegion',
+      JSON.parse(localStorage.getItem('region-storage'))?.state
+        ?.selectedRegionIds,
+    );
+    logger.log(
+      'interestCategory',
+      JSON.parse(localStorage.getItem('hobby-storage'))?.state?.selectedHobbies,
+    );
 
     const jsonData = {
       defaultImage: profileIcon === defaultProfileIcon,
       nickName: nickname,
-      interestRegion: JSON.parse(localStorage.getItem('region-storage'))?.state?.selectedRegionIds,
-      interestCategory: JSON.parse(localStorage.getItem('hobby-storage'))?.state?.selectedHobbies,
-    }
+      interestRegion: JSON.parse(localStorage.getItem('region-storage'))?.state
+        ?.selectedRegionIds,
+      interestCategory: JSON.parse(localStorage.getItem('hobby-storage'))?.state
+        ?.selectedHobbies,
+    };
 
     logger.log('file', file);
     if (file) {
-      formData.append('file', file)
+      formData.append('file', file);
     }
 
-    formData.append('data', new Blob([JSON.stringify(jsonData)], { type: 'application/json' }));
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(jsonData)], { type: 'application/json' }),
+    );
 
     try {
-      await profileInfoController.editProfileDetail(formData)
+      await profileInfoController.editProfileDetail(formData);
     } catch (error) {
       console.error('프로필 정보 수정 실패', error);
     }
-  }
+  };
 
   return (
     <>

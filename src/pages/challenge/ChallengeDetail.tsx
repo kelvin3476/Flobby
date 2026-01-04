@@ -15,7 +15,8 @@ import useMainPage from '@/hooks/main/useMainPage';
 import { GetChallengeDetailResponse } from '@/api/ApiTypes';
 import { ChallengeController } from '@/services/challenge/controllers/ChallengeController';
 
-import "@/styles/challenge/detail/ChallengeDetail.scss";
+import '@/styles/challenge/detail/ChallengeDetail.scss';
+import ChallengeDetailFloatingCard from '@/components/challenge/detail/ChallengeDetailFloatingCard';
 
 const ChallengeDetail = () => {
   const { challengeId } = useParams<{ challengeId }>();
@@ -23,7 +24,8 @@ const ChallengeDetail = () => {
   const { accessToken } = useMainPage();
 
   const [currentTab, setCurrentTab] = useState<string>('introduction');
-  const [challengeDetail, setChallengeDetail] = useState<GetChallengeDetailResponse | null>(null);
+  const [challengeDetail, setChallengeDetail] =
+    useState<GetChallengeDetailResponse | null>(null);
 
   const tabItems = [
     { label: '소개', key: 'introduction' },
@@ -84,22 +86,35 @@ const ChallengeDetail = () => {
       {/* 메인 헤더 */}
       <MainHeader accessToken={accessToken} />
 
-      {/* 챌린지 상세 컨테이너 */}
-      <div className="challenge-detail-container">
-        {/* 탭 */}
-        <Tab tabs={tabItems} currentTab={currentTab} onTabChange={setCurrentTab} />
+      <div className="challenge-detail-flex-wrapper">
+        {/* 챌린지 상세 컨테이너 */}
+        <div className="challenge-detail-container">
+          {/* 탭 */}
+          <Tab
+            tabs={tabItems}
+            currentTab={currentTab}
+            onTabChange={setCurrentTab}
+          />
 
-        {/* 챌린지 상세 컨텐츠 */}
-        <div className="challenge-detail-content">
-          {sections.map((section, index) => (
-            <React.Fragment key={section.key}>
-              {section.component}
+          {/* 챌린지 상세 컨텐츠 */}
+          <div className="challenge-detail-content">
+            {sections.map((section, index) => (
+              <React.Fragment key={section.key}>
+                {section.component}
 
-              {/* 마지막 요소가 아닐 때만 Divider 렌더링 */}
-              {index !== sections.length - 1 && <Divider />}
-            </React.Fragment>
-          ))}
+                {/* 마지막 요소가 아닐 때만 Divider 렌더링 */}
+                {index !== sections.length - 1 && <Divider />}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
+
+        {/* 챌린지 상세 플로팅 카드 */}
+
+        <ChallengeDetailFloatingCard
+          isParticipated={challengeDetail?.isParticipated}
+          challengeRecruitThumbnail={challengeDetail?.recruitThumnail}
+        />
       </div>
     </div>
   );

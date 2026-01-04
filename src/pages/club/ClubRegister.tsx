@@ -11,7 +11,7 @@ import ClubDescription from '@/components/club/register/ClubDescription';
 import Button from '@/components/button/Button';
 import Title from '@/components/club/text/Title';
 import RequiredText from '@/components/club/text/RequiredText';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 
 import useMainPage from '@/hooks/main/useMainPage';
 import useClubRegisterStore from '@/store/club/useClubRegisterStore';

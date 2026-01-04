@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Tag from '@/components/tag/Tag';
 import Button from '@/components/button/Button';
 import DropDownModal from '@/components/modal/DropDownModal';
-import ClubModal from '@/components/modal/ClubModal';
+import ClubModal from '@/components/modal/ChallengeModal';
 import ClubTextModal from '@/components/modal/ClubTextModal';
 import ClubSelectModal from '@/components/modal/ClubSelectModal';
 
