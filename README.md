@@ -51,7 +51,7 @@
 <img  height=40px  src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
 <img  height=40px  src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=Vite&logoColor=yellow"/>
 <img  height=40px  src="https://img.shields.io/badge/Amazon%20S3-ffa500?style=flat&logo=Amazon%20S3&logoColor=white"/>
-<img  height=40px  src="https://img.shields.io/badge/Oracle OCI-red?style=flat&logo=Oracle OCI&logoColor=Red"/>
+<img  height=40px  src="https://img.shields.io/badge/Oracle OCI-red?style=flat"/>
 
 </p>
 
